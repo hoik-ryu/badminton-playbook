@@ -1,0 +1,980 @@
+{
+  "schema_version": 1,
+  "status": "verified",
+  "source": {
+    "repo": "git@github.com:hoik-ryu/fullstack-boilerplate.git",
+    "ref": "v1.0.0",
+    "commit": "43ca48c74f7fff27ca09d8737f0a2bb52567f87a",
+    "manifest_name": "fullstack-boilerplate",
+    "manifest_version": "1.0.0"
+  },
+  "project_slug": "badminton-playbook",
+  "project_title": "SMAPSH",
+  "based_on": {
+    "planning_approved_revision": "2",
+    "discovery_approved_revision": "2",
+    "planning_hashes": {
+      "docs/planning/02-prd.md": "86adaec58828c84d51b172e793068d730aea3ffc36d419f1c5172d9fd6a2a75f",
+      "docs/planning/03-user-stories.md": "8aa49f7af2f2cd216ce56539ee822eddb029d0965fe526bb7faecf30e59fa920",
+      "docs/planning/04-user-flows.md": "519d82582b426dffc7568ce55f72044ad09ab19dd7c7d2556fd7dac0a76d1f36",
+      "docs/planning/05-acceptance-criteria.md": "b478d5211da8ea1eb52b87086d623959726c38a70b0d6caa1c7318f182487185"
+    }
+  },
+  "snapshot_dir": "/private/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/product-init.2bPtYYphJl/src",
+  "manifest": {
+    "schema_version": 1,
+    "name": "fullstack-boilerplate",
+    "version": "1.0.0",
+    "apply": {
+      "exclude": []
+    },
+    "substitutions": [
+      {
+        "from": "fullstack-boilerplate",
+        "to": "{project_slug}",
+        "files": [
+          ".env.example",
+          "backend/.env.example",
+          "docker-compose.yml",
+          "backend/app/core/config.py",
+          "backend/pyproject.toml"
+        ]
+      },
+      {
+        "from": "Fullstack Boilerplate",
+        "to": "{project_title}",
+        "files": [
+          "frontend/index.html",
+          "frontend/src/pages/HomePage.tsx"
+        ]
+      }
+    ],
+    "merge": [
+      {
+        "path": ".gitignore",
+        "strategy": "append-missing-lines",
+        "required": [
+          ".env",
+          ".env.*",
+          "!.env.example",
+          "node_modules/",
+          "dist/",
+          ".venv/",
+          "__pycache__/",
+          ".pytest_cache/",
+          ".ruff_cache/",
+          ".mypy_cache/"
+        ]
+      },
+      {
+        "path": "CLAUDE.md",
+        "strategy": "append-section",
+        "section_title": "개발 규칙 (fullstack-boilerplate)"
+      },
+      {
+        "path": "README.md",
+        "strategy": "append-section",
+        "section_title": "개발 환경 (fullstack-boilerplate)"
+      }
+    ],
+    "verify": {
+      "env_file": ".env.example",
+      "ignored_paths": [
+        "frontend/node_modules",
+        "frontend/dist",
+        "backend/.venv",
+        "backend/.pytest_cache",
+        "backend/.ruff_cache",
+        "backend/.mypy_cache"
+      ],
+      "ports": {
+        "POSTGRES_PORT": 55432,
+        "BACKEND_PORT": 58000,
+        "FRONTEND_PORT": 55173
+      },
+      "env": {
+        "APP_ENV": "verify",
+        "CORS_ORIGINS": "http://localhost:55173",
+        "VITE_API_BASE_URL": "http://localhost:58000"
+      },
+      "stages": {
+        "fe": [
+          {
+            "run": "pnpm install --frozen-lockfile",
+            "cwd": "frontend"
+          },
+          {
+            "run": "pnpm lint",
+            "cwd": "frontend"
+          },
+          {
+            "run": "pnpm typecheck",
+            "cwd": "frontend"
+          },
+          {
+            "run": "pnpm test",
+            "cwd": "frontend"
+          },
+          {
+            "run": "pnpm build",
+            "cwd": "frontend"
+          }
+        ],
+        "be": [
+          {
+            "run": "uv sync --frozen",
+            "cwd": "backend"
+          },
+          {
+            "run": "uv run ruff check .",
+            "cwd": "backend"
+          },
+          {
+            "run": "uv run ruff format --check .",
+            "cwd": "backend"
+          },
+          {
+            "run": "uv run mypy app tests",
+            "cwd": "backend"
+          },
+          {
+            "run": "uv run pytest",
+            "cwd": "backend"
+          }
+        ],
+        "db": [
+          {
+            "run": "{compose} up -d --wait db"
+          },
+          {
+            "run": "{compose} run --rm --build backend alembic upgrade head"
+          },
+          {
+            "run": "{compose} run --rm backend alembic check"
+          },
+          {
+            "run": "{compose} run --rm backend alembic downgrade base"
+          },
+          {
+            "run": "{compose} run --rm backend alembic upgrade head"
+          },
+          {
+            "run": "{compose} run --rm backend pytest -m db"
+          }
+        ],
+        "smoke": [
+          {
+            "run": "{compose} up -d --build --wait"
+          }
+        ]
+      },
+      "http": [
+        {
+          "url": "http://localhost:{BACKEND_PORT}/health",
+          "expect_status": 200,
+          "contains": "\"database\":\"ok\""
+        },
+        {
+          "url": "http://localhost:{FRONTEND_PORT}/",
+          "expect_status": 200
+        }
+      ]
+    }
+  },
+  "plan": {
+    "id": "3f99296ecba90370",
+    "created_at": "2026-11-06T04:46:29Z",
+    "add": [
+      {
+        "path": ".env.example",
+        "sha256": "55e9e97d6dfb5c901986f5b85a8eddcebd718122f351e78863703aa62ef2ad00",
+        "mode": "100644"
+      },
+      {
+        "path": ".github/workflows/ci.yml",
+        "sha256": "dfb2fad7cbf33cc6ee2fc8862a8d3b2c4a7be950992ea7e8b0987aa3e698d2b0",
+        "mode": "100644"
+      },
+      {
+        "path": ".gitignore",
+        "sha256": "afc0d20f879d9e6aac2b3e9c2ea18b4dfdd366cd59dc6fddb6af44e1092d56a5",
+        "mode": "100644"
+      },
+      {
+        "path": "CLAUDE.md",
+        "sha256": "963d6387c7a079f250472aee6db3e0044aa4f815c1ca97e24da46ee8ef504db9",
+        "mode": "100644"
+      },
+      {
+        "path": "Makefile",
+        "sha256": "b71f4dc7df7b18a852a0576646b7f1073bb7b4e515831d141d2f68327f9ce3cc",
+        "mode": "100644"
+      },
+      {
+        "path": "README.md",
+        "sha256": "ff21fe74adcb164823bab7e854710e35fe143253191f8379a34fa11e016b78fa",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/.dockerignore",
+        "sha256": "ed66e86fc1a0bf460a5774f011a70a271755a8bb3a6c53e46ce4a60270bba84a",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/.env.example",
+        "sha256": "b021cc0ff30d3c2fcb84f7989f30e609920d64893f8b9b39bf0f637bd6218beb",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/.python-version",
+        "sha256": "7b55f8e67b5623c4bef3fa691288da9437d79d3aba156de48d481db32ac7d16d",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/Dockerfile",
+        "sha256": "5c8866a582c7cf3622b953a2f33fa4273b1b3c0e142dccc72659b7ec24bff802",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/alembic.ini",
+        "sha256": "7a7bb47e9268983b75f49b3a1e435e0d80a83c94015540a66ae41362ba27d5dc",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/alembic/env.py",
+        "sha256": "ee5d5ab80d04f18bf9d41731940794fd4595039d977034a940bfeb7cf4db96cb",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/alembic/script.py.mako",
+        "sha256": "7883f9f4f59387bc303343ed2eac18f9a5376b46e252c476c6c47a8030fedede",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/alembic/versions/20261105_0001_baseline.py",
+        "sha256": "07163682c1b482ae931abc8468523d9dc06638915613c6610d1e563160808a83",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/app/__init__.py",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/app/api/__init__.py",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/app/api/router.py",
+        "sha256": "daf2bfb2b9b107bf9671c9c5842eea6cc5c2220672fe1dd7b3ab5a6d02571a1b",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/app/api/routes/__init__.py",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/app/api/routes/health.py",
+        "sha256": "0918f00b4b3c5872b50c5891b5988bb65a878a1d7eba8f213268a76b3b62bd22",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/app/core/__init__.py",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/app/core/config.py",
+        "sha256": "f2adeedc96057f3a093fa537cc8de47568aef813f482bbfa85ae09c0d335574d",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/app/core/db.py",
+        "sha256": "c55c28f92f132788d45886e4c443628c17c7d7ad0f09a5af668249012275f041",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/app/core/errors.py",
+        "sha256": "57219cd6f2267f40e78d12b1c5e755cf5c83af4331d194cc7202d10d33ba7a67",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/app/main.py",
+        "sha256": "28db589e2db69a1d263b581590eba60c7d593dfbcb9ff9b7d46c9114c82ceef4",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/app/models.py",
+        "sha256": "44937d40c375db548d6f0ecf612e76529620b61f9314261eeb54d46e9ef714c0",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/app/modules/README.md",
+        "sha256": "850974b18de79b1f53d05c5a63ecd64ec93f613b09fc3de9c32b1d981968f456",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/app/modules/__init__.py",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/pyproject.toml",
+        "sha256": "b9aa10e66dac69966c0d36694ca22610a3806551ecd65551c536dc8bc1b5f448",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/tests/__init__.py",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/tests/conftest.py",
+        "sha256": "1fce9649d80d53ea9c96a931fea1380fa234312136e670ddb91e9e33f2bf7b02",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/tests/test_errors.py",
+        "sha256": "4626b0be60858456684a1b6bb960c2d6f1c780e5ae4912a38d1ea5314f3c0953",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/tests/test_health.py",
+        "sha256": "dd69a4f973531c2965a6acbea76b4b9bfd0505ab2dd876aafc0217309bac2124",
+        "mode": "100644"
+      },
+      {
+        "path": "backend/uv.lock",
+        "sha256": "61fc527df65dfffd8ae690f5761bd51e96fbc1c660e64158d4173dcf94042d3d",
+        "mode": "100644"
+      },
+      {
+        "path": "docker-compose.yml",
+        "sha256": "e5ae00fbc0025e977c672309a09937145770fbba8b330dd454b6ec48aa3ac659",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/.dockerignore",
+        "sha256": "51b683467baace87247effed923b8aaecc559168ba0efbb43fd4714a8dc19362",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/.env.example",
+        "sha256": "ff95f14a79d2752b9f3af44f1b3cc80457e85b98477db318fce716a3066e9595",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/Dockerfile",
+        "sha256": "d14ef3981c72a85828fbe08daa00cb4b99ea8bd55184588f9b34a6da66d6e5c4",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/eslint.config.js",
+        "sha256": "eff781503d784ee4ffa7ba02f68504d0be7d58f8730b3e44c75862dd47bcef80",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/index.html",
+        "sha256": "1b87759cc798836ad1ce84e71381995613fb42a019f11fb1239e3a3255347282",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/package.json",
+        "sha256": "4c8fc81e00e631b21ab4f7564d6ef5fa9a583694e133c251019dff1f9a6e9b0e",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/pnpm-lock.yaml",
+        "sha256": "24946f9a4e4ce4fdabdfd2a6e2da0c7bbb07478e73dadb1a127ab3d959ae2d4c",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/src/features/health/HealthStatus.test.tsx",
+        "sha256": "b847980b9752743fbbfa82ce9b297adae6507c64836a389469cb7af47681b875",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/src/features/health/HealthStatus.tsx",
+        "sha256": "274d927e64eeff445d5947d00f0d62da9e882d2a296894e21b5b48ddfad2e485",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/src/features/health/api.ts",
+        "sha256": "d792d9ee9a7d06ca4c93ebf2e6433f5c1649dccd59833cb47fbf33b0661e1eb9",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/src/features/health/useHealth.ts",
+        "sha256": "19793598756d41336002dbf50fd73cf2df6e308af2f34b6a959371f4867af859",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/src/lib/api/client.test.ts",
+        "sha256": "d408918434d83aee726e4ddb45c6a6195f41ceff4785a67f4ca5c9f2fcb2f4c2",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/src/lib/api/client.ts",
+        "sha256": "59ee38ded7914f83e0e886e07c977541e9b755672aa2de43140a5dba8a70b977",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/src/lib/api/errors.ts",
+        "sha256": "34f03e59908dc163e35db30698601accb41086fa9ab16bcb4e95b967c58daade",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/src/lib/api/index.ts",
+        "sha256": "cf96dc7de93614600c14f156393dda997c830f06bfed528375bc2a8c418bd33f",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/src/main.tsx",
+        "sha256": "1036c51e6c7c32e761414609f330b1e8cb6f4a66eb5b581526908a1dcbee4ddf",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/src/pages/HomePage.tsx",
+        "sha256": "93d046c1f88760862c1b9d88e1b8acb3e5836b5161961e0582aafd436995be2f",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/src/pages/NotFoundPage.tsx",
+        "sha256": "4a385d2eee38f23cec4dc663b3634a77f5179ea29cfcbf193a3af450f6d1d487",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/src/routes/RootLayout.tsx",
+        "sha256": "f08afabfa7285980b1ff12959eea5d8d76297b286379a68589c9201fdd8fb910",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/src/routes/router.test.tsx",
+        "sha256": "08cd36e4fc7a959e0e2b5c806311773965276013916097d0c5ba0d743d4afcd6",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/src/routes/router.tsx",
+        "sha256": "d27bf4254776f73732e5576fb5480aa25aba26f75182a58e5f1975d059a8171e",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/src/test/setup.ts",
+        "sha256": "4e8042deb928d8989a9fe9fd88df61eacaa169578e4c483f9887b77646d0ca55",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/src/vite-env.d.ts",
+        "sha256": "227d5944220a22db58883611843467d483928e3d759a3f8a9ae700cb53174e4d",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/tsconfig.app.json",
+        "sha256": "da58e581dad1b2125cb52657ecf9334fe0e7994d1f5915d1227c3e8006b637ee",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/tsconfig.json",
+        "sha256": "e8d6f7b50828db3953e21c7e92584f9206b3cd2551b4012507372afbb7fe9ce3",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/tsconfig.node.json",
+        "sha256": "aab837c63f1d46460c97646154fbe53fba5824f5fdb2bbbe2b9bb72af99c26b5",
+        "mode": "100644"
+      },
+      {
+        "path": "frontend/vite.config.ts",
+        "sha256": "3fe2b8e05938a19ccad3dba7848b5d5bfe9e03f7e6d46568592cb24c9d99483c",
+        "mode": "100644"
+      }
+    ],
+    "identical": [],
+    "conflicts": [],
+    "excluded": [
+      {
+        "path": "boilerplate.manifest.toml",
+        "reason": "manifest"
+      }
+    ],
+    "protected": []
+  },
+  "approval": {
+    "approved": true,
+    "plan_id": "3f99296ecba90370",
+    "at": "2026-11-06T04:47:05Z"
+  },
+  "branch": "init/fullstack-boilerplate-v1.0.0",
+  "files_done": [
+    {
+      "path": ".env.example",
+      "sha256": "55e9e97d6dfb5c901986f5b85a8eddcebd718122f351e78863703aa62ef2ad00"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "dfb2fad7cbf33cc6ee2fc8862a8d3b2c4a7be950992ea7e8b0987aa3e698d2b0"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "afc0d20f879d9e6aac2b3e9c2ea18b4dfdd366cd59dc6fddb6af44e1092d56a5"
+    },
+    {
+      "path": "CLAUDE.md",
+      "sha256": "963d6387c7a079f250472aee6db3e0044aa4f815c1ca97e24da46ee8ef504db9"
+    },
+    {
+      "path": "Makefile",
+      "sha256": "b71f4dc7df7b18a852a0576646b7f1073bb7b4e515831d141d2f68327f9ce3cc"
+    },
+    {
+      "path": "README.md",
+      "sha256": "ff21fe74adcb164823bab7e854710e35fe143253191f8379a34fa11e016b78fa"
+    },
+    {
+      "path": "backend/.dockerignore",
+      "sha256": "ed66e86fc1a0bf460a5774f011a70a271755a8bb3a6c53e46ce4a60270bba84a"
+    },
+    {
+      "path": "backend/.env.example",
+      "sha256": "b021cc0ff30d3c2fcb84f7989f30e609920d64893f8b9b39bf0f637bd6218beb"
+    },
+    {
+      "path": "backend/.python-version",
+      "sha256": "7b55f8e67b5623c4bef3fa691288da9437d79d3aba156de48d481db32ac7d16d"
+    },
+    {
+      "path": "backend/Dockerfile",
+      "sha256": "5c8866a582c7cf3622b953a2f33fa4273b1b3c0e142dccc72659b7ec24bff802"
+    },
+    {
+      "path": "backend/alembic.ini",
+      "sha256": "7a7bb47e9268983b75f49b3a1e435e0d80a83c94015540a66ae41362ba27d5dc"
+    },
+    {
+      "path": "backend/alembic/env.py",
+      "sha256": "ee5d5ab80d04f18bf9d41731940794fd4595039d977034a940bfeb7cf4db96cb"
+    },
+    {
+      "path": "backend/alembic/script.py.mako",
+      "sha256": "7883f9f4f59387bc303343ed2eac18f9a5376b46e252c476c6c47a8030fedede"
+    },
+    {
+      "path": "backend/alembic/versions/20261105_0001_baseline.py",
+      "sha256": "07163682c1b482ae931abc8468523d9dc06638915613c6610d1e563160808a83"
+    },
+    {
+      "path": "backend/app/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/api/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/api/router.py",
+      "sha256": "daf2bfb2b9b107bf9671c9c5842eea6cc5c2220672fe1dd7b3ab5a6d02571a1b"
+    },
+    {
+      "path": "backend/app/api/routes/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/api/routes/health.py",
+      "sha256": "0918f00b4b3c5872b50c5891b5988bb65a878a1d7eba8f213268a76b3b62bd22"
+    },
+    {
+      "path": "backend/app/core/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/core/config.py",
+      "sha256": "f2adeedc96057f3a093fa537cc8de47568aef813f482bbfa85ae09c0d335574d"
+    },
+    {
+      "path": "backend/app/core/db.py",
+      "sha256": "c55c28f92f132788d45886e4c443628c17c7d7ad0f09a5af668249012275f041"
+    },
+    {
+      "path": "backend/app/core/errors.py",
+      "sha256": "57219cd6f2267f40e78d12b1c5e755cf5c83af4331d194cc7202d10d33ba7a67"
+    },
+    {
+      "path": "backend/app/main.py",
+      "sha256": "28db589e2db69a1d263b581590eba60c7d593dfbcb9ff9b7d46c9114c82ceef4"
+    },
+    {
+      "path": "backend/app/models.py",
+      "sha256": "44937d40c375db548d6f0ecf612e76529620b61f9314261eeb54d46e9ef714c0"
+    },
+    {
+      "path": "backend/app/modules/README.md",
+      "sha256": "850974b18de79b1f53d05c5a63ecd64ec93f613b09fc3de9c32b1d981968f456"
+    },
+    {
+      "path": "backend/app/modules/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/pyproject.toml",
+      "sha256": "b9aa10e66dac69966c0d36694ca22610a3806551ecd65551c536dc8bc1b5f448"
+    },
+    {
+      "path": "backend/tests/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/tests/conftest.py",
+      "sha256": "1fce9649d80d53ea9c96a931fea1380fa234312136e670ddb91e9e33f2bf7b02"
+    },
+    {
+      "path": "backend/tests/test_errors.py",
+      "sha256": "4626b0be60858456684a1b6bb960c2d6f1c780e5ae4912a38d1ea5314f3c0953"
+    },
+    {
+      "path": "backend/tests/test_health.py",
+      "sha256": "dd69a4f973531c2965a6acbea76b4b9bfd0505ab2dd876aafc0217309bac2124"
+    },
+    {
+      "path": "backend/uv.lock",
+      "sha256": "61fc527df65dfffd8ae690f5761bd51e96fbc1c660e64158d4173dcf94042d3d"
+    },
+    {
+      "path": "docker-compose.yml",
+      "sha256": "e5ae00fbc0025e977c672309a09937145770fbba8b330dd454b6ec48aa3ac659"
+    },
+    {
+      "path": "frontend/.dockerignore",
+      "sha256": "51b683467baace87247effed923b8aaecc559168ba0efbb43fd4714a8dc19362"
+    },
+    {
+      "path": "frontend/.env.example",
+      "sha256": "ff95f14a79d2752b9f3af44f1b3cc80457e85b98477db318fce716a3066e9595"
+    },
+    {
+      "path": "frontend/Dockerfile",
+      "sha256": "d14ef3981c72a85828fbe08daa00cb4b99ea8bd55184588f9b34a6da66d6e5c4"
+    },
+    {
+      "path": "frontend/eslint.config.js",
+      "sha256": "eff781503d784ee4ffa7ba02f68504d0be7d58f8730b3e44c75862dd47bcef80"
+    },
+    {
+      "path": "frontend/index.html",
+      "sha256": "1b87759cc798836ad1ce84e71381995613fb42a019f11fb1239e3a3255347282"
+    },
+    {
+      "path": "frontend/package.json",
+      "sha256": "4c8fc81e00e631b21ab4f7564d6ef5fa9a583694e133c251019dff1f9a6e9b0e"
+    },
+    {
+      "path": "frontend/pnpm-lock.yaml",
+      "sha256": "24946f9a4e4ce4fdabdfd2a6e2da0c7bbb07478e73dadb1a127ab3d959ae2d4c"
+    },
+    {
+      "path": "frontend/src/features/health/HealthStatus.test.tsx",
+      "sha256": "b847980b9752743fbbfa82ce9b297adae6507c64836a389469cb7af47681b875"
+    },
+    {
+      "path": "frontend/src/features/health/HealthStatus.tsx",
+      "sha256": "274d927e64eeff445d5947d00f0d62da9e882d2a296894e21b5b48ddfad2e485"
+    },
+    {
+      "path": "frontend/src/features/health/api.ts",
+      "sha256": "d792d9ee9a7d06ca4c93ebf2e6433f5c1649dccd59833cb47fbf33b0661e1eb9"
+    },
+    {
+      "path": "frontend/src/features/health/useHealth.ts",
+      "sha256": "19793598756d41336002dbf50fd73cf2df6e308af2f34b6a959371f4867af859"
+    },
+    {
+      "path": "frontend/src/lib/api/client.test.ts",
+      "sha256": "d408918434d83aee726e4ddb45c6a6195f41ceff4785a67f4ca5c9f2fcb2f4c2"
+    },
+    {
+      "path": "frontend/src/lib/api/client.ts",
+      "sha256": "59ee38ded7914f83e0e886e07c977541e9b755672aa2de43140a5dba8a70b977"
+    },
+    {
+      "path": "frontend/src/lib/api/errors.ts",
+      "sha256": "34f03e59908dc163e35db30698601accb41086fa9ab16bcb4e95b967c58daade"
+    },
+    {
+      "path": "frontend/src/lib/api/index.ts",
+      "sha256": "cf96dc7de93614600c14f156393dda997c830f06bfed528375bc2a8c418bd33f"
+    },
+    {
+      "path": "frontend/src/main.tsx",
+      "sha256": "1036c51e6c7c32e761414609f330b1e8cb6f4a66eb5b581526908a1dcbee4ddf"
+    },
+    {
+      "path": "frontend/src/pages/HomePage.tsx",
+      "sha256": "93d046c1f88760862c1b9d88e1b8acb3e5836b5161961e0582aafd436995be2f"
+    },
+    {
+      "path": "frontend/src/pages/NotFoundPage.tsx",
+      "sha256": "4a385d2eee38f23cec4dc663b3634a77f5179ea29cfcbf193a3af450f6d1d487"
+    },
+    {
+      "path": "frontend/src/routes/RootLayout.tsx",
+      "sha256": "f08afabfa7285980b1ff12959eea5d8d76297b286379a68589c9201fdd8fb910"
+    },
+    {
+      "path": "frontend/src/routes/router.test.tsx",
+      "sha256": "08cd36e4fc7a959e0e2b5c806311773965276013916097d0c5ba0d743d4afcd6"
+    },
+    {
+      "path": "frontend/src/routes/router.tsx",
+      "sha256": "d27bf4254776f73732e5576fb5480aa25aba26f75182a58e5f1975d059a8171e"
+    },
+    {
+      "path": "frontend/src/test/setup.ts",
+      "sha256": "4e8042deb928d8989a9fe9fd88df61eacaa169578e4c483f9887b77646d0ca55"
+    },
+    {
+      "path": "frontend/src/vite-env.d.ts",
+      "sha256": "227d5944220a22db58883611843467d483928e3d759a3f8a9ae700cb53174e4d"
+    },
+    {
+      "path": "frontend/tsconfig.app.json",
+      "sha256": "da58e581dad1b2125cb52657ecf9334fe0e7994d1f5915d1227c3e8006b637ee"
+    },
+    {
+      "path": "frontend/tsconfig.json",
+      "sha256": "e8d6f7b50828db3953e21c7e92584f9206b3cd2551b4012507372afbb7fe9ce3"
+    },
+    {
+      "path": "frontend/tsconfig.node.json",
+      "sha256": "aab837c63f1d46460c97646154fbe53fba5824f5fdb2bbbe2b9bb72af99c26b5"
+    },
+    {
+      "path": "frontend/vite.config.ts",
+      "sha256": "3fe2b8e05938a19ccad3dba7848b5d5bfe9e03f7e6d46568592cb24c9d99483c"
+    }
+  ],
+  "runtime_conflicts": [],
+  "merges": [],
+  "verification": {
+    "fe": {
+      "stage": "fe",
+      "at": "2026-11-06T04:47:50Z",
+      "steps": [
+        {
+          "run": "pnpm install --frozen-lockfile",
+          "cwd": "frontend",
+          "exit": 0,
+          "seconds": 1.1,
+          "log": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/product-init-verify-fe-qywiw8gq/00.log"
+        },
+        {
+          "run": "pnpm lint",
+          "cwd": "frontend",
+          "exit": 0,
+          "seconds": 1.3,
+          "log": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/product-init-verify-fe-qywiw8gq/01.log"
+        },
+        {
+          "run": "pnpm typecheck",
+          "cwd": "frontend",
+          "exit": 0,
+          "seconds": 1.7,
+          "log": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/product-init-verify-fe-qywiw8gq/02.log"
+        },
+        {
+          "run": "pnpm test",
+          "cwd": "frontend",
+          "exit": 0,
+          "seconds": 2.1,
+          "log": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/product-init-verify-fe-qywiw8gq/03.log"
+        },
+        {
+          "run": "pnpm build",
+          "cwd": "frontend",
+          "exit": 0,
+          "seconds": 1.8,
+          "log": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/product-init-verify-fe-qywiw8gq/04.log"
+        }
+      ],
+      "result": "pass"
+    },
+    "be": {
+      "stage": "be",
+      "at": "2026-11-06T04:47:59Z",
+      "steps": [
+        {
+          "run": "uv sync --frozen",
+          "cwd": "backend",
+          "exit": 0,
+          "seconds": 0.2,
+          "log": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/product-init-verify-be-a80w0yxy/00.log"
+        },
+        {
+          "run": "uv run ruff check .",
+          "cwd": "backend",
+          "exit": 0,
+          "seconds": 0.4,
+          "log": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/product-init-verify-be-a80w0yxy/01.log"
+        },
+        {
+          "run": "uv run ruff format --check .",
+          "cwd": "backend",
+          "exit": 0,
+          "seconds": 0.0,
+          "log": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/product-init-verify-be-a80w0yxy/02.log"
+        },
+        {
+          "run": "uv run mypy app tests",
+          "cwd": "backend",
+          "exit": 0,
+          "seconds": 3.9,
+          "log": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/product-init-verify-be-a80w0yxy/03.log"
+        },
+        {
+          "run": "uv run pytest",
+          "cwd": "backend",
+          "exit": 0,
+          "seconds": 2.8,
+          "log": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/product-init-verify-be-a80w0yxy/04.log"
+        }
+      ],
+      "result": "pass"
+    },
+    "compose_project": "badminton-playbook-init-verify",
+    "db": {
+      "stage": "db",
+      "at": "2026-11-06T04:48:20Z",
+      "steps": [
+        {
+          "run": "docker compose -p badminton-playbook-init-verify --env-file .env.example up -d --wait db",
+          "cwd": ".",
+          "exit": 0,
+          "seconds": 3.8,
+          "log": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/product-init-verify-db-hjfcn8ag/00.log"
+        },
+        {
+          "run": "docker compose -p badminton-playbook-init-verify --env-file .env.example run --rm --build backend alembic upgrade head",
+          "cwd": ".",
+          "exit": 0,
+          "seconds": 3.8,
+          "log": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/product-init-verify-db-hjfcn8ag/01.log"
+        },
+        {
+          "run": "docker compose -p badminton-playbook-init-verify --env-file .env.example run --rm backend alembic check",
+          "cwd": ".",
+          "exit": 0,
+          "seconds": 1.3,
+          "log": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/product-init-verify-db-hjfcn8ag/02.log"
+        },
+        {
+          "run": "docker compose -p badminton-playbook-init-verify --env-file .env.example run --rm backend alembic downgrade base",
+          "cwd": ".",
+          "exit": 0,
+          "seconds": 1.3,
+          "log": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/product-init-verify-db-hjfcn8ag/03.log"
+        },
+        {
+          "run": "docker compose -p badminton-playbook-init-verify --env-file .env.example run --rm backend alembic upgrade head",
+          "cwd": ".",
+          "exit": 0,
+          "seconds": 1.3,
+          "log": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/product-init-verify-db-hjfcn8ag/04.log"
+        },
+        {
+          "run": "docker compose -p badminton-playbook-init-verify --env-file .env.example run --rm backend pytest -m db",
+          "cwd": ".",
+          "exit": 0,
+          "seconds": 1.6,
+          "log": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/product-init-verify-db-hjfcn8ag/05.log"
+        }
+      ],
+      "result": "pass",
+      "cleanup": {
+        "run": "docker compose -p badminton-playbook-init-verify --env-file .env.example down --remove-orphans",
+        "exit": 0
+      }
+    },
+    "smoke": {
+      "stage": "smoke",
+      "at": "2026-11-06T04:48:34Z",
+      "steps": [
+        {
+          "run": "docker compose -p badminton-playbook-init-verify --env-file .env.example up -d --build --wait",
+          "cwd": ".",
+          "exit": 0,
+          "seconds": 7.3,
+          "log": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/product-init-verify-smoke-rb5i905k/00.log"
+        },
+        {
+          "http": "http://localhost:58000/health",
+          "ok": true,
+          "detail": "200"
+        },
+        {
+          "http": "http://localhost:55173/",
+          "ok": true,
+          "detail": "200"
+        }
+      ],
+      "result": "pass",
+      "cleanup": {
+        "run": "docker compose -p badminton-playbook-init-verify --env-file .env.example down --remove-orphans",
+        "exit": 0
+      }
+    }
+  },
+  "history": [
+    {
+      "at": "2026-11-06T04:40:16Z",
+      "event": "planned",
+      "note": "plan a6ac59581dd6deb1: add 61, identical 0, conflicts 0"
+    },
+    {
+      "at": "2026-11-06T04:46:29Z",
+      "event": "planned",
+      "note": "plan 3f99296ecba90370: add 61, identical 0, conflicts 0"
+    },
+    {
+      "at": "2026-11-06T04:47:05Z",
+      "event": "approved",
+      "note": "plan 3f99296ecba90370"
+    },
+    {
+      "at": "2026-11-06T04:47:05Z",
+      "event": "branch_created",
+      "note": "init/fullstack-boilerplate-v1.0.0"
+    },
+    {
+      "at": "2026-11-06T04:47:05Z",
+      "event": "applying",
+      "note": ""
+    },
+    {
+      "at": "2026-11-06T04:47:05Z",
+      "event": "applied",
+      "note": "files 61, runtime conflicts 0"
+    },
+    {
+      "at": "2026-11-06T04:47:58Z",
+      "event": "verify_fe",
+      "note": "pass"
+    },
+    {
+      "at": "2026-11-06T04:48:06Z",
+      "event": "verify_be",
+      "note": "pass"
+    },
+    {
+      "at": "2026-11-06T04:48:34Z",
+      "event": "verify_db",
+      "note": "pass"
+    },
+    {
+      "at": "2026-11-06T04:48:45Z",
+      "event": "verify_smoke",
+      "note": "pass"
+    }
+  ],
+  "created_at": "2026-11-06T04:40:16Z",
+  "updated_at": "2026-11-06T04:48:45Z"
+}
