@@ -4,28 +4,23 @@
   "skill": "product-design",
   "created_at": "2026-11-09T00:43:42Z",
   "based_on": {
-    "discovery_revision": "2",
-    "planning_revision": "2",
+    "discovery_revision": "3",
+    "planning_revision": "3",
     "planning_hashes": {
-      "docs/planning/01-discovery.md": "9bd651316f55831a8c652c80397dacee4f81f270537964bf95f5cf6b5496a77f",
-      "docs/planning/02-prd.md": "86adaec58828c84d51b172e793068d730aea3ffc36d419f1c5172d9fd6a2a75f",
-      "docs/planning/03-user-stories.md": "8aa49f7af2f2cd216ce56539ee822eddb029d0965fe526bb7faecf30e59fa920",
-      "docs/planning/04-user-flows.md": "519d82582b426dffc7568ce55f72044ad09ab19dd7c7d2556fd7dac0a76d1f36",
-      "docs/planning/05-acceptance-criteria.md": "b478d5211da8ea1eb52b87086d623959726c38a70b0d6caa1c7318f182487185"
+      "docs/planning/01-discovery.md": "5fcf2ebb6023832a9ab964714a535480ce0adc8d0ce301bea7522f937f87a068",
+      "docs/planning/02-prd.md": "fd5fd0fbb5fc3cc4a8820c3d27fe9289fb35ec255b5ffea3e1b50308173a653a",
+      "docs/planning/03-user-stories.md": "1f07d275ca2995f0380c9809df586d037f9d59a673dda82b3f9417c3af27cd5a",
+      "docs/planning/04-user-flows.md": "c5ebc6b4644e644cf31adac8c25a2763aa3ff3531f5afc7ee70c9f573a760827",
+      "docs/planning/05-acceptance-criteria.md": "a7a9b40fe3b4933fdcd1cd6d44724d1bb3c00a676fc0045ab32d5f5ebcf73e3c"
     },
-    "planning_commit": "99cd9f77ab8e4bd4dd38087511e728a1e23785ed"
+    "planning_commit": "d1640c0f60629bb059753e2ce2ed5cd2da4665f8",
+    "previous": {
+      "planning_revision": "2",
+      "planning_commit": "99cd9f77ab8e4bd4dd38087511e728a1e23785ed"
+    }
   },
   "validity": {
-    "status": "outdated",
-    "reason": "planning 승인 해시가 디자인 기준과 다릅니다",
-    "changed": [
-      "docs/planning/01-discovery.md",
-      "docs/planning/02-prd.md",
-      "docs/planning/03-user-stories.md",
-      "docs/planning/04-user-flows.md",
-      "docs/planning/05-acceptance-criteria.md"
-    ],
-    "detected_at": "2026-11-09T06:39:36Z"
+    "status": "valid"
   },
   "stages": {
     "ux_planning": {
@@ -35,7 +30,7 @@
         "docs/design/00-ux-decisions.md"
       ],
       "artifacts_done": {
-        "docs/design/00-ux-decisions.md": "4eed42efe5fe5ed85af11ae5ba60433bae56844ce6447d6b5fc9a591aa7e643d"
+        "docs/design/00-ux-decisions.md": "1b3a071f9223cbe2389bf55804c33d3bf256a79c6fe7ccad2e9a0d57ed2aa748"
       },
       "submitted": null,
       "approved": null
@@ -83,7 +78,14 @@
       "event": "outdated",
       "revision": null,
       "note": "planning 변경 감지: docs/planning/01-discovery.md, docs/planning/02-prd.md, docs/planning/03-user-stories.md, docs/planning/04-user-flows.md, docs/planning/05-acceptance-criteria.md"
+    },
+    {
+      "at": "2026-11-09T06:46:07Z",
+      "stage": "design",
+      "event": "rebased",
+      "revision": null,
+      "note": "planning r2 → r3"
     }
   ],
-  "updated_at": "2026-11-09T06:39:36Z"
+  "updated_at": "2026-11-09T07:07:10Z"
 }
