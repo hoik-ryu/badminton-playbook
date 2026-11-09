@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "workflow": "ai-product-workflow",
+  "skill": "product-design",
+  "created_at": "2026-11-09T00:43:42Z",
+  "based_on": {
+    "discovery_revision": "2",
+    "planning_revision": "2",
+    "planning_hashes": {
+      "docs/planning/01-discovery.md": "9bd651316f55831a8c652c80397dacee4f81f270537964bf95f5cf6b5496a77f",
+      "docs/planning/02-prd.md": "86adaec58828c84d51b172e793068d730aea3ffc36d419f1c5172d9fd6a2a75f",
+      "docs/planning/03-user-stories.md": "8aa49f7af2f2cd216ce56539ee822eddb029d0965fe526bb7faecf30e59fa920",
+      "docs/planning/04-user-flows.md": "519d82582b426dffc7568ce55f72044ad09ab19dd7c7d2556fd7dac0a76d1f36",
+      "docs/planning/05-acceptance-criteria.md": "b478d5211da8ea1eb52b87086d623959726c38a70b0d6caa1c7318f182487185"
+    },
+    "planning_commit": "99cd9f77ab8e4bd4dd38087511e728a1e23785ed"
+  },
+  "validity": {
+    "status": "valid"
+  },
+  "stages": {
+    "ux_planning": {
+      "status": "in_progress",
+      "revision": 0,
+      "artifacts": [
+        "docs/design/00-ux-decisions.md"
+      ],
+      "artifacts_done": {
+        "docs/design/00-ux-decisions.md": "4eed42efe5fe5ed85af11ae5ba60433bae56844ce6447d6b5fc9a591aa7e643d"
+      },
+      "submitted": null,
+      "approved": null
+    },
+    "ux_spec": {
+      "status": "locked",
+      "revision": 0,
+      "artifacts": [
+        "docs/design/01-information-architecture.md",
+        "docs/design/02-screens.md",
+        "docs/design/03-screen-flows.md",
+        "docs/design/04-ui-system.md",
+        "docs/design/05-design-traceability.md"
+      ],
+      "artifacts_done": {},
+      "submitted": null,
+      "approved": null,
+      "structure_confirmed": null,
+      "based_on_ux_planning_revision": null
+    },
+    "preview": {
+      "status": "locked",
+      "revision": 0,
+      "artifacts": [
+        "docs/design/06-preview-review.md"
+      ],
+      "artifacts_done": {},
+      "submitted": null,
+      "approved": null,
+      "based_on_ux_spec_revision": null,
+      "verification": null
+    }
+  },
+  "history": [
+    {
+      "at": "2026-11-09T00:43:42Z",
+      "stage": "ux_planning",
+      "event": "started",
+      "revision": 0,
+      "note": "planning r2 기준으로 시작"
+    }
+  ],
+  "updated_at": "2026-11-09T04:06:55Z"
+}
