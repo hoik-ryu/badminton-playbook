@@ -1,6 +1,6 @@
 ---
 doc: user-stories
-revision: 3
+revision: 4
 language: ko
 based_on:
   discovery_revision: 3
@@ -9,6 +9,8 @@ based_on:
 # 사용자 스토리 (User Stories): badminton-playbook
 
 > **r3 개정**: PF-001~006 반영. 수정한 스토리는 비고에 (r3)으로 표시했고, 폐기한 스토리는 취소선으로 남겼습니다. 신규 스토리는 US-022부터입니다.
+
+> **r4 개정**: 스토리 내용은 바뀌지 않았습니다. Planning 문서 4개가 revision을 함께 쓰므로 front matter revision만 4로 올렸습니다. r4에서 추가한 세션 규칙(C-25)과 게스트 삭제 제한(C-26)은 US-008·US-006의 AC(AC-101–AC-106)로 확인합니다.
 
 ## 스토리 목록
 

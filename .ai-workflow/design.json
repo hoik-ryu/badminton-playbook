@@ -24,19 +24,31 @@
   },
   "stages": {
     "ux_planning": {
-      "status": "in_progress",
-      "revision": 0,
+      "status": "approved",
+      "revision": 1,
       "artifacts": [
         "docs/design/00-ux-decisions.md"
       ],
       "artifacts_done": {
-        "docs/design/00-ux-decisions.md": "1b3a071f9223cbe2389bf55804c33d3bf256a79c6fe7ccad2e9a0d57ed2aa748"
+        "docs/design/00-ux-decisions.md": "099fa4400c316b79564a5b217b9b9808c7d55c19d4eb4ca4f81dfc063b7e1412"
       },
-      "submitted": null,
-      "approved": null
+      "submitted": {
+        "revision": 1,
+        "at": "2026-11-09T07:10:57Z",
+        "hashes": {
+          "docs/design/00-ux-decisions.md": "099fa4400c316b79564a5b217b9b9808c7d55c19d4eb4ca4f81dfc063b7e1412"
+        }
+      },
+      "approved": {
+        "revision": 1,
+        "at": "2026-11-09T07:12:43Z",
+        "hashes": {
+          "docs/design/00-ux-decisions.md": "099fa4400c316b79564a5b217b9b9808c7d55c19d4eb4ca4f81dfc063b7e1412"
+        }
+      }
     },
     "ux_spec": {
-      "status": "locked",
+      "status": "in_progress",
       "revision": 0,
       "artifacts": [
         "docs/design/01-information-architecture.md",
@@ -45,11 +57,21 @@
         "docs/design/04-ui-system.md",
         "docs/design/05-design-traceability.md"
       ],
-      "artifacts_done": {},
+      "artifacts_done": {
+        "docs/design/01-information-architecture.md": "17e37c77311e7699128b330aa3d35ac92a071f96af5d71c72c80312701528779",
+        "docs/design/02-screens.md": "f3a1d43b39ba87a125560f44723de441afb2152c886b97e838dd17b4764647a6",
+        "docs/design/03-screen-flows.md": "cbbcdbab3aabfe4e2a108399b1fb7368a2ee6c8ce407827cf89005f853ff2854",
+        "docs/design/04-ui-system.md": "93f93fe8f0c27486f8becb6cad064b5b9e1201394908120858bd4335f85c4ce4",
+        "docs/design/05-design-traceability.md": "ff7f371ca968c1a0a94d52061358f234c005c37462949067635053f59fa7d357"
+      },
       "submitted": null,
       "approved": null,
-      "structure_confirmed": null,
-      "based_on_ux_planning_revision": null
+      "structure_confirmed": {
+        "revision": 1,
+        "at": "2026-11-09T07:32:35Z",
+        "signature": "4b13f3da6ed39a1ab9c4f535ac6bf9a878b37fc18975047b84cf47ebbea4b96d"
+      },
+      "based_on_ux_planning_revision": 1
     },
     "preview": {
       "status": "locked",
@@ -85,7 +107,42 @@
       "event": "rebased",
       "revision": null,
       "note": "planning r2 → r3"
+    },
+    {
+      "at": "2026-11-09T07:10:57Z",
+      "stage": "ux_planning",
+      "event": "submitted",
+      "revision": 1,
+      "note": ""
+    },
+    {
+      "at": "2026-11-09T07:12:43Z",
+      "stage": "ux_planning",
+      "event": "approved",
+      "revision": 1,
+      "note": "사용자 명시 승인(2026-11-09)"
+    },
+    {
+      "at": "2026-11-09T07:12:43Z",
+      "stage": "ux_spec",
+      "event": "unlocked",
+      "revision": 0,
+      "note": "ux_planning r1 승인"
+    },
+    {
+      "at": "2026-11-09T07:14:56Z",
+      "stage": "ux_spec",
+      "event": "started",
+      "revision": 0,
+      "note": "ux_planning r1 기준"
+    },
+    {
+      "at": "2026-11-09T07:32:35Z",
+      "stage": "ux_spec",
+      "event": "structure_confirmed",
+      "revision": 1,
+      "note": "사용자 구조 확인(2026-11-09): 화면 29개, 라우트·접근 매트릭스·명명 규칙"
     }
   ],
-  "updated_at": "2026-11-09T07:07:10Z"
+  "updated_at": "2026-11-09T07:56:50Z"
 }

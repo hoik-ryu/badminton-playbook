@@ -26,26 +26,22 @@ stages:
 
   planning:
     status: approved         # locked | not_started | in_progress | awaiting_approval | approved | outdated
-    revision: 3
+    revision: 4
     based_on_discovery_revision: 3
     artifacts:
       - docs/planning/02-prd.md
       - docs/planning/03-user-stories.md
       - docs/planning/04-user-flows.md
       - docs/planning/05-acceptance-criteria.md
-    artifacts_done:     # 현재 revision 사이클에서 작성을 마친 파일
-      - docs/planning/02-prd.md
-      - docs/planning/03-user-stories.md
-      - docs/planning/04-user-flows.md
-      - docs/planning/05-acceptance-criteria.md
+    artifacts_done: []     # 현재 revision 사이클에서 작성을 마친 파일
     approved:
-      revision: 3
-      at: "2026-11-09T06:39:36Z"
+      revision: 4
+      at: "2026-11-09T08:19:12Z"
       hashes:
-        docs/planning/02-prd.md: "fd5fd0fbb5fc3cc4a8820c3d27fe9289fb35ec255b5ffea3e1b50308173a653a"
-        docs/planning/03-user-stories.md: "1f07d275ca2995f0380c9809df586d037f9d59a673dda82b3f9417c3af27cd5a"
-        docs/planning/04-user-flows.md: "c5ebc6b4644e644cf31adac8c25a2763aa3ff3531f5afc7ee70c9f573a760827"
-        docs/planning/05-acceptance-criteria.md: "a7a9b40fe3b4933fdcd1cd6d44724d1bb3c00a676fc0045ab32d5f5ebcf73e3c"
+        docs/planning/02-prd.md: "a0c71d2bdb9fe0bb9fe1e5f5ab8d7e1934e7057aea456418b4f1afd9c9d53432"
+        docs/planning/03-user-stories.md: "dc1c8c961ccde30b8082400ecfe8aa9c550a1b7eef8fd09e5536daee9cb830d3"
+        docs/planning/04-user-flows.md: "2c2acfc482a90bdc21db00707ec25a7db65573418021576f30053eb79b28d00f"
+        docs/planning/05-acceptance-criteria.md: "922f55566a31a0eb9eadc389d82e78e382b65c477b36c24509f25c8b2100c191"
 
   design:
     status: not_started         # locked | not_started  (Milestone 2 이후. planning 승인으로만 잠금 해제)
@@ -68,4 +64,7 @@ history:
   - { at: "2026-11-09T06:16:28Z", stage: planning, event: generated, revision: 2, note: "T5: discovery r3 기준으로 02–05를 r3로 개정 시작(사용자 'Planning r3 작성을 시작해 주세요'). 승인된 PF-001~006 변경 제안서 기준" }
   - { at: "2026-11-09T06:25:55Z", stage: planning, event: submitted, revision: 3, note: "Planning r3 제출: 02–05 r3, 추적성 점검 통과(유효 FR 24·Must 21, NFR 9, C 24, US 24, FLOW 8, AC 97, 폐기 FR-017·018·US-017·018·AC-048·051·052)" }
   - { at: "2026-11-09T06:39:36Z", stage: planning, event: approved, revision: 3, note: "사용자 명시적 승인(AskUserQuestion '승인'). ASM-023~026 함께 수용. design locked → not_started(UX Planning 재검토는 별도 확인 후)" }
+  - { at: "2026-11-09T08:06:37Z", stage: planning, event: reopened, revision: 3, note: "T9: Planning r4 개정(세션 하루 1개·종료 조건, 청백전 게스트 삭제 제한). 사용자 명시적 승인('Planning r4 개정을 승인합니다'). Discovery r3 유지. r3 승인 해시 02=fd5fd0fb… 03=1f07d275… 04=c5ebc6b4… 05=a7a9b40f…. design locked" }
+  - { at: "2026-11-09T08:17:08Z", stage: planning, event: submitted, revision: 4, note: "Planning r4 제출(사용자 submit 승인): FR-005·007 수정, C-25·26, FLOW-004-S1a·S9a·S9b, FLOW-003-S5b·S5c·S5d, AC-101~107 추가, AC-013 전제·AC-050 추적·매트릭스 FR-006 정정. 추적성 오류 0(FR 24·Must 21, NFR 9, C 26, US 24, FLOW 8·단계 80, AC 104). 해시 02=a0c71d2b… 03=dc1c8c96… 04=2c2acfc4… 05=922f5556…" }
+  - { at: "2026-11-09T08:19:12Z", stage: planning, event: approved, revision: 4, note: "사용자 명시적 승인('Planning r4를 승인합니다'). 제출 해시와 일치. design locked → not_started(/product-design check·rebase는 별도 확인 후)" }
   # - { at: "", stage: discovery, event: started | submitted | changes_requested | approved | reopened | outdated | generated, revision: 0, note: "" }
