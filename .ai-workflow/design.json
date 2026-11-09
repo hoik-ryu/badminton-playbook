@@ -16,7 +16,16 @@
     "planning_commit": "99cd9f77ab8e4bd4dd38087511e728a1e23785ed"
   },
   "validity": {
-    "status": "valid"
+    "status": "outdated",
+    "reason": "planning 승인 해시가 디자인 기준과 다릅니다",
+    "changed": [
+      "docs/planning/01-discovery.md",
+      "docs/planning/02-prd.md",
+      "docs/planning/03-user-stories.md",
+      "docs/planning/04-user-flows.md",
+      "docs/planning/05-acceptance-criteria.md"
+    ],
+    "detected_at": "2026-11-09T06:39:36Z"
   },
   "stages": {
     "ux_planning": {
@@ -67,7 +76,14 @@
       "event": "started",
       "revision": 0,
       "note": "planning r2 기준으로 시작"
+    },
+    {
+      "at": "2026-11-09T06:39:36Z",
+      "stage": "design",
+      "event": "outdated",
+      "revision": null,
+      "note": "planning 변경 감지: docs/planning/01-discovery.md, docs/planning/02-prd.md, docs/planning/03-user-stories.md, docs/planning/04-user-flows.md, docs/planning/05-acceptance-criteria.md"
     }
   ],
-  "updated_at": "2026-11-09T04:06:55Z"
+  "updated_at": "2026-11-09T06:39:36Z"
 }
