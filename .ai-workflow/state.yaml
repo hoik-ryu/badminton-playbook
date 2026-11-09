@@ -9,23 +9,23 @@ project:
   language: "ko"      # 산출물 언어. 기본 ko, 사용자가 명시한 경우에만 변경 (예: en)
   created_at: "2026-11-05T07:29:22Z"
 
-current_stage: design   # discovery | planning | design
+current_stage: planning   # discovery | planning | design
 
 stages:
   discovery:
     status: approved    # in_progress | awaiting_approval | approved
-    revision: 2
+    revision: 3
     interview_round: 3
     artifacts:
       - docs/planning/01-discovery.md
     approved:
-      revision: 2
-      at: "2026-11-06T01:59:49Z"
+      revision: 3
+      at: "2026-11-09T06:10:50Z"
       hashes:
-        docs/planning/01-discovery.md: "9bd651316f55831a8c652c80397dacee4f81f270537964bf95f5cf6b5496a77f"           # { 경로: sha256 }
+        docs/planning/01-discovery.md: "5fcf2ebb6023832a9ab964714a535480ce0adc8d0ce301bea7522f937f87a068"           # { 경로: sha256 }
 
   planning:
-    status: approved         # locked | not_started | in_progress | awaiting_approval | approved | outdated
+    status: outdated         # locked | not_started | in_progress | awaiting_approval | approved | outdated
     revision: 2
     based_on_discovery_revision: 2
     artifacts:
@@ -35,16 +35,12 @@ stages:
       - docs/planning/05-acceptance-criteria.md
     artifacts_done: []     # 현재 revision 사이클에서 작성을 마친 파일
     approved:
-      revision: 2
-      at: "2026-11-06T03:32:54Z"
-      hashes:
-        docs/planning/02-prd.md: "86adaec58828c84d51b172e793068d730aea3ffc36d419f1c5172d9fd6a2a75f"
-        docs/planning/03-user-stories.md: "8aa49f7af2f2cd216ce56539ee822eddb029d0965fe526bb7faecf30e59fa920"
-        docs/planning/04-user-flows.md: "519d82582b426dffc7568ce55f72044ad09ab19dd7c7d2556fd7dac0a76d1f36"
-        docs/planning/05-acceptance-criteria.md: "b478d5211da8ea1eb52b87086d623959726c38a70b0d6caa1c7318f182487185"
+      revision: null
+      at: null
+      hashes: {}
 
   design:
-    status: not_started         # locked | not_started  (Milestone 2 이후. planning 승인으로만 잠금 해제)
+    status: locked         # locked | not_started  (Milestone 2 이후. planning 승인으로만 잠금 해제)
 
 history:
   - { at: "2026-11-05T07:29:22Z", stage: discovery, event: started, revision: 0, note: "/product-start 초기화" }
@@ -57,4 +53,8 @@ history:
   - { at: "2026-11-06T02:09:15Z", stage: planning, event: changes_requested, revision: 1, note: "r1 미승인. ASM-007~014, Q-010·012~018, Must FR 재검토, 확정/가정 구분 요청" }
   - { at: "2026-11-06T02:33:19Z", stage: planning, event: submitted, revision: 2, note: "ASM-007~014·Q-010·012~018 확인 반영(C-01~C-12), 카카오 로그인, FR-020·021(Should) 추가, FR-011 축소, AC-056~061 추가" }
   - { at: "2026-11-06T03:32:54Z", stage: planning, event: approved, revision: 2, note: "사용자 명시적 승인(AskUserQuestion). Milestone 1 완료, design 잠금 해제" }
+  - { at: "2026-11-09T06:05:07Z", stage: discovery, event: reopened, revision: 2, note: "T7: PF-001~006(/product-design UX Planning) 반영을 위한 Discovery r3 재검토. 사용자 명시적 승인('전체 변경 방향과 PF-001~006 정책을 승인'). r2 승인 해시 01=9bd65131…" }
+  - { at: "2026-11-09T06:05:07Z", stage: planning, event: outdated, revision: 2, note: "T7로 planning r2 승인 초기화, design locked. r2 승인 해시 02=86adaec5… 03=8aa49f7a… 04=519d8258… 05=b478d521…" }
+  - { at: "2026-11-09T06:09:39Z", stage: discovery, event: submitted, revision: 3, note: "Discovery r3 제출: PF-001~006 반영(급수·지인, 청백전 개인전·팀전과 운영진 주도 대진, 회원 청백전 조회, 게임형 튜토리얼과 진행 저장, 실력차 표시), GOAL-002·003 지표 확정, Q-010·012·013 해결. ID 추가·폐기 없음" }
+  - { at: "2026-11-09T06:10:50Z", stage: discovery, event: approved, revision: 3, note: "사용자 명시적 승인(AskUserQuestion '승인'). planning은 T7로 outdated 유지(Planning r3는 사용자 확인 후 시작)" }
   # - { at: "", stage: discovery, event: started | submitted | changes_requested | approved | reopened | outdated | generated, revision: 0, note: "" }
