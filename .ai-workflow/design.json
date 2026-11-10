@@ -5,18 +5,18 @@
   "created_at": "2026-11-09T00:43:42Z",
   "based_on": {
     "discovery_revision": "3",
-    "planning_revision": "3",
+    "planning_revision": "4",
     "planning_hashes": {
       "docs/planning/01-discovery.md": "5fcf2ebb6023832a9ab964714a535480ce0adc8d0ce301bea7522f937f87a068",
-      "docs/planning/02-prd.md": "fd5fd0fbb5fc3cc4a8820c3d27fe9289fb35ec255b5ffea3e1b50308173a653a",
-      "docs/planning/03-user-stories.md": "1f07d275ca2995f0380c9809df586d037f9d59a673dda82b3f9417c3af27cd5a",
-      "docs/planning/04-user-flows.md": "c5ebc6b4644e644cf31adac8c25a2763aa3ff3531f5afc7ee70c9f573a760827",
-      "docs/planning/05-acceptance-criteria.md": "a7a9b40fe3b4933fdcd1cd6d44724d1bb3c00a676fc0045ab32d5f5ebcf73e3c"
+      "docs/planning/02-prd.md": "a0c71d2bdb9fe0bb9fe1e5f5ab8d7e1934e7057aea456418b4f1afd9c9d53432",
+      "docs/planning/03-user-stories.md": "dc1c8c961ccde30b8082400ecfe8aa9c550a1b7eef8fd09e5536daee9cb830d3",
+      "docs/planning/04-user-flows.md": "2c2acfc482a90bdc21db00707ec25a7db65573418021576f30053eb79b28d00f",
+      "docs/planning/05-acceptance-criteria.md": "922f55566a31a0eb9eadc389d82e78e382b65c477b36c24509f25c8b2100c191"
     },
-    "planning_commit": "d1640c0f60629bb059753e2ce2ed5cd2da4665f8",
+    "planning_commit": "f043d914377724d6559d8387ee4af07df1002ff2",
     "previous": {
-      "planning_revision": "2",
-      "planning_commit": "99cd9f77ab8e4bd4dd38087511e728a1e23785ed"
+      "planning_revision": "3",
+      "planning_commit": "d1640c0f60629bb059753e2ce2ed5cd2da4665f8"
     }
   },
   "validity": {
@@ -25,21 +25,28 @@
   "stages": {
     "ux_planning": {
       "status": "approved",
-      "revision": 1,
+      "revision": 2,
       "artifacts": [
         "docs/design/00-ux-decisions.md"
       ],
       "artifacts_done": {
-        "docs/design/00-ux-decisions.md": "099fa4400c316b79564a5b217b9b9808c7d55c19d4eb4ca4f81dfc063b7e1412"
+        "docs/design/00-ux-decisions.md": "c17cf17f57d72b66fc4ba632240b06e63d9a88fca9a048f69245a502bcfbc650"
       },
       "submitted": {
-        "revision": 1,
-        "at": "2026-11-09T07:10:57Z",
+        "revision": 2,
+        "at": "2026-11-10T00:48:16Z",
         "hashes": {
-          "docs/design/00-ux-decisions.md": "099fa4400c316b79564a5b217b9b9808c7d55c19d4eb4ca4f81dfc063b7e1412"
+          "docs/design/00-ux-decisions.md": "c17cf17f57d72b66fc4ba632240b06e63d9a88fca9a048f69245a502bcfbc650"
         }
       },
       "approved": {
+        "revision": 2,
+        "at": "2026-11-10T00:49:46Z",
+        "hashes": {
+          "docs/design/00-ux-decisions.md": "c17cf17f57d72b66fc4ba632240b06e63d9a88fca9a048f69245a502bcfbc650"
+        }
+      },
+      "last_approved": {
         "revision": 1,
         "at": "2026-11-09T07:12:43Z",
         "hashes": {
@@ -48,8 +55,8 @@
       }
     },
     "ux_spec": {
-      "status": "in_progress",
-      "revision": 0,
+      "status": "approved",
+      "revision": 1,
       "artifacts": [
         "docs/design/01-information-architecture.md",
         "docs/design/02-screens.md",
@@ -58,23 +65,43 @@
         "docs/design/05-design-traceability.md"
       ],
       "artifacts_done": {
-        "docs/design/01-information-architecture.md": "17e37c77311e7699128b330aa3d35ac92a071f96af5d71c72c80312701528779",
-        "docs/design/02-screens.md": "f3a1d43b39ba87a125560f44723de441afb2152c886b97e838dd17b4764647a6",
-        "docs/design/03-screen-flows.md": "cbbcdbab3aabfe4e2a108399b1fb7368a2ee6c8ce407827cf89005f853ff2854",
-        "docs/design/04-ui-system.md": "93f93fe8f0c27486f8becb6cad064b5b9e1201394908120858bd4335f85c4ce4",
-        "docs/design/05-design-traceability.md": "ff7f371ca968c1a0a94d52061358f234c005c37462949067635053f59fa7d357"
+        "docs/design/01-information-architecture.md": "2248baf00aadf442318a8c5282a9ce84bbccdf530a58bca295ba5de193560449",
+        "docs/design/02-screens.md": "8ec8ab0a4292b87d2a097fbe85fb04e09546a347dcb175a238b54594b08509e6",
+        "docs/design/03-screen-flows.md": "f81babed3cf77f0b50c4303ec14931318d97e2faeff6db4dc95d386783e78a07",
+        "docs/design/04-ui-system.md": "5209e3436609f6da4f9c1ab71e1af55a808ad0ed4f94bf1d5c1913c9e33e105b",
+        "docs/design/05-design-traceability.md": "6281bffd4b4b0202521d0c65426b1203941e2f9e2ed6ec16602ba66228ef6d90"
       },
-      "submitted": null,
-      "approved": null,
+      "submitted": {
+        "revision": 1,
+        "at": "2026-11-10T01:34:28Z",
+        "hashes": {
+          "docs/design/01-information-architecture.md": "2248baf00aadf442318a8c5282a9ce84bbccdf530a58bca295ba5de193560449",
+          "docs/design/02-screens.md": "8ec8ab0a4292b87d2a097fbe85fb04e09546a347dcb175a238b54594b08509e6",
+          "docs/design/03-screen-flows.md": "f81babed3cf77f0b50c4303ec14931318d97e2faeff6db4dc95d386783e78a07",
+          "docs/design/04-ui-system.md": "5209e3436609f6da4f9c1ab71e1af55a808ad0ed4f94bf1d5c1913c9e33e105b",
+          "docs/design/05-design-traceability.md": "6281bffd4b4b0202521d0c65426b1203941e2f9e2ed6ec16602ba66228ef6d90"
+        }
+      },
+      "approved": {
+        "revision": 1,
+        "at": "2026-11-10T01:38:14Z",
+        "hashes": {
+          "docs/design/01-information-architecture.md": "2248baf00aadf442318a8c5282a9ce84bbccdf530a58bca295ba5de193560449",
+          "docs/design/02-screens.md": "8ec8ab0a4292b87d2a097fbe85fb04e09546a347dcb175a238b54594b08509e6",
+          "docs/design/03-screen-flows.md": "f81babed3cf77f0b50c4303ec14931318d97e2faeff6db4dc95d386783e78a07",
+          "docs/design/04-ui-system.md": "5209e3436609f6da4f9c1ab71e1af55a808ad0ed4f94bf1d5c1913c9e33e105b",
+          "docs/design/05-design-traceability.md": "6281bffd4b4b0202521d0c65426b1203941e2f9e2ed6ec16602ba66228ef6d90"
+        }
+      },
       "structure_confirmed": {
         "revision": 1,
-        "at": "2026-11-09T07:32:35Z",
+        "at": "2026-11-10T01:22:34Z",
         "signature": "4b13f3da6ed39a1ab9c4f535ac6bf9a878b37fc18975047b84cf47ebbea4b96d"
       },
-      "based_on_ux_planning_revision": 1
+      "based_on_ux_planning_revision": 2
     },
     "preview": {
-      "status": "locked",
+      "status": "not_started",
       "revision": 0,
       "artifacts": [
         "docs/design/06-preview-review.md"
@@ -142,7 +169,84 @@
       "event": "structure_confirmed",
       "revision": 1,
       "note": "사용자 구조 확인(2026-11-09): 화면 29개, 라우트·접근 매트릭스·명명 규칙"
+    },
+    {
+      "at": "2026-11-09T08:40:31Z",
+      "stage": "design",
+      "event": "outdated",
+      "revision": null,
+      "note": "planning 변경 감지: docs/planning/02-prd.md, docs/planning/03-user-stories.md, docs/planning/04-user-flows.md, docs/planning/05-acceptance-criteria.md"
+    },
+    {
+      "at": "2026-11-10T00:32:22Z",
+      "stage": "ux_spec",
+      "event": "invalidated",
+      "revision": 0,
+      "note": "planning 변경으로 디자인 재검토"
+    },
+    {
+      "at": "2026-11-10T00:32:22Z",
+      "stage": "design",
+      "event": "rebased",
+      "revision": null,
+      "note": "planning r3 → r4"
+    },
+    {
+      "at": "2026-11-10T00:48:16Z",
+      "stage": "ux_planning",
+      "event": "submitted",
+      "revision": 2,
+      "note": ""
+    },
+    {
+      "at": "2026-11-10T00:49:46Z",
+      "stage": "ux_planning",
+      "event": "approved",
+      "revision": 2,
+      "note": "사용자 명시 승인(2026-11-10, 'UX Planning revision 2의 최종 승인을 허가합니다')"
+    },
+    {
+      "at": "2026-11-10T00:49:46Z",
+      "stage": "ux_spec",
+      "event": "unlocked",
+      "revision": 0,
+      "note": "ux_planning r2 승인"
+    },
+    {
+      "at": "2026-11-10T00:56:13Z",
+      "stage": "ux_spec",
+      "event": "started",
+      "revision": 0,
+      "note": "ux_planning r2 기준"
+    },
+    {
+      "at": "2026-11-10T01:22:34Z",
+      "stage": "ux_spec",
+      "event": "structure_confirmed",
+      "revision": 1,
+      "note": "사용자 구조 확인(2026-11-10): Planning r4 rebase 후 화면 29개·라우트 유지, 구조 서명 4b13f3da… 동일"
+    },
+    {
+      "at": "2026-11-10T01:34:28Z",
+      "stage": "ux_spec",
+      "event": "submitted",
+      "revision": 1,
+      "note": ""
+    },
+    {
+      "at": "2026-11-10T01:38:14Z",
+      "stage": "ux_spec",
+      "event": "approved",
+      "revision": 1,
+      "note": "사용자 명시 승인(2026-11-10, 'UX Specification revision 1의 최종 승인을 허가합니다')"
+    },
+    {
+      "at": "2026-11-10T01:38:14Z",
+      "stage": "preview",
+      "event": "unlocked",
+      "revision": 0,
+      "note": "ux_spec r1 승인"
     }
   ],
-  "updated_at": "2026-11-09T07:56:50Z"
+  "updated_at": "2026-11-10T01:38:14Z"
 }
