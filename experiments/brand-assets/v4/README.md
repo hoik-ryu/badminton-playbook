@@ -3,10 +3,14 @@
 기존 심볼(래스터에서 추출한 깃털 셔틀콕 + 네온 스피드 트레일)을 대체할 **새 심볼 후보 3종**입니다.
 모든 후보는 손으로 정의한 기하(SVG path/circle/arc)로 만든 순수 벡터이며, 배경 타일·글로우·네온 효과가 없습니다.
 
-> **실제 앱에는 아무것도 적용하지 않았습니다.** `frontend/`, `design-preview/`, `docs/`, 기존 브랜드 자산(v3 등)은 수정하지 않았고
-> 이 폴더(`experiments/brand-assets/v4/`)에만 파일을 만들었습니다.
+> **결정(2026-11-11)**: B · Geo Shuttle을 채택했습니다. 채택본과 앱 아이콘 원본 렌더는 `final/`
+> (`final/smapsh-symbol-b.svg`, `final/render-final.mjs` → `final/out/`)에 있고, 앱에는 `frontend/src/assets/brand/smapsh-symbol.svg`와
+> `frontend/public/` 아이콘으로 들어갔습니다. 아래 A·B·C 비교는 결정 기록입니다.
+>
+> **정리(2026-11-13)**: 후보 렌더 결과(`out/`, `compare/`)는 `render.mjs`로 다시 만들 수 있어 Git에서 지웠습니다(`.gitignore`로 제외).
+> 필요하면 아래 '재생성'을 실행하거나 Git 이력(커밋 `1770bab`)에서 꺼냅니다.
 
-- 전체 비교: `compare/overview.png`
+- 전체 비교: `compare/overview.png`(재생성 결과물)
 - 색상: 틸 `#006D68`(주), `#008F89`(보조 틸), 민트 `#2BBFAF`(포인트 전용) · 다크 배경 확인색 `#0B1F20`
 - 모든 SVG는 `viewBox="0 0 120 120"` 정사각, 투명 배경
 
@@ -86,6 +90,11 @@ experiments/brand-assets/v4/
   src/symbol-{a,b,c}.svg       # 컬러
   src/symbol-{a,b,c}-mono.svg  # 단색 #006D68
   src/symbol-{a,b,c}-white.svg # 단색 흰색(다크 배경용)
+  final/smapsh-symbol-b.svg    # 채택본(B안, 흰 배경 대비 보정)
+  final/render-final.mjs       # 앱 아이콘·파비콘 렌더
+  final/out/                   # 앱 아이콘 원본(frontend/public/과 같은 파일)
+
+# 아래는 render.mjs 생성물(Git 제외, 다시 만들 수 있음)
   out/{a,b,c}/symbol-<x>-1024.png, -512.png, -mono-1024.png, -white-1024.png  # 투명 PNG
   out/{a,b,c}/on-white.png, on-dark.png     # 800x800 배경 위 확인
   out/{a,b,c}/sizes.png                     # 32/64/192 실제 크기 + 32px 4배 확대 (컬러·모노·다크)

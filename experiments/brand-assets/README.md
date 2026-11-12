@@ -5,10 +5,23 @@
 - 새 로고를 그리지 않았습니다. 보드 **메인 로고 픽셀**에서 배경(어두운 그라데이션, 2차 곡면 맞춤)을 빼 투명도를 계산했고,
   보드 배경의 네온 줄기 2곳은 지웠습니다. 보드의 설명 문구·아이콘 목업·로그인 예시 문구는 쓰지 않았습니다.
 
-| 파일(`out/`) | 크기 | 용도 | 만든 방법 |
+## 현재 구조(2026-11-13 정리)
+
+| 경로 | 내용 | Git |
+|---|---|---|
+| `source/brand-board.png` | 브랜드 보드 원본 | 보관 |
+| `extract.mjs` | 보드 → `out/` 분리 스크립트 | 보관 |
+| `out/` | `extract.mjs` 생성물(아래 표). 다시 만들 수 있어 Git에서 제외(`.gitignore`) | 제외 |
+| `sheet.html`, `shot.mjs` | `out/` 모아보기 페이지와 캡처 스크립트(`extract.mjs` 실행 후 사용) | 보관 |
+| `v4/` | 현재 앱 심볼(v4 B안 Geo Shuttle). 채택본과 앱 아이콘 원본은 `v4/final/`, 설명은 `v4/README.md` | 보관 |
+
+- 앱에 들어간 자산: `frontend/src/assets/brand/smapsh-symbol.svg`, `frontend/public/` 아이콘(= `v4/final/`)
+- 정리로 삭제한 것: 이전 출력 `out/`, 채택하지 않은 시안 `v3/`·`symbol-v2/`·`symbol-v3/`. 필요하면 Git 이력(커밋 `1770bab`)에서 꺼낼 수 있습니다.
+
+| 파일(`out/`, 생성물) | 크기 | 용도 | 만든 방법 |
 |---|---|---|---|
 | `smapsh-full-dark.png` | 864×396 | 전체 로고(세로형), 어두운 배경 | 원래 색 + 네온 빛 번짐(반투명) |
-| `smapsh-symbol-dark.png` / `smapsh-wordmark-dark.png` | 577×294 / 864×126 | 인트로 로고 장면(따로 움직임) | 위와 같음 |
+| `smapsh-symbol-dark.png` / `smapsh-wordmark-dark.png` | 577×294 / 864×126 | (과거) 인트로 로고 장면. 현재 인트로는 v4 로고 사용 | 위와 같음 |
 | `smapsh-horizontal-dark.png` | 1278×240 | 가로형, 어두운 배경 | 심볼 + 워드마크 재배치(보드 '로그인 화면 사용 예시' 배치) |
 | `smapsh-full-light.png` / `smapsh-horizontal-light.png` | 850×382 / 1179×192 | 밝은 배경용(로그인) | 같은 모양 마스크에 보드 밝은 예시 색 계열: 심볼 `#006D68`→`#00A69E`, 워드마크 `#0F2C2F` |
 | `smapsh-symbol-crisp.png` | 517×266 | 아이콘용 심볼 | 원래 색(흰·청록), 빛 번짐 제거 |
