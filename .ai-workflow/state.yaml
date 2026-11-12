@@ -25,8 +25,8 @@ stages:
         docs/planning/01-discovery.md: "5fcf2ebb6023832a9ab964714a535480ce0adc8d0ce301bea7522f937f87a068"           # { 경로: sha256 }
 
   planning:
-    status: approved         # locked | not_started | in_progress | awaiting_approval | approved | outdated
-    revision: 4
+    status: approved   # locked | not_started | in_progress | awaiting_approval | approved | outdated
+    revision: 5
     based_on_discovery_revision: 3
     artifacts:
       - docs/planning/02-prd.md
@@ -35,16 +35,16 @@ stages:
       - docs/planning/05-acceptance-criteria.md
     artifacts_done: []     # 현재 revision 사이클에서 작성을 마친 파일
     approved:
-      revision: 4
-      at: "2026-11-09T08:19:12Z"
+      revision: 5
+      at: "2026-11-12T06:45:21Z"
       hashes:
-        docs/planning/02-prd.md: "a0c71d2bdb9fe0bb9fe1e5f5ab8d7e1934e7057aea456418b4f1afd9c9d53432"
-        docs/planning/03-user-stories.md: "dc1c8c961ccde30b8082400ecfe8aa9c550a1b7eef8fd09e5536daee9cb830d3"
-        docs/planning/04-user-flows.md: "2c2acfc482a90bdc21db00707ec25a7db65573418021576f30053eb79b28d00f"
-        docs/planning/05-acceptance-criteria.md: "922f55566a31a0eb9eadc389d82e78e382b65c477b36c24509f25c8b2100c191"
+        docs/planning/02-prd.md: e747052d4bfada1b92d72bd725f7724d42003882f400b0ae319aa583fc26f4bd
+        docs/planning/03-user-stories.md: c771b7e87aa7adf5e69279f0905e1d4763278e7d81f2805e364192e0843c6125
+        docs/planning/04-user-flows.md: 0bd4c939ddeae2447dbe6487df51241d93c454b8cec347d797a666c16cf8065b
+        docs/planning/05-acceptance-criteria.md: e29b953ca2e6637e848bfd2513bab275f77a3464d5aaada0845acc911a920cc7
 
   design:
-    status: not_started         # locked | not_started  (Milestone 2 이후. planning 승인으로만 잠금 해제)
+    status: not_started   # locked | not_started  (Milestone 2 이후. planning 승인으로만 잠금 해제)
 
 history:
   - { at: "2026-11-05T07:29:22Z", stage: discovery, event: started, revision: 0, note: "/product-start 초기화" }
@@ -67,4 +67,7 @@ history:
   - { at: "2026-11-09T08:06:37Z", stage: planning, event: reopened, revision: 3, note: "T9: Planning r4 개정(세션 하루 1개·종료 조건, 청백전 게스트 삭제 제한). 사용자 명시적 승인('Planning r4 개정을 승인합니다'). Discovery r3 유지. r3 승인 해시 02=fd5fd0fb… 03=1f07d275… 04=c5ebc6b4… 05=a7a9b40f…. design locked" }
   - { at: "2026-11-09T08:17:08Z", stage: planning, event: submitted, revision: 4, note: "Planning r4 제출(사용자 submit 승인): FR-005·007 수정, C-25·26, FLOW-004-S1a·S9a·S9b, FLOW-003-S5b·S5c·S5d, AC-101~107 추가, AC-013 전제·AC-050 추적·매트릭스 FR-006 정정. 추적성 오류 0(FR 24·Must 21, NFR 9, C 26, US 24, FLOW 8·단계 80, AC 104). 해시 02=a0c71d2b… 03=dc1c8c96… 04=2c2acfc4… 05=922f5556…" }
   - { at: "2026-11-09T08:19:12Z", stage: planning, event: approved, revision: 4, note: "사용자 명시적 승인('Planning r4를 승인합니다'). 제출 해시와 일치. design locked → not_started(/product-design check·rebase는 별도 확인 후)" }
+  - { at: "2026-11-12T06:35:26Z", stage: planning, event: reopened, revision: 4, note: "T9: 사용자 요청(I3 결정 D-6~D-10 정식 반영, Planning r5). r4 승인 기록은 Git(f043d91·5503071)·history에 보존", src: engine }
+  - { at: "2026-11-12T06:38:38Z", stage: planning, event: submitted, revision: 5, note: "Planning r5 제출: NFR-003·C-15·C-19·C-20·FR-015·FR-024 보강, AC-108–110, FLOW-005-S4c·S7a·S7b·FLOW-008-S3a. 기존 AC 불변", src: engine }
+  - { at: "2026-11-12T06:45:21Z", stage: planning, event: approved, revision: 5, note: "사용자 명시 승인(2026-11-12 '사용자로서 Planning r5 승인을 명시적으로 승인합니다'). I3 결정 D-6~D-8 반영, AC-108–110", src: engine }
   # - { at: "", stage: discovery, event: started | submitted | changes_requested | approved | reopened | outdated | generated, revision: 0, note: "" }
