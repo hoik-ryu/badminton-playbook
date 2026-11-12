@@ -1,0 +1,46 @@
+/* Tailwind v4 진입점(docs/design-profile/stack.md 결정). 색·크기는 tokens.css(04 승인 토큰 + theme.json)의 변수만 가리킵니다.
+   Tailwind 기본 색 팔레트는 비워(--color-*: initial) 토큰 밖 색 클래스가 만들어지지 않게 합니다(design-preview/src/app.css와 같은 대응). */
+@import "tailwindcss";
+
+@theme {
+  --color-*: initial;
+  --spacing: 4px; /* space.1–8(4px 단위)과 일치 */
+}
+
+@theme inline {
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-page: var(--color-bg-page);
+  --color-surface: var(--color-bg-surface);
+  --color-ink: var(--color-text-primary);
+  --color-ink-muted: var(--color-text-secondary);
+  --color-ink-disabled: var(--color-text-disabled);
+  --color-line: var(--color-border-default);
+  --color-line-strong: var(--color-border-strong);
+  --color-action: var(--color-action-primary);
+  --color-on-action: var(--color-action-onPrimary);
+  --color-focus: var(--color-focus-ring);
+  --color-info-bg: var(--color-status-info-bg);
+  --color-warning-fg: var(--color-status-warning-fg);
+  --color-warning-bg: var(--color-status-warning-bg);
+  --color-danger-fg: var(--color-status-danger-fg);
+  --color-danger-bg: var(--color-status-danger-bg);
+  --color-success-fg: var(--color-status-success-fg);
+  --color-success-bg: var(--color-status-success-bg);
+  --color-blue-team-fg: var(--color-team-blue-fg);
+  --color-blue-team-bg: var(--color-team-blue-bg);
+  --color-white-team-fg: var(--color-team-white-fg);
+  --color-white-team-bg: var(--color-team-white-bg);
+  --color-kakao-bg: var(--color-brand-kakao-bg);
+  --color-kakao-fg: var(--color-brand-kakao-fg);
+  --font-sans: var(--font-family-base);
+  --text-caption: var(--font-size-caption);
+  --text-body: var(--font-size-body);
+  --text-title: var(--font-size-title);
+  --text-heading: var(--font-size-heading);
+  --text-display: var(--font-size-display);
+  /* 반경: tokens.css(레이어 밖)의 --radius-sm 6 · --radius-md 10이 Tailwind 기본값(테마 레이어)을 덮어 rounded-sm·rounded-md에 그대로 적용됨 */
+  --radius-sheet: var(--radius-sheet);
+  --shadow-card: var(--elevation-card);
+  --shadow-sheet: var(--elevation-sheet);
+}

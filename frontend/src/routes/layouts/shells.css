@@ -1,0 +1,87 @@
+/*
+ * 서비스 셸 레이아웃(인증·회원·운영). 색·크기는 tokens.css 변수만 씁니다.
+ *
+ * 회원·인증 셸: 모바일은 화면 너비 그대로, 태블릿·PC(≥768)는 가운데 열(--app-column-max)
+ *   명세와의 차이(사용자 결정 2026-11-11, ④ + spec_conflict): NFR-002·AC-050·01 IA·04 1.5의 480px → 600px.
+ *   PC 회원 내비게이션: 600px 열 + 하단 탭 유지(사용자 결정 2026-11-11). 04 1.5의 '하단 탭 대신 왼쪽 메뉴'와 다름.
+ *   기록: docs/workflow-proposals/frontend-implementation-deviations.md
+ * 운영 셸: 회원 셸과 같음(600px 열 + 하단 탭, 사용자 결정 2026-11-12). 04 1.5·UXD-066의 태블릿 720·PC 왼쪽 메뉴 배치와 다름.
+ */
+:root {
+  --app-column-max: 600px;
+  --app-outer-bg: var(--color-bg-surface);
+  --app-column-shadow: 0 0 24px rgba(0, 0, 0, 0.06);
+  --app-nav-height: 56px;
+}
+
+.app-column {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--color-bg-page);
+}
+
+.app-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+/* 하단 탭이 있는 화면: 목록 끝 스크롤 여백 = 탭 + 안전 영역 + 16(VD-020) */
+.app-main.has-nav {
+  padding-bottom: calc(var(--app-nav-height) + env(safe-area-inset-bottom, 0px) + 16px);
+}
+
+html:has(.app-main.has-nav) {
+  scroll-padding-bottom: calc(var(--app-nav-height) + env(safe-area-inset-bottom, 0px) + 16px);
+}
+
+@media (min-width: 768px) {
+  html {
+    background: var(--app-outer-bg);
+  }
+
+  body {
+    background: transparent;
+  }
+
+  .app-column {
+    width: 100%;
+    max-width: var(--app-column-max);
+    margin: 0 auto;
+    box-shadow: var(--app-column-shadow);
+  }
+}
+
+/*
+ * 고정 요소(하단 탭, 떠 있는 버튼, 토스트)는 이 클래스를 쓰면 가운데 열 너비 안에 머뭅니다.
+ *   .app-fixed-bar : 열 전체 너비의 고정 막대. top/bottom은 요소에서 정함
+ *   .app-fixed-end : 열 오른쪽 끝 기준(떠 있는 버튼). 오른쪽 간격은 --app-fixed-end-gap(기본 16px)
+ */
+.app-fixed-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+
+.app-fixed-end {
+  position: fixed;
+  right: var(--app-fixed-end-gap, 16px);
+}
+
+@media (min-width: 768px) {
+  .app-fixed-bar {
+    left: 50%;
+    right: auto;
+    width: min(100%, var(--app-column-max));
+    transform: translateX(-50%);
+  }
+
+  .app-fixed-end {
+    right: calc(max(0px, (100% - var(--app-column-max)) / 2) + var(--app-fixed-end-gap, 16px));
+  }
+}
+
+/* ── 운영 셸 ── */
+/* 사용자 결정(2026-11-12): 운영 셸도 회원 셸과 같은 600px 열 + 하단 탭(PC 왼쪽 메뉴·넓은 배치 없음).
+   04 1.5·UXD-066(PC 왼쪽 메뉴 240 + 가운데 최대 1200, 태블릿 720)과 다름 → UX Spec r2 반영 예정 */

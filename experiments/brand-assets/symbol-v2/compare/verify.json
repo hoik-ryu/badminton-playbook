@@ -1,0 +1,54 @@
+{
+ "files": {
+  "dark": {
+   "w": 573,
+   "h": 322,
+   "bitDepth": 8,
+   "colorType": 6
+  },
+  "light": {
+   "w": 573,
+   "h": 322,
+   "bitDepth": 8,
+   "colorType": 6
+  },
+  "lightTokens": {
+   "w": 573,
+   "h": 322,
+   "bitDepth": 8,
+   "colorType": 6
+  }
+ },
+ "alpha": {
+  "lightTokensAlphaDiffPixels": 0,
+  "lightTokens": {
+   "zero": 150177,
+   "full": 32409,
+   "partial": 1920,
+   "zeroPct": 81.4,
+   "borderMaxAlpha": 0
+  },
+  "size": [
+   573,
+   322,
+   573,
+   322
+  ],
+  "dark": {
+   "zero": 150177,
+   "full": 32409,
+   "partial": 1920,
+   "zeroPct": 81.4,
+   "borderMaxAlpha": 0
+  },
+  "light": {
+   "zero": 150177,
+   "full": 32409,
+   "partial": 1920,
+   "zeroPct": 81.4,
+   "borderMaxAlpha": 0
+  },
+  "alphaDiffPixels": 0,
+  "alphaMaxDiff": 0
+ }
+}

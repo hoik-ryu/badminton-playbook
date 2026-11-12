@@ -1,8 +1,7 @@
 import { ApiError, NETWORK_ERROR_STATUS, type ApiErrorBody } from './errors'
 
-const DEFAULT_BASE_URL = 'http://localhost:8000'
-
-export const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL ?? DEFAULT_BASE_URL).replace(/\/$/, '')
+// 기본은 같은 출처('' → Vite 프록시 /api). 다른 주소를 쓰면 그 서버의 CORS_ORIGINS에 이 화면 주소가 있어야 합니다.
+export const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL ?? '').replace(/\/$/, '')
 
 type RequestOptions = Omit<RequestInit, 'body'> & { body?: unknown }
 
@@ -29,6 +28,7 @@ async function parseBody(response: Response): Promise<unknown> {
 export async function apiRequest<T>(path: string, options: RequestOptions = {}): Promise<T> {
   const { body, headers, ...rest } = options
   const init: RequestInit = {
+    credentials: 'include', // httpOnly 세션 쿠키(같은 출처·허용된 다른 출처 모두)
     ...rest,
     headers: {
       Accept: 'application/json',

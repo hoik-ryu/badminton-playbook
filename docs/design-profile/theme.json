@@ -1,0 +1,20 @@
+{
+  "schema": "design-theme/v1",
+  "name": "smapsh-c-mint-hybrid",
+  "version": "0.1.0-draft",
+  "note": "초안(2026-11-11). SMAPSH C안 Teal Mint 렌더링 값. 승인된 04 토큰 이름만 씀. 04에 없는 C안 의미 토큰(header.bg, selected.*, nav.active, action.accent)은 넣지 않고 07의 CR로 분리. 대비: action.primary #006D68 + 흰 글자 6.20:1, focus.ring #008F89 흰 배경 3.97:1(≥3:1).",
+  "primitives": {
+    "teal-50": "#DFF5F1",
+    "teal-600": "#008F89",
+    "teal-700": "#006D68"
+  },
+  "tokens": {
+    "color.action.primary": "{teal-700}",
+    "color.focus.ring": "{teal-600}",
+    "font.family.base": "\"Pretendard Variable\", Pretendard, system-ui, sans-serif"
+  },
+  "css": {
+    "file": "design-preview/src/tokens.css",
+    "var_pattern": "--{dashed}"
+  }
+}

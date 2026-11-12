@@ -26,3 +26,12 @@ htmlcov/
 .DS_Store
 .idea/
 .vscode/
+
+# 검증 스크립트가 반복 생성하는 결과물(스크린샷·결과 JSON·프레임·녹화). 스크립트로 다시 만들 수 있어 Git에서 제외하고 로컬에만 둠
+#  - experiments/frontend-layout/check-*.mjs → results/
+#  - experiments/preview-review/*.mjs → results/
+#  - experiments/cinematic-intro/verify.mjs → results/
+# (brand-assets의 out/·compare/는 브랜드 결정 기록·검사 입력으로 문서와 스크립트가 참조하므로 제외하지 않음)
+experiments/frontend-layout/results/
+experiments/preview-review/results/
+experiments/cinematic-intro/results/

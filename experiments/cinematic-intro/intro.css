@@ -1,0 +1,113 @@
+/* SMAPSH 시네마틱 인트로 PoC(실험). 로그인 모사 값은 frontend/src/styles/tokens.css와 같게 둡니다. */
+:root {
+  --col: 600px; /* frontend RootLayout --app-column-max와 같음 */
+  --teal: #006d68; /* color.action.primary(theme) */
+  --neon: #2cf0d6; /* 인트로 전용 네온(토큰 밖, 실험 값) */
+  --stage: #02090a; /* 인트로 전용 어두운 배경(토큰 밖, 실험 값) */
+  --surface: #f4f5f7;
+  --text-2: #545a65;
+  --kakao-bg: #fee500;
+  --kakao-fg: #191919;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  font-family: "Pretendard Variable", Pretendard, system-ui, -apple-system, "Apple SD Gothic Neo", sans-serif;
+  background: #fff;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* 모바일: 화면 전체. PC(≥1024): 가운데 600px 열 + 바깥 회색 + 은은한 그림자(실제 앱과 같음) */
+.column { position: relative; min-height: 100dvh; overflow: hidden; background: #fff; }
+@media (min-width: 1024px) {
+  html { background: var(--surface); }
+  body { background: transparent; }
+  .column { max-width: var(--col); margin: 0 auto; box-shadow: 0 0 24px rgba(0, 0, 0, 0.06); }
+}
+
+/* ── 로그인 모사(SCR-001 ST1) ── */
+.login {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  padding: 24px 16px calc(24px + env(safe-area-inset-bottom, 0px));
+}
+.login__brand { display: flex; flex: 2; flex-direction: column; align-items: center; justify-content: center; }
+.login__logo { display: block; width: 100%; height: auto; }
+.login__title:focus { outline: none; }
+.login__title { width: min(280px, 78%); margin: 0; line-height: 0; }
+.login__actions { display: flex; flex: 1; flex-direction: column; justify-content: flex-end; gap: 8px; }
+.login__kakao {
+  min-height: 48px; width: 100%; border: 0; border-radius: 10px; font: inherit; font-size: 16px; font-weight: 700;
+  color: var(--kakao-fg); background: var(--kakao-bg); cursor: pointer;
+}
+.login__note { margin: 0; font-size: 13px; color: var(--text-2); text-align: center; }
+
+.poc-tools { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.poc-btn {
+  min-height: 44px; padding: 0 14px; border: 1px solid #6b7280; border-radius: 10px; background: #fff;
+  font: inherit; font-size: 14px; font-weight: 700; color: #1a1d23; cursor: pointer;
+}
+.poc-status { font-size: 13px; color: var(--text-2); text-align: right; }
+
+/* ── 인트로 ── */
+.intro { position: absolute; inset: 0; z-index: 2; overflow: hidden; background: var(--stage); }
+.intro[hidden] { display: none; }
+.shot { position: absolute; inset: 0; opacity: 0; will-change: transform, opacity, clip-path, filter; }
+.shot > img, .half > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.s2 .flash { position: absolute; inset: 0; background: #fff; opacity: 0; mix-blend-mode: screen; }
+
+/* 3컷: 대각선으로 나뉜 두 장면 + 경계 네온 */
+.s3 .half { position: absolute; left: 0; right: 0; height: 56%; overflow: hidden; will-change: transform; }
+.s3 .half img { will-change: transform; }
+.s3 .top { top: 0; clip-path: polygon(0 0, 100% 0, 100% 82%, 0 100%); }
+.s3 .bottom { bottom: 0; clip-path: polygon(0 18%, 100% 0, 100% 100%, 0 100%); }
+.neon-wrap { position: absolute; inset: 0; filter: blur(7px); }
+.neon { position: absolute; inset: 0; transform-origin: 0 50%; background: linear-gradient(90deg, rgba(44, 240, 214, 0.2), var(--neon) 40%, #e8fffb 70%, var(--neon)); }
+.neon.soft { clip-path: polygon(0 52.5%, 100% 42.5%, 100% 47.5%, 0 57.5%); }
+.neon.sharp { clip-path: polygon(0 54.6%, 100% 44.6%, 100% 45.4%, 0 55.4%); }
+
+/* 5컷: 로고 장면 */
+.s5 {
+  background:
+    radial-gradient(ellipse 70% 45% at 50% 44%, rgba(0, 109, 104, 0.55), transparent 70%),
+    linear-gradient(165deg, #031a1b 0%, #020a0b 55%, #04211f 100%);
+}
+.burst { position: absolute; inset: -20%; background: radial-gradient(circle at 50% 45%, rgba(220, 255, 250, 0.95), rgba(44, 240, 214, 0.5) 22%, transparent 55%); opacity: 0; }
+.wave { position: absolute; left: -25%; right: -25%; height: 34%; border-top: 2px solid rgba(44, 240, 214, 0.85); border-radius: 50% 50% 0 0 / 100% 100% 0 0; filter: drop-shadow(0 0 10px var(--neon)); opacity: 0; }
+.w1 { bottom: -6%; }
+.w2 { bottom: -14%; border-top-color: rgba(44, 240, 214, 0.4); }
+.halo { position: absolute; left: 50%; top: 40%; width: 320px; height: 320px; margin: -160px 0 0 -160px; border-radius: 50%; background: radial-gradient(circle, rgba(44, 240, 214, 0.55), rgba(0, 109, 104, 0.25) 45%, transparent 70%); filter: blur(10px); opacity: 0; }
+.mark { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-bottom: 8%; text-align: center; }
+/* 로고 잠금(lockup): 추출 영역 864×396 기준 위치(%) — 심볼 140,0 577×294 / 워드마크 0,270 864×126 */
+.mark__lockup { position: relative; width: min(78%, 360px); aspect-ratio: 864 / 396; }
+.mark__lockup > img { position: absolute; display: block; }
+.mark__symbol { left: 16.2%; top: 0; width: 66.8%; height: 74.2%; opacity: 0; }
+.mark__wordmark { left: 0; top: 68.2%; width: 100%; height: 31.8%; opacity: 0; }
+/* 반짝임: 워드마크 모양으로만 보이게 마스크 */
+.mark__glint { position: absolute; left: 0; top: 68.2%; width: 100%; height: 31.8%; opacity: 0;
+  -webkit-mask: url(assets/brand/smapsh-wordmark-dark.png) 0 0 / 100% 100% no-repeat; mask: url(assets/brand/smapsh-wordmark-dark.png) 0 0 / 100% 100% no-repeat;
+  background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.95) 50%, transparent 58%) 0 0 / 300% 100% no-repeat; }
+/* 심볼의 속도 궤적 꼬리(약 23%, 62%)로 들어오는 빛줄기 */
+.mark__trail { position: absolute; right: 76%; top: 61%; width: 150%; height: 3px; display: block; opacity: 0; transform-origin: 100% 50%; border-radius: 3px;
+  background: linear-gradient(90deg, transparent, rgba(44, 240, 214, 0.25) 40%, var(--neon) 85%, #f2fffd);
+  box-shadow: 0 0 14px 3px rgba(44, 240, 214, 0.7); }
+.mark__sub { margin: 16px 0 0; font-size: 11px; font-weight: 600; letter-spacing: 0.42em; color: rgba(255, 255, 255, 0.78); opacity: 0; white-space: nowrap; }
+
+/* 빛의 궤적: 회전한 줄 위를 빛줄기가 지나감 */
+.trails { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.trail { position: absolute; left: -30%; width: 160%; height: 3px; display: block; opacity: 0; border-radius: 3px;
+  background: linear-gradient(90deg, transparent, rgba(44, 240, 214, 0.15) 30%, var(--neon) 70%, #f2fffd 85%, transparent);
+  box-shadow: 0 0 12px 2px rgba(44, 240, 214, 0.65); }
+.t1 { top: 30%; } .t2 { top: 68%; height: 2px; } .t3 { top: 58%; } .t4 { top: 74%; height: 2px; } .t5 { top: 22%; height: 2px; }
+
+.vignette { position: absolute; inset: 0; z-index: 3; pointer-events: none; background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(0, 0, 0, 0.6)); }
+.whiteout { position: absolute; inset: 0; z-index: 4; pointer-events: none; opacity: 0; background: radial-gradient(circle at 50% 42%, #fff 0%, #fff 40%, #f2fbfa 100%); }
+
+.skip {
+  position: absolute; z-index: 5; top: calc(12px + env(safe-area-inset-top, 0px)); right: 12px;
+  min-height: 44px; min-width: 88px; padding: 0 16px; border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 999px;
+  background: rgba(0, 0, 0, 0.45); color: #fff; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer;
+}
+.skip:focus-visible, .poc-btn:focus-visible, .login__kakao:focus-visible { outline: 2px solid var(--neon); outline-offset: 2px; }
+.login .poc-btn:focus-visible, .login__kakao:focus-visible { outline-color: var(--teal); }

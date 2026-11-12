@@ -1,0 +1,132 @@
+{
+ "config": {
+  "symbol": {
+   "region": {
+    "x": 500,
+    "y": 76,
+    "w": 600,
+    "h": 290
+   },
+   "mask": [
+    0.5,
+    0.64
+   ]
+  },
+  "speedZone": {
+   "poly": [
+    [
+     530,
+     225
+    ],
+    [
+     700,
+     225
+    ],
+    [
+     700,
+     262
+    ],
+    [
+     650,
+     282
+    ],
+    [
+     612,
+     292
+    ],
+    [
+     600,
+     372
+    ],
+    [
+     530,
+     372
+    ]
+   ],
+   "mask": [
+    0.8,
+    0.92
+   ],
+   "blur": 1.2,
+   "feather": 4
+  },
+  "wordmark": {
+   "region": {
+    "x": 352,
+    "y": 362,
+    "w": 864,
+    "h": 126
+   },
+   "mask": [
+    0.5,
+    0.64
+   ]
+  },
+  "minArea": 150,
+  "lightSymbol": [
+   [
+    0,
+    "#2BBFAF"
+   ],
+   [
+    0.5,
+    "#008F89"
+   ],
+   [
+    1,
+    "#00524E"
+   ]
+  ],
+  "lightWordmark": [
+   [
+    0,
+    "#0B4D4A"
+   ],
+   [
+    1,
+    "#0F2C2F"
+   ]
+  ],
+  "iconBg": [
+   "#0B3436",
+   "#03181A"
+  ]
+ },
+ "sizes": {
+  "symbol-dark": "560x315",
+  "symbol-light": "560x315",
+  "symbol-v2-dark": "570x320",
+  "wordmark-dark": "846x97",
+  "wordmark-light": "846x97",
+  "lockup-stacked-dark": "846x378",
+  "lockup-stacked-light": "846x378",
+  "lockup-horizontal-light": "1120x175",
+  "lockup-horizontal-dark": "1120x175",
+  "icon-512": "512x512",
+  "icon-192": "192x192",
+  "icon-180": "180x180",
+  "icon-48": "48x48",
+  "icon-32": "32x32",
+  "icon-16": "16x16"
+ },
+ "stackedLayout": {
+  "w": 846,
+  "h": 378,
+  "symbol": {
+   "x": 197,
+   "y": 0,
+   "w": 500,
+   "h": 255
+  },
+  "wordmark": {
+   "x": 0,
+   "y": 281,
+   "w": 846,
+   "h": 97
+  }
+ },
+ "dropped": {
+  "symbol": 5,
+  "wordmark": 0
+ }
+}

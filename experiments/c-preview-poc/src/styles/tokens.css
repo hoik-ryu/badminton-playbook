@@ -1,0 +1,88 @@
+/* 생성 파일: scripts/gen-tokens.mjs — 직접 수정 금지. 원본: docs/design-profile/tokens.json(승인) + themes/c-mint-hybrid.json(실험) */
+@theme {
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-bg-page: #FFFFFF; /* tokens.json */
+  --color-bg-surface: #F4F5F7; /* tokens.json */
+  --color-text-primary: #1A1D23; /* tokens.json */
+  --color-text-secondary: #545A65; /* tokens.json */
+  --color-text-disabled: #6B7280; /* tokens.json */
+  --color-border-default: #D5D9E0; /* tokens.json */
+  --color-border-strong: #6B7280; /* tokens.json */
+  --color-action-primary: #006D68; /* theme override (실험) */
+  --color-action-onPrimary: #FFFFFF; /* tokens.json */
+  --color-focus-ring: #008F89; /* theme override (실험) */
+  --color-status-danger-fg: #B3261E; /* tokens.json */
+  --color-status-danger-bg: #FDE7E5; /* tokens.json */
+  --color-status-warning-fg: #7A4F00; /* tokens.json */
+  --color-status-warning-bg: #FFF3D1; /* tokens.json */
+  --color-status-success-fg: #1B6E35; /* tokens.json */
+  --color-status-success-bg: #E4F4E8; /* tokens.json */
+  --color-status-info-bg: #E3ECFC; /* tokens.json */
+  --color-team-blue-fg: #1747A6; /* tokens.json */
+  --color-team-blue-bg: #E3ECFC; /* tokens.json */
+  --color-team-white-fg: #1A1D23; /* tokens.json */
+  --color-team-white-bg: #FFFFFF; /* tokens.json */
+  --color-brand-kakao-bg: #FEE500; /* tokens.json */
+  --color-brand-kakao-fg: #191919; /* tokens.json */
+  --color-court-surface: #2F7D4F; /* tokens.json */
+  --color-court-line: #FFFFFF; /* tokens.json */
+  --color-court-me: #1D5BD0; /* tokens.json */
+  --color-court-opponent: #F2C14E; /* tokens.json */
+  --color-action-accent: #008F89; /* theme add (실험) */
+  --color-header-bg: #008F89; /* theme add (실험) */
+  --color-header-fg: #FFFFFF; /* theme add (실험) */
+  --color-selected-bg: #DFF5F1; /* theme add (실험) */
+  --color-selected-fg: #006D68; /* theme add (실험) */
+  --color-nav-active: #006D68; /* theme add (실험) */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-sheet: 16px;
+  --text-caption: 13px;
+  --text-caption--line-height: 1.5;
+  --text-body: 16px;
+  --text-body--line-height: 1.5;
+  --text-title: 18px;
+  --text-title--line-height: 1.5;
+  --text-heading: 22px;
+  --text-heading--line-height: 1.5;
+  --text-display: 32px;
+  --text-display--line-height: 1.5;
+  --radius-lg: var(--radius-md); /* shadcn rounded-lg → 04 radius.md */
+  --spacing: 4px; /* space.* = 4px 배수 */
+  --font-sans: "Pretendard Variable", Pretendard, system-ui, sans-serif; /* VD-001 */
+  --shadow-sheet: 0px -4px 16px 0px rgba(0, 0, 0, 0.16);
+  --shadow-card: 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+:root {
+  --background: var(--color-bg-page);
+  --foreground: var(--color-text-primary);
+  --card: var(--color-bg-page);
+  --card-foreground: var(--color-text-primary);
+  --muted: var(--color-bg-surface);
+  --muted-foreground: var(--color-text-secondary);
+  --primary: var(--color-action-primary);
+  --primary-foreground: var(--color-action-onPrimary);
+  --destructive: var(--color-status-danger-fg);
+  --border: var(--color-border-default);
+  --input: var(--color-border-strong);
+  --ring: var(--color-focus-ring);
+  --radius: var(--radius-md);
+  --primary: var(--color-action-primary); /* C 테마가 action.primary를 덮어씀 */
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}

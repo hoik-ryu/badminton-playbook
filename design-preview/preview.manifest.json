@@ -1,0 +1,119 @@
+{
+  "ux_spec_revision": 1,
+  "design_direction_revision": 1,
+  "screens": {
+    "SCR-001": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-002": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-003": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-004": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-005": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-101": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-102": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-103": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-111": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-112": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-121": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-122": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-201": {
+      "file": "src/screens/SCR-201.tsx",
+      "states": [
+        "SCR-201-ST1"
+      ],
+      "vd": [
+        "VD-001",
+        "VD-002",
+        "VD-003",
+        "VD-019",
+        "VD-020"
+      ],
+      "note": "mobile 레이아웃만 구현(PC 왼쪽 메뉴·메뉴 카드 2열은 이번 범위 밖). 가상 값: 슈퍼 관리자, 가입 승인 대기 3건, 오늘 세션 진행 중"
+    },
+    "SCR-202": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-203": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-204": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-205": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-211": {
+      "file": "src/screens/SCR-211.tsx",
+      "states": [
+        "SCR-211-ST1"
+      ],
+      "vd": [
+        "VD-001",
+        "VD-002",
+        "VD-003",
+        "VD-004",
+        "VD-007",
+        "VD-008",
+        "VD-010",
+        "VD-019",
+        "VD-020"
+      ],
+      "note": "mobile 레이아웃만 구현(PC 레이아웃은 이번 범위 밖)"
+    },
+    "SCR-212": {
+      "skip": "Design Direction r1 렌더 범위 — 다음 구현 순서 2번(아직 구현 전, 2026-11-11)"
+    },
+    "SCR-213": {
+      "skip": "Design Direction r1 렌더 범위 — 다음 구현 순서 3번(아직 구현 전, 2026-11-11)"
+    },
+    "SCR-214": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-221": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-222": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-223": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-224": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-225": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-226": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-231": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    },
+    "SCR-232": {
+      "skip": "Design Direction r1 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213 4개 화면만)"
+    }
+  }
+}

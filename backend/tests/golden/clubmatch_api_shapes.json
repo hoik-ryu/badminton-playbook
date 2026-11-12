@@ -1,0 +1,333 @@
+{
+ "errors": {
+  "club_match_not_found": {
+   "details": true,
+   "status": 404
+  },
+  "conflict": {
+   "details": {
+    "games": [
+     true
+    ],
+    "version": true
+   },
+   "status": 409
+  },
+  "csrf_origin_mismatch": {
+   "details": true,
+   "status": 403
+  },
+  "forbidden": {
+   "details": true,
+   "status": 403
+  },
+  "in_games": {
+   "details": true,
+   "status": 409
+  },
+  "locked": {
+   "details": true,
+   "status": 409
+  },
+  "min_players": {
+   "details": {
+    "blue": true,
+    "count": true,
+    "minPerTeam": true,
+    "minTotal": true,
+    "white": true
+   },
+   "status": 422
+  },
+  "no_games": {
+   "details": true,
+   "status": 409
+  },
+  "no_substitute": {
+   "details": {
+    "games": [
+     true
+    ]
+   },
+   "status": 422
+  },
+  "not_all_recorded": {
+   "details": {
+    "remaining": true
+   },
+   "status": 409
+  },
+  "not_eligible": {
+   "details": true,
+   "status": 422
+  },
+  "not_found": {
+   "details": true,
+   "status": 404
+  },
+  "same_matchup": {
+   "details": {
+    "games": [
+     true
+    ],
+    "with": [
+     true
+    ]
+   },
+   "status": 409
+  },
+  "unauthenticated": {
+   "details": true,
+   "status": 401
+  },
+  "unscored_players": {
+   "details": {
+    "keys": [
+     true
+    ]
+   },
+   "status": 422
+  }
+ },
+ "responses": {
+  "ClubMatchListItem[]": [
+   {
+    "date": true,
+    "id": true,
+    "method": true,
+    "name": true,
+    "status": true,
+    "team": {
+     "blue": true,
+     "white": true
+    },
+    "unrecorded": true,
+    "winnerText": true
+   }
+  ],
+  "ClubMatchView": {
+   "date": true,
+   "games": [
+    {
+     "changed": true,
+     "gap": true,
+     "genderRelaxed": true,
+     "manual": true,
+     "no": true,
+     "relaxations": [
+      {
+       "reason": true,
+       "rule": true
+      }
+     ],
+     "repeatedMatchup": true,
+     "resultChanged": true,
+     "team1": [
+      {
+       "gender": true,
+       "grade": true,
+       "id": true,
+       "key": true,
+       "kind": true,
+       "name": true,
+       "score": true
+      }
+     ],
+     "team2": [
+      {
+       "gender": true,
+       "grade": true,
+       "id": true,
+       "key": true,
+       "kind": true,
+       "name": true,
+       "score": true
+      }
+     ],
+     "winner": true
+    }
+   ],
+   "id": true,
+   "method": true,
+   "modifiedAt": true,
+   "name": true,
+   "preview": {
+    "even": true,
+    "groups": [
+     {
+      "games": true,
+      "people": true
+     }
+    ],
+    "proposals": [
+     {
+      "each": {
+       "blue": true,
+       "white": true
+      },
+      "totalGames": true
+     }
+    ]
+   },
+   "resultModifiedAt": true,
+   "rows": [
+    {
+     "available": true,
+     "games": true,
+     "gender": true,
+     "grade": true,
+     "id": true,
+     "inUnrecorded": true,
+     "key": true,
+     "kind": true,
+     "left": true,
+     "name": true,
+     "participating": true,
+     "score": true,
+     "team": true
+    }
+   ],
+   "rules": {
+    "balance": true,
+    "gender": true
+   },
+   "standings": [
+    {
+     "games": true,
+     "guest": true,
+     "key": true,
+     "name": true,
+     "rank": true,
+     "tied": true,
+     "wins": true
+    }
+   ],
+   "status": true,
+   "summary": {
+    "blue": {
+     "male": true,
+     "n": true
+    },
+    "count": true,
+    "female": true,
+    "male": true,
+    "unscored": [
+     {
+      "gender": true,
+      "grade": true,
+      "id": true,
+      "key": true,
+      "kind": true,
+      "name": true,
+      "score": true
+     }
+    ],
+    "white": {
+     "male": true,
+     "n": true
+    }
+   },
+   "team": {
+    "blue": true,
+    "white": true
+   },
+   "teamProposed": true,
+   "totalGames": true,
+   "unrecorded": true,
+   "version": true
+  },
+  "MemberStatus": {
+   "gamesToRank": true,
+   "rank": true,
+   "recommended": true,
+   "record": {
+    "games": true,
+    "losses": true,
+    "wins": true
+   },
+   "referrer": true,
+   "tutorial": {
+    "beginner": true,
+    "novice": true,
+    "total": true
+   }
+  },
+  "MyRecord": {
+   "games": true,
+   "gamesToRank": true,
+   "losses": true,
+   "rank": true,
+   "rate": true,
+   "wins": true
+  },
+  "PublicClubMatch": {
+   "date": true,
+   "games": [
+    {
+     "changed": true,
+     "mySide": true,
+     "no": true,
+     "resultChanged": true,
+     "team1": [
+      {
+       "guest": true,
+       "key": true,
+       "me": true,
+       "name": true
+      }
+     ],
+     "team2": [
+      {
+       "guest": true,
+       "key": true,
+       "me": true,
+       "name": true
+      }
+     ],
+     "winner": true
+    }
+   ],
+   "id": true,
+   "method": true,
+   "modifiedAt": true,
+   "name": true,
+   "participating": true,
+   "resultModifiedAt": true,
+   "standings": [
+    {
+     "games": true,
+     "guest": true,
+     "key": true,
+     "me": true,
+     "name": true,
+     "rank": true,
+     "tied": true,
+     "wins": true
+    }
+   ],
+   "status": true,
+   "team": {
+    "blue": true,
+    "white": true
+   },
+   "unrecorded": true
+  },
+  "PublicClubMatchItem[]": [
+   {
+    "date": true,
+    "games": true,
+    "id": true,
+    "method": true,
+    "name": true,
+    "participants": true,
+    "resultText": true,
+    "status": true,
+    "team": {
+     "blue": true,
+     "white": true
+    },
+    "unrecorded": true
+   }
+  ]
+ }
+}

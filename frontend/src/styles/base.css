@@ -1,0 +1,20 @@
+/* 전역 기본값(서비스 화면 공통). 색·글꼴·크기는 tokens.css의 변수만 씁니다. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-base);
+  line-height: var(--font-lineHeight-body);
+  color: var(--color-text-primary);
+  background: var(--color-bg-page);
+  -webkit-text-size-adjust: 100%;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}

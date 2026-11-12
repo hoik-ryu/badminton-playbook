@@ -20,14 +20,16 @@ jobs:
         env:
           POSTGRES_USER: app
           POSTGRES_PASSWORD: app
-          POSTGRES_DB: app
+          POSTGRES_DB: app_test
         ports:
-          - 5432:5432
+          # DB 테스트 보호(backend/app/core/dbguard.py): 루프백 기본 포트 5432·비테스트 이름은 거부
+          - 55432:5432
         options: >-
-          --health-cmd "pg_isready -U app -d app"
+          --health-cmd "pg_isready -U app -d app_test"
           --health-interval 5s --health-timeout 5s --health-retries 10
     env:
-      DATABASE_URL: postgresql+psycopg://app:app@localhost:5432/app
+      DATABASE_URL: postgresql+psycopg://app:app@localhost:55432/app_test
+      TEST_DATABASE_URL: postgresql+psycopg://app:app@localhost:55432/app_test
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6

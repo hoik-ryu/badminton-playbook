@@ -1,0 +1,99 @@
+/* 시네마틱 인트로(Brand Experience, experiments/cinematic-intro에서 옮김, .smapsh-intro 아래로 한정).
+   네온·무대 배경색은 04 토큰 밖 실험 값입니다(정식 반영 시 토큰 결정 필요). */
+.smapsh-intro {
+  --intro-neon: #2cf0d6;
+  --intro-stage: #02090a;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+  background: var(--intro-stage);
+}
+
+/* 태블릿·PC(≥768): 가운데 열(shells.css --app-column-max) 안에서만 */
+@media (min-width: 768px) {
+  .smapsh-intro {
+    left: 50%;
+    right: auto;
+    width: min(100%, var(--app-column-max, 600px));
+    translate: -50% 0;
+  }
+}
+
+.smapsh-intro .shot { position: absolute; inset: 0; opacity: 0; will-change: transform, opacity, clip-path, filter; }
+.smapsh-intro .shot > img,
+.smapsh-intro .half > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* v4 보드 컷(가로 원본, 세로 약 306px): 반 화면을 채우는 ③④는 인물이 가운데 오도록 위치만 맞춤 */
+.smapsh-intro .s3 .top > img { object-position: 45% 40%; }
+.smapsh-intro .s3 .bottom > img { object-position: 55% 50%; }
+/* ①②⑤ '띠' 구성: 같은 사진을 흐린 배경으로 깔고, 화면 가운데 넓은 띠에 선명한 사진(모바일 확대 약 1.16배) */
+.smapsh-intro .band > img { max-width: none; } /* 전역 img { max-width: 100% } 해제(폭 100% 초과 배치) */
+.smapsh-intro .band > .band__bg { position: absolute; inset: -6%; width: 112%; height: 112%; object-fit: cover; filter: blur(18px) brightness(0.5) saturate(1.2); }
+.smapsh-intro .band > .band__fg {
+  position: absolute; left: 0; top: 50%; width: 100%; height: 42%; translate: 0 -50%; object-fit: cover;
+  -webkit-mask: linear-gradient(transparent, #000 9%, #000 91%, transparent); mask: linear-gradient(transparent, #000 9%, #000 91%, transparent);
+}
+.smapsh-intro .s1 > .band__fg { object-position: 32% 50%; }
+.smapsh-intro .s2 > .band__fg { object-position: 52% 45%; }
+/* ⑤ 두 사람: 원본 비율(780×312) 그대로 조금 크게 — 두 얼굴이 모두 보이게 */
+.smapsh-intro .band--wide > .band__fg { left: -10%; width: 120%; height: auto; aspect-ratio: 780 / 312; }
+.smapsh-intro .s2 .flash { position: absolute; inset: 0; background: #fff; opacity: 0; mix-blend-mode: screen; }
+
+.smapsh-intro .s3 .half { position: absolute; left: 0; right: 0; height: 56%; overflow: hidden; }
+.smapsh-intro .s3 .top { top: 0; clip-path: polygon(0 0, 100% 0, 100% 82%, 0 100%); }
+.smapsh-intro .s3 .bottom { bottom: 0; clip-path: polygon(0 18%, 100% 0, 100% 100%, 0 100%); }
+.smapsh-intro .neon-wrap { position: absolute; inset: 0; filter: blur(7px); }
+.smapsh-intro .neon { position: absolute; inset: 0; transform-origin: 0 50%; background: linear-gradient(90deg, rgba(44, 240, 214, 0.2), var(--intro-neon) 40%, #e8fffb 70%, var(--intro-neon)); }
+.smapsh-intro .neon.soft { clip-path: polygon(0 52.5%, 100% 42.5%, 100% 47.5%, 0 57.5%); }
+.smapsh-intro .neon.sharp { clip-path: polygon(0 54.6%, 100% 44.6%, 100% 45.4%, 0 55.4%); }
+
+.smapsh-intro .s5 {
+  background:
+    radial-gradient(ellipse 70% 45% at 50% 44%, rgba(0, 109, 104, 0.55), transparent 70%),
+    linear-gradient(165deg, #031a1b 0%, #020a0b 55%, #04211f 100%);
+}
+.smapsh-intro .burst { position: absolute; inset: -20%; opacity: 0; background: radial-gradient(circle at 50% 45%, rgba(220, 255, 250, 0.95), rgba(44, 240, 214, 0.5) 22%, transparent 55%); }
+.smapsh-intro .wave { position: absolute; left: -25%; right: -25%; height: 34%; opacity: 0; border-top: 2px solid rgba(44, 240, 214, 0.85); border-radius: 50% 50% 0 0 / 100% 100% 0 0; filter: drop-shadow(0 0 10px var(--intro-neon)); }
+.smapsh-intro .w1 { bottom: -6%; }
+.smapsh-intro .w2 { bottom: -14%; border-top-color: rgba(44, 240, 214, 0.4); }
+.smapsh-intro .halo { position: absolute; left: 50%; top: 40%; width: 320px; height: 320px; margin: -160px 0 0 -160px; border-radius: 50%; opacity: 0; background: radial-gradient(circle, rgba(44, 240, 214, 0.55), rgba(0, 109, 104, 0.25) 45%, transparent 70%); filter: blur(10px); }
+.smapsh-intro .mark { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-bottom: 8%; text-align: center; }
+/* 세로형 잠금(브랜드 v4): 심볼(SVG) 위, 'SMAPSH' 글자 아래 — 6컷 보드 ⑥ 배치 */
+.smapsh-intro .mark__lockup { position: relative; display: flex; flex-direction: column; align-items: center; width: min(78%, 360px); }
+.smapsh-intro .mark__symbol {
+  display: block; width: 38%; aspect-ratio: 1; opacity: 0;
+  /* 어두운 무대에서 보이도록 밝기·빛 번짐만 더함(심볼 모양·색 구성은 v4 그대로) */
+  filter: brightness(1.45) saturate(1.05) drop-shadow(0 0 16px rgba(44, 240, 214, 0.4));
+}
+.smapsh-intro .mark__word { position: relative; margin-top: 6px; line-height: 1; }
+.smapsh-intro .mark__wordmark,
+.smapsh-intro .mark__glint { display: block; font-size: clamp(44px, 14vw, 68px); font-weight: 900; font-style: italic; letter-spacing: 0.01em; white-space: nowrap; }
+.smapsh-intro .mark__wordmark { color: #fff; opacity: 0; text-shadow: 0 0 18px rgba(44, 240, 214, 0.35); }
+.smapsh-intro .mark__glint {
+  position: absolute; inset: 0; opacity: 0; color: transparent;
+  background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.95) 50%, transparent 58%) 0 0 / 300% 100% no-repeat;
+  -webkit-background-clip: text; background-clip: text;
+}
+.smapsh-intro .mark__trail {
+  position: absolute; right: 62%; top: 22%; width: 150%; height: 3px; display: block; opacity: 0; transform-origin: 100% 50%; border-radius: 3px;
+  background: linear-gradient(90deg, transparent, rgba(44, 240, 214, 0.25) 40%, var(--intro-neon) 85%, #f2fffd);
+  box-shadow: 0 0 14px 3px rgba(44, 240, 214, 0.7);
+}
+.smapsh-intro .mark__sub { margin: 18px 0 0; font-size: 11px; font-weight: 600; letter-spacing: 0.42em; color: rgba(255, 255, 255, 0.78); opacity: 0; white-space: nowrap; }
+
+.smapsh-intro .trails { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.smapsh-intro .trail { position: absolute; left: -30%; display: block; width: 160%; height: 3px; opacity: 0; border-radius: 3px;
+  background: linear-gradient(90deg, transparent, rgba(44, 240, 214, 0.15) 30%, var(--intro-neon) 70%, #f2fffd 85%, transparent);
+  box-shadow: 0 0 12px 2px rgba(44, 240, 214, 0.65); }
+.smapsh-intro .t1 { top: 30%; }
+.smapsh-intro .t2 { top: 68%; height: 2px; }
+.smapsh-intro .t3 { top: 58%; }
+.smapsh-intro .t5 { top: 22%; height: 2px; }
+
+.smapsh-intro .vignette { position: absolute; inset: 0; z-index: 3; pointer-events: none; background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(0, 0, 0, 0.6)); }
+.smapsh-intro .skip {
+  position: absolute; z-index: 5; top: calc(12px + env(safe-area-inset-top, 0px)); right: 12px;
+  min-width: 88px; min-height: 44px; padding: 0 16px; border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 999px;
+  font: inherit; font-size: 14px; font-weight: 700; color: #fff; background: rgba(0, 0, 0, 0.45); cursor: pointer;
+}
+.smapsh-intro .skip:focus-visible { outline: 2px solid var(--intro-neon); outline-offset: 2px; }

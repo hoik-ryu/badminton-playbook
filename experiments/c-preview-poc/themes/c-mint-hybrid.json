@@ -1,0 +1,25 @@
+{
+  "$description": "C안 Mint Hybrid 테마(개발자 설정, 실험). 승인된 tokens.json의 의미 토큰 값을 덮어쓰거나 C안 전용 의미 토큰을 더한다. 관리자 UI 없음.",
+  "name": "c-mint-hybrid",
+  "primitive": {
+    "teal.50": "#DFF5F1",
+    "teal.600": "#008F89",
+    "teal.700": "#006D68"
+  },
+  "override": {
+    "color.action.primary": "{teal.700}",
+    "color.focus.ring": "{teal.600}"
+  },
+  "add": {
+    "color.action.accent": "{teal.600}",
+    "color.header.bg": "{teal.600}",
+    "color.header.fg": "{color.action.onPrimary}",
+    "color.selected.bg": "{teal.50}",
+    "color.selected.fg": "{teal.700}",
+    "color.nav.active": "{teal.700}"
+  },
+  "rules": {
+    "color.action.accent": "비텍스트 전용(흰 글자 3.97:1). 글자 배경 금지",
+    "color.header.bg": "22px 굵은 제목(큰 글자 3:1)·아이콘·흰 입력칸만 올림"
+  }
+}

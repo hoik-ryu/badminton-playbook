@@ -1,0 +1,50 @@
+/* SCR-001 로그인(ST1 기본). 승인 UX Spec r1 02 SCR-001 + Design Direction r1(VD-001 Pretendard). */
+.login {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: var(--space-6) var(--space-gutter-mobile)
+    calc(var(--space-6) + env(safe-area-inset-bottom, 0px));
+}
+
+.login__brand {
+  display: flex;
+  flex: 2;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 브랜드 심볼(장식 이미지, 투명 배경) — 제목 글자가 이름을 전함 */
+.login__symbol {
+  display: block;
+  width: 112px;
+  height: 112px;
+  margin-bottom: var(--space-3);
+}
+
+/* 'SMAPSH' HTML 글자, teal(color.action.primary #006D68) */
+.login__title {
+  margin: 0;
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25;
+  color: var(--color-action-primary);
+}
+
+/* '카카오로 시작하기': 화면 아래쪽 1/3 엄지 영역(02 SCR-001) */
+.login__actions {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+
+.login__note {
+  margin: 0;
+  font-size: var(--font-size-caption);
+  color: var(--color-text-secondary);
+  text-align: center;
+}

@@ -26,6 +26,7 @@ services:
       APP_ENV: ${APP_ENV:-local}
       DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-app}@db:5432/${POSTGRES_DB:-app}
       CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173}
+      # 카카오 키·SESSION_SECRET·DEV_LOGIN_* 는 마운트된 backend/.env(/app/.env)에서 읽습니다(여기에 값을 쓰지 않음).
     ports:
       - "${BACKEND_PORT:-8000}:8000"
     volumes:
@@ -37,7 +38,10 @@ services:
   frontend:
     build: ./frontend
     environment:
-      VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:8000}
+      # 비우면 같은 출처(/api → Vite 프록시 → backend). 세션 쿠키·카카오 Redirect URI가 이 방식을 전제로 함
+      VITE_API_BASE_URL: ${VITE_API_BASE_URL:-}
+      VITE_DATA_SOURCE: ${VITE_DATA_SOURCE:-mock}
+      API_PROXY_TARGET: http://backend:8000
     ports:
       - "${FRONTEND_PORT:-5173}:5173"
     volumes:

@@ -1,0 +1,13 @@
+{
+  "comment": "튜토리얼 스테이지 레지스트리(D4): 서버는 스테이지 id·난이도·상황 수만 압니다. 시나리오 본문은 frontend/src/features/tutorial/content/stages.ts. 프런트 테스트(registry.test.ts)가 두 곳이 일치하는지 확인합니다.",
+  "passNumerator": 7,
+  "passDenominator": 10,
+  "stages": [
+    { "id": "beginner-1", "level": "beginner", "situations": 5 },
+    { "id": "beginner-2", "level": "beginner", "situations": 5 },
+    { "id": "beginner-3", "level": "beginner", "situations": 5 },
+    { "id": "novice-1", "level": "novice", "situations": 5 },
+    { "id": "novice-2", "level": "novice", "situations": 5 },
+    { "id": "novice-3", "level": "novice", "situations": 5 }
+  ]
+}

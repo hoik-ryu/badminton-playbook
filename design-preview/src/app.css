@@ -1,0 +1,56 @@
+/* Tailwind v4 진입점. 색·크기는 tokens.css(04 + theme.json)의 변수만 가리킵니다.
+   Tailwind 기본 색 팔레트는 비워(--color-*: initial) 토큰 밖 색 클래스가 만들어지지 않게 합니다. */
+@import "tailwindcss";
+
+@theme {
+  --color-*: initial;
+}
+
+@theme inline {
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  /* 04 의미 토큰 → 유틸리티 이름 */
+  --color-page: var(--color-bg-page);
+  --color-surface: var(--color-bg-surface);
+  --color-ink: var(--color-text-primary);
+  --color-ink-muted: var(--color-text-secondary);
+  --color-ink-disabled: var(--color-text-disabled);
+  --color-line: var(--color-border-default);
+  --color-line-strong: var(--color-border-strong);
+  --color-action: var(--color-action-primary);
+  --color-on-action: var(--color-action-onPrimary);
+  --color-focus: var(--color-focus-ring);
+  --color-warning-fg: var(--color-status-warning-fg);
+  --color-warning-bg: var(--color-status-warning-bg);
+  --color-info-bg: var(--color-status-info-bg);
+  --color-danger-fg: var(--color-status-danger-fg);
+  --color-success-fg: var(--color-status-success-fg);
+  --color-success-bg: var(--color-status-success-bg);
+  /* shadcn/ui 부품이 쓰는 이름(token-mapping.md 3장 별칭) */
+  --color-background: var(--color-bg-page);
+  --color-foreground: var(--color-text-primary);
+  --color-primary: var(--color-action-primary);
+  --color-primary-foreground: var(--color-action-onPrimary);
+  --color-muted: var(--color-bg-surface);
+  --color-muted-foreground: var(--color-text-secondary);
+  --color-border: var(--color-border-default);
+  --color-input: var(--color-border-strong);
+  --color-ring: var(--color-focus-ring);
+  --color-destructive: var(--color-status-danger-fg);
+  /* 글자·반경·그림자 */
+  --font-sans: var(--font-family-base);
+  --text-caption: var(--font-size-caption);
+  --text-body: var(--font-size-body);
+  --text-title: var(--font-size-title);
+  --text-heading: var(--font-size-heading);
+  --radius-lg: var(--radius-md); /* shadcn rounded-lg → 04 radius.md */
+  --shadow-card: var(--elevation-card);
+}
+
+@layer base {
+  :root { --safe-bottom: env(safe-area-inset-bottom, 0px); }
+  /* VD-020: 포커스 스크롤 여백 = 하단 탭 56 + 안전 영역 + 16 + 떠 있는 버튼 48 + 16(목록 끝 여백과 같음). bare 모드는 문서, 셸은 .pv-frame이 스크롤 */
+  html:has(.smapsh), .pv-frame { scroll-padding-bottom: calc(136px + var(--safe-bottom)); }
+  .smapsh { font-family: var(--font-family-base); line-height: var(--font-lineHeight-body); color: var(--color-text-primary); background: var(--color-bg-page); -webkit-text-size-adjust: 100%; }
+  .smapsh :focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+}

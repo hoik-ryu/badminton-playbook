@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>SMAPSH 인트로 PoC</title>
+    <link rel="icon" href="assets/brand/favicon.ico" />
+    <link rel="preload" as="image" href="assets/shot1-shuttle.jpg" />
+    <link rel="stylesheet" href="intro.css" />
+  </head>
+  <body>
+    <!-- 실험용 PoC(승인 흐름 밖). 실제 frontend/ 코드가 아닙니다. -->
+    <div class="column" id="column">
+      <!-- 현재 frontend 로그인 화면(SCR-001 ST1)을 모사한 PoC 화면 -->
+      <section class="login" id="login" aria-labelledby="login-title">
+        <div class="poc-tools">
+          <button type="button" id="replay" class="poc-btn">인트로 다시 재생</button>
+          <span id="status" class="poc-status" role="status">준비 중</span>
+        </div>
+        <div class="login__brand">
+          <h1 id="login-title" class="login__title" tabindex="-1">
+            <img class="login__logo" src="assets/brand/smapsh-horizontal-light.png" alt="SMAPSH" width="1179" height="192" />
+          </h1>
+        </div>
+        <div class="login__actions">
+          <button type="button" class="login__kakao">카카오로 시작하기</button>
+          <p class="login__note">PoC 모사 화면 · 실제 로그인 아님</p>
+        </div>
+      </section>
+
+      <div class="intro" id="intro" role="region" aria-label="SMAPSH 인트로" hidden>
+        <div class="shot s1"><img src="assets/shot1-shuttle.jpg" alt="" /></div>
+        <div class="shot s2">
+          <img src="assets/shot2-smash.jpg" alt="" />
+          <div class="flash"></div>
+        </div>
+        <div class="shot s3">
+          <div class="half top"><img src="assets/shot3a-player.jpg" alt="" /></div>
+          <div class="half bottom"><img src="assets/shot3b-doubles.jpg" alt="" /></div>
+          <div class="neon-wrap"><div class="neon soft"></div></div>
+          <div class="neon sharp"></div>
+        </div>
+        <div class="shot s4"><img src="assets/shot4-racket.jpg" alt="" /></div>
+        <div class="shot s5">
+          <div class="burst"></div>
+          <div class="wave w1"></div>
+          <div class="wave w2"></div>
+          <div class="halo"></div>
+          <div class="mark">
+            <!-- 브랜드 보드 메인 로고(심볼 + 워드마크, 어두운 배경용). 배치는 원본 위치 그대로(experiments/brand-assets) -->
+            <div class="mark__lockup">
+              <i class="mark__trail"></i>
+              <img class="mark__symbol" src="assets/brand/smapsh-symbol-dark.png" alt="" />
+              <img class="mark__wordmark" src="assets/brand/smapsh-wordmark-dark.png" alt="SMAPSH" />
+              <span class="mark__glint"></span>
+            </div>
+            <p class="mark__sub">BADMINTON CLUB PLATFORM</p>
+          </div>
+        </div>
+        <div class="trails" aria-hidden="true">
+          <i class="trail t1"></i><i class="trail t2"></i><i class="trail t3"></i><i class="trail t5"></i>
+        </div>
+        <div class="vignette"></div>
+        <div class="whiteout"></div>
+        <button type="button" class="skip" id="skip">건너뛰기</button>
+      </div>
+    </div>
+    <script type="module" src="intro.js"></script>
+  </body>
+</html>

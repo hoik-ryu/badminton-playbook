@@ -1,0 +1,15 @@
+# Vercel CLI 업로드 제외(Git 연동 배포는 커밋된 파일만 사용). 비밀값·로컬 산출물이 업로드되지 않게 합니다.
+**/.env
+**/.env.*
+!**/.env.example
+**/node_modules
+backend/.venv
+**/__pycache__
+**/.pytest_cache
+**/.mypy_cache
+**/.ruff_cache
+frontend/dist
+experiments/
+design-preview/
+.ai-workflow/
+.vercel

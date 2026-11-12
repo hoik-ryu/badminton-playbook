@@ -5,18 +5,18 @@
   "created_at": "2026-11-09T00:43:42Z",
   "based_on": {
     "discovery_revision": "3",
-    "planning_revision": "4",
+    "planning_revision": "5",
     "planning_hashes": {
       "docs/planning/01-discovery.md": "5fcf2ebb6023832a9ab964714a535480ce0adc8d0ce301bea7522f937f87a068",
-      "docs/planning/02-prd.md": "a0c71d2bdb9fe0bb9fe1e5f5ab8d7e1934e7057aea456418b4f1afd9c9d53432",
-      "docs/planning/03-user-stories.md": "dc1c8c961ccde30b8082400ecfe8aa9c550a1b7eef8fd09e5536daee9cb830d3",
-      "docs/planning/04-user-flows.md": "2c2acfc482a90bdc21db00707ec25a7db65573418021576f30053eb79b28d00f",
-      "docs/planning/05-acceptance-criteria.md": "922f55566a31a0eb9eadc389d82e78e382b65c477b36c24509f25c8b2100c191"
+      "docs/planning/02-prd.md": "e747052d4bfada1b92d72bd725f7724d42003882f400b0ae319aa583fc26f4bd",
+      "docs/planning/03-user-stories.md": "c771b7e87aa7adf5e69279f0905e1d4763278e7d81f2805e364192e0843c6125",
+      "docs/planning/04-user-flows.md": "0bd4c939ddeae2447dbe6487df51241d93c454b8cec347d797a666c16cf8065b",
+      "docs/planning/05-acceptance-criteria.md": "e29b953ca2e6637e848bfd2513bab275f77a3464d5aaada0845acc911a920cc7"
     },
-    "planning_commit": "f043d914377724d6559d8387ee4af07df1002ff2",
+    "planning_commit": "92468769975599a59ec5309ddc50363a19e145c0",
     "previous": {
-      "planning_revision": "3",
-      "planning_commit": "d1640c0f60629bb059753e2ce2ed5cd2da4665f8"
+      "planning_revision": "4",
+      "planning_commit": "f043d914377724d6559d8387ee4af07df1002ff2"
     }
   },
   "validity": {
@@ -24,38 +24,24 @@
   },
   "stages": {
     "ux_planning": {
-      "status": "approved",
-      "revision": 2,
+      "status": "in_progress",
+      "revision": 3,
       "artifacts": [
         "docs/design/00-ux-decisions.md"
       ],
-      "artifacts_done": {
-        "docs/design/00-ux-decisions.md": "c17cf17f57d72b66fc4ba632240b06e63d9a88fca9a048f69245a502bcfbc650"
-      },
-      "submitted": {
-        "revision": 2,
-        "at": "2026-11-10T00:48:16Z",
-        "hashes": {
-          "docs/design/00-ux-decisions.md": "c17cf17f57d72b66fc4ba632240b06e63d9a88fca9a048f69245a502bcfbc650"
-        }
-      },
-      "approved": {
+      "artifacts_done": {},
+      "submitted": null,
+      "approved": null,
+      "last_approved": {
         "revision": 2,
         "at": "2026-11-10T00:49:46Z",
         "hashes": {
           "docs/design/00-ux-decisions.md": "c17cf17f57d72b66fc4ba632240b06e63d9a88fca9a048f69245a502bcfbc650"
         }
-      },
-      "last_approved": {
-        "revision": 1,
-        "at": "2026-11-09T07:12:43Z",
-        "hashes": {
-          "docs/design/00-ux-decisions.md": "099fa4400c316b79564a5b217b9b9808c7d55c19d4eb4ca4f81dfc063b7e1412"
-        }
       }
     },
     "ux_spec": {
-      "status": "approved",
+      "status": "locked",
       "revision": 1,
       "artifacts": [
         "docs/design/01-information-architecture.md",
@@ -64,25 +50,12 @@
         "docs/design/04-ui-system.md",
         "docs/design/05-design-traceability.md"
       ],
-      "artifacts_done": {
-        "docs/design/01-information-architecture.md": "2248baf00aadf442318a8c5282a9ce84bbccdf530a58bca295ba5de193560449",
-        "docs/design/02-screens.md": "8ec8ab0a4292b87d2a097fbe85fb04e09546a347dcb175a238b54594b08509e6",
-        "docs/design/03-screen-flows.md": "f81babed3cf77f0b50c4303ec14931318d97e2faeff6db4dc95d386783e78a07",
-        "docs/design/04-ui-system.md": "5209e3436609f6da4f9c1ab71e1af55a808ad0ed4f94bf1d5c1913c9e33e105b",
-        "docs/design/05-design-traceability.md": "6281bffd4b4b0202521d0c65426b1203941e2f9e2ed6ec16602ba66228ef6d90"
-      },
-      "submitted": {
-        "revision": 1,
-        "at": "2026-11-10T01:34:28Z",
-        "hashes": {
-          "docs/design/01-information-architecture.md": "2248baf00aadf442318a8c5282a9ce84bbccdf530a58bca295ba5de193560449",
-          "docs/design/02-screens.md": "8ec8ab0a4292b87d2a097fbe85fb04e09546a347dcb175a238b54594b08509e6",
-          "docs/design/03-screen-flows.md": "f81babed3cf77f0b50c4303ec14931318d97e2faeff6db4dc95d386783e78a07",
-          "docs/design/04-ui-system.md": "5209e3436609f6da4f9c1ab71e1af55a808ad0ed4f94bf1d5c1913c9e33e105b",
-          "docs/design/05-design-traceability.md": "6281bffd4b4b0202521d0c65426b1203941e2f9e2ed6ec16602ba66228ef6d90"
-        }
-      },
-      "approved": {
+      "artifacts_done": {},
+      "submitted": null,
+      "approved": null,
+      "structure_confirmed": null,
+      "based_on_ux_planning_revision": 2,
+      "last_approved": {
         "revision": 1,
         "at": "2026-11-10T01:38:14Z",
         "hashes": {
@@ -92,16 +65,10 @@
           "docs/design/04-ui-system.md": "5209e3436609f6da4f9c1ab71e1af55a808ad0ed4f94bf1d5c1913c9e33e105b",
           "docs/design/05-design-traceability.md": "6281bffd4b4b0202521d0c65426b1203941e2f9e2ed6ec16602ba66228ef6d90"
         }
-      },
-      "structure_confirmed": {
-        "revision": 1,
-        "at": "2026-11-10T01:22:34Z",
-        "signature": "4b13f3da6ed39a1ab9c4f535ac6bf9a878b37fc18975047b84cf47ebbea4b96d"
-      },
-      "based_on_ux_planning_revision": 2
+      }
     },
     "preview": {
-      "status": "not_started",
+      "status": "locked",
       "revision": 0,
       "artifacts": [
         "docs/design/06-preview-review.md"
@@ -109,8 +76,108 @@
       "artifacts_done": {},
       "submitted": null,
       "approved": null,
-      "based_on_ux_spec_revision": null,
-      "verification": null
+      "based_on_ux_spec_revision": 1,
+      "verification": {
+        "result": "pass",
+        "at": "2026-11-11T03:51:39Z",
+        "tree_hash": "39fca2f0ee5171c5167a36262967b4e49e36af17a24a42d81dde6e9048a000bc",
+        "check": {
+          "ok": true,
+          "errors": [],
+          "warnings": [
+            "테마: 테마에 없는 04 토큰 60개는 04 값으로 렌더합니다: breakpoint.base, breakpoint.desktop, breakpoint.tablet, color.action.onPrimary, color.bg.page, color.bg.surface, color.border.default, color.border.strong"
+          ],
+          "counts": {
+            "screens_in_spec": 29,
+            "screens_in_preview": 2,
+            "states_in_preview": 2
+          }
+        },
+        "steps": [
+          {
+            "run": "pnpm install --frozen-lockfile",
+            "exit": 0,
+            "tail": [
+              "Lockfile is up to date, resolution step is skipped",
+              "Already up to date",
+              "",
+              "╭ Warning ─────────────────────────────────────────────────────────────────────╮",
+              "│                                                                              │",
+              "│   Ignored build scripts: esbuild@0.28.2.                                     │",
+              "│   Run \"pnpm approve-builds\" to pick which dependencies should be allowed     │",
+              "│   to run scripts.                                                            │",
+              "│                                                                              │",
+              "╰──────────────────────────────────────────────────────────────────────────────╯",
+              "Done in 327ms using pnpm v10.34.5"
+            ]
+          },
+          {
+            "run": "pnpm run build",
+            "exit": 0,
+            "tail": [
+              "dist/assets/PretendardVariable.subset.25-CsoWBIZB.woff2   42.03 kB",
+              "dist/assets/PretendardVariable.subset.19-CJu4Zcdo.woff2   42.33 kB",
+              "dist/assets/PretendardVariable.subset.2-dCZkyKLw.woff2    43.92 kB",
+              "dist/assets/index-Dd-nVj0N.css                            81.64 kB │ gzip: 21.54 kB",
+              "dist/assets/index-JZIMqWVl.js                            294.19 kB │ gzip: 95.11 kB",
+              "✓ built in 1.19s",
+              "Found 1 warning while optimizing generated CSS:",
+              "",
+              "\u001b[2m│   }\u001b[22m",
+              "\u001b[2m│   .text-\\[length\\:var\\(--font-size-\\*\\)\\] {\u001b[22m",
+              "\u001b[2m│\u001b[22m     font-size: var(--font-size-*);",
+              "\u001b[2m┆\u001b[22m                                \u001b[33m\u001b[2m^--\u001b[22m Unexpected token Delim('*')\u001b[39m",
+              "\u001b[2m┆\u001b[22m",
+              "\u001b[2m│   }\u001b[22m",
+              "\u001b[2m│   .text-\\[length\\:var\\(--font-size-body\\)\\] {\u001b[22m"
+            ]
+          }
+        ],
+        "semantic_tree_hash": "019b6e7cfc0198564bf61b31b0f60f2c2baafca2446de8b29e75eafadbdedda7",
+        "semantic_algo": "sem-2",
+        "theme_hash": "fd21e9ea803fa4a7191fd3f5e107e8a8f55146775f58fa44c7c15cfd50ebd06b"
+      },
+      "review": null,
+      "based_on_design_direction_revision": 1
+    },
+    "design_direction": {
+      "status": "locked",
+      "revision": 1,
+      "artifacts": [
+        "docs/design/07-design-direction.md"
+      ],
+      "artifacts_done": {},
+      "submitted": null,
+      "approved": null,
+      "based_on_ux_spec_revision": 1,
+      "last_approved": {
+        "revision": 1,
+        "at": "2026-11-11T01:51:29Z",
+        "hashes": {
+          "docs/design/07-design-direction.md": "df6413ff1b18069f1427ec4a78abd78b0855aade470abea71f5e727dafdfd11a"
+        },
+        "ux_spec_revision": 1,
+        "ux_spec_hashes": {
+          "docs/design/01-information-architecture.md": "2248baf00aadf442318a8c5282a9ce84bbccdf530a58bca295ba5de193560449",
+          "docs/design/02-screens.md": "8ec8ab0a4292b87d2a097fbe85fb04e09546a347dcb175a238b54594b08509e6",
+          "docs/design/03-screen-flows.md": "f81babed3cf77f0b50c4303ec14931318d97e2faeff6db4dc95d386783e78a07",
+          "docs/design/04-ui-system.md": "5209e3436609f6da4f9c1ab71e1af55a808ad0ed4f94bf1d5c1913c9e33e105b",
+          "docs/design/05-design-traceability.md": "6281bffd4b4b0202521d0c65426b1203941e2f9e2ed6ec16602ba66228ef6d90"
+        },
+        "approved_vds": [
+          "VD-001",
+          "VD-002",
+          "VD-003",
+          "VD-004",
+          "VD-007",
+          "VD-008",
+          "VD-010",
+          "VD-019",
+          "VD-020"
+        ],
+        "renderer": "code",
+        "theme_hash": "fd21e9ea803fa4a7191fd3f5e107e8a8f55146775f58fa44c7c15cfd50ebd06b"
+      }
     }
   },
   "history": [
@@ -246,7 +313,146 @@
       "event": "unlocked",
       "revision": 0,
       "note": "ux_spec r1 승인"
+    },
+    {
+      "at": "2026-11-11T01:29:58Z",
+      "stage": "design",
+      "event": "migrated",
+      "revision": null,
+      "note": "v1 → v2 (5개 항목 추가, 기존 승인·해시·revision 유지)"
+    },
+    {
+      "at": "2026-11-11T01:30:04Z",
+      "stage": "design_direction",
+      "event": "started",
+      "revision": 0,
+      "note": "ux_spec r1 기준"
+    },
+    {
+      "at": "2026-11-11T01:35:02Z",
+      "stage": "design_direction",
+      "event": "submitted",
+      "revision": 1,
+      "note": ""
+    },
+    {
+      "at": "2026-11-11T01:51:29Z",
+      "stage": "design_direction",
+      "event": "approved",
+      "revision": 1,
+      "note": "사용자 명시적 승인"
+    },
+    {
+      "at": "2026-11-11T01:55:36Z",
+      "stage": "design",
+      "event": "gate_enabled",
+      "revision": null,
+      "note": "config.gates.design_direction = true (프리뷰 현재 상태: not_started, Design Direction: approved) — 사용자 동의. 기존 승인·해시·revision 유지"
+    },
+    {
+      "at": "2026-11-11T01:55:43Z",
+      "stage": "preview",
+      "event": "started",
+      "revision": 0,
+      "note": "ux_spec r1 기준"
+    },
+    {
+      "at": "2026-11-11T02:02:17Z",
+      "stage": "preview",
+      "event": "verified",
+      "revision": 0,
+      "note": ""
+    },
+    {
+      "at": "2026-11-11T03:46:09Z",
+      "stage": "preview",
+      "event": "verified",
+      "revision": 0,
+      "note": ""
+    },
+    {
+      "at": "2026-11-11T03:51:39Z",
+      "stage": "preview",
+      "event": "verified",
+      "revision": 0,
+      "note": ""
+    },
+    {
+      "at": "2026-11-12T06:45:38Z",
+      "stage": "design",
+      "event": "outdated",
+      "revision": null,
+      "note": "planning 변경 감지: docs/planning/02-prd.md, docs/planning/03-user-stories.md, docs/planning/04-user-flows.md, docs/planning/05-acceptance-criteria.md"
+    },
+    {
+      "at": "2026-11-12T06:54:19Z",
+      "stage": "ux_spec",
+      "event": "invalidated",
+      "revision": 1,
+      "note": "planning 변경으로 디자인 재검토"
+    },
+    {
+      "at": "2026-11-12T06:54:19Z",
+      "stage": "design_direction",
+      "event": "invalidated",
+      "revision": 1,
+      "note": "planning 변경으로 디자인 재검토"
+    },
+    {
+      "at": "2026-11-12T06:54:19Z",
+      "stage": "preview",
+      "event": "invalidated",
+      "revision": 0,
+      "note": "planning 변경으로 디자인 재검토"
+    },
+    {
+      "at": "2026-11-12T06:54:19Z",
+      "stage": "design",
+      "event": "rebased",
+      "revision": null,
+      "note": "planning r4 → r5"
+    },
+    {
+      "at": "2026-11-12T06:55:59Z",
+      "stage": "ux_planning",
+      "event": "submitted",
+      "revision": 3,
+      "note": ""
+    },
+    {
+      "at": "2026-11-12T07:29:19Z",
+      "stage": "ux_planning",
+      "event": "changes_requested",
+      "revision": 3,
+      "note": "사용자 결정(2026-11-12): 운영 화면 PC·모바일 동일 한 열+하단 탭, PC 옆 패널 폐지·시트 통일. UXD-066 미결 문구 해소 및 UXD-002·022·026·038 정합성 수정"
     }
   ],
-  "updated_at": "2026-11-10T01:38:14Z"
+  "updated_at": "2026-11-12T07:29:19Z",
+  "config": {
+    "workflow": "v2",
+    "theme_file": "docs/design-profile/theme.json",
+    "gates": {
+      "design_direction": true
+    }
+  },
+  "theme": {
+    "path": "docs/design-profile/theme.json",
+    "baseline_hash": "fd21e9ea803fa4a7191fd3f5e107e8a8f55146775f58fa44c7c15cfd50ebd06b",
+    "recorded_at": "2026-11-11T01:29:58Z"
+  },
+  "migration": {
+    "from": "v1",
+    "to": "v2",
+    "at": "2026-11-11T01:29:58Z",
+    "backup": null
+  },
+  "gate_activations": [
+    {
+      "gate": "design_direction",
+      "at": "2026-11-11T01:55:36Z",
+      "preview_status": "not_started",
+      "preview_approved_revision": null,
+      "design_direction_status": "approved"
+    }
+  ]
 }

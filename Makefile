@@ -5,7 +5,7 @@ COMPOSE := docker compose
 BE := cd backend &&
 FE := cd frontend &&
 
-.PHONY: help setup env dev up down logs ps migrate migration migrate-down \
+.PHONY: help setup env dev up down logs ps migrate migration migrate-down users super-admin \
         test test-be test-fe test-db lint lint-be lint-fe typecheck typecheck-be typecheck-fe \
         format build check
 
@@ -51,6 +51,13 @@ migration: ## 새 마이그레이션 생성: make migration m="add example table
 migrate-down: ## 마이그레이션 1단계 롤백
 	$(COMPOSE) run --rm backend alembic downgrade -1
 
+users: ## 사용자 목록: make users [status=pending]
+	$(COMPOSE) run --rm backend python -m app.modules.user.cli list $(if $(status),--status $(status),)
+
+super-admin: ## 최초 슈퍼 관리자 지정: make super-admin id=<사용자 UUID>
+	@test -n "$(id)" || (echo 'usage: make super-admin id=<user uuid> (make users status=pending 으로 확인)' && exit 1)
+	$(COMPOSE) run --rm backend python -m app.modules.user.cli grant-super-admin $(id)
+
 # ---------- Quality ----------
 test: test-be test-fe ## FE/BE 단위 테스트 (DB 불필요)
 
@@ -60,8 +67,8 @@ test-be: ## Backend 단위 테스트
 test-fe: ## Frontend 단위 테스트
 	$(FE) pnpm test
 
-test-db: ## 실제 PostgreSQL 연동 테스트 (Docker 필요)
-	$(COMPOSE) run --rm backend pytest -m db
+test-db: ## 실제 PostgreSQL 연동 테스트 (Docker 필요). compose 내부 DB(db)만 TEST_DATABASE_URL로 허용
+	$(COMPOSE) run --rm backend sh -c 'TEST_DATABASE_URL="$$DATABASE_URL" pytest -m db'
 
 lint: lint-be lint-fe ## Lint (ruff, eslint)
 
