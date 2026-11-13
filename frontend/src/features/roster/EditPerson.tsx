@@ -6,7 +6,7 @@ import { Button } from '../../components/Button'
 import { ConfirmDialog } from '../../components/ConfirmDialog'
 import { NoticeBox } from '../../components/NoticeBox'
 import { RecordSummary } from '../../components/RecordSummary'
-import { Sheet, SidePanel } from '../../components/Sheet'
+import { Sheet } from '../../components/Sheet'
 import { useToast } from '../../components/toastContext'
 import { isApiError } from '../../lib/api'
 import { eulReul } from '../../lib/josa'
@@ -16,15 +16,15 @@ import { focusFirstError, validatePerson, type PersonDraft, type PersonErrors } 
 
 // SCR-212 회원·게스트 편집(패널: 모바일 하단 시트 최대 90%, PC 명단 옆 패널 400).
 // - 편집: 이름·성별·급수(필수)·점수(1–10, 미설정 허용). '저장' → 토스트·명단 갱신(AC-010, AC-098)
-// - 회원 현황(CMP-045 ops): 지인·랭크·전적·튜토리얼·권장 대상(ST2는 현황만 스켈레톤). 게스트는 현황 없음(ST7, AC-015)
+// - 회원 현황(RecordSummary audience=ops): 지인·랭크·전적·튜토리얼·권장 대상(ST2는 현황만 스켈레톤). 게스트는 현황 없음(ST7, AC-015)
 // - 게스트 삭제 분기(C-26, UXD-022 r4): ① 진행 중 라운드 출전·② 확정된 청백전 미기록 경기 → ST8 비활성+안내 / ③ 확정 전 대진 → ST10 폐기 확인 / ④ 청백전 참가자로만 → ST11 / ⑤ 그 밖 → 확인 창
 // - 닫기·다른 행(바뀐 값 있음) → 확인 창 "변경 내용을 버릴까요?"
 // - 회원 비활성 처리·다시 활성화(ST9, US-020)는 후순위(B2 범위 밖)
-type Props = { person: RosterPerson; desktop: boolean; onClose: () => void; onChanged: () => void }
+type Props = { person: RosterPerson; onClose: () => void; onChanged: () => void }
 
 const toDraft = (p: RosterPerson): PersonDraft => ({ name: p.name, gender: p.gender, grade: p.grade, score: p.score, referrer: '' })
 
-export function EditPerson({ person, desktop, onClose, onChanged }: Props) {
+export function EditPerson({ person, onClose, onChanged }: Props) {
   const toast = useToast()
   const [draft, setDraft] = useState<PersonDraft>(() => toDraft(person))
   const [errors, setErrors] = useState<PersonErrors>({})
@@ -79,10 +79,8 @@ export function EditPerson({ person, desktop, onClose, onChanged }: Props) {
       await updatePerson(person.kind, person.id, { name: draft.name.trim(), gender: draft.gender, grade: draft.grade, score: draft.score }, person.version)
       toast('저장했습니다')
       onChanged()
-      if (!desktop) {
-        leaving.current = true
-        onClose() // 모바일은 저장 후 닫음, PC 옆 패널은 연달아 편집하도록 유지
-      }
+      leaving.current = true
+      onClose() // 저장 후 시트를 닫음(PC·모바일 공통 하단 시트, UXD-022 r6)
     } catch (err) {
       if (isApiError(err) && err.code === INVALID_SCORE) setErrors({ score: '점수는 1–10 중에서 골라 주세요' })
       else if (isApiError(err) && err.code === ROSTER_CONFLICT) {
@@ -169,15 +167,9 @@ export function EditPerson({ person, desktop, onClose, onChanged }: Props) {
 
   return (
     <>
-      {desktop ? (
-        <SidePanel title={person.name} titleBadge={titleBadge} onRequestClose={onClose} footer={footer} testId="edit-panel">
-          {body}
-        </SidePanel>
-      ) : (
-        <Sheet open title={person.name} titleBadge={titleBadge} onRequestClose={onClose} footer={footer} testId="edit-sheet">
-          {body}
-        </Sheet>
-      )}
+      <Sheet open title={person.name} titleBadge={titleBadge} onRequestClose={onClose} footer={footer} testId="edit-sheet">
+        {body}
+      </Sheet>
       <ConfirmDialog
         open={blocker.state === 'blocked'}
         onOpenChange={(o) => !o && blocker.state === 'blocked' && blocker.reset()}

@@ -4,7 +4,9 @@ import { skipReason } from './previewLinks'
 import { screens } from './registry'
 
 type Viewport = 'mobile' | 'tablet' | 'desktop'
-const WIDTH: Record<Viewport, number> = { mobile: 390, tablet: 768, desktop: 1280 }
+// Design Direction r2 6장: 검증 폭 390(390×844)·1440(1440×900, 콘텐츠 최대 600px 열)
+const WIDTH: Record<Viewport, number> = { mobile: 390, tablet: 768, desktop: 1440 }
+const HEIGHT: Record<Viewport, number> = { mobile: 844, tablet: 1024, desktop: 900 }
 
 function parseHash(): { screen?: string; state?: string; vp?: Viewport } {
   const [screen, state, vp] = window.location.hash.replace(/^#/, '').split('/')
@@ -91,7 +93,7 @@ export function PreviewApp() {
               </div>
             </div>
             <div className="pv-stage">
-              <div className="pv-frame" style={{ width: WIDTH[vp] }} data-viewport={vp}>
+              <div className="pv-frame" style={{ width: WIDTH[vp], height: HEIGHT[vp] }} data-viewport={vp}>
                 {screen.render(stateId)}
               </div>
             </div>

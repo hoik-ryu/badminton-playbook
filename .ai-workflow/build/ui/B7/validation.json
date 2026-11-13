@@ -1,0 +1,13 @@
+{
+  "at": "2026-11-13T07:03:04Z",
+  "ok": true,
+  "brief_digest": "7c9c0eb617b09129bd460be5c89387f786c1d505562408e53cddbd7a968447c6",
+  "plan_sha256": "2116908b02b75258a2c5e12463919e066bcbe9ce81160b5be0054759bce42033",
+  "errors": [],
+  "warnings": [],
+  "counts": {
+    "screens": 0,
+    "states": 0,
+    "cmps_used": 0
+  }
+}

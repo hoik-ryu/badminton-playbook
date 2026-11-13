@@ -1,0 +1,5 @@
+# 증거 원본 로그·스크린샷은 Git에서 제외합니다(요약은 build.json에 기록).
+evidence/
+*.log
+runs/
+lock.json

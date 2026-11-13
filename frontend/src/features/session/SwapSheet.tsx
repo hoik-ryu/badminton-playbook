@@ -74,7 +74,7 @@ export function SwapSheet({ view, target, onClose, onSwapped, onConflict }: Prop
 
   const who = `${target.name}(${target.gender}${target.score ?? ''})`
   return (
-    <Sheet open title={`${who}${waGwa(target.name).slice(target.name.length)} 바꿀 사람`} onRequestClose={onClose} desktop="bottom" testId="swap-sheet">
+    <Sheet open title={`${who}${waGwa(target.name).slice(target.name.length)} 바꿀 사람`} onRequestClose={onClose} testId="swap-sheet">
       <div data-scr="SCR-205" data-st={failed ? 'SCR-205-ST4' : list.length === 0 ? 'SCR-205-ST3' : 'SCR-205-ST1'} className="flex flex-col gap-2">
         {failed && <NoticeBox tone="danger">교체하지 못했습니다. 대진은 그대로입니다</NoticeBox>}
         {list.length === 0 && <p className="m-0 py-6 text-center text-body text-ink-muted">바꿀 수 있는 사람이 없습니다</p>}

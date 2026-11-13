@@ -1,0 +1,214 @@
+{
+  "format": "pb-ui-map/v1",
+  "components": {
+    "CMP-001": {
+      "source": "existing",
+      "export": "Button",
+      "registered_at": "2026-11-13T06:15:40Z",
+      "path": "frontend/src/components/Button.tsx",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: variant primary|secondary|danger|text|kakao, size md44|lg48, fullWidth, 로딩·비활성 — 04 계약과 같음"
+    },
+    "CMP-002": {
+      "source": "existing",
+      "export": "SegmentedControl",
+      "registered_at": "2026-11-13T06:15:40Z",
+      "path": "frontend/src/components/RadioButtons.tsx",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: export SegmentedControl: 2–3개 중 하나, size md|sm(최소 44), radiogroup — 04 계약과 같음(CMP-003과 같은 파일의 별도 export)"
+    },
+    "CMP-003": {
+      "source": "existing",
+      "export": "ChoiceGrid",
+      "registered_at": "2026-11-13T06:15:40Z",
+      "path": "frontend/src/components/RadioButtons.tsx",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: export ChoiceGrid: kind grade|score(4·5열), allowClear, 칸 44×44, 오류 문구 — 04 계약과 같음(CMP-002와 같은 파일의 별도 export)"
+    },
+    "CMP-004": {
+      "source": "existing",
+      "export": "FilterChip",
+      "registered_at": "2026-11-13T06:15:40Z",
+      "path": "frontend/src/components/FilterChip.tsx",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: count(0이면 숨김), aria-pressed, 숫자 레이블, VD-010 — 04 계약과 같음"
+    },
+    "CMP-005": {
+      "source": "existing",
+      "export": "Badge",
+      "registered_at": "2026-11-13T06:15:40Z",
+      "path": "frontend/src/components/Badge.tsx",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: tone 7종, shape label|count, 글자 포함 — 04 계약과 같음"
+    },
+    "CMP-006": {
+      "source": "existing",
+      "export": "TextField",
+      "registered_at": "2026-11-13T06:15:41Z",
+      "path": "frontend/src/components/TextField.tsx",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: type은 input 속성, 오류 aria-invalid·describedby, 16px — 04 계약과 같음"
+    },
+    "CMP-007": {
+      "source": "existing",
+      "export": "Switch",
+      "registered_at": "2026-11-13T06:15:41Z",
+      "path": "frontend/src/components/Switch.tsx",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: description(withDescription), 켜짐·꺼짐·비활성, role=switch — 04 계약과 같음"
+    },
+    "CMP-008": {
+      "source": "existing",
+      "export": "Checkbox",
+      "registered_at": "2026-11-13T06:15:41Z",
+      "path": "frontend/src/components/Checkbox.tsx",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: rowMode, indeterminate(selectAll), 비활성 — 04 계약과 같음"
+    },
+    "CMP-021": {
+      "source": "existing",
+      "export": "Sheet",
+      "registered_at": "2026-11-13T06:15:41Z",
+      "path": "frontend/src/components/Sheet.tsx",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: 같은 부품(시트). 단 PC dialog·480px 좁은 하단·SidePanel 분기는 04 r2(presentation=bottom만)와 다름 → B7에서 수정"
+    },
+    "CMP-022": {
+      "source": "existing",
+      "export": "ConfirmDialog",
+      "registered_at": "2026-11-13T06:15:41Z",
+      "path": "frontend/src/components/ConfirmDialog.tsx",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: tone default|danger|conflict, 버튼 1·2개, 처리 중, alertdialog — 04 계약과 같음"
+    },
+    "CMP-023": {
+      "source": "existing",
+      "export": "NoticeBox",
+      "registered_at": "2026-11-13T06:15:41Z",
+      "path": "frontend/src/components/NoticeBox.tsx",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: tone 4종, action, dismissible, alert/status — 04 계약과 같음"
+    },
+    "CMP-025": {
+      "source": "existing",
+      "export": "AppNav",
+      "registered_at": "2026-11-13T06:15:41Z",
+      "path": "frontend/src/components/AppNav.tsx",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: 같은 부품(하단 탭). 단 layout=side(PC 왼쪽 메뉴)는 04 r2(layout=bottom만)와 다름 → B7에서 수정"
+    },
+    "CMP-026": {
+      "source": "existing",
+      "export": "PageHeader",
+      "registered_at": "2026-11-13T06:15:41Z",
+      "path": "frontend/src/components/PageHeader.tsx",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: leading none|back|close, trailing none|menu|action, sticky, h1 — 04 계약과 같음(h1 크기 VD-023은 B7)"
+    },
+    "CMP-027": {
+      "source": "existing",
+      "export": "StateView",
+      "registered_at": "2026-11-13T06:15:41Z",
+      "path": "frontend/src/components/StateView.tsx",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: kind loading|empty|error|forbidden|notFound, action — 04 계약과 같음"
+    },
+    "CMP-030": {
+      "source": "existing",
+      "export": "ListItem",
+      "registered_at": "2026-11-13T06:15:42Z",
+      "path": "frontend/src/components/ListItem.tsx",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: 같은 부품(목록 행, trailing chevron|badge). 단 variant=card(SCR-201)는 04에 없고 04 3.1·VD-024(메뉴 목록 Flat)와 다름 → B7에서 수정"
+    },
+    "CMP-045": {
+      "source": "existing",
+      "export": "RecordSummary",
+      "registered_at": "2026-11-13T06:15:42Z",
+      "path": "frontend/src/components/RecordSummary.tsx",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: audience self|ops, 랭크 있음·없음·기록 없음 — 04 계약과 같음"
+    }
+  },
+  "tokens": {
+    "format": "css-vars",
+    "file": "frontend/src/styles/tokens.css",
+    "var_pattern": "--{dashed}"
+  },
+  "exceptions": {
+    "tokens": [],
+    "audit": [],
+    "log": []
+  },
+  "history": [
+    {
+      "at": "2026-11-13T06:15:40Z",
+      "event": "register CMP-001 (existing)",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: variant primary|secondary|danger|text|kakao, size md44|lg48, fullWidth, 로딩·비활성 — 04 계약과 같음"
+    },
+    {
+      "at": "2026-11-13T06:15:40Z",
+      "event": "register CMP-002 (existing)",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: export SegmentedControl: 2–3개 중 하나, size md|sm(최소 44), radiogroup — 04 계약과 같음(CMP-003과 같은 파일의 별도 export)"
+    },
+    {
+      "at": "2026-11-13T06:15:40Z",
+      "event": "register CMP-003 (existing)",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: export ChoiceGrid: kind grade|score(4·5열), allowClear, 칸 44×44, 오류 문구 — 04 계약과 같음(CMP-002와 같은 파일의 별도 export)"
+    },
+    {
+      "at": "2026-11-13T06:15:40Z",
+      "event": "register CMP-004 (existing)",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: count(0이면 숨김), aria-pressed, 숫자 레이블, VD-010 — 04 계약과 같음"
+    },
+    {
+      "at": "2026-11-13T06:15:40Z",
+      "event": "register CMP-005 (existing)",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: tone 7종, shape label|count, 글자 포함 — 04 계약과 같음"
+    },
+    {
+      "at": "2026-11-13T06:15:41Z",
+      "event": "register CMP-006 (existing)",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: type은 input 속성, 오류 aria-invalid·describedby, 16px — 04 계약과 같음"
+    },
+    {
+      "at": "2026-11-13T06:15:41Z",
+      "event": "register CMP-007 (existing)",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: description(withDescription), 켜짐·꺼짐·비활성, role=switch — 04 계약과 같음"
+    },
+    {
+      "at": "2026-11-13T06:15:41Z",
+      "event": "register CMP-008 (existing)",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: rowMode, indeterminate(selectAll), 비활성 — 04 계약과 같음"
+    },
+    {
+      "at": "2026-11-13T06:15:41Z",
+      "event": "register CMP-021 (existing)",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: 같은 부품(시트). 단 PC dialog·480px 좁은 하단·SidePanel 분기는 04 r2(presentation=bottom만)와 다름 → B7에서 수정"
+    },
+    {
+      "at": "2026-11-13T06:15:41Z",
+      "event": "register CMP-022 (existing)",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: tone default|danger|conflict, 버튼 1·2개, 처리 중, alertdialog — 04 계약과 같음"
+    },
+    {
+      "at": "2026-11-13T06:15:41Z",
+      "event": "register CMP-023 (existing)",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: tone 4종, action, dismissible, alert/status — 04 계약과 같음"
+    },
+    {
+      "at": "2026-11-13T06:15:41Z",
+      "event": "register CMP-025 (existing)",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: 같은 부품(하단 탭). 단 layout=side(PC 왼쪽 메뉴)는 04 r2(layout=bottom만)와 다름 → B7에서 수정"
+    },
+    {
+      "at": "2026-11-13T06:15:41Z",
+      "event": "register CMP-026 (existing)",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: leading none|back|close, trailing none|menu|action, sticky, h1 — 04 계약과 같음(h1 크기 VD-023은 B7)"
+    },
+    {
+      "at": "2026-11-13T06:15:41Z",
+      "event": "register CMP-027 (existing)",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: kind loading|empty|error|forbidden|notFound, action — 04 계약과 같음"
+    },
+    {
+      "at": "2026-11-13T06:15:42Z",
+      "event": "register CMP-030 (existing)",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: 같은 부품(목록 행, trailing chevron|badge). 단 variant=card(SCR-201)는 04에 없고 04 3.1·VD-024(메뉴 목록 Flat)와 다름 → B7에서 수정"
+    },
+    {
+      "at": "2026-11-13T06:15:42Z",
+      "event": "register CMP-045 (existing)",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: audience self|ops, 랭크 있음·없음·기록 없음 — 04 계약과 같음"
+    },
+    {
+      "at": "2026-11-13T06:15:42Z",
+      "event": "tokens css-vars",
+      "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 토큰 출력 파일: frontend/src/styles/tokens.css(04 + theme.json 생성 파일)"
+    }
+  ]
+}

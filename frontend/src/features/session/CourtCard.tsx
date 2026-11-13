@@ -44,7 +44,7 @@ export function CourtCard({ court, onPlayer, onRelax, excluded = [] }: Props) {
     </div>
   )
   return (
-    <article data-cmp="CMP-041" data-court={court.no} aria-label={`코트 ${court.no}`} className="flex flex-col rounded-md border border-line bg-page px-4 py-3 shadow-card">
+    <article data-cmp="CMP-041" data-court={court.no} aria-label={`코트 ${court.no}`} className="flex flex-col rounded-md border border-line bg-page px-4 py-3">
       <header className="flex items-center justify-between gap-2 border-b border-line pb-2">
         <h3 className="m-0 text-body font-bold text-ink">코트 {court.no}</h3>
         <span className={cn('text-body tabular-nums', court.gap === null ? 'text-ink-muted' : 'font-bold text-ink')}>{court.gap === null ? '실력차 계산 불가' : `실력차 ${court.gap}점`}</span>

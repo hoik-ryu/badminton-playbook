@@ -1,0 +1,1184 @@
+{
+  "schema_version": 1,
+  "engine": {
+    "skill": "product-build",
+    "engine_ref": "0edcd4c"
+  },
+  "created_at": "2026-11-13T06:10:58Z",
+  "updated_at": "2026-11-13T07:09:27Z",
+  "plan": {
+    "status": "approved",
+    "revision": 2,
+    "submitted": {
+      "revision": 2,
+      "at": "2026-11-13T06:18:48Z",
+      "hashes": {
+        "docs/build/implementation-plan.json": "d7654b1359fcf4e90d2fe1fb969fa827cc2dd19f611542654c5205a26502394d",
+        "docs/build/00-implementation-plan.md": "961207583b799f235bd34f2cb896b26a86351ddb35a46a07abbc2e799afe16f9",
+        "docs/build/build-profile.toml": "fdc3c14d126e6014e6b40678704598c25a81da5a40737dc7ac52ca9f991b911c"
+      },
+      "inputs": {
+        "planning": {
+          "discovery_revision": "3",
+          "planning_revision": "6",
+          "hashes": {
+            "docs/planning/01-discovery.md": "5fcf2ebb6023832a9ab964714a535480ce0adc8d0ce301bea7522f937f87a068",
+            "docs/planning/02-prd.md": "6a9da38ce4439d60e51f3d20fbc4e94b63d202563cf69af268bcd7e3f8fcad57",
+            "docs/planning/03-user-stories.md": "172f84f3e0b95a442f2d5a1670d6510de5d3bdf99c6775f6818dfa4f7b2c5231",
+            "docs/planning/04-user-flows.md": "4adfff41cc441fe2b975c820ec7843b475e2f31ad275f827e69c74735c855eb2",
+            "docs/planning/05-acceptance-criteria.md": "29c74652d2a9f712d660943b476d7bbba390aacfe32fac56c6658147806ca1bc"
+          }
+        },
+        "design": {
+          "level": "L3",
+          "workflow": "v2",
+          "basis": {
+            "ux_spec_revision": 2,
+            "design_direction_revision": 2,
+            "preview_revision": 1
+          },
+          "approved_digests": {
+            "ux_planning": "9a16718c54e67ae61e53f24d79b26415af8fc7700d5348237023fa0e03ff10ec",
+            "ux_spec": "7e7b404ea131b5b6c91989bebcf482ac1cb51a1ea65d54ed91345626ef87f77e",
+            "design_direction": "c786501a688742f3eab09006bee8b1d08eab94527e4ee66d5c87cfedee478a07",
+            "preview": "64fdb120dedc6798204ed32a3079d6500e5d2ba9798bf45a0ec43419f86a265f"
+          }
+        },
+        "design_files": {
+          "docs/design/00-ux-decisions.md": "1964b4d8ecbc993042a5835a3c0f65e3be5afa4d932c23d1d36bdf9fa5c06105",
+          "docs/design/01-information-architecture.md": "94c9ae6860464aa33dcce495118572b5a22eb4e615d2d59b6f7b12a89020bd76",
+          "docs/design/02-screens.md": "238867828129796bd81c0b3a3ee8245c68e9dc211eaad6860362b9159ffe8919",
+          "docs/design/03-screen-flows.md": "29f568804ae3b5184ea9e50b199cf86624d528230f10c1b99159096a1aafcd57",
+          "docs/design/04-ui-system.md": "148e8ff520af7a277d04c212fc2555493d0689936db5e5f980da96ab589ecbb9",
+          "docs/design/05-design-traceability.md": "e5309788aa94dcd5fb378f4540376b27962c22265c57d1f2b64cd5c72d6cf3bc",
+          "docs/design/07-design-direction.md": "d9553c8fdc509a6ace7f9e9b5f337ef3f7ec10f36b80ef0b32d7cf200f74d7e0"
+        }
+      },
+      "summary": {
+        "batches": 9,
+        "auto": 4,
+        "user": 5,
+        "ac_assigned": 73,
+        "ac_active": 73,
+        "ac_deferred": 30,
+        "screens_owned": 29,
+        "screens_required": 25
+      },
+      "warnings": [
+        "B1: 화면 7개 — 상한 6 초과(나누기 권장)"
+      ]
+    },
+    "approved": {
+      "revision": 2,
+      "at": "2026-11-13T06:42:45Z",
+      "hashes": {
+        "docs/build/implementation-plan.json": "d7654b1359fcf4e90d2fe1fb969fa827cc2dd19f611542654c5205a26502394d",
+        "docs/build/00-implementation-plan.md": "961207583b799f235bd34f2cb896b26a86351ddb35a46a07abbc2e799afe16f9",
+        "docs/build/build-profile.toml": "fdc3c14d126e6014e6b40678704598c25a81da5a40737dc7ac52ca9f991b911c"
+      },
+      "inputs": {
+        "planning": {
+          "discovery_revision": "3",
+          "planning_revision": "6",
+          "hashes": {
+            "docs/planning/01-discovery.md": "5fcf2ebb6023832a9ab964714a535480ce0adc8d0ce301bea7522f937f87a068",
+            "docs/planning/02-prd.md": "6a9da38ce4439d60e51f3d20fbc4e94b63d202563cf69af268bcd7e3f8fcad57",
+            "docs/planning/03-user-stories.md": "172f84f3e0b95a442f2d5a1670d6510de5d3bdf99c6775f6818dfa4f7b2c5231",
+            "docs/planning/04-user-flows.md": "4adfff41cc441fe2b975c820ec7843b475e2f31ad275f827e69c74735c855eb2",
+            "docs/planning/05-acceptance-criteria.md": "29c74652d2a9f712d660943b476d7bbba390aacfe32fac56c6658147806ca1bc"
+          }
+        },
+        "design": {
+          "level": "L3",
+          "workflow": "v2",
+          "basis": {
+            "ux_spec_revision": 2,
+            "design_direction_revision": 2,
+            "preview_revision": 1
+          },
+          "approved_digests": {
+            "ux_planning": "9a16718c54e67ae61e53f24d79b26415af8fc7700d5348237023fa0e03ff10ec",
+            "ux_spec": "7e7b404ea131b5b6c91989bebcf482ac1cb51a1ea65d54ed91345626ef87f77e",
+            "design_direction": "c786501a688742f3eab09006bee8b1d08eab94527e4ee66d5c87cfedee478a07",
+            "preview": "64fdb120dedc6798204ed32a3079d6500e5d2ba9798bf45a0ec43419f86a265f"
+          }
+        },
+        "design_files": {
+          "docs/design/00-ux-decisions.md": "1964b4d8ecbc993042a5835a3c0f65e3be5afa4d932c23d1d36bdf9fa5c06105",
+          "docs/design/01-information-architecture.md": "94c9ae6860464aa33dcce495118572b5a22eb4e615d2d59b6f7b12a89020bd76",
+          "docs/design/02-screens.md": "238867828129796bd81c0b3a3ee8245c68e9dc211eaad6860362b9159ffe8919",
+          "docs/design/03-screen-flows.md": "29f568804ae3b5184ea9e50b199cf86624d528230f10c1b99159096a1aafcd57",
+          "docs/design/04-ui-system.md": "148e8ff520af7a277d04c212fc2555493d0689936db5e5f980da96ab589ecbb9",
+          "docs/design/05-design-traceability.md": "e5309788aa94dcd5fb378f4540376b27962c22265c57d1f2b64cd5c72d6cf3bc",
+          "docs/design/07-design-direction.md": "d9553c8fdc509a6ace7f9e9b5f337ef3f7ec10f36b80ef0b32d7cf200f74d7e0"
+        }
+      },
+      "statement": "구현 계획 승인 — r2",
+      "summary": {
+        "batches": 9,
+        "auto": 4,
+        "user": 5,
+        "ac_assigned": 73,
+        "ac_active": 73,
+        "ac_deferred": 30,
+        "screens_owned": 29,
+        "screens_required": 25
+      }
+    },
+    "last_approved": null,
+    "validity": {
+      "status": "valid"
+    }
+  },
+  "batches": {
+    "B0": {
+      "status": "verified",
+      "approval": "auto",
+      "approval_reasons": [],
+      "requires_design": true,
+      "design_path": "preview_approved",
+      "waiver": null,
+      "depends_on": [],
+      "ac_targets": {},
+      "plan_revision": 2,
+      "run": {
+        "batch": "B0",
+        "started_at": "2026-11-13T06:43:06Z",
+        "owner": "claude-b0",
+        "plan_revision": 2,
+        "base": {
+          "head": "f4d12b749b383a9cf7b02dc2b1b0f4a686ad3ddb",
+          "branch": "main",
+          "dirty": {}
+        },
+        "tasks": {
+          "B0-T1": {
+            "status": "done",
+            "files": [],
+            "at": "2026-11-13T06:43:33Z",
+            "note": ""
+          },
+          "B0-T2": {
+            "status": "done",
+            "files": [],
+            "at": "2026-11-13T06:43:33Z",
+            "note": ""
+          },
+          "B0-T3": {
+            "status": "done",
+            "files": [],
+            "at": "2026-11-13T06:43:34Z",
+            "note": ""
+          },
+          "B0-T4": {
+            "status": "done",
+            "files": [
+              "frontend/src/pages/NotFoundPage.test.tsx"
+            ],
+            "at": "2026-11-13T06:43:49Z",
+            "note": ""
+          }
+        },
+        "attempts": {
+          "test-fe": {
+            "consecutive_failures": 0,
+            "total": 1,
+            "last": {
+              "at": "2026-11-13T06:43:54Z",
+              "exit": 0,
+              "log": ".ai-workflow/build/evidence/B0/attempts/test-fe-01.log",
+              "task": null
+            }
+          },
+          "test-be": {
+            "consecutive_failures": 0,
+            "total": 1,
+            "last": {
+              "at": "2026-11-13T06:44:16Z",
+              "exit": 0,
+              "log": ".ai-workflow/build/evidence/B0/attempts/test-be-01.log",
+              "task": null
+            }
+          },
+          "make-lint": {
+            "consecutive_failures": 0,
+            "total": 1,
+            "last": {
+              "at": "2026-11-13T06:44:18Z",
+              "exit": 0,
+              "log": ".ai-workflow/build/evidence/B0/attempts/make-lint-01.log",
+              "task": null
+            }
+          },
+          "make-typecheck": {
+            "consecutive_failures": 0,
+            "total": 1,
+            "last": {
+              "at": "2026-11-13T06:44:20Z",
+              "exit": 0,
+              "log": ".ai-workflow/build/evidence/B0/attempts/make-typecheck-01.log",
+              "task": null
+            }
+          },
+          "make-build": {
+            "consecutive_failures": 0,
+            "total": 1,
+            "last": {
+              "at": "2026-11-13T06:44:24Z",
+              "exit": 0,
+              "log": ".ai-workflow/build/evidence/B0/attempts/make-build-01.log",
+              "task": null
+            }
+          },
+          "verify": {
+            "consecutive_failures": 0,
+            "total": 3,
+            "last": {
+              "at": "2026-11-13T06:58:16Z",
+              "run_id": "20261113-155734-84a411",
+              "ok": true
+            }
+          }
+        },
+        "failure": null,
+        "confirmations": [],
+        "findings": {
+          "out_of_scope": [],
+          "test_changes": [],
+          "files_changed": 1
+        },
+        "checkpoint": {
+          "seq": 5,
+          "at": "2026-11-13T06:44:30Z",
+          "digest": "65b5283090a5757de6ea2dcb67417cc76d553c1811e715b1335e2936897e0b45"
+        },
+        "submitted": {
+          "at": "2026-11-13T06:44:30Z",
+          "files": {
+            "frontend/src/pages/NotFoundPage.test.tsx": "1a6246eda17acf78595ef34020caa396067ca9cf417f1df4747e806fe82e5570"
+          },
+          "out_of_scope": [],
+          "test_changes": [],
+          "meaning": "구현 완료(implemented). 검증 완료·승인 완료가 아닙니다."
+        }
+      },
+      "verification": {
+        "run_id": "20261113-155734-84a411",
+        "dir": ".ai-workflow/build/evidence/B0/runs/20261113-155734-84a411",
+        "digest": "e5dec17aa5cfb0f7f01cae6e3e93289b7bc89258edb274558b27172a1274d54a",
+        "at": "2026-11-13T06:58:16Z",
+        "valid": true,
+        "steps": {
+          "test-be": {
+            "status": "passed",
+            "exit": 0,
+            "log": ".ai-workflow/build/evidence/B0/runs/20261113-155734-84a411/test-be.log",
+            "report": {
+              "format": "junit-xml",
+              "cases": 1369,
+              "passed": 1369,
+              "failed": 0,
+              "sha256": "ade05cfa95f6cab8dbbb51a3f766d5c3e22931737d1a9685b5b12fbf9e8bc0de"
+            }
+          },
+          "test-fe": {
+            "status": "passed",
+            "exit": 0,
+            "log": ".ai-workflow/build/evidence/B0/runs/20261113-155734-84a411/test-fe.log",
+            "report": {
+              "format": "junit-xml",
+              "cases": 175,
+              "passed": 175,
+              "failed": 0,
+              "sha256": "99b52571e034015095ccc1d9dbadf9f60d8e628957dd2a2945e5d327955e3853"
+            }
+          },
+          "make-test-db": {
+            "status": "passed",
+            "exit": 0,
+            "log": ".ai-workflow/build/evidence/B0/runs/20261113-155734-84a411/make-test-db.log"
+          },
+          "make-lint": {
+            "status": "passed",
+            "exit": 0,
+            "log": ".ai-workflow/build/evidence/B0/runs/20261113-155734-84a411/make-lint.log"
+          },
+          "make-typecheck": {
+            "status": "passed",
+            "exit": 0,
+            "log": ".ai-workflow/build/evidence/B0/runs/20261113-155734-84a411/make-typecheck.log"
+          },
+          "make-build": {
+            "status": "passed",
+            "exit": 0,
+            "log": ".ai-workflow/build/evidence/B0/runs/20261113-155734-84a411/make-build.log"
+          }
+        },
+        "counts": {
+          "verified": 0,
+          "insufficient": 0,
+          "failing": 0,
+          "not_run": 0,
+          "untested": 0,
+          "invalid_run": 0
+        },
+        "evaluation": {},
+        "reasons": [],
+        "code_tree": "cf5c103cd62d0ebcaa0439a2a47752b5466ac2a25345fc68cd1e2ca7baed5549",
+        "case_files": [],
+        "scope_tree": "bcd3df85119b5db9cf78823664047135c07f3512a4c6cff30220332199d6a808",
+        "deps": {
+          "frontend/package.json": "acd7630bc3beeb236dad2b4115c859fb92704af4155efc5b093b358de6a268ca",
+          "frontend/pnpm-lock.yaml": "6916fba9b13c123e7d2a48abeb4052f1f35c346b1aa37886a2e3b9cb2cb94522"
+        },
+        "targets": {}
+      }
+    },
+    "B1": {
+      "status": "planned",
+      "approval": "user",
+      "approval_reasons": [
+        "risk:permission,security",
+        "계획에서 사용자 승인 지정"
+      ],
+      "requires_design": true,
+      "design_path": "preview_approved",
+      "waiver": null,
+      "depends_on": [
+        "B0"
+      ],
+      "ac_targets": {
+        "AC-001": "E3",
+        "AC-002": "E3",
+        "AC-003": "E3",
+        "AC-004": "E3",
+        "AC-005": "E3",
+        "AC-006": "E3",
+        "AC-007": "E3",
+        "AC-008": "E3",
+        "AC-009": "E3",
+        "AC-011": "E3",
+        "AC-049": "E3",
+        "AC-060": "E3",
+        "AC-099": "E3"
+      },
+      "plan_revision": 2
+    },
+    "B2": {
+      "status": "planned",
+      "approval": "user",
+      "approval_reasons": [
+        "risk:permission,privacy,security",
+        "계획에서 사용자 승인 지정"
+      ],
+      "requires_design": true,
+      "design_path": "preview_approved",
+      "waiver": null,
+      "depends_on": [
+        "B0"
+      ],
+      "ac_targets": {
+        "AC-015": "E2",
+        "AC-017": "E3",
+        "AC-045": "E2",
+        "AC-046": "E2",
+        "AC-047": "E2",
+        "AC-053": "E3",
+        "AC-054": "E2",
+        "AC-055": "E3",
+        "AC-057": "E2",
+        "AC-067": "E3",
+        "AC-068": "E3",
+        "AC-069": "E3",
+        "AC-082": "E2",
+        "AC-083": "E2",
+        "AC-084": "E2",
+        "AC-086": "E2",
+        "AC-087": "E2",
+        "AC-088": "E2",
+        "AC-089": "E2",
+        "AC-093": "E2",
+        "AC-094": "E2",
+        "AC-098": "E2",
+        "AC-110": "E2"
+      },
+      "plan_revision": 2
+    },
+    "B3": {
+      "status": "planned",
+      "approval": "auto",
+      "approval_reasons": [],
+      "requires_design": true,
+      "design_path": "preview_approved",
+      "waiver": null,
+      "depends_on": [
+        "B0"
+      ],
+      "ac_targets": {
+        "AC-090": "E2",
+        "AC-091": "E2",
+        "AC-092": "E2",
+        "AC-095": "E2",
+        "AC-096": "E2"
+      },
+      "plan_revision": 2
+    },
+    "B4": {
+      "status": "planned",
+      "approval": "auto",
+      "approval_reasons": [],
+      "requires_design": true,
+      "design_path": "preview_approved",
+      "waiver": null,
+      "depends_on": [
+        "B0"
+      ],
+      "ac_targets": {},
+      "plan_revision": 2
+    },
+    "B5": {
+      "status": "planned",
+      "approval": "user",
+      "approval_reasons": [
+        "risk:data_loss,permission,privacy,security",
+        "계획에서 사용자 승인 지정"
+      ],
+      "requires_design": true,
+      "design_path": "preview_approved",
+      "waiver": null,
+      "depends_on": [
+        "B0"
+      ],
+      "ac_targets": {
+        "AC-010": "E2",
+        "AC-012": "E2",
+        "AC-013": "E3",
+        "AC-014": "E3",
+        "AC-016": "E2",
+        "AC-018": "E2",
+        "AC-066": "E3",
+        "AC-097": "E3",
+        "AC-100": "E2",
+        "AC-105": "E3",
+        "AC-106": "E3",
+        "AC-107": "E3"
+      },
+      "plan_revision": 2
+    },
+    "B6": {
+      "status": "planned",
+      "approval": "user",
+      "approval_reasons": [
+        "risk:data_loss",
+        "계획에서 사용자 승인 지정"
+      ],
+      "requires_design": true,
+      "design_path": "preview_approved",
+      "waiver": null,
+      "depends_on": [
+        "B0"
+      ],
+      "ac_targets": {
+        "AC-042": "E2",
+        "AC-043": "E2",
+        "AC-044": "E2",
+        "AC-065": "E2",
+        "AC-070": "E3",
+        "AC-071": "E2",
+        "AC-072": "E2",
+        "AC-073": "E2",
+        "AC-074": "E2",
+        "AC-075": "E2",
+        "AC-076": "E2",
+        "AC-077": "E3",
+        "AC-078": "E2",
+        "AC-079": "E2",
+        "AC-080": "E2",
+        "AC-081": "E2",
+        "AC-085": "E2",
+        "AC-108": "E2",
+        "AC-109": "E3"
+      },
+      "plan_revision": 2
+    },
+    "B7": {
+      "status": "verified",
+      "approval": "auto",
+      "approval_reasons": [],
+      "requires_design": true,
+      "design_path": "preview_approved",
+      "waiver": null,
+      "depends_on": [
+        "B0"
+      ],
+      "ac_targets": {
+        "AC-050": "E2"
+      },
+      "plan_revision": 2,
+      "run": {
+        "batch": "B7",
+        "started_at": "2026-11-13T07:03:04Z",
+        "owner": "claude-b7",
+        "plan_revision": 2,
+        "base": {
+          "head": "120a9368a8f390773050a624f7d4e2d7f8a29b6e",
+          "branch": "main",
+          "dirty": {}
+        },
+        "tasks": {
+          "B7-T1": {
+            "status": "done",
+            "files": [
+              "frontend/src/components/Sheet.tsx",
+              "frontend/src/components/sheetHooks.ts",
+              "frontend/src/features/clubmatch/ClubSwapSheet.tsx",
+              "frontend/src/features/roster/EditPerson.tsx",
+              "frontend/src/features/session/SwapSheet.tsx",
+              "frontend/src/pages/ClubMatchPage.tsx",
+              "frontend/src/pages/RosterPage.tsx",
+              "frontend/src/pages/SessionPage.tsx",
+              "frontend/src/routes/layouts/Shells.tsx"
+            ],
+            "at": "2026-11-13T07:04:49Z",
+            "note": ""
+          },
+          "B7-T2": {
+            "status": "done",
+            "files": [],
+            "at": "2026-11-13T07:04:49Z",
+            "note": ""
+          },
+          "B7-T3": {
+            "status": "done",
+            "files": [
+              "frontend/src/components/AppNav.tsx"
+            ],
+            "at": "2026-11-13T07:05:37Z",
+            "note": ""
+          },
+          "B7-T4": {
+            "status": "done",
+            "files": [
+              "frontend/src/components/PageHeader.tsx"
+            ],
+            "at": "2026-11-13T07:05:55Z",
+            "note": ""
+          },
+          "B7-T5": {
+            "status": "done",
+            "files": [
+              "frontend/src/features/clubmatch/ClubGameCard.tsx",
+              "frontend/src/features/clubmatch/MemberGameCard.tsx",
+              "frontend/src/features/clubmatch/StandingsCard.tsx",
+              "frontend/src/features/session/CourtCard.tsx",
+              "frontend/src/features/tutorial/StageCard.tsx"
+            ],
+            "at": "2026-11-13T07:05:58Z",
+            "note": ""
+          },
+          "B7-T6": {
+            "status": "done",
+            "files": [
+              "frontend/src/components/ListItem.tsx",
+              "frontend/src/pages/OpsHomePage.tsx"
+            ],
+            "at": "2026-11-13T07:06:17Z",
+            "note": ""
+          },
+          "B7-T7": {
+            "status": "done",
+            "files": [
+              "frontend/src/routes/layouts/shells.css",
+              "frontend/src/styles/tokens.css"
+            ],
+            "at": "2026-11-13T07:06:53Z",
+            "note": ""
+          },
+          "B7-T8": {
+            "status": "done",
+            "files": [
+              "frontend/src/layout.test.tsx"
+            ],
+            "at": "2026-11-13T07:07:25Z",
+            "note": ""
+          }
+        },
+        "attempts": {
+          "test-fe": {
+            "consecutive_failures": 0,
+            "total": 1,
+            "last": {
+              "at": "2026-11-13T07:08:05Z",
+              "exit": 0,
+              "log": ".ai-workflow/build/evidence/B7/attempts/test-fe-01.log",
+              "task": null
+            }
+          },
+          "test-be": {
+            "consecutive_failures": 0,
+            "total": 1,
+            "last": {
+              "at": "2026-11-13T07:08:27Z",
+              "exit": 0,
+              "log": ".ai-workflow/build/evidence/B7/attempts/test-be-01.log",
+              "task": null
+            }
+          },
+          "make-lint": {
+            "consecutive_failures": 0,
+            "total": 1,
+            "last": {
+              "at": "2026-11-13T07:08:29Z",
+              "exit": 0,
+              "log": ".ai-workflow/build/evidence/B7/attempts/make-lint-01.log",
+              "task": null
+            }
+          },
+          "make-typecheck": {
+            "consecutive_failures": 0,
+            "total": 1,
+            "last": {
+              "at": "2026-11-13T07:08:31Z",
+              "exit": 0,
+              "log": ".ai-workflow/build/evidence/B7/attempts/make-typecheck-01.log",
+              "task": null
+            }
+          },
+          "make-build": {
+            "consecutive_failures": 0,
+            "total": 1,
+            "last": {
+              "at": "2026-11-13T07:08:36Z",
+              "exit": 0,
+              "log": ".ai-workflow/build/evidence/B7/attempts/make-build-01.log",
+              "task": null
+            }
+          },
+          "make-test-db": {
+            "consecutive_failures": 0,
+            "total": 1,
+            "last": {
+              "at": "2026-11-13T07:08:40Z",
+              "exit": 0,
+              "log": ".ai-workflow/build/evidence/B7/attempts/make-test-db-01.log",
+              "task": null
+            }
+          },
+          "verify": {
+            "consecutive_failures": 0,
+            "total": 1,
+            "last": {
+              "at": "2026-11-13T07:09:27Z",
+              "run_id": "20261113-160845-03361c",
+              "ok": true
+            }
+          }
+        },
+        "failure": null,
+        "confirmations": [],
+        "findings": {
+          "out_of_scope": [],
+          "test_changes": [],
+          "files_changed": 21
+        },
+        "checkpoint": {
+          "seq": 10,
+          "at": "2026-11-13T07:08:45Z",
+          "digest": "fbffec3252c42fed955c95b07a19c7b45cc8f034ab2818ab3312b1247a3215af"
+        },
+        "submitted": {
+          "at": "2026-11-13T07:08:45Z",
+          "files": {
+            "frontend/src/components/AppNav.tsx": "8722960ed2cc427769d499db7eac9690b763ffee89005a8d586d69c2e3fb17b2",
+            "frontend/src/components/ListItem.tsx": "905590b2ee15811c4cf6186382845e21a1d767a534b3ec933169d8832d8ef078",
+            "frontend/src/components/PageHeader.tsx": "e0c92eb0927a9ab22a6f4fca05daf210396ae40838413a3afee72ff8faf5f19b",
+            "frontend/src/components/Sheet.tsx": "b904d8ca8653a05926e629d86a53dc4b5a852b90decba67621ff664576aababc",
+            "frontend/src/components/sheetHooks.ts": "1e64ced37105e7054d28a516c271289099cdd4ccb31f7cc81294a561fb3a41c9",
+            "frontend/src/features/clubmatch/ClubGameCard.tsx": "ab2e5d4f0bcee84245a54c5a7e8d8398291f0c28cf078cabbaa39d215b612791",
+            "frontend/src/features/clubmatch/ClubSwapSheet.tsx": "fd74e135433fd39ef53d04c4d63cdce2da09fefbfde0345b730a86b42d6fc3a8",
+            "frontend/src/features/clubmatch/MemberGameCard.tsx": "5baec8d60cf68c3dfd795c57240fcb928da81a1e3a0aca1d8de2f15f6039f573",
+            "frontend/src/features/clubmatch/StandingsCard.tsx": "d05b00b0866d0a2747a8dd542199508191e7de7d3c95ca57870df80565bd0247",
+            "frontend/src/features/roster/EditPerson.tsx": "5f1834f1cff07bff7d256911eea635bbc61596772314515c985478268d3fe2de",
+            "frontend/src/features/session/CourtCard.tsx": "b7841c6a8cf90c8e8aac44480eb36bd1b740ca7afd7f650a85383652c80a56ba",
+            "frontend/src/features/session/SwapSheet.tsx": "c1e20ea00fde76f8ae38be3a201a2a61ca49616c9c59e96d045fb56bddfbc1ae",
+            "frontend/src/features/tutorial/StageCard.tsx": "dfb8292977bd0e1c81dc26e9ce7f3c6fea14d3725bc7c571fb46991feaf20e8a",
+            "frontend/src/layout.test.tsx": "0fe6adff0b5d2e82db0cb8b9ffc75b8e68824e73788402d1da05e61703cbf145",
+            "frontend/src/pages/ClubMatchPage.tsx": "73160c710ccebf86fd8e5bcead4ec50e142c91298a4a0002c89aa0f9d232eb15",
+            "frontend/src/pages/OpsHomePage.tsx": "1dcf61caffbe59b66e58446d867fa766571f2dab66095a77fecaf26c10e005b5",
+            "frontend/src/pages/RosterPage.tsx": "4b57f54afc3d14101786bbb89aefc6098fb2821d0d04a0372214700e59be1b47",
+            "frontend/src/pages/SessionPage.tsx": "240ed5012b5e5c3ebc50ee959e83f170c00974e31321a852f06fe97082bbac34",
+            "frontend/src/routes/layouts/Shells.tsx": "259410863031c18a8dbf656fc40461ef476183088cda507e752966cb71cc4c0a",
+            "frontend/src/routes/layouts/shells.css": "686e36e04b2ab4d1ab87f961aff957dccc677900ae10fc46368a381505dd869f",
+            "frontend/src/styles/tokens.css": "07d4db47390b3ecb0c4bd6b9113c1cafe03a2f032eccbf76b10268529fdf0aec"
+          },
+          "out_of_scope": [],
+          "test_changes": [],
+          "meaning": "구현 완료(implemented). 검증 완료·승인 완료가 아닙니다."
+        }
+      },
+      "verification": {
+        "run_id": "20261113-160845-03361c",
+        "dir": ".ai-workflow/build/evidence/B7/runs/20261113-160845-03361c",
+        "digest": "fe0f7f90f80b0d30b39fab05cce12fe666ee4d63cfbc96c45d218019c5b469cd",
+        "at": "2026-11-13T07:09:26Z",
+        "valid": true,
+        "steps": {
+          "test-be": {
+            "status": "passed",
+            "exit": 0,
+            "log": ".ai-workflow/build/evidence/B7/runs/20261113-160845-03361c/test-be.log",
+            "report": {
+              "format": "junit-xml",
+              "cases": 1369,
+              "passed": 1369,
+              "failed": 0,
+              "sha256": "4a810a8807c1fd51bf3a9146996b725ffbbd52520e4e962802155c77919d7848"
+            }
+          },
+          "test-fe": {
+            "status": "passed",
+            "exit": 0,
+            "log": ".ai-workflow/build/evidence/B7/runs/20261113-160845-03361c/test-fe.log",
+            "report": {
+              "format": "junit-xml",
+              "cases": 179,
+              "passed": 179,
+              "failed": 0,
+              "sha256": "598e66e3ab901393294d312dc89d891ca453e11f9fdbc4767f68dd0f9500769d"
+            }
+          },
+          "make-test-db": {
+            "status": "passed",
+            "exit": 0,
+            "log": ".ai-workflow/build/evidence/B7/runs/20261113-160845-03361c/make-test-db.log"
+          },
+          "make-lint": {
+            "status": "passed",
+            "exit": 0,
+            "log": ".ai-workflow/build/evidence/B7/runs/20261113-160845-03361c/make-lint.log"
+          },
+          "make-typecheck": {
+            "status": "passed",
+            "exit": 0,
+            "log": ".ai-workflow/build/evidence/B7/runs/20261113-160845-03361c/make-typecheck.log"
+          },
+          "make-build": {
+            "status": "passed",
+            "exit": 0,
+            "log": ".ai-workflow/build/evidence/B7/runs/20261113-160845-03361c/make-build.log"
+          }
+        },
+        "counts": {
+          "verified": 1,
+          "insufficient": 0,
+          "failing": 0,
+          "not_run": 0,
+          "untested": 0,
+          "invalid_run": 0
+        },
+        "evaluation": {
+          "AC-050": {
+            "target": "E2",
+            "cases": [
+              {
+                "id": "src/layout.test.tsx::AC-050 한 열 최대 600px (UX Spec r2, VD-021) > [AC-050] 토큰 size.content.member는 600px이고 셸 열·바깥 배경이 그 토큰과 color.bg.page를 쓴다",
+                "status": "passed"
+              },
+              {
+                "id": "src/layout.test.tsx::AC-050 한 열 최대 600px (UX Spec r2, VD-021) > [AC-050] 튜토리얼 홈(SCR-101-ST1)은 PC 폭에서도 한 열 셸과 하단 탭만 쓴다",
+                "status": "passed"
+              },
+              {
+                "id": "src/layout.test.tsx::AC-050 한 열 최대 600px (UX Spec r2, VD-021) > [AC-050] 마이페이지(SCR-121-ST1)는 PC 폭에서도 한 열 셸과 하단 탭만 쓴다",
+                "status": "passed"
+              },
+              {
+                "id": "src/layout.test.tsx::AC-050 한 열 최대 600px (UX Spec r2, VD-021) > [AC-050] 시트는 PC 폭에서도 600px 열 너비의 하단 시트다(CMP-021 presentation=bottom, D2)",
+                "status": "passed"
+              }
+            ],
+            "level": "E2",
+            "evidence": [],
+            "status": "verified",
+            "reason": "태그된 테스트 통과(E2)"
+          }
+        },
+        "reasons": [],
+        "code_tree": "9aa0a0db54b5e05bc1517bb09d9579267d2208d891a0d92d5af357c893c35ba6",
+        "case_files": [
+          "frontend/src/layout.test.tsx"
+        ],
+        "scope_tree": "7813edbe61d93346a418729ed257de42a6f4acb00ded536269cdd51d1e473bab",
+        "deps": {
+          "frontend/package.json": "acd7630bc3beeb236dad2b4115c859fb92704af4155efc5b093b358de6a268ca",
+          "frontend/pnpm-lock.yaml": "6916fba9b13c123e7d2a48abeb4052f1f35c346b1aa37886a2e3b9cb2cb94522"
+        },
+        "targets": {
+          "AC-050": "E2"
+        },
+        "ui": {
+          "format": "pb-ui-evidence/v1",
+          "active": true,
+          "reasons": [],
+          "warnings": [
+            "프로필에 브라우저 검증 단계(report.format = \"pb-ui\")가 없습니다"
+          ],
+          "brief_digest": "7c9c0eb617b09129bd460be5c89387f786c1d505562408e53cddbd7a968447c6",
+          "ui_plan_sha": "2116908b02b75258a2c5e12463919e066bcbe9ce81160b5be0054759bce42033",
+          "ui_plan_validated": true,
+          "basis": {
+            "screens": {},
+            "tokens": "8a909bb72622c361a84ce33cab63a9c6ff57c1e7365f6a000dd706e2d306f930",
+            "ui_plan_components": "80a8d4b8a89dd4474ad11a3c3aed169e5ceb5a9a4aeb633a16b80d9766532f1d"
+          },
+          "code": {
+            "run_id": "20261113-160845-03361c",
+            "at": "2026-11-13T07:09:26Z",
+            "valid": true,
+            "code_tree": "9aa0a0db54b5e05bc1517bb09d9579267d2208d891a0d92d5af357c893c35ba6",
+            "code_only_tree": "65a43b959f71d294367a09260e31bb08921c8b937f54174bfe26f508dce0c025",
+            "head": "120a9368a8f390773050a624f7d4e2d7f8a29b6e"
+          },
+          "states": {},
+          "ac_links": {},
+          "browser": {
+            "status": "not_configured",
+            "steps": {},
+            "blocking": [],
+            "warnings": [
+              "프로필에 브라우저 검증 단계(report.format = \"pb-ui\")가 없습니다"
+            ],
+            "results": [],
+            "final_approval_blockers": [],
+            "coverage": {
+              "required_states": 0,
+              "with_browser_pass": [],
+              "without_browser": []
+            }
+          },
+          "tokens": {
+            "check": {
+              "ok": true,
+              "source": "theme:docs/design-profile/theme.json",
+              "format": "css-vars",
+              "counts": {
+                "approved": 63,
+                "matched": 63,
+                "missing": 0,
+                "mismatch": 0,
+                "excepted": 0
+              },
+              "missing": [],
+              "mismatch": [],
+              "excepted": [],
+              "stale_exceptions": []
+            },
+            "audit": {
+              "ok": true,
+              "mode": "warn",
+              "counts": {
+                "findings": 0,
+                "excepted": 0
+              },
+              "findings": []
+            }
+          },
+          "components": {
+            "map": {
+              "ok": true,
+              "errors": [],
+              "duplicates": []
+            },
+            "reuse": {
+              "checked": [],
+              "used": {},
+              "unused": [],
+              "files": 20,
+              "note": "정적 참조(import·식별자)만 봅니다. 실제로 렌더링되는지는 화면 상태 테스트·브라우저 증거로 확인합니다."
+            }
+          },
+          "manual": [],
+          "counts": {
+            "verified": 0,
+            "insufficient": 0,
+            "failing": 0,
+            "not_run": 0,
+            "untested": 0,
+            "manual_only": 0,
+            "invalid_run": 0
+          },
+          "final_approval_blockers": [],
+          "evidence_digest": "0975e849dc8cec8be2fc35536dd1f993e750ece80db9c475461e8165b8acbc0f"
+        }
+      }
+    },
+    "B8": {
+      "status": "planned",
+      "approval": "user",
+      "approval_reasons": [
+        "계획에서 사용자 승인 지정"
+      ],
+      "requires_design": true,
+      "design_path": "preview_approved",
+      "waiver": null,
+      "depends_on": [
+        "B7"
+      ],
+      "ac_targets": {},
+      "plan_revision": 2
+    }
+  },
+  "waivers": [],
+  "history": [
+    {
+      "at": "2026-11-13T06:10:58Z",
+      "target": "plan",
+      "event": "initialized",
+      "revision": 0,
+      "note": "planning r6"
+    },
+    {
+      "at": "2026-11-13T06:18:34Z",
+      "target": "plan",
+      "event": "submitted",
+      "revision": 1,
+      "note": "배치 9개(자동 4, 사용자 5)"
+    },
+    {
+      "at": "2026-11-13T06:18:48Z",
+      "target": "plan",
+      "event": "submitted",
+      "revision": 2,
+      "note": "배치 9개(자동 4, 사용자 5)"
+    },
+    {
+      "at": "2026-11-13T06:42:45Z",
+      "target": "plan",
+      "event": "approved",
+      "revision": 2,
+      "note": "구현 계획 승인 — r2"
+    },
+    {
+      "at": "2026-11-13T06:43:06Z",
+      "target": "batch",
+      "event": "started",
+      "revision": 2,
+      "note": "B0 (잠금 9469d6481752, base f4d12b7, 미커밋 0개)"
+    },
+    {
+      "at": "2026-11-13T06:43:33Z",
+      "target": "batch",
+      "event": "task_done",
+      "revision": null,
+      "note": "B0/B0-T1: 파일 0개"
+    },
+    {
+      "at": "2026-11-13T06:43:33Z",
+      "target": "batch",
+      "event": "task_done",
+      "revision": null,
+      "note": "B0/B0-T2: 파일 0개"
+    },
+    {
+      "at": "2026-11-13T06:43:34Z",
+      "target": "batch",
+      "event": "task_done",
+      "revision": null,
+      "note": "B0/B0-T3: 파일 0개"
+    },
+    {
+      "at": "2026-11-13T06:43:49Z",
+      "target": "batch",
+      "event": "task_done",
+      "revision": null,
+      "note": "B0/B0-T4: 파일 1개"
+    },
+    {
+      "at": "2026-11-13T06:44:30Z",
+      "target": "batch",
+      "event": "implemented",
+      "revision": null,
+      "note": "B0: 파일 1개, 범위 밖 0개"
+    },
+    {
+      "at": "2026-11-13T06:45:09Z",
+      "target": "batch",
+      "event": "verify_failed",
+      "revision": null,
+      "note": "B0: 검증 단계 make-test-db: not_run (필요한 환경 없음: docker)"
+    },
+    {
+      "at": "2026-11-13T06:56:23Z",
+      "target": "batch",
+      "event": "verify_failed",
+      "revision": null,
+      "note": "B0: 검증 단계 make-test-db: failed"
+    },
+    {
+      "at": "2026-11-13T06:58:16Z",
+      "target": "batch",
+      "event": "verified",
+      "revision": null,
+      "note": "B0: 필수 AC 검증 완료"
+    },
+    {
+      "at": "2026-11-13T07:03:04Z",
+      "target": "batch",
+      "event": "started",
+      "revision": 2,
+      "note": "B7 (잠금 c92f2fd8aedc, base 120a936, 미커밋 0개)"
+    },
+    {
+      "at": "2026-11-13T07:04:49Z",
+      "target": "batch",
+      "event": "task_done",
+      "revision": null,
+      "note": "B7/B7-T1: 파일 9개"
+    },
+    {
+      "at": "2026-11-13T07:04:49Z",
+      "target": "batch",
+      "event": "task_done",
+      "revision": null,
+      "note": "B7/B7-T2: 파일 0개"
+    },
+    {
+      "at": "2026-11-13T07:05:37Z",
+      "target": "batch",
+      "event": "task_done",
+      "revision": null,
+      "note": "B7/B7-T3: 파일 1개"
+    },
+    {
+      "at": "2026-11-13T07:05:55Z",
+      "target": "batch",
+      "event": "task_done",
+      "revision": null,
+      "note": "B7/B7-T4: 파일 1개"
+    },
+    {
+      "at": "2026-11-13T07:05:58Z",
+      "target": "batch",
+      "event": "task_done",
+      "revision": null,
+      "note": "B7/B7-T5: 파일 5개"
+    },
+    {
+      "at": "2026-11-13T07:06:17Z",
+      "target": "batch",
+      "event": "task_done",
+      "revision": null,
+      "note": "B7/B7-T6: 파일 2개"
+    },
+    {
+      "at": "2026-11-13T07:06:53Z",
+      "target": "batch",
+      "event": "task_done",
+      "revision": null,
+      "note": "B7/B7-T7: 파일 2개"
+    },
+    {
+      "at": "2026-11-13T07:07:25Z",
+      "target": "batch",
+      "event": "task_done",
+      "revision": null,
+      "note": "B7/B7-T8: 파일 1개"
+    },
+    {
+      "at": "2026-11-13T07:08:45Z",
+      "target": "batch",
+      "event": "implemented",
+      "revision": null,
+      "note": "B7: 파일 21개, 범위 밖 0개"
+    },
+    {
+      "at": "2026-11-13T07:09:27Z",
+      "target": "batch",
+      "event": "verified",
+      "revision": null,
+      "note": "B7: 필수 AC 검증 완료"
+    }
+  ],
+  "case_history": {
+    "src/layout.test.tsx::AC-050 한 열 최대 600px (UX Spec r2, VD-021) > [AC-050] 토큰 size.content.member는 600px이고 셸 열·바깥 배경이 그 토큰과 color.bg.page를 쓴다": {
+      "acs": [
+        "AC-050"
+      ],
+      "file": "frontend/src/layout.test.tsx",
+      "records": [
+        {
+          "run": "20261113-160845-03361c",
+          "tree": "9aa0a0db54b5e05bc1517bb09d9579267d2208d891a0d92d5af357c893c35ba6",
+          "code": "65a43b959f71d294367a09260e31bb08921c8b937f54174bfe26f508dce0c025",
+          "test_sha": "0fe6adff0b5d2e82db0cb8b9ffc75b8e68824e73788402d1da05e61703cbf145",
+          "test_copy": ".ai-workflow/build/evidence/B7/runs/20261113-160845-03361c/testfiles/frontend/src/layout.test.tsx",
+          "status": "passed",
+          "at": "2026-11-13T07:09:26Z",
+          "valid": true,
+          "batch": "B7",
+          "mode": "final"
+        }
+      ]
+    },
+    "src/layout.test.tsx::AC-050 한 열 최대 600px (UX Spec r2, VD-021) > [AC-050] 튜토리얼 홈(SCR-101-ST1)은 PC 폭에서도 한 열 셸과 하단 탭만 쓴다": {
+      "acs": [
+        "AC-050"
+      ],
+      "file": "frontend/src/layout.test.tsx",
+      "records": [
+        {
+          "run": "20261113-160845-03361c",
+          "tree": "9aa0a0db54b5e05bc1517bb09d9579267d2208d891a0d92d5af357c893c35ba6",
+          "code": "65a43b959f71d294367a09260e31bb08921c8b937f54174bfe26f508dce0c025",
+          "test_sha": "0fe6adff0b5d2e82db0cb8b9ffc75b8e68824e73788402d1da05e61703cbf145",
+          "test_copy": ".ai-workflow/build/evidence/B7/runs/20261113-160845-03361c/testfiles/frontend/src/layout.test.tsx",
+          "status": "passed",
+          "at": "2026-11-13T07:09:26Z",
+          "valid": true,
+          "batch": "B7",
+          "mode": "final"
+        }
+      ]
+    },
+    "src/layout.test.tsx::AC-050 한 열 최대 600px (UX Spec r2, VD-021) > [AC-050] 마이페이지(SCR-121-ST1)는 PC 폭에서도 한 열 셸과 하단 탭만 쓴다": {
+      "acs": [
+        "AC-050"
+      ],
+      "file": "frontend/src/layout.test.tsx",
+      "records": [
+        {
+          "run": "20261113-160845-03361c",
+          "tree": "9aa0a0db54b5e05bc1517bb09d9579267d2208d891a0d92d5af357c893c35ba6",
+          "code": "65a43b959f71d294367a09260e31bb08921c8b937f54174bfe26f508dce0c025",
+          "test_sha": "0fe6adff0b5d2e82db0cb8b9ffc75b8e68824e73788402d1da05e61703cbf145",
+          "test_copy": ".ai-workflow/build/evidence/B7/runs/20261113-160845-03361c/testfiles/frontend/src/layout.test.tsx",
+          "status": "passed",
+          "at": "2026-11-13T07:09:26Z",
+          "valid": true,
+          "batch": "B7",
+          "mode": "final"
+        }
+      ]
+    },
+    "src/layout.test.tsx::AC-050 한 열 최대 600px (UX Spec r2, VD-021) > [AC-050] 시트는 PC 폭에서도 600px 열 너비의 하단 시트다(CMP-021 presentation=bottom, D2)": {
+      "acs": [
+        "AC-050"
+      ],
+      "file": "frontend/src/layout.test.tsx",
+      "records": [
+        {
+          "run": "20261113-160845-03361c",
+          "tree": "9aa0a0db54b5e05bc1517bb09d9579267d2208d891a0d92d5af357c893c35ba6",
+          "code": "65a43b959f71d294367a09260e31bb08921c8b937f54174bfe26f508dce0c025",
+          "test_sha": "0fe6adff0b5d2e82db0cb8b9ffc75b8e68824e73788402d1da05e61703cbf145",
+          "test_copy": ".ai-workflow/build/evidence/B7/runs/20261113-160845-03361c/testfiles/frontend/src/layout.test.tsx",
+          "status": "passed",
+          "at": "2026-11-13T07:09:26Z",
+          "valid": true,
+          "batch": "B7",
+          "mode": "final"
+        }
+      ]
+    }
+  }
+}

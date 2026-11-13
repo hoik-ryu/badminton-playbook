@@ -1,6 +1,6 @@
 ---
 doc: user-flows
-revision: 5
+revision: 6
 language: ko
 based_on:
   discovery_revision: 3

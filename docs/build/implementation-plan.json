@@ -1,0 +1,1427 @@
+{
+  "plan_format": 1,
+  "scope": {
+    "priorities": [
+      "Must"
+    ],
+    "include": []
+  },
+  "order_strategy": "vertical",
+  "batches": [
+    {
+      "id": "B0",
+      "title": "부품 대응표 확정과 공통 오류 화면",
+      "kind": "foundation",
+      "goal": "기존 공통 부품 16개(동일성 확인·등록 완료)를 재사용 기준으로 삼고, 미확인 CMP의 동일성을 확인한다. 새 부품은 만들지 않는다. 범위 밖 공통 화면 SCR-005(페이지 없음, CMP-027)를 이 배치에서 소유해 화면 상태 테스트만 확인한다(AC 없음).",
+      "screens": [
+        "SCR-005"
+      ],
+      "acs": [],
+      "stories": [],
+      "components": {
+        "reuse": [
+          "CMP-001",
+          "CMP-002",
+          "CMP-003",
+          "CMP-004",
+          "CMP-005",
+          "CMP-006",
+          "CMP-007",
+          "CMP-008",
+          "CMP-021",
+          "CMP-022",
+          "CMP-023",
+          "CMP-025",
+          "CMP-026",
+          "CMP-027",
+          "CMP-030",
+          "CMP-045"
+        ],
+        "new": []
+      },
+      "depends_on": [],
+      "tasks": [
+        {
+          "id": "B0-T1",
+          "layer": "docs",
+          "title": "미확인 후보 CMP-024 PersonRow(04 trailing 6종·group 변형 vs 코드 자유 slot·group 없음), CMP-029 Toast(ToastProvider+useToast 분리, Toast export 없음) 계약 대조 → 사용자 확인 후 ui-map register 또는 원장 결정",
+          "refs": [
+            "CMP-024",
+            "CMP-029"
+          ]
+        },
+        {
+          "id": "B0-T2",
+          "layer": "docs",
+          "title": "부품 경로 밖 구현 확인: CMP-028(AttendancePanel·ParticipantsPanel 인라인), CMP-044(SwapSheet·ClubSwapSheet·SubstituteSheet 인라인), CMP-041(CourtCard·ClubGameCard·MemberGameCard 3개), CMP-042 StandingsCard, CMP-043 ClubMatchListItem, CMP-046 TutorialCourt, CMP-047 StageCard → 근거가 확인된 것만 등록, 나머지는 미확인 유지",
+          "refs": [
+            "CMP-028",
+            "CMP-044",
+            "CMP-041",
+            "CMP-042",
+            "CMP-043",
+            "CMP-046",
+            "CMP-047"
+          ]
+        },
+        {
+          "id": "B0-T3",
+          "layer": "test",
+          "title": "ui-map check·token-check·token-audit 기준선 기록(token-check는 B7 전까지 size.content.member 480≠600으로 실패가 예상됨)",
+          "refs": [
+            "CMP-021",
+            "CMP-025"
+          ],
+          "depends_on": [
+            "B0-T1"
+          ]
+        },
+        {
+          "id": "B0-T4",
+          "layer": "test",
+          "title": "SCR-005 화면 상태 태그 테스트([SCR-005-ST1]) — 범위 밖 공통 화면, AC 증거 아님",
+          "refs": [
+            "SCR-005",
+            "CMP-027"
+          ]
+        }
+      ],
+      "paths": {
+        "allow": [
+          "frontend/src/components/*.test.tsx",
+          "frontend/src/pages/NotFoundPage.test.tsx"
+        ],
+        "shared": []
+      },
+      "risk_tags": [],
+      "approval": "auto",
+      "done_criteria": [
+        "ui-map check 오류 0",
+        "미확인 CMP마다 등록 또는 '미확인 유지' 사유 기록",
+        "새 부품·토큰 0"
+      ],
+      "test_plan": []
+    },
+    {
+      "id": "B1",
+      "title": "인증·가입 승인·역할·운영 홈 — 기존 구현 확인",
+      "kind": "ui",
+      "goal": "SCR-001–004·201·231·232의 기존 구현과 AC 증거를 E2로 올린다(코드 변경은 테스트만)",
+      "screens": [
+        "SCR-001",
+        "SCR-002",
+        "SCR-003",
+        "SCR-004",
+        "SCR-201",
+        "SCR-231",
+        "SCR-232"
+      ],
+      "acs": [
+        "AC-001",
+        "AC-002",
+        "AC-003",
+        "AC-004",
+        "AC-005",
+        "AC-006",
+        "AC-007",
+        "AC-008",
+        "AC-009",
+        "AC-011",
+        "AC-049",
+        "AC-060",
+        "AC-099"
+      ],
+      "stories": [
+        "US-001",
+        "US-002",
+        "US-003",
+        "US-004",
+        "US-005",
+        "US-006",
+        "US-024"
+      ],
+      "components": {
+        "reuse": [
+          "CMP-001",
+          "CMP-002",
+          "CMP-003",
+          "CMP-005",
+          "CMP-006",
+          "CMP-008",
+          "CMP-022",
+          "CMP-023",
+          "CMP-025",
+          "CMP-026",
+          "CMP-027",
+          "CMP-030"
+        ],
+        "new": []
+      },
+      "depends_on": [
+        "B0"
+      ],
+      "tasks": [
+        {
+          "id": "B1-T1",
+          "layer": "test",
+          "title": "기존 AC 테스트를 [AC-xxx] 태그로 연결하고 JUnit 리포트(test-fe·test-be)로 E2 판정(E1 언급만으로 완료 처리 안 함)",
+          "refs": [
+            "AC-001",
+            "AC-002",
+            "AC-003",
+            "AC-004",
+            "AC-005",
+            "AC-006",
+            "AC-007",
+            "AC-008",
+            "AC-009",
+            "AC-011",
+            "AC-049",
+            "AC-060",
+            "AC-099"
+          ]
+        },
+        {
+          "id": "B1-T2",
+          "layer": "test",
+          "title": "E0 AC(테스트 언급 없음)의 테스트 보강과 화면 상태 태그([SCR-xxx-STn]) 테스트",
+          "refs": [
+            "AC-004",
+            "AC-060"
+          ],
+          "depends_on": [
+            "B1-T1"
+          ]
+        }
+      ],
+      "paths": {
+        "allow": [
+          "frontend/src/features/auth/*.test.tsx",
+          "frontend/src/features/auth/*.test.ts",
+          "frontend/src/routes/*.test.tsx",
+          "frontend/src/pages/*.test.tsx",
+          "backend/tests/modules/test_auth.py",
+          "backend/tests/modules/test_auth_db.py",
+          "backend/tests/modules/test_approval.py",
+          "backend/tests/modules/test_role.py",
+          "backend/tests/modules/test_dev_login.py"
+        ],
+        "shared": []
+      },
+      "risk_tags": [
+        "security",
+        "permission"
+      ],
+      "approval": "user",
+      "done_criteria": [
+        "현재(adopt, 검증 아님) E1 11개·E0 2개 / E2 0개 → 목표 E2(위험 AC는 E3, 프로필 evidence)",
+        "test-fe·test-be·lint·typecheck·build 통과(test-db는 Docker 없으면 not_run, 통과로 세지 않음)",
+        "배치 AC 전부 목표 증거 수준 충족(adopt-register로 imported 등록 후 verify)"
+      ],
+      "test_plan": [
+        {
+          "ac": "AC-001",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-002",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-003",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-004",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-005",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-006",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-007",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-008",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-009",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-011",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-049",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-060",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-099",
+          "kind": "integration"
+        }
+      ]
+    },
+    {
+      "id": "B2",
+      "title": "회원 화면(튜토리얼 홈·청백전 조회·마이페이지) — 기존 구현 확인",
+      "kind": "ui",
+      "goal": "SCR-101·111·112·121·122의 기존 구현과 AC 증거를 E2로 올린다(코드 변경은 테스트만)",
+      "screens": [
+        "SCR-101",
+        "SCR-111",
+        "SCR-112",
+        "SCR-121",
+        "SCR-122"
+      ],
+      "acs": [
+        "AC-015",
+        "AC-017",
+        "AC-045",
+        "AC-046",
+        "AC-047",
+        "AC-053",
+        "AC-054",
+        "AC-055",
+        "AC-057",
+        "AC-067",
+        "AC-068",
+        "AC-069",
+        "AC-082",
+        "AC-083",
+        "AC-084",
+        "AC-086",
+        "AC-087",
+        "AC-088",
+        "AC-089",
+        "AC-093",
+        "AC-094",
+        "AC-098",
+        "AC-110"
+      ],
+      "stories": [
+        "US-005",
+        "US-006",
+        "US-007",
+        "US-015",
+        "US-016",
+        "US-019",
+        "US-023",
+        "US-024",
+        "US-025"
+      ],
+      "components": {
+        "reuse": [
+          "CMP-001",
+          "CMP-002",
+          "CMP-003",
+          "CMP-005",
+          "CMP-006",
+          "CMP-021",
+          "CMP-022",
+          "CMP-023",
+          "CMP-025",
+          "CMP-026",
+          "CMP-027",
+          "CMP-045"
+        ],
+        "new": []
+      },
+      "depends_on": [
+        "B0"
+      ],
+      "tasks": [
+        {
+          "id": "B2-T1",
+          "layer": "test",
+          "title": "기존 AC 테스트를 [AC-xxx] 태그로 연결하고 JUnit 리포트(test-fe·test-be)로 E2 판정(E1 언급만으로 완료 처리 안 함)",
+          "refs": [
+            "AC-015",
+            "AC-017",
+            "AC-045",
+            "AC-046",
+            "AC-047",
+            "AC-053",
+            "AC-054",
+            "AC-055",
+            "AC-057",
+            "AC-067",
+            "AC-068",
+            "AC-069",
+            "AC-082",
+            "AC-083",
+            "AC-084",
+            "AC-086",
+            "AC-087",
+            "AC-088",
+            "AC-089",
+            "AC-093",
+            "AC-094",
+            "AC-098",
+            "AC-110"
+          ]
+        },
+        {
+          "id": "B2-T2",
+          "layer": "test",
+          "title": "E0 AC(테스트 언급 없음)의 테스트 보강과 화면 상태 태그([SCR-xxx-STn]) 테스트",
+          "refs": [
+            "AC-047",
+            "AC-057",
+            "AC-067",
+            "AC-068",
+            "AC-083",
+            "AC-086",
+            "AC-098",
+            "AC-110"
+          ],
+          "depends_on": [
+            "B2-T1"
+          ]
+        }
+      ],
+      "paths": {
+        "allow": [
+          "frontend/src/features/clubmatch/member.test.tsx",
+          "frontend/src/features/tutorial/*.test.tsx",
+          "frontend/src/features/me/*.test.tsx",
+          "backend/tests/modules/test_clubmatch_member.py",
+          "backend/tests/modules/test_profile.py",
+          "backend/tests/modules/test_tutorial.py",
+          "backend/tests/modules/test_tutorial_db.py"
+        ],
+        "shared": []
+      },
+      "risk_tags": [
+        "privacy"
+      ],
+      "approval": "user",
+      "done_criteria": [
+        "현재(adopt, 검증 아님) E1 15개·E0 8개 / E2 0개 → 목표 E2(위험 AC는 E3, 프로필 evidence)",
+        "test-fe·test-be·lint·typecheck·build 통과(test-db는 Docker 없으면 not_run, 통과로 세지 않음)",
+        "배치 AC 전부 목표 증거 수준 충족(adopt-register로 imported 등록 후 verify)"
+      ],
+      "test_plan": [
+        {
+          "ac": "AC-015",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-017",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-045",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-046",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-047",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-053",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-054",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-055",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-057",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-067",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-068",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-069",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-082",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-083",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-084",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-086",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-087",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-088",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-089",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-093",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-094",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-098",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-110",
+          "kind": "integration"
+        }
+      ]
+    },
+    {
+      "id": "B3",
+      "title": "튜토리얼 플레이·결과 — 기존 구현 확인",
+      "kind": "ui",
+      "goal": "SCR-102·103의 기존 구현과 AC 증거를 E2로 올린다(코드 변경은 테스트만)",
+      "screens": [
+        "SCR-102",
+        "SCR-103"
+      ],
+      "acs": [
+        "AC-090",
+        "AC-091",
+        "AC-092",
+        "AC-095",
+        "AC-096"
+      ],
+      "stories": [
+        "US-024"
+      ],
+      "components": {
+        "reuse": [
+          "CMP-001",
+          "CMP-022",
+          "CMP-023",
+          "CMP-026",
+          "CMP-027",
+          "CMP-030"
+        ],
+        "new": []
+      },
+      "depends_on": [
+        "B0"
+      ],
+      "tasks": [
+        {
+          "id": "B3-T1",
+          "layer": "test",
+          "title": "기존 AC 테스트를 [AC-xxx] 태그로 연결하고 JUnit 리포트(test-fe·test-be)로 E2 판정(E1 언급만으로 완료 처리 안 함)",
+          "refs": [
+            "AC-090",
+            "AC-091",
+            "AC-092",
+            "AC-095",
+            "AC-096"
+          ]
+        },
+        {
+          "id": "B3-T2",
+          "layer": "test",
+          "title": "E0 AC(테스트 언급 없음)의 테스트 보강과 화면 상태 태그([SCR-xxx-STn]) 테스트",
+          "refs": [
+            "AC-095"
+          ],
+          "depends_on": [
+            "B3-T1"
+          ]
+        }
+      ],
+      "paths": {
+        "allow": [
+          "frontend/src/features/tutorial/engine/*.test.ts",
+          "frontend/src/features/tutorial/content/*.test.ts"
+        ],
+        "shared": []
+      },
+      "risk_tags": [],
+      "approval": "auto",
+      "done_criteria": [
+        "현재(adopt, 검증 아님) E1 4개·E0 1개 / E2 0개 → 목표 E2(위험 AC는 E3, 프로필 evidence)",
+        "test-fe·test-be·lint·typecheck·build 통과(test-db는 Docker 없으면 not_run, 통과로 세지 않음)",
+        "배치 AC 전부 목표 증거 수준 충족(adopt-register로 imported 등록 후 verify)"
+      ],
+      "test_plan": [
+        {
+          "ac": "AC-090",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-091",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-092",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-095",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-096",
+          "kind": "integration"
+        }
+      ]
+    },
+    {
+      "id": "B4",
+      "title": "실시간 대진 화면(FE·Mock) — 화면 소유만, AC는 B9로 이관",
+      "kind": "ui",
+      "goal": "SCR-202–205의 기존 FE(Mock 데이터) 화면을 소유하고 레이아웃·시트 회귀만 확인한다. 실시간 대진 AC 30개는 백엔드(I4)가 없어 deferred(B9 이관)이며 이 배치에서 검증 완료로 세지 않는다.",
+      "screens": [
+        "SCR-202",
+        "SCR-204",
+        "SCR-205"
+      ],
+      "acs": [],
+      "stories": [],
+      "components": {
+        "reuse": [
+          "CMP-001",
+          "CMP-002",
+          "CMP-003",
+          "CMP-005",
+          "CMP-006",
+          "CMP-007",
+          "CMP-008",
+          "CMP-021",
+          "CMP-022",
+          "CMP-023",
+          "CMP-026",
+          "CMP-027"
+        ],
+        "new": []
+      },
+      "depends_on": [
+        "B0"
+      ],
+      "tasks": [
+        {
+          "id": "B4-T1",
+          "layer": "test",
+          "title": "Mock 기반 화면 상태 태그 테스트([SCR-202-ST1] 등) 유지·보강 — AC 증거로 쓰지 않음",
+          "refs": [
+            "SCR-202",
+            "SCR-204",
+            "SCR-205"
+          ]
+        }
+      ],
+      "paths": {
+        "allow": [
+          "frontend/src/features/session/*.test.tsx",
+          "frontend/src/features/session/*.test.ts"
+        ],
+        "shared": []
+      },
+      "risk_tags": [],
+      "approval": "auto",
+      "done_criteria": [
+        "화면 상태 테스트 통과(AC 검증 아님)",
+        "실시간 대진 Must AC 30개는 deferred 유지(전체 Must 완료로 보고하지 않음)"
+      ],
+      "test_plan": []
+    },
+    {
+      "id": "B5",
+      "title": "명단·회원·게스트·점수 — 기존 구현 확인",
+      "kind": "ui",
+      "goal": "SCR-211–214의 기존 구현과 AC 증거를 E2로 올린다(코드 변경은 테스트만)",
+      "screens": [
+        "SCR-211",
+        "SCR-212",
+        "SCR-213",
+        "SCR-214"
+      ],
+      "acs": [
+        "AC-010",
+        "AC-012",
+        "AC-013",
+        "AC-014",
+        "AC-016",
+        "AC-018",
+        "AC-066",
+        "AC-097",
+        "AC-100",
+        "AC-105",
+        "AC-106",
+        "AC-107"
+      ],
+      "stories": [
+        "US-005",
+        "US-006",
+        "US-007",
+        "US-026"
+      ],
+      "components": {
+        "reuse": [
+          "CMP-001",
+          "CMP-002",
+          "CMP-003",
+          "CMP-004",
+          "CMP-005",
+          "CMP-006",
+          "CMP-007",
+          "CMP-021",
+          "CMP-022",
+          "CMP-023",
+          "CMP-026",
+          "CMP-027",
+          "CMP-045"
+        ],
+        "new": []
+      },
+      "depends_on": [
+        "B0"
+      ],
+      "tasks": [
+        {
+          "id": "B5-T1",
+          "layer": "test",
+          "title": "기존 AC 테스트를 [AC-xxx] 태그로 연결하고 JUnit 리포트(test-fe·test-be)로 E2 판정(E1 언급만으로 완료 처리 안 함)",
+          "refs": [
+            "AC-010",
+            "AC-012",
+            "AC-013",
+            "AC-014",
+            "AC-016",
+            "AC-018",
+            "AC-066",
+            "AC-097",
+            "AC-100",
+            "AC-105",
+            "AC-106",
+            "AC-107"
+          ]
+        },
+        {
+          "id": "B5-T2",
+          "layer": "test",
+          "title": "E0 AC(테스트 언급 없음)의 테스트 보강과 화면 상태 태그([SCR-xxx-STn]) 테스트",
+          "refs": [
+            "AC-014",
+            "AC-018",
+            "AC-097",
+            "AC-105",
+            "AC-106"
+          ],
+          "depends_on": [
+            "B5-T1"
+          ]
+        }
+      ],
+      "paths": {
+        "allow": [
+          "frontend/src/features/roster/*.test.tsx",
+          "backend/tests/modules/test_roster.py",
+          "backend/tests/modules/test_roster_db.py"
+        ],
+        "shared": []
+      },
+      "risk_tags": [
+        "data_loss",
+        "privacy"
+      ],
+      "approval": "user",
+      "done_criteria": [
+        "현재(adopt, 검증 아님) E1 7개·E0 5개 / E2 0개 → 목표 E2(위험 AC는 E3, 프로필 evidence)",
+        "test-fe·test-be·lint·typecheck·build 통과(test-db는 Docker 없으면 not_run)",
+        "배치 AC 전부 목표 증거 수준 충족(adopt-register로 imported 등록 후 verify)"
+      ],
+      "test_plan": [
+        {
+          "ac": "AC-010",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-012",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-013",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-014",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-016",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-018",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-066",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-097",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-100",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-105",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-106",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-107",
+          "kind": "integration"
+        }
+      ]
+    },
+    {
+      "id": "B6",
+      "title": "청백전 운영 — 기존 구현 확인",
+      "kind": "ui",
+      "goal": "SCR-221–226의 기존 구현과 AC 증거를 E2로 올린다(코드 변경은 테스트만)",
+      "screens": [
+        "SCR-221",
+        "SCR-222",
+        "SCR-223",
+        "SCR-224",
+        "SCR-225",
+        "SCR-226"
+      ],
+      "acs": [
+        "AC-042",
+        "AC-043",
+        "AC-044",
+        "AC-065",
+        "AC-070",
+        "AC-071",
+        "AC-072",
+        "AC-073",
+        "AC-074",
+        "AC-075",
+        "AC-076",
+        "AC-077",
+        "AC-078",
+        "AC-079",
+        "AC-080",
+        "AC-081",
+        "AC-085",
+        "AC-108",
+        "AC-109"
+      ],
+      "stories": [
+        "US-014",
+        "US-015",
+        "US-016",
+        "US-022"
+      ],
+      "components": {
+        "reuse": [
+          "CMP-001",
+          "CMP-002",
+          "CMP-005",
+          "CMP-006",
+          "CMP-007",
+          "CMP-008",
+          "CMP-021",
+          "CMP-022",
+          "CMP-023",
+          "CMP-026",
+          "CMP-027",
+          "CMP-030"
+        ],
+        "new": []
+      },
+      "depends_on": [
+        "B0"
+      ],
+      "tasks": [
+        {
+          "id": "B6-T1",
+          "layer": "test",
+          "title": "기존 AC 테스트를 [AC-xxx] 태그로 연결하고 JUnit 리포트(test-fe·test-be)로 E2 판정(E1 언급만으로 완료 처리 안 함)",
+          "refs": [
+            "AC-042",
+            "AC-043",
+            "AC-044",
+            "AC-065",
+            "AC-070",
+            "AC-071",
+            "AC-072",
+            "AC-073",
+            "AC-074",
+            "AC-075",
+            "AC-076",
+            "AC-077",
+            "AC-078",
+            "AC-079",
+            "AC-080",
+            "AC-081",
+            "AC-085",
+            "AC-108",
+            "AC-109"
+          ]
+        },
+        {
+          "id": "B6-T2",
+          "layer": "test",
+          "title": "E0 AC(테스트 언급 없음)의 테스트 보강과 화면 상태 태그([SCR-xxx-STn]) 테스트",
+          "refs": [
+            "AC-065",
+            "AC-079",
+            "AC-108",
+            "AC-109"
+          ],
+          "depends_on": [
+            "B6-T1"
+          ]
+        }
+      ],
+      "paths": {
+        "allow": [
+          "frontend/src/features/clubmatch/clubmatch.test.tsx",
+          "frontend/src/features/clubmatch/policy.test.tsx",
+          "frontend/src/features/clubmatch/*.golden.test.ts",
+          "frontend/src/features/clubmatch/api.*.test.ts",
+          "frontend/src/features/clubmatch/schedule.test.ts",
+          "backend/tests/modules/test_clubmatch.py",
+          "backend/tests/modules/test_clubmatch_*.py"
+        ],
+        "shared": []
+      },
+      "risk_tags": [
+        "data_loss"
+      ],
+      "approval": "user",
+      "done_criteria": [
+        "현재(adopt, 검증 아님) E1 15개·E0 4개 / E2 0개 → 목표 E2(위험 AC는 E3, 프로필 evidence)",
+        "test-fe·test-be·lint·typecheck·build 통과(test-db는 Docker 없으면 not_run)",
+        "배치 AC 전부 목표 증거 수준 충족(adopt-register로 imported 등록 후 verify)"
+      ],
+      "test_plan": [
+        {
+          "ac": "AC-042",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-043",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-044",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-065",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-070",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-071",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-072",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-073",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-074",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-075",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-076",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-077",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-078",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-079",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-080",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-081",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-085",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-108",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-109",
+          "kind": "integration"
+        }
+      ]
+    },
+    {
+      "id": "B7",
+      "title": "UX Spec r2·Design Direction r2 레이아웃 정합(B-04)",
+      "kind": "ui",
+      "goal": "FE를 승인 명세에 맞춘다: 시트 PC·모바일 공통 하단(CMP-021 presentation=bottom), PC 옆 패널·넓은 배치·왼쪽 메뉴 제거, h1 22px, 카드 그림자 제거·메뉴 목록 Flat, FE 토큰 600px. 새 부품·토큰 없음.",
+      "screens": [],
+      "touches": [
+        "SCR-101",
+        "SCR-112",
+        "SCR-121",
+        "SCR-201",
+        "SCR-202",
+        "SCR-203",
+        "SCR-205",
+        "SCR-211",
+        "SCR-212",
+        "SCR-223",
+        "SCR-224",
+        "SCR-225"
+      ],
+      "acs": [
+        "AC-050"
+      ],
+      "stories": [
+        "US-019",
+        "US-024"
+      ],
+      "components": {
+        "reuse": [
+          "CMP-021",
+          "CMP-025",
+          "CMP-026",
+          "CMP-030"
+        ],
+        "new": []
+      },
+      "depends_on": [
+        "B0"
+      ],
+      "tasks": [
+        {
+          "id": "B7-T1",
+          "layer": "fe",
+          "title": "CMP-021 Sheet: PC dialog·480px 좁은 하단 분기 제거, 600px 열 하단 시트만(VD-025, 04 CMP-021 r2). 딤 bg-ink/40은 토큰 밖 예외 유지(B-03)",
+          "refs": [
+            "CMP-021",
+            "SCR-203",
+            "SCR-212",
+            "SCR-224"
+          ]
+        },
+        {
+          "id": "B7-T2",
+          "layer": "fe",
+          "title": "SidePanel·useWideLayout·WideLayoutContext 등 PC 넓은 배치 분기 제거(SessionPage·ClubMatchPage·RosterPage·EditPerson·SwapSheet·ClubSwapSheet)",
+          "refs": [
+            "SCR-202",
+            "SCR-211",
+            "SCR-223"
+          ],
+          "depends_on": [
+            "B7-T1"
+          ]
+        },
+        {
+          "id": "B7-T3",
+          "layer": "fe",
+          "title": "CMP-025 AppNav layout=side 제거(04 r2 layout=bottom만, VD-019)",
+          "refs": [
+            "CMP-025",
+            "SCR-201"
+          ]
+        },
+        {
+          "id": "B7-T4",
+          "layer": "fe",
+          "title": "CMP-026 PageHeader h1 = font.size.heading 22px(VD-023, 04 3.1)",
+          "refs": [
+            "CMP-026"
+          ]
+        },
+        {
+          "id": "B7-T5",
+          "layer": "fe",
+          "title": "카드 표현 VD-024: CourtCard·ClubGameCard·MemberGameCard·StandingsCard·StageCard 그림자 제거(테두리 1px·radius.md 유지)",
+          "refs": [
+            "SCR-202",
+            "SCR-223",
+            "SCR-112",
+            "SCR-101"
+          ]
+        },
+        {
+          "id": "B7-T6",
+          "layer": "fe",
+          "title": "CMP-030 ListItem variant=card(SCR-201 운영 메뉴) → 행(Flat, 04 3.1·VD-024·Preview SCR-201)",
+          "refs": [
+            "CMP-030",
+            "SCR-201"
+          ]
+        },
+        {
+          "id": "B7-T7",
+          "layer": "infra",
+          "title": "frontend/src/styles/tokens.css를 theme-check --print-css로 재생성(size.content.member 600, F1 해소 조건 3). shells.css·Shells.tsx의 '04 1.5와 다름' 주석 정리",
+          "refs": [
+            "AC-050",
+            "SCR-201"
+          ]
+        },
+        {
+          "id": "B7-T8",
+          "layer": "test",
+          "title": "[AC-050] 600px 열 테스트, 화면 상태 태그 테스트, token-check·token-audit·ui-map check·ui-guard",
+          "refs": [
+            "AC-050"
+          ],
+          "depends_on": [
+            "B7-T1",
+            "B7-T2",
+            "B7-T3",
+            "B7-T4",
+            "B7-T5",
+            "B7-T6",
+            "B7-T7"
+          ]
+        }
+      ],
+      "paths": {
+        "allow": [
+          "frontend/src/components/Sheet.tsx",
+          "frontend/src/components/sheetHooks.ts",
+          "frontend/src/components/AppNav.tsx",
+          "frontend/src/components/PageHeader.tsx",
+          "frontend/src/components/ListItem.tsx",
+          "frontend/src/components/*.test.tsx",
+          "frontend/src/pages/SessionPage.tsx",
+          "frontend/src/pages/ClubMatchPage.tsx",
+          "frontend/src/pages/RosterPage.tsx",
+          "frontend/src/pages/OpsHomePage.tsx",
+          "frontend/src/features/roster/EditPerson.tsx",
+          "frontend/src/features/session/SwapSheet.tsx",
+          "frontend/src/features/session/CourtCard.tsx",
+          "frontend/src/features/clubmatch/ClubSwapSheet.tsx",
+          "frontend/src/features/clubmatch/StandingsCard.tsx",
+          "frontend/src/features/clubmatch/MemberGameCard.tsx",
+          "frontend/src/features/clubmatch/ClubGameCard.tsx",
+          "frontend/src/features/tutorial/StageCard.tsx",
+          "frontend/src/styles/tokens.css",
+          "frontend/src/routes/layouts/shells.css",
+          "frontend/src/routes/layouts/Shells.tsx",
+          "frontend/src/layout.test.tsx"
+        ],
+        "shared": []
+      },
+      "risk_tags": [],
+      "approval": "auto",
+      "done_criteria": [
+        "data-presentation side·dialog 0, AppNav layout=side 0, h1 22px, 카드 그림자 0, SCR-201 메뉴 Flat",
+        "token-check 통과(size.content.member 600)",
+        "AC-050 E2(현재 adopt E0, 테스트 언급 없음)",
+        "test-fe·lint·typecheck·build 통과, ui-guard ok"
+      ],
+      "test_plan": [
+        {
+          "ac": "AC-050",
+          "kind": "integration"
+        }
+      ]
+    },
+    {
+      "id": "B8",
+      "title": "시트 상호작용 검증(B-01·B-02)",
+      "kind": "ui",
+      "goal": "Preview에서 검증하지 못한 04 3.2 하단 시트 규칙을 제품 코드에서 검증한다. 규칙과 다르면 코드로 고치되 명세 변경이 필요하면 멈춘다. 중첩 시트의 부모인 SCR-203(참석 체크 시트)을 이 배치가 소유한다(관련 AC-012는 B5, 세션 AC는 B9 이관).",
+      "screens": [
+        "SCR-203"
+      ],
+      "touches": [
+        "SCR-212",
+        "SCR-213",
+        "SCR-214",
+        "SCR-224",
+        "SCR-226"
+      ],
+      "acs": [],
+      "stories": [],
+      "components": {
+        "reuse": [
+          "CMP-021",
+          "CMP-022"
+        ],
+        "new": []
+      },
+      "depends_on": [
+        "B7"
+      ],
+      "tasks": [
+        {
+          "id": "B8-T1",
+          "layer": "test",
+          "title": "중첩 시트: 닫기·바깥 누르기·Esc·뒤로 가기가 맨 위 시트 하나만 닫음(SCR-203→213/214, SCR-224→214/226)",
+          "refs": [
+            "CMP-021",
+            "SCR-203",
+            "SCR-213",
+            "SCR-224",
+            "SCR-226"
+          ]
+        },
+        {
+          "id": "B8-T2",
+          "layer": "test",
+          "title": "아래 시트·부모 화면 입력값·스크롤·검색어·필터 보존, 포커스 복원(연 버튼)",
+          "refs": [
+            "CMP-021",
+            "SCR-203",
+            "SCR-211"
+          ]
+        },
+        {
+          "id": "B8-T3",
+          "layer": "test",
+          "title": "저장 성공 시 그 시트만 닫고 갱신, 바뀐 값이 있으면 닫기 전 확인(CMP-022), 저장 실패 시 시트·입력값 유지, SCR-226 예외(반영 없이 닫기 = 제외 취소)",
+          "refs": [
+            "CMP-022",
+            "SCR-212",
+            "SCR-213",
+            "SCR-226"
+          ]
+        },
+        {
+          "id": "B8-T4",
+          "layer": "fe",
+          "title": "T1–T3에서 04 3.2와 다르게 동작하는 곳만 수정(명세 변경이 필요하면 멈추고 ledger)",
+          "refs": [
+            "CMP-021"
+          ],
+          "depends_on": [
+            "B8-T1",
+            "B8-T2",
+            "B8-T3"
+          ]
+        },
+        {
+          "id": "B8-T5",
+          "layer": "test",
+          "title": "수동 증거(EM, 사용자 확인 문장 필요): 키보드 조작, 실제 기기 안전 영역, 200% 확대, 중첩 시트 사용성(B-01: 두 번째 시트가 첫 시트를 가리는 문제)",
+          "refs": [
+            "SCR-213",
+            "SCR-203"
+          ],
+          "depends_on": [
+            "B8-T4"
+          ]
+        }
+      ],
+      "paths": {
+        "allow": [
+          "frontend/src/components/Sheet.tsx",
+          "frontend/src/components/sheetHooks.ts",
+          "frontend/src/components/*.test.tsx",
+          "frontend/src/features/roster/*.test.tsx",
+          "frontend/src/features/session/*.test.tsx",
+          "frontend/src/features/clubmatch/*.test.tsx",
+          "frontend/src/features/roster/AddPersonSheet.tsx",
+          "frontend/src/features/roster/ScoreEntrySheet.tsx",
+          "frontend/src/features/roster/EditPerson.tsx",
+          "frontend/src/features/clubmatch/SubstituteSheet.tsx"
+        ],
+        "shared": []
+      },
+      "risk_tags": [],
+      "approval": "user",
+      "done_criteria": [
+        "04 3.2 규칙별 자동 테스트 통과(E2 상당, AC 아님)",
+        "키보드·실기기·200%·중첩 사용성은 EM(사용자 확인)으로만 기록, 자동 검증으로 세지 않음",
+        "사용성 문제가 명세 변경이면 /product-design으로 이관"
+      ],
+      "test_plan": []
+    }
+  ],
+  "deferred": [
+    {
+      "id": "AC-019",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-020",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-021",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-022",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-023",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-024",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-025",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-026",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-027",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-028",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-029",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-030",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-031",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-032",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-033",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-034",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-036",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-037",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-038",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-039",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-040",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-056",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-061",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-062",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-063",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-064",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-101",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-102",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-103",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    },
+    {
+      "id": "AC-104",
+      "reason": "B9 실시간 대진 BE·API 후속 이관(사용자 결정 2026-11-13): 범용 Build 엔진의 FE 구현·검증 경로를 우선 검증하기 위함. 세션 백엔드 모듈이 없고 FE는 Mock이라 이 AC는 미완료 상태로 유지"
+    }
+  ]
+}

@@ -41,18 +41,18 @@ export function OpsHomePage() {
   return (
     <section data-scr="SCR-201" data-st={pending.kind === 'loading' ? 'SCR-201-ST2' : pending.kind === 'error' ? 'SCR-201-ST4' : 'SCR-201-ST1'}>
       <PageHeader title="운영" />
-      <ul aria-label="운영 메뉴" className="m-0 flex flex-col gap-2 px-4 pt-2 pb-4">
-        <ListItem variant="card" label="오늘 운동" to="/ops/session" />
-        <ListItem variant="card" label="명단" to="/ops/roster" />
-        <ListItem variant="card" label="청백전 관리" to="/ops/club-matches" />
+      <ul aria-label="운영 메뉴" className="m-0 list-none border-t border-line p-0">
+        <ListItem label="오늘 운동" to="/ops/session" />
+        <ListItem label="명단" to="/ops/roster" />
+        <ListItem label="청백전 관리" to="/ops/club-matches" />
         <ListItem
-          variant="card"
+         
           label="가입 승인"
           to="/ops/approvals"
           ariaLabel={pending.kind === 'ok' && pending.count > 0 ? `가입 승인, 대기 ${pending.count}건` : undefined}
           badge={approvalBadge}
         />
-        {me.role === 'superAdmin' && <ListItem variant="card" label="역할 관리" to="/ops/roles" />}
+        {me.role === 'superAdmin' && <ListItem label="역할 관리" to="/ops/roles" />}
       </ul>
     </section>
   )

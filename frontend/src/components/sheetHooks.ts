@@ -1,34 +1,7 @@
-import { createContext, useContext, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router'
 
-// CMP-021 Sheet 보조 훅. URL은 바뀌지 않고 열림 상태를 history state({ sheet })에 둡니다(02 공통: 뒤로 가기로 닫힘).
-
-/** PC(≥1024, 04 breakpoint.desktop) 여부 */
-export function useIsDesktop() {
-  const query = '(min-width: 1024px)'
-  const get = () => typeof window.matchMedia === 'function' && window.matchMedia(query).matches
-  const [desktop, setDesktop] = useState(get)
-  useEffect(() => {
-    if (typeof window.matchMedia !== 'function') return
-    const mq = window.matchMedia(query)
-    const on = () => setDesktop(mq.matches)
-    mq.addEventListener('change', on)
-    return () => mq.removeEventListener('change', on)
-  }, [])
-  return desktop
-}
-
-/**
- * 넓은 PC 배치(옆 패널·2열 등)를 쓸 수 있는 셸인지. 운영 셸은 회원 셸처럼 PC에서도 모바일 폭 한 열 + 하단 탭이라 false
- * (사용자 결정 2026-11-12, 04 1.5·UXD-066과 다름 → docs/workflow-proposals/frontend-implementation-deviations.md)
- */
-export const WideLayoutContext = createContext(true)
-
-/** 화면 배치용 PC 여부(넓은 배치를 허용하는 셸에서만 true). 시트를 PC에서 가운데 창으로 띄우는 판단은 useIsDesktop 그대로 */
-export function useWideLayout() {
-  const desktop = useIsDesktop()
-  return useContext(WideLayoutContext) && desktop
-}
+// Sheet(components/Sheet.tsx) 보조 훅. URL은 바뀌지 않고 열림 상태를 history state({ sheet })에 둡니다(02 공통: 뒤로 가기로 닫힘).
+// (r2) PC 넓은 배치 판단(useIsDesktop·useWideLayout·WideLayoutContext)은 없앴습니다: 모든 셸이 PC·모바일 같은 600px 한 열(D1).
 
 /** 시트 열림 상태 = history state.sheet. 열기는 같은 주소로 push(이미 열린 시트에서 대상만 바꾸면 replace, 시트 위 시트는 stack으로 push), 닫기는 뒤로 가기 */
 export function useSheetRoute() {

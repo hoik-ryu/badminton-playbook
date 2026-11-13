@@ -8,8 +8,8 @@ import { ConfirmDialog } from '../components/ConfirmDialog'
 import { NoticeBox } from '../components/NoticeBox'
 import { PageHeader } from '../components/PageHeader'
 import { SegmentedControl } from '../components/RadioButtons'
-import { Sheet, SidePanel } from '../components/Sheet'
-import { useSheetRoute, useWideLayout } from '../components/sheetHooks'
+import { Sheet } from '../components/Sheet'
+import { useSheetRoute } from '../components/sheetHooks'
 import { StateView } from '../components/StateView'
 import { Switch } from '../components/Switch'
 import { TextField } from '../components/TextField'
@@ -35,7 +35,6 @@ const STATUS: Record<ClubMatchView['status'], string> = { draft: '대진 미확�
 
 export function ClubMatchPage() {
   const { matchId = '' } = useParams()
-  const desktop = useWideLayout() // 운영 셸은 PC에서도 모바일 배치(사용자 결정 2026-11-12)
   const { sheet, open, close } = useSheetRoute()
   const [load, setLoad] = useState<Load>({ kind: 'loading' })
   const [busy, setBusy] = useState(false)
@@ -44,7 +43,6 @@ export function ClubMatchPage() {
   const [changed, setChanged] = useState<'settings' | 'participants' | null>(null)
   const [ask, setAsk] = useState<Ask>(null)
   const [conflict, setConflict] = useState(false)
-  const [panelOpen, setPanelOpen] = useState(true) // PC 옆 패널
   const [gamesInput, setGamesInput] = useState('')
   const [keepInput, setKeepInput] = useState(false)
   const autoOpened = useRef(false)
@@ -88,13 +86,12 @@ export function ClubMatchPage() {
   const draft = view?.status === 'draft'
   const hasGames = (view?.games.length ?? 0) > 0
 
-  // ST3: 참가자 없음 → 참가자 패널 자동 열림(UXD-038)
+  // ST3: 참가자 없음 → 참가자 시트 자동 열림(UXD-038, PC·모바일 공통 하단 시트)
   useEffect(() => {
     if (!view || autoOpened.current || view.status !== 'draft' || view.summary.count > 0) return
     autoOpened.current = true
-    if (desktop) setPanelOpen(true)
-    else if (!sheet) open('participants')
-  }, [view, desktop, sheet, open])
+    if (!sheet) open('participants')
+  }, [view, sheet, open])
 
   const fail = (e: unknown, fallback: string) => {
     if (isApiError(e) && e.code === CLUB_ERRORS.conflict) setConflict(true)
@@ -146,13 +143,13 @@ export function ClubMatchPage() {
   const scrollToFirstUnrecorded = () => document.querySelector('[data-cmp=CMP-041][data-recorded=false]')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
 
   // ── 시트 ──
-  const participantsSheet = !desktop && !!sheet?.startsWith('participants')
+  const participantsSheet = !!sheet?.startsWith('participants')
   const scoresOpen = sheet === 'scores' || sheet === 'participants/scores'
   const excludeKey = sheet?.startsWith('participants/exclude:') ? sheet.slice('participants/exclude:'.length) : null
   const swap = sheet?.startsWith('swap:') ? { no: Number(sheet.split(':')[1]), key: sheet.split(':').slice(2).join(':') } : null // 'swap:<경기>:<사람 키>'
   const swapGame = swap && view ? view.games.find((g) => g.no === swap.no) : undefined
   const swapTarget: Person | null = swap && swapGame ? [...swapGame.team1, ...swapGame.team2].find((p) => p.key === swap.key) ?? null : null
-  const openParticipants = () => (desktop ? setPanelOpen(true) : open('participants'))
+  const openParticipants = () => open('participants')
   const openScores = () => (sheet?.startsWith('participants') ? open('participants/scores', { stack: true }) : open('scores'))
 
   const panel = view && (
@@ -219,7 +216,6 @@ export function ClubMatchPage() {
         {view && (
           <>
             {view.status === 'finished' && <StandingsCard view={view} final />}
-            {desktop && <div className="flex justify-end">{actions}</div>}
             {draft && (
               <SegmentedControl
                 label="방식"
@@ -296,20 +292,15 @@ export function ClubMatchPage() {
             )}
           </>
         )}
-        {!desktop && view && view.status !== 'finished' && <div aria-hidden className="h-20" />}
+        {view && view.status !== 'finished' && <div aria-hidden className="h-20" />}
       </div>
-      {!desktop && view && view.status !== 'finished' && actions && <div className={cn('app-fixed-bar bottom-[calc(56px+env(safe-area-inset-bottom,0px))] z-20 border-t border-line bg-page px-4 py-3')}>{actions}</div>}
+      {view && view.status !== 'finished' && actions && <div className={cn('app-fixed-bar bottom-[calc(56px+env(safe-area-inset-bottom,0px))] z-20 border-t border-line bg-page px-4 py-3')}>{actions}</div>}
     </div>
   )
 
   return (
     <div className="flex min-w-0">
       {main}
-      {desktop && view && panelOpen && (
-        <SidePanel title={view.method === 'team' ? '팀 구성' : '참가자'} onRequestClose={() => setPanelOpen(false)} testId="club-panel">
-          {panel}
-        </SidePanel>
-      )}
       {participantsSheet && view && (
         <Sheet open title={view.method === 'team' ? '팀 구성' : '참가자'} onRequestClose={close} height="70%" testId="participants-sheet">
           {panel}

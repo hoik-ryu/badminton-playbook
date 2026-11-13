@@ -4,7 +4,7 @@ import type { ReactNode } from 'react'
 import { useNavigate } from 'react-router'
 
 // CMP-026 PageHeader — 04: leading=none|back|close, trailing=none|menu|action, sticky. 화면 제목은 h1, 뒤로 가기 레이블 '뒤로'.
-// 높이 56(design-preview SCR-211·201과 같음). 승인 UX Spec r1: 흰 헤더(CR-004 거절)
+// 높이 56. 흰 헤더(CR-004 거절). (r2) h1 = font.size.heading 22·bold(04 3.1, VD-023)
 type Props = {
   title: string
   leading?: 'none' | 'back' | 'close'
@@ -33,7 +33,7 @@ export function PageHeader({ title, leading = 'none', backTo, onClose, trailing 
         </button>
       )}
       <div className="flex min-w-0 flex-1 items-center gap-2">
-        <h1 className="m-0 min-w-0 truncate text-title font-bold text-ink">{title}</h1>
+        <h1 className="m-0 min-w-0 truncate text-heading font-bold text-ink">{title}</h1>
         {badge}
       </div>
       {trailing === 'menu' ? (

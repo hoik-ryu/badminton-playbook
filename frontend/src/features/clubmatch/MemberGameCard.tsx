@@ -44,7 +44,7 @@ export function MemberGameCard({ game, method, emphasis = false }: { game: Membe
       data-mine={mine ? 'true' : 'false'}
       data-recorded={game.winner ? 'true' : 'false'}
       aria-label={`${game.no}경기${mine ? ' · 내 경기' : ''}${outcome ? ` · ${outcome}` : ''}`}
-      className={cn('flex flex-col gap-2 rounded-md border bg-page px-4 py-3 shadow-card', mine ? 'border-action' : 'border-line', emphasis && 'border-2')}
+      className={cn('flex flex-col gap-2 rounded-md border bg-page px-4 py-3', mine ? 'border-action' : 'border-line', emphasis && 'border-2')}
     >
       <header className="flex items-center justify-between gap-2">
         <h3 className={cn('m-0 flex items-center gap-2 font-bold text-ink', emphasis ? 'text-title' : 'text-body')}>

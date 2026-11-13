@@ -26,7 +26,7 @@ stages:
 
   planning:
     status: approved   # locked | not_started | in_progress | awaiting_approval | approved | outdated
-    revision: 5
+    revision: 6
     based_on_discovery_revision: 3
     artifacts:
       - docs/planning/02-prd.md
@@ -34,14 +34,18 @@ stages:
       - docs/planning/04-user-flows.md
       - docs/planning/05-acceptance-criteria.md
     artifacts_done: []     # 현재 revision 사이클에서 작성을 마친 파일
+    submitted:             # 제출 스냅샷(submit이 기록, approve·check가 비교, 승인 시 비움)
+      revision: null
+      at: null
+      hashes: {}
     approved:
-      revision: 5
-      at: "2026-11-12T06:45:21Z"
+      revision: 6
+      at: "2026-11-13T04:00:29Z"
       hashes:
-        docs/planning/02-prd.md: e747052d4bfada1b92d72bd725f7724d42003882f400b0ae319aa583fc26f4bd
-        docs/planning/03-user-stories.md: c771b7e87aa7adf5e69279f0905e1d4763278e7d81f2805e364192e0843c6125
-        docs/planning/04-user-flows.md: 0bd4c939ddeae2447dbe6487df51241d93c454b8cec347d797a666c16cf8065b
-        docs/planning/05-acceptance-criteria.md: e29b953ca2e6637e848bfd2513bab275f77a3464d5aaada0845acc911a920cc7
+        docs/planning/02-prd.md: 6a9da38ce4439d60e51f3d20fbc4e94b63d202563cf69af268bcd7e3f8fcad57
+        docs/planning/03-user-stories.md: 172f84f3e0b95a442f2d5a1670d6510de5d3bdf99c6775f6818dfa4f7b2c5231
+        docs/planning/04-user-flows.md: 4adfff41cc441fe2b975c820ec7843b475e2f31ad275f827e69c74735c855eb2
+        docs/planning/05-acceptance-criteria.md: 29c74652d2a9f712d660943b476d7bbba390aacfe32fac56c6658147806ca1bc
 
   design:
     status: not_started   # locked | not_started  (Milestone 2 이후. planning 승인으로만 잠금 해제)
@@ -70,4 +74,7 @@ history:
   - { at: "2026-11-12T06:35:26Z", stage: planning, event: reopened, revision: 4, note: "T9: 사용자 요청(I3 결정 D-6~D-10 정식 반영, Planning r5). r4 승인 기록은 Git(f043d91·5503071)·history에 보존", src: engine }
   - { at: "2026-11-12T06:38:38Z", stage: planning, event: submitted, revision: 5, note: "Planning r5 제출: NFR-003·C-15·C-19·C-20·FR-015·FR-024 보강, AC-108–110, FLOW-005-S4c·S7a·S7b·FLOW-008-S3a. 기존 AC 불변", src: engine }
   - { at: "2026-11-12T06:45:21Z", stage: planning, event: approved, revision: 5, note: "사용자 명시 승인(2026-11-12 '사용자로서 Planning r5 승인을 명시적으로 승인합니다'). I3 결정 D-6~D-8 반영, AC-108–110", src: engine }
+  - { at: "2026-11-13T02:06:29Z", stage: planning, event: reopened, revision: 5, note: "T9 재개: 사용자 확정 D1: PC·모바일 한 열 최대 600px 정책 반영을 위한 Planning r6 개정. r5 승인(2026-11-12T06:45:21Z) 무효화, 이전 승인 해시 02=e747052d… 03=c771b7e8… 04=0bd4c939… 05=e29b953c…. design locked. 승인 후 변경된 파일: 02-prd.md, 05-acceptance-criteria.md", src: engine }
+  - { at: "2026-11-13T02:28:23Z", stage: planning, event: submitted, revision: 6, note: "Planning r6: PC·모바일 공통 단일 열 최대 600px 정책 반영. FR 24·US 24·FLOW 8·AC 107, 추적성 누락 없음. 제출 해시 02=6a9da38c… 03=172f84f3… 04=4adfff41… 05=29c74652…", src: engine }
+  - { at: "2026-11-13T04:00:29Z", stage: planning, event: approved, revision: 6, note: "explicit approval. 제출 스냅샷(r6, 2026-11-13T02:28:23Z, 마이그레이션)과 일치 확인", src: engine }
   # - { at: "", stage: discovery, event: started | submitted | changes_requested | approved | reopened | outdated | generated, revision: 0, note: "" }

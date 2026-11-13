@@ -8,7 +8,7 @@ import { FilterChip } from '../components/FilterChip'
 import { NoticeBox } from '../components/NoticeBox'
 import { OverflowMenu } from '../components/OverflowMenu'
 import { PageHeader } from '../components/PageHeader'
-import { useSheetRoute, useWideLayout } from '../components/sheetHooks'
+import { useSheetRoute } from '../components/sheetHooks'
 import { StateView } from '../components/StateView'
 import { TextField } from '../components/TextField'
 import { listRoster, type Roster, type RosterPerson } from '../features/roster/api'
@@ -26,7 +26,6 @@ type Load = { kind: 'loading' } | { kind: 'error' } | { kind: 'ok'; roster: Rost
 type Chip = 'unset' | 'tutorial' | null
 
 export function RosterPage() {
-  const desktop = useWideLayout() // 운영 셸은 PC에서도 모바일 배치(사용자 결정 2026-11-12)
   const { sheet, open, close } = useSheetRoute()
   const [load, setLoad] = useState<Load>({ kind: 'loading' })
   const [query, setQuery] = useState('')
@@ -104,12 +103,6 @@ export function RosterPage() {
         backTo="/ops"
         trailing={
           <div className="flex items-center gap-1">
-            {desktop && (
-              <Button size="md" onClick={() => open('add:guest')}>
-                <Plus aria-hidden />
-                게스트 추가
-              </Button>
-            )}
             {menu}
           </div>
         }
@@ -184,10 +177,11 @@ export function RosterPage() {
             </>
           )}
           {/* 스크롤 안전 영역(VD-020): 떠 있는 버튼 48 + 16 (탭 + 안전 영역 + 16은 셸 하단 여백) */}
-          {!desktop && <div aria-hidden className="h-16" />}
+          <div aria-hidden className="h-16" />
         </>
       )}
-      {!desktop && load.kind === 'ok' && (
+      {/* '게스트 추가'는 PC·모바일 모두 오른쪽 아래(UXD-026 r6, D3) */}
+      {load.kind === 'ok' && (
         <Button className="app-fixed-end bottom-[calc(56px+env(safe-area-inset-bottom,0px)+16px)] z-20 shadow-card" onClick={() => open('add:guest')} data-testid="fab">
           <Plus aria-hidden />
           게스트 추가
@@ -199,7 +193,7 @@ export function RosterPage() {
   return (
     <div className="flex min-w-0">
       {list}
-      {editing && <EditPerson key={sheet ?? ''} person={editing} desktop={desktop} onClose={close} onChanged={() => void refresh()} />}
+      {editing && <EditPerson key={sheet ?? ''} person={editing} onClose={close} onChanged={() => void refresh()} />}
       {adding && <AddPersonSheet mode={adding} onClose={close} onAdded={() => void refresh()} />}
     </div>
   )

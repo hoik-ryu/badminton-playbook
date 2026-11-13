@@ -50,7 +50,7 @@ export function ClubSwapSheet({ view, gameNo, target, onClose, onDone, onConflic
   const who = `${target.name}${view.method === 'team' && targetTeam ? `(${TEAM_LABEL[targetTeam]})` : ''}`
   return (
     <>
-      <Sheet open title={`${gameNo}경기 ${who}${waGwa(target.name).slice(target.name.length)} 바꿀 사람`} onRequestClose={onClose} desktop="bottom" testId="club-swap-sheet">
+      <Sheet open title={`${gameNo}경기 ${who}${waGwa(target.name).slice(target.name.length)} 바꿀 사람`} onRequestClose={onClose} testId="club-swap-sheet">
         <div data-scr="SCR-225" data-st={failed ? 'SCR-225-ST4' : list.length === 0 ? 'SCR-225-ST3' : 'SCR-225-ST1'} className="flex flex-col gap-2">
           {failed && <NoticeBox tone="danger">{failed}</NoticeBox>}
           {list.length === 0 ? (

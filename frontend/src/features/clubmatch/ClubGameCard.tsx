@@ -53,7 +53,7 @@ export function ClubGameCard({ game, method, showResult, onPlayer, onResult, onR
     </div>
   )
   return (
-    <article data-cmp="CMP-041" data-game={game.no} data-recorded={game.winner ? 'true' : 'false'} aria-label={`${game.no}경기`} className="flex flex-col gap-2 rounded-md border border-line bg-page px-4 py-3 shadow-card">
+    <article data-cmp="CMP-041" data-game={game.no} data-recorded={game.winner ? 'true' : 'false'} aria-label={`${game.no}경기`} className="flex flex-col gap-2 rounded-md border border-line bg-page px-4 py-3">
       <header className="flex items-center justify-between gap-2">
         <h3 className="m-0 flex items-center gap-2 text-body font-bold text-ink">
           {game.no}경기

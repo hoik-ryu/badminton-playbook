@@ -45,6 +45,8 @@
   --text-heading: var(--font-size-heading);
   --radius-lg: var(--radius-md); /* shadcn rounded-lg → 04 radius.md */
   --shadow-card: var(--elevation-card);
+  --shadow-sheet: var(--elevation-sheet); /* VD-025 */
+  --text-display: var(--font-size-display);
 }
 
 @layer base {

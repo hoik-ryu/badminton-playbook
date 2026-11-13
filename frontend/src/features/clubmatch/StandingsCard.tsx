@@ -16,7 +16,7 @@ export function StandingsCard({ view, final = false }: { view: StandingsData; fi
     const { blue, white } = view.team
     const result = blue === white ? `무승부 (${blue} : ${white})` : `${blue > white ? '청팀' : '백팀'} 승리 (${blue} : ${white})`
     return (
-      <section data-cmp="CMP-042" aria-label={final ? '최종 결과' : '팀 승수'} className="rounded-md border border-line bg-page px-4 py-3 shadow-card">
+      <section data-cmp="CMP-042" aria-label={final ? '최종 결과' : '팀 승수'} className="rounded-md border border-line bg-page px-4 py-3">
         {final && <p className="m-0 text-caption font-bold text-ink-muted">최종 결과</p>}
         <p className="m-0 text-title font-bold text-ink">{final ? result : `청 ${blue} : 백 ${white}`}</p>
         {!final && <p className="m-0 text-body text-ink-muted">미기록 {view.unrecorded}경기</p>}
@@ -25,7 +25,7 @@ export function StandingsCard({ view, final = false }: { view: StandingsData; fi
   }
   const rows = all ? view.standings : view.standings.filter((r) => r.rank <= 3)
   return (
-    <section data-cmp="CMP-042" aria-label={final ? '최종 순위' : '순위'} className="rounded-md border border-line bg-page px-4 py-3 shadow-card">
+    <section data-cmp="CMP-042" aria-label={final ? '최종 순위' : '순위'} className="rounded-md border border-line bg-page px-4 py-3">
       <p className="m-0 mb-2 text-caption font-bold text-ink-muted">
         {final ? '최종 순위' : '순위'}
         {!final && ` · 미기록 ${view.unrecorded}경기`}

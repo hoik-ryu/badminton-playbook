@@ -1,0 +1,110 @@
+{
+  "format": "pb-ui-review/v1",
+  "batch": "B7",
+  "status": "verified",
+  "run_id": "20261113-160845-03361c",
+  "verified_at": "2026-11-13T07:09:26Z",
+  "code": {
+    "run_id": "20261113-160845-03361c",
+    "at": "2026-11-13T07:09:26Z",
+    "valid": true,
+    "code_tree": "9aa0a0db54b5e05bc1517bb09d9579267d2208d891a0d92d5af357c893c35ba6",
+    "code_only_tree": "65a43b959f71d294367a09260e31bb08921c8b937f54174bfe26f508dce0c025",
+    "head": "120a9368a8f390773050a624f7d4e2d7f8a29b6e"
+  },
+  "scope_tree": "7813edbe61d93346a418729ed257de42a6f4acb00ded536269cdd51d1e473bab",
+  "evidence_digest": "0975e849dc8cec8be2fc35536dd1f993e750ece80db9c475461e8165b8acbc0f",
+  "screens": {},
+  "browser": {
+    "status": "not_configured",
+    "steps": {},
+    "blocking": [],
+    "warnings": [
+      "프로필에 브라우저 검증 단계(report.format = \"pb-ui\")가 없습니다"
+    ],
+    "coverage": {
+      "required_states": 0,
+      "with_browser_pass": [],
+      "without_browser": []
+    }
+  },
+  "tokens": {
+    "at_verify": {
+      "ok": true,
+      "source": "theme:docs/design-profile/theme.json",
+      "format": "css-vars",
+      "counts": {
+        "approved": 63,
+        "matched": 63,
+        "missing": 0,
+        "mismatch": 0,
+        "excepted": 0
+      },
+      "missing": [],
+      "mismatch": [],
+      "excepted": [],
+      "stale_exceptions": []
+    },
+    "now": {
+      "ok": true,
+      "counts": {
+        "approved": 63,
+        "matched": 63,
+        "missing": 0,
+        "mismatch": 0,
+        "excepted": 0
+      },
+      "missing": [],
+      "mismatch": [],
+      "excepted": []
+    },
+    "audit": {
+      "ok": true,
+      "mode": "warn",
+      "counts": {
+        "findings": 0,
+        "excepted": 0
+      },
+      "findings": []
+    }
+  },
+  "components": {
+    "CMP-021": {
+      "plan": "reuse",
+      "mapped": true,
+      "source": "existing",
+      "path": "frontend/src/components/Sheet.tsx",
+      "export": "Sheet"
+    },
+    "CMP-025": {
+      "plan": "reuse",
+      "mapped": true,
+      "source": "existing",
+      "path": "frontend/src/components/AppNav.tsx",
+      "export": "AppNav"
+    },
+    "CMP-026": {
+      "plan": "reuse",
+      "mapped": true,
+      "source": "existing",
+      "path": "frontend/src/components/PageHeader.tsx",
+      "export": "PageHeader"
+    },
+    "CMP-030": {
+      "plan": "reuse",
+      "mapped": true,
+      "source": "existing",
+      "path": "frontend/src/components/ListItem.tsx",
+      "export": "ListItem"
+    }
+  },
+  "manual": [],
+  "feedback": [],
+  "warnings": [
+    "프로필에 브라우저 검증 단계(report.format = \"pb-ui\")가 없습니다"
+  ],
+  "blockers": [],
+  "review_id": "edb0177763ef5e13",
+  "ready": true,
+  "at": "2026-11-13T07:09:35Z"
+}

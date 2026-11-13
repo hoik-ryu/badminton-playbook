@@ -20,7 +20,7 @@ export function StageCard({ to, no, title, status, best, total, progressUnknown 
         aria-label={label}
         data-cmp="CMP-047"
         data-status={progressUnknown ? 'unknown' : status}
-        className={cn('flex min-h-16 items-center gap-3 rounded-md border bg-page px-4 py-3 text-ink no-underline shadow-card active:bg-surface', status === 'passed' && !progressUnknown ? 'border-action' : 'border-line')}
+        className={cn('flex min-h-16 items-center gap-3 rounded-md border bg-page px-4 py-3 text-ink no-underline active:bg-surface', status === 'passed' && !progressUnknown ? 'border-action' : 'border-line')}
       >
         <div className="flex min-w-0 flex-1 flex-col gap-0.5">
           <span className="text-body font-bold">스테이지 {no}</span>

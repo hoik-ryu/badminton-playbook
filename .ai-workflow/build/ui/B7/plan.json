@@ -1,0 +1,33 @@
+{
+  "format": "pb-ui-plan/v1",
+  "batch": "B7",
+  "brief_digest": "7c9c0eb617b09129bd460be5c89387f786c1d505562408e53cddbd7a968447c6",
+  "screens": {},
+  "components": {
+    "CMP-021": {
+      "action": "reuse",
+      "part": "Sheet",
+      "file": "frontend/src/components/Sheet.tsx"
+    },
+    "CMP-025": {
+      "action": "reuse",
+      "part": "AppNav",
+      "file": "frontend/src/components/AppNav.tsx"
+    },
+    "CMP-026": {
+      "action": "reuse",
+      "part": "PageHeader",
+      "file": "frontend/src/components/PageHeader.tsx"
+    },
+    "CMP-030": {
+      "action": "reuse",
+      "part": "ListItem",
+      "file": "frontend/src/components/ListItem.tsx"
+    }
+  },
+  "notes": [
+    "B7은 화면을 소유하지 않아(touches 12) Brief screens가 비어 있고, 소유 화면·CMP에 묶인 VD-021·024·025가 Brief에 포함되지 않음. 구현 기준은 승인된 07 r2 원문(VD-021 600px 열·좌우 16, VD-024 카드 테두리·그림자 없음, VD-025 하단 시트·딤 임시값)과 04 r2 CMP-021·025·026·030, 04 3.1.",
+    "AC-050(SCR-101-ST1, SCR-121-ST1)은 B2 소유 화면의 상태라 이 Plan의 states로 연결할 수 없음. [AC-050] 태그 테스트로만 증거를 만든다.",
+    "새 CMP·토큰 없음. 승인된 프리뷰는 시각 참고만(코드 import·복사 안 함)."
+  ]
+}

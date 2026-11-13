@@ -1,0 +1,422 @@
+{
+  "format": "pb-ui-brief/v1",
+  "batch": "B7",
+  "title": "UX Spec r2·Design Direction r2 레이아웃 정합(B-04)",
+  "kind": "ui",
+  "goal": "FE를 승인 명세에 맞춘다: 시트 PC·모바일 공통 하단(CMP-021 presentation=bottom), PC 옆 패널·넓은 배치·왼쪽 메뉴 제거, h1 22px, 카드 그림자 제거·메뉴 목록 Flat, FE 토큰 600px. 새 부품·토큰 없음.",
+  "plan_revision": 2,
+  "design": {
+    "level": "L3",
+    "workflow": "v2",
+    "basis": {
+      "ux_spec_revision": 2,
+      "design_direction_revision": 2,
+      "preview_revision": 1
+    },
+    "waiver": null
+  },
+  "screens": {},
+  "touches": {
+    "SCR-101": {
+      "name": "튜토리얼 홈",
+      "states": [
+        "SCR-101-ST1",
+        "SCR-101-ST2",
+        "SCR-101-ST3",
+        "SCR-101-ST4",
+        "SCR-101-ST5"
+      ]
+    },
+    "SCR-112": {
+      "name": "청백전 상세(회원)",
+      "states": [
+        "SCR-112-ST1",
+        "SCR-112-ST2",
+        "SCR-112-ST3",
+        "SCR-112-ST4",
+        "SCR-112-ST5",
+        "SCR-112-ST7",
+        "SCR-112-ST8"
+      ]
+    },
+    "SCR-121": {
+      "name": "마이페이지",
+      "states": [
+        "SCR-121-ST1",
+        "SCR-121-ST2",
+        "SCR-121-ST3",
+        "SCR-121-ST4",
+        "SCR-121-ST5",
+        "SCR-121-ST7"
+      ]
+    },
+    "SCR-201": {
+      "name": "운영 홈",
+      "states": [
+        "SCR-201-ST1",
+        "SCR-201-ST2",
+        "SCR-201-ST4",
+        "SCR-201-ST5"
+      ]
+    },
+    "SCR-202": {
+      "name": "오늘 운동(실시간 대진)",
+      "states": [
+        "SCR-202-ST1",
+        "SCR-202-ST10",
+        "SCR-202-ST2",
+        "SCR-202-ST3",
+        "SCR-202-ST4",
+        "SCR-202-ST5",
+        "SCR-202-ST6",
+        "SCR-202-ST7",
+        "SCR-202-ST8",
+        "SCR-202-ST9"
+      ]
+    },
+    "SCR-203": {
+      "name": "참석 체크",
+      "states": [
+        "SCR-203-ST1",
+        "SCR-203-ST2",
+        "SCR-203-ST3",
+        "SCR-203-ST4"
+      ]
+    },
+    "SCR-205": {
+      "name": "선수 교체(실시간 대진)",
+      "states": [
+        "SCR-205-ST1",
+        "SCR-205-ST3",
+        "SCR-205-ST4"
+      ]
+    },
+    "SCR-211": {
+      "name": "명단",
+      "states": [
+        "SCR-211-ST1",
+        "SCR-211-ST2",
+        "SCR-211-ST3",
+        "SCR-211-ST4",
+        "SCR-211-ST5"
+      ]
+    },
+    "SCR-212": {
+      "name": "회원·게스트 편집",
+      "states": [
+        "SCR-212-ST1",
+        "SCR-212-ST10",
+        "SCR-212-ST11",
+        "SCR-212-ST2",
+        "SCR-212-ST4",
+        "SCR-212-ST7",
+        "SCR-212-ST8",
+        "SCR-212-ST9"
+      ]
+    },
+    "SCR-223": {
+      "name": "청백전 운영 상세",
+      "states": [
+        "SCR-223-ST1",
+        "SCR-223-ST2",
+        "SCR-223-ST3",
+        "SCR-223-ST4",
+        "SCR-223-ST5",
+        "SCR-223-ST6",
+        "SCR-223-ST7",
+        "SCR-223-ST8",
+        "SCR-223-ST9"
+      ]
+    },
+    "SCR-224": {
+      "name": "참가자·팀 구성",
+      "states": [
+        "SCR-224-ST1",
+        "SCR-224-ST2",
+        "SCR-224-ST3",
+        "SCR-224-ST4",
+        "SCR-224-ST7",
+        "SCR-224-ST8"
+      ]
+    },
+    "SCR-225": {
+      "name": "선수 교체(청백전)",
+      "states": [
+        "SCR-225-ST1",
+        "SCR-225-ST3",
+        "SCR-225-ST4",
+        "SCR-225-ST6"
+      ]
+    }
+  },
+  "components": {
+    "CMP-021": {
+      "name": "Sheet",
+      "purpose": "부모 화면 위에 여는 하단 시트(SCR-122, SCR-203–205, SCR-212–214, SCR-222, SCR-224–226, 랭크 기준 안내)",
+      "variants": "`presentation=bottom`(PC·모바일 공통, 600px 열 아래쪽에서 열림), `height=content|70%|full`, `stacked`(시트 위 두 번째 시트). (r2) r1의 `side`(PC 옆 패널)·`dialog`(PC 가운데 대화상자)는 없앴습니다(사용자 결정 D2, UXD-002·022·038)",
+      "states": "열림, 닫힘, 입력 중 닫기 확인(CMP-022), 저장 중(저장 버튼 로딩), 저장 실패(시트 위쪽 안내 상자, 입력값 유지). 열기·닫기·중첩 규칙은 3장 '하단 시트 규칙'",
+      "used_in": "SCR-121, SCR-122, SCR-202, SCR-203, SCR-204, SCR-205, SCR-212, SCR-213, SCR-214, SCR-222, SCR-223, SCR-224, SCR-225, SCR-226",
+      "a11y": "열리면 제목으로 포커스, 포커스 가둠(모달 시트), Esc·뒤로 가기로 맨 위 시트 하나만 닫기, 닫히면 그 시트를 연 버튼으로 포커스 복귀(두 번째 시트를 닫으면 아래 시트 안의 버튼). 시트 아래 화면과 하단 탭바는 `inert`",
+      "role": "reuse_mapped",
+      "mapping": {
+        "source": "existing",
+        "export": "Sheet",
+        "registered_at": "2026-11-13T06:15:41Z",
+        "path": "frontend/src/components/Sheet.tsx",
+        "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: 같은 부품(시트). 단 PC dialog·480px 좁은 하단·SidePanel 분기는 04 r2(presentation=bottom만)와 다름 → B7에서 수정"
+      }
+    },
+    "CMP-025": {
+      "name": "AppNav",
+      "purpose": "하단 탭바(튜토리얼 / 청백전 / 마이페이지 / 운영), PC·모바일 공통(UXD-066)",
+      "variants": "`role=member|admin|superAdmin`(운영 탭·역할 관리 노출), `layout=bottom`. (r2) r1의 `layout=side`(PC 왼쪽 메뉴)는 없앴습니다(사용자 결정 D1, UXD-066 r6 정합성). 탭바는 600px 열 너비로 화면 아래에 고정하고 기기 안전 영역만큼 아래 여백을 둡니다",
+      "states": "현재 탭, 배지(운영 탭 승인 대기 건수)",
+      "used_in": "SCR-101, SCR-111, SCR-121, SCR-201",
+      "a11y": "`nav` + `aria-current=\"page\"`, 탭 높이 56px, 배지 수를 레이블에 포함",
+      "role": "reuse_mapped",
+      "mapping": {
+        "source": "existing",
+        "export": "AppNav",
+        "registered_at": "2026-11-13T06:15:41Z",
+        "path": "frontend/src/components/AppNav.tsx",
+        "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: 같은 부품(하단 탭). 단 layout=side(PC 왼쪽 메뉴)는 04 r2(layout=bottom만)와 다름 → B7에서 수정"
+      }
+    },
+    "CMP-026": {
+      "name": "PageHeader",
+      "purpose": "화면 제목, 뒤로 가기·나가기, 상태 배지, 오른쪽 행동(더보기, 만들기)",
+      "variants": "`leading=none|back|close`, `trailing=none|menu|action`, `sticky`",
+      "states": "기본",
+      "used_in": "SCR-101, SCR-102, SCR-103, SCR-111, SCR-112, SCR-121, SCR-201, SCR-202, SCR-211, SCR-221, SCR-223, SCR-231, SCR-232",
+      "a11y": "화면 제목은 `h1`, 뒤로 가기 버튼 레이블 '뒤로'",
+      "role": "reuse_mapped",
+      "mapping": {
+        "source": "existing",
+        "export": "PageHeader",
+        "registered_at": "2026-11-13T06:15:41Z",
+        "path": "frontend/src/components/PageHeader.tsx",
+        "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: leading none|back|close, trailing none|menu|action, sticky, h1 — 04 계약과 같음(h1 크기 VD-023은 B7)"
+      }
+    },
+    "CMP-030": {
+      "name": "ListItem",
+      "purpose": "누르면 이동·재생하는 일반 목록 행(운영 메뉴, 틀린 상황, 남은 경기)",
+      "variants": "`trailing=chevron|badge|control`",
+      "states": "기본, 눌림",
+      "used_in": "SCR-103, SCR-201, SCR-226",
+      "a11y": "행 전체가 하나의 링크·버튼, 높이 48px",
+      "role": "reuse_mapped",
+      "mapping": {
+        "source": "existing",
+        "export": "ListItem",
+        "registered_at": "2026-11-13T06:15:42Z",
+        "path": "frontend/src/components/ListItem.tsx",
+        "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: 같은 부품(목록 행, trailing chevron|badge). 단 variant=card(SCR-201)는 04에 없고 04 3.1·VD-024(메뉴 목록 Flat)와 다름 → B7에서 수정"
+      }
+    }
+  },
+  "tokens": {
+    "source": "theme:docs/design-profile/theme.json",
+    "approved": {
+      "color.bg.page": "#FFFFFF",
+      "color.bg.surface": "#F4F5F7",
+      "color.text.primary": "#1A1D23",
+      "color.text.secondary": "#545A65",
+      "color.text.disabled": "#6B7280",
+      "color.border.default": "#D5D9E0",
+      "color.border.strong": "#6B7280",
+      "color.action.onPrimary": "#FFFFFF",
+      "color.status.danger.fg": "#B3261E",
+      "color.status.danger.bg": "#FDE7E5",
+      "color.status.warning.fg": "#7A4F00",
+      "color.status.warning.bg": "#FFF3D1",
+      "color.status.success.fg": "#1B6E35",
+      "color.status.success.bg": "#E4F4E8",
+      "color.status.info.bg": "#E3ECFC",
+      "color.team.blue.fg": "#1747A6",
+      "color.team.blue.bg": "#E3ECFC",
+      "color.team.white.fg": "#1A1D23",
+      "color.team.white.bg": "#FFFFFF",
+      "color.brand.kakao.bg": "#FEE500",
+      "color.brand.kakao.fg": "#191919",
+      "color.court.surface": "#2F7D4F",
+      "color.court.line": "#FFFFFF",
+      "color.court.me": "#1D5BD0",
+      "color.court.opponent": "#F2C14E",
+      "space.1": "4px",
+      "space.2": "8px",
+      "space.3": "12px",
+      "space.4": "16px",
+      "space.5": "20px",
+      "space.6": "24px",
+      "space.8": "32px",
+      "space.gutter.mobile": "16px",
+      "space.gutter.desktop": "24px",
+      "radius.sm": "6px",
+      "radius.md": "10px",
+      "radius.sheet": "16px",
+      "font.size.caption": "13px",
+      "font.size.body": "16px",
+      "font.size.title": "18px",
+      "font.size.heading": "22px",
+      "font.size.display": "32px",
+      "font.weight.regular": "400",
+      "font.weight.bold": "700",
+      "font.lineHeight.body": "1.5",
+      "size.touch.min": "44px",
+      "size.content.member": "600px",
+      "size.panel.side": "400px",
+      "size.nav.side": "240px",
+      "size.content.ops.max": "1200px",
+      "elevation.sheet": "0 -4px 16px rgba(0,0,0,0.16)",
+      "elevation.card": "0 1px 3px rgba(0,0,0,0.12)",
+      "motion.duration.fast": "150ms",
+      "motion.duration.base": "250ms",
+      "motion.tutorial.speed.normal": "1.0",
+      "motion.tutorial.speed.slow": "0.5",
+      "motion.reduced": "`prefers-reduced-motion: reduce`이면 시트 전환은 즉시, 튜토리얼은 결과 위치를 바로 표시",
+      "breakpoint.base": "0–767px",
+      "breakpoint.tablet": "768–1023px",
+      "breakpoint.desktop": "≥1024px",
+      "color.action.primary": "#006D68",
+      "color.focus.ring": "#008F89",
+      "font.family.base": "\"Pretendard Variable\", Pretendard, system-ui, sans-serif"
+    },
+    "output": {
+      "format": "css-vars",
+      "file": "frontend/src/styles/tokens.css",
+      "var_pattern": "--{dashed}"
+    }
+  },
+  "visual_decisions_global": [
+    {
+      "id": "VD-001",
+      "title": "기본 글꼴 Pretendard",
+      "decision": "Pretendard Variable, 폴백 system-ui, sans-serif(테마 값 `font.family.base`)"
+    },
+    {
+      "id": "VD-003",
+      "title": "웹 글꼴 로딩 방식",
+      "decision": "npm `pretendard` 패키지의 dynamic subset을 빌드에 포함(자체 호스팅, 외부 CDN 없음)"
+    },
+    {
+      "id": "VD-022",
+      "title": "섹션 간격 3단계",
+      "decision": "① 섹션 사이 `space.6`(24px) ② 섹션 안 항목 사이(카드와 카드, 입력칸과 입력칸) `space.3`(12px) ③ 한 요소 안(제목과 보조 글, 아이콘과 글자) `space.1`(4px). 항상 ① > ② > ③. 목록 행 사이는 간격 없이 VD-008의 구분선"
+    },
+    {
+      "id": "VD-023",
+      "title": "제목 계층의 색과 간격",
+      "decision": "크기·굵기는 04 3.1 그대로(h1 `font.size.heading`, h2 `font.size.title`·`font.weight.bold`, h3 `font.size.body`·`font.weight.bold`). 제목 색은 모두 `color.text.primary`, 보조 정보는 `color.text.secondary`. 제목 아래 내용과의 간격은 `space.2`(8px), 제목 위 간격은 VD-022의 섹션·항목 간격을 따름"
+    }
+  ],
+  "data": {
+    "tasks": [],
+    "providers": [
+      {
+        "batch": "B0",
+        "tasks": []
+      }
+    ],
+    "api_contract": {
+      "path": "",
+      "exists": false
+    }
+  },
+  "acs": [
+    "AC-050"
+  ],
+  "test_plan": [
+    {
+      "ac": "AC-050",
+      "kind": "integration"
+    }
+  ],
+  "paths": {
+    "allow": [
+      "frontend/src/components/Sheet.tsx",
+      "frontend/src/components/sheetHooks.ts",
+      "frontend/src/components/AppNav.tsx",
+      "frontend/src/components/PageHeader.tsx",
+      "frontend/src/components/ListItem.tsx",
+      "frontend/src/components/*.test.tsx",
+      "frontend/src/pages/SessionPage.tsx",
+      "frontend/src/pages/ClubMatchPage.tsx",
+      "frontend/src/pages/RosterPage.tsx",
+      "frontend/src/pages/OpsHomePage.tsx",
+      "frontend/src/features/roster/EditPerson.tsx",
+      "frontend/src/features/session/SwapSheet.tsx",
+      "frontend/src/features/session/CourtCard.tsx",
+      "frontend/src/features/clubmatch/ClubSwapSheet.tsx",
+      "frontend/src/features/clubmatch/StandingsCard.tsx",
+      "frontend/src/features/clubmatch/MemberGameCard.tsx",
+      "frontend/src/features/clubmatch/ClubGameCard.tsx",
+      "frontend/src/features/tutorial/StageCard.tsx",
+      "frontend/src/styles/tokens.css",
+      "frontend/src/routes/layouts/shells.css",
+      "frontend/src/routes/layouts/Shells.tsx",
+      "frontend/src/layout.test.tsx"
+    ],
+    "shared": []
+  },
+  "depends_on": [
+    "B0"
+  ],
+  "rules": [
+    "승인된 UX Spec·Design Direction·토큰만 따릅니다. 명세에 없는 정보·행동·정책은 구현하지 않고 원장(ledger)에 올립니다.",
+    "대응표에 있는 컴포넌트는 반드시 재사용합니다. 같은 컴포넌트를 새로 만들지 않습니다.",
+    "색·간격 등은 승인된 토큰(토큰 출력 파일의 변수)으로 씁니다. 직접 값은 프로젝트가 허용한 예외만.",
+    "design-preview/는 시각 참고만 합니다. import·복사하지 않습니다.",
+    "UI Plan(.ai-workflow/build/ui/<배치>/plan.json)을 쓰고 ui-plan-validate가 통과한 뒤 구현합니다."
+  ],
+  "sources": {
+    "docs/design/02-screens.md": "238867828129796bd81c0b3a3ee8245c68e9dc211eaad6860362b9159ffe8919",
+    "docs/design/04-ui-system.md": "148e8ff520af7a277d04c212fc2555493d0689936db5e5f980da96ab589ecbb9",
+    "docs/design/05-design-traceability.md": "e5309788aa94dcd5fb378f4540376b27962c22265c57d1f2b64cd5c72d6cf3bc",
+    "docs/design/07-design-direction.md": "d9553c8fdc509a6ace7f9e9b5f337ef3f7ec10f36b80ef0b32d7cf200f74d7e0",
+    "docs/build/implementation-plan.json": "d7654b1359fcf4e90d2fe1fb969fa827cc2dd19f611542654c5205a26502394d",
+    "docs/build/ui-map.json": "648031cdc8c9e66955ec5d3e8c91ccdac2a02de270359f3305cf14ac55f44e7e",
+    "docs/design-profile/theme.json": "fd21e9ea803fa4a7191fd3f5e107e8a8f55146775f58fa44c7c15cfd50ebd06b"
+  },
+  "warnings": [],
+  "layout": {
+    "note": "승인된 02 '레이아웃'·04 '공통 패턴' 원문과 승인 토큰 중 간격·글자·브레이크포인트 토큰입니다. 엔진은 해석·보완하지 않습니다. 원문에 없는 레이아웃 규칙은 만들지 않고, 필요하면 원장(ledger)에 올립니다.",
+    "screens": {},
+    "missing": [],
+    "patterns": {
+      "source": "docs/design/04-ui-system.md",
+      "text": "- **확인 창(CMP-022)**: 되돌릴 수 없는 행동(확정, 라운드 완료, 세션 종료, 청백전 종료, 방식 변경, 팀 변경 후 재생성, 결과 반대로 수정, 거절, 역할 변경, 게스트 삭제, 비활성 처리)과 입력 중 닫기, 스테이지 나가기에만 씁니다. 처음 결과 기록·참석 체크·옵션 변경·다시 생성은 확인 없이 바로 반영합니다. 제목은 질문형, 본문은 결과 한 줄, 행동 버튼은 동사입니다.\n- **토스트(CMP-029)**: 성공 알림만 3초. 실패는 토스트로 알리지 않고 안내 상자(CMP-023)로 화면에 남깁니다.\n- **빈 상태(CMP-027 empty)**: 왜 비었는지 + 할 수 있는 다음 행동 버튼 하나. 검색·필터 결과 없음은 조건 해제 버튼.\n- **오류 표시**: 입력 오류는 필드 아래(CMP-006·CMP-003), 저장 실패는 시트·화면 위쪽 안내 상자(CMP-023, 입력값 유지), 불러오기 실패는 블록 오류(CMP-027, '다시 시도'). 문구는 원인 + 해결 방법. 네트워크 실패는 \"연결이 불안정합니다. 다시 시도해 주세요\".\n- **충돌 안내**: 기획이 정한 지점(SCR-202 확정, SCR-223·SCR-225·SCR-226의 청백전 조작; FLOW-004-S6a, FLOW-005-S6a)에서만 충돌 확인 창(CMP-022 `tone=conflict`) \"다른 운영진이 …을 변경했습니다. 방금 한 작업은 처리되지 않았습니다\" → '확인' → 최신 상태를 다시 불러옴. 그 밖의 화면에서 이미 처리된 요청은 오류 안내 상자로 알리고 목록을 새로고침합니다.\n- **로딩**: 처음 불러오기는 스켈레톤, 행동 중에는 누른 버튼만 진행 표시하고 같은 행동을 막습니다(중복 제출 방지). 대진 생성은 2초 안(AC-034), 스테이지 준비는 3초 안(AC-095)을 목표로 하며 넘으면 문구를 유지합니다.\n- **권한별 노출**: 회원 화면 컴포넌트(`audience=member`)는 1–10 점수·팀 점수 합·실력차·다른 회원의 급수·지인·튜토리얼 진행·랭크를 그리지 않습니다(NFR-005, AC-066, AC-068). 화면에서 숨기는 것과 별개로 API 응답에도 없어야 합니다(구현 단계 계약 테스트).\n- **팀 표기**: 팀전은 '청팀 / 백팀'(색 띠 + 글자, 백팀은 테두리형), 개인전과 실시간 대진은 '1팀 / 2팀'(글자만, C-24).\n\n### 3.1 레이아웃 공통 패턴 (r2, 사용자 결정 D1·D4·D6)\n\n아래는 구조와 역할만 정합니다. 어떤 토큰 단계를 쓸지(구체적인 값)는 Design Direction r2에서 기존 토큰 중에서 고르고, 새 값은 만들지 않습니다(D6).\n\n- **한 열 원칙**: 모든 화면은 가운데 정렬한 한 열(최대 `size.content.member` 600px)에 위에서 아래로 쌓습니다(1.5). 콘텐츠 블록을 좌우로 나란히 두는 다단 배치는 쓰지 않습니다. 한 블록 안의 작은 격자(ChoiceGrid 4×2·5×2, 나란한 두 버튼, 청·백 결과 버튼)는 한 열 안의 요소라 허용합니다. 열 바깥에는 배경만 둡니다.\n- **페이지 좌우 여백**: 열 안쪽 좌우 여백은 모든 화면에서 같은 값을 쓰고, 화면 제목(CMP-026)·목록·카드·하단 고정 바·시트 내용의 왼쪽 시작선을 맞춥니다. 기본은 `space.gutter.mobile`이며, 열이 600px에 닿는 넓은 화면에서 `space.gutter.desktop`으로 넓힐지는 Design Direction에서 정합니다. 목록 행(CMP-024·CMP-030)은 누름 영역을 열 끝까지 넓히되 글자는 같은 시작선에 둡니다.\n- **섹션 간격**: 간격은 세 단계 역할로 나눕니다. ① 섹션 사이(예: SCR-121의 랭크·전적·프로필, SCR-223의 요약·대진 설정·경기 목록) ② 섹션 안 항목 사이(카드와 카드, 입력칸과 입력칸) ③ 한 요소 안(제목과 보조 글, 아이콘과 글자). 항상 ① > ② > ③이고, 각 단계는 `space.*` 중 하나로 화면 전체에서 통일합니다(값은 Design Direction).\n- **제목 계층**: 1.3 글자 토큰의 용도를 제목 단계에 대응시킵니다. 한 화면에 `h1`은 하나(CMP-026 화면 제목, `font.size.heading`). 섹션 머리·시트 제목·카드 제목은 `h2`(`font.size.title`, `font.weight.bold`), 섹션·시트·카드 안의 작은 묶음 머리(예: '── 게스트 ──', '── 현황 ──')는 `h3`(`font.size.body`, `font.weight.bold`). 본문은 `font.size.body`, 보조 정보는 `color.text.secondary`로 구분하며 `font.size.caption`은 1.3의 '보조' 용도(배지·시각·단위 등 짧은 글자)에 씁니다. 큰 숫자 강조(결과 점수·랭크 등급)만 `font.size.display`. 제목 단계를 건너뛰지 않습니다(WCAG 1.3.1). 굵기·크기 외의 시각 처리(색·간격)는 Design Direction에서 정합니다.\n- **카드와 Flat 구분(D4)**: 카드는 일괄 금지가 아니라 목적이 있을 때만 씁니다.\n  - **카드를 쓰는 경우**: 한 덩어리로 읽고 비교하거나 그 단위로 행동하는 정보 묶음. 경기·코트(CMP-041), 결과·순위 요약(CMP-042), 청백전 목록 항목(CMP-043), 랭크·전적 요약(CMP-045), 스테이지(CMP-047), 내 다음 경기 강조(UXD-049).\n  - **Flat(카드 없이 행·구분선·섹션 머리로 구분)**: 같은 형식이 반복되는 목록(사람 행 CMP-024, 메뉴·남은 경기 CMP-030, 후보 CMP-044), 입력·설정 묶음(폼, 스위치·옵션), 필터·검색 영역, 한 줄 안내(NoticeBox CMP-023는 자체 배경만).\n  - 카드 안에 카드를 두지 않습니다(한 단계만). 시트는 이미 표면이므로 시트 안 내용은 원칙적으로 Flat이며, 시트 안에서도 위 '카드를 쓰는 경우'에 해당하는 묶음만 카드로 둡니다.\n  - 카드 표현(테두리 `color.border.default`·그림자 `elevation.card`·모서리 `radius.md` 중 무엇을 쓸지)은 Design Direction에서 정합니다.\n- **하단 고정 요소와 안전 영역**: 하단 탭바(CMP-025), 화면의 하단 고정 행동 바, 오른쪽 아래 주 버튼(SCR-211 '게스트 추가', UXD-026·D3)은 모두 600px 열 안에 둡니다.\n  - 쌓는 순서(아래에서 위로): 기기 안전 영역(`env(safe-area-inset-bottom)`) → 하단 탭바 → 하단 고정 행동 바 또는 오른쪽 아래 주 버튼. 서로 겹치지 않습니다. 탭바를 숨기는 화면(SCR-102, SCR-103)은 안전 영역 바로 위에 둡니다.\n  - 고정 요소가 있는 화면은 스크롤 내용 끝에 고정 요소 높이만큼 여백을 두어 마지막 행·카드가 가리지 않게 합니다.\n  - 고정 요소와 열 가장자리 사이 간격은 '페이지 좌우 여백'과 같은 값을 씁니다.\n\n### 3.2 하단 시트 규칙 (r2, 사용자 결정 D2, 변경안 Y10)\n\nCMP-021을 쓰는 모든 시트에 적용합니다. 시트 위 시트는 `01` 5장의 두 곳(SCR-203 → SCR-213·SCR-214, SCR-224 → SCR-214·SCR-226)뿐입니다.\n\n- **닫기 순서**: ✕ 버튼, 바깥(딤) 누르기, Esc, 브라우저 뒤로 가기는 모두 **맨 위 시트 하나만** 닫습니다. 두 번째 시트를 닫으면 첫 번째 시트로, 첫 번째 시트를 닫으면 부모 화면으로 돌아갑니다. 한 번에 여러 시트를 닫지 않습니다.\n- **아래 상태 보존**: 위 시트를 닫으면 아래 시트의 입력값·스크롤 위치·검색어·필터·체크 상태를 그대로 둡니다. 부모 화면(SCR-202, SCR-211, SCR-223 등)도 시트를 닫은 뒤 필터·검색어·스크롤 위치와 접힘 상태를 유지합니다.\n- **포커스 복원**: 시트를 닫으면 그 시트를 연 요소로 포커스를 돌려줍니다(두 번째 시트를 닫으면 첫 번째 시트 안의 그 버튼). 연 요소가 사라졌으면(예: 행이 삭제됨) 그 목록의 제목이나 다음 행으로 보냅니다.\n- **저장**: 저장에 성공하면 **그 시트만** 닫고 아래 시트·부모 화면의 해당 값을 갱신합니다(예: SCR-214 점수 저장 → SCR-203 참석 목록의 점수·'점수 미설정 N명' 갱신, SCR-213 게스트 저장 → SCR-203에서 바로 참석 체크). 성공 알림은 3장 '토스트' 규칙을 따릅니다.\n- **취소·닫기 확인**: 바뀐 값이 있는 시트를 ✕·바깥 누르기·Esc·뒤로 가기로 닫으려 하면 입력 중 닫기 확인 창(CMP-022)을 띄웁니다('계속 입력' / '닫기'). 바뀐 값이 없거나 즉시 저장형 시트(SCR-203 참석 체크, SCR-204 옵션, SCR-224 참가자)는 확인 없이 닫습니다.\n- **저장 실패**: 시트를 닫지 않고 시트 위쪽에 안내 상자(CMP-023)로 원인과 다음 행동을 보여 주며 입력값을 유지합니다(3장 '오류 표시'). 충돌(ST6)은 3장 '충돌 안내'를 따릅니다.\n- **예외(SCR-226)**: 대체 선수 지정 시트는 '반영'에 성공하면 닫히고, '반영'하지 않고 닫으면 확인 창 \"대체 선수를 정하지 않으면 제외가 취소됩니다\" 후 제외 자체를 되돌립니다(`02` SCR-226 시트 동작, AC-078). 이 동작은 위 '취소·닫기 확인'보다 우선합니다.\n- **탭바·고정 버튼과의 관계**: 시트는 하단 탭바와 화면의 하단 고정 바·오른쪽 아래 주 버튼을 덮고 열립니다(그동안 아래 요소는 누를 수 없음). 시트의 하단 고정 버튼(저장·반영)은 안전 영역 위에 두고, 시트 내용 끝에 버튼 높이만큼 여백을 둡니다. 키보드가 올라오면 입력칸과 하단 고정 버튼이 키보드에 가리지 않게 시트 안을 스크롤합니다.\n- **높이**: 화면마다 `02`에 정한 `height`(내용 높이·70%·전체)를 쓰고, 끌어올려 전체로 펼칠 수 있는 시트는 `02`에 적힌 곳만입니다. 시트 너비는 열 너비와 같습니다."
+    },
+    "tokens": {
+      "spacing": {
+        "space.1": "4px",
+        "space.2": "8px",
+        "space.3": "12px",
+        "space.4": "16px",
+        "space.5": "20px",
+        "space.6": "24px",
+        "space.8": "32px",
+        "space.gutter.desktop": "24px",
+        "space.gutter.mobile": "16px"
+      },
+      "typography": {
+        "font.family.base": "\"Pretendard Variable\", Pretendard, system-ui, sans-serif",
+        "font.lineHeight.body": "1.5",
+        "font.size.body": "16px",
+        "font.size.caption": "13px",
+        "font.size.display": "32px",
+        "font.size.heading": "22px",
+        "font.size.title": "18px",
+        "font.weight.bold": "700",
+        "font.weight.regular": "400"
+      },
+      "breakpoint": {
+        "breakpoint.base": "0–767px",
+        "breakpoint.desktop": "≥1024px",
+        "breakpoint.tablet": "768–1023px"
+      }
+    },
+    "digest": "61cc7eb8cf0ad70cb26638e7f49144429b75b888f64fd1a3df011542c31d7a12"
+  },
+  "digest": "7c9c0eb617b09129bd460be5c89387f786c1d505562408e53cddbd7a968447c6"
+}

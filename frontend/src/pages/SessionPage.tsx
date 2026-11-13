@@ -1,4 +1,3 @@
-import { cn } from 'cn'
 import { useCallback, useEffect, useState } from 'react'
 
 import { Badge } from '../components/Badge'
@@ -7,8 +6,8 @@ import { ConfirmDialog } from '../components/ConfirmDialog'
 import { NoticeBox } from '../components/NoticeBox'
 import { OverflowMenu } from '../components/OverflowMenu'
 import { PageHeader } from '../components/PageHeader'
-import { Sheet, SidePanel } from '../components/Sheet'
-import { useSheetRoute, useWideLayout } from '../components/sheetHooks'
+import { Sheet } from '../components/Sheet'
+import { useSheetRoute } from '../components/sheetHooks'
 import { StateView } from '../components/StateView'
 import { isApiError } from '../lib/api'
 import { eulReul } from '../lib/josa'
@@ -39,7 +38,6 @@ const mmddWeek = (d: string) => `${mmdd(d)}(${new Intl.DateTimeFormat('ko-KR', {
 const toRosterPerson = (p: SessionPerson): RosterPerson => ({ id: p.id, kind: p.kind, name: p.name, gender: p.gender, grade: p.grade, score: p.score, tutorialRecommendedUnpassed: false })
 
 export function SessionPage() {
-  const desktop = useWideLayout() // 운영 셸은 PC에서도 모바일 배치(사용자 결정 2026-11-12)
   const { sheet, open, close } = useSheetRoute()
   const [viewingId, setViewingId] = useState<string | undefined>(undefined)
   const [load, setLoad] = useState<Load>({ kind: 'loading' })
@@ -49,7 +47,6 @@ export function SessionPage() {
   const [changedSinceDraft, setChangedSinceDraft] = useState(false)
   const [confirm, setConfirm] = useState<Confirm>(null)
   const [conflict, setConflict] = useState(false)
-  const [panel, setPanel] = useState<'attendance' | 'options' | null>('attendance') // PC 옆 패널
 
   const refresh = useCallback(async () => {
     try {
@@ -91,8 +88,7 @@ export function SessionPage() {
       const v = await startToday()
       setViewingId(undefined)
       if (v.phase === 'ready' && v.nextRoundNo === 1) {
-        if (desktop) setPanel('attendance')
-        else open('attendance') // 첫 라운드면 참석 패널 자동 열림(UXD-002)
+        open('attendance') // 첫 라운드면 참석 시트 자동 열림(UXD-002)
       }
     }, '오늘 운동을 시작하지 못했습니다. 다시 시도해 주세요')
 
@@ -108,15 +104,15 @@ export function SessionPage() {
     void refresh()
   }
 
-  // ── 시트·패널 ──
-  const attendanceOpen = !desktop && !!sheet?.startsWith('attendance')
+  // ── 시트(PC·모바일 공통 하단 시트, UX Spec r2 D2) ──
+  const attendanceOpen = !!sheet?.startsWith('attendance')
   const scoresOpen = sheet === 'scores' || sheet === 'attendance/scores'
   const addOpen = sheet === 'attendance/add'
   const swapKey = sheet?.startsWith('swap:') ? sheet.slice(5) : null
   const swapTarget = swapKey && view?.current ? view.current.courts.flatMap((c) => [...c.team1, ...c.team2]).find((p) => p.key === swapKey) ?? null : null
   const relax = sheet?.startsWith('relax:') ? (sheet.slice(6) as Relaxation) : null
-  const openAttendance = () => (desktop ? setPanel('attendance') : open('attendance'))
-  const openOptions = () => (desktop ? setPanel('options') : open('options'))
+  const openAttendance = () => open('attendance')
+  const openOptions = () => open('options')
   const openScores = () => (sheet?.startsWith('attendance') ? open('attendance/scores', { stack: true }) : open('scores'))
 
   const attendanceContent = view && <AttendancePanel view={view} onChanged={onPanelChanged} onAddGuest={() => open('attendance/add', { stack: true })} onScores={openScores} />
@@ -228,7 +224,6 @@ export function SessionPage() {
               <p className="m-0 text-title font-bold text-ink">
                 {roundNo}라운드 · {stage}
               </p>
-              {desktop && actions}
             </div>
             <div className="flex flex-wrap gap-2">
               <Button variant="secondary" size="md" onClick={openAttendance} aria-label={`참석 ${view.summary.count}명, 참석 체크 열기`}>
@@ -286,9 +281,9 @@ export function SessionPage() {
             </div>
           </details>
         )}
-        {!desktop && view && (phase === 'ready' || phase === 'review' || phase === 'inProgress') && <div aria-hidden className="h-20" />}
+        {view && (phase === 'ready' || phase === 'review' || phase === 'inProgress') && <div aria-hidden className="h-20" />}
       </div>
-      {!desktop && view && (phase === 'ready' || phase === 'review' || phase === 'inProgress') && (
+      {view && (phase === 'ready' || phase === 'review' || phase === 'inProgress') && (
         <div className="app-fixed-bar bottom-[calc(56px+env(safe-area-inset-bottom,0px))] z-20 border-t border-line bg-page px-4 py-3">{actions}</div>
       )}
     </div>
@@ -298,28 +293,12 @@ export function SessionPage() {
   return (
     <div className="flex min-w-0">
       {main}
-      {desktop && view && s && s.status === 'open' && panel && (
-        <SidePanel
-          title={panel === 'attendance' ? '참석 체크' : '대진 옵션'}
-          onRequestClose={() => setPanel(null)}
-          testId="session-panel"
-        >
-          <div role="tablist" aria-label="패널" className="mb-3 grid grid-cols-2 gap-2">
-            {(['attendance', 'options'] as const).map((t) => (
-              <button key={t} type="button" role="tab" aria-selected={panel === t} onClick={() => setPanel(t)} className={cn('h-11 rounded-md border text-body', panel === t ? 'border-action bg-action font-bold text-on-action' : 'border-line-strong bg-page text-ink')}>
-                {t === 'attendance' ? '참석' : '옵션'}
-              </button>
-            ))}
-          </div>
-          {panel === 'attendance' ? attendanceContent : optionsContent}
-        </SidePanel>
-      )}
       {attendanceOpen && view && (
         <Sheet open title="참석 체크" onRequestClose={close} height="70%" testId="attendance-sheet">
           {attendanceContent}
         </Sheet>
       )}
-      {!desktop && sheet === 'options' && optionsContent && (
+      {sheet === 'options' && optionsContent && (
         <Sheet open title="대진 옵션" onRequestClose={close} testId="options-sheet">
           {optionsContent}
         </Sheet>

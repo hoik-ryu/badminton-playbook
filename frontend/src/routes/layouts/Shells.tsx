@@ -1,7 +1,6 @@
 import { Outlet, useLoaderData, useMatches } from 'react-router'
 
 import { AppNav } from '../../components/AppNav'
-import { WideLayoutContext } from '../../components/sheetHooks'
 import type { ShellData } from '../guards'
 
 export type RouteHandle = { hideNav?: boolean }
@@ -17,7 +16,7 @@ export function AuthShell() {
   )
 }
 
-// 회원 셸(SCR-101·111·112·121): 하단 탭. 102·103은 탭바 숨김(handle.hideNav). PC도 600px 열 + 하단 탭(사용자 결정)
+// 회원 셸(SCR-101·111·112·121): 하단 탭. 102·103은 탭바 숨김(handle.hideNav). PC도 600px 열 + 하단 탭(UX Spec r2 04 1.5)
 export function MemberShell() {
   const { me, opsBadge } = useLoaderData() as ShellData
   const hideNav = useMatches().some((m) => (m.handle as RouteHandle | undefined)?.hideNav)
@@ -31,18 +30,15 @@ export function MemberShell() {
   )
 }
 
-// 운영 셸(SCR-201–232): 회원 셸과 같은 600px 열 + 하단 탭. PC도 같음(왼쪽 메뉴 없음)
-// 사용자 결정 2026-11-12: 04 1.5·UXD-066의 'PC 왼쪽 메뉴 240 + 가운데 최대 1200'과 다름(UX Spec r2 반영 예정)
+// 운영 셸(SCR-201–232): 회원 셸과 같은 600px 열 + 하단 탭. PC도 같음(왼쪽 메뉴 없음, UX Spec r2 04 1.5·UXD-066 r6)
 export function OpsShell() {
   const { me, opsBadge } = useLoaderData() as ShellData
   return (
-    <WideLayoutContext.Provider value={false}>
-      <div className="app-column" data-shell="ops">
-        <main className="app-main has-nav">
-          <Outlet />
-        </main>
-        <AppNav role={me.role} opsBadge={opsBadge} />
-      </div>
-    </WideLayoutContext.Provider>
+    <div className="app-column" data-shell="ops">
+      <main className="app-main has-nav">
+        <Outlet />
+      </main>
+      <AppNav role={me.role} opsBadge={opsBadge} />
+    </div>
   )
 }

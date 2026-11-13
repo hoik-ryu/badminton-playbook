@@ -1,16 +1,14 @@
 /*
  * 서비스 셸 레이아웃(인증·회원·운영). 색·크기는 tokens.css 변수만 씁니다.
  *
- * 회원·인증 셸: 모바일은 화면 너비 그대로, 태블릿·PC(≥768)는 가운데 열(--app-column-max)
- *   명세와의 차이(사용자 결정 2026-11-11, ④ + spec_conflict): NFR-002·AC-050·01 IA·04 1.5의 480px → 600px.
- *   PC 회원 내비게이션: 600px 열 + 하단 탭 유지(사용자 결정 2026-11-11). 04 1.5의 '하단 탭 대신 왼쪽 메뉴'와 다름.
- *   기록: docs/workflow-proposals/frontend-implementation-deviations.md
- * 운영 셸: 회원 셸과 같음(600px 열 + 하단 탭, 사용자 결정 2026-11-12). 04 1.5·UXD-066의 태블릿 720·PC 왼쪽 메뉴 배치와 다름.
+ * 인증·회원·운영 셸 공통(UX Spec r2 01 1장·04 1.5, Design Direction r2 VD-021): 모바일은 화면 너비 그대로,
+ *   태블릿·PC(≥768)는 가운데 정렬한 최대 600px 한 열(size.content.member) + 하단 탭. PC 왼쪽 메뉴·넓은 배치 없음.
+ *   열 바깥은 color.bg.page(열과 같은 흰색), 경계선·그림자 없음(VD-021).
  */
 :root {
-  --app-column-max: 600px;
-  --app-outer-bg: var(--color-bg-surface);
-  --app-column-shadow: 0 0 24px rgba(0, 0, 0, 0.06);
+  --app-column-max: var(--size-content-member);
+  --app-outer-bg: var(--color-bg-page);
+  --app-column-shadow: none;
   --app-nav-height: 56px;
 }
 
@@ -83,5 +81,4 @@ html:has(.app-main.has-nav) {
 }
 
 /* ── 운영 셸 ── */
-/* 사용자 결정(2026-11-12): 운영 셸도 회원 셸과 같은 600px 열 + 하단 탭(PC 왼쪽 메뉴·넓은 배치 없음).
-   04 1.5·UXD-066(PC 왼쪽 메뉴 240 + 가운데 최대 1200, 태블릿 720)과 다름 → UX Spec r2 반영 예정 */
+/* 운영 셸도 회원 셸과 같은 600px 열 + 하단 탭(PC 왼쪽 메뉴·넓은 배치 없음, UX Spec r2 04 1.5·UXD-066 r6) */
