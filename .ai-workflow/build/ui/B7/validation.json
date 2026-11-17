@@ -1,13 +1,33 @@
 {
-  "at": "2026-11-13T07:03:04Z",
+  "at": "2026-11-17T00:09:59Z",
   "ok": true,
-  "brief_digest": "7c9c0eb617b09129bd460be5c89387f786c1d505562408e53cddbd7a968447c6",
-  "plan_sha256": "2116908b02b75258a2c5e12463919e066bcbe9ce81160b5be0054759bce42033",
+  "brief_digest": "304805ef2557f97b4397cd7f8e68b181da326503ec0e61d12fa1b694cd174e39",
+  "plan_sha256": "87036e4327019d79ffaad2cd75e37854e571ff23738c7f8a2c08cea43067f0a8",
   "errors": [],
-  "warnings": [],
+  "warnings": [
+    "[touched_plan_legacy] (touched_missing) SCR-101: 이 배치가 바꾸는 화면(touches)의 계획이 없습니다. touched.SCR-101에 changes·via와 대표 상태(states)·위임(covered_by)·예외(exempt) 중 하나를 적으세요 — 이미 시작된 배치의 이전 UI Plan이라 경고만 합니다(다시 계획하면 적용)",
+    "[touched_plan_legacy] (touched_missing) SCR-112: 이 배치가 바꾸는 화면(touches)의 계획이 없습니다. touched.SCR-112에 changes·via와 대표 상태(states)·위임(covered_by)·예외(exempt) 중 하나를 적으세요 — 이미 시작된 배치의 이전 UI Plan이라 경고만 합니다(다시 계획하면 적용)",
+    "[touched_plan_legacy] (touched_missing) SCR-121: 이 배치가 바꾸는 화면(touches)의 계획이 없습니다. touched.SCR-121에 changes·via와 대표 상태(states)·위임(covered_by)·예외(exempt) 중 하나를 적으세요 — 이미 시작된 배치의 이전 UI Plan이라 경고만 합니다(다시 계획하면 적용)",
+    "[touched_plan_legacy] (touched_missing) SCR-201: 이 배치가 바꾸는 화면(touches)의 계획이 없습니다. touched.SCR-201에 changes·via와 대표 상태(states)·위임(covered_by)·예외(exempt) 중 하나를 적으세요 — 이미 시작된 배치의 이전 UI Plan이라 경고만 합니다(다시 계획하면 적용)",
+    "[touched_plan_legacy] (touched_missing) SCR-202: 이 배치가 바꾸는 화면(touches)의 계획이 없습니다. touched.SCR-202에 changes·via와 대표 상태(states)·위임(covered_by)·예외(exempt) 중 하나를 적으세요 — 이미 시작된 배치의 이전 UI Plan이라 경고만 합니다(다시 계획하면 적용)",
+    "[touched_plan_legacy] (touched_missing) SCR-203: 이 배치가 바꾸는 화면(touches)의 계획이 없습니다. touched.SCR-203에 changes·via와 대표 상태(states)·위임(covered_by)·예외(exempt) 중 하나를 적으세요 — 이미 시작된 배치의 이전 UI Plan이라 경고만 합니다(다시 계획하면 적용)",
+    "[touched_plan_legacy] (touched_missing) SCR-205: 이 배치가 바꾸는 화면(touches)의 계획이 없습니다. touched.SCR-205에 changes·via와 대표 상태(states)·위임(covered_by)·예외(exempt) 중 하나를 적으세요 — 이미 시작된 배치의 이전 UI Plan이라 경고만 합니다(다시 계획하면 적용)",
+    "[touched_plan_legacy] (touched_missing) SCR-211: 이 배치가 바꾸는 화면(touches)의 계획이 없습니다. touched.SCR-211에 changes·via와 대표 상태(states)·위임(covered_by)·예외(exempt) 중 하나를 적으세요 — 이미 시작된 배치의 이전 UI Plan이라 경고만 합니다(다시 계획하면 적용)",
+    "[touched_plan_legacy] (touched_missing) SCR-212: 이 배치가 바꾸는 화면(touches)의 계획이 없습니다. touched.SCR-212에 changes·via와 대표 상태(states)·위임(covered_by)·예외(exempt) 중 하나를 적으세요 — 이미 시작된 배치의 이전 UI Plan이라 경고만 합니다(다시 계획하면 적용)",
+    "[touched_plan_legacy] (touched_missing) SCR-223: 이 배치가 바꾸는 화면(touches)의 계획이 없습니다. touched.SCR-223에 changes·via와 대표 상태(states)·위임(covered_by)·예외(exempt) 중 하나를 적으세요 — 이미 시작된 배치의 이전 UI Plan이라 경고만 합니다(다시 계획하면 적용)",
+    "[touched_plan_legacy] (touched_missing) SCR-224: 이 배치가 바꾸는 화면(touches)의 계획이 없습니다. touched.SCR-224에 changes·via와 대표 상태(states)·위임(covered_by)·예외(exempt) 중 하나를 적으세요 — 이미 시작된 배치의 이전 UI Plan이라 경고만 합니다(다시 계획하면 적용)",
+    "[touched_plan_legacy] (touched_missing) SCR-225: 이 배치가 바꾸는 화면(touches)의 계획이 없습니다. touched.SCR-225에 changes·via와 대표 상태(states)·위임(covered_by)·예외(exempt) 중 하나를 적으세요 — 이미 시작된 배치의 이전 UI Plan이라 경고만 합니다(다시 계획하면 적용)"
+  ],
   "counts": {
     "screens": 0,
     "states": 0,
-    "cmps_used": 0
-  }
+    "cmps_used": 0,
+    "touched": {
+      "screens": 12,
+      "representative": 0,
+      "covered": 0,
+      "exempt": 0
+    }
+  },
+  "rules": "touched-v1"
 }

@@ -16,10 +16,11 @@ body { margin: 0; font-family: system-ui, -apple-system, 'Apple SD Gothic Neo', 
 .pv-toolbar button[aria-selected='true'], .pv-toolbar button[aria-pressed='true'] { background: #1f2937; color: #fff; border-color: #1f2937; }
 .pv-stage { overflow-x: auto; }
 /* 고정 요소(하단 탭·떠 있는 버튼)가 프레임 기준으로 붙도록 transform으로 기준 상자를 만듦 */
-.pv-frame { transform: translateZ(0); height: 844px; overflow-y: auto; margin: 0 auto; background: var(--color-bg-page); box-shadow: 0 2px 12px rgba(0,0,0,.12); }
-.pv-bare { min-height: 100dvh; background: var(--color-bg-page); } /* 화면이 짧을 때 아래 빈 곳도 페이지 배경 */
+.pv-frame { transform: translateZ(0); height: 844px; overflow-y: auto; margin: 0 auto; background: var(--color-bg-surface); box-shadow: 0 2px 12px rgba(0,0,0,.12); }
+.pv-bare { min-height: 100dvh; background: var(--color-bg-surface); } /* (r3) 화면이 짧을 때 아래 빈 곳도 열 바깥 배경(VD-021) */
 /* 미구현 화면 안내(셸 전용) */
 .pv-missing { padding: 24px 16px; font-family: system-ui, -apple-system, 'Apple SD Gothic Neo', sans-serif; }
 .pv-missing h2 { font-size: 18px; margin: 16px 0 8px; }
 .pv-missing p { font-size: 14px; color: #374151; }
 .pv-missing button { font: inherit; min-height: 44px; padding: 0 16px; border: 1px solid #6b7280; background: #fff; border-radius: 6px; cursor: pointer; }
+.pv-bare > .smapsh { min-height: 100dvh; } /* 측정 모드에서도 열이 화면 아래까지 이어지게 */

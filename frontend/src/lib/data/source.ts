@@ -1,8 +1,9 @@
-// 데이터 출처 선택: 'mock'(기본, 저장소 안 가짜 어댑터) | 'api'(실제 백엔드).
+// 데이터 출처 선택: 'api'(기본, 실제 백엔드) | 'mock'(VITE_DATA_SOURCE=mock일 때만, 저장소 안 가짜 어댑터).
+// (2026-11-17 사용자 결정) 기본을 api로 바꿈. 테스트는 vite.config.ts test.env에서 mock으로 고정.
 // 기능별 api.ts가 이 값으로 Mock 어댑터와 api.get/post 호출 중 하나를 고릅니다. 화면 코드는 출처를 모릅니다.
 export type DataSource = 'mock' | 'api'
 
-export const dataSource: DataSource = import.meta.env.VITE_DATA_SOURCE === 'api' ? 'api' : 'mock'
+export const dataSource: DataSource = import.meta.env.VITE_DATA_SOURCE === 'mock' ? 'mock' : 'api'
 
 // 백엔드가 준비된 기능만 VITE_DATA_SOURCE를 따릅니다. 나머지는 api 모드에서도 Mock(브라우저 저장소)으로 동작합니다.
 // (2026-11-12: 인증·가입 승인·역할·본인 프로필·명단(I1)·튜토리얼 진행(I2)·청백전(운영진·회원 조회·마이페이지 전적, I3-d4) DB 전환.

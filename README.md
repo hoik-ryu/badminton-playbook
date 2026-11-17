@@ -89,7 +89,7 @@ Template 기능을 쓸 수 없다면 `git clone --depth 1 <url> my-product && cd
 | `backend/.env.example` | backend 설정. 카카오 키·`SESSION_SECRET`·개발용 로그인(`DEV_LOGIN_*`)은 **항상 `backend/.env`**에서 읽습니다(Compose도 마운트된 파일 사용) |
 | `frontend/.env.example` | Docker 없이 frontend 실행 시 (`VITE_DATA_SOURCE`, `VITE_API_BASE_URL`, `API_PROXY_TARGET`) |
 
-`VITE_DATA_SOURCE`: `mock`(기본, 화면 개발용 가짜 데이터) 또는 `api`(실제 백엔드). 현재 백엔드가 있는 기능은 **인증·가입 승인·역할·본인 프로필·명단(회원·게스트·점수)·튜토리얼 진행 기록·청백전(운영진·회원 조회·마이페이지 전적, I3-d4)**이고, `api`여도 오늘 운동은 Mock으로 동작합니다(I4 전, 그 화면의 사람·점수 입력도 Mock 샘플)(`lib/data/source.ts`의 `featureSource`). `frontend/.env`의 `VITE_API_BASE_URL`을 비우면 Vite 프록시(`API_PROXY_TARGET`, 기본 `http://localhost:8000`)를 거쳐 같은 출처로 호출합니다.
+`VITE_DATA_SOURCE`: `api`(기본, 실제 백엔드) 또는 `mock`(화면 개발용 가짜 데이터, 백엔드 없이 실행·`?as=역할` 전환). 현재 백엔드가 있는 기능은 **인증·가입 승인·역할·본인 프로필·명단(회원·게스트·점수)·튜토리얼 진행 기록·청백전(운영진·회원 조회·마이페이지 전적, I3-d4)**이고, `api`여도 오늘 운동은 Mock으로 동작합니다(I4 전, 그 화면의 사람·점수 입력도 Mock 샘플)(`lib/data/source.ts`의 `featureSource`). `frontend/.env`의 `VITE_API_BASE_URL`을 비우면 Vite 프록시(`API_PROXY_TARGET`, 기본 `http://localhost:8000`)를 거쳐 같은 출처로 호출합니다.
 
 `VITE_API_BASE_URL`은 비워 두는 것을 권장합니다. 그러면 브라우저가 같은 출처의 `/api`를 호출하고, Vite 개발 서버가 `API_PROXY_TARGET`(기본 `http://localhost:8000`, Compose는 `http://backend:8000`)으로 넘깁니다. 세션 쿠키와 카카오 Redirect URI(`http://localhost:5173/api/auth/kakao/callback`)가 이 방식을 전제로 합니다.
 
@@ -141,7 +141,7 @@ Template 기능을 쓸 수 없다면 `git clone --depth 1 <url> my-product && cd
 ```bash
 docker compose up -d --wait db                       # DB만 컨테이너로
 cd backend && uv run alembic upgrade head && uv run uvicorn app.main:app --reload
-cd frontend && pnpm dev                              # 실제 API: VITE_DATA_SOURCE=api pnpm dev
+cd frontend && pnpm dev                              # 기본 실제 API. 가짜 데이터: VITE_DATA_SOURCE=mock pnpm dev
 ```
 
 로컬 DB 테스트: `make migrate && make test-db`(Docker, compose 내부 DB만 사용). Docker 없이 할 때는 임시 테스트 DB를 만들어 `DATABASE_URL=<테스트 DB> uv run alembic upgrade head` 후 `TEST_DATABASE_URL=<테스트 DB> uv run pytest -m db`.

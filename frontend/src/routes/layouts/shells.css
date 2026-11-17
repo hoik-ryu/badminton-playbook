@@ -3,12 +3,12 @@
  *
  * 인증·회원·운영 셸 공통(UX Spec r2 01 1장·04 1.5, Design Direction r2 VD-021): 모바일은 화면 너비 그대로,
  *   태블릿·PC(≥768)는 가운데 정렬한 최대 600px 한 열(size.content.member) + 하단 탭. PC 왼쪽 메뉴·넓은 배치 없음.
- *   열 바깥은 color.bg.page(열과 같은 흰색), 경계선·그림자 없음(VD-021).
+ *   (Design Direction r3 VD-021) 화면이 열보다 넓으면 열 바깥 color.bg.surface, 열 color.bg.page + 그림자 elevation.card로 영역 구분.
  */
 :root {
   --app-column-max: var(--size-content-member);
-  --app-outer-bg: var(--color-bg-page);
-  --app-column-shadow: none;
+  --app-outer-bg: var(--color-bg-surface);
+  --app-column-shadow: var(--elevation-card);
   --app-nav-height: 56px;
 }
 

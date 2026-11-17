@@ -1,13 +1,13 @@
 import type { ReactNode } from 'react'
 
 // 04 1.5·3.1 한 열 원칙(r2, D1) + VD-021: 모든 폭에서 가운데 정렬한 최대 600px(size.content.member) 한 열.
-// 열 바깥은 color.bg.page(경계선 없음). 콘텐츠·메뉴·버튼은 열 안에만 둡니다.
+// (r3) 열 바깥은 color.bg.surface, 열은 color.bg.page + 그림자 elevation.card(VD-021 r3). 콘텐츠·메뉴·버튼은 열 안에만 둡니다.
 export const COLUMN = 'mx-auto w-full max-w-(--size-content-member)'
 
 export function Screen({ scr, st, platform, children }: { scr: string; st: string; platform: 'mobile' | 'responsive'; children: ReactNode }) {
   return (
-    <div className="smapsh min-h-full bg-page" data-scr={scr} data-st={st} data-platform={platform}>
-      <div className={COLUMN} data-testid="column">
+    <div className="smapsh flex min-h-full flex-col bg-surface" data-scr={scr} data-st={st} data-platform={platform}>
+      <div className={`${COLUMN} flex-1 bg-page shadow-card`} data-testid="column">
         {children}
       </div>
     </div>

@@ -5,16 +5,16 @@
     "engine_ref": "0edcd4c"
   },
   "created_at": "2026-11-13T06:10:58Z",
-  "updated_at": "2026-11-13T07:09:27Z",
+  "updated_at": "2026-11-17T00:12:50Z",
   "plan": {
     "status": "approved",
-    "revision": 2,
+    "revision": 3,
     "submitted": {
-      "revision": 2,
-      "at": "2026-11-13T06:18:48Z",
+      "revision": 3,
+      "at": "2026-11-17T00:05:46Z",
       "hashes": {
         "docs/build/implementation-plan.json": "d7654b1359fcf4e90d2fe1fb969fa827cc2dd19f611542654c5205a26502394d",
-        "docs/build/00-implementation-plan.md": "961207583b799f235bd34f2cb896b26a86351ddb35a46a07abbc2e799afe16f9",
+        "docs/build/00-implementation-plan.md": "d7962114f7218003454cc11ededa153a2213b3b9eb19e0dbf830d5132988002d",
         "docs/build/build-profile.toml": "fdc3c14d126e6014e6b40678704598c25a81da5a40737dc7ac52ca9f991b911c"
       },
       "inputs": {
@@ -34,14 +34,14 @@
           "workflow": "v2",
           "basis": {
             "ux_spec_revision": 2,
-            "design_direction_revision": 2,
-            "preview_revision": 1
+            "design_direction_revision": 3,
+            "preview_revision": 2
           },
           "approved_digests": {
             "ux_planning": "9a16718c54e67ae61e53f24d79b26415af8fc7700d5348237023fa0e03ff10ec",
             "ux_spec": "7e7b404ea131b5b6c91989bebcf482ac1cb51a1ea65d54ed91345626ef87f77e",
-            "design_direction": "c786501a688742f3eab09006bee8b1d08eab94527e4ee66d5c87cfedee478a07",
-            "preview": "64fdb120dedc6798204ed32a3079d6500e5d2ba9798bf45a0ec43419f86a265f"
+            "design_direction": "04d58330f84432b7b010bf264b1d6bba00d27b9b207cc20510b0acf78b40bfcc",
+            "preview": "caa2e97f08963d3f6ba9555dcd0c095efb6c9a8dfe1afe1887360e2cc37ac197"
           }
         },
         "design_files": {
@@ -51,7 +51,7 @@
           "docs/design/03-screen-flows.md": "29f568804ae3b5184ea9e50b199cf86624d528230f10c1b99159096a1aafcd57",
           "docs/design/04-ui-system.md": "148e8ff520af7a277d04c212fc2555493d0689936db5e5f980da96ab589ecbb9",
           "docs/design/05-design-traceability.md": "e5309788aa94dcd5fb378f4540376b27962c22265c57d1f2b64cd5c72d6cf3bc",
-          "docs/design/07-design-direction.md": "d9553c8fdc509a6ace7f9e9b5f337ef3f7ec10f36b80ef0b32d7cf200f74d7e0"
+          "docs/design/07-design-direction.md": "53c909ac73e219d09a59d70b6a7f9d5f0fbac3bfdf8a62c8d300e7b3e7c3aac3"
         }
       },
       "summary": {
@@ -69,6 +69,63 @@
       ]
     },
     "approved": {
+      "revision": 3,
+      "at": "2026-11-17T00:09:48Z",
+      "hashes": {
+        "docs/build/implementation-plan.json": "d7654b1359fcf4e90d2fe1fb969fa827cc2dd19f611542654c5205a26502394d",
+        "docs/build/00-implementation-plan.md": "d7962114f7218003454cc11ededa153a2213b3b9eb19e0dbf830d5132988002d",
+        "docs/build/build-profile.toml": "fdc3c14d126e6014e6b40678704598c25a81da5a40737dc7ac52ca9f991b911c"
+      },
+      "inputs": {
+        "planning": {
+          "discovery_revision": "3",
+          "planning_revision": "6",
+          "hashes": {
+            "docs/planning/01-discovery.md": "5fcf2ebb6023832a9ab964714a535480ce0adc8d0ce301bea7522f937f87a068",
+            "docs/planning/02-prd.md": "6a9da38ce4439d60e51f3d20fbc4e94b63d202563cf69af268bcd7e3f8fcad57",
+            "docs/planning/03-user-stories.md": "172f84f3e0b95a442f2d5a1670d6510de5d3bdf99c6775f6818dfa4f7b2c5231",
+            "docs/planning/04-user-flows.md": "4adfff41cc441fe2b975c820ec7843b475e2f31ad275f827e69c74735c855eb2",
+            "docs/planning/05-acceptance-criteria.md": "29c74652d2a9f712d660943b476d7bbba390aacfe32fac56c6658147806ca1bc"
+          }
+        },
+        "design": {
+          "level": "L3",
+          "workflow": "v2",
+          "basis": {
+            "ux_spec_revision": 2,
+            "design_direction_revision": 3,
+            "preview_revision": 2
+          },
+          "approved_digests": {
+            "ux_planning": "9a16718c54e67ae61e53f24d79b26415af8fc7700d5348237023fa0e03ff10ec",
+            "ux_spec": "7e7b404ea131b5b6c91989bebcf482ac1cb51a1ea65d54ed91345626ef87f77e",
+            "design_direction": "04d58330f84432b7b010bf264b1d6bba00d27b9b207cc20510b0acf78b40bfcc",
+            "preview": "caa2e97f08963d3f6ba9555dcd0c095efb6c9a8dfe1afe1887360e2cc37ac197"
+          }
+        },
+        "design_files": {
+          "docs/design/00-ux-decisions.md": "1964b4d8ecbc993042a5835a3c0f65e3be5afa4d932c23d1d36bdf9fa5c06105",
+          "docs/design/01-information-architecture.md": "94c9ae6860464aa33dcce495118572b5a22eb4e615d2d59b6f7b12a89020bd76",
+          "docs/design/02-screens.md": "238867828129796bd81c0b3a3ee8245c68e9dc211eaad6860362b9159ffe8919",
+          "docs/design/03-screen-flows.md": "29f568804ae3b5184ea9e50b199cf86624d528230f10c1b99159096a1aafcd57",
+          "docs/design/04-ui-system.md": "148e8ff520af7a277d04c212fc2555493d0689936db5e5f980da96ab589ecbb9",
+          "docs/design/05-design-traceability.md": "e5309788aa94dcd5fb378f4540376b27962c22265c57d1f2b64cd5c72d6cf3bc",
+          "docs/design/07-design-direction.md": "53c909ac73e219d09a59d70b6a7f9d5f0fbac3bfdf8a62c8d300e7b3e7c3aac3"
+        }
+      },
+      "statement": "구현 계획 승인 + 테스트 변경 허용(2026-11-17, 선택지 응답)",
+      "summary": {
+        "batches": 9,
+        "auto": 4,
+        "user": 5,
+        "ac_assigned": 73,
+        "ac_active": 73,
+        "ac_deferred": 30,
+        "screens_owned": 29,
+        "screens_required": 25
+      }
+    },
+    "last_approved": {
       "revision": 2,
       "at": "2026-11-13T06:42:45Z",
       "hashes": {
@@ -125,7 +182,6 @@
         "screens_required": 25
       }
     },
-    "last_approved": null,
     "validity": {
       "status": "valid"
     }
@@ -140,7 +196,7 @@
       "waiver": null,
       "depends_on": [],
       "ac_targets": {},
-      "plan_revision": 2,
+      "plan_revision": 3,
       "run": {
         "batch": "B0",
         "started_at": "2026-11-13T06:43:06Z",
@@ -362,7 +418,7 @@
         "AC-060": "E3",
         "AC-099": "E3"
       },
-      "plan_revision": 2
+      "plan_revision": 3
     },
     "B2": {
       "status": "planned",
@@ -402,7 +458,7 @@
         "AC-098": "E2",
         "AC-110": "E2"
       },
-      "plan_revision": 2
+      "plan_revision": 3
     },
     "B3": {
       "status": "planned",
@@ -421,7 +477,7 @@
         "AC-095": "E2",
         "AC-096": "E2"
       },
-      "plan_revision": 2
+      "plan_revision": 3
     },
     "B4": {
       "status": "planned",
@@ -434,7 +490,7 @@
         "B0"
       ],
       "ac_targets": {},
-      "plan_revision": 2
+      "plan_revision": 3
     },
     "B5": {
       "status": "planned",
@@ -463,7 +519,7 @@
         "AC-106": "E3",
         "AC-107": "E3"
       },
-      "plan_revision": 2
+      "plan_revision": 3
     },
     "B6": {
       "status": "planned",
@@ -499,7 +555,7 @@
         "AC-108": "E2",
         "AC-109": "E3"
       },
-      "plan_revision": 2
+      "plan_revision": 3
     },
     "B7": {
       "status": "verified",
@@ -514,7 +570,7 @@
       "ac_targets": {
         "AC-050": "E2"
       },
-      "plan_revision": 2,
+      "plan_revision": 3,
       "run": {
         "batch": "B7",
         "started_at": "2026-11-13T07:03:04Z",
@@ -666,10 +722,10 @@
           },
           "verify": {
             "consecutive_failures": 0,
-            "total": 1,
+            "total": 3,
             "last": {
-              "at": "2026-11-13T07:09:27Z",
-              "run_id": "20261113-160845-03361c",
+              "at": "2026-11-17T00:12:50Z",
+              "run_id": "20261117-091208-508038",
               "ok": true
             }
           }
@@ -717,55 +773,55 @@
         }
       },
       "verification": {
-        "run_id": "20261113-160845-03361c",
-        "dir": ".ai-workflow/build/evidence/B7/runs/20261113-160845-03361c",
-        "digest": "fe0f7f90f80b0d30b39fab05cce12fe666ee4d63cfbc96c45d218019c5b469cd",
-        "at": "2026-11-13T07:09:26Z",
+        "run_id": "20261117-091208-508038",
+        "dir": ".ai-workflow/build/evidence/B7/runs/20261117-091208-508038",
+        "digest": "5adcbbbbc1c4630ca1f53169f86d3f02af43dee6ccf93f23185072f419f9b146",
+        "at": "2026-11-17T00:12:49Z",
         "valid": true,
         "steps": {
           "test-be": {
             "status": "passed",
             "exit": 0,
-            "log": ".ai-workflow/build/evidence/B7/runs/20261113-160845-03361c/test-be.log",
+            "log": ".ai-workflow/build/evidence/B7/runs/20261117-091208-508038/test-be.log",
             "report": {
               "format": "junit-xml",
               "cases": 1369,
               "passed": 1369,
               "failed": 0,
-              "sha256": "4a810a8807c1fd51bf3a9146996b725ffbbd52520e4e962802155c77919d7848"
+              "sha256": "91337a4a1b4331e5147df82c20aec8d40389d3abf5b512bde0de6d310a753c66"
             }
           },
           "test-fe": {
             "status": "passed",
             "exit": 0,
-            "log": ".ai-workflow/build/evidence/B7/runs/20261113-160845-03361c/test-fe.log",
+            "log": ".ai-workflow/build/evidence/B7/runs/20261117-091208-508038/test-fe.log",
             "report": {
               "format": "junit-xml",
               "cases": 179,
               "passed": 179,
               "failed": 0,
-              "sha256": "598e66e3ab901393294d312dc89d891ca453e11f9fdbc4767f68dd0f9500769d"
+              "sha256": "7e6ff1db097328088e59f3802933bb65ffc65310f618638d2b85538fd89c395d"
             }
           },
           "make-test-db": {
             "status": "passed",
             "exit": 0,
-            "log": ".ai-workflow/build/evidence/B7/runs/20261113-160845-03361c/make-test-db.log"
+            "log": ".ai-workflow/build/evidence/B7/runs/20261117-091208-508038/make-test-db.log"
           },
           "make-lint": {
             "status": "passed",
             "exit": 0,
-            "log": ".ai-workflow/build/evidence/B7/runs/20261113-160845-03361c/make-lint.log"
+            "log": ".ai-workflow/build/evidence/B7/runs/20261117-091208-508038/make-lint.log"
           },
           "make-typecheck": {
             "status": "passed",
             "exit": 0,
-            "log": ".ai-workflow/build/evidence/B7/runs/20261113-160845-03361c/make-typecheck.log"
+            "log": ".ai-workflow/build/evidence/B7/runs/20261117-091208-508038/make-typecheck.log"
           },
           "make-build": {
             "status": "passed",
             "exit": 0,
-            "log": ".ai-workflow/build/evidence/B7/runs/20261113-160845-03361c/make-build.log"
+            "log": ".ai-workflow/build/evidence/B7/runs/20261117-091208-508038/make-build.log"
           }
         },
         "counts": {
@@ -781,7 +837,7 @@
             "target": "E2",
             "cases": [
               {
-                "id": "src/layout.test.tsx::AC-050 한 열 최대 600px (UX Spec r2, VD-021) > [AC-050] 토큰 size.content.member는 600px이고 셸 열·바깥 배경이 그 토큰과 color.bg.page를 쓴다",
+                "id": "src/layout.test.tsx::AC-050 한 열 최대 600px (UX Spec r2, VD-021) > [AC-050] 토큰 size.content.member는 600px이고 셸 열이 그 토큰을, 바깥·열 구분이 color.bg.surface·elevation.card를 쓴다(VD-021 r3)",
                 "status": "passed"
               },
               {
@@ -804,11 +860,11 @@
           }
         },
         "reasons": [],
-        "code_tree": "9aa0a0db54b5e05bc1517bb09d9579267d2208d891a0d92d5af357c893c35ba6",
+        "code_tree": "02c353c669f6ebc11a47728b81ec8dde739f22130069dfec7663f1b07ad82353",
         "case_files": [
           "frontend/src/layout.test.tsx"
         ],
-        "scope_tree": "7813edbe61d93346a418729ed257de42a6f4acb00ded536269cdd51d1e473bab",
+        "scope_tree": "c9398db24f8ddb6b91a2cbc9bc34d20d9deb4674727b6c9b91d8e747d95896f7",
         "deps": {
           "frontend/package.json": "acd7630bc3beeb236dad2b4115c859fb92704af4155efc5b093b358de6a268ca",
           "frontend/pnpm-lock.yaml": "6916fba9b13c123e7d2a48abeb4052f1f35c346b1aa37886a2e3b9cb2cb94522"
@@ -821,26 +877,133 @@
           "active": true,
           "reasons": [],
           "warnings": [
+            "[touched_unplanned] SCR-101: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-112: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-121: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-201: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-202: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-203: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-205: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-211: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-212: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-223: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-224: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-225: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
             "프로필에 브라우저 검증 단계(report.format = \"pb-ui\")가 없습니다"
           ],
-          "brief_digest": "7c9c0eb617b09129bd460be5c89387f786c1d505562408e53cddbd7a968447c6",
-          "ui_plan_sha": "2116908b02b75258a2c5e12463919e066bcbe9ce81160b5be0054759bce42033",
+          "touched": {
+            "rules": "touched-v1",
+            "screens": {
+              "SCR-101": {
+                "mode": "unplanned",
+                "via": []
+              },
+              "SCR-112": {
+                "mode": "unplanned",
+                "via": []
+              },
+              "SCR-121": {
+                "mode": "unplanned",
+                "via": []
+              },
+              "SCR-201": {
+                "mode": "unplanned",
+                "via": []
+              },
+              "SCR-202": {
+                "mode": "unplanned",
+                "via": []
+              },
+              "SCR-203": {
+                "mode": "unplanned",
+                "via": []
+              },
+              "SCR-205": {
+                "mode": "unplanned",
+                "via": []
+              },
+              "SCR-211": {
+                "mode": "unplanned",
+                "via": []
+              },
+              "SCR-212": {
+                "mode": "unplanned",
+                "via": []
+              },
+              "SCR-223": {
+                "mode": "unplanned",
+                "via": []
+              },
+              "SCR-224": {
+                "mode": "unplanned",
+                "via": []
+              },
+              "SCR-225": {
+                "mode": "unplanned",
+                "via": []
+              }
+            },
+            "blockers": [
+              "[touched_unplanned] SCR-101: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+              "[touched_unplanned] SCR-112: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+              "[touched_unplanned] SCR-121: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+              "[touched_unplanned] SCR-201: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+              "[touched_unplanned] SCR-202: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+              "[touched_unplanned] SCR-203: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+              "[touched_unplanned] SCR-205: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+              "[touched_unplanned] SCR-211: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+              "[touched_unplanned] SCR-212: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+              "[touched_unplanned] SCR-223: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+              "[touched_unplanned] SCR-224: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+              "[touched_unplanned] SCR-225: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다"
+            ],
+            "counts": {
+              "representative": 0,
+              "covered": 0,
+              "exempt": 0,
+              "unplanned": 12
+            }
+          },
+          "brief_digest": "304805ef2557f97b4397cd7f8e68b181da326503ec0e61d12fa1b694cd174e39",
+          "ui_plan_sha": "87036e4327019d79ffaad2cd75e37854e571ff23738c7f8a2c08cea43067f0a8",
           "ui_plan_validated": true,
           "basis": {
             "screens": {},
             "tokens": "8a909bb72622c361a84ce33cab63a9c6ff57c1e7365f6a000dd706e2d306f930",
-            "ui_plan_components": "80a8d4b8a89dd4474ad11a3c3aed169e5ceb5a9a4aeb633a16b80d9766532f1d"
+            "ui_plan_components": "80a8d4b8a89dd4474ad11a3c3aed169e5ceb5a9a4aeb633a16b80d9766532f1d",
+            "touched": {
+              "SCR-101": "68d22132e0d17b61213da4f52e06ab87d5bb3a6406c450150cb99d822dc39f31",
+              "SCR-112": "5516add5268063e48aa1cd21a769decd7baf7aed85b8f8a0b0b9d2993b1770c9",
+              "SCR-121": "d43993772b0aa0472798e9656c9ecc51a6a84de0383a095d48c424570b662eae",
+              "SCR-201": "a341d68a6af0e71883d7d08968ad8e1d235aa5536ad7cf992d5fe5e84f6d7622",
+              "SCR-202": "47f0824d2afcd7f523c86e9326fe2ce84c5b9f0de8baf59cdd1f99b827e111a8",
+              "SCR-203": "a4ab1078436977651e71351aeaa204c2459e72f314cd91d4a27b597031deac07",
+              "SCR-205": "93464a54b324278707d60a75fec561bee15590908bc7e87f9b874927f6b0ed24",
+              "SCR-211": "7aeef2833487df108b01844caaa32a3ecbc5b6349d97f7ce46cb48a30f99b937",
+              "SCR-212": "20ca091b01a8eaad7f6031809e1c2c922caa8af2b5ba071073fa95bccbb7b546",
+              "SCR-223": "e3a376e732227b9784a7230349e7092e355b088bf2f1092cff1f01c67383dff6",
+              "SCR-224": "d284f5c6d28a92c641a953f674100ac7d66087c01c1d879702b0cafa07da7809",
+              "SCR-225": "0a4de3196a168470909130ab0a5335a3b7bdddbdf5ef3a3bf2b739dd0ee1a508"
+            }
           },
           "code": {
-            "run_id": "20261113-160845-03361c",
-            "at": "2026-11-13T07:09:26Z",
+            "run_id": "20261117-091208-508038",
+            "at": "2026-11-17T00:12:49Z",
             "valid": true,
-            "code_tree": "9aa0a0db54b5e05bc1517bb09d9579267d2208d891a0d92d5af357c893c35ba6",
-            "code_only_tree": "65a43b959f71d294367a09260e31bb08921c8b937f54174bfe26f508dce0c025",
-            "head": "120a9368a8f390773050a624f7d4e2d7f8a29b6e"
+            "code_tree": "02c353c669f6ebc11a47728b81ec8dde739f22130069dfec7663f1b07ad82353",
+            "code_only_tree": "f4197e2ca7600537c0107ceefdf40d548487b23bf050f3b5b87167e8fb4c6f03",
+            "head": "5d8a93056ca3de4d9e82a718df340b59b402f00d"
           },
           "states": {},
-          "ac_links": {},
+          "ac_links": {
+            "AC-050": {
+              "ac_status": "verified",
+              "ac_level": "E2",
+              "states": {},
+              "mismatch": false,
+              "gaps": []
+            }
+          },
           "browser": {
             "status": "not_configured",
             "steps": {},
@@ -907,10 +1070,69 @@
             "manual_only": 0,
             "invalid_run": 0
           },
-          "final_approval_blockers": [],
-          "evidence_digest": "0975e849dc8cec8be2fc35536dd1f993e750ece80db9c475461e8165b8acbc0f"
+          "final_approval_blockers": [
+            "[touched_unplanned] SCR-101: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-112: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-121: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-201: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-202: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-203: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-205: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-211: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-212: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-223: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-224: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다",
+            "[touched_unplanned] SCR-225: touches 화면의 계획(UI Plan touched)이 없어 증거 대상을 정할 수 없습니다"
+          ],
+          "evidence_digest": "3253dc0038627a17293d549a86d35caf56ff07639f86f58cf497f33ebe5ca606"
         }
-      }
+      },
+      "ui_feedback": [
+        {
+          "id": "FB-001",
+          "batch": "B7",
+          "summary": "데스크톱 600px 열이 바깥과 구분되지 않음 — Design Direction r3 VD-021(바깥 color.bg.surface, 열 그림자 elevation.card)과 코드(shells.css 바깥 흰색·그림자 없음)가 다름",
+          "targets": {
+            "screens": [
+              "SCR-201"
+            ],
+            "states": []
+          },
+          "facts": [
+            {
+              "kind": "defect"
+            }
+          ],
+          "classification": {
+            "status": "excluded",
+            "categories": [],
+            "primary": null,
+            "flags": [],
+            "reapproval_required": false,
+            "reapproval_stages": [],
+            "notes": [],
+            "impact": []
+          },
+          "category": "결함",
+          "route": "code_fix",
+          "route_reason": "결함 보고(승인 명세와 다르게 구현됨): 이 배치 코드만 고칩니다",
+          "status": "open",
+          "statement": "그림자 아직없는데?? 영역 구분이 안돼 내가 지금 데스크탑에서 보고있는데 다른 영역이랑 하나도 구분이안되는데?",
+          "by": "사용자",
+          "at": "2026-11-17T00:10:14Z",
+          "review_id": null,
+          "code": {
+            "scope_tree": "7813edbe61d93346a418729ed257de42a6f4acb00ded536269cdd51d1e473bab",
+            "head": "5d8a93056ca3de4d9e82a718df340b59b402f00d"
+          },
+          "design_revisions": {
+            "ux_planning": null,
+            "ux_spec": null,
+            "preview": null,
+            "design_direction": null
+          }
+        }
+      ]
     },
     "B8": {
       "status": "planned",
@@ -925,7 +1147,7 @@
         "B7"
       ],
       "ac_targets": {},
-      "plan_revision": 2
+      "plan_revision": 3
     }
   },
   "waivers": [],
@@ -1097,6 +1319,55 @@
       "event": "verified",
       "revision": null,
       "note": "B7: 필수 AC 검증 완료"
+    },
+    {
+      "at": "2026-11-16T23:54:18Z",
+      "target": "plan",
+      "event": "outdated",
+      "revision": 2,
+      "note": "design.design_direction: 승인 기록 변경; design.preview: 계획 기준이었던 프리뷰 승인 기록 변경; design.level: L3 → L1; docs/design/07-design-direction.md: 내용 변경"
+    },
+    {
+      "at": "2026-11-17T00:05:45Z",
+      "target": "plan",
+      "event": "reopened",
+      "revision": 2,
+      "note": "outdated → drafting: Design Direction r3(VD-021 열 바깥 color.bg.surface + 열 그림자) 승인과 Preview r2 승인으로 입력 기준 변경. 계획 내용은 그대로, 새 기준으로 다시 제출"
+    },
+    {
+      "at": "2026-11-17T00:05:46Z",
+      "target": "plan",
+      "event": "submitted",
+      "revision": 3,
+      "note": "배치 9개(자동 4, 사용자 5)"
+    },
+    {
+      "at": "2026-11-17T00:09:48Z",
+      "target": "plan",
+      "event": "approved",
+      "revision": 3,
+      "note": "구현 계획 승인 + 테스트 변경 허용(2026-11-17, 선택지 응답)"
+    },
+    {
+      "at": "2026-11-17T00:10:14Z",
+      "target": "batch",
+      "event": "ui_feedback",
+      "revision": null,
+      "note": "B7: FB-001 code_fix — 데스크톱 600px 열이 바깥과 구분되지 않음 — Design Direction r3 VD-021(바깥 color.bg.surface, 열 그림자 elevation.card)과 코드(shells.css 바깥 흰색·그"
+    },
+    {
+      "at": "2026-11-17T00:11:40Z",
+      "target": "batch",
+      "event": "verify_failed",
+      "revision": null,
+      "note": "B7: 검증 단계 make-test-db: failed"
+    },
+    {
+      "at": "2026-11-17T00:12:50Z",
+      "target": "batch",
+      "event": "verified",
+      "revision": null,
+      "note": "B7: 필수 AC 검증 완료"
     }
   ],
   "case_history": {
@@ -1137,6 +1408,30 @@
           "valid": true,
           "batch": "B7",
           "mode": "final"
+        },
+        {
+          "run": "20261117-091105-5ac4c8",
+          "tree": "02c353c669f6ebc11a47728b81ec8dde739f22130069dfec7663f1b07ad82353",
+          "code": "f4197e2ca7600537c0107ceefdf40d548487b23bf050f3b5b87167e8fb4c6f03",
+          "test_sha": "4452581bb4e9fef3a31d91c5d0a94aeb05dd9bedd271cbbb0f482403d1e8bf7f",
+          "test_copy": ".ai-workflow/build/evidence/B7/runs/20261117-091105-5ac4c8/testfiles/frontend/src/layout.test.tsx",
+          "status": "passed",
+          "at": "2026-11-17T00:11:39Z",
+          "valid": true,
+          "batch": "B7",
+          "mode": "final"
+        },
+        {
+          "run": "20261117-091208-508038",
+          "tree": "02c353c669f6ebc11a47728b81ec8dde739f22130069dfec7663f1b07ad82353",
+          "code": "f4197e2ca7600537c0107ceefdf40d548487b23bf050f3b5b87167e8fb4c6f03",
+          "test_sha": "4452581bb4e9fef3a31d91c5d0a94aeb05dd9bedd271cbbb0f482403d1e8bf7f",
+          "test_copy": ".ai-workflow/build/evidence/B7/runs/20261117-091208-508038/testfiles/frontend/src/layout.test.tsx",
+          "status": "passed",
+          "at": "2026-11-17T00:12:49Z",
+          "valid": true,
+          "batch": "B7",
+          "mode": "final"
         }
       ]
     },
@@ -1157,6 +1452,30 @@
           "valid": true,
           "batch": "B7",
           "mode": "final"
+        },
+        {
+          "run": "20261117-091105-5ac4c8",
+          "tree": "02c353c669f6ebc11a47728b81ec8dde739f22130069dfec7663f1b07ad82353",
+          "code": "f4197e2ca7600537c0107ceefdf40d548487b23bf050f3b5b87167e8fb4c6f03",
+          "test_sha": "4452581bb4e9fef3a31d91c5d0a94aeb05dd9bedd271cbbb0f482403d1e8bf7f",
+          "test_copy": ".ai-workflow/build/evidence/B7/runs/20261117-091105-5ac4c8/testfiles/frontend/src/layout.test.tsx",
+          "status": "passed",
+          "at": "2026-11-17T00:11:39Z",
+          "valid": true,
+          "batch": "B7",
+          "mode": "final"
+        },
+        {
+          "run": "20261117-091208-508038",
+          "tree": "02c353c669f6ebc11a47728b81ec8dde739f22130069dfec7663f1b07ad82353",
+          "code": "f4197e2ca7600537c0107ceefdf40d548487b23bf050f3b5b87167e8fb4c6f03",
+          "test_sha": "4452581bb4e9fef3a31d91c5d0a94aeb05dd9bedd271cbbb0f482403d1e8bf7f",
+          "test_copy": ".ai-workflow/build/evidence/B7/runs/20261117-091208-508038/testfiles/frontend/src/layout.test.tsx",
+          "status": "passed",
+          "at": "2026-11-17T00:12:49Z",
+          "valid": true,
+          "batch": "B7",
+          "mode": "final"
         }
       ]
     },
@@ -1174,6 +1493,62 @@
           "test_copy": ".ai-workflow/build/evidence/B7/runs/20261113-160845-03361c/testfiles/frontend/src/layout.test.tsx",
           "status": "passed",
           "at": "2026-11-13T07:09:26Z",
+          "valid": true,
+          "batch": "B7",
+          "mode": "final"
+        },
+        {
+          "run": "20261117-091105-5ac4c8",
+          "tree": "02c353c669f6ebc11a47728b81ec8dde739f22130069dfec7663f1b07ad82353",
+          "code": "f4197e2ca7600537c0107ceefdf40d548487b23bf050f3b5b87167e8fb4c6f03",
+          "test_sha": "4452581bb4e9fef3a31d91c5d0a94aeb05dd9bedd271cbbb0f482403d1e8bf7f",
+          "test_copy": ".ai-workflow/build/evidence/B7/runs/20261117-091105-5ac4c8/testfiles/frontend/src/layout.test.tsx",
+          "status": "passed",
+          "at": "2026-11-17T00:11:39Z",
+          "valid": true,
+          "batch": "B7",
+          "mode": "final"
+        },
+        {
+          "run": "20261117-091208-508038",
+          "tree": "02c353c669f6ebc11a47728b81ec8dde739f22130069dfec7663f1b07ad82353",
+          "code": "f4197e2ca7600537c0107ceefdf40d548487b23bf050f3b5b87167e8fb4c6f03",
+          "test_sha": "4452581bb4e9fef3a31d91c5d0a94aeb05dd9bedd271cbbb0f482403d1e8bf7f",
+          "test_copy": ".ai-workflow/build/evidence/B7/runs/20261117-091208-508038/testfiles/frontend/src/layout.test.tsx",
+          "status": "passed",
+          "at": "2026-11-17T00:12:49Z",
+          "valid": true,
+          "batch": "B7",
+          "mode": "final"
+        }
+      ]
+    },
+    "src/layout.test.tsx::AC-050 한 열 최대 600px (UX Spec r2, VD-021) > [AC-050] 토큰 size.content.member는 600px이고 셸 열이 그 토큰을, 바깥·열 구분이 color.bg.surface·elevation.card를 쓴다(VD-021 r3)": {
+      "acs": [
+        "AC-050"
+      ],
+      "file": "frontend/src/layout.test.tsx",
+      "records": [
+        {
+          "run": "20261117-091105-5ac4c8",
+          "tree": "02c353c669f6ebc11a47728b81ec8dde739f22130069dfec7663f1b07ad82353",
+          "code": "f4197e2ca7600537c0107ceefdf40d548487b23bf050f3b5b87167e8fb4c6f03",
+          "test_sha": "4452581bb4e9fef3a31d91c5d0a94aeb05dd9bedd271cbbb0f482403d1e8bf7f",
+          "test_copy": ".ai-workflow/build/evidence/B7/runs/20261117-091105-5ac4c8/testfiles/frontend/src/layout.test.tsx",
+          "status": "passed",
+          "at": "2026-11-17T00:11:39Z",
+          "valid": true,
+          "batch": "B7",
+          "mode": "final"
+        },
+        {
+          "run": "20261117-091208-508038",
+          "tree": "02c353c669f6ebc11a47728b81ec8dde739f22130069dfec7663f1b07ad82353",
+          "code": "f4197e2ca7600537c0107ceefdf40d548487b23bf050f3b5b87167e8fb4c6f03",
+          "test_sha": "4452581bb4e9fef3a31d91c5d0a94aeb05dd9bedd271cbbb0f482403d1e8bf7f",
+          "test_copy": ".ai-workflow/build/evidence/B7/runs/20261117-091208-508038/testfiles/frontend/src/layout.test.tsx",
+          "status": "passed",
+          "at": "2026-11-17T00:12:49Z",
           "valid": true,
           "batch": "B7",
           "mode": "final"

@@ -4,14 +4,14 @@
   "title": "UX Spec r2·Design Direction r2 레이아웃 정합(B-04)",
   "kind": "ui",
   "goal": "FE를 승인 명세에 맞춘다: 시트 PC·모바일 공통 하단(CMP-021 presentation=bottom), PC 옆 패널·넓은 배치·왼쪽 메뉴 제거, h1 22px, 카드 그림자 제거·메뉴 목록 Flat, FE 토큰 600px. 새 부품·토큰 없음.",
-  "plan_revision": 2,
+  "plan_revision": 3,
   "design": {
     "level": "L3",
     "workflow": "v2",
     "basis": {
       "ux_spec_revision": 2,
-      "design_direction_revision": 2,
-      "preview_revision": 1
+      "design_direction_revision": 3,
+      "preview_revision": 2
     },
     "waiver": null
   },
@@ -373,7 +373,7 @@
     "docs/design/02-screens.md": "238867828129796bd81c0b3a3ee8245c68e9dc211eaad6860362b9159ffe8919",
     "docs/design/04-ui-system.md": "148e8ff520af7a277d04c212fc2555493d0689936db5e5f980da96ab589ecbb9",
     "docs/design/05-design-traceability.md": "e5309788aa94dcd5fb378f4540376b27962c22265c57d1f2b64cd5c72d6cf3bc",
-    "docs/design/07-design-direction.md": "d9553c8fdc509a6ace7f9e9b5f337ef3f7ec10f36b80ef0b32d7cf200f74d7e0",
+    "docs/design/07-design-direction.md": "53c909ac73e219d09a59d70b6a7f9d5f0fbac3bfdf8a62c8d300e7b3e7c3aac3",
     "docs/build/implementation-plan.json": "d7654b1359fcf4e90d2fe1fb969fa827cc2dd19f611542654c5205a26502394d",
     "docs/build/ui-map.json": "648031cdc8c9e66955ec5d3e8c91ccdac2a02de270359f3305cf14ac55f44e7e",
     "docs/design-profile/theme.json": "fd21e9ea803fa4a7191fd3f5e107e8a8f55146775f58fa44c7c15cfd50ebd06b"
@@ -418,5 +418,1360 @@
     },
     "digest": "61cc7eb8cf0ad70cb26638e7f49144429b75b888f64fd1a3df011542c31d7a12"
   },
-  "digest": "7c9c0eb617b09129bd460be5c89387f786c1d505562408e53cddbd7a968447c6"
+  "touched": {
+    "note": "이 배치가 소유하지 않지만 바꾸는 화면입니다. 화면마다 증거를 내지 않고, 변경 경로(via)마다 대표 화면의 상태에서 증거를 냅니다. affected_via = 이 배치가 다루는 CMP 중 그 화면에 있는 것(수정 영향 후보), referenced = 화면에 있지만 이 배치가 다루지 않는 CMP(참조).",
+    "rules": "touched-v1",
+    "screens": {
+      "SCR-101": {
+        "name": "튜토리얼 홈",
+        "route": "/tutorial",
+        "owner": "B2",
+        "priority": "Must",
+        "states": [
+          {
+            "id": "SCR-101-ST1",
+            "label": "기본",
+            "behavior": "진행 기록과 함께 표시",
+            "defined": true
+          },
+          {
+            "id": "SCR-101-ST2",
+            "label": "로딩",
+            "behavior": "섹션·카드 스켈레톤",
+            "defined": true
+          },
+          {
+            "id": "SCR-101-ST3",
+            "label": "빈 상태",
+            "behavior": "진행 기록 없음: 모든 카드 미통과('-'), 진행률 0/3. 별도 빈 화면은 두지 않음",
+            "defined": true
+          },
+          {
+            "id": "SCR-101-ST4",
+            "label": "오류",
+            "behavior": "진행 기록을 못 불러오면 카드 목록은 보여 주고 진행 표시 자리에 \"진행 기록을 불러오지 못했습니다 · 다시 시도\". 콘텐츠 목록도 실패하면 블록 오류",
+            "defined": true
+          },
+          {
+            "id": "SCR-101-ST5",
+            "label": "권한 없음",
+            "behavior": "비로그인 → SCR-001, 미승인 → SCR-003(AC-049, FLOW-006-S1a)",
+            "defined": true
+          },
+          {
+            "id": null,
+            "label": "충돌",
+            "behavior": "해당 없음(조회 화면)",
+            "defined": false
+          }
+        ],
+        "components": [
+          "CMP-023",
+          "CMP-025",
+          "CMP-026",
+          "CMP-027",
+          "CMP-047"
+        ],
+        "affected_via": [
+          "CMP-025",
+          "CMP-026"
+        ],
+        "referenced": [
+          "CMP-023",
+          "CMP-027",
+          "CMP-047"
+        ],
+        "acs": [
+          {
+            "id": "AC-050",
+            "title": "회원 화면은 PC에서도 모바일 너비로 보인다 *(r3 수정: 추적 대상 변경)*",
+            "priority": "Must",
+            "states": [
+              "SCR-101-ST1"
+            ],
+            "target_level": "E2"
+          }
+        ],
+        "vd": [
+          {
+            "id": "VD-002",
+            "title": "아이콘 세트 Lucide",
+            "decision": "lucide-react 아이콘만 씀",
+            "via": "CMP-025"
+          },
+          {
+            "id": "VD-019",
+            "title": "하단 탭 Lucide 아이콘과 현재 탭 표시",
+            "decision": "튜토리얼 graduation-cap, 청백전 swords, 마이페이지 circle-user-round, 운영 clipboard-list(24px). 탭 이름·순서·글자 레이블·행동은 그대로. 현재 탭은 아이콘·글자 `color.action.primary` + 굵은 글자 + 위쪽 표시 막대(새 토큰 없음). 탭 높이 56(CR-005). (r2) PC·모바일 같은 하단 탭, 600px 열 너비(04 CMP-025 `layout=bottom`)",
+            "via": "CMP-025"
+          },
+          {
+            "id": "VD-020",
+            "title": "하단 안전 영역",
+            "decision": "하단 탭 아래 `env(safe-area-inset-bottom)`, 목록 끝 스크롤 여백 = 탭 높이 + 안전 영역 + 16, 포커스 스크롤 여백도 같게. 오른쪽 아래 '게스트 추가'는 탭 위 16. (r2) 적용 범위 확장: PC(1440px)의 600px 열에서도 같은 값을 쓰고, '게스트 추가'는 열 오른쪽 안쪽 16(열 바깥 화면 가장자리가 아님). 하단 고정 행동 바(SCR-202, SCR-223)와 시트 하단 고정 버튼도 안전 영역 위(04 3.1·3.2)",
+            "via": "CMP-025"
+          },
+          {
+            "id": "VD-021",
+            "title": "한 열 레이아웃의 좌우 여백과 열 바깥 배경",
+            "decision": "열 안쪽 좌우 여백은 모든 폭에서 `space.gutter.mobile`(16px). 600px 열에 닿는 넓은 화면에서도 `space.gutter.desktop`으로 넓히지 않음. ~~열 바깥 배경은 `color.bg.page`(열과 같은 흰색, 경계선 없음).~~ (r3) 화면 폭이 열보다 넓을 때(태블릿·PC) 열 바깥 배경은 `color.bg.surface`, 열 배경은 `color.bg.page`이고 열에 그림자 `elevation.card`를 줘 영역을 구분함. 모바일(화면 폭 = 열 폭)에는 바깥 영역이 없어 해당 없음. 화면 제목·목록·카드·하단 고정 바·시트 내용의 왼쪽 시작선을 이 여백으로 맞춤",
+            "via": "CMP-026"
+          },
+          {
+            "id": "VD-024",
+            "title": "카드 표현과 적용 대상",
+            "decision": "04 3.1 '카드를 쓰는 경우'의 정보 묶음(CMP-041 GameCard, CMP-042 StandingsCard, CMP-043 ClubMatchListItem, CMP-045 RecordSummary, CMP-047 StageCard)만 카드로 그림. 표현은 배경 `color.bg.page` + 테두리 1px `color.border.default` + 모서리 `radius.md`, 그림자 없음(`elevation.card`는 쓰지 않음). 카드 안 구역 구분은 `color.bg.surface`. 카드 안 여백은 `space.3`. 반복 목록·입력·설정·필터는 Flat(행과 구분선). 카드 안에 카드를 두지 않음",
+            "via": "CMP-047"
+          }
+        ],
+        "layout": "```\n┌──────────────────────┐\n│ 튜토리얼              │\n│ ⓘ 처음이라면 입문자부터 │\n│ ── 튜토리얼 난이도 · 입문자  2/3 통과 ──│\n│ [스테이지 1 ✓ 5/5]     │\n│ [스테이지 2 ✓ 4/5]     │\n│ [스테이지 3   -  ]     │\n│ ── 튜토리얼 난이도 · 왕초보  0/3 통과 ──│\n│ [스테이지 1 …]        │\n│ ▸ 준비 중 (초보, D조 이상) │ ← 접힘\n├──────────────────────┤\n│ 튜토리얼 청백전 마이 운영│ ← 하단 탭(운영은 운영진 이상)\n└──────────────────────┘\n```"
+      },
+      "SCR-112": {
+        "name": "청백전 상세(회원)",
+        "route": "/club-matches/:matchId",
+        "owner": "B2",
+        "priority": "Must",
+        "states": [
+          {
+            "id": "SCR-112-ST1",
+            "label": "기본",
+            "behavior": "진행 중: 다음 경기 강조 + 내 경기 + 승수/순위 + 전체 대진",
+            "defined": true
+          },
+          {
+            "id": "SCR-112-ST2",
+            "label": "로딩",
+            "behavior": "카드 스켈레톤",
+            "defined": true
+          },
+          {
+            "id": "SCR-112-ST3",
+            "label": "빈 상태",
+            "behavior": "내가 참가하지 않은 청백전: 내 경기 자리에 \"이번 청백전에는 참가하지 않았어요\", 승수/순위와 전체 대진은 표시",
+            "defined": true
+          },
+          {
+            "id": "SCR-112-ST4",
+            "label": "오류",
+            "behavior": "블록 오류 + 다시 시도",
+            "defined": true
+          },
+          {
+            "id": "SCR-112-ST5",
+            "label": "권한 없음",
+            "behavior": "미확정·없는 청백전: \"청백전을 찾을 수 없습니다\" + '청백전 목록으로'(존재 여부를 드러내지 않음, AC-069)",
+            "defined": true
+          },
+          {
+            "id": null,
+            "label": "충돌",
+            "behavior": "해당 없음(조회 화면)",
+            "defined": false
+          },
+          {
+            "id": "SCR-112-ST7",
+            "label": "대진 수정됨",
+            "behavior": "위쪽 배너 '대진이 수정되었습니다(시각)', 바뀐 경기 카드에 '변경됨' 배지(AC-088)",
+            "defined": true
+          },
+          {
+            "id": "SCR-112-ST8",
+            "label": "종료",
+            "behavior": "맨 위 최종 결과 카드(팀전 승리·무승부, 개인전 최종 순위 상위 3명, 펼치기)(UXD-072). '다음 경기' 섹션 없음. (r2, X7) 종료 후 결과가 수정되었으면 맨 위에 '경기 결과가 수정되었습니다(시각)' 배너, 결과가 바뀐 경기 카드에 '결과 수정됨' 배지를 붙입니다(ST7의 대진 수정 배너·'변경됨'과 구분, AC-110, FLOW-008-S3a, C-15, UXD-049)",
+            "defined": true
+          }
+        ],
+        "components": [
+          "CMP-005",
+          "CMP-023",
+          "CMP-026",
+          "CMP-027",
+          "CMP-041",
+          "CMP-042"
+        ],
+        "affected_via": [
+          "CMP-026"
+        ],
+        "referenced": [
+          "CMP-005",
+          "CMP-023",
+          "CMP-027",
+          "CMP-041",
+          "CMP-042"
+        ],
+        "acs": [],
+        "vd": [
+          {
+            "id": "VD-002",
+            "title": "아이콘 세트 Lucide",
+            "decision": "lucide-react 아이콘만 씀",
+            "via": "CMP-026"
+          },
+          {
+            "id": "VD-007",
+            "title": "명단 행 구성(단일 행)",
+            "decision": "UXD-074 표기 그대로 한 줄 '이름 · 성별 · 급수 · 점수'(이름·점수 굵게). 점수 없음은 점수 자리에 '미설정' 배지. 점수 오른쪽 열 분리는 쓰지 않음(CR-006 거절)",
+            "via": "CMP-005"
+          },
+          {
+            "id": "VD-021",
+            "title": "한 열 레이아웃의 좌우 여백과 열 바깥 배경",
+            "decision": "열 안쪽 좌우 여백은 모든 폭에서 `space.gutter.mobile`(16px). 600px 열에 닿는 넓은 화면에서도 `space.gutter.desktop`으로 넓히지 않음. ~~열 바깥 배경은 `color.bg.page`(열과 같은 흰색, 경계선 없음).~~ (r3) 화면 폭이 열보다 넓을 때(태블릿·PC) 열 바깥 배경은 `color.bg.surface`, 열 배경은 `color.bg.page`이고 열에 그림자 `elevation.card`를 줘 영역을 구분함. 모바일(화면 폭 = 열 폭)에는 바깥 영역이 없어 해당 없음. 화면 제목·목록·카드·하단 고정 바·시트 내용의 왼쪽 시작선을 이 여백으로 맞춤",
+            "via": "CMP-026"
+          },
+          {
+            "id": "VD-024",
+            "title": "카드 표현과 적용 대상",
+            "decision": "04 3.1 '카드를 쓰는 경우'의 정보 묶음(CMP-041 GameCard, CMP-042 StandingsCard, CMP-043 ClubMatchListItem, CMP-045 RecordSummary, CMP-047 StageCard)만 카드로 그림. 표현은 배경 `color.bg.page` + 테두리 1px `color.border.default` + 모서리 `radius.md`, 그림자 없음(`elevation.card`는 쓰지 않음). 카드 안 구역 구분은 `color.bg.surface`. 카드 안 여백은 `space.3`. 반복 목록·입력·설정·필터는 Flat(행과 구분선). 카드 안에 카드를 두지 않음",
+            "via": "CMP-041"
+          }
+        ],
+        "layout": "```\n┌──────────────────────┐\n│ ← 가을 청백전  [팀전][진행 중] │\n│ (운영진만) 관리 화면으로 ▸ │\n│ [대진이 수정되었습니다(14:05)]│ ← ST7\n│ [최종 결과 카드]       │ ← ST8: 청팀 승리 (청 6 : 백 4)\n│ [경기 결과가 수정되었습니다(15:20)]│ ← ST8(종료 후 결과 수정 시)\n│ 다음 경기              │\n│ ┌ 3번째 경기 · 청팀 ─┐ │\n│ │ 나 + 이영희 vs 박·최 │ │\n│ └──────────────────┘ │\n│ 내 경기 (나머지 순서대로)│\n│ 청 3 : 백 2  /  순위 요약 카드│\n│ 전체 대진 ▾            │\n└──────────────────────┘\n```"
+      },
+      "SCR-121": {
+        "name": "마이페이지",
+        "route": "/me",
+        "owner": "B2",
+        "priority": "Must",
+        "states": [
+          {
+            "id": "SCR-121-ST1",
+            "label": "기본",
+            "behavior": "랭크·전적·프로필",
+            "defined": true
+          },
+          {
+            "id": "SCR-121-ST2",
+            "label": "로딩",
+            "behavior": "카드 스켈레톤",
+            "defined": true
+          },
+          {
+            "id": "SCR-121-ST3",
+            "label": "빈 상태",
+            "behavior": "청백전 기록 없음: 전적 자리에 \"청백전 기록이 없습니다\"(AC-055), 랭크 카드는 '랭크까지 10경기'",
+            "defined": true
+          },
+          {
+            "id": "SCR-121-ST4",
+            "label": "오류",
+            "behavior": "블록 오류 + 다시 시도. 로그아웃은 항상 표시",
+            "defined": true
+          },
+          {
+            "id": "SCR-121-ST5",
+            "label": "권한 없음",
+            "behavior": "비로그인·미승인은 `01` 리다이렉트",
+            "defined": true
+          },
+          {
+            "id": null,
+            "label": "충돌",
+            "behavior": "해당 없음(조회 화면)",
+            "defined": false
+          },
+          {
+            "id": "SCR-121-ST7",
+            "label": "랭크 없음",
+            "behavior": "10경기 미만: '랭크 없음 · 랭크까지 n경기'(AC-046)",
+            "defined": true
+          }
+        ],
+        "components": [
+          "CMP-001",
+          "CMP-021",
+          "CMP-025",
+          "CMP-026",
+          "CMP-045"
+        ],
+        "affected_via": [
+          "CMP-021",
+          "CMP-025",
+          "CMP-026"
+        ],
+        "referenced": [
+          "CMP-001",
+          "CMP-045"
+        ],
+        "acs": [
+          {
+            "id": "AC-050",
+            "title": "회원 화면은 PC에서도 모바일 너비로 보인다 *(r3 수정: 추적 대상 변경)*",
+            "priority": "Must",
+            "states": [
+              "SCR-121-ST1"
+            ],
+            "target_level": "E2"
+          }
+        ],
+        "vd": [
+          {
+            "id": "VD-002",
+            "title": "아이콘 세트 Lucide",
+            "decision": "lucide-react 아이콘만 씀",
+            "via": "CMP-025"
+          },
+          {
+            "id": "VD-019",
+            "title": "하단 탭 Lucide 아이콘과 현재 탭 표시",
+            "decision": "튜토리얼 graduation-cap, 청백전 swords, 마이페이지 circle-user-round, 운영 clipboard-list(24px). 탭 이름·순서·글자 레이블·행동은 그대로. 현재 탭은 아이콘·글자 `color.action.primary` + 굵은 글자 + 위쪽 표시 막대(새 토큰 없음). 탭 높이 56(CR-005). (r2) PC·모바일 같은 하단 탭, 600px 열 너비(04 CMP-025 `layout=bottom`)",
+            "via": "CMP-025"
+          },
+          {
+            "id": "VD-020",
+            "title": "하단 안전 영역",
+            "decision": "하단 탭 아래 `env(safe-area-inset-bottom)`, 목록 끝 스크롤 여백 = 탭 높이 + 안전 영역 + 16, 포커스 스크롤 여백도 같게. 오른쪽 아래 '게스트 추가'는 탭 위 16. (r2) 적용 범위 확장: PC(1440px)의 600px 열에서도 같은 값을 쓰고, '게스트 추가'는 열 오른쪽 안쪽 16(열 바깥 화면 가장자리가 아님). 하단 고정 행동 바(SCR-202, SCR-223)와 시트 하단 고정 버튼도 안전 영역 위(04 3.1·3.2)",
+            "via": "CMP-001"
+          },
+          {
+            "id": "VD-021",
+            "title": "한 열 레이아웃의 좌우 여백과 열 바깥 배경",
+            "decision": "열 안쪽 좌우 여백은 모든 폭에서 `space.gutter.mobile`(16px). 600px 열에 닿는 넓은 화면에서도 `space.gutter.desktop`으로 넓히지 않음. ~~열 바깥 배경은 `color.bg.page`(열과 같은 흰색, 경계선 없음).~~ (r3) 화면 폭이 열보다 넓을 때(태블릿·PC) 열 바깥 배경은 `color.bg.surface`, 열 배경은 `color.bg.page`이고 열에 그림자 `elevation.card`를 줘 영역을 구분함. 모바일(화면 폭 = 열 폭)에는 바깥 영역이 없어 해당 없음. 화면 제목·목록·카드·하단 고정 바·시트 내용의 왼쪽 시작선을 이 여백으로 맞춤",
+            "via": "CMP-026"
+          },
+          {
+            "id": "VD-024",
+            "title": "카드 표현과 적용 대상",
+            "decision": "04 3.1 '카드를 쓰는 경우'의 정보 묶음(CMP-041 GameCard, CMP-042 StandingsCard, CMP-043 ClubMatchListItem, CMP-045 RecordSummary, CMP-047 StageCard)만 카드로 그림. 표현은 배경 `color.bg.page` + 테두리 1px `color.border.default` + 모서리 `radius.md`, 그림자 없음(`elevation.card`는 쓰지 않음). 카드 안 구역 구분은 `color.bg.surface`. 카드 안 여백은 `space.3`. 반복 목록·입력·설정·필터는 Flat(행과 구분선). 카드 안에 카드를 두지 않음",
+            "via": "CMP-045"
+          },
+          {
+            "id": "VD-025",
+            "title": "하단 시트 시각(중첩 시트 포함)",
+            "decision": "PC·모바일 같은 하단 시트(CMP-021 `presentation=bottom`). 시트 너비는 600px 열과 같음. 위쪽 모서리 `radius.sheet`, 그림자 `elevation.sheet`, 배경 `color.bg.page`. 위쪽 손잡이 막대는 `color.border.default`, 높이 `space.1`. 하단 고정 버튼 영역은 위쪽 구분선 `color.border.default` + 안전 영역 위(VD-020). 열기·닫기는 `motion.duration.base`(움직임 줄이기면 즉시). 중첩 시트(04 3.2)는 같은 CMP-021 `stacked`를 재사용하고 새 변형을 만들지 않음: 두 번째 시트는 첫 번째 시트 위에 같은 모양으로 열리고, 딤은 한 겹만 둠. 딤 배경은 `color.text.primary` 40% 불투명도(**임시 구현값**, 현재 FE `bg-ink/40`)",
+            "via": "CMP-021"
+          }
+        ],
+        "layout": "```\n┌──────────────────────┐\n│ 마이페이지             │\n│ ┌ 랭크  A  (?)       ┐│\n│ │ 승률 58%           ││\n│ └───────────────────┘│\n│ 청백전 전적            │\n│  24경기 14승 10패 58%  │\n│  청백전 기록 보기 ▸     │\n│ 프로필                 │\n│  김민수 · 남 · 급수 B조 │\n│  [프로필 수정]          │\n│ 로그아웃               │\n└──────────────────────┘\n```"
+      },
+      "SCR-201": {
+        "name": "운영 홈",
+        "route": "/ops",
+        "owner": "B1",
+        "priority": "Must",
+        "states": [
+          {
+            "id": "SCR-201-ST1",
+            "label": "기본",
+            "behavior": "메뉴 목록",
+            "defined": true
+          },
+          {
+            "id": "SCR-201-ST2",
+            "label": "로딩",
+            "behavior": "메뉴는 바로 표시, 배지 자리만 로딩",
+            "defined": true
+          },
+          {
+            "id": null,
+            "label": "빈 상태",
+            "behavior": "해당 없음(메뉴는 고정)",
+            "defined": false
+          },
+          {
+            "id": "SCR-201-ST4",
+            "label": "오류",
+            "behavior": "배지 건수를 못 불러와도 메뉴는 표시하고 배지만 숨김",
+            "defined": true
+          },
+          {
+            "id": "SCR-201-ST5",
+            "label": "권한 없음",
+            "behavior": "회원 → SCR-004(운영 탭 자체가 보이지 않음)",
+            "defined": true
+          },
+          {
+            "id": null,
+            "label": "충돌",
+            "behavior": "해당 없음(조회 화면)",
+            "defined": false
+          }
+        ],
+        "components": [
+          "CMP-005",
+          "CMP-025",
+          "CMP-026",
+          "CMP-030"
+        ],
+        "affected_via": [
+          "CMP-025",
+          "CMP-026",
+          "CMP-030"
+        ],
+        "referenced": [
+          "CMP-005"
+        ],
+        "acs": [],
+        "vd": [
+          {
+            "id": "VD-002",
+            "title": "아이콘 세트 Lucide",
+            "decision": "lucide-react 아이콘만 씀",
+            "via": "CMP-025"
+          },
+          {
+            "id": "VD-007",
+            "title": "명단 행 구성(단일 행)",
+            "decision": "UXD-074 표기 그대로 한 줄 '이름 · 성별 · 급수 · 점수'(이름·점수 굵게). 점수 없음은 점수 자리에 '미설정' 배지. 점수 오른쪽 열 분리는 쓰지 않음(CR-006 거절)",
+            "via": "CMP-005"
+          },
+          {
+            "id": "VD-019",
+            "title": "하단 탭 Lucide 아이콘과 현재 탭 표시",
+            "decision": "튜토리얼 graduation-cap, 청백전 swords, 마이페이지 circle-user-round, 운영 clipboard-list(24px). 탭 이름·순서·글자 레이블·행동은 그대로. 현재 탭은 아이콘·글자 `color.action.primary` + 굵은 글자 + 위쪽 표시 막대(새 토큰 없음). 탭 높이 56(CR-005). (r2) PC·모바일 같은 하단 탭, 600px 열 너비(04 CMP-025 `layout=bottom`)",
+            "via": "CMP-025"
+          },
+          {
+            "id": "VD-020",
+            "title": "하단 안전 영역",
+            "decision": "하단 탭 아래 `env(safe-area-inset-bottom)`, 목록 끝 스크롤 여백 = 탭 높이 + 안전 영역 + 16, 포커스 스크롤 여백도 같게. 오른쪽 아래 '게스트 추가'는 탭 위 16. (r2) 적용 범위 확장: PC(1440px)의 600px 열에서도 같은 값을 쓰고, '게스트 추가'는 열 오른쪽 안쪽 16(열 바깥 화면 가장자리가 아님). 하단 고정 행동 바(SCR-202, SCR-223)와 시트 하단 고정 버튼도 안전 영역 위(04 3.1·3.2)",
+            "via": "CMP-025"
+          },
+          {
+            "id": "VD-021",
+            "title": "한 열 레이아웃의 좌우 여백과 열 바깥 배경",
+            "decision": "열 안쪽 좌우 여백은 모든 폭에서 `space.gutter.mobile`(16px). 600px 열에 닿는 넓은 화면에서도 `space.gutter.desktop`으로 넓히지 않음. ~~열 바깥 배경은 `color.bg.page`(열과 같은 흰색, 경계선 없음).~~ (r3) 화면 폭이 열보다 넓을 때(태블릿·PC) 열 바깥 배경은 `color.bg.surface`, 열 배경은 `color.bg.page`이고 열에 그림자 `elevation.card`를 줘 영역을 구분함. 모바일(화면 폭 = 열 폭)에는 바깥 영역이 없어 해당 없음. 화면 제목·목록·카드·하단 고정 바·시트 내용의 왼쪽 시작선을 이 여백으로 맞춤",
+            "via": "CMP-026"
+          }
+        ],
+        "layout": "```\nPC·모바일 공통(최대 600px 한 열)\n┌──────────────────────┐\n│ 운영                  │\n│ 오늘 운동          ▸  │\n│ 명단               ▸  │\n│ 청백전 관리        ▸  │\n│ 가입 승인     (3)  ▸  │\n│ 역할 관리          ▸  │ ← 슈퍼 관리자만\n├──────────────────────┤\n│ 하단 탭(운영 (3))      │\n└──────────────────────┘\n```"
+      },
+      "SCR-202": {
+        "name": "오늘 운동(실시간 대진)",
+        "route": "/ops/session",
+        "owner": "B4",
+        "priority": "Must",
+        "states": [
+          {
+            "id": "SCR-202-ST1",
+            "label": "기본",
+            "behavior": "생성 전: 참석·옵션 요약과 '대진 생성'. 2라운드 이후는 지난 라운드와 대기자 우선 안내",
+            "defined": true
+          },
+          {
+            "id": "SCR-202-ST2",
+            "label": "로딩",
+            "behavior": "생성 중: 코트 카드 자리 스켈레톤, 행동 버튼 잠금(2초 안에 결과, AC-034)",
+            "defined": true
+          },
+          {
+            "id": "SCR-202-ST3",
+            "label": "빈 상태",
+            "behavior": "오늘 세션 없음: \"오늘 운동을 시작하세요\" + '오늘 운동 시작'",
+            "defined": true
+          },
+          {
+            "id": "SCR-202-ST4",
+            "label": "오류",
+            "behavior": "4명 미만 \"최소 4명이 필요합니다\"(AC-026, 생성 안 함), 진행 중 라운드 있음 \"현재 라운드를 먼저 완료하세요\"(AC-039), 진행 중 라운드가 있는데 종료 요청이 서버에서 거부됨(AC-101), 생성·저장 실패는 안내 상자 + 다시 시도",
+            "defined": true
+          },
+          {
+            "id": "SCR-202-ST5",
+            "label": "권한 없음",
+            "behavior": "회원 → SCR-004",
+            "defined": true
+          },
+          {
+            "id": "SCR-202-ST6",
+            "label": "충돌",
+            "behavior": "확인 창 \"다른 운영진이 대진을 변경했습니다. 확정은 처리되지 않았습니다\" → 닫으면 최신 상태(AC-056, UXD-010)",
+            "defined": true
+          },
+          {
+            "id": "SCR-202-ST7",
+            "label": "대진 검토",
+            "behavior": "미확정 대진: 코트 카드(교체 가능 표시), 대기자, 완화 표시, '다시 생성'·'확정'. 16명 미만·4의 배수 아님이면 가능한 코트만(AC-025)",
+            "defined": true
+          },
+          {
+            "id": "SCR-202-ST8",
+            "label": "라운드 진행 중",
+            "behavior": "확정된 코트 카드(교체 불가, 실력차 유지 표시), '라운드 완료'. 참석에서 뺀 사람은 경기에 그대로 남고 '다음 라운드부터 제외' 표시(FLOW-004-S8a). '세션 종료'는 비활성 + \"진행 중인 라운드를 먼저 완료하세요\"(AC-101)",
+            "defined": true
+          },
+          {
+            "id": "SCR-202-ST9",
+            "label": "세션 종료",
+            "behavior": "\"오늘 세션이 종료되었습니다. 오늘은 새 세션을 만들 수 없습니다\", 지난 라운드 목록만(생성·재개 버튼 없음, AC-104)",
+            "defined": true
+          },
+          {
+            "id": "SCR-202-ST10",
+            "label": "이전 날짜 미종료 세션",
+            "behavior": "다른 상태 위에 겹쳐 보이는 위쪽 고정 배너: \"종료되지 않은 11/02(일) 세션이 있습니다\" + '이어서 열기'·'종료'(UXD-076). 그 세션이 종료되면 사라짐",
+            "defined": true
+          }
+        ],
+        "components": [
+          "CMP-001",
+          "CMP-005",
+          "CMP-021",
+          "CMP-022",
+          "CMP-023",
+          "CMP-024",
+          "CMP-026",
+          "CMP-027",
+          "CMP-041"
+        ],
+        "affected_via": [
+          "CMP-021",
+          "CMP-026"
+        ],
+        "referenced": [
+          "CMP-001",
+          "CMP-005",
+          "CMP-022",
+          "CMP-023",
+          "CMP-024",
+          "CMP-027",
+          "CMP-041"
+        ],
+        "acs": [],
+        "vd": [
+          {
+            "id": "VD-002",
+            "title": "아이콘 세트 Lucide",
+            "decision": "lucide-react 아이콘만 씀",
+            "via": "CMP-026"
+          },
+          {
+            "id": "VD-004",
+            "title": "점수·인원 숫자는 고정폭 숫자",
+            "decision": "점수와 인원 숫자에 `tabular-nums`",
+            "via": "CMP-024"
+          },
+          {
+            "id": "VD-007",
+            "title": "명단 행 구성(단일 행)",
+            "decision": "UXD-074 표기 그대로 한 줄 '이름 · 성별 · 급수 · 점수'(이름·점수 굵게). 점수 없음은 점수 자리에 '미설정' 배지. 점수 오른쪽 열 분리는 쓰지 않음(CR-006 거절)",
+            "via": "CMP-005"
+          },
+          {
+            "id": "VD-008",
+            "title": "행 높이 56 + 구분선 1(행 안)",
+            "decision": "행 전체 56(구분선 포함), 좌우 여백 16(VD-021의 페이지 좌우 여백과 같음)",
+            "via": "CMP-024"
+          },
+          {
+            "id": "VD-020",
+            "title": "하단 안전 영역",
+            "decision": "하단 탭 아래 `env(safe-area-inset-bottom)`, 목록 끝 스크롤 여백 = 탭 높이 + 안전 영역 + 16, 포커스 스크롤 여백도 같게. 오른쪽 아래 '게스트 추가'는 탭 위 16. (r2) 적용 범위 확장: PC(1440px)의 600px 열에서도 같은 값을 쓰고, '게스트 추가'는 열 오른쪽 안쪽 16(열 바깥 화면 가장자리가 아님). 하단 고정 행동 바(SCR-202, SCR-223)와 시트 하단 고정 버튼도 안전 영역 위(04 3.1·3.2)",
+            "via": "screen"
+          },
+          {
+            "id": "VD-021",
+            "title": "한 열 레이아웃의 좌우 여백과 열 바깥 배경",
+            "decision": "열 안쪽 좌우 여백은 모든 폭에서 `space.gutter.mobile`(16px). 600px 열에 닿는 넓은 화면에서도 `space.gutter.desktop`으로 넓히지 않음. ~~열 바깥 배경은 `color.bg.page`(열과 같은 흰색, 경계선 없음).~~ (r3) 화면 폭이 열보다 넓을 때(태블릿·PC) 열 바깥 배경은 `color.bg.surface`, 열 배경은 `color.bg.page`이고 열에 그림자 `elevation.card`를 줘 영역을 구분함. 모바일(화면 폭 = 열 폭)에는 바깥 영역이 없어 해당 없음. 화면 제목·목록·카드·하단 고정 바·시트 내용의 왼쪽 시작선을 이 여백으로 맞춤",
+            "via": "CMP-026"
+          },
+          {
+            "id": "VD-024",
+            "title": "카드 표현과 적용 대상",
+            "decision": "04 3.1 '카드를 쓰는 경우'의 정보 묶음(CMP-041 GameCard, CMP-042 StandingsCard, CMP-043 ClubMatchListItem, CMP-045 RecordSummary, CMP-047 StageCard)만 카드로 그림. 표현은 배경 `color.bg.page` + 테두리 1px `color.border.default` + 모서리 `radius.md`, 그림자 없음(`elevation.card`는 쓰지 않음). 카드 안 구역 구분은 `color.bg.surface`. 카드 안 여백은 `space.3`. 반복 목록·입력·설정·필터는 Flat(행과 구분선). 카드 안에 카드를 두지 않음",
+            "via": "CMP-041"
+          },
+          {
+            "id": "VD-025",
+            "title": "하단 시트 시각(중첩 시트 포함)",
+            "decision": "PC·모바일 같은 하단 시트(CMP-021 `presentation=bottom`). 시트 너비는 600px 열과 같음. 위쪽 모서리 `radius.sheet`, 그림자 `elevation.sheet`, 배경 `color.bg.page`. 위쪽 손잡이 막대는 `color.border.default`, 높이 `space.1`. 하단 고정 버튼 영역은 위쪽 구분선 `color.border.default` + 안전 영역 위(VD-020). 열기·닫기는 `motion.duration.base`(움직임 줄이기면 즉시). 중첩 시트(04 3.2)는 같은 CMP-021 `stacked`를 재사용하고 새 변형을 만들지 않음: 두 번째 시트는 첫 번째 시트 위에 같은 모양으로 열리고, 딤은 한 겹만 둠. 딤 배경은 `color.text.primary` 40% 불투명도(**임시 구현값**, 현재 FE `bg-ink/40`)",
+            "via": "CMP-021"
+          }
+        ],
+        "layout": "```\n모바일\n┌──────────────────────────┐\n│ ← 오늘 운동 11/09  [⋯ 세션 종료]│\n│ 2라운드 · 대진 검토         │ ← 라운드 번호·단계\n│ [참석 18명 ▸] [옵션: 레벨별 ▸]│ ← 시트 버튼(요약 포함)\n│ ⚠ 2경기에서 규칙 완화        │ ← 완화 있을 때만\n│ ┌ 코트 1 ─── 실력차 2점 ┐   │\n│ │ 1팀 김(남7) 이(여5) =12 │   │\n│ │ 2팀 박(남6) 최(여4) =10 │   │\n│ │ [성별 완화]             │   │\n│ └────────────────────┘   │\n│ … 코트 2–4                │\n│ 대기자 2명: 정(남, 2게임) 강(여, 1게임)│\n│ ▸ 지난 라운드 (1)          │ ← 접힘\n├──────────────────────────┤\n│ [다시 생성]   [  확정  ]   │ ← 하단 고정 행동 바(탭바·안전 영역 위)\n├──────────────────────────┤\n│ 하단 탭                    │\n└──────────────────────────┘\n```\n- (r2) PC·모바일 공통 배치입니다(최대 600px 한 열). 코트 카드는 한 열로 쌓고, 참석·옵션은 버튼으로 여는 하단 시트(SCR-203, SCR-204)입니다."
+      },
+      "SCR-203": {
+        "name": "참석 체크",
+        "route": "/ops/session (시트)",
+        "owner": "B8",
+        "priority": "Must",
+        "states": [
+          {
+            "id": "SCR-203-ST1",
+            "label": "기본",
+            "behavior": "목록과 체크",
+            "defined": true
+          },
+          {
+            "id": "SCR-203-ST2",
+            "label": "로딩",
+            "behavior": "목록 스켈레톤",
+            "defined": true
+          },
+          {
+            "id": "SCR-203-ST3",
+            "label": "빈 상태",
+            "behavior": "명단에 사람이 없음: \"명단이 비어 있습니다\" + '게스트 추가'. 검색 결과 없음은 \"'○○'와 일치하는 사람이 없습니다\"",
+            "defined": true
+          },
+          {
+            "id": "SCR-203-ST4",
+            "label": "오류",
+            "behavior": "체크 저장 실패: 해당 행 체크 되돌림 + 안내 상자",
+            "defined": true
+          },
+          {
+            "id": null,
+            "label": "권한 없음",
+            "behavior": "해당 없음(부모 화면에서 처리)",
+            "defined": false
+          },
+          {
+            "id": null,
+            "label": "충돌",
+            "behavior": "해당 없음(충돌은 확정 시점에 SCR-202-ST6으로 판정, FLOW-004-S6a)",
+            "defined": false
+          }
+        ],
+        "components": [
+          "CMP-001",
+          "CMP-006",
+          "CMP-008",
+          "CMP-021",
+          "CMP-023",
+          "CMP-024",
+          "CMP-028"
+        ],
+        "affected_via": [
+          "CMP-021"
+        ],
+        "referenced": [
+          "CMP-001",
+          "CMP-006",
+          "CMP-008",
+          "CMP-023",
+          "CMP-024",
+          "CMP-028"
+        ],
+        "acs": [],
+        "vd": [
+          {
+            "id": "VD-004",
+            "title": "점수·인원 숫자는 고정폭 숫자",
+            "decision": "점수와 인원 숫자에 `tabular-nums`",
+            "via": "CMP-024"
+          },
+          {
+            "id": "VD-007",
+            "title": "명단 행 구성(단일 행)",
+            "decision": "UXD-074 표기 그대로 한 줄 '이름 · 성별 · 급수 · 점수'(이름·점수 굵게). 점수 없음은 점수 자리에 '미설정' 배지. 점수 오른쪽 열 분리는 쓰지 않음(CR-006 거절)",
+            "via": "CMP-024"
+          },
+          {
+            "id": "VD-008",
+            "title": "행 높이 56 + 구분선 1(행 안)",
+            "decision": "행 전체 56(구분선 포함), 좌우 여백 16(VD-021의 페이지 좌우 여백과 같음)",
+            "via": "CMP-024"
+          },
+          {
+            "id": "VD-020",
+            "title": "하단 안전 영역",
+            "decision": "하단 탭 아래 `env(safe-area-inset-bottom)`, 목록 끝 스크롤 여백 = 탭 높이 + 안전 영역 + 16, 포커스 스크롤 여백도 같게. 오른쪽 아래 '게스트 추가'는 탭 위 16. (r2) 적용 범위 확장: PC(1440px)의 600px 열에서도 같은 값을 쓰고, '게스트 추가'는 열 오른쪽 안쪽 16(열 바깥 화면 가장자리가 아님). 하단 고정 행동 바(SCR-202, SCR-223)와 시트 하단 고정 버튼도 안전 영역 위(04 3.1·3.2)",
+            "via": "CMP-001"
+          },
+          {
+            "id": "VD-025",
+            "title": "하단 시트 시각(중첩 시트 포함)",
+            "decision": "PC·모바일 같은 하단 시트(CMP-021 `presentation=bottom`). 시트 너비는 600px 열과 같음. 위쪽 모서리 `radius.sheet`, 그림자 `elevation.sheet`, 배경 `color.bg.page`. 위쪽 손잡이 막대는 `color.border.default`, 높이 `space.1`. 하단 고정 버튼 영역은 위쪽 구분선 `color.border.default` + 안전 영역 위(VD-020). 열기·닫기는 `motion.duration.base`(움직임 줄이기면 즉시). 중첩 시트(04 3.2)는 같은 CMP-021 `stacked`를 재사용하고 새 변형을 만들지 않음: 두 번째 시트는 첫 번째 시트 위에 같은 모양으로 열리고, 딤은 한 겹만 둠. 딤 배경은 `color.text.primary` 40% 불투명도(**임시 구현값**, 현재 FE `bg-ink/40`)",
+            "via": "CMP-021"
+          }
+        ],
+        "layout": "```\n┌──────────────────────┐\n│ ─── 참석 체크  ✕ ──── │\n│ 참석 18명 · 남 10 여 8 │ ← 고정\n│ ⚠ 점수 미설정 2명 ▸    │\n│ [이름 검색_______]     │\n│ ☑ 김민수 남 7          │\n│ ☐ 박지훈 남 6          │\n│ ── 게스트 ──          │\n│ ☑ 손님A 여 4           │\n│ [+ 게스트 추가]        │\n└──────────────────────┘\n```"
+      },
+      "SCR-205": {
+        "name": "선수 교체(실시간 대진)",
+        "route": "/ops/session (시트)",
+        "owner": "B4",
+        "priority": "Must",
+        "states": [
+          {
+            "id": "SCR-205-ST1",
+            "label": "기본",
+            "behavior": "후보 목록",
+            "defined": true
+          },
+          {
+            "id": null,
+            "label": "로딩",
+            "behavior": "해당 없음(대진 데이터로 즉시 계산)",
+            "defined": false
+          },
+          {
+            "id": "SCR-205-ST3",
+            "label": "빈 상태",
+            "behavior": "\"바꿀 수 있는 사람이 없습니다\"",
+            "defined": true
+          },
+          {
+            "id": "SCR-205-ST4",
+            "label": "오류",
+            "behavior": "교체 저장 실패 안내 상자, 대진은 그대로",
+            "defined": true
+          },
+          {
+            "id": null,
+            "label": "권한 없음",
+            "behavior": "해당 없음(부모 화면에서 처리)",
+            "defined": false
+          },
+          {
+            "id": null,
+            "label": "충돌",
+            "behavior": "해당 없음(충돌은 확정 시점에 판정, FLOW-004-S6a)",
+            "defined": false
+          }
+        ],
+        "components": [
+          "CMP-005",
+          "CMP-021",
+          "CMP-023",
+          "CMP-044"
+        ],
+        "affected_via": [
+          "CMP-021"
+        ],
+        "referenced": [
+          "CMP-005",
+          "CMP-023",
+          "CMP-044"
+        ],
+        "acs": [],
+        "vd": [
+          {
+            "id": "VD-007",
+            "title": "명단 행 구성(단일 행)",
+            "decision": "UXD-074 표기 그대로 한 줄 '이름 · 성별 · 급수 · 점수'(이름·점수 굵게). 점수 없음은 점수 자리에 '미설정' 배지. 점수 오른쪽 열 분리는 쓰지 않음(CR-006 거절)",
+            "via": "CMP-005"
+          },
+          {
+            "id": "VD-020",
+            "title": "하단 안전 영역",
+            "decision": "하단 탭 아래 `env(safe-area-inset-bottom)`, 목록 끝 스크롤 여백 = 탭 높이 + 안전 영역 + 16, 포커스 스크롤 여백도 같게. 오른쪽 아래 '게스트 추가'는 탭 위 16. (r2) 적용 범위 확장: PC(1440px)의 600px 열에서도 같은 값을 쓰고, '게스트 추가'는 열 오른쪽 안쪽 16(열 바깥 화면 가장자리가 아님). 하단 고정 행동 바(SCR-202, SCR-223)와 시트 하단 고정 버튼도 안전 영역 위(04 3.1·3.2)",
+            "via": "CMP-021"
+          },
+          {
+            "id": "VD-025",
+            "title": "하단 시트 시각(중첩 시트 포함)",
+            "decision": "PC·모바일 같은 하단 시트(CMP-021 `presentation=bottom`). 시트 너비는 600px 열과 같음. 위쪽 모서리 `radius.sheet`, 그림자 `elevation.sheet`, 배경 `color.bg.page`. 위쪽 손잡이 막대는 `color.border.default`, 높이 `space.1`. 하단 고정 버튼 영역은 위쪽 구분선 `color.border.default` + 안전 영역 위(VD-020). 열기·닫기는 `motion.duration.base`(움직임 줄이기면 즉시). 중첩 시트(04 3.2)는 같은 CMP-021 `stacked`를 재사용하고 새 변형을 만들지 않음: 두 번째 시트는 첫 번째 시트 위에 같은 모양으로 열리고, 딤은 한 겹만 둠. 딤 배경은 `color.text.primary` 40% 불투명도(**임시 구현값**, 현재 FE `bg-ink/40`)",
+            "via": "CMP-021"
+          }
+        ],
+        "layout": "```\n┌──────────────────────────┐\n│ ─── 김민수(남7)와 바꿀 사람 ✕ │\n│ 대기자                     │\n│  정우성 남6 · 교체 후 실력차 1점│\n│ 다른 경기                   │\n│  코트2 박지훈 남6 · 실력차 3점 ⚠성별│\n│  코트3 이수 여5 · (같은 경기) 비활성│\n└──────────────────────────┘\n```"
+      },
+      "SCR-211": {
+        "name": "명단",
+        "route": "/ops/roster",
+        "owner": "B5",
+        "priority": "Must",
+        "states": [
+          {
+            "id": "SCR-211-ST1",
+            "label": "기본",
+            "behavior": "목록",
+            "defined": true
+          },
+          {
+            "id": "SCR-211-ST2",
+            "label": "로딩",
+            "behavior": "행 스켈레톤",
+            "defined": true
+          },
+          {
+            "id": "SCR-211-ST3",
+            "label": "빈 상태",
+            "behavior": "명단 없음: \"아직 회원이 없습니다. 카카오로 가입한 사람을 승인하면 여기에 나타납니다\" + '게스트 추가'. 필터·검색 결과 없음은 조건 해제 버튼",
+            "defined": true
+          },
+          {
+            "id": "SCR-211-ST4",
+            "label": "오류",
+            "behavior": "블록 오류 + 다시 시도",
+            "defined": true
+          },
+          {
+            "id": "SCR-211-ST5",
+            "label": "권한 없음",
+            "behavior": "회원 → SCR-004",
+            "defined": true
+          },
+          {
+            "id": null,
+            "label": "충돌",
+            "behavior": "해당 없음(조회 화면, 편집은 SCR-212)",
+            "defined": false
+          }
+        ],
+        "components": [
+          "CMP-001",
+          "CMP-004",
+          "CMP-005",
+          "CMP-006",
+          "CMP-007",
+          "CMP-024",
+          "CMP-026",
+          "CMP-027"
+        ],
+        "affected_via": [
+          "CMP-026"
+        ],
+        "referenced": [
+          "CMP-001",
+          "CMP-004",
+          "CMP-005",
+          "CMP-006",
+          "CMP-007",
+          "CMP-024",
+          "CMP-027"
+        ],
+        "acs": [],
+        "vd": [
+          {
+            "id": "VD-002",
+            "title": "아이콘 세트 Lucide",
+            "decision": "lucide-react 아이콘만 씀",
+            "via": "CMP-026"
+          },
+          {
+            "id": "VD-004",
+            "title": "점수·인원 숫자는 고정폭 숫자",
+            "decision": "점수와 인원 숫자에 `tabular-nums`",
+            "via": "screen"
+          },
+          {
+            "id": "VD-007",
+            "title": "명단 행 구성(단일 행)",
+            "decision": "UXD-074 표기 그대로 한 줄 '이름 · 성별 · 급수 · 점수'(이름·점수 굵게). 점수 없음은 점수 자리에 '미설정' 배지. 점수 오른쪽 열 분리는 쓰지 않음(CR-006 거절)",
+            "via": "screen"
+          },
+          {
+            "id": "VD-008",
+            "title": "행 높이 56 + 구분선 1(행 안)",
+            "decision": "행 전체 56(구분선 포함), 좌우 여백 16(VD-021의 페이지 좌우 여백과 같음)",
+            "via": "CMP-024"
+          },
+          {
+            "id": "VD-010",
+            "title": "필터 칩 보이는 높이 32 · 누름 영역 44",
+            "decision": "위아래 6px 누름 영역 확장, 두 줄일 때 줄 간격 12, 반경 `radius.md`(CR-010)",
+            "via": "CMP-004"
+          },
+          {
+            "id": "VD-020",
+            "title": "하단 안전 영역",
+            "decision": "하단 탭 아래 `env(safe-area-inset-bottom)`, 목록 끝 스크롤 여백 = 탭 높이 + 안전 영역 + 16, 포커스 스크롤 여백도 같게. 오른쪽 아래 '게스트 추가'는 탭 위 16. (r2) 적용 범위 확장: PC(1440px)의 600px 열에서도 같은 값을 쓰고, '게스트 추가'는 열 오른쪽 안쪽 16(열 바깥 화면 가장자리가 아님). 하단 고정 행동 바(SCR-202, SCR-223)와 시트 하단 고정 버튼도 안전 영역 위(04 3.1·3.2)",
+            "via": "screen"
+          },
+          {
+            "id": "VD-021",
+            "title": "한 열 레이아웃의 좌우 여백과 열 바깥 배경",
+            "decision": "열 안쪽 좌우 여백은 모든 폭에서 `space.gutter.mobile`(16px). 600px 열에 닿는 넓은 화면에서도 `space.gutter.desktop`으로 넓히지 않음. ~~열 바깥 배경은 `color.bg.page`(열과 같은 흰색, 경계선 없음).~~ (r3) 화면 폭이 열보다 넓을 때(태블릿·PC) 열 바깥 배경은 `color.bg.surface`, 열 배경은 `color.bg.page`이고 열에 그림자 `elevation.card`를 줘 영역을 구분함. 모바일(화면 폭 = 열 폭)에는 바깥 영역이 없어 해당 없음. 화면 제목·목록·카드·하단 고정 바·시트 내용의 왼쪽 시작선을 이 여백으로 맞춤",
+            "via": "CMP-026"
+          }
+        ],
+        "layout": "```\nPC·모바일 공통(최대 600px 한 열)\n┌──────────────────────────┐\n│ ← 명단                 ⋯ │\n│ 카카오 가입·승인으로 회원이 등록됩니다│\n│ [이름 검색_________]      │\n│ (점수 미설정 3) (튜토리얼 권장·미통과 5)│\n│ 비활성 포함 ( )           │\n│ 김민수 · 남 · C조 · 7점    │\n│ 박지훈 · 남 · B조 · [미설정]│\n│ ── 게스트 ──              │\n│ 손님A · 여 · 입문자 · 4점  │\n│ (마지막 행이 버튼에 가리지 않게 아래 여백)│\n│              [+ 게스트 추가]│ ← 오른쪽 아래 주 버튼(열 안, 탭바·안전 영역 위)\n├──────────────────────────┤\n│ 하단 탭                    │\n└──────────────────────────┘\n```"
+      },
+      "SCR-212": {
+        "name": "회원·게스트 편집",
+        "route": "/ops/roster (시트)",
+        "owner": "B5",
+        "priority": "Must",
+        "states": [
+          {
+            "id": "SCR-212-ST1",
+            "label": "기본",
+            "behavior": "회원 편집 + 현황",
+            "defined": true
+          },
+          {
+            "id": "SCR-212-ST2",
+            "label": "로딩",
+            "behavior": "현황 영역 스켈레톤, 편집 영역은 명단 값으로 바로 표시",
+            "defined": true
+          },
+          {
+            "id": null,
+            "label": "빈 상태",
+            "behavior": "해당 없음(대상 한 명이 항상 있음)",
+            "defined": false
+          },
+          {
+            "id": "SCR-212-ST4",
+            "label": "오류",
+            "behavior": "필드 오류, 저장·삭제 실패 안내 상자(입력값 유지)",
+            "defined": true
+          },
+          {
+            "id": null,
+            "label": "권한 없음",
+            "behavior": "해당 없음(부모 화면에서 처리)",
+            "defined": false
+          },
+          {
+            "id": null,
+            "label": "충돌",
+            "behavior": "해당 없음(기획의 충돌 감지 범위 밖: FLOW-004-S6a, FLOW-005-S6a. 이미 처리된 요청은 ST4 오류 문구로 안내)",
+            "defined": false
+          },
+          {
+            "id": "SCR-212-ST7",
+            "label": "게스트",
+            "behavior": "현황 영역 없음, 아래쪽 '게스트 삭제'",
+            "defined": true
+          },
+          {
+            "id": "SCR-212-ST8",
+            "label": "게스트 삭제 불가",
+            "behavior": "진행 중 라운드에 출전한 게스트: 삭제 버튼 비활성 + \"라운드가 끝난 뒤 삭제하세요\"(AC-014). 확정된 미종료 청백전의 미기록 경기에 포함된 게스트: 삭제 버튼 비활성 + \"'가을 청백전'의 남은 경기 2개에 포함되어 있습니다. 먼저 대체 선수를 정하세요\"와 '청백전으로' 링크(SCR-223, AC-105). 서버도 거부",
+            "defined": true
+          },
+          {
+            "id": "SCR-212-ST9",
+            "label": "비활성 회원",
+            "behavior": "위쪽 '비활성' 배지, 아래쪽 '다시 활성화'. 확정된 미종료 청백전에 남은 경기가 있으면 안내 상자 \"남은 청백전 경기 n개 · 대체 선수 처리가 필요합니다\"와 '청백전으로' 링크(SCR-223). 대진은 자동으로 바꾸지 않음(D, UX 설계 결정)",
+            "defined": true
+          },
+          {
+            "id": "SCR-212-ST10",
+            "label": "게스트 삭제: 확정 전 대진 포함",
+            "behavior": "확인 창 \"손님A를 삭제하면 '가을 청백전'(또는 오늘 운동)의 확정하지 않은 대진이 폐기됩니다. 삭제할까요?\" → 대진 폐기와 삭제를 한 번에 처리. 실패하면 둘 다 그대로 두고 \"삭제하지 못했습니다. 대진과 게스트는 바뀌지 않았습니다\" 안내(AC-106)",
+            "defined": true
+          },
+          {
+            "id": "SCR-212-ST11",
+            "label": "게스트 삭제: 청백전 참가자로만 등록",
+            "behavior": "확인 창에 \"'가을 청백전' 참가자 명단에서도 빠집니다\"를 더함 → 삭제와 참가자 제거를 한 번에 처리, 실패하면 둘 다 그대로(AC-107)",
+            "defined": true
+          }
+        ],
+        "components": [
+          "CMP-001",
+          "CMP-002",
+          "CMP-003",
+          "CMP-005",
+          "CMP-006",
+          "CMP-021",
+          "CMP-022",
+          "CMP-023",
+          "CMP-029",
+          "CMP-045"
+        ],
+        "affected_via": [
+          "CMP-021"
+        ],
+        "referenced": [
+          "CMP-001",
+          "CMP-002",
+          "CMP-003",
+          "CMP-005",
+          "CMP-006",
+          "CMP-022",
+          "CMP-023",
+          "CMP-029",
+          "CMP-045"
+        ],
+        "acs": [],
+        "vd": [
+          {
+            "id": "VD-007",
+            "title": "명단 행 구성(단일 행)",
+            "decision": "UXD-074 표기 그대로 한 줄 '이름 · 성별 · 급수 · 점수'(이름·점수 굵게). 점수 없음은 점수 자리에 '미설정' 배지. 점수 오른쪽 열 분리는 쓰지 않음(CR-006 거절)",
+            "via": "CMP-005"
+          },
+          {
+            "id": "VD-020",
+            "title": "하단 안전 영역",
+            "decision": "하단 탭 아래 `env(safe-area-inset-bottom)`, 목록 끝 스크롤 여백 = 탭 높이 + 안전 영역 + 16, 포커스 스크롤 여백도 같게. 오른쪽 아래 '게스트 추가'는 탭 위 16. (r2) 적용 범위 확장: PC(1440px)의 600px 열에서도 같은 값을 쓰고, '게스트 추가'는 열 오른쪽 안쪽 16(열 바깥 화면 가장자리가 아님). 하단 고정 행동 바(SCR-202, SCR-223)와 시트 하단 고정 버튼도 안전 영역 위(04 3.1·3.2)",
+            "via": "CMP-001"
+          },
+          {
+            "id": "VD-024",
+            "title": "카드 표현과 적용 대상",
+            "decision": "04 3.1 '카드를 쓰는 경우'의 정보 묶음(CMP-041 GameCard, CMP-042 StandingsCard, CMP-043 ClubMatchListItem, CMP-045 RecordSummary, CMP-047 StageCard)만 카드로 그림. 표현은 배경 `color.bg.page` + 테두리 1px `color.border.default` + 모서리 `radius.md`, 그림자 없음(`elevation.card`는 쓰지 않음). 카드 안 구역 구분은 `color.bg.surface`. 카드 안 여백은 `space.3`. 반복 목록·입력·설정·필터는 Flat(행과 구분선). 카드 안에 카드를 두지 않음",
+            "via": "CMP-045"
+          },
+          {
+            "id": "VD-025",
+            "title": "하단 시트 시각(중첩 시트 포함)",
+            "decision": "PC·모바일 같은 하단 시트(CMP-021 `presentation=bottom`). 시트 너비는 600px 열과 같음. 위쪽 모서리 `radius.sheet`, 그림자 `elevation.sheet`, 배경 `color.bg.page`. 위쪽 손잡이 막대는 `color.border.default`, 높이 `space.1`. 하단 고정 버튼 영역은 위쪽 구분선 `color.border.default` + 안전 영역 위(VD-020). 열기·닫기는 `motion.duration.base`(움직임 줄이기면 즉시). 중첩 시트(04 3.2)는 같은 CMP-021 `stacked`를 재사용하고 새 변형을 만들지 않음: 두 번째 시트는 첫 번째 시트 위에 같은 모양으로 열리고, 딤은 한 겹만 둠. 딤 배경은 `color.text.primary` 40% 불투명도(**임시 구현값**, 현재 FE `bg-ink/40`)",
+            "via": "CMP-021"
+          }
+        ],
+        "layout": "```\n┌──────────────────────────┐\n│ ─── 김민수 [회원]  ✕ ──── │\n│ 이름 [김민수]              │\n│ 성별 [남|여]               │\n│ 급수 (8개 버튼)            │\n│ 점수 [1][2][3][4][5]       │\n│      [6][7][8][9][10]      │\n│ ── 현황 (회원만) ──        │\n│ 지인: 이영희               │\n│ 랭크 A · 24경기 14승 10패  │\n│ 튜토리얼: 입문자 2/3 · 왕초보 0/3 · 권장 대상│\n│ [      저장      ]         │\n│ ─────────────             │\n│ 회원 비활성 처리 (위험 텍스트 버튼)│ ← 게스트면 '게스트 삭제'\n└──────────────────────────┘\n```"
+      },
+      "SCR-223": {
+        "name": "청백전 운영 상세",
+        "route": "/ops/club-matches/:matchId",
+        "owner": "B6",
+        "priority": "Must",
+        "states": [
+          {
+            "id": "SCR-223-ST1",
+            "label": "기본",
+            "behavior": "생성 전: 참가자 요약, 대진 설정, '대진 생성'",
+            "defined": true
+          },
+          {
+            "id": "SCR-223-ST2",
+            "label": "로딩",
+            "behavior": "생성 중: 경기 카드 자리 스켈레톤, 행동 잠금",
+            "defined": true
+          },
+          {
+            "id": "SCR-223-ST3",
+            "label": "빈 상태",
+            "behavior": "참가자 없음: \"참가자를 먼저 정하세요\" + 참가자 시트(SCR-224) 자동 열림(UXD-038)",
+            "defined": true
+          },
+          {
+            "id": "SCR-223-ST4",
+            "label": "오류",
+            "behavior": "점수 미설정 참가자 \"점수 미설정 N명의 점수를 먼저 매겨 주세요\"(AC-071), 참가자 4명 미만, 생성·저장 실패 안내 상자, 미기록 경기가 남아 종료 불가 'n경기 남음'(FLOW-005-S8a)",
+            "defined": true
+          },
+          {
+            "id": "SCR-223-ST5",
+            "label": "권한 없음",
+            "behavior": "회원 → SCR-004",
+            "defined": true
+          },
+          {
+            "id": "SCR-223-ST6",
+            "label": "충돌",
+            "behavior": "확정·교체·결과 입력·수정·방식 변경·종료 시 다른 운영진이 먼저 변경: 확인 창 \"다른 운영진이 청백전을 변경했습니다. 방금 한 작업은 처리되지 않았습니다\" → 닫으면 최신 상태(AC-080, UXD-010)",
+            "defined": true
+          },
+          {
+            "id": "SCR-223-ST7",
+            "label": "대진 검토",
+            "behavior": "미확정 대진: 경기 카드(교체 가능), '다시 생성'·'확정'. 결과 버튼 없음(FLOW-005-S4b). 균등안을 고르지 않았으면 순위표에 사람별 경기 수를 표시한다는 안내",
+            "defined": true
+          },
+          {
+            "id": "SCR-223-ST8",
+            "label": "확정",
+            "behavior": "결과 입력 모드: 상단 '확정됨(회원 공개)', 결과 버튼, 기록된 경기의 '미기록으로 되돌리기'(X4), 팀 승수·순위 즉시 갱신, '청백전 종료'. 방식 토글·다시 생성·팀 변경 잠금",
+            "defined": true
+          },
+          {
+            "id": "SCR-223-ST9",
+            "label": "종료",
+            "behavior": "맨 위 최종 결과 카드(팀 승수가 같으면 '무승부 (5 : 5)', 결정전 없음, FLOW-005-S8b), 경기 목록과 결과 수정은 유지. 종료 후 고친 경기에는 '결과 수정됨' 배지(X6, AC-110). '미기록으로 되돌리기'는 없음",
+            "defined": true
+          }
+        ],
+        "components": [
+          "CMP-001",
+          "CMP-002",
+          "CMP-005",
+          "CMP-006",
+          "CMP-007",
+          "CMP-021",
+          "CMP-022",
+          "CMP-023",
+          "CMP-026",
+          "CMP-027",
+          "CMP-041",
+          "CMP-042"
+        ],
+        "affected_via": [
+          "CMP-021",
+          "CMP-026"
+        ],
+        "referenced": [
+          "CMP-001",
+          "CMP-002",
+          "CMP-005",
+          "CMP-006",
+          "CMP-007",
+          "CMP-022",
+          "CMP-023",
+          "CMP-027",
+          "CMP-041",
+          "CMP-042"
+        ],
+        "acs": [],
+        "vd": [
+          {
+            "id": "VD-002",
+            "title": "아이콘 세트 Lucide",
+            "decision": "lucide-react 아이콘만 씀",
+            "via": "CMP-026"
+          },
+          {
+            "id": "VD-007",
+            "title": "명단 행 구성(단일 행)",
+            "decision": "UXD-074 표기 그대로 한 줄 '이름 · 성별 · 급수 · 점수'(이름·점수 굵게). 점수 없음은 점수 자리에 '미설정' 배지. 점수 오른쪽 열 분리는 쓰지 않음(CR-006 거절)",
+            "via": "CMP-005"
+          },
+          {
+            "id": "VD-020",
+            "title": "하단 안전 영역",
+            "decision": "하단 탭 아래 `env(safe-area-inset-bottom)`, 목록 끝 스크롤 여백 = 탭 높이 + 안전 영역 + 16, 포커스 스크롤 여백도 같게. 오른쪽 아래 '게스트 추가'는 탭 위 16. (r2) 적용 범위 확장: PC(1440px)의 600px 열에서도 같은 값을 쓰고, '게스트 추가'는 열 오른쪽 안쪽 16(열 바깥 화면 가장자리가 아님). 하단 고정 행동 바(SCR-202, SCR-223)와 시트 하단 고정 버튼도 안전 영역 위(04 3.1·3.2)",
+            "via": "screen"
+          },
+          {
+            "id": "VD-021",
+            "title": "한 열 레이아웃의 좌우 여백과 열 바깥 배경",
+            "decision": "열 안쪽 좌우 여백은 모든 폭에서 `space.gutter.mobile`(16px). 600px 열에 닿는 넓은 화면에서도 `space.gutter.desktop`으로 넓히지 않음. ~~열 바깥 배경은 `color.bg.page`(열과 같은 흰색, 경계선 없음).~~ (r3) 화면 폭이 열보다 넓을 때(태블릿·PC) 열 바깥 배경은 `color.bg.surface`, 열 배경은 `color.bg.page`이고 열에 그림자 `elevation.card`를 줘 영역을 구분함. 모바일(화면 폭 = 열 폭)에는 바깥 영역이 없어 해당 없음. 화면 제목·목록·카드·하단 고정 바·시트 내용의 왼쪽 시작선을 이 여백으로 맞춤",
+            "via": "CMP-026"
+          },
+          {
+            "id": "VD-024",
+            "title": "카드 표현과 적용 대상",
+            "decision": "04 3.1 '카드를 쓰는 경우'의 정보 묶음(CMP-041 GameCard, CMP-042 StandingsCard, CMP-043 ClubMatchListItem, CMP-045 RecordSummary, CMP-047 StageCard)만 카드로 그림. 표현은 배경 `color.bg.page` + 테두리 1px `color.border.default` + 모서리 `radius.md`, 그림자 없음(`elevation.card`는 쓰지 않음). 카드 안 구역 구분은 `color.bg.surface`. 카드 안 여백은 `space.3`. 반복 목록·입력·설정·필터는 Flat(행과 구분선). 카드 안에 카드를 두지 않음",
+            "via": "CMP-041"
+          },
+          {
+            "id": "VD-025",
+            "title": "하단 시트 시각(중첩 시트 포함)",
+            "decision": "PC·모바일 같은 하단 시트(CMP-021 `presentation=bottom`). 시트 너비는 600px 열과 같음. 위쪽 모서리 `radius.sheet`, 그림자 `elevation.sheet`, 배경 `color.bg.page`. 위쪽 손잡이 막대는 `color.border.default`, 높이 `space.1`. 하단 고정 버튼 영역은 위쪽 구분선 `color.border.default` + 안전 영역 위(VD-020). 열기·닫기는 `motion.duration.base`(움직임 줄이기면 즉시). 중첩 시트(04 3.2)는 같은 CMP-021 `stacked`를 재사용하고 새 변형을 만들지 않음: 두 번째 시트는 첫 번째 시트 위에 같은 모양으로 열리고, 딤은 한 겹만 둠. 딤 배경은 `color.text.primary` 40% 불투명도(**임시 구현값**, 현재 FE `bg-ink/40`)",
+            "via": "CMP-021"
+          }
+        ],
+        "layout": "```\nPC·모바일 공통 — ST1 생성 전 / ST7 검토\n┌──────────────────────────────┐\n│ ← 가을 청백전 11/08  [대진 미확정] │\n│ 방식 [개인전 | 팀전]             │ ← 확정 전만 바꿀 수 있음\n│ [참가자 14명 · 청 7 백 7 ▸]      │ ← SCR-224 하단 시트\n│ 대진 설정                       │\n│  총 경기 수 [10]                │\n│  14명 · 10경기 → 12명 3경기, 2명 2경기│ ← UXD-071 미리보기\n│  [7경기 · 모두 2경기] [14경기 · 모두 4경기] [입력값 유지]│\n│  밸런스 (●)  성별 조합 (●)       │\n│ ── (ST7) 경기 1–10 ──           │\n│ ┌ 1경기 · 실력차 1점 ────────┐   │\n│ │ 청팀 김(7) 이(5) / 백팀 박(6) 최(5)│\n│ └─────────────────────────┘   │\n├──────────────────────────────┤\n│ [다시 생성]        [  확정  ]   │ ← ST1이면 [대진 생성](탭바·안전 영역 위)\n└──────────────────────────────┘\nPC·모바일 공통 — ST8 확정(결과 입력) / ST9 종료\n┌──────────────────────────────┐\n│ ← 가을 청백전  [확정됨 · 회원 공개] │\n│ [최종 결과 카드]                │ ← ST9\n│ 청 3 : 백 2 · 미기록 5          │ ← 팀전 / 개인전은 순위 요약 카드\n│ [참가자 14명 ▸]                 │ ← 중도 귀가 처리는 SCR-224 시트에서\n│ ┌ 1경기 ─ 실력차 1점 ───────┐   │\n│ │ [같은 대진 반복 · 대체 후보 소진]│   │ ← 완화 배지 + 사유(있을 때)\n│ │ 청팀 김 이  [청 승]          │   │\n│ │ 백팀 박 최  [백 승]          │   │\n│ │ 미기록으로 되돌리기          │   │ ← ST8, 결과가 기록된 경기만\n│ └─────────────────────────┘   │\n│ ┌ 2경기 [결과 수정됨] ───────┐   │ ← ST9, 종료 후 결과를 고친 경기\n│ └─────────────────────────┘   │\n├──────────────────────────────┤\n│        [ 청백전 종료 ]          │ ← 미기록이 있으면 비활성 + 'n경기 남음'\n└──────────────────────────────┘\n```\n- (r2) PC·모바일 공통 배치입니다(최대 600px 한 열). 경기 카드는 한 열로 쌓고, 참가자·팀 구성은 '참가자 n명' 버튼으로 여는 하단 시트(SCR-224)입니다. 팀 승수·순위 요약은 경기 목록 위에 둡니다."
+      },
+      "SCR-224": {
+        "name": "참가자·팀 구성",
+        "route": "/ops/club-matches/:matchId (시트)",
+        "owner": "B6",
+        "priority": "Must",
+        "states": [
+          {
+            "id": "SCR-224-ST1",
+            "label": "기본",
+            "behavior": "개인전 참가자 목록",
+            "defined": true
+          },
+          {
+            "id": "SCR-224-ST2",
+            "label": "로딩",
+            "behavior": "팀 배정안 계산 중(팀전 처음 열 때), 목록 스켈레톤",
+            "defined": true
+          },
+          {
+            "id": "SCR-224-ST3",
+            "label": "빈 상태",
+            "behavior": "명단에 사람이 없음: \"명단이 비어 있습니다\" + '명단으로'(SCR-211)",
+            "defined": true
+          },
+          {
+            "id": "SCR-224-ST4",
+            "label": "오류",
+            "behavior": "저장 실패: 해당 행 되돌림 + 안내 상자",
+            "defined": true
+          },
+          {
+            "id": null,
+            "label": "권한 없음",
+            "behavior": "해당 없음(부모 화면에서 처리)",
+            "defined": false
+          },
+          {
+            "id": null,
+            "label": "충돌",
+            "behavior": "해당 없음(기획의 충돌 감지 범위 밖: FLOW-004-S6a, FLOW-005-S6a. 이미 처리된 요청은 ST4 오류 문구로 안내). 중도 귀가 대체의 교체 충돌은 SCR-226-ST6에서 처리",
+            "defined": false
+          },
+          {
+            "id": "SCR-224-ST7",
+            "label": "팀전",
+            "behavior": "팀별 인원 고정 표시, 알고리즘 배정안, '청/백/불참'",
+            "defined": true
+          },
+          {
+            "id": "SCR-224-ST8",
+            "label": "대진 확정 후",
+            "behavior": "팀 선택 비활성 + \"대진 확정 후에는 같은 팀 안에서 선수 교체만 할 수 있습니다\"(UXD-070), 참가 해제 불가, '이후 대진에서 제외'만 가능",
+            "defined": true
+          }
+        ],
+        "components": [
+          "CMP-002",
+          "CMP-005",
+          "CMP-006",
+          "CMP-008",
+          "CMP-021",
+          "CMP-022",
+          "CMP-023",
+          "CMP-024",
+          "CMP-028"
+        ],
+        "affected_via": [
+          "CMP-021"
+        ],
+        "referenced": [
+          "CMP-002",
+          "CMP-005",
+          "CMP-006",
+          "CMP-008",
+          "CMP-022",
+          "CMP-023",
+          "CMP-024",
+          "CMP-028"
+        ],
+        "acs": [],
+        "vd": [
+          {
+            "id": "VD-004",
+            "title": "점수·인원 숫자는 고정폭 숫자",
+            "decision": "점수와 인원 숫자에 `tabular-nums`",
+            "via": "CMP-024"
+          },
+          {
+            "id": "VD-007",
+            "title": "명단 행 구성(단일 행)",
+            "decision": "UXD-074 표기 그대로 한 줄 '이름 · 성별 · 급수 · 점수'(이름·점수 굵게). 점수 없음은 점수 자리에 '미설정' 배지. 점수 오른쪽 열 분리는 쓰지 않음(CR-006 거절)",
+            "via": "CMP-005"
+          },
+          {
+            "id": "VD-008",
+            "title": "행 높이 56 + 구분선 1(행 안)",
+            "decision": "행 전체 56(구분선 포함), 좌우 여백 16(VD-021의 페이지 좌우 여백과 같음)",
+            "via": "CMP-024"
+          },
+          {
+            "id": "VD-020",
+            "title": "하단 안전 영역",
+            "decision": "하단 탭 아래 `env(safe-area-inset-bottom)`, 목록 끝 스크롤 여백 = 탭 높이 + 안전 영역 + 16, 포커스 스크롤 여백도 같게. 오른쪽 아래 '게스트 추가'는 탭 위 16. (r2) 적용 범위 확장: PC(1440px)의 600px 열에서도 같은 값을 쓰고, '게스트 추가'는 열 오른쪽 안쪽 16(열 바깥 화면 가장자리가 아님). 하단 고정 행동 바(SCR-202, SCR-223)와 시트 하단 고정 버튼도 안전 영역 위(04 3.1·3.2)",
+            "via": "CMP-021"
+          },
+          {
+            "id": "VD-025",
+            "title": "하단 시트 시각(중첩 시트 포함)",
+            "decision": "PC·모바일 같은 하단 시트(CMP-021 `presentation=bottom`). 시트 너비는 600px 열과 같음. 위쪽 모서리 `radius.sheet`, 그림자 `elevation.sheet`, 배경 `color.bg.page`. 위쪽 손잡이 막대는 `color.border.default`, 높이 `space.1`. 하단 고정 버튼 영역은 위쪽 구분선 `color.border.default` + 안전 영역 위(VD-020). 열기·닫기는 `motion.duration.base`(움직임 줄이기면 즉시). 중첩 시트(04 3.2)는 같은 CMP-021 `stacked`를 재사용하고 새 변형을 만들지 않음: 두 번째 시트는 첫 번째 시트 위에 같은 모양으로 열리고, 딤은 한 겹만 둠. 딤 배경은 `color.text.primary` 40% 불투명도(**임시 구현값**, 현재 FE `bg-ink/40`)",
+            "via": "CMP-021"
+          }
+        ],
+        "layout": "```\n개인전                              팀전\n┌──────────────────────┐   ┌──────────────────────────┐\n│ ─── 참가자  ✕ ─────── │   │ ─── 팀 구성  ✕ ─────────── │\n│ 참가 14명 · 남 8 여 6  │   │ 청 7(남4 여3) · 백 7(남4 여3)│\n│ ⚠ 점수 미설정 1명 ▸    │   │ 알고리즘 배정안을 채웠습니다   │\n│ [검색____]            │   │ 김민수 남 7 [청|백|불참]      │\n│ ☑ 김민수 남 7          │   │ 박지훈 남 6 [청|백|불참]      │\n│ ☑ 박지훈 남 6 (출전)   │   │ ── 게스트 ──                │\n│   ⋯ 이후 대진에서 제외  │   │ 손님A 여 4 [청|백|불참]       │\n│ ── 게스트 ──          │   └──────────────────────────┘\n└──────────────────────┘\n```"
+      },
+      "SCR-225": {
+        "name": "선수 교체(청백전)",
+        "route": "/ops/club-matches/:matchId (시트)",
+        "owner": "B6",
+        "priority": "Must",
+        "states": [
+          {
+            "id": "SCR-225-ST1",
+            "label": "기본",
+            "behavior": "후보 목록",
+            "defined": true
+          },
+          {
+            "id": null,
+            "label": "로딩",
+            "behavior": "해당 없음(대진 데이터로 즉시 계산)",
+            "defined": false
+          },
+          {
+            "id": "SCR-225-ST3",
+            "label": "빈 상태",
+            "behavior": "\"바꿀 수 있는 사람이 없습니다\"",
+            "defined": true
+          },
+          {
+            "id": "SCR-225-ST4",
+            "label": "오류",
+            "behavior": "교체 저장 실패 안내 상자, 대진은 그대로",
+            "defined": true
+          },
+          {
+            "id": null,
+            "label": "권한 없음",
+            "behavior": "해당 없음(부모 화면에서 처리)",
+            "defined": false
+          },
+          {
+            "id": "SCR-225-ST6",
+            "label": "충돌",
+            "behavior": "교체 시 다른 운영진이 먼저 변경(결과 기록 포함): 충돌 확인 창 → 시트 닫고 SCR-223 최신 상태(AC-080)",
+            "defined": true
+          }
+        ],
+        "components": [
+          "CMP-005",
+          "CMP-021",
+          "CMP-022",
+          "CMP-023",
+          "CMP-044"
+        ],
+        "affected_via": [
+          "CMP-021"
+        ],
+        "referenced": [
+          "CMP-005",
+          "CMP-022",
+          "CMP-023",
+          "CMP-044"
+        ],
+        "acs": [],
+        "vd": [
+          {
+            "id": "VD-007",
+            "title": "명단 행 구성(단일 행)",
+            "decision": "UXD-074 표기 그대로 한 줄 '이름 · 성별 · 급수 · 점수'(이름·점수 굵게). 점수 없음은 점수 자리에 '미설정' 배지. 점수 오른쪽 열 분리는 쓰지 않음(CR-006 거절)",
+            "via": "CMP-005"
+          },
+          {
+            "id": "VD-020",
+            "title": "하단 안전 영역",
+            "decision": "하단 탭 아래 `env(safe-area-inset-bottom)`, 목록 끝 스크롤 여백 = 탭 높이 + 안전 영역 + 16, 포커스 스크롤 여백도 같게. 오른쪽 아래 '게스트 추가'는 탭 위 16. (r2) 적용 범위 확장: PC(1440px)의 600px 열에서도 같은 값을 쓰고, '게스트 추가'는 열 오른쪽 안쪽 16(열 바깥 화면 가장자리가 아님). 하단 고정 행동 바(SCR-202, SCR-223)와 시트 하단 고정 버튼도 안전 영역 위(04 3.1·3.2)",
+            "via": "CMP-021"
+          },
+          {
+            "id": "VD-025",
+            "title": "하단 시트 시각(중첩 시트 포함)",
+            "decision": "PC·모바일 같은 하단 시트(CMP-021 `presentation=bottom`). 시트 너비는 600px 열과 같음. 위쪽 모서리 `radius.sheet`, 그림자 `elevation.sheet`, 배경 `color.bg.page`. 위쪽 손잡이 막대는 `color.border.default`, 높이 `space.1`. 하단 고정 버튼 영역은 위쪽 구분선 `color.border.default` + 안전 영역 위(VD-020). 열기·닫기는 `motion.duration.base`(움직임 줄이기면 즉시). 중첩 시트(04 3.2)는 같은 CMP-021 `stacked`를 재사용하고 새 변형을 만들지 않음: 두 번째 시트는 첫 번째 시트 위에 같은 모양으로 열리고, 딤은 한 겹만 둠. 딤 배경은 `color.text.primary` 40% 불투명도(**임시 구현값**, 현재 FE `bg-ink/40`)",
+            "via": "CMP-021"
+          }
+        ],
+        "layout": "```\n┌───────────────────────────────┐\n│ ─── 3경기 김민수(청)와 바꿀 사람 ✕ │\n│ 경기 수 적은 순                  │\n│  정우성 청 · 2경기 · 실력차 1점    │\n│  강하늘 청 · 3경기 · 경기 중 · 실력차 2점│\n│  이수   청 · 3경기 (같은 4명·같은 팀) 비활성│\n│ ⚠ 교체하면 경기 수 차이가 2가 됩니다 │ ← 해당 후보 선택 시\n└───────────────────────────────┘\n```"
+      }
+    },
+    "component_vd": [
+      {
+        "id": "VD-002",
+        "title": "아이콘 세트 Lucide",
+        "decision": "lucide-react 아이콘만 씀",
+        "cmps": [
+          "CMP-025",
+          "CMP-026"
+        ]
+      },
+      {
+        "id": "VD-019",
+        "title": "하단 탭 Lucide 아이콘과 현재 탭 표시",
+        "decision": "튜토리얼 graduation-cap, 청백전 swords, 마이페이지 circle-user-round, 운영 clipboard-list(24px). 탭 이름·순서·글자 레이블·행동은 그대로. 현재 탭은 아이콘·글자 `color.action.primary` + 굵은 글자 + 위쪽 표시 막대(새 토큰 없음). 탭 높이 56(CR-005). (r2) PC·모바일 같은 하단 탭, 600px 열 너비(04 CMP-025 `layout=bottom`)",
+        "cmps": [
+          "CMP-025"
+        ]
+      },
+      {
+        "id": "VD-020",
+        "title": "하단 안전 영역",
+        "decision": "하단 탭 아래 `env(safe-area-inset-bottom)`, 목록 끝 스크롤 여백 = 탭 높이 + 안전 영역 + 16, 포커스 스크롤 여백도 같게. 오른쪽 아래 '게스트 추가'는 탭 위 16. (r2) 적용 범위 확장: PC(1440px)의 600px 열에서도 같은 값을 쓰고, '게스트 추가'는 열 오른쪽 안쪽 16(열 바깥 화면 가장자리가 아님). 하단 고정 행동 바(SCR-202, SCR-223)와 시트 하단 고정 버튼도 안전 영역 위(04 3.1·3.2)",
+        "cmps": [
+          "CMP-021",
+          "CMP-025"
+        ]
+      },
+      {
+        "id": "VD-021",
+        "title": "한 열 레이아웃의 좌우 여백과 열 바깥 배경",
+        "decision": "열 안쪽 좌우 여백은 모든 폭에서 `space.gutter.mobile`(16px). 600px 열에 닿는 넓은 화면에서도 `space.gutter.desktop`으로 넓히지 않음. ~~열 바깥 배경은 `color.bg.page`(열과 같은 흰색, 경계선 없음).~~ (r3) 화면 폭이 열보다 넓을 때(태블릿·PC) 열 바깥 배경은 `color.bg.surface`, 열 배경은 `color.bg.page`이고 열에 그림자 `elevation.card`를 줘 영역을 구분함. 모바일(화면 폭 = 열 폭)에는 바깥 영역이 없어 해당 없음. 화면 제목·목록·카드·하단 고정 바·시트 내용의 왼쪽 시작선을 이 여백으로 맞춤",
+        "cmps": [
+          "CMP-026"
+        ]
+      },
+      {
+        "id": "VD-025",
+        "title": "하단 시트 시각(중첩 시트 포함)",
+        "decision": "PC·모바일 같은 하단 시트(CMP-021 `presentation=bottom`). 시트 너비는 600px 열과 같음. 위쪽 모서리 `radius.sheet`, 그림자 `elevation.sheet`, 배경 `color.bg.page`. 위쪽 손잡이 막대는 `color.border.default`, 높이 `space.1`. 하단 고정 버튼 영역은 위쪽 구분선 `color.border.default` + 안전 영역 위(VD-020). 열기·닫기는 `motion.duration.base`(움직임 줄이기면 즉시). 중첩 시트(04 3.2)는 같은 CMP-021 `stacked`를 재사용하고 새 변형을 만들지 않음: 두 번째 시트는 첫 번째 시트 위에 같은 모양으로 열리고, 딤은 한 겹만 둠. 딤 배경은 `color.text.primary` 40% 불투명도(**임시 구현값**, 현재 FE `bg-ink/40`)",
+        "cmps": [
+          "CMP-021"
+        ]
+      }
+    ],
+    "digest": "5a499b9cb04ed122354741b84097aeef9c55e1a24ee2e612bf751389e8a8789b"
+  },
+  "digest": "304805ef2557f97b4397cd7f8e68b181da326503ec0e61d12fa1b694cd174e39"
 }

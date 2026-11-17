@@ -40,7 +40,7 @@ services:
     environment:
       # 비우면 같은 출처(/api → Vite 프록시 → backend). 세션 쿠키·카카오 Redirect URI가 이 방식을 전제로 함
       VITE_API_BASE_URL: ${VITE_API_BASE_URL:-}
-      VITE_DATA_SOURCE: ${VITE_DATA_SOURCE:-mock}
+      VITE_DATA_SOURCE: ${VITE_DATA_SOURCE:-api}
       API_PROXY_TARGET: http://backend:8000
     ports:
       - "${FRONTEND_PORT:-5173}:5173"

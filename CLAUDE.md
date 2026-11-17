@@ -42,7 +42,7 @@ backend/
 frontend/
   src/
     lib/api/           # 공통 API 클라이언트(api.get/post/...), ApiError
-    lib/data/source.ts # 데이터 출처 선택(VITE_DATA_SOURCE: mock | api). featureSource(): 백엔드 준비된 기능만 api
+    lib/data/source.ts # 데이터 출처 선택(VITE_DATA_SOURCE: api(기본) | mock). featureSource(): 백엔드 준비된 기능만 api
     components/        # 공통 UI 컴포넌트(04 CMP: Button, Badge, NoticeBox, StateView, ConfirmDialog, Toast, PageHeader, AppNav …)
     features/<domain>/ # 기능 단위: api.ts(mock/api 분기), 훅, 컴포넌트, 테스트
     features/auth/     # 계정·역할 타입, getMe, 개발용 역할 전환(devPersona)

@@ -39,13 +39,13 @@ describe('AC-050 한 열 최대 600px (UX Spec r2, VD-021)', () => {
   })
   afterEach(() => vi.unstubAllGlobals())
 
-  it('[AC-050] 토큰 size.content.member는 600px이고 셸 열·바깥 배경이 그 토큰과 color.bg.page를 쓴다', () => {
+  it('[AC-050] 토큰 size.content.member는 600px이고 셸 열이 그 토큰을, 바깥·열 구분이 color.bg.surface·elevation.card를 쓴다(VD-021 r3)', () => {
     const tokens = read('./styles/tokens.css')
     expect(tokens).toMatch(/--size-content-member:\s*600px;/)
     const shells = read('./routes/layouts/shells.css')
     expect(shells).toMatch(/--app-column-max:\s*var\(--size-content-member\);/)
-    expect(shells).toMatch(/--app-outer-bg:\s*var\(--color-bg-page\);/)
-    expect(shells).toMatch(/--app-column-shadow:\s*none;/)
+    expect(shells).toMatch(/--app-outer-bg:\s*var\(--color-bg-surface\);/)
+    expect(shells).toMatch(/--app-column-shadow:\s*var\(--elevation-card\);/)
   })
 
   it('[AC-050] 튜토리얼 홈(SCR-101-ST1)은 PC 폭에서도 한 열 셸과 하단 탭만 쓴다', async () => {

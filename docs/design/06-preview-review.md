@@ -1,6 +1,6 @@
 ---
 doc: preview-review
-revision: 1
+revision: 2
 language: ko
 based_on:
   ux_spec_revision: 2
@@ -10,7 +10,9 @@ based_on:
 
 - 프리뷰 위치: `design-preview/` (정적 프리뷰, 제품 코드 아님. 실제 API·DB·인증 없음, 가짜 데이터 `src/mock/data.ts`)
 - 실행: `pnpm --dir design-preview install && pnpm --dir design-preview dev` → http://localhost:55180/ (예: `#SCR-213/SCR-213-ST1/desktop`, 측정용 `?bare=1&safe=34`)
-- 기준: UX 설계 r2(승인됨, 2026-11-13), Design Direction r2(승인됨, 2026-11-13, VD 14개), 테마 `docs/design-profile/theme.json`
+- 기준: UX 설계 r2(승인됨, 2026-11-13), Design Direction **r3**(승인됨, 2026-11-17, VD 14개), 테마 `docs/design-profile/theme.json`
+
+> **r2(2026-11-17)**: Design Direction r3의 VD-021 변경(열 바깥 `color.bg.surface`, 열 `color.bg.page` + 그림자 `elevation.card`)만 반영했습니다. 바뀐 파일은 `design-preview/src/components/smapsh/Layout.tsx`(한 열 셸), `src/preview.css`(프리뷰 셸 바깥 배경), `preview.manifest.json`(`design_direction_revision` 3). 화면·상태·다른 VD는 r1과 같습니다. 측정 22건 통과(`experiments/preview-review/results/r3/results.json`): 열 ≤ 600·가운데, 바깥 `rgb(244,245,247)`, 열 흰색 + 그림자, 열이 화면 아래까지 채움, 옆 패널·대화상자 0.
 - 실행 환경: Node 20.19.5, pnpm, Vite 7 + React 19 + Tailwind v4(`design-preview/package.json`). `src/tokens.css`는 `theme-check --print-css` 생성값
 
 ## 렌더 대상과 검증 결과
@@ -65,6 +67,7 @@ Design Direction r2 6장 렌더 범위 그대로입니다(7개 화면, 11개 상
 | FB-005 | SCR-213-ST1 | 중첩 시트는 현재 Preview 표현을 이번 단계에서 허용. 두 번째 시트(90%)가 첫 번째 시트(70%)를 완전히 가리는 문제는 실제 Build에서 사용성 확인 대상으로 이관 | 프리뷰 변경 없음, Build 이관(B-01) | 보류 |
 | FB-006 | SCR-203, SCR-212, SCR-213 | 딤 배경 40%: 기존 예외 유지 | 변경 없음(VD-025 토큰 밖 값, 임시 구현값) | 반영 |
 | FB-007 | 전체 | 새로운 토큰·컴포넌트 추가 없음, 추가 디자인 개정 요청 없음 | 변경 없음 | 반영 |
+| FB-008 | 전체(데스크톱) | (2026-11-17) 데스크톱에서 가운데 열이 다른 영역과 하나도 구분되지 않음. 원래 그림자로 영역을 구분했음 | Design Direction r3 VD-021(바깥 `color.bg.surface` + 열 그림자 `elevation.card`) 승인 후 프리뷰 셸에 반영 | 반영 |
 
 `UX 설계 변경 필요`인 피드백은 없습니다. 프리뷰 작성 중 스스로 고친 구현 문제(하단 탭 순서, 고정 요소의 열 제약, 데스크톱 프레임 1440, h1 크기, 시트 하단 버튼 폭, 선수명 줄바꿈, 가짜 데이터 실력차)는 승인 명세에 맞춘 구현 수정이라 FB로 적지 않았습니다.
 

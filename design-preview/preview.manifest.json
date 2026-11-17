@@ -1,6 +1,6 @@
 {
   "ux_spec_revision": 2,
-  "design_direction_revision": 2,
+  "design_direction_revision": 3,
   "screens": {
     "SCR-001": {
       "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
