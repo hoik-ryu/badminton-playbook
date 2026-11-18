@@ -4,19 +4,19 @@
   "skill": "product-design",
   "created_at": "2026-11-09T00:43:42Z",
   "based_on": {
-    "discovery_revision": "3",
-    "planning_revision": "6",
+    "discovery_revision": "4",
+    "planning_revision": "7",
     "planning_hashes": {
-      "docs/planning/01-discovery.md": "5fcf2ebb6023832a9ab964714a535480ce0adc8d0ce301bea7522f937f87a068",
-      "docs/planning/02-prd.md": "6a9da38ce4439d60e51f3d20fbc4e94b63d202563cf69af268bcd7e3f8fcad57",
-      "docs/planning/03-user-stories.md": "172f84f3e0b95a442f2d5a1670d6510de5d3bdf99c6775f6818dfa4f7b2c5231",
-      "docs/planning/04-user-flows.md": "4adfff41cc441fe2b975c820ec7843b475e2f31ad275f827e69c74735c855eb2",
-      "docs/planning/05-acceptance-criteria.md": "29c74652d2a9f712d660943b476d7bbba390aacfe32fac56c6658147806ca1bc"
+      "docs/planning/01-discovery.md": "5424a9030cd836ef7b88ea7f4a75e880daca5445eb146bc3f6c78106860df7d4",
+      "docs/planning/02-prd.md": "201051d35df61de6a69ca6d1e24720121f726c2806e8e5522c3078996d6b0a9e",
+      "docs/planning/03-user-stories.md": "1d3a88fe49e97eb34b8dbbd62da147ff4e060fac870c65b600cfe6252a1f375a",
+      "docs/planning/04-user-flows.md": "a3799227d2bde0ada27df2a5290961c5bf6b26c3d7fcc66b90f9250994a0216c",
+      "docs/planning/05-acceptance-criteria.md": "6b53ed45486b3343c53eb221bd640cdc7a1c523377ab37b86d4bf4df42d399aa"
     },
-    "planning_commit": "1cea6b70ad5355830fe6d8603ce9bf380e999583",
+    "planning_commit": "c646abb0f4f6e9a4b58218e39af6eb7d7f38df57",
     "previous": {
-      "planning_revision": "5",
-      "planning_commit": "92468769975599a59ec5309ddc50363a19e145c0"
+      "planning_revision": "6",
+      "planning_commit": "1cea6b70ad5355830fe6d8603ce9bf380e999583"
     }
   },
   "validity": {
@@ -25,38 +25,38 @@
   "stages": {
     "ux_planning": {
       "status": "approved",
-      "revision": 4,
+      "revision": 5,
       "artifacts": [
         "docs/design/00-ux-decisions.md"
       ],
       "artifacts_done": {
-        "docs/design/00-ux-decisions.md": "1964b4d8ecbc993042a5835a3c0f65e3be5afa4d932c23d1d36bdf9fa5c06105"
+        "docs/design/00-ux-decisions.md": "d07342f1e21135841f65ab7fdd010022bc58aca4f11f80418222c8153a1172d1"
       },
       "submitted": {
-        "revision": 4,
-        "at": "2026-11-13T04:22:02Z",
+        "revision": 5,
+        "at": "2026-11-18T07:08:32Z",
         "hashes": {
-          "docs/design/00-ux-decisions.md": "1964b4d8ecbc993042a5835a3c0f65e3be5afa4d932c23d1d36bdf9fa5c06105"
+          "docs/design/00-ux-decisions.md": "d07342f1e21135841f65ab7fdd010022bc58aca4f11f80418222c8153a1172d1"
         }
       },
       "approved": {
+        "revision": 5,
+        "at": "2026-11-18T07:14:36Z",
+        "hashes": {
+          "docs/design/00-ux-decisions.md": "d07342f1e21135841f65ab7fdd010022bc58aca4f11f80418222c8153a1172d1"
+        }
+      },
+      "last_approved": {
         "revision": 4,
         "at": "2026-11-13T04:34:26Z",
         "hashes": {
           "docs/design/00-ux-decisions.md": "1964b4d8ecbc993042a5835a3c0f65e3be5afa4d932c23d1d36bdf9fa5c06105"
         }
-      },
-      "last_approved": {
-        "revision": 2,
-        "at": "2026-11-10T00:49:46Z",
-        "hashes": {
-          "docs/design/00-ux-decisions.md": "c17cf17f57d72b66fc4ba632240b06e63d9a88fca9a048f69245a502bcfbc650"
-        }
       }
     },
     "ux_spec": {
       "status": "approved",
-      "revision": 2,
+      "revision": 3,
       "artifacts": [
         "docs/design/01-information-architecture.md",
         "docs/design/02-screens.md",
@@ -65,24 +65,41 @@
         "docs/design/05-design-traceability.md"
       ],
       "artifacts_done": {
-        "docs/design/01-information-architecture.md": "94c9ae6860464aa33dcce495118572b5a22eb4e615d2d59b6f7b12a89020bd76",
-        "docs/design/02-screens.md": "238867828129796bd81c0b3a3ee8245c68e9dc211eaad6860362b9159ffe8919",
-        "docs/design/03-screen-flows.md": "29f568804ae3b5184ea9e50b199cf86624d528230f10c1b99159096a1aafcd57",
-        "docs/design/04-ui-system.md": "148e8ff520af7a277d04c212fc2555493d0689936db5e5f980da96ab589ecbb9",
-        "docs/design/05-design-traceability.md": "e5309788aa94dcd5fb378f4540376b27962c22265c57d1f2b64cd5c72d6cf3bc"
+        "docs/design/01-information-architecture.md": "7271a7464aeca613a296f065b7d7d59c49bad7089afd591a0444fa1349f5d41e",
+        "docs/design/02-screens.md": "47720f542c3ede7fccec099f52017455aa07c7a4f4b17a3bdd23c19e70343857",
+        "docs/design/03-screen-flows.md": "77006dcaf60e2296947c660a485f65a8fbd155b1fdaa11f3f037452e297bfc8b",
+        "docs/design/04-ui-system.md": "566d23d4ca9feac8e8c5d3aea2435b4cc4fb77715f4d796a3c79b75a31b6a087",
+        "docs/design/05-design-traceability.md": "bddbed6bcaf1fdd7ac269f3fe5db025dfb810f9fa30cb432203419c2baae5686"
       },
       "submitted": {
-        "revision": 2,
-        "at": "2026-11-13T04:58:00Z",
+        "revision": 3,
+        "at": "2026-11-18T08:00:26Z",
         "hashes": {
-          "docs/design/01-information-architecture.md": "94c9ae6860464aa33dcce495118572b5a22eb4e615d2d59b6f7b12a89020bd76",
-          "docs/design/02-screens.md": "238867828129796bd81c0b3a3ee8245c68e9dc211eaad6860362b9159ffe8919",
-          "docs/design/03-screen-flows.md": "29f568804ae3b5184ea9e50b199cf86624d528230f10c1b99159096a1aafcd57",
-          "docs/design/04-ui-system.md": "148e8ff520af7a277d04c212fc2555493d0689936db5e5f980da96ab589ecbb9",
-          "docs/design/05-design-traceability.md": "e5309788aa94dcd5fb378f4540376b27962c22265c57d1f2b64cd5c72d6cf3bc"
+          "docs/design/01-information-architecture.md": "7271a7464aeca613a296f065b7d7d59c49bad7089afd591a0444fa1349f5d41e",
+          "docs/design/02-screens.md": "47720f542c3ede7fccec099f52017455aa07c7a4f4b17a3bdd23c19e70343857",
+          "docs/design/03-screen-flows.md": "77006dcaf60e2296947c660a485f65a8fbd155b1fdaa11f3f037452e297bfc8b",
+          "docs/design/04-ui-system.md": "566d23d4ca9feac8e8c5d3aea2435b4cc4fb77715f4d796a3c79b75a31b6a087",
+          "docs/design/05-design-traceability.md": "bddbed6bcaf1fdd7ac269f3fe5db025dfb810f9fa30cb432203419c2baae5686"
         }
       },
       "approved": {
+        "revision": 3,
+        "at": "2026-11-18T08:04:18Z",
+        "hashes": {
+          "docs/design/01-information-architecture.md": "7271a7464aeca613a296f065b7d7d59c49bad7089afd591a0444fa1349f5d41e",
+          "docs/design/02-screens.md": "47720f542c3ede7fccec099f52017455aa07c7a4f4b17a3bdd23c19e70343857",
+          "docs/design/03-screen-flows.md": "77006dcaf60e2296947c660a485f65a8fbd155b1fdaa11f3f037452e297bfc8b",
+          "docs/design/04-ui-system.md": "566d23d4ca9feac8e8c5d3aea2435b4cc4fb77715f4d796a3c79b75a31b6a087",
+          "docs/design/05-design-traceability.md": "bddbed6bcaf1fdd7ac269f3fe5db025dfb810f9fa30cb432203419c2baae5686"
+        }
+      },
+      "structure_confirmed": {
+        "revision": 3,
+        "at": "2026-11-18T08:00:09Z",
+        "signature": "6f7b7f005bc8a3e4da36e1d4020d87264b69b2f1ae5aca104c965265316f1324"
+      },
+      "based_on_ux_planning_revision": 5,
+      "last_approved": {
         "revision": 2,
         "at": "2026-11-13T05:03:14Z",
         "hashes": {
@@ -92,77 +109,17 @@
           "docs/design/04-ui-system.md": "148e8ff520af7a277d04c212fc2555493d0689936db5e5f980da96ab589ecbb9",
           "docs/design/05-design-traceability.md": "e5309788aa94dcd5fb378f4540376b27962c22265c57d1f2b64cd5c72d6cf3bc"
         }
-      },
-      "structure_confirmed": {
-        "revision": 2,
-        "at": "2026-11-13T04:51:09Z",
-        "signature": "6f7b7f005bc8a3e4da36e1d4020d87264b69b2f1ae5aca104c965265316f1324"
-      },
-      "based_on_ux_planning_revision": 4,
-      "last_approved": {
-        "revision": 1,
-        "at": "2026-11-10T01:38:14Z",
-        "hashes": {
-          "docs/design/01-information-architecture.md": "2248baf00aadf442318a8c5282a9ce84bbccdf530a58bca295ba5de193560449",
-          "docs/design/02-screens.md": "8ec8ab0a4292b87d2a097fbe85fb04e09546a347dcb175a238b54594b08509e6",
-          "docs/design/03-screen-flows.md": "f81babed3cf77f0b50c4303ec14931318d97e2faeff6db4dc95d386783e78a07",
-          "docs/design/04-ui-system.md": "5209e3436609f6da4f9c1ab71e1af55a808ad0ed4f94bf1d5c1913c9e33e105b",
-          "docs/design/05-design-traceability.md": "6281bffd4b4b0202521d0c65426b1203941e2f9e2ed6ec16602ba66228ef6d90"
-        }
       }
     },
     "preview": {
-      "status": "approved",
+      "status": "locked",
       "revision": 2,
       "artifacts": [
         "docs/design/06-preview-review.md"
       ],
-      "artifacts_done": {
-        "docs/design/06-preview-review.md": "670641799a8ea93d9e2344adcdd164c5fbf462e226daae4b0db9ab31343a5227"
-      },
-      "submitted": {
-        "revision": 2,
-        "at": "2026-11-17T00:00:01Z",
-        "hashes": {
-          "docs/design/06-preview-review.md": "670641799a8ea93d9e2344adcdd164c5fbf462e226daae4b0db9ab31343a5227",
-          "design-preview/": "43ea62c31cb4d9e07dc93d995c22fdfd456170016d25598d3386fd1ec2019a16"
-        },
-        "semantic_tree_hash": "55b9790118f736e2e47b29ea70e220f0348ca91d8faf79e2a83e770f19145987",
-        "semantic_algo": "sem-2",
-        "theme_hash": "fd21e9ea803fa4a7191fd3f5e107e8a8f55146775f58fa44c7c15cfd50ebd06b",
-        "design_direction_revision": 3,
-        "design_direction_hashes": {
-          "docs/design/07-design-direction.md": "53c909ac73e219d09a59d70b6a7f9d5f0fbac3bfdf8a62c8d300e7b3e7c3aac3"
-        }
-      },
-      "approved": {
-        "revision": 2,
-        "at": "2026-11-17T00:05:40Z",
-        "hashes": {
-          "docs/design/06-preview-review.md": "670641799a8ea93d9e2344adcdd164c5fbf462e226daae4b0db9ab31343a5227",
-          "design-preview/": "43ea62c31cb4d9e07dc93d995c22fdfd456170016d25598d3386fd1ec2019a16"
-        },
-        "ux_spec_hashes": {
-          "docs/design/01-information-architecture.md": "94c9ae6860464aa33dcce495118572b5a22eb4e615d2d59b6f7b12a89020bd76",
-          "docs/design/02-screens.md": "238867828129796bd81c0b3a3ee8245c68e9dc211eaad6860362b9159ffe8919",
-          "docs/design/03-screen-flows.md": "29f568804ae3b5184ea9e50b199cf86624d528230f10c1b99159096a1aafcd57",
-          "docs/design/04-ui-system.md": "148e8ff520af7a277d04c212fc2555493d0689936db5e5f980da96ab589ecbb9",
-          "docs/design/05-design-traceability.md": "e5309788aa94dcd5fb378f4540376b27962c22265c57d1f2b64cd5c72d6cf3bc"
-        },
-        "semantic_tree_hash": "55b9790118f736e2e47b29ea70e220f0348ca91d8faf79e2a83e770f19145987",
-        "semantic_algo": "sem-2",
-        "theme_hash": "fd21e9ea803fa4a7191fd3f5e107e8a8f55146775f58fa44c7c15cfd50ebd06b",
-        "design_direction_revision": 3,
-        "design_direction_hashes": {
-          "docs/design/07-design-direction.md": "53c909ac73e219d09a59d70b6a7f9d5f0fbac3bfdf8a62c8d300e7b3e7c3aac3"
-        },
-        "renderer": {
-          "planned": "code",
-          "used": "code",
-          "switched": false,
-          "reason": null
-        }
-      },
+      "artifacts_done": {},
+      "submitted": null,
+      "approved": null,
       "based_on_ux_spec_revision": 2,
       "verification": {
         "result": "pass",
@@ -227,11 +184,11 @@
       "review": null,
       "based_on_design_direction_revision": 3,
       "last_approved": {
-        "revision": 1,
-        "at": "2026-11-13T06:10:32Z",
+        "revision": 2,
+        "at": "2026-11-17T00:05:40Z",
         "hashes": {
-          "docs/design/06-preview-review.md": "803eb2e0dd86459b6e1649add884f98077f1cb1340d549e00f6fb08c141fd41c",
-          "design-preview/": "9f8c693af9269ac275ecc5b3592a9c11f55111e0c0da188fb151966ce08b1de0"
+          "docs/design/06-preview-review.md": "670641799a8ea93d9e2344adcdd164c5fbf462e226daae4b0db9ab31343a5227",
+          "design-preview/": "43ea62c31cb4d9e07dc93d995c22fdfd456170016d25598d3386fd1ec2019a16"
         },
         "ux_spec_hashes": {
           "docs/design/01-information-architecture.md": "94c9ae6860464aa33dcce495118572b5a22eb4e615d2d59b6f7b12a89020bd76",
@@ -240,12 +197,12 @@
           "docs/design/04-ui-system.md": "148e8ff520af7a277d04c212fc2555493d0689936db5e5f980da96ab589ecbb9",
           "docs/design/05-design-traceability.md": "e5309788aa94dcd5fb378f4540376b27962c22265c57d1f2b64cd5c72d6cf3bc"
         },
-        "semantic_tree_hash": "58d4a4f27d2cd2f5fbdf02f084af0fe287099398a7f31fbe9f20a390524abf50",
+        "semantic_tree_hash": "55b9790118f736e2e47b29ea70e220f0348ca91d8faf79e2a83e770f19145987",
         "semantic_algo": "sem-2",
         "theme_hash": "fd21e9ea803fa4a7191fd3f5e107e8a8f55146775f58fa44c7c15cfd50ebd06b",
-        "design_direction_revision": 2,
+        "design_direction_revision": 3,
         "design_direction_hashes": {
-          "docs/design/07-design-direction.md": "d9553c8fdc509a6ace7f9e9b5f337ef3f7ec10f36b80ef0b32d7cf200f74d7e0"
+          "docs/design/07-design-direction.md": "53c909ac73e219d09a59d70b6a7f9d5f0fbac3bfdf8a62c8d300e7b3e7c3aac3"
         },
         "renderer": {
           "planned": "code",
@@ -256,60 +213,20 @@
       }
     },
     "design_direction": {
-      "status": "approved",
+      "status": "not_started",
       "revision": 3,
       "artifacts": [
         "docs/design/07-design-direction.md"
       ],
-      "artifacts_done": {
-        "docs/design/07-design-direction.md": "53c909ac73e219d09a59d70b6a7f9d5f0fbac3bfdf8a62c8d300e7b3e7c3aac3"
-      },
-      "submitted": {
-        "revision": 3,
-        "at": "2026-11-16T23:54:18Z",
-        "hashes": {
-          "docs/design/07-design-direction.md": "53c909ac73e219d09a59d70b6a7f9d5f0fbac3bfdf8a62c8d300e7b3e7c3aac3"
-        }
-      },
-      "approved": {
+      "artifacts_done": {},
+      "submitted": null,
+      "approved": null,
+      "based_on_ux_spec_revision": 2,
+      "last_approved": {
         "revision": 3,
         "at": "2026-11-16T23:58:52Z",
         "hashes": {
           "docs/design/07-design-direction.md": "53c909ac73e219d09a59d70b6a7f9d5f0fbac3bfdf8a62c8d300e7b3e7c3aac3"
-        },
-        "ux_spec_revision": 2,
-        "ux_spec_hashes": {
-          "docs/design/01-information-architecture.md": "94c9ae6860464aa33dcce495118572b5a22eb4e615d2d59b6f7b12a89020bd76",
-          "docs/design/02-screens.md": "238867828129796bd81c0b3a3ee8245c68e9dc211eaad6860362b9159ffe8919",
-          "docs/design/03-screen-flows.md": "29f568804ae3b5184ea9e50b199cf86624d528230f10c1b99159096a1aafcd57",
-          "docs/design/04-ui-system.md": "148e8ff520af7a277d04c212fc2555493d0689936db5e5f980da96ab589ecbb9",
-          "docs/design/05-design-traceability.md": "e5309788aa94dcd5fb378f4540376b27962c22265c57d1f2b64cd5c72d6cf3bc"
-        },
-        "approved_vds": [
-          "VD-001",
-          "VD-002",
-          "VD-003",
-          "VD-004",
-          "VD-007",
-          "VD-008",
-          "VD-010",
-          "VD-019",
-          "VD-020",
-          "VD-021",
-          "VD-022",
-          "VD-023",
-          "VD-024",
-          "VD-025"
-        ],
-        "renderer": "code",
-        "theme_hash": "fd21e9ea803fa4a7191fd3f5e107e8a8f55146775f58fa44c7c15cfd50ebd06b"
-      },
-      "based_on_ux_spec_revision": 2,
-      "last_approved": {
-        "revision": 2,
-        "at": "2026-11-13T05:14:57Z",
-        "hashes": {
-          "docs/design/07-design-direction.md": "d9553c8fdc509a6ace7f9e9b5f337ef3f7ec10f36b80ef0b32d7cf200f74d7e0"
         },
         "ux_spec_revision": 2,
         "ux_spec_hashes": {
@@ -795,9 +712,100 @@
       "event": "approved",
       "revision": 2,
       "note": "사용자 명시 승인(2026-11-17 '그럼 승인할게'): 시각 디자인 승인 — Preview r2(VD-021 r3 열 구분 반영)"
+    },
+    {
+      "at": "2026-11-18T06:55:28Z",
+      "stage": "design",
+      "event": "outdated",
+      "revision": null,
+      "note": "planning 변경 감지: docs/planning/01-discovery.md, docs/planning/02-prd.md, docs/planning/03-user-stories.md, docs/planning/04-user-flows.md, docs/planning/05-acceptance-criteria.md"
+    },
+    {
+      "at": "2026-11-18T06:55:28Z",
+      "stage": "ux_spec",
+      "event": "invalidated",
+      "revision": 2,
+      "note": "planning 변경으로 디자인 재검토"
+    },
+    {
+      "at": "2026-11-18T06:55:28Z",
+      "stage": "design_direction",
+      "event": "invalidated",
+      "revision": 3,
+      "note": "planning 변경으로 디자인 재검토"
+    },
+    {
+      "at": "2026-11-18T06:55:28Z",
+      "stage": "preview",
+      "event": "invalidated",
+      "revision": 2,
+      "note": "planning 변경으로 디자인 재검토"
+    },
+    {
+      "at": "2026-11-18T06:55:28Z",
+      "stage": "design",
+      "event": "rebased",
+      "revision": null,
+      "note": "planning r6 → r7"
+    },
+    {
+      "at": "2026-11-18T07:08:32Z",
+      "stage": "ux_planning",
+      "event": "submitted",
+      "revision": 5,
+      "note": ""
+    },
+    {
+      "at": "2026-11-18T07:14:36Z",
+      "stage": "ux_planning",
+      "event": "approved",
+      "revision": 5,
+      "note": "UX Planning r5를 승인합니다."
+    },
+    {
+      "at": "2026-11-18T07:14:36Z",
+      "stage": "ux_spec",
+      "event": "unlocked",
+      "revision": 2,
+      "note": "ux_planning r5 승인"
+    },
+    {
+      "at": "2026-11-18T07:15:01Z",
+      "stage": "ux_spec",
+      "event": "started",
+      "revision": 2,
+      "note": "ux_planning r5 기준"
+    },
+    {
+      "at": "2026-11-18T08:00:09Z",
+      "stage": "ux_spec",
+      "event": "structure_confirmed",
+      "revision": 3,
+      "note": "UX Spec r3의 IA 및 화면 목록 구조를 확인합니다. 기존 29개 화면의 ID, 이름, 경로, 셸, 접근 역할, 플랫폼을 유지하는 현재 구조를 수용합니다."
+    },
+    {
+      "at": "2026-11-18T08:00:26Z",
+      "stage": "ux_spec",
+      "event": "submitted",
+      "revision": 3,
+      "note": ""
+    },
+    {
+      "at": "2026-11-18T08:04:18Z",
+      "stage": "ux_spec",
+      "event": "approved",
+      "revision": 3,
+      "note": "UX Spec r3를 승인합니다."
+    },
+    {
+      "at": "2026-11-18T08:04:18Z",
+      "stage": "design_direction",
+      "event": "unlocked",
+      "revision": 3,
+      "note": "ux_spec r3 승인"
     }
   ],
-  "updated_at": "2026-11-17T00:05:40Z",
+  "updated_at": "2026-11-18T08:04:18Z",
   "config": {
     "workflow": "v2",
     "theme_file": "docs/design-profile/theme.json",
