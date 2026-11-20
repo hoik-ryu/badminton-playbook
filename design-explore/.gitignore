@@ -1,0 +1,5 @@
+# /product-design이 관리합니다(직접 고치지 마세요). 디자인 탐색 산출물 중 보존 집합 밖을 Git에서 제외합니다(설계 D6).
+*/compare.html
+*/compare/
+*/shots/
+references/*/original.*

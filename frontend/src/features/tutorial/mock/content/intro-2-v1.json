@@ -1,0 +1,181 @@
+{
+  "id": "intro-2-v1",
+  "course": "intro",
+  "no": 2,
+  "version": 1,
+  "title": "기본 자리와 복귀",
+  "minutes": 2,
+  "thumbnail": "AST-028",
+  "situations": [
+    {
+      "no": 1,
+      "description": "내 편 코트의 번호를 눌러 이동해요.",
+      "question": "4번 위치로 이동해 보세요",
+      "start": {
+        "me": [
+          40,
+          102
+        ],
+        "partner": [
+          24,
+          84
+        ],
+        "opponents": [
+          [
+            18,
+            26
+          ],
+          [
+            43,
+            38
+          ]
+        ]
+      },
+      "shuttle": null,
+      "answer": 4,
+      "allow": [],
+      "partnerCell": 3,
+      "explanation": {
+        "correct": "맞아요. 4번 위치예요.",
+        "better": null,
+        "wrong": "4번 위치로 가야 해요. 번호는 왼쪽에서 오른쪽, 위에서 아래로 커져요."
+      }
+    },
+    {
+      "no": 2,
+      "description": "내 편 코트의 번호를 눌러 이동해요.",
+      "question": "1번 위치로 이동해 보세요",
+      "start": {
+        "me": [
+          40,
+          102
+        ],
+        "partner": [
+          24,
+          84
+        ],
+        "opponents": [
+          [
+            18,
+            26
+          ],
+          [
+            43,
+            38
+          ]
+        ]
+      },
+      "shuttle": null,
+      "answer": 1,
+      "allow": [],
+      "partnerCell": 2,
+      "explanation": {
+        "correct": "맞아요. 1번 위치예요.",
+        "better": null,
+        "wrong": "1번 위치로 가야 해요. 번호는 왼쪽에서 오른쪽, 위에서 아래로 커져요."
+      }
+    },
+    {
+      "no": 3,
+      "description": "내 편 코트의 번호를 눌러 이동해요.",
+      "question": "6번 위치로 이동해 보세요",
+      "start": {
+        "me": [
+          40,
+          102
+        ],
+        "partner": [
+          24,
+          84
+        ],
+        "opponents": [
+          [
+            18,
+            26
+          ],
+          [
+            43,
+            38
+          ]
+        ]
+      },
+      "shuttle": null,
+      "answer": 6,
+      "allow": [],
+      "partnerCell": 5,
+      "explanation": {
+        "correct": "맞아요. 6번 위치예요.",
+        "better": null,
+        "wrong": "6번 위치로 가야 해요. 번호는 왼쪽에서 오른쪽, 위에서 아래로 커져요."
+      }
+    },
+    {
+      "no": 4,
+      "description": "내 편 코트의 번호를 눌러 이동해요.",
+      "question": "3번 위치로 이동해 보세요",
+      "start": {
+        "me": [
+          40,
+          102
+        ],
+        "partner": [
+          24,
+          84
+        ],
+        "opponents": [
+          [
+            18,
+            26
+          ],
+          [
+            43,
+            38
+          ]
+        ]
+      },
+      "shuttle": null,
+      "answer": 3,
+      "allow": [],
+      "partnerCell": 4,
+      "explanation": {
+        "correct": "맞아요. 3번 위치예요.",
+        "better": null,
+        "wrong": "3번 위치로 가야 해요. 번호는 왼쪽에서 오른쪽, 위에서 아래로 커져요."
+      }
+    },
+    {
+      "no": 5,
+      "description": "내 편 코트의 번호를 눌러 이동해요.",
+      "question": "5번 위치로 이동해 보세요",
+      "start": {
+        "me": [
+          40,
+          102
+        ],
+        "partner": [
+          24,
+          84
+        ],
+        "opponents": [
+          [
+            18,
+            26
+          ],
+          [
+            43,
+            38
+          ]
+        ]
+      },
+      "shuttle": null,
+      "answer": 5,
+      "allow": [],
+      "partnerCell": 6,
+      "explanation": {
+        "correct": "맞아요. 5번 위치예요.",
+        "better": null,
+        "wrong": "5번 위치로 가야 해요. 번호는 왼쪽에서 오른쪽, 위에서 아래로 커져요."
+      }
+    }
+  ]
+}

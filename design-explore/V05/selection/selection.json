@@ -1,0 +1,381 @@
+{
+  "id": "EXP-V05-MIX",
+  "round": "V05",
+  "phase": "visual",
+  "kind": "explore",
+  "base": null,
+  "variants": [
+    "A",
+    "B"
+  ],
+  "per_target": {
+    "SCR-102": "A",
+    "SCR-103": "B"
+  },
+  "axes": null,
+  "statement": "V05 최종 디자인 후보로 SCR-102는 A안(떠 있는 시트형), SCR-103은 B안(밴드·구획형)을 선택합니다. UX Spec r5와 UX Planning r6에 따른 코트 표시 방식, 개선된 대비 및 고정 높이 원칙을 유지합니다.",
+  "feedback": [],
+  "at": "2026-11-19T04:54:30Z",
+  "measurement": "passed",
+  "measurement_detail": {
+    "status": "passed",
+    "waiver": null,
+    "variants": {
+      "A": {
+        "status": "passed",
+        "run_id": "M20261119-043548-4043ac",
+        "at": "2026-11-19T04:35:48Z",
+        "reason": null,
+        "warnings": [
+          "SCR-102@desktop: overlap:s102-court+s102-exit-cancel",
+          "SCR-102@desktop: overlap:s102-court+s102-exit-confirm",
+          "SCR-102@mobile-sm: overlap:s102-court+s102-exit-cancel",
+          "SCR-102@mobile-sm: overlap:s102-court+s102-exit-confirm",
+          "SCR-102@mobile: overlap:s102-court+s102-exit-cancel",
+          "SCR-102@mobile: overlap:s102-court+s102-exit-confirm"
+        ],
+        "report": "design-explore/V05/shots/M20261119-043548-4043ac/report.json",
+        "report_sha256": "f0c03f92c38b0098bd9f7cc4c948ad0ccdfeffd884601898a1c7c2a33ad2df05"
+      },
+      "B": {
+        "status": "passed",
+        "run_id": "M20261119-043548-4043ac",
+        "at": "2026-11-19T04:35:48Z",
+        "reason": null,
+        "warnings": [
+          "SCR-102@desktop: overlap:s102-court+s102-exit-cancel",
+          "SCR-102@desktop: overlap:s102-court+s102-exit-confirm",
+          "SCR-102@mobile-sm: overlap:s102-court+s102-exit-cancel",
+          "SCR-102@mobile-sm: overlap:s102-court+s102-exit-confirm",
+          "SCR-102@mobile: overlap:s102-court+s102-exit-cancel",
+          "SCR-102@mobile: overlap:s102-court+s102-exit-confirm"
+        ],
+        "report": "design-explore/V05/shots/M20261119-043548-4043ac/report.json",
+        "report_sha256": "f0c03f92c38b0098bd9f7cc4c948ad0ccdfeffd884601898a1c7c2a33ad2df05"
+      }
+    },
+    "level": "measured"
+  },
+  "visually_reviewed": "model",
+  "renderers": {
+    "A": "html",
+    "B": "html"
+  },
+  "check": {
+    "ok": true,
+    "warnings": [
+      "V05-A: AST-047: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V05-A: AST-048: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V05-A: AST-049: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V05-A: AST-050: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V05-A: AST-051: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V05-A: AST-052: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V05-A: AST-053: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V05-A: AST-055: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V05-A: AST-056: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V05-B: AST-047: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V05-B: AST-048: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V05-B: AST-049: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V05-B: AST-050: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V05-B: AST-051: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V05-B: AST-052: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V05-B: AST-053: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V05-B: AST-055: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V05-B: AST-056: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)"
+    ]
+  },
+  "coverage": {
+    "variants": {
+      "A": {
+        "SCR-102": {
+          "covered": [],
+          "missing": [],
+          "total": 0
+        },
+        "SCR-103": {
+          "covered": [],
+          "missing": [],
+          "total": 0
+        }
+      },
+      "B": {
+        "SCR-102": {
+          "covered": [],
+          "missing": [],
+          "total": 0
+        },
+        "SCR-103": {
+          "covered": [],
+          "missing": [],
+          "total": 0
+        }
+      }
+    },
+    "confirmations": [],
+    "confirmation_statement": null,
+    "not_ui": []
+  },
+  "files": {
+    "design-explore/V05/A/index.html": "aa7055fe32c5090c2b984926b8273d98e1cd928282a9b90f55152bff61905c61",
+    "design-explore/V05/A/plan.md": "11fea437182996d8745191c1aa7d09d8d286e11416e3c6e10d7044baefffd754",
+    "design-explore/V05/A/styles.css": "bb1bdda51f6e1fe73401a811f4ee99a8ac6d082dde6ac6a6f30ac5b301e59fd3",
+    "design-explore/V05/A/theme.json": "c9f8c381f26af3c260cfd1e56210ff77f015e6dcf54934017204e8bf4b667366",
+    "design-explore/V05/A/tokens.css": "1ffef4a7a56eb3cf837ca6665419f89daeeb2f1815539af091a180ef47fd7e43",
+    "design-explore/V05/B/index.html": "4c4f8e365f15b3e734556ac71309eba9d1668f4cac212974520acd7d00d7d7e6",
+    "design-explore/V05/B/plan.md": "652de3fff70f5a8a48d0fa203822dcf87dac7a08c34621e8d52737779e2eb09c",
+    "design-explore/V05/B/styles.css": "2b6cc9b43ab6b7a82b177175d7789dba506ac9ec1da31a70e1d505904dad9ee2",
+    "design-explore/V05/B/theme.json": "ce074024ffc3033f768351eb144582ebad68f8c8de5e40eb020197b64e665eb1",
+    "design-explore/V05/B/tokens.css": "1ffef4a7a56eb3cf837ca6665419f89daeeb2f1815539af091a180ef47fd7e43",
+    "design-explore/V05/_assets/AST-001.svg": "c59ddf6c92d493fcc4cf7e2523dc9396b13ba7028fc3d5f27e87dff14a30805a",
+    "design-explore/V05/_assets/AST-002.svg": "99fe6d184b35cc24f346c2c5b94091d153419dec1e5d2bce5fd327bcfebea82f",
+    "design-explore/V05/_assets/AST-003.svg": "cef8a98899841947c6b51c143eb61bfd9415423afbc93adf0fbc1df1bd601128",
+    "design-explore/V05/_assets/AST-004.svg": "698a63cbc58c01335f34d5a1dee7ef09db2f314ec841abf02cad856987ebaf12",
+    "design-explore/V05/_assets/AST-005.svg": "04f8cc34de7599a5882a5c1124f4900549c2df4cc9820f6e61eb3e7c0a93aa9f",
+    "design-explore/V05/_assets/AST-006.svg": "16d5e9fa0c8d8a451a23b4eeaa36854d6a6d85a28766a3f991c2440d331b067f",
+    "design-explore/V05/_assets/AST-007.svg": "82bf48db175cb6dec10e15ab4bde7b1d0e34371e716f9fb05ee8e87c7dc69236",
+    "design-explore/V05/_assets/AST-008.svg": "6638d74e920a8262a3ab7bd0e597f768d09c970933da54d5f19abf950ba70d20",
+    "design-explore/V05/_assets/AST-009.svg": "f1877670b9198844daaf39613ce4fd81010529a7214b1a3f6c1069bbf8f707eb",
+    "design-explore/V05/_assets/AST-010.svg": "9118955e2a2bc25b2210eb6e956650d3fe1f519484fd2183bdf0264c535da3c1",
+    "design-explore/V05/_assets/AST-011.svg": "72e94602befcad9603f8458ecd82ee63cd2455a0eb50c71b510fad2ea4718709",
+    "design-explore/V05/_assets/AST-012.svg": "026c600d6662a2d4fc81775936ce5f25515d4aa0d8c0ebacb5dea162b302f2ed",
+    "design-explore/V05/_assets/AST-013.svg": "b3e802770a237cde0bfda93e86184cb99c4677492eff7344f458f19a7f66c4c4",
+    "design-explore/V05/_assets/AST-014.svg": "423931822a54c885734d040f322697172d5fe8f682c97e075987f4bf10181ca0",
+    "design-explore/V05/_assets/AST-015.svg": "968cc037f6491c5618c541edfe7d604a7df29fcf5d0274e6f17145d669961f56",
+    "design-explore/V05/_assets/AST-016.svg": "529444b462f004fa981f8cdc5deb95c2014456557f865bc84cdee7bfafb1feb1",
+    "design-explore/V05/_assets/AST-017.svg": "7e8b36f44a59e021dcbe6a099ee746c616151151cd906441a96de4afdb32844f",
+    "design-explore/V05/_assets/AST-018.svg": "fd2578555b9ff71d3c1bfc11138f324fda73fe55136acbc329f19766dbe6897a",
+    "design-explore/V05/_assets/AST-019.svg": "7d1bb2f5f239f523c89fa94a6d09f53b8b7e8dd50bd5f2f77dd44df8a9d51e42",
+    "design-explore/V05/_assets/AST-020.svg": "59d914fa674d0e5de8a278dd2fbb860686953c6b24613a3991510caa8a27de4d",
+    "design-explore/V05/_assets/AST-021.svg": "1fb032933a302a6bd7add23e24a3e986bd3e7533af2cdcfbc1a85bbca110ab3e",
+    "design-explore/V05/_assets/AST-022.svg": "2781fc8e83d60926cbc8a6f872e9c50f52e91c14382fb296ad686b076f7e4ac6",
+    "design-explore/V05/_assets/AST-023.svg": "0bacdedbe169e249d0152125959105a0a835256999f69b4dc2d092aa6674016c",
+    "design-explore/V05/_assets/AST-024.svg": "1471d498fe79a90816f627fc6f7b9405b943ba9be2af5918d2c6b48b56d86061",
+    "design-explore/V05/_assets/AST-025.svg": "eda2a886c351dbd0153f49327b84dcaf13d2f6a6333e16852046aedafbf479a5",
+    "design-explore/V05/_assets/AST-026.png": "5f245753a5ebaedb95c995740ecd280c7942100fb8c6626ef8c2fae95a5a830f",
+    "design-explore/V05/_assets/AST-027.png": "a0f00ba6cada12253d066f17047605331be13395f3d20ffb322999147c9922e3",
+    "design-explore/V05/_assets/AST-028.png": "53da5e7ab9f71150194635b3145c2f0b23934a0d69eef39f6227e01fd6c38ce7",
+    "design-explore/V05/_assets/AST-029.png": "f305f736ce0665d2ab1e203c3d0c37fd18a0c51a3e13d83ca32a4dede1efd377",
+    "design-explore/V05/_assets/AST-030.png": "305ca3428adbe0da605fdb5ff77e36c68ea1587ba6075b3489401e89c475a840",
+    "design-explore/V05/_assets/AST-031.png": "cf023a9128bd0bf1ee98de690745510c888a29fc99ca0149f0e253bcd3615c2b",
+    "design-explore/V05/_assets/AST-032.png": "6ac3e716834c200d833c1057767b2b7b6f09f328a8461933adbe98f400bc8be9",
+    "design-explore/V05/_assets/AST-033.png": "d99e8a2ce385c455c5abc8d91296a2bfbaef28f6bfef99f63c79501229d21757",
+    "design-explore/V05/_assets/AST-034.png": "935382a96bc4fe89f8e01b95c2ed47db0517dffb962f659716f132c629c99f2b",
+    "design-explore/V05/_assets/AST-035.png": "14b5914c8eb4b30a4e34e62664ebe25fb389724b00b9d7d8bdfbd9438b31cacd",
+    "design-explore/V05/_assets/AST-036.png": "7dd56ca4015b64256abddf95eb02ab96f9a2844a5e4170c0089e0b3f629db381",
+    "design-explore/V05/_assets/AST-037.png": "ac763c8121cc4dcaf5aa0c0d417b362ff721475690721b1bf80b1cf5a20c48cb",
+    "design-explore/V05/_assets/AST-038.png": "336ff7d930344a80738e4a730834efd8b8b82229b02cd42ff83437099bea15e1",
+    "design-explore/V05/_assets/AST-039.png": "9e1302fecf444adfb1db76918943bab8875ddc6111bf733e790aea99930fe1b9",
+    "design-explore/V05/_assets/AST-040.png": "3e2b171647601ae1f1763eca54e7d22efa850ccd5a25f024768ab275cfaedb3b",
+    "design-explore/V05/_assets/AST-041.png": "49b96f8b9900bdbd6b4c9a8663d9fabd5b1df773aa498cad08b10cfe70dc31e8",
+    "design-explore/V05/_assets/AST-042.png": "23b56e71e8c15fb04f17b2f2f3f7d0a13229f685566c7971cf379f9b71d64f13",
+    "design-explore/V05/_assets/AST-043.png": "e9e656bb65d31752851c64cbcec29261b697126599f94df6fb4352d5149bd37b",
+    "design-explore/V05/_assets/AST-044.png": "e7738c0ef518d52f97161ee0bb94808a5b3a8acdda65d3657ece3912b19c7d0e",
+    "design-explore/V05/_assets/AST-045.png": "e79b83ab3740c1f3351e599e499569da05009dfcbaab7c6075f880a2faf2b409",
+    "design-explore/V05/_assets/AST-046.png": "a43abbd331d64a2567fa781b41d2771fc12151ed86b81cf97aa6fe1d200995df",
+    "design-explore/V05/_assets/AST-047.svg": "d9924d230eaabc2857c57fa0471f2b821d7031ecb61c83efed9254479a56ed7a",
+    "design-explore/V05/_assets/AST-048.svg": "0f0b07934007010cf539557149b1ee5099087d97732f10a8a6f94ea410554f0e",
+    "design-explore/V05/_assets/AST-049.svg": "481e01d2c1d49731629ebcda2f6ef1c8c4392376252c9afda393638f6f84fda8",
+    "design-explore/V05/_assets/AST-050.svg": "47b47c4629e0c2de4216d3b369cf1dc10a996639c7c2aa9429a8d508bdff49cc",
+    "design-explore/V05/_assets/AST-051.svg": "c87c1c480e21227842846b35ea11c7f31a71cf99a531fadbd12c74016acf45c7",
+    "design-explore/V05/_assets/AST-052.svg": "740232feb6ab2d360d7cf7434985984a94bc03e63837503d022cb2409c102771",
+    "design-explore/V05/_assets/AST-053.svg": "e3ef475f3e6d40d15be54b07296e73c420bf53e70a9688996c411c2e1c4b1944",
+    "design-explore/V05/_assets/AST-054.svg": "087986481f55d3d15da05c3ff5796cd8bcdf1c7fcf2d93d5db0d5fd095b0e5d2",
+    "design-explore/V05/_assets/AST-055.svg": "06b4c0537d06bd3f6c482e872b0803da5bd2be2008d6bcae4e7cc428df96c435",
+    "design-explore/V05/_assets/AST-056.svg": "13f1dfef027e6c60f3ef9ef3b12c0b7265df418e6fa7975dda5b53d45572188f",
+    "design-explore/V05/brief.md": "e23aa45307528e301411dadb4a0d40498f87d1eeb514c84a8140789ee9bf9736",
+    "design-explore/V05/critique.md": "bc24cf473ee2a62b62821129223205fdf365468d45d20ebc81590cf103eb6f74",
+    "design-explore/V05/quality.json": "810ed5e648772754ee17427096eb9c2f3e933f5d27b3484076be9b7efebc2a97"
+  },
+  "retention": {
+    "design-explore/V05/A/index.html": "aa7055fe32c5090c2b984926b8273d98e1cd928282a9b90f55152bff61905c61",
+    "design-explore/V05/A/plan.md": "11fea437182996d8745191c1aa7d09d8d286e11416e3c6e10d7044baefffd754",
+    "design-explore/V05/A/styles.css": "bb1bdda51f6e1fe73401a811f4ee99a8ac6d082dde6ac6a6f30ac5b301e59fd3",
+    "design-explore/V05/A/theme.json": "c9f8c381f26af3c260cfd1e56210ff77f015e6dcf54934017204e8bf4b667366",
+    "design-explore/V05/A/tokens.css": "1ffef4a7a56eb3cf837ca6665419f89daeeb2f1815539af091a180ef47fd7e43",
+    "design-explore/V05/B/index.html": "4c4f8e365f15b3e734556ac71309eba9d1668f4cac212974520acd7d00d7d7e6",
+    "design-explore/V05/B/plan.md": "652de3fff70f5a8a48d0fa203822dcf87dac7a08c34621e8d52737779e2eb09c",
+    "design-explore/V05/B/styles.css": "2b6cc9b43ab6b7a82b177175d7789dba506ac9ec1da31a70e1d505904dad9ee2",
+    "design-explore/V05/B/theme.json": "ce074024ffc3033f768351eb144582ebad68f8c8de5e40eb020197b64e665eb1",
+    "design-explore/V05/B/tokens.css": "1ffef4a7a56eb3cf837ca6665419f89daeeb2f1815539af091a180ef47fd7e43",
+    "design-explore/V05/brief.md": "e23aa45307528e301411dadb4a0d40498f87d1eeb514c84a8140789ee9bf9736",
+    "design-explore/V05/critique.md": "bc24cf473ee2a62b62821129223205fdf365468d45d20ebc81590cf103eb6f74",
+    "design-explore/explore.manifest.json": "4be5f6f0527df0fdf5eac35b0ec91122a71310a05b30551de2a59ffcff077264"
+  },
+  "evidence": [
+    {
+      "path": "design-explore/V05/selection/evidence/m-A-SCR-102-mobile.png",
+      "sha256": "88bf3b29c03230139ae4523539ee0be8b63ec6b9be17aff4cc61213f7153a3df",
+      "bytes": 67056,
+      "source": "measurement",
+      "variant": "A",
+      "target": "SCR-102",
+      "viewport": "mobile",
+      "measured_sha256": "88bf3b29c03230139ae4523539ee0be8b63ec6b9be17aff4cc61213f7153a3df"
+    },
+    {
+      "path": "design-explore/V05/selection/evidence/m-A-SCR-102-mobile-sm.png",
+      "sha256": "9d292522bec6d0add970c23d72012ca829edc2ca0b7c9c9514b1c6113ffb6b35",
+      "bytes": 58708,
+      "source": "measurement",
+      "variant": "A",
+      "target": "SCR-102",
+      "viewport": "mobile-sm",
+      "measured_sha256": "9d292522bec6d0add970c23d72012ca829edc2ca0b7c9c9514b1c6113ffb6b35"
+    },
+    {
+      "path": "design-explore/V05/selection/evidence/m-A-SCR-102-desktop.png",
+      "sha256": "bfea9182c8c8811aade907f0d3f2b74f82e8962820da2b705ced7fd8f5e7c9ba",
+      "bytes": 35952,
+      "source": "measurement",
+      "variant": "A",
+      "target": "SCR-102",
+      "viewport": "desktop",
+      "measured_sha256": "bfea9182c8c8811aade907f0d3f2b74f82e8962820da2b705ced7fd8f5e7c9ba"
+    },
+    {
+      "path": "design-explore/V05/selection/evidence/m-B-SCR-103-mobile.png",
+      "sha256": "70a6b47605c08d48f87a660413827be45bdf7016a5c8bcac91269abf234b4605",
+      "bytes": 73102,
+      "source": "measurement",
+      "variant": "B",
+      "target": "SCR-103",
+      "viewport": "mobile",
+      "measured_sha256": "70a6b47605c08d48f87a660413827be45bdf7016a5c8bcac91269abf234b4605"
+    },
+    {
+      "path": "design-explore/V05/selection/evidence/m-B-SCR-103-mobile-sm.png",
+      "sha256": "b24ede708ead5a790a4a304105886a1ea8cd23d6fd3480c3a5fa212bb18c8d9b",
+      "bytes": 70246,
+      "source": "measurement",
+      "variant": "B",
+      "target": "SCR-103",
+      "viewport": "mobile-sm",
+      "measured_sha256": "b24ede708ead5a790a4a304105886a1ea8cd23d6fd3480c3a5fa212bb18c8d9b"
+    },
+    {
+      "path": "design-explore/V05/selection/evidence/m-B-SCR-103-desktop.png",
+      "sha256": "9ac1900c93dc882a07930d674b6fe7f529eb5e42476f6d583bc0ac4c94e35f28",
+      "bytes": 39984,
+      "source": "measurement",
+      "variant": "B",
+      "target": "SCR-103",
+      "viewport": "desktop",
+      "measured_sha256": "9ac1900c93dc882a07930d674b6fe7f529eb5e42476f6d583bc0ac4c94e35f28"
+    }
+  ],
+  "guidance": [
+    {
+      "name": "engine-procedure",
+      "version": "exploration.md(18bf645)",
+      "used_for": [
+        "plan",
+        "contrast",
+        "critique"
+      ]
+    }
+  ],
+  "mode": "ai",
+  "reference": null,
+  "basis": {
+    "planning_revision": "7",
+    "planning_hashes_sha256": "04693e9424174b2bd1e3cf147c7832d12a126a6111ea45968733f417384d6c72",
+    "ux_spec_revision": 5,
+    "fingerprints": {
+      "SCR-102": {
+        "screen": "SCR-102",
+        "name": "스테이지 플레이",
+        "info": [
+          "코트(선수·파트너·상대·셔틀콕 위치, 내 선수 강조)와 내 편 번호 격자",
+          "질문('어디로 이동해야 할까요?' 또는 입문자 'N번 위치로 이동해 보세요')",
+          "판정 뒤 표시: 고른 칸·정답 칸·허용 칸·셔틀 방향, 결과 문구(득점/랠리 이어짐/실점, 이유, '더 좋은 위치' 설명)",
+          "상황 진행(n/5)과 현재 점수"
+        ],
+        "actions": [
+          "번호 칸 터치(단일 터치)",
+          "번호 칸 터치(확인 단계)",
+          "'이 칸으로 이동'(확인 단계)",
+          "'다음 상황'",
+          "'다시 도전'",
+          "'올바른 움직임 보기' / '최선 위치 보기'",
+          "'다시 보기' / '느리게 보기(0.5배속)'",
+          "'나가기'",
+          "브라우저 뒤로 가기",
+          "새로고침·창 닫기·인앱 브라우저 닫기"
+        ],
+        "inputs": [],
+        "states": [
+          "SCR-102-ST1",
+          "SCR-102-ST10",
+          "SCR-102-ST11",
+          "SCR-102-ST12",
+          "SCR-102-ST2",
+          "SCR-102-ST4",
+          "SCR-102-ST5",
+          "SCR-102-ST7",
+          "SCR-102-ST8",
+          "SCR-102-ST9"
+        ],
+        "cmps": [
+          "CMP-001",
+          "CMP-022",
+          "CMP-026",
+          "CMP-027",
+          "CMP-046"
+        ],
+        "uxd": [
+          "UXD-060",
+          "UXD-061",
+          "UXD-069",
+          "UXD-077",
+          "UXD-078",
+          "UXD-079",
+          "UXD-080",
+          "UXD-081"
+        ],
+        "hash": "58164cc5563d9c5f067ca35e569bf482dff71398c07e3d76c2767adcd27ff0d2"
+      },
+      "SCR-103": {
+        "screen": "SCR-103",
+        "name": "스테이지 결과",
+        "info": [
+          "이번 점수·통과 여부(통과 기준 '5개 중 4개(70%)' 함께 표시)",
+          "최고 점수(이번이 더 높으면 '최고 점수 갱신')",
+          "(r3) 과정 진행률과 전체 진행률(저장 뒤 값, 새 스테이지 ID 기준)",
+          "틀린(허용·오답) 상황 목록",
+          "'다음 스테이지'·'다시 하기'·'목록'"
+        ],
+        "actions": [
+          "화면 진입",
+          "'다시 저장'(ST4)",
+          "틀린 상황 누르기",
+          "'다음 스테이지'",
+          "'다시 하기'",
+          "'목록'"
+        ],
+        "inputs": [],
+        "states": [
+          "SCR-103-ST1",
+          "SCR-103-ST2",
+          "SCR-103-ST4",
+          "SCR-103-ST7"
+        ],
+        "cmps": [
+          "CMP-001",
+          "CMP-023",
+          "CMP-026",
+          "CMP-030",
+          "CMP-046",
+          "CMP-049"
+        ],
+        "uxd": [
+          "UXD-061",
+          "UXD-065",
+          "UXD-069",
+          "UXD-079",
+          "UXD-083"
+        ],
+        "hash": "3f739c8b64ef0f79ad593e75b62d409a0ecfe6921a813a29d319e522a1b47125"
+      }
+    }
+  }
+}

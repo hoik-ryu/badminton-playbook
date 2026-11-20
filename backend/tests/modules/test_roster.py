@@ -198,7 +198,12 @@ def test_ac_100_member_status(admin: TestClient, db: Session) -> None:
     s = admin.get(f"/api/roster/members/{m['id']}/status").json()
     assert s["referrer"] == "지인A" and s["recommended"] is True  # 점수 3 이하(C-23)
     assert s["rank"] is None and s["record"] == {"games": 0, "wins": 0, "losses": 0}  # I3 전
-    assert s["tutorial"] == {"beginner": 0, "novice": 0, "total": 3}  # I2 전
+    # AC-100 r7: 새 과정별 '통과 스테이지 수 / 스테이지 수'(기록 없음)
+    assert s["tutorial"] == [
+        {"course": "intro", "name": "입문자", "passed": 0, "total": 2},
+        {"course": "starter", "name": "왕초급", "passed": 0, "total": 3},
+        {"course": "basic", "name": "초급", "passed": 0, "total": 3},
+    ]
 
 
 # ── 동시 수정 ──

@@ -1,0 +1,632 @@
+[
+ {
+  "file": "A-390-SCR-102-00.png",
+  "variant": "A",
+  "vp": "390",
+  "target": "SCR-102",
+  "label": "SCR-102 상황 재생(ST2→ST1 사이, mode=playing) · 기본 코트: 학습용 분할선·번호 숨김 [표시 방식 변경 제안]"
+ },
+ {
+  "file": "A-390-SCR-102-01.png",
+  "variant": "A",
+  "vp": "390",
+  "target": "SCR-102",
+  "label": "SCR-102-ST11 · 입문자 안내형 선택 대기(6칸, 셔틀 없음)"
+ },
+ {
+  "file": "A-390-SCR-102-02.png",
+  "variant": "A",
+  "vp": "390",
+  "target": "SCR-102",
+  "label": "SCR-102-ST1 · 선택 대기(왕초급 6칸, 단일 터치)"
+ },
+ {
+  "file": "A-390-SCR-102-03.png",
+  "variant": "A",
+  "vp": "390",
+  "target": "SCR-102",
+  "label": "SCR-102-ST1 · 선택 대기(초급 9칸, 단일 터치)"
+ },
+ {
+  "file": "A-390-SCR-102-04.png",
+  "variant": "A",
+  "vp": "390",
+  "target": "SCR-102",
+  "label": "SCR-102-ST12 · 칸 선택됨·확정 대기(확인 단계, 3번 선택)"
+ },
+ {
+  "file": "A-390-SCR-102-05.png",
+  "variant": "A",
+  "vp": "390",
+  "target": "SCR-102",
+  "label": "SCR-102-ST7 · 정답(6번, +1점)"
+ },
+ {
+  "file": "A-390-SCR-102-06.png",
+  "variant": "A",
+  "vp": "390",
+  "target": "SCR-102",
+  "label": "SCR-102-ST8 · 허용(4번 선택, 정답 6번, 0점)"
+ },
+ {
+  "file": "A-390-SCR-102-07.png",
+  "variant": "A",
+  "vp": "390",
+  "target": "SCR-102",
+  "label": "SCR-102-ST9 · 오답(3번 선택, 정답 6번, 0점)"
+ },
+ {
+  "file": "A-390-SCR-102-08.png",
+  "variant": "A",
+  "vp": "390",
+  "target": "SCR-102",
+  "label": "SCR-102-ST10 · 정답 움직임 보기(동선 화살표)"
+ },
+ {
+  "file": "A-390-SCR-102-09.png",
+  "variant": "A",
+  "vp": "390",
+  "target": "SCR-102",
+  "label": "SCR-102 · '나가기'·뒤로 가기 확인 창(CMP-022)"
+ },
+ {
+  "file": "A-390-SCR-103-10.png",
+  "variant": "A",
+  "vp": "390",
+  "target": "SCR-103",
+  "label": "SCR-103-ST1 · 통과(4/5, 최고 점수 갱신, 저장 뒤 진행률)"
+ },
+ {
+  "file": "A-390-SCR-103-11.png",
+  "variant": "A",
+  "vp": "390",
+  "target": "SCR-103",
+  "label": "SCR-103-ST1 · 통과(5/5, 틀린 상황 0개 → 목록 숨김)"
+ },
+ {
+  "file": "A-390-SCR-103-12.png",
+  "variant": "A",
+  "vp": "390",
+  "target": "SCR-103",
+  "label": "SCR-103-ST7 · 미통과(2/5, '다시 하기' 강조)"
+ },
+ {
+  "file": "A-390-SCR-103-13.png",
+  "variant": "A",
+  "vp": "390",
+  "target": "SCR-103",
+  "label": "SCR-103-ST2 · 저장 중(결과 먼저, 진행률은 저장 뒤)"
+ },
+ {
+  "file": "A-390-SCR-103-14.png",
+  "variant": "A",
+  "vp": "390",
+  "target": "SCR-103",
+  "label": "SCR-103-ST4 · 저장 실패(안내 상자 + '다시 저장', 진행률 숨김)"
+ },
+ {
+  "file": "A-360-SCR-102-00.png",
+  "variant": "A",
+  "vp": "360",
+  "target": "SCR-102",
+  "label": "SCR-102 상황 재생(ST2→ST1 사이, mode=playing) · 기본 코트: 학습용 분할선·번호 숨김 [표시 방식 변경 제안]"
+ },
+ {
+  "file": "A-360-SCR-102-01.png",
+  "variant": "A",
+  "vp": "360",
+  "target": "SCR-102",
+  "label": "SCR-102-ST11 · 입문자 안내형 선택 대기(6칸, 셔틀 없음)"
+ },
+ {
+  "file": "A-360-SCR-102-02.png",
+  "variant": "A",
+  "vp": "360",
+  "target": "SCR-102",
+  "label": "SCR-102-ST1 · 선택 대기(왕초급 6칸, 단일 터치)"
+ },
+ {
+  "file": "A-360-SCR-102-03.png",
+  "variant": "A",
+  "vp": "360",
+  "target": "SCR-102",
+  "label": "SCR-102-ST1 · 선택 대기(초급 9칸, 단일 터치)"
+ },
+ {
+  "file": "A-360-SCR-102-04.png",
+  "variant": "A",
+  "vp": "360",
+  "target": "SCR-102",
+  "label": "SCR-102-ST12 · 칸 선택됨·확정 대기(확인 단계, 3번 선택)"
+ },
+ {
+  "file": "A-360-SCR-102-05.png",
+  "variant": "A",
+  "vp": "360",
+  "target": "SCR-102",
+  "label": "SCR-102-ST7 · 정답(6번, +1점)"
+ },
+ {
+  "file": "A-360-SCR-102-06.png",
+  "variant": "A",
+  "vp": "360",
+  "target": "SCR-102",
+  "label": "SCR-102-ST8 · 허용(4번 선택, 정답 6번, 0점)"
+ },
+ {
+  "file": "A-360-SCR-102-07.png",
+  "variant": "A",
+  "vp": "360",
+  "target": "SCR-102",
+  "label": "SCR-102-ST9 · 오답(3번 선택, 정답 6번, 0점)"
+ },
+ {
+  "file": "A-360-SCR-102-08.png",
+  "variant": "A",
+  "vp": "360",
+  "target": "SCR-102",
+  "label": "SCR-102-ST10 · 정답 움직임 보기(동선 화살표)"
+ },
+ {
+  "file": "A-360-SCR-102-09.png",
+  "variant": "A",
+  "vp": "360",
+  "target": "SCR-102",
+  "label": "SCR-102 · '나가기'·뒤로 가기 확인 창(CMP-022)"
+ },
+ {
+  "file": "A-360-SCR-103-10.png",
+  "variant": "A",
+  "vp": "360",
+  "target": "SCR-103",
+  "label": "SCR-103-ST1 · 통과(4/5, 최고 점수 갱신, 저장 뒤 진행률)"
+ },
+ {
+  "file": "A-360-SCR-103-11.png",
+  "variant": "A",
+  "vp": "360",
+  "target": "SCR-103",
+  "label": "SCR-103-ST1 · 통과(5/5, 틀린 상황 0개 → 목록 숨김)"
+ },
+ {
+  "file": "A-360-SCR-103-12.png",
+  "variant": "A",
+  "vp": "360",
+  "target": "SCR-103",
+  "label": "SCR-103-ST7 · 미통과(2/5, '다시 하기' 강조)"
+ },
+ {
+  "file": "A-360-SCR-103-13.png",
+  "variant": "A",
+  "vp": "360",
+  "target": "SCR-103",
+  "label": "SCR-103-ST2 · 저장 중(결과 먼저, 진행률은 저장 뒤)"
+ },
+ {
+  "file": "A-360-SCR-103-14.png",
+  "variant": "A",
+  "vp": "360",
+  "target": "SCR-103",
+  "label": "SCR-103-ST4 · 저장 실패(안내 상자 + '다시 저장', 진행률 숨김)"
+ },
+ {
+  "file": "A-360s-SCR-102-00.png",
+  "variant": "A",
+  "vp": "360s",
+  "target": "SCR-102",
+  "label": "SCR-102 상황 재생(ST2→ST1 사이, mode=playing) · 기본 코트: 학습용 분할선·번호 숨김 [표시 방식 변경 제안]"
+ },
+ {
+  "file": "A-360s-SCR-102-01.png",
+  "variant": "A",
+  "vp": "360s",
+  "target": "SCR-102",
+  "label": "SCR-102-ST11 · 입문자 안내형 선택 대기(6칸, 셔틀 없음)"
+ },
+ {
+  "file": "A-360s-SCR-102-02.png",
+  "variant": "A",
+  "vp": "360s",
+  "target": "SCR-102",
+  "label": "SCR-102-ST1 · 선택 대기(왕초급 6칸, 단일 터치)"
+ },
+ {
+  "file": "A-360s-SCR-102-03.png",
+  "variant": "A",
+  "vp": "360s",
+  "target": "SCR-102",
+  "label": "SCR-102-ST1 · 선택 대기(초급 9칸, 단일 터치)"
+ },
+ {
+  "file": "A-360s-SCR-102-04.png",
+  "variant": "A",
+  "vp": "360s",
+  "target": "SCR-102",
+  "label": "SCR-102-ST12 · 칸 선택됨·확정 대기(확인 단계, 3번 선택)"
+ },
+ {
+  "file": "A-360s-SCR-102-05.png",
+  "variant": "A",
+  "vp": "360s",
+  "target": "SCR-102",
+  "label": "SCR-102-ST7 · 정답(6번, +1점)"
+ },
+ {
+  "file": "A-360s-SCR-102-06.png",
+  "variant": "A",
+  "vp": "360s",
+  "target": "SCR-102",
+  "label": "SCR-102-ST8 · 허용(4번 선택, 정답 6번, 0점)"
+ },
+ {
+  "file": "A-360s-SCR-102-07.png",
+  "variant": "A",
+  "vp": "360s",
+  "target": "SCR-102",
+  "label": "SCR-102-ST9 · 오답(3번 선택, 정답 6번, 0점)"
+ },
+ {
+  "file": "A-360s-SCR-102-08.png",
+  "variant": "A",
+  "vp": "360s",
+  "target": "SCR-102",
+  "label": "SCR-102-ST10 · 정답 움직임 보기(동선 화살표)"
+ },
+ {
+  "file": "A-360s-SCR-102-09.png",
+  "variant": "A",
+  "vp": "360s",
+  "target": "SCR-102",
+  "label": "SCR-102 · '나가기'·뒤로 가기 확인 창(CMP-022)"
+ },
+ {
+  "file": "A-360s-SCR-103-10.png",
+  "variant": "A",
+  "vp": "360s",
+  "target": "SCR-103",
+  "label": "SCR-103-ST1 · 통과(4/5, 최고 점수 갱신, 저장 뒤 진행률)"
+ },
+ {
+  "file": "A-360s-SCR-103-11.png",
+  "variant": "A",
+  "vp": "360s",
+  "target": "SCR-103",
+  "label": "SCR-103-ST1 · 통과(5/5, 틀린 상황 0개 → 목록 숨김)"
+ },
+ {
+  "file": "A-360s-SCR-103-12.png",
+  "variant": "A",
+  "vp": "360s",
+  "target": "SCR-103",
+  "label": "SCR-103-ST7 · 미통과(2/5, '다시 하기' 강조)"
+ },
+ {
+  "file": "A-360s-SCR-103-13.png",
+  "variant": "A",
+  "vp": "360s",
+  "target": "SCR-103",
+  "label": "SCR-103-ST2 · 저장 중(결과 먼저, 진행률은 저장 뒤)"
+ },
+ {
+  "file": "A-360s-SCR-103-14.png",
+  "variant": "A",
+  "vp": "360s",
+  "target": "SCR-103",
+  "label": "SCR-103-ST4 · 저장 실패(안내 상자 + '다시 저장', 진행률 숨김)"
+ },
+ {
+  "file": "B-390-SCR-102-00.png",
+  "variant": "B",
+  "vp": "390",
+  "target": "SCR-102",
+  "label": "SCR-102 상황 재생(ST2→ST1 사이, mode=playing) · 기본 코트: 학습용 분할선·번호 숨김 [표시 방식 변경 제안]"
+ },
+ {
+  "file": "B-390-SCR-102-01.png",
+  "variant": "B",
+  "vp": "390",
+  "target": "SCR-102",
+  "label": "SCR-102-ST11 · 입문자 안내형 선택 대기(6칸, 셔틀 없음)"
+ },
+ {
+  "file": "B-390-SCR-102-02.png",
+  "variant": "B",
+  "vp": "390",
+  "target": "SCR-102",
+  "label": "SCR-102-ST1 · 선택 대기(왕초급 6칸, 단일 터치)"
+ },
+ {
+  "file": "B-390-SCR-102-03.png",
+  "variant": "B",
+  "vp": "390",
+  "target": "SCR-102",
+  "label": "SCR-102-ST1 · 선택 대기(초급 9칸, 단일 터치)"
+ },
+ {
+  "file": "B-390-SCR-102-04.png",
+  "variant": "B",
+  "vp": "390",
+  "target": "SCR-102",
+  "label": "SCR-102-ST12 · 칸 선택됨·확정 대기(확인 단계, 3번 선택)"
+ },
+ {
+  "file": "B-390-SCR-102-05.png",
+  "variant": "B",
+  "vp": "390",
+  "target": "SCR-102",
+  "label": "SCR-102-ST7 · 정답(6번, +1점)"
+ },
+ {
+  "file": "B-390-SCR-102-06.png",
+  "variant": "B",
+  "vp": "390",
+  "target": "SCR-102",
+  "label": "SCR-102-ST8 · 허용(4번 선택, 정답 6번, 0점)"
+ },
+ {
+  "file": "B-390-SCR-102-07.png",
+  "variant": "B",
+  "vp": "390",
+  "target": "SCR-102",
+  "label": "SCR-102-ST9 · 오답(3번 선택, 정답 6번, 0점)"
+ },
+ {
+  "file": "B-390-SCR-102-08.png",
+  "variant": "B",
+  "vp": "390",
+  "target": "SCR-102",
+  "label": "SCR-102-ST10 · 정답 움직임 보기(동선 화살표)"
+ },
+ {
+  "file": "B-390-SCR-102-09.png",
+  "variant": "B",
+  "vp": "390",
+  "target": "SCR-102",
+  "label": "SCR-102 · '나가기'·뒤로 가기 확인 창(CMP-022)"
+ },
+ {
+  "file": "B-390-SCR-103-10.png",
+  "variant": "B",
+  "vp": "390",
+  "target": "SCR-103",
+  "label": "SCR-103-ST1 · 통과(4/5, 최고 점수 갱신, 저장 뒤 진행률)"
+ },
+ {
+  "file": "B-390-SCR-103-11.png",
+  "variant": "B",
+  "vp": "390",
+  "target": "SCR-103",
+  "label": "SCR-103-ST1 · 통과(5/5, 틀린 상황 0개 → 목록 숨김)"
+ },
+ {
+  "file": "B-390-SCR-103-12.png",
+  "variant": "B",
+  "vp": "390",
+  "target": "SCR-103",
+  "label": "SCR-103-ST7 · 미통과(2/5, '다시 하기' 강조)"
+ },
+ {
+  "file": "B-390-SCR-103-13.png",
+  "variant": "B",
+  "vp": "390",
+  "target": "SCR-103",
+  "label": "SCR-103-ST2 · 저장 중(결과 먼저, 진행률은 저장 뒤)"
+ },
+ {
+  "file": "B-390-SCR-103-14.png",
+  "variant": "B",
+  "vp": "390",
+  "target": "SCR-103",
+  "label": "SCR-103-ST4 · 저장 실패(안내 상자 + '다시 저장', 진행률 숨김)"
+ },
+ {
+  "file": "B-360-SCR-102-00.png",
+  "variant": "B",
+  "vp": "360",
+  "target": "SCR-102",
+  "label": "SCR-102 상황 재생(ST2→ST1 사이, mode=playing) · 기본 코트: 학습용 분할선·번호 숨김 [표시 방식 변경 제안]"
+ },
+ {
+  "file": "B-360-SCR-102-01.png",
+  "variant": "B",
+  "vp": "360",
+  "target": "SCR-102",
+  "label": "SCR-102-ST11 · 입문자 안내형 선택 대기(6칸, 셔틀 없음)"
+ },
+ {
+  "file": "B-360-SCR-102-02.png",
+  "variant": "B",
+  "vp": "360",
+  "target": "SCR-102",
+  "label": "SCR-102-ST1 · 선택 대기(왕초급 6칸, 단일 터치)"
+ },
+ {
+  "file": "B-360-SCR-102-03.png",
+  "variant": "B",
+  "vp": "360",
+  "target": "SCR-102",
+  "label": "SCR-102-ST1 · 선택 대기(초급 9칸, 단일 터치)"
+ },
+ {
+  "file": "B-360-SCR-102-04.png",
+  "variant": "B",
+  "vp": "360",
+  "target": "SCR-102",
+  "label": "SCR-102-ST12 · 칸 선택됨·확정 대기(확인 단계, 3번 선택)"
+ },
+ {
+  "file": "B-360-SCR-102-05.png",
+  "variant": "B",
+  "vp": "360",
+  "target": "SCR-102",
+  "label": "SCR-102-ST7 · 정답(6번, +1점)"
+ },
+ {
+  "file": "B-360-SCR-102-06.png",
+  "variant": "B",
+  "vp": "360",
+  "target": "SCR-102",
+  "label": "SCR-102-ST8 · 허용(4번 선택, 정답 6번, 0점)"
+ },
+ {
+  "file": "B-360-SCR-102-07.png",
+  "variant": "B",
+  "vp": "360",
+  "target": "SCR-102",
+  "label": "SCR-102-ST9 · 오답(3번 선택, 정답 6번, 0점)"
+ },
+ {
+  "file": "B-360-SCR-102-08.png",
+  "variant": "B",
+  "vp": "360",
+  "target": "SCR-102",
+  "label": "SCR-102-ST10 · 정답 움직임 보기(동선 화살표)"
+ },
+ {
+  "file": "B-360-SCR-102-09.png",
+  "variant": "B",
+  "vp": "360",
+  "target": "SCR-102",
+  "label": "SCR-102 · '나가기'·뒤로 가기 확인 창(CMP-022)"
+ },
+ {
+  "file": "B-360-SCR-103-10.png",
+  "variant": "B",
+  "vp": "360",
+  "target": "SCR-103",
+  "label": "SCR-103-ST1 · 통과(4/5, 최고 점수 갱신, 저장 뒤 진행률)"
+ },
+ {
+  "file": "B-360-SCR-103-11.png",
+  "variant": "B",
+  "vp": "360",
+  "target": "SCR-103",
+  "label": "SCR-103-ST1 · 통과(5/5, 틀린 상황 0개 → 목록 숨김)"
+ },
+ {
+  "file": "B-360-SCR-103-12.png",
+  "variant": "B",
+  "vp": "360",
+  "target": "SCR-103",
+  "label": "SCR-103-ST7 · 미통과(2/5, '다시 하기' 강조)"
+ },
+ {
+  "file": "B-360-SCR-103-13.png",
+  "variant": "B",
+  "vp": "360",
+  "target": "SCR-103",
+  "label": "SCR-103-ST2 · 저장 중(결과 먼저, 진행률은 저장 뒤)"
+ },
+ {
+  "file": "B-360-SCR-103-14.png",
+  "variant": "B",
+  "vp": "360",
+  "target": "SCR-103",
+  "label": "SCR-103-ST4 · 저장 실패(안내 상자 + '다시 저장', 진행률 숨김)"
+ },
+ {
+  "file": "B-360s-SCR-102-00.png",
+  "variant": "B",
+  "vp": "360s",
+  "target": "SCR-102",
+  "label": "SCR-102 상황 재생(ST2→ST1 사이, mode=playing) · 기본 코트: 학습용 분할선·번호 숨김 [표시 방식 변경 제안]"
+ },
+ {
+  "file": "B-360s-SCR-102-01.png",
+  "variant": "B",
+  "vp": "360s",
+  "target": "SCR-102",
+  "label": "SCR-102-ST11 · 입문자 안내형 선택 대기(6칸, 셔틀 없음)"
+ },
+ {
+  "file": "B-360s-SCR-102-02.png",
+  "variant": "B",
+  "vp": "360s",
+  "target": "SCR-102",
+  "label": "SCR-102-ST1 · 선택 대기(왕초급 6칸, 단일 터치)"
+ },
+ {
+  "file": "B-360s-SCR-102-03.png",
+  "variant": "B",
+  "vp": "360s",
+  "target": "SCR-102",
+  "label": "SCR-102-ST1 · 선택 대기(초급 9칸, 단일 터치)"
+ },
+ {
+  "file": "B-360s-SCR-102-04.png",
+  "variant": "B",
+  "vp": "360s",
+  "target": "SCR-102",
+  "label": "SCR-102-ST12 · 칸 선택됨·확정 대기(확인 단계, 3번 선택)"
+ },
+ {
+  "file": "B-360s-SCR-102-05.png",
+  "variant": "B",
+  "vp": "360s",
+  "target": "SCR-102",
+  "label": "SCR-102-ST7 · 정답(6번, +1점)"
+ },
+ {
+  "file": "B-360s-SCR-102-06.png",
+  "variant": "B",
+  "vp": "360s",
+  "target": "SCR-102",
+  "label": "SCR-102-ST8 · 허용(4번 선택, 정답 6번, 0점)"
+ },
+ {
+  "file": "B-360s-SCR-102-07.png",
+  "variant": "B",
+  "vp": "360s",
+  "target": "SCR-102",
+  "label": "SCR-102-ST9 · 오답(3번 선택, 정답 6번, 0점)"
+ },
+ {
+  "file": "B-360s-SCR-102-08.png",
+  "variant": "B",
+  "vp": "360s",
+  "target": "SCR-102",
+  "label": "SCR-102-ST10 · 정답 움직임 보기(동선 화살표)"
+ },
+ {
+  "file": "B-360s-SCR-102-09.png",
+  "variant": "B",
+  "vp": "360s",
+  "target": "SCR-102",
+  "label": "SCR-102 · '나가기'·뒤로 가기 확인 창(CMP-022)"
+ },
+ {
+  "file": "B-360s-SCR-103-10.png",
+  "variant": "B",
+  "vp": "360s",
+  "target": "SCR-103",
+  "label": "SCR-103-ST1 · 통과(4/5, 최고 점수 갱신, 저장 뒤 진행률)"
+ },
+ {
+  "file": "B-360s-SCR-103-11.png",
+  "variant": "B",
+  "vp": "360s",
+  "target": "SCR-103",
+  "label": "SCR-103-ST1 · 통과(5/5, 틀린 상황 0개 → 목록 숨김)"
+ },
+ {
+  "file": "B-360s-SCR-103-12.png",
+  "variant": "B",
+  "vp": "360s",
+  "target": "SCR-103",
+  "label": "SCR-103-ST7 · 미통과(2/5, '다시 하기' 강조)"
+ },
+ {
+  "file": "B-360s-SCR-103-13.png",
+  "variant": "B",
+  "vp": "360s",
+  "target": "SCR-103",
+  "label": "SCR-103-ST2 · 저장 중(결과 먼저, 진행률은 저장 뒤)"
+ },
+ {
+  "file": "B-360s-SCR-103-14.png",
+  "variant": "B",
+  "vp": "360s",
+  "target": "SCR-103",
+  "label": "SCR-103-ST4 · 저장 실패(안내 상자 + '다시 저장', 진행률 숨김)"
+ }
+]

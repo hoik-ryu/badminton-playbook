@@ -246,11 +246,14 @@
     "wins": true
    },
    "referrer": true,
-   "tutorial": {
-    "beginner": true,
-    "novice": true,
-    "total": true
-   }
+   "tutorial": [
+    {
+     "course": true,
+     "name": true,
+     "passed": true,
+     "total": true
+    }
+   ]
   },
   "MyRecord": {
    "games": true,

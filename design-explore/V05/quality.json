@@ -1,0 +1,250 @@
+{
+  "format": "design-quality-review/v1",
+  "round": "V05",
+  "reviewer": "model",
+  "note": "모델 평가(visually_reviewed: model). 근거는 explore-verify 측정 스크린샷(M20261119-043548-4043ac, UX Spec r5 기준 재측정). 상태별 비교는 design-explore/review/V05/(검토용). 사람 평가·사용자 선택을 대신하지 않음.",
+  "variants": {
+    "A": {
+      "criteria": {
+        "hierarchy": {
+          "rating": "adequate",
+          "observations": "SCR-102는 상단 바(56) → 상황 설명 → 코트(가장 큼) → 흰 시트(질문·판정)로 읽히고, 판정 뒤 학습 행동은 큰 외곽선 버튼, 이동 행동은 제목 줄 글자 버튼이라 오답 뒤 '올바른 움직임 보기'가 먼저 보인다. SCR-103(A)은 카드 4장이 같은 무게라 점수 카드 외에는 위계 차이가 작다.",
+          "evidence": [
+            "shots/M20261119-043548-4043ac/shots/A-SCR-102-mobile.png",
+            "shots/M20261119-043548-4043ac/shots/A-SCR-102-mobile-sm.png",
+            "shots/M20261119-043548-4043ac/shots/A-SCR-103-mobile.png",
+            "shots/M20261119-043548-4043ac/shots/A-SCR-103-mobile-sm.png"
+          ],
+          "issues": [
+            {
+              "severity": "minor",
+              "what": "'다시 도전'·'다음 상황' 13px 글자 버튼이 판정 제목 옆에서 덜 눈에 띈다",
+              "where": "SCR-102",
+              "fix": "글자 버튼에 화살표·되돌리기 아이콘을 함께 두거나 16px로 올린다(Preview에서 오탭·발견성 확인)"
+            }
+          ]
+        },
+        "density_balance": {
+          "rating": "adequate",
+          "observations": "아래 시트 160px 고정으로 판정 상태는 정보가 꽉 차지만, 재생·질문만 있는 상태에서는 시트 아래쪽이 비어 보인다. 코트는 남은 높이를 채워 390×844에서 번호 22px, 360×640에서 14.5px.",
+          "evidence": [
+            "shots/M20261119-043548-4043ac/shots/A-SCR-102-mobile.png",
+            "shots/M20261119-043548-4043ac/shots/A-SCR-102-mobile-sm.png"
+          ],
+          "issues": [
+            {
+              "severity": "minor",
+              "what": "재생 중·선택 대기 상태의 시트 아래 빈 공간",
+              "where": "SCR-102",
+              "fix": "UXD-081 고정 높이는 유지하고 질문을 시트 세로 가운데에 두는 등 빈 공간이 덜 보이게 정렬만 조정"
+            }
+          ]
+        },
+        "typography": {
+          "rating": "adequate",
+          "observations": "상황 설명 16 굵게, 질문·판정 제목 18 굵게, 이유 13, 큰 CTA 22 굵게(04 r4 CMP-001). 코트 번호 5.4단위 + 불투명 원으로 5.04:1.",
+          "evidence": [
+            "shots/M20261119-043548-4043ac/shots/A-SCR-102-mobile.png",
+            "shots/M20261119-043548-4043ac/shots/A-SCR-102-mobile-sm.png"
+          ],
+          "issues": [
+            {
+              "severity": "minor",
+              "what": "360×560 인앱 가정 화면에서 코트 번호 11.5px",
+              "where": "SCR-102",
+              "fix": "확인 단계 전환을 전제로 조건부 수용(사용자 결정 2026-11-19), Preview에서 실기기 가독성 재검증"
+            }
+          ]
+        },
+        "component_consistency": {
+          "rating": "strong",
+          "observations": "CMP-001 변형(primary-lg·outline·secondary·chip·text)과 CMP-026(close·none)이 화면·상태 사이에서 같은 규칙이며 측정에서 component_inconsistent가 없다.",
+          "evidence": [
+            "shots/M20261119-043548-4043ac/shots/A-SCR-102-mobile.png",
+            "shots/M20261119-043548-4043ac/shots/A-SCR-102-mobile-sm.png",
+            "shots/M20261119-043548-4043ac/shots/A-SCR-103-mobile.png",
+            "shots/M20261119-043548-4043ac/shots/A-SCR-103-mobile-sm.png"
+          ],
+          "issues": [
+            {
+              "severity": "minor",
+              "what": "ST10 재생 칩(민트 면)과 ST8·9의 외곽선 버튼이 같은 줄 위치에서 모양이 달라 보인다",
+              "where": "SCR-102",
+              "fix": "재생 칩도 외곽선 변형으로 맞출지 DD에서 결정"
+            }
+          ]
+        },
+        "iconography": {
+          "rating": "adequate",
+          "observations": "Lucide 아이콘(AST-047–056)만 쓰고 판정 아이콘은 칸 오른쪽 위에 두어 선수·셔틀에 가리지 않는다. 코트 표시는 자산 없이 CSS 도형.",
+          "evidence": [
+            "shots/M20261119-043548-4043ac/shots/A-SCR-102-mobile.png",
+            "shots/M20261119-043548-4043ac/shots/A-SCR-102-mobile-sm.png"
+          ],
+          "issues": [
+            {
+              "severity": "minor",
+              "what": "새 아이콘 권리 미확인(Lucide ISC, check·x·arrow-right·circle-alert는 MIT 고지 포함)",
+              "where": "SCR-102",
+              "fix": "사용자 권리 확인 문장으로 explore-asset confirm"
+            }
+          ]
+        },
+        "reference_alignment": {
+          "rating": "not_applicable",
+          "observations": "AI 라운드(레퍼런스 대조 없음). V04-A 디자인 시스템(토큰·카드·CTA)을 그대로 이어 씀.",
+          "evidence": [
+            "shots/M20261119-043548-4043ac/shots/A-SCR-102-mobile.png",
+            "shots/M20261119-043548-4043ac/shots/A-SCR-102-mobile-sm.png"
+          ],
+          "issues": []
+        },
+        "mobile_balance": {
+          "rating": "adequate",
+          "observations": "390×844·360×640 모두 스크롤 없이 학습 행동이 보이고 버튼 글자 잘림·넘침 0. 9칸 54×60(360×640), 360×560에서는 43×47로 확인 단계 조건.",
+          "evidence": [
+            "shots/M20261119-043548-4043ac/shots/A-SCR-102-mobile.png",
+            "shots/M20261119-043548-4043ac/shots/A-SCR-102-mobile-sm.png"
+          ],
+          "issues": [
+            {
+              "severity": "minor",
+              "what": "360×560에서 9칸 너비 43px",
+              "where": "SCR-102",
+              "fix": "UXD-078 확인 단계로 전환(규칙대로), Preview 실기기 확인"
+            }
+          ]
+        }
+      }
+    },
+    "B": {
+      "criteria": {
+        "hierarchy": {
+          "rating": "adequate",
+          "observations": "SCR-103은 가운데 점수(32) → 통과 배지 → 기준 → 구분선 아래 최고 점수 → 진행률 → 틀린 상황 → 아래 고정 버튼으로 한 장 문서처럼 읽힌다. SCR-102(B)는 진행 띠·판정 띠가 강하지만 판정 뒤 도구 버튼 4개가 같은 무게다.",
+          "evidence": [
+            "shots/M20261119-043548-4043ac/shots/B-SCR-102-mobile.png",
+            "shots/M20261119-043548-4043ac/shots/B-SCR-102-mobile-sm.png",
+            "shots/M20261119-043548-4043ac/shots/B-SCR-103-mobile.png",
+            "shots/M20261119-043548-4043ac/shots/B-SCR-103-mobile-sm.png"
+          ],
+          "issues": [
+            {
+              "severity": "minor",
+              "what": "SCR-102(B) 판정 뒤 학습 행동과 이동 행동의 위계가 약함",
+              "where": "SCR-102",
+              "fix": "SCR-102는 A안을 쓰는 조합으로 해소(사용자 결정 후보)"
+            }
+          ]
+        },
+        "density_balance": {
+          "rating": "adequate",
+          "observations": "SCR-103은 카드 여백이 없어 한 화면에 더 많이 들어가고 버튼은 아래 고정. 360×640 미통과(틀린 상황 3개)와 360×560에서 목록만 스크롤된다.",
+          "evidence": [
+            "shots/M20261119-043548-4043ac/shots/B-SCR-103-mobile.png",
+            "shots/M20261119-043548-4043ac/shots/B-SCR-103-mobile-sm.png"
+          ],
+          "issues": [
+            {
+              "severity": "minor",
+              "what": "360×560에서 고정 버튼 영역이 화면의 약 1/3을 차지해 틀린 상황이 1개만 보임",
+              "where": "SCR-103",
+              "fix": "작은 화면에서 '다시 하기'·'목록' 버튼 높이를 48px로 줄이는 안을 DD에서 검토"
+            }
+          ]
+        },
+        "typography": {
+          "rating": "adequate",
+          "observations": "결과 점수는 토큰 밖 48px에서 font.size.display 32px로 바꿨고 '/ 5'는 18px로 위계 유지. 통과까지 남은 점수 16 굵게.",
+          "evidence": [
+            "shots/M20261119-043548-4043ac/shots/B-SCR-103-mobile.png",
+            "shots/M20261119-043548-4043ac/shots/B-SCR-103-mobile-sm.png"
+          ],
+          "issues": [
+            {
+              "severity": "minor",
+              "what": "32px로 줄인 점수가 가운데 정렬 레이아웃에서 이전보다 존재감이 약함",
+              "where": "SCR-103",
+              "fix": "점수 위아래 여백을 늘려 강조(토큰 안에서 조정)"
+            }
+          ]
+        },
+        "component_consistency": {
+          "rating": "strong",
+          "observations": "CMP-001(primary-lg·outline·secondary·tool·tool-primary)·CMP-049 막대·CMP-030 행·CMP-023 안내 상자가 상태 사이에서 같은 규칙이며 component_inconsistent가 없다.",
+          "evidence": [
+            "shots/M20261119-043548-4043ac/shots/B-SCR-102-mobile.png",
+            "shots/M20261119-043548-4043ac/shots/B-SCR-102-mobile-sm.png",
+            "shots/M20261119-043548-4043ac/shots/B-SCR-103-mobile.png",
+            "shots/M20261119-043548-4043ac/shots/B-SCR-103-mobile-sm.png"
+          ],
+          "issues": [
+            {
+              "severity": "minor",
+              "what": "SCR-103(B)의 버튼 규칙과 SCR-102(A)의 시트 버튼 모서리(14px vs 10px) 차이",
+              "where": "SCR-103",
+              "fix": "조합 채택 시 CMP-001 모서리를 한 값으로 통일(DD)"
+            }
+          ]
+        },
+        "iconography": {
+          "rating": "adequate",
+          "observations": "통과(체크)·미통과(되돌리기)·저장 중(로더)·저장 실패(알림) 아이콘이 글자와 함께 쓰인다.",
+          "evidence": [
+            "shots/M20261119-043548-4043ac/shots/B-SCR-103-mobile.png",
+            "shots/M20261119-043548-4043ac/shots/B-SCR-103-mobile-sm.png"
+          ],
+          "issues": [
+            {
+              "severity": "minor",
+              "what": "아이콘 권리 미확인(Lucide)",
+              "where": "SCR-103",
+              "fix": "사용자 권리 확인 문장으로 explore-asset confirm"
+            }
+          ]
+        },
+        "reference_alignment": {
+          "rating": "not_applicable",
+          "observations": "AI 라운드(레퍼런스 대조 없음). V04-A 토큰·배지·CTA 사용.",
+          "evidence": [
+            "shots/M20261119-043548-4043ac/shots/B-SCR-103-mobile.png",
+            "shots/M20261119-043548-4043ac/shots/B-SCR-103-mobile-sm.png"
+          ],
+          "issues": []
+        },
+        "mobile_balance": {
+          "rating": "adequate",
+          "observations": "결과 화면 버튼이 390·360 모두 스크롤 없이 보인다(아래 고정). SCR-102(B)는 상황 설명 띠가 높아 360×640 번호 13.3px로 14px에 못 미친다.",
+          "evidence": [
+            "shots/M20261119-043548-4043ac/shots/B-SCR-102-mobile.png",
+            "shots/M20261119-043548-4043ac/shots/B-SCR-102-mobile-sm.png",
+            "shots/M20261119-043548-4043ac/shots/B-SCR-103-mobile.png",
+            "shots/M20261119-043548-4043ac/shots/B-SCR-103-mobile-sm.png"
+          ],
+          "issues": [
+            {
+              "severity": "minor",
+              "what": "SCR-102(B) 360×640 번호 13.3px",
+              "where": "SCR-102",
+              "fix": "SCR-102는 A안(14.5px)을 쓰는 조합으로 해소"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "goals": {
+    "G1": {
+      "status": "addressed",
+      "before": [
+        "shots/M20261119-035054-c6ecd6/shots/A-SCR-102-mobile.png",
+        "shots/M20261119-035054-c6ecd6/shots/B-SCR-103-mobile.png"
+      ],
+      "after": [
+        "shots/M20261119-043548-4043ac/shots/A-SCR-102-mobile.png",
+        "shots/M20261119-043548-4043ac/shots/B-SCR-103-mobile.png"
+      ],
+      "note": "코트 #2F7D4F·좌표·6/9칸·판정 로직은 그대로 두고 V04-A 디자인 시스템을 셸(카드 구성·위계·간격)에 적용. 2차에서 재생 중 격자·번호 숨김(UXD-077 r6), 대비 4건 개선, 번호 14.5px(360×640) 확보."
+    }
+  }
+}

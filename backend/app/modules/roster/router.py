@@ -160,7 +160,7 @@ def member_status(user_id: uuid.UUID, _: AdminUser, db: DbSession) -> MemberStat
         rank=rank,
         gamesToRank=to_rank,
         record={"games": wins + losses, "wins": wins, "losses": losses},
-        tutorial={**passed_counts(db, user.id), "total": 3},
+        tutorial=passed_counts(db, user.id),
         recommended=score is None or score <= 3,
     )
 

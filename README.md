@@ -113,7 +113,14 @@ Template 기능을 쓸 수 없다면 `git clone --depth 1 <url> my-product && cd
 
 - 게임 로직은 렌더링과 분리돼 있습니다(`frontend/src/features/tutorial/engine/`: 판정·점수·통과·저장 병합, 애니메이션 타임라인). 화면 없이 테스트합니다(`logic.test.ts`).
 - 시나리오는 `frontend/src/features/tutorial/content/stages.ts`의 정적 데이터입니다. **현재는 검수 전 초안**이며 운영진·코치 검수 후 이 파일만 바꿉니다.
-- 진행 기록(통과 여부·최고 점수·최초 통과 시각)은 api 모드에서 `tutorial_progress`(I2)에, Mock 모드에서는 브라우저 저장소에 저장됩니다. 서버는 스테이지 id·상황 수만 압니다(`backend/app/modules/tutorial/stage_registry.json`). **시나리오(stages.ts)의 스테이지·상황 수를 바꾸면 이 파일도 함께 바꿔야 하며**, 프런트 테스트(`content/registry.test.ts`)가 어긋남을 알려 줍니다.
+- 진행 기록(통과 여부·최고 점수·최초 통과 시각)은 api 모드에서 `tutorial_progress`(I2)에, Mock 모드에서는 브라우저 저장소에 저장됩니다. 서버 레지스트리(`backend/app/modules/tutorial/stage_registry.json`)에는 과정(입문자 `intro`·왕초급 `starter`·초급 `basic`, 중급·고급은 미출시)과 새 스테이지 ID(`intro-1-v1` 등, PRD r7 ASM-033)가 있습니다. 개편 전 ID(`beginner-*`·`novice-*`) 기록은 DB에 남지만 진행률·운영진 현황에서 빠지고 새 저장은 404입니다(AC-118·119). **레지스트리를 바꾸면 프런트 Mock 사본(`features/tutorial/mockRegistry.ts`)도 함께 바꿔야 하며**, 프런트 테스트(`content/registry.test.ts`)가 어긋남을 알려 줍니다.
+- (전환 중, 2026-11-19) 콘텐츠를 백엔드 JSON과 API로 옮기는 작업이 진행 중입니다(`docs/workflow-proposals/tutorial-mvp-implementation-plan.md`). 그동안 기존 튜토리얼 화면(옛 ID 콘텐츠)은 Mock 모드에서만 저장되고, api 모드 저장은 404입니다.
+- 서버 콘텐츠(2단계): `backend/app/modules/tutorial/content/<stage_id>.json`(스테이지마다 한 파일). 형식·정합성은 `content.py`의 자동 검사(AC-117)가 확인하고, 전술 검수는 `content/REVIEW_CHECKLIST.md`(PRD 7.3 ③)로 합니다. **현재 8개 파일은 Preview 예시를 옮긴 미검수 초안이며 배포 금지**입니다. 콘텐츠를 바꾸면 스테이지 ID 버전을 올립니다(`-v2`).
+- 콘텐츠 조회 API(승인 회원): `GET /api/me/tutorial/courses`(과정·출시 스테이지 목록·통과 기준), `GET /api/me/tutorial/stages/{id}`(공개 콘텐츠 — 정답·허용 칸·해설 등 판정 데이터는 없음). 진행 기록은 기존 `GET /api/me/tutorial/progress`. 미출시 과정·없는 ID는 404 `stage_not_found`.
+- SCR-101 목록(4단계): `GET /api/me/tutorial/courses`와 `GET /api/me/tutorial/progress`를 따로 불러와 과정·스테이지·진행률을 그립니다. 목록 실패·진행 실패는 화면 안에서 안내와 '다시 시도'로 처리하고, 진행 실패 때 0점·미통과로 꾸며 보여 주지 않습니다. 과정 설명·장식 그림은 레지스트리의 `description`·`icon`입니다.
+- SCR-102 경기장 게임(5단계): `frontend/src/features/tutorial/court/`(원근 경기장 StadiumCourt·좌표 변환·칸 계산, Preview r3에서 옮김), `play/`(화면 부품·진행 규칙), `pages/StagePlayPage.tsx`. 칸을 확정하면 서버 판정 API를 부르고, 점수는 서버의 `points`만 더합니다. Mock 모드의 판정 서버(`mock/server.ts`, 정답 포함)는 mock 빌드에서만 불러오며 api 빌드에는 들어가지 않습니다. 튜토리얼 화면은 `.tutorial-theme`(승인 테마 값)을 씁니다. Mock 콘텐츠 사본(`mock/content/*.json`)은 서버 콘텐츠와 같아야 하며 `content/registry.test.ts`가 확인합니다.
+- SCR-103 결과(6단계): 결과 주소 `/tutorial/stages/{id}/result?run={runId}`. 들어오면 `PUT /api/me/tutorial/stages/{id}` `{runId}`로 저장(멱등)하고 서버 값으로 표시, 새로고침하면 `GET /api/me/tutorial/runs/{runId}`(완료된 본인 회차만, 틀린 상황 다시 보기 데이터 포함)로 복구합니다. 저장 실패는 '다시 저장'으로 다시 보냅니다.
+- 서버 판정 회차(3단계): `POST /api/me/tutorial/stages/{id}/runs`(회차 시작, 2시간) → `POST /api/me/tutorial/runs/{runId}/judge` `{situation, cell}`(서버가 정답·허용·오답 판정, 상황별 첫 판정만 점수 반영 — 재도전 0점) → `PUT /api/me/tutorial/stages/{id}` `{runId}`(서버가 점수·통과 계산해 저장, 멱등). 클라이언트 점수(`{score, total}`)는 받지 않습니다. 회차 표 `tutorial_runs`는 마이그레이션 0010이 필요합니다(로컬 Compose DB에는 적용, 운영·Neon은 미적용). 고른 칸 번호는 저장하지 않고 첫 판정(c/a/w/-)만 회차 기간 동안 임시 보관합니다.
 
 ## 청백전(I3, 진행 중)
 

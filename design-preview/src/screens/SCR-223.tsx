@@ -91,7 +91,7 @@ export function Scr223({ stateId }: { stateId: string }) {
 
 function ResultButton({ team, won }: { team: '청' | '백'; won: boolean }) {
   return (
-    <button type="button" aria-pressed={won} className={`h-11 shrink-0 rounded-md border px-3 text-body font-bold ${won ? 'border-action bg-action text-on-action' : 'border-line-strong bg-page text-ink'}`}>
+    <button type="button" aria-pressed={won} className={`h-11 shrink-0 rounded-md border px-3 text-body font-bold ${won ? 'border-2 border-ink-accent bg-mint-subtle text-ink-accent' : 'border-line-strong bg-page text-ink'}`}>
       {team} 승
     </button>
   )

@@ -15,6 +15,9 @@
   --color-ink: var(--color-text-primary);
   --color-ink-muted: var(--color-text-secondary);
   --color-ink-disabled: var(--color-text-disabled);
+  --color-ink-accent: var(--color-text-accent); /* 강조 글자(UX Spec r4) */
+  --color-mint-subtle: var(--color-accent-subtle); /* 강조 보조 면 */
+  --color-mint: var(--color-accent-mint); /* 장식 면 전용 */
   --color-line: var(--color-border-default);
   --color-line-strong: var(--color-border-strong);
   --color-action: var(--color-action-primary);

@@ -1,0 +1,149 @@
+/* 튜토리얼(SCR-101·102·103) 프리뷰 스타일. 색은 tokens.css 변수만(VD-038), 모서리 radius.md·radius.sheet(VD-041·044·045).
+   토큰 색을 섞은 그림자·불투명도는 07에 기록된 토큰 밖 값(VD-024·026·027·044). 제품 코드 아님. */
+
+/* ---------- CMP-046 코트: 컨테이너 단위로 좌표계를 그대로 확대·축소 ---------- */
+.tc-box { flex: 1; min-height: 0; container-type: size; display: grid; place-items: center; }
+.tc { --cu: min(100cqw / 71, 100cqh / 144); position: relative; width: min(100cqw, calc(100cqh * 71 / 144)); aspect-ratio: 71 / 144;
+  background: var(--color-court-surface); border-radius: calc(3 * var(--cu)); }
+.tc > * { position: absolute; display: block; }
+.tc-rect { border: calc(.5 * var(--cu)) solid color-mix(in srgb, var(--color-court-line) 90%, transparent); }
+.tc-v { border-left: calc(.5 * var(--cu)) solid color-mix(in srgb, var(--color-court-line) 90%, transparent); }
+.tc-h { border-top: calc(.5 * var(--cu)) solid color-mix(in srgb, var(--color-court-line) 90%, transparent); }
+.tc-net { height: calc(1.4 * var(--cu)) !important; transform: translateY(-50%); background: var(--color-court-line); }
+/* VD-026 학습용 격자: 흰 70% 점선 0.35단위(1.6/1.2), 선택 대기에 들어가며 240ms 페이드(움직임 줄이기면 바로) */
+.tc-gv, .tc-gh, .tc-num { animation: tc-in 240ms ease-out both; }
+@keyframes tc-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .tc-gv, .tc-gh, .tc-num { animation: none; } }
+.tc-gv { width: calc(.35 * var(--cu)) !important; transform: translateX(-50%);
+  background: repeating-linear-gradient(to bottom, color-mix(in srgb, var(--color-court-line) 70%, transparent) 0 calc(1.6 * var(--cu)), transparent 0 calc(2.8 * var(--cu))); }
+.tc-gh { height: calc(.35 * var(--cu)) !important; transform: translateY(-50%);
+  background: repeating-linear-gradient(to right, color-mix(in srgb, var(--color-court-line) 70%, transparent) 0 calc(1.6 * var(--cu)), transparent 0 calc(2.8 * var(--cu))); }
+/* VD-027 번호: 5.4단위 굵게, 바닥색 불투명 원 7단위(흰 대 원 5.04:1) */
+.tc-num { display: grid !important; place-items: center; width: calc(7 * var(--cu)); height: calc(7 * var(--cu)); border-radius: 50%;
+  background: var(--color-court-surface); color: var(--color-court-line); font-weight: 700; font-size: calc(5.4 * var(--cu)); line-height: 1; font-variant-numeric: tabular-nums; z-index: 3; }
+/* 선수·셔틀(기존 그림 치수), 이름에 바닥색 받침(VD-029, 판정 칸 위 5.04:1) */
+.tc-pl { width: 0; height: 0; z-index: 2; pointer-events: none; }
+.tc-pl b { position: absolute; left: calc(-3.6 * var(--cu)); top: calc(-3.6 * var(--cu)); width: calc(7.2 * var(--cu)); height: calc(7.2 * var(--cu)); border-radius: 50%; border: calc(.6 * var(--cu)) solid var(--color-court-line); }
+.tc-pl-opp b { background: var(--color-court-opponent); }
+.tc-pl-me b { background: var(--color-court-me); }
+.tc-ring-me { position: absolute; left: calc(-5.2 * var(--cu)); top: calc(-5.2 * var(--cu)); width: calc(10.4 * var(--cu)); height: calc(10.4 * var(--cu)); border-radius: 50%; border: calc(1.2 * var(--cu)) solid var(--color-court-line); }
+.tc-pl em { position: absolute; left: 0; top: calc(4.4 * var(--cu)); transform: translateX(-50%); padding: 0 calc(.8 * var(--cu)); border-radius: calc(1.2 * var(--cu));
+  background: var(--color-court-surface); color: var(--color-court-line); font-style: normal; font-weight: 700; font-size: calc(3.6 * var(--cu)); line-height: 1.25; white-space: nowrap; }
+.tc-self em { top: calc(5.6 * var(--cu)); font-size: calc(4.2 * var(--cu)); }
+.tc-sh { width: calc(3.8 * var(--cu)); height: calc(3.8 * var(--cu)); transform: translate(-50%, -50%); border-radius: 50%; background: var(--color-court-line); border: calc(.5 * var(--cu)) solid var(--color-text-primary); z-index: 2; }
+/* VD-028 선택 강조 / VD-029 판정 */
+.tc-mk { display: grid !important; place-items: start end; padding: var(--cu); border-radius: calc(1.5 * var(--cu)); z-index: 1; }
+.tc-mk-select { background: color-mix(in srgb, var(--color-court-line) 25%, transparent); border: calc(.8 * var(--cu)) solid var(--color-court-line); }
+.tc-mk-selectWait { background: color-mix(in srgb, var(--color-court-line) 25%, transparent); border: calc(1.2 * var(--cu)) solid var(--color-court-line); }
+.tc-mk-ok { background: color-mix(in srgb, var(--color-status-success-bg) 90%, transparent); color: var(--color-status-success-fg); border: calc(.5 * var(--cu)) solid var(--color-court-line); }
+.tc-mk-allow { background: color-mix(in srgb, var(--color-status-warning-bg) 90%, transparent); color: var(--color-status-warning-fg); border: calc(.5 * var(--cu)) dashed var(--color-court-line); }
+.tc-mk-bad { background: color-mix(in srgb, var(--color-status-danger-bg) 90%, transparent); color: var(--color-status-danger-fg); border: calc(.5 * var(--cu)) solid var(--color-court-line); }
+.tc-mine { border-width: calc(1.2 * var(--cu)); }
+.tc-mk-ic { width: calc(6.4 * var(--cu)); height: calc(6.4 * var(--cu)); }
+/* VD-030 셔틀 방향 고리: 흰 점선 + 안팎 바닥색 외곽선 0.4단위 */
+.tc-ring { width: calc(7 * var(--cu)); height: calc(7 * var(--cu)); transform: translate(-50%, -50%); border-radius: 50%; border: calc(.5 * var(--cu)) dashed var(--color-court-line); z-index: 2;
+  box-shadow: 0 0 0 calc(.4 * var(--cu)) var(--color-court-surface), inset 0 0 0 calc(.4 * var(--cu)) var(--color-court-surface); }
+/* VD-031 동선: 흰 실선 0.6 + 화살촉 2.4, 바닥색 외곽선 0.4, 파트너 점선 0.4 */
+.tc-rt { height: calc(.6 * var(--cu)); margin-top: calc(-.3 * var(--cu)); transform-origin: 0 50%; background: var(--color-court-line); z-index: 2;
+  filter: drop-shadow(calc(.4 * var(--cu)) 0 0 var(--color-court-surface)) drop-shadow(calc(-.4 * var(--cu)) 0 0 var(--color-court-surface)) drop-shadow(0 calc(.4 * var(--cu)) 0 var(--color-court-surface)) drop-shadow(0 calc(-.4 * var(--cu)) 0 var(--color-court-surface)); }
+.tc-rt i { position: absolute; right: calc(-.6 * var(--cu)); top: 50%; width: 0; height: 0; transform: translateY(-50%);
+  border-left: calc(2.4 * var(--cu)) solid var(--color-court-line); border-top: calc(1.5 * var(--cu)) solid transparent; border-bottom: calc(1.5 * var(--cu)) solid transparent; }
+.tc-rt-p { height: calc(.4 * var(--cu)); background: repeating-linear-gradient(to right, var(--color-court-line) 0 calc(1.4 * var(--cu)), transparent 0 calc(2.4 * var(--cu))); }
+.tc-hit { z-index: 4; border-radius: calc(1.5 * var(--cu)); background: transparent; border: 0; cursor: pointer; }
+.tc-hit:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+
+/* ---------- SCR-101(V04-A) 배너·카드 그림자 ---------- */
+.tu-banner { background:
+  radial-gradient(55% 75% at 92% 8%, color-mix(in srgb, var(--color-bg-page) 55%, transparent) 0%, transparent 70%),
+  linear-gradient(112deg, color-mix(in srgb, var(--color-accent-subtle) 70%, var(--color-bg-page)) 0%, var(--color-accent-subtle) 38%, color-mix(in srgb, var(--color-accent-mint) 60%, var(--color-accent-subtle)) 68%, var(--color-accent-mint) 100%); }
+.tu-streaks { background: linear-gradient(118deg, transparent 52%, color-mix(in srgb, var(--color-bg-page) 70%, transparent) 52.5%, color-mix(in srgb, var(--color-bg-page) 70%, transparent) 54%, transparent 54.5%),
+  linear-gradient(118deg, transparent 60%, color-mix(in srgb, var(--color-bg-page) 45%, transparent) 60.4%, color-mix(in srgb, var(--color-bg-page) 45%, transparent) 61.6%, transparent 62%); }
+.tu-shuttle { filter: drop-shadow(0 8px 10px color-mix(in srgb, var(--color-action-primary) 22%, transparent)); }
+/* VD-024 r4 개정안: 튜토리얼 목록 카드(이어서 하기·스테이지 행·진행률)의 옅은 그림자 */
+.tu-soft { box-shadow: 0 3px 10px color-mix(in srgb, var(--color-action-primary) 7%, transparent), 0 1px 2px color-mix(in srgb, var(--color-text-primary) 5%, transparent); }
+.tu-soft-lg { box-shadow: 0 6px 18px color-mix(in srgb, var(--color-action-primary) 10%, transparent), 0 1px 3px color-mix(in srgb, var(--color-text-primary) 6%, transparent); }
+/* VD-044 SCR-102 아래 시트 위쪽 옅은 그림자 */
+.tu-sheet { box-shadow: 0 -6px 20px color-mix(in srgb, var(--color-text-primary) 8%, transparent), 0 -1px 0 color-mix(in srgb, var(--color-border-default) 60%, transparent); }
+.tu-divider { border-color: color-mix(in srgb, var(--color-border-default) 60%, var(--color-bg-page)); }
+
+/* 흐름 모드 움직임: 셔틀 날아옴(상황 재생)·내 캐릭터·파트너 이동. 움직임 줄이기 설정이면 바로 표시(02 SCR-102) */
+.tc-pl, .tc-sh { transition: left var(--tc-move, 600ms) ease-in-out, top var(--tc-move, 600ms) ease-in-out; }
+.tc[data-mode='playing'] .tc-sh { transition-duration: var(--tc-fly, 1100ms); transition-timing-function: ease-out; }
+.tc[data-mode='playing'] { cursor: pointer; }
+.tc[data-slow='true'] { --tc-move: 1200ms; }
+@media (prefers-reduced-motion: reduce) { .tc-pl, .tc-sh { transition: none !important; } }
+
+/* ---------- SCR-102 경기장판(game-images 레이어) ---------- */
+.sc-box { position: relative; z-index: 1; flex: 1; min-height: 0; overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, black 18px); mask-image: linear-gradient(to bottom, transparent 0, black 18px); }
+.sc-box[data-mode='playing'] { cursor: pointer; }
+.sc-stage { position: absolute; }
+.sc-stage > * { position: absolute; }
+.sc-bg { inset: 0; width: 100%; height: 100%; user-select: none; }
+.sc-svg { inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.sc-top { z-index: 4; }
+.sc-top .sc-num { pointer-events: none; }
+.sc-top .sc-hit { pointer-events: auto; cursor: pointer; fill: transparent; }
+.sc-top .sc-hit:focus-visible { outline: none; stroke: var(--color-focus-ring); stroke-width: 6; }
+/* VD-026 격자: 흰 70% 점선 */
+.sc-grid line { stroke: color-mix(in srgb, var(--color-court-line) 70%, transparent); stroke-width: 4; stroke-dasharray: 16 12; stroke-linecap: butt; }
+.sc-grid, .sc-num { animation: tc-in 240ms ease-out both; }
+@media (prefers-reduced-motion: reduce) { .sc-grid, .sc-num { animation: none; } }
+/* VD-027 번호: 바닥색 불투명 원 + 흰 굵은 숫자 */
+/* 번호: 원·배경 없이 숫자만(은은하게). 얇은 코트색 외곽선은 밝은 코트 라인 위 가독성용(배경 아님) */
+.sc-num { fill: var(--color-court-line); fill-opacity: 0.6; font-weight: 700; font-family: var(--font-family-base); font-variant-numeric: tabular-nums;
+  stroke: var(--color-court-surface); stroke-opacity: 0.35; stroke-width: 0.08em; paint-order: stroke; transition: fill-opacity 160ms ease-out; }
+.sc-num-on { fill-opacity: 1; stroke-opacity: 0.6; }
+/* 선택 영역 바닥 면(UXD-077 선택 대기): 기본 반투명 민트, 선택 칸은 더 진한 면 + 흰 테두리. 이동 시작 시 흐려지며 사라짐 */
+.sc-tiles { transition: opacity 240ms ease-out; }
+.sc-tiles[data-on='false'] { opacity: 0; }
+.sc-tile { fill: color-mix(in srgb, var(--color-accent-mint) 24%, transparent); stroke: color-mix(in srgb, var(--color-accent-mint) 75%, transparent); stroke-width: 3; stroke-linejoin: round;
+  transition: fill 160ms ease-out, stroke 160ms ease-out, stroke-width 160ms ease-out; }
+.sc-tile-on { fill: color-mix(in srgb, var(--color-accent-mint) 50%, transparent); stroke: var(--color-court-line); stroke-width: 7; }
+.sc-go { z-index: 5; transform: translate(-50%, -50%); padding: 3px 10px; border-radius: 9999px; background: var(--color-bg-page); color: var(--color-text-accent);
+  font-size: var(--font-size-caption); font-weight: 700; line-height: 1.5; white-space: nowrap; pointer-events: none;
+  box-shadow: 0 1px 4px color-mix(in srgb, var(--color-text-primary) 25%, transparent); transition: opacity 200ms ease-out; animation: tc-in 160ms ease-out both; }
+.sc-go-sm { padding: 0 8px; }
+.sc-go[data-on='false'] { opacity: 0; animation: none; }
+@media (prefers-reduced-motion: reduce) { .sc-tiles, .sc-tile, .sc-num, .sc-go { transition: none; animation: none; } }
+/* VD-028 선택 / VD-029 판정 */
+.sc-mk polygon { stroke: var(--color-court-line); stroke-width: 4; stroke-linejoin: round; }
+.sc-mk-select polygon, .sc-mk-selectWait polygon { fill: color-mix(in srgb, var(--color-court-line) 25%, transparent); stroke-width: 6; }
+.sc-mk-selectWait polygon { stroke-width: 9; }
+.sc-mk-ok polygon { fill: color-mix(in srgb, var(--color-status-success-bg) 90%, transparent); }
+.sc-mk-allow polygon { fill: color-mix(in srgb, var(--color-status-warning-bg) 90%, transparent); stroke-dasharray: 14 10; }
+.sc-mk-bad polygon { fill: color-mix(in srgb, var(--color-status-danger-bg) 90%, transparent); }
+.sc-mine polygon { stroke-width: 9; }
+.sc-mk-ic { fill: none; stroke-width: 2.4; }
+.sc-mk-ok .sc-mk-ic { color: var(--color-status-success-fg); }
+.sc-mk-allow .sc-mk-ic { color: var(--color-status-warning-fg); }
+.sc-mk-bad .sc-mk-ic { color: var(--color-status-danger-fg); }
+/* VD-030 셔틀 방향 고리 / VD-031 동선 */
+.sc-ring { fill: none; stroke: var(--color-court-line); stroke-width: 4; stroke-dasharray: 10 8; paint-order: stroke; filter: drop-shadow(0 0 2px var(--color-court-surface)) drop-shadow(0 0 2px var(--color-court-surface)); }
+.sc-rt-under { stroke: var(--color-court-surface); stroke-width: 12; stroke-linecap: round; }
+.sc-rt-line { stroke: var(--color-court-line); stroke-width: 6; stroke-linecap: round; }
+.sc-rt-p .sc-rt-line { stroke-width: 4; stroke-dasharray: 12 10; }
+.sc-arrowhead { fill: var(--color-court-line); stroke: var(--color-court-surface); stroke-width: 1; }
+/* 선수·셔틀 레이어: 이동은 left/top 전환(0.6초, 느리게 1.2초). 움직임 줄이기면 즉시 */
+.sc-mv { transition: left var(--sc-move, 600ms) ease-in-out, top var(--sc-move, 600ms) ease-in-out, width var(--sc-move, 600ms) ease-in-out, height var(--sc-move, 600ms) ease-in-out; }
+.sc-box[data-slow='true'] { --sc-move: 1200ms; }
+@media (prefers-reduced-motion: reduce) { .sc-mv { transition: none !important; } }
+.sc-pl { z-index: 2; pointer-events: none; user-select: none; }
+.sc-shadow { z-index: 1; border-radius: 50%; background: color-mix(in srgb, var(--color-text-primary) 28%, transparent); }
+.sc-shadow-me { background: color-mix(in srgb, var(--color-court-line) 55%, transparent); box-shadow: 0 0 0 2px var(--color-court-line); }
+.sc-bubble { z-index: 3; transform: translate(-50%, -100%); padding: 1px 8px; border-radius: 9999px; font-size: var(--font-size-caption); font-weight: 700; line-height: 1.5; white-space: nowrap;
+  background: var(--color-bg-page); color: var(--color-text-primary); box-shadow: 0 1px 3px color-mix(in srgb, var(--color-text-primary) 25%, transparent); }
+.sc-bubble-me { background: var(--color-court-me); color: var(--color-court-line); }
+.sc-sh { z-index: 3; pointer-events: none; filter: drop-shadow(0 2px 2px color-mix(in srgb, var(--color-text-primary) 35%, transparent)); }
+.sc-sh-shadow { z-index: 1; border-radius: 50%; background: color-mix(in srgb, var(--color-text-primary) 30%, transparent); }
+
+/* ---------- SCR-102 화면 셸(game-storyboard 참고): 경기장 분위기 상단 ---------- */
+/* 상단 배경 = 같은 경기장 이미지를 흐리게 + 글자색 막(새 색 토큰 없이 경기장의 남색 분위기) */
+.pl-atmo { position: absolute; inset: 0; z-index: 0; overflow: hidden; background: var(--color-text-primary); }
+.pl-atmo::before { content: ''; position: absolute; inset: -24px; background: url('/game/stadium.webp') center top / cover no-repeat; filter: blur(14px); }
+.pl-atmo::after { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--color-text-primary) 62%, transparent) 0, color-mix(in srgb, var(--color-text-primary) 38%, transparent) 180px, color-mix(in srgb, var(--color-text-primary) 15%, transparent) 100%); }
+.pl-pill { background: color-mix(in srgb, var(--color-bg-page) 16%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-bg-page) 38%, transparent); }
+.pl-step-next { color: var(--color-bg-page); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--color-bg-page) 70%, transparent); }
+.pl-step-line { background: color-mix(in srgb, var(--color-bg-page) 38%, transparent); }
+.pl-cta { box-shadow: 0 6px 14px color-mix(in srgb, var(--color-action-primary) 30%, transparent); }

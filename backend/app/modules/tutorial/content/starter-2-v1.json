@@ -1,0 +1,261 @@
+{
+  "id": "starter-2-v1",
+  "course": "starter",
+  "no": 2,
+  "version": 1,
+  "title": "담당 영역 나누기",
+  "minutes": 3,
+  "thumbnail": "AST-030",
+  "situations": [
+    {
+      "no": 1,
+      "description": "상대가 내 쪽 오른쪽 뒤로 높게 넘겼어요.",
+      "question": "어디로 이동해야 할까요?",
+      "start": {
+        "me": [
+          40,
+          102
+        ],
+        "partner": [
+          24,
+          84
+        ],
+        "opponents": [
+          [
+            18,
+            26
+          ],
+          [
+            43,
+            38
+          ]
+        ]
+      },
+      "shuttle": {
+        "from": [
+          43,
+          38
+        ],
+        "stop": [
+          47,
+          82
+        ],
+        "landing": [
+          49,
+          126
+        ],
+        "landingCell": 6
+      },
+      "answer": 6,
+      "allow": [
+        4
+      ],
+      "partnerCell": 3,
+      "explanation": {
+        "correct": "오른쪽 뒤는 내 담당 영역이라 그 칸으로 가서 받아요.",
+        "better": "괜찮은 위치예요. 더 좋은 위치는 6번이에요.",
+        "wrong": "셔틀은 오른쪽 뒤로 왔어요. 6번으로 가야 해요."
+      }
+    },
+    {
+      "no": 2,
+      "description": "상대가 내 쪽 왼쪽 뒤로 높게 넘겼어요.",
+      "question": "어디로 이동해야 할까요?",
+      "start": {
+        "me": [
+          40,
+          102
+        ],
+        "partner": [
+          24,
+          84
+        ],
+        "opponents": [
+          [
+            18,
+            26
+          ],
+          [
+            43,
+            38
+          ]
+        ]
+      },
+      "shuttle": {
+        "from": [
+          43,
+          38
+        ],
+        "stop": [
+          16,
+          82
+        ],
+        "landing": [
+          12,
+          126
+        ],
+        "landingCell": 5
+      },
+      "answer": 5,
+      "allow": [
+        3
+      ],
+      "partnerCell": 4,
+      "explanation": {
+        "correct": "왼쪽 뒤는 내 담당 영역이라 그 칸으로 가서 받아요.",
+        "better": "괜찮은 위치예요. 더 좋은 위치는 5번이에요.",
+        "wrong": "셔틀은 왼쪽 뒤로 왔어요. 5번으로 가야 해요."
+      }
+    },
+    {
+      "no": 3,
+      "description": "상대가 내 쪽 오른쪽 앞으로 짧게 떨어뜨렸어요.",
+      "question": "어디로 이동해야 할까요?",
+      "start": {
+        "me": [
+          40,
+          102
+        ],
+        "partner": [
+          24,
+          84
+        ],
+        "opponents": [
+          [
+            18,
+            26
+          ],
+          [
+            43,
+            38
+          ]
+        ]
+      },
+      "shuttle": {
+        "from": [
+          43,
+          38
+        ],
+        "stop": [
+          44,
+          66
+        ],
+        "landing": [
+          50,
+          74
+        ],
+        "landingCell": 2
+      },
+      "answer": 2,
+      "allow": [
+        4
+      ],
+      "partnerCell": 5,
+      "explanation": {
+        "correct": "오른쪽 앞은 내 담당 영역이라 그 칸으로 가서 받아요.",
+        "better": "괜찮은 위치예요. 더 좋은 위치는 2번이에요.",
+        "wrong": "셔틀은 오른쪽 앞로 왔어요. 2번으로 가야 해요."
+      }
+    },
+    {
+      "no": 4,
+      "description": "상대가 내 쪽 왼쪽 앞으로 짧게 떨어뜨렸어요.",
+      "question": "어디로 이동해야 할까요?",
+      "start": {
+        "me": [
+          40,
+          102
+        ],
+        "partner": [
+          24,
+          84
+        ],
+        "opponents": [
+          [
+            18,
+            26
+          ],
+          [
+            43,
+            38
+          ]
+        ]
+      },
+      "shuttle": {
+        "from": [
+          43,
+          38
+        ],
+        "stop": [
+          18,
+          66
+        ],
+        "landing": [
+          11,
+          74
+        ],
+        "landingCell": 1
+      },
+      "answer": 1,
+      "allow": [
+        3
+      ],
+      "partnerCell": 6,
+      "explanation": {
+        "correct": "왼쪽 앞은 내 담당 영역이라 그 칸으로 가서 받아요.",
+        "better": "괜찮은 위치예요. 더 좋은 위치는 1번이에요.",
+        "wrong": "셔틀은 왼쪽 앞로 왔어요. 1번으로 가야 해요."
+      }
+    },
+    {
+      "no": 5,
+      "description": "상대가 내 쪽 오른쪽 가운데로 빠르게 밀어 넣었어요.",
+      "question": "어디로 이동해야 할까요?",
+      "start": {
+        "me": [
+          40,
+          102
+        ],
+        "partner": [
+          24,
+          84
+        ],
+        "opponents": [
+          [
+            18,
+            26
+          ],
+          [
+            43,
+            38
+          ]
+        ]
+      },
+      "shuttle": {
+        "from": [
+          43,
+          38
+        ],
+        "stop": [
+          46,
+          84
+        ],
+        "landing": [
+          50,
+          100
+        ],
+        "landingCell": 4
+      },
+      "answer": 4,
+      "allow": [
+        6
+      ],
+      "partnerCell": 3,
+      "explanation": {
+        "correct": "오른쪽 가운데는 내 담당 영역이라 그 칸으로 가서 받아요.",
+        "better": "괜찮은 위치예요. 더 좋은 위치는 4번이에요.",
+        "wrong": "셔틀은 오른쪽 가운데로 왔어요. 4번으로 가야 해요."
+      }
+    }
+  ]
+}

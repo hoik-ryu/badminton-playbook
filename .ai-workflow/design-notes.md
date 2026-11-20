@@ -919,3 +919,273 @@ PF-002의 미결정 사항(기획에서 정할 것): 개인전 순위 동률·�
 - R27-Q1 → UXD-077 '이동 목표점' 항목 보완(기본 = 칸 중심, 상황별 지정 가능, 판정은 칸 번호), 상태 확정
 - R27-Q2 → UXD-078 제목·결정 재작성(44px 자동 전환 기준 삭제, 참고 기준으로만), AC-115와의 관계 명시, 상태 확정
 - 라운드 26의 R26-Q1·Q2 기록은 그대로 두고 이 라운드가 보완함
+
+## Design Direction r4 — 참고 이미지 확인·CR 결정 (2026-11-18)
+
+사용자 원문(발췌):
+- "REF-001은 제가 제공한 디자인 참고 이미지입니다. 이미지에는 실제 사용자 개인정보가 포함되어 있지 않음을 확인합니다. 개인정보 없음 확인."
+- "참고 이미지의 권리 상태는 제가 직접 제작하거나 생성한 시안으로 확인되는 경우 own으로 기록하세요. 권리 상태를 확인할 수 없다면 unknown을 유지하고 별도로 알려주세요." → 직접 제작·생성 여부는 확인되지 않아 unknown 유지
+- "RX-001-02·03은 시각적 참고 특성으로 수용합니다. 나머지 RX-001-04·05·08·12·17은 참고 수준으로만 사용하고, 정확한 수치나 필수 요구사항으로 확정하지 않습니다."
+- CR-011: "A안인 새로운 의미 토큰 color.accent.subtle을 선호합니다. … 지금 바로 수정하지 말고 … 영향 분석을 마칠 때까지 최종 확정하지 마세요."
+- CR-012: A안(미니 코트 썸네일, 간결한 벡터 셔틀콕, 장식은 접근성 트리 제외)
+- CR-013: B안(기존 테두리 토큰 유지)
+- 시각 탐색: SCR-101·SCR-102, A안 REF-001 충실, B안 같은 디자인 언어에서 정보 밀도·강조만 조정, 390×844·360×640 비교, 연민트는 시안 검토용 임시 값
+
+처리:
+- privacy --by user none(확정), RX-001-02·03 confirmed, RX-001-04·05·08·12·17 rejected(참고 수준 — 시안 규칙·수치로 쓰지 않음)
+- CR-011 impact: A안 ②(ux_spec 재승인 필수, reopen --stage ux_spec), B안 ③(재승인 없음). 07 CR-011에 절차·영향 기록, 확정 안 함
+- CR-012 A·CR-013 B 07에 결정 기록
+
+## 시각 탐색 라운드 V01 (2026-11-18, 선택 대기)
+- explore-init --phase visual --mode reference --intent INT-001 --variants 2 --targets SCR-101,SCR-102
+- V01-A 'REF-001 충실안' / V01-B '밀도·강조 조정안'. 후보 테마는 공식 값 + 임시 color.accent.subtle(#DFF5F1, CR-011 미확정, token_needs_cr 경고)
+- explore-check 통과(오류 0), explore-verify not_run(측정 명령 없음), compare.html 생성, critique.md(모델 평가) 작성
+- 검토 캡처(측정 아님): Claude가 헤드리스 Chrome으로 390×844·360×640 iframe 캡처(세션 임시 폴더). 선택 시 --evidence로 사람 확인 캡처가 필요
+- 사용자 선택 대기. 선택 전에는 explore-adopt·VD 승인 없음
+
+## 시각 탐색 V01 미선택 → V02 원본 충실형 (2026-11-19)
+사용자 원문(발췌): "현재 A안과 B안 모두 선택하지 않겠습니다. … REF-001 왼쪽 튜토리얼 목록 화면을 최대한 충실하게 재현하는 방향으로 다시 작업해 주세요." / 이어서 하기: "흰색 배경, 부드러운 그림자, 은은한 테두리 … Teal은 제목·아이콘·진행 상태의 강조색으로만" / "필요한 이미지 자산을 별도로 제작하는 방식을 검토하세요 … 생성한 자산은 출처, 권리 상태, 파일 경로를 기록" / "기존 A/B 중 하나를 선택한 것으로 기록하지 마세요."
+처리:
+- V01은 선택·채택 기록 없이 보존
+- 자산 등록(design-profile/assets.json, 파일 design-profile/assets/): AST-001·014–016 Lucide v1.70.0(ISC, licensed, 권리 미확인 상태), AST-002 배너 셔틀콕, AST-003–010 스테이지 미니 코트(TutorialCourt 좌표 재사용), AST-011–013 과정 장식 아이콘 — 모두 model_drawn(모델 제작 SVG), 권리 unknown(사용자 확인 전 탐색 전용). 이미지 생성 도구는 쓰지 않음(외부 전송 없이 SVG로 제작)
+- 아이콘 스타일 기록(explore-asset style): 승인된 VD-002(사용자 결정 2026-11-10 "lucide-react 아이콘만 씀")를 근거로 Lucide 기본값(outline·2·24·round)
+- V02(대상 SCR-101, reference, INT-001): A 원본 충실 재현안 / B 충실형·큰 일러스트. explore-check 오류 0, 측정 not_run, critique 작성
+- 원본 비교 캡처(모델 검토용, 측정 아님): 세션 임시 폴더 v02/compare390.png·compare360.png·regions.png·full390.png
+
+### V03 (2026-11-19) — V02-A 수정 라운드 1회째(상한 2), 미선택·미채택
+- 대상 SCR-101, 기준 V02-A. 목표 G1 밝은 민트·풍부한 배너 그라데이션(후보 Primary #087F73·Mint #8EE3CC·Soft Mint #DDF8EF·Page #FAFFFD, 확정 아님), G2 스테이지별 다른 일러스트, G3 작은 글자 13px·360px 넘침 방지·V02-A 레이아웃 유지.
+- 자산: 셔틀콕 AST-017(임시 SVG, 원본 3D 품질 미달), 썸네일 AST-018–025(8종 서로 다른 구성). 모두 model_drawn·권리 미상(탐색 전용). TutorialCourt 좌표·로직 변경 없음.
+- 대비: #087F73은 흰색 4.89:1, #DDF8EF 위 4.37:1(작은 글자 미달) → 배지 글자는 Teal 80%+본문색 혼합(약 5.4:1).
+- explore-check 오류 0, explore-verify not_run(측정 명령 없음 → quality.json 근거 없음), critique.md(모델 평가) 작성, compare.html 생성.
+- 검토 자료(지속 보관): design-explore/review/V03/(index·compare390·compare360·banner·thumbs·full .html/.png, 로컬 서버로 열람).
+- 셔틀콕 고품질 이미지: Figma generate_image 사용 가능하나 유료 크레딧·외부 전송 → 사용자 승인 대기.
+- 사용자 선택 대기. V02-A·V03 공식 채택 아님, DD 제출·승인 없음, UX Spec 재개정 없음.
+- V03-2 (2026-11-19) 사용자 지시: "기존 V03 레이아웃을 유지하고, AST-017 셔틀콕 SVG를 제공된 투명 배경 이미지로 교체하세요. 배너 배경은 이미지에 포함하지 말고 CSS 그라데이션으로 구현하세요." 
+  - 제공 PNG는 왼쪽 어두운 부분만 투명이고 민트 바닥·그림자·구름 모양 가장자리가 남아 있어, 사본에서 셔틀콕만 분리(배경·그림자·구름 제거, 원본 파일 수정 없음) → 420×394 PNG를 AST-026(image·decorative·self_made, 라이선스 unknown, 원작자·생성 방식 미확인)으로 등록. AST-017은 기록 유지·V03에서 미사용.
+  - 배너: CSS만(왼쪽 위 연민트 → 오른쪽 아래 밝은 민트 + 오른쪽 위 흰 빛, 흰 대각선 2줄 유지), 어두운 녹색·구름 없음. 셔틀콕 104px·좌우 반전 제거, 설명 문구와 겹치지 않게 배치.
+  - explore-check 오류 0, 리뷰 PNG(compare390·360·banner·full) 재캡처. 여전히 미선택·미채택.
+
+### V04 (2026-11-19) — V03-A 수정 라운드(같은 계열 2회째 = 상한 도달), 미선택·미채택
+- 사용자 원문(발췌): "V03-A의 레이아웃, 밝은 민트 색감, 카드 구성, 정보 밀도는 최대한 유지하세요. … 제공한 이미지 자료를 최대한 활용해 스테이지 일러스트와 공통 디자인 요소를 더 풍부하고 완성도 높게"
+- 원본 자료 보존: design-profile/sources/2026-11-19/(읽기 전용 사본+SHA256SUMS), smapsh_assets_v2/는 루트에 그대로. 둘 다 .git/info/exclude로 커밋 제외(.gitignore·스테이징 변경 없음).
+- 자산 AST-027–045 등록(모두 generated_tool·unknown, 탐색 전용). V04 사용: 썸네일 AST-027–034, 과정 장식 AST-035–037, 배너 AST-026 유지. 공통 장식 AST-038–045는 등록·미사용. 상세: design-profile/asset-catalog-2026-11-19.md
+- 썸네일 매핑은 Planning r7 C-27 학습 목표 기준(보드의 서브·로테이션 등 제목은 따르지 않음).
+- 스매시·민트 라켓 이미지는 체크무늬가 그려진 RGB라 분리 품질 낮음 → 참고 전용. 상태 배지 이미지는 글자 고정 → 참고 전용.
+- explore-check 오류 0, 측정 not_run, critique 작성. 검토: design-explore/review/V04/
+
+### V04 사용자 결정 (2026-11-19) — 기록만, 공식 선택·채택 아님
+사용자 원문: "V04 시안에 대한 사용자 결정입니다. - 최종 후보: V04-A - intro-1 썸네일: V03 번호 격자(AST-018) - 배너: ① 현재 셔틀콕 유지"
+- 반영: V04-A intro-1 썸네일 AST-027 → AST-018(V03 번호 격자 SVG). 배너 AST-026 그대로. explore-check 오류 0. 리뷰 PNG(compare390·360·thumbs·full) 재캡처.
+- AST-027은 등록 유지·미사용. 배너 비교안 ②③(review/V04/var-*)은 검토 자료로만 남김.
+- 엔진 선택 기록(explore-choose V04 A)은 시도했으나 `quality_review_required`로 차단(상태 변경 없음): 2차 수정 라운드는 quality.json(측정 스크린샷 근거)이 필요하고, 측정 명령(measure_cmd)이 없어 측정 not_run.
+- 발견한 충돌: CR-012는 2026-11-18 A안(코트 축소 썸네일·신규 일러스트 금지·단색 선 벡터 셔틀콕)으로 결정돼 있으나, V04-A는 래스터 일러스트(AST-028–037)·사진풍 셔틀콕(AST-026)을 씀 → CR-012 재결정(C안 계열) 필요. ④라 UX Spec 영향 없음.
+- CR-011 범위 확대 필요: V04-A는 color.accent.subtle(#DDF8EF)과 color.accent.mint(#8EE3CC) 두 신규 토큰을 씀(② → UX Spec 재개정에 둘 다). 기존 토큰 값 변경 color.action.primary·focus.ring #087F73, color.bg.page #FAFFFD는 ③(테마 값, Preview 재승인).
+- 다음 단계는 사용자 지시 대기(adopt·DD 제출·승인·UX Spec reopen 실행 안 함).
+
+### V04 Primary 결정 (2026-11-19) — 기록만, 공식 채택·UX Spec reopen 아님
+- 사용자 원문: "Primary 색상은 A안 `#0B9E8B`로 결정하겠습니다." / "단, 텍스트와 아이콘의 접근성을 고려하여 `color.focus.ring`이나 텍스트용 진한 청록색은 별도로 유지할 수 있습니다." / CR-012: "CR-012는 신규 일러스트 자산 사용을 허용하는 C안 계열로 변경하는 방향에 동의합니다." / CR-011: "다음 신규 토큰 2개를 UX Spec r4에 반영하는 방향에 동의합니다."
+- 비교: review/V04/primary390·primary360·primary-zoom (현재·A·B·C 단순 교체 + A 최종). 이전 V04-A(#087F73) 보존: review/V04/snapshots/V04-A_primary-087F73/
+- V04-A 적용(같은 라운드 수정, 새 라운드 없음): theme action.primary #0B9E8B, focus.ring #087F73, explore-tokens 재생성. CSS: 13px 강조 글자(머리글·이어서 하기 머리글·선택 탭 글자·알약·통과 배지)는 primary 70%+text.primary 혼합, 선택 탭 아이콘은 밝은 primary, 재생 아이콘 바탕은 흰색(연민트 위 2.99:1 방지). explore-check 오류 0.
+- 07 CR-011·CR-012에 결정 기록 추가(상태·분류 문장은 DD 재개 시 정식 갱신).
+- 배너 셔틀콕 새 원본: 루트에 아직 없음 → AST-026 유지, 대기.
+- (2026-11-19) 배너 셔틀콕 교체: 사용자 원문 "셔틀콕 이미지 이거야"(앞선 지시: 코르크·깃털 잘림 없게, 비율 왜곡 금지, 방향·그라데이션·레이아웃 유지, 390·360 확인). 제공 파일은 투명이 아닌 그려진 체크무늬 RGB → 평평함·체크무늬 색·가장자리 연결·갇힌 체크무늬 판정으로 분리(깃털·코르크·띠 온전). AST-046 등록(self_made·unknown, 탐색 전용), V04-A 배너 AST-026 → AST-046(102px, 비율 유지). AST-026 보존. 교체 전 보존본: review/V04/snapshots/V04-A_primary-0B9E8B_AST-026/. 비교: review/V04/shuttle-banner.png·shuttle390.png. explore-check 오류 0.
+
+### UX Spec r4 재개정 착수·측정 준비 (2026-11-19)
+- 사용자 원문: "`reopen --stage ux_spec` 진행을 승인합니다." / "강조 글자색은 Primary에서 계산하는 방식이 아니라 별도 의미 토큰으로 분리합니다." / "CR-011은 신규 토큰 3개를 UX Spec r4에 반영하는 방향으로 확정합니다." / "CR-012는 C안 계열로 재결정합니다."
+- 사전 검증: ux_spec r3 승인 해시 01–05 일치, 구조 확인 r3, V04 explore-check 통과, 자산 해시 정상. 백업: 엔진 backup(04·05·07) + .ai-workflow/backups-local/(design.json, V04·자산 tgz, Git 제외).
+- reopen 실행(엔진): ux_spec in_progress(준비 revision 4), design_direction locked.
+- UX Spec r4: 01–05 revision 4, 04 1.2에 color.accent.subtle #DDF8EF·color.accent.mint #8EE3CC·color.text.accent #10776C 추가, color.action.primary 용도를 채움·아이콘으로 정리(링크·강조 글자는 text.accent), 역할 분리·대비 유지 규칙 추가, 04·05 개정 이력. 화면·흐름·학습 목표·기능 변경 없음. trace 오류 0(기존 경고 3), done 5건. 제출·승인 안 함.
+- V04-A: 강조 글자 color-mix → var(--color-text-accent), theme.json에 color.text.accent 추가, explore-tokens, check 오류 0(token_needs_cr 경고 해소).
+- 측정: tools/pd-measure/(엔진 템플릿 chrome-cdp 복사), explore-config measure_cmd·emulation·뷰포트 mobile 390×844@2·mobile-sm 360×640@2·desktop 1280×800. explore-verify V03(M20261119-020055-9258a3)·V04(M20261119-020127-3e7ee5) completed, 차단 0, 경고 fixed_overlap 3씩. V04 --asset-fallback(M20261119-020301-4d5c67) 차단 0. quality.json(모델 평가) 작성 → explore-quality 통과. explore-choose·adopt 실행 안 함.
+- 발견: color.action.onPrimary(#FFFFFF) 대 #0B9E8B = 3.35:1 → 주 버튼 글자 4.5:1 미달. 04 규칙에 '4.5:1 유지'를 넣었으므로 DD 테마에서 해결 필요(③).
+- 자산 권리 확인안: design-profile/asset-rights-proposal-2026-11-19.md (확정 안 함).
+
+### UX Spec r4 제출 준비 검증·주 버튼 대비 검토 (2026-11-19) — 제출·승인·DD begin 안 함
+- 사용자 원문(정정): "저는 V04-A의 밝은 민트 Primary `#0B9E8B`와 흰색 버튼 글자 조합을 유지하고 싶습니다. 진한 청록 버튼이나 어두운 글자로 변경하는 A/B안은 선택하지 않겠습니다." / "색상 변경은 아직 승인하지 않았습니다."
+- 주 버튼 검토(review/V04/button-contrast.png): #0B9E8B+흰 16px 700 = 3.35:1 미달(4.5). 큰 글자(굵게 ≥18.66px, 예 font.size.heading 22px 700)면 기준 3:1 충족. 18px 700은 13.5pt라 큰 글자 아님 → 미달. 같은 색조·채도 최소 명도 조정 #098575 = 4.54:1(16px 충족). 결정 대기.
+- 하단 탭 겹침(fixed_overlap 3건): 탭바가 position: sticky라 첫 화면에서만 목록 위에 겹치고, 스크롤 끝(review/V04/scroll-end.png)에서는 마지막 행·준비 중 카드가 모두 탭 위에 보임 → 가려지는 콘텐츠 없음. 시안 수정 불필요. 제품 구현에서 fixed로 바꿀 때만 padding-bottom: calc(탭 높이 + env(safe-area-inset-bottom)) 필요.
+- UX Spec r4 검증: 구조 서명 r3과 동일(제출 시 structure_carried 자동), done 해시 5건 일치, trace 오류 0·기존 경고 3, 01–03은 revision만 변경.
+- 주의: r4 04에 넣은 규칙 'color.action.onPrimary 대 color.action.primary 4.5:1 이상'은 #0B9E8B+흰 16px 유지와 충돌 → 주 버튼 대비 결정 후 r4 문구(필요 시 CMP-001 글자 크기) 조정 뒤 제출해야 함.
+
+### UX Spec r4 제출 (2026-11-19) — 승인 대기
+- 사용자 원문: "주 버튼 대비 문제는 ②번이 아니라 **①번(색상 유지, 큰 글자)**으로 최종 결정합니다." / "문제가 없다면 UX Spec r4를 제출하세요. 승인은 하지 말고 제출 결과를 보고한 뒤 기다리세요."
+- 04: CMP-001 큰 CTA(variant=primary·size=lg) 글자 font.size.heading 22px·bold, 1.3 heading 용도 추가, 1.2 대비 규칙 '일반 4.5:1 이상 또는 큰 글자(굵게 ≥18.66px 또는 ≥24px) 3:1 이상', 별도 검토 대상(size=md 주 버튼·작은 주 버튼·SegmentedControl 선택 상태·primary 로그인 버튼; 미확인=통과 아님) 기록. 04·05 개정 이력 갱신.
+- done(04·05), trace 오류 0·경고 3(기존), 구조 서명 r3과 동일(structure_carried), submit → awaiting_approval r4. 승인·DD begin 안 함.
+
+### UX Spec r4 승인·DD r4 재개 (2026-11-19)
+- 사용자 원문: "UX Spec revision 4를 승인합니다." → approve --revision 4 --note 원문 그대로. ux_spec approved r4.
+- begin design_direction → in_progress(based_on_ux_spec_revision 4). cross_verify 정상.
+- 07 정리: front matter based_on ux_spec 4, r4 재개 기록, 결정표 E/F/G행, CR-011 반영(최종 값 표: 토큰 3개 ②, primary #0B9E8B·focus #087F73·bg.page #FAFFFD ③, 공식 theme.json은 choose→adopt→VD 승인 때 반영), CR-012 반영(C안 계열 재결정 + 자산 사용 정책 6항 + V04-A 자산 권리 상태 표), CR-013 상태 표기 '기각'(B안 유지와 같은 뜻), VD-033–036에 V04-A 정합 메모, 4.1 DD 해결 항목(작은 주 버튼·SegmentedControl 대비 미달, 해결 후보만 기록).
+- DD trace: 오류 15(후보 VD 13 + 후보 VD-024 렌더 범위 2 — 선택·채택·VD 결정 후 해소 예정), 경고 10(토큰 밖 값). done 기록. V04 시안 변경 없음(check 오류 0).
+- 하지 않음: explore-asset confirm, explore-choose, explore-adopt, DD 제출·승인, Preview, 코드·DB, 커밋.
+
+### DD 4.1 결정·V04-A 공식 선택 (2026-11-19)
+- 사용자 원문(4.1): "큰 CTA: 기존 #0B9E8B 배경 + 흰색 22px Bold 유지 / 작은 Primary 버튼: 흰색 배경 + color.text.accent 글자 및 테두리 / SegmentedControl 선택 상태: color.accent.subtle 배경 + color.text.accent 글자 및 체크 아이콘" — 새 토큰 없음. 대비 검증(review/V04/dd41-contrast.png): 작은 버튼 글자 5.42, 테두리 4.84–5.36, 세그먼트 글자·체크 4.84, 선택 면 대 페이지 1.11(체크·굵기 필수), 포커스 링 4.37–4.84. 07 4.1 결정 기록.
+- 권리 확인안 갱신(Lucide ISC 확인안 A / ChatGPT 생성 이력 확정·약관 확인 필요 B / AST-018 보류). confirm 실행 안 함.
+- explore-choose V04 A, note "저는 V04-A를 최종 디자인으로 선택합니다." → EXP-V04-A. 경고: fixed_overlap 3(분석상 가림 없음). 권리 미확인은 선택을 막지 않음(채택·VD 승인 단계에서 공식 후보 자산 여부로 걸림).
+- 후보 VD 결정 계획(실행 안 함):
+  - explore-adopt V04 → 후보 테마 diff(③ primary·focus·bg.page, ② 신규 3토큰)로 후보 VD 생성 + V04-A 정합 메모를 VD-033–036 본문에 반영.
+  - SCR-101 VD-032–036: V04-A로 검증 → 정합 반영 후 사용자 승인 대상(VD-033·034·035의 Primary 글자 → color.text.accent).
+  - VD-024(카드 표현 r4 개정): V04-A의 흰 카드·옅은 그림자 기준으로 개정안 승인 또는 r4 개정 철회(r3 승인 문구 복귀) — 둘 중 하나로 SCR-202·223 렌더 범위 오류 2건 해소.
+  - SCR-102 VD-026–031, SCR-103 VD-037: 시각 탐색 없이 문서 결정만 있음 → (a) 문서대로 승인하고 Preview에서 검증 (b) SCR-102·103 시각 탐색 라운드 후 결정 (c) 이번 r4에서 제외하고 SCR-102·103을 렌더 범위 후속으로. 사용자 결정 필요.
+  - trace 오류 15 = 후보 VD 13 + VD-024 렌더 2 → 위 결정으로 모두 해소 가능.
+
+### 채택 준비 점검·SCR-102·103 탐색 계획 (2026-11-19) — adopt·VD 결정 안 함
+- 사용자 방향: VD-032–036 정합 반영 후 승인 대상, VD-024 r4 개정안(흰 카드·옅은 그림자) 승인 방향, VD-026–031·037은 별도 시각 탐색 후 승인.
+- explore-adopt 조건(pd_visual.cmd_explore_adopt): 현재 선택이 그 라운드, 선택 후 보존 파일 불변, 선택 최신, DD in_progress. 권리 미확인은 adopt를 막지 않음(후보 자산 VD에 '채택 불가' 목록으로 표시). 실제 차단: DD trace의 vd_asset_errors — 07 VD '관련'에 적힌 AST의 권리 미확인 시 오류 → DD 제출 불가.
+- V04-A 사용 자산 16개(AST-001·014·015·016·018·028–037·046) 모두 권리 미확인 → VD에 연결하면 DD 제출 차단 대상.
+- 엔진 제약: 시각 단계 활성 선택 1개. V05 선택 시 V04 선택 superseded, adopt는 현재 선택 라운드만 → V04 adopt를 V05 선택보다 먼저.
+- 계획 문서: design-explore/plans/SCR-102-103-exploration-plan.md(라운드·시안 미생성).
+
+## 2026-11-19 V04 채택 · V05(SCR-102·103) 탐색 착수
+- 사용자 승인: "`explore-adopt --round V04` 실행을 승인합니다." 실행 전 재확인: 선택 EXP-V04-A, 보존 파일 changed 0·missing 0, stale 없음, 측정 passed(M20261119-020127-3e7ee5).
+- explore-adopt V04 결과: 후보 VD-038(색)·039(타이포)·040(간격)·041(컴포넌트 표현)·042(아이콘·일러스트: 채택 불가 AST-001·014–016·018·028–037·046, 권리 미확인)·043(화면 구성), theme_diff changed 2(action.primary #006D68→#0B9E8B, focus.ring #008F89→#087F73)·added 52·same 1, cr_tokens 없음. 파일: design-explore/V04/selection/adoption/. 07·공식 테마 미변경, VD 승인·제외 없음.
+- VD 정리 준비(07 미반영): 엔진 후보 VD-038–043은 기존 07 VD와 겹침 — VD-038·039·041 ↔ 토큰 값(04 r4·DD 4.1), VD-042 ↔ VD-002·019 + 자산 권리, VD-043 ↔ VD-032–036(SCR-101 계층). 07로 옮길 때 기존 VD-032–036(정합 메모 반영)·VD-024(r4 개정안)에 근거 EXP-V04-A를 연결하고, 엔진 후보는 중복이면 '기존 VD로 흡수'로 처리하는 안을 사용자 결정 대상으로 둠.
+- 사용자 방향 변경(같은 날): 코트 #2F7D4F 확정, 민트 코트(B안) 제외, 시안 차이는 셸(카드 구성·정보 위계·간격)만.
+- V05 explore-init(visual, ai, 시안 2, 대상 SCR-102·SCR-103). 새 탐색 라운드(수정 라운드 아님). 테마는 V04-A 값 그대로(provenance 없음).
+- 새 자산(Lucide v1.70.0, source licensed, license ISC, 권리 확인 미기록): AST-047 check, 048 x, 049 waves-horizontal, 050 play, 051 snail, 052 rotate-ccw, 053 arrow-right, 054 list(미사용), 055 loader-circle, 056 circle-alert. 코트는 자산 없이 CSS 도형(기존 좌표를 백분율·컨테이너 단위로 옮김) → model_drawn 자산 추가 없음.
+- 시안: A 떠 있는 시트형 / B 밴드·구획형. 상태 프레임: SCR-102 ST11·ST1(6칸)·ST1(9칸)·ST12·ST7·ST8·ST9·ST10·나가기 확인 창, SCR-103 ST1·ST7·ST2·ST4. ST2·ST4·ST5(SCR-102)와 결과 화면 내 재생은 미렌더(02 행동 표에 없는 버튼 필요).
+- 근거 처리(공개): SCR-102 action-9·10은 확인 창 버튼에 근거 병기(action-10은 브라우저 기본 경고), SCR-103 action-1은 '다시 저장'에 병기. SCR-102 DOM은 정보 순서 검사에 맞춰 본문→아래 영역→상단 바(CSS grid로 상단 배치), info-4 표지는 판정 프레임부터 — 구현 시 DOM 순서 확인 항목.
+- 검사·측정: explore-check 오류 0. explore-verify M20261119-035054-c6ecd6 차단 0(경고: 확인 창 프레임 의도 겹침만), --asset-fallback M20261119-035128-17ba71 차단 0. 중간 수정: B 도구 '다음 상황' 3.35:1 미달 → DD 4.1 작은 주 버튼 규칙 적용, 코트 바닥을 코트 요소에 칠해 선수 이름 대비 오측정(1.01) 해소, A 판정 버튼 겹침 해소.
+- 코트 대비(토큰 계산): VD-026–029 전제(바닥 위)는 모두 충족. 판정 채움 칸 위 미달 4건 — 번호 원 60% 위 번호 2.74–2.84, 셔틀 방향 흰 고리 1.29, 동선 화살표 끝 1.29(그림자 3.09로 보완), '나' 이름 1.34. 보완 후보: 번호 원 80%(3.70–3.77), 고리 바닥색 바깥선(3.75–4.01) 또는 text.primary 점선, 이름 바닥색 85% 받침(3.98–4.06). VD 값은 바꾸지 않음(사용자 결정 대상).
+- 칸 크기(DOM): 아래 영역 168px로 360×640 배율 A 2.61·B 2.47, 9칸 53×58·50×55, 번호 12·11.4px. 인앱 360×560 가정 9칸 42×46·39×43(<44 → 확인 단계 조건).
+- 검토 자료: design-explore/review/V05/index.html(boards/·frames/). 선택·채택·VD 결정·DD 제출·Preview·제품 코드·커밋 없음.
+
+## 2026-11-19 V05 2차 개선 · 코트 표시 방식 검토(승인 단계 아님)
+- 사용자 지시: 조합 검토 SCR-102=A·SCR-103=B, 코트 #2F7D4F 유지, "일반 코트 먼저 → 문제 출제 때만 우리 팀 반코트에 학습용 분할선·번호" 방식 검토, 대비 4건·번호/라인 충돌·코트 크기 개선. V04-A·V05 선택·채택·VD 결정·UX Spec 수정·DD·Preview·코드·커밋 금지.
+- 정합성(읽기 전용 분석): 반코트만 분할·번호 매핑·누름 영역·판정은 UXD-077·AC-111·02 그대로. 재생 중 격자·번호 '숨김'은 04 CMP-046 상태 '재생 중: 번호 흐림'·VD-026(35%)·VD-027(40%)과 다름 → 04 문구 개정(UX Spec CR ①) + VD 값 변경. AC-090 Given·AC-111 Then의 '격자가 보입니다'는 선택 단계 기준으로 해석하면 충돌 없음(엄밀 해석 시 Planning AC 문구 명확화). 입문자(ST11)는 재생이 없어 바로 격자 표시(유지 권장). 아래 영역 판정 전후 가변 높이는 UXD-081(00, UX Planning) 충돌 → 시안은 고정 160px 유지, 가변안은 수치만 보고.
+- 시안 변경(V05 A·B 공통 코트): 상황 재생 프레임 추가(mode=playing, 격자·번호 숨김, [표시 방식 변경 제안] 표기), 격자 등장 240ms 페이드(움직임 줄이기 시 없음), 번호 5.4단위 + 바닥색 100% 원 7단위, 왼쪽 열 번호 x+5.4·첫 줄 y+1.4(칸·누름 좌표 불변), 선수 이름 바닥색 받침, 셔틀 고리 안팎 바닥색 외곽선 0.4, 동선 바닥색 100% 외곽선(drop-shadow, 화살촉 포함), SCR-103 버튼 영역 sticky. A 아래 영역 160px, 판정 이유 영역 안 스크롤. B 결과 점수 48px → font.size.display. SCR-103에 5/5·틀린 상황 0개 프레임 추가(02 '목록 숨김').
+- 대비(토큰 계산): 번호 2.74–2.84 → 5.04, 셔틀 고리 1.29 → 외곽선 3.75–4.01, 동선 1.29/3.09 → 3.75–4.01(바닥 위 흰 선 5.04), '나' 이름 1.34 → 5.04.
+- 크기(DOM): A 390×844 번호 22.1px·9칸 83×91, 360×640 14.5px·54×60, 360×560 11.5px·43×47(확인 단계 조건). B 360×640 13.3px.
+- 측정: explore-check 오류 0, explore-verify M20261119-040329-6e5343 차단 0(경고: 확인 창 의도 겹침), --asset-fallback M20261119-040403-a8a654 차단 0. 프레임별 검사: SCR-102 시트 넘침·버튼 잘림 없음, SCR-103 목록만 스크롤(버튼 고정).
+- 자산 권리 검증(기록 안 함): lucide-react 1.70.0 LICENSE = ISC(Lucide Icons and Contributors) + Feather 파생 아이콘 MIT(Cole Bemis). V05 사용 중 check(AST-047)·x(048)·arrow-right(053)·circle-alert(056, 옛 alert-circle)은 Feather 파생 → ISC + MIT 고지. graduation-cap·swords·circle-user-round·clipboard-list·waves-horizontal·play·snail·rotate-ccw·list·loader-circle은 목록에 없음(ISC).
+- 검토 자료: design-explore/review/V05/index.html(combo·beforeafter·boards·frames), 1차 자료 review/V05/before/.
+
+## 2026-11-19 UX Spec 개정 절차 검토(실행 안 함) · 최종 후보 지정
+- 사용자 결정: 코트 표시 방식 공식 반영(재생 중 격자·번호 숨김, 선택 대기부터 우리 반코트에 표시, ST11은 처음부터), UXD-081 유지(160px), AC-090·111은 '선택 단계에서 보임' 해석을 DD에 명시, UX Planning r5 재오픈 안 함, 최종 후보 = SCR-102 V05-A + SCR-103 V05-B(공식 선택·채택 아님), 코트 #2F7D4F, 2차 시안의 번호 크기·대비·터치 영역 유지.
+- 중단 사유(발견): 승인된 UX Planning r5 문서 00-ux-decisions.md UXD-077(803행)에 "재생 중에는 누름 영역을 끄고 번호를 흐리게 합니다"가 있음 → 04 CMP-046만 '숨김'으로 고치면 UX Planning과 불일치. 또 UXD-077은 번호 위치를 "칸 원점에서 x +2.2, y +4.2"로 정함 → 2차 시안의 왼쪽 열 x+5.4·첫 줄 y+1.4 이동은 Design Direction 수준이 아니라 UXD-077과 다름(앞선 보고의 분류 정정).
+- 엔진 확인: reopen은 하위 단계를 locked로 무효화(invalidate_downstream). 탐색 선택 기준은 승인 UX Spec revision과 02 기반 구조 지문(04 변경은 지문 무관) — 재승인 후 선택은 새 기준으로 해야 stale 아님. 구조 서명은 01 라우트 표·화면 목록 기반이라 04·00 문구 변경으로 바뀌지 않음(structure_carried 예상).
+- AC 해석: 엔진은 DD의 AC 해석 문장을 의미 검사하지 않음(허용·거부 판정 없음). AC-090 전제·AC-111 결과의 '격자가 보입니다'를 선택 단계 기준으로 읽는 것은 문구상 가능.
+- Lucide 라이선스: 엔진에서 라이선스 값 변경은 add(최초)·confirm(--license + 사용자 문장)으로만 가능, 별도 정정 명령 없음 → confirm 단계에서 사용자 문장 필요해 중단. 제안 값: AST-047·048·053·056 "ISC AND MIT"(Lucide ISC + Feather 파생 MIT), AST-001·014–016·049–052·054·055 "ISC".
+- 변경 없음: 문서·상태·시안·자산 레지스트리 모두 그대로(이 기록만 추가).
+
+## 2026-11-19 코트 표시 방식 최종 의도 · UX Planning r6 개정안 준비(실행 안 함)
+- 사용자 의도: 재생 중 분할선 절대 미표시, 기본안 = 분할선·번호 완전 숨김(대체안 = 번호만 희미하게), 선택 단계부터 우리 반코트에 선명 표시, 라인·네트 유지, ST11 예외 유지, 좌표·매핑·판정 불변.
+- 개정안 파일: design-explore/plans/UXD-077-r6-court-display-proposal.md — 00 UXD-077(803행) 문구·r6 메모, 04 CMP-046 상태 2줄·r5 메모, 02 SCR-102 문장 2곳·r5 메모(구조 지문 표 불변), 03 FLOW-006-S2(선택), 01–05 front matter, 07 VD-026·027 후속, AC 해석 메모, 엔진 명령 순서. 번호 위치(UXD-077 x+2.2·y+4.2)는 선택 ①유지/②개정을 사용자 결정으로 남김.
+- 대체안(번호만 희미하게)은 현행 UXD-077 '번호를 흐리게'와 같아 UX Planning·UX Spec 개정 없이 DD만으로 가능.
+- V05 시안은 이미 기본안(완전 숨김)으로 그려져 있음. reopen·approve·선택·채택 실행 없음.
+
+## 2026-11-19 UX Planning r6 제출(approve 대기)
+- 사용자 결정: 완전 숨김 기본안 공식 채택, 번호 위치 ② 문구 개정. 재오픈 사유(사용자 원문): "SCR-102의 상황 재생 중 학습용 격자와 번호를 완전히 숨기고, 문제 선택 단계에서 우리 팀 반코트에만 표시하도록 UXD-077을 개정하며, 번호와 실제 코트 라인의 겹침을 해소하기 위해 번호 표시 위치도 함께 개정합니다."
+- 실행: reopen --stage ux_planning(→ ux_spec·design_direction locked) → backup(Git 복원 가능으로 파일 백업 생략) → 00 수정(revision 6, 문서 r6 개정 메모, UXD-077 번호 위치·그리는 순서·근거) → done → trace(오류 0·경고 0, UXD 67) → submit(awaiting_approval r6). cross_verify 정상.
+- 미실행: approve, UX Spec r5 개정, V05 선택·채택, DD, Preview, 코드, 커밋.
+
+## 2026-11-19 UX Planning r6 승인 · UX Spec r5 작성(제출 차단: 구조 확인 필요)
+- approve ux_planning r6 — 사용자 승인 문장(원문): "UX Planning revision 6의 UXD-077 개정 내용을 확인했으며, 상황 재생 중 격자·번호 완전 숨김과 번호 위치 개선을 승인합니다."
+- begin ux_spec(기준 ux_planning r6) → 01–05 backup(.ai-workflow/backup/design/, 단일 슬롯) → 수정: 01–05 front matter revision 5·ux_planning_revision 6, 각 문서 r5 개정 메모, 04 CMP-046 상태 '멈춤·선택 대기'·'재생 중', 02 SCR-102 상태 전이 아래 문단·그리는 순서·번호 위치, 03 FLOW-006-S2 비고. 표(정보·행동·입력·상태·컴포넌트)·화면 목록·라우트·칸 좌표·누름 영역·매핑·판정 불변.
+- done 01–05, trace structure(오류 0, 경고 1: SCR-005 추적 ID — 기존), trace ux_spec(오류 0, 경고 3: SCR-004·005 — 기존).
+- submit 차단: structure_not_confirmed — UX Planning 재오픈 시 invalidate_downstream이 ux_spec structure_confirmed를 지움 → 이번 revision의 구조 확인(checkpoint --note 사용자 문장) 필요. 사용자 확인 대기.
+- Design Direction 검증 항목(사용자 지시): 15칸(grid-5x3) 배치에서 번호가 코트 라인과 겹치는 문제 — 왼쪽 끝 열은 단식 사이드라인(x 4.6), 3열(x 24.4–36.6)은 센터 라인(x 30.5, y 86.8 아래), 5열(x 48.8–61)은 기본 위치(x +0.8, 원 7단위)일 때 오른쪽 단식 사이드라인(x 56.4)과 약 0.2단위 겹침 가능. DD 재개 뒤 15칸 시험 데이터로 렌더·측정해 위치 값을 정함(AC-116).
+
+## 2026-11-19 UX Spec r5 구조 확인·제출(approve 대기)
+- checkpoint --note(사용자 원문): "UX Spec revision 5의 IA, 화면 목록, 라우트 및 내비게이션 구조가 기존 승인된 revision 4와 동일함을 확인합니다. 이번 개정은 SCR-102의 코트 표시 방식과 번호 표시 위치에 관한 변경이며, 기존 화면 구조를 유지하는 것에 동의합니다." → structure_confirmed r5.
+- submit ux_spec → awaiting_approval r5, trace 오류 0·경고 3(SCR-005 추적 ID 없음, SCR-004·005 연결 US 없음). cross_verify 정상, validity valid.
+- SCR-004·005 경고: 권한 없음·페이지 없음 공통 화면(01 96–97행 '공통 | 인증'). r4 백업 대비 01·02·05에서 SCR-004·005 관련 줄 변경 0건 → 이번 개정과 무관한 기존 경고.
+- 미실행: approve ux_spec, V05 선택·채택, DD, Preview, 코드, 커밋.
+
+## 2026-11-19 UX Spec r5 승인 · DD 재개 · V05 재검증
+- approve ux_spec r5 — 사용자 원문: "UX Spec revision 5의 변경 내용과 구조 확인 결과를 검토했으며, UX Planning revision 6에 따른 코트 표시 방식 및 번호 위치 개정을 승인합니다."
+- begin design_direction(based_on ux_spec r5). 07 backup(단일 슬롯) → 수정: front matter ux_spec_revision 5, 'r4 재개 2' 메모, 1장 입력 기준, VD-026(재생 중 0%·240ms 페이드), VD-027(위치 r6 값·5.4단위·불투명 원 7단위·재생 중 숨김·판정 뒤 100%·15칸 시험 결과), VD-029(아이콘 오른쪽 위·이름 받침), VD-030(고리 외곽선), VD-031(동선 외곽선), 7장 정합 메모(AC-090·111 해석, UXD-081 유지), 9장 코트 검증 항목. VD 상태는 모두 후보 그대로. trace 오류 15(후보 VD 13 + 렌더 범위 2, 변동 없음).
+- V05: explore-check 오류 0, explore-verify M20261119-043548-4043ac·--asset-fallback M20261119-043622-2cba94 차단 0(경고 확인 창 의도 겹침만). 직접 측정: 재생 프레임 격자 0·누름 0, 모든 프레임 네트 위 격자·누름 0, 넘침·잘림 0, SCR-103 목록만 스크롤. 크기 A: 390×844 22.1px·9칸 83×91, 360×640 14.5px·54×60, 360×560 11.5px·43×47(확인 단계 조건).
+- 15칸 시험(review/V05/grid15/): r6 값 그대로면 겹침 8건, 15칸 전용 후보(원 5.0·글자 4.0·x+0.6) 겹침 0, 글자 10.7px(360×640).
+- V05 라운드 기준은 ux_spec r4로 만들어졌지만 구조 지문이 같아 검사 통과. 선택은 지금(r5) 기준으로 기록되므로 stale 아님 예상.
+
+## 2026-11-19 V05 공식 선택(EXP-V05-MIX)
+- 사용자 결정: 360×560 번호 11.5px 조건부 수용(확인 단계 전제, Preview 재검증 항목으로 07 9장 기록), 15칸 번호 값 미확정(참고값으로만 07 VD-027에 보존).
+- 엔진 확인: explore-choose --per-target T=A,T=B로 화면별 조합 지원(_parse_selection). 선택 전 조건으로 V05/quality.json(design-quality-review/v1, 모델 평가, 근거 M20261119-043548-4043ac) 작성 → explore-quality 오류·경고 0.
+- explore-choose --round V05 --per-target SCR-102=A,SCR-103=B --note(사용자 원문): "V05 최종 디자인 후보로 SCR-102는 A안(떠 있는 시트형), SCR-103은 B안(밴드·구획형)을 선택합니다. UX Spec r5와 UX Planning r6에 따른 코트 표시 방식, 개선된 대비 및 고정 높이 원칙을 유지합니다." → EXP-V05-MIX. 증거: 측정 스크린샷 자동 보존(V05/selection/evidence).
+- 상태: visual chosen EXP-V05-MIX, 무결성 changed 0·missing 0, stale 없음. V04 선택 EXP-V04-A는 superseded_by V05(기록 유지), V04 채택 산출물(adoption/) 그대로.
+- 채택 조건(cmd_explore_adopt): 현재 선택 라운드 V05 ✓, 보존 파일 불변 ✓, 최신(stale 없음) ✓, DD in_progress ✓ → 채택 가능. 혼합 선택은 기준 시안 없음 → 테마는 A 기준으로 병합(A·B 테마 값 동일이라 차이 없음).
+- 미실행: V05 채택, VD 결정, 권리 확인, DD 제출·승인, Preview, 코드, 커밋.
+
+## 2026-11-19 V05 채택 · DD 후보 분석(07 미변경)
+- explore-adopt --round V05(사용자 지시) → EXP-V05-MIX, 후보 VD-038–043(V05/selection/adoption/), theme_diff changed 2(primary #006D68→#0B9E8B, focus #008F89→#087F73)·added 52·same 1, cr_tokens 없음. V04 adoption 산출물 보존.
+- 충돌: V04·V05 채택이 같은 ID VD-038–043을 만듦(07 다음 번호 기준) → 07로 옮길 때 재번호 필요. VD-038–041(색·타이포·간격·모서리)은 V04·V05 결정·테마 토큰 완전 동일 → 하나로 병합 가능(근거 EXP-V04-A·EXP-V05-MIX).
+- VD-042(아이콘·일러스트)는 결정 문장에 채택 불가 자산 나열, 관련 필드에는 AST 없음. 기존 07에서 본문에 자산을 언급하는 VD: VD-033(AST-046), VD-036(AST-018·028·035). 관련 필드에 AST를 가진 VD 없음.
+- 추천안(사용자 결정 대기): 병합 VD-038 색(승인), 039 타이포·040 간격·041 모서리(승인, 04 값 확인), 042 아이콘(승인, lucide-react 패키지 — VD-002·019와 같은 방식, AST 관련 미기재), 043 SCR-101 계층(V04-A), 044 SCR-102 셸(V05-A), 045 SCR-103 셸(V05-B), 046 SCR-101 일러스트 자산(ChatGPT·AST-018 — 권리 확인 전 제외 또는 대기). 기존 VD-024·026–037 승인(033·036은 일러스트 문장을 046으로 분리하는 수정 후).
+
+## 2026-11-19 07 VD 정리·승인 반영(VD-046 보류)
+- 사용자 결정(원문 일부): "제안한 병합·재번호 및 신규 VD 구성을 채택합니다", "권리 미확인 자산에 의존하지 않는 VD는 앞서 제안한 승인 방향으로 진행합니다", "VD-046은 아직 승인하거나 제외하지 말고 보류", "Lucide는 … lucide-react 패키지 방식으로 사용".
+- 엔진 확인: VD 승인은 07 '상태' 필드로만 판정(별도 명령·문장 없음) → 상태에 사용자 결정 원문을 함께 기록.
+- 07 변경: VD-024 승인(r4 개정안 + V04-A 흰 카드·옅은 그림자로 개정안 문장 수정), VD-026–031·037 승인, VD-032·034·035 승인(근거 EXP-V04-A), VD-033·036 일러스트 문장을 VD-046으로 분리 후 승인(관련·본문 AST 0), 정합 메모를 '채택 반영·우선'으로 표시. 신규 VD-038–041(V04·V05 엔진 후보 병합·재번호, 승인), VD-042 Lucide 패키지(승인, AST 미기재, ISC+MIT 고지), VD-043 SCR-101 계층(승인), VD-044 SCR-102 셸·VD-045 SCR-103 셸(시안 계산값 측정으로 작성, 후보 — 모서리 토큰 밖 값 결정 대기), VD-046 일러스트(미결정, 권리 대기). 결정표 E·E2행 갱신.
+- 시안 검증 발견: V05-A 모서리 14·20·13px(토큰 밖), V05-B 버튼 radius.md 10 → 화면 간 불일치. V05-B '최고 점수 갱신' 배지 글자가 .r-best span 규칙에 덮여 text.secondary로 표시 → VD-045에서 text.accent로 바로잡음(보존 파일 미변경).
+- trace design_direction: 오류 3(VD-044·045 후보, VD-046 미결정), 경고 12(토큰 밖 값 기록 11 + 렌더 범위 밖 화면 19개 — 기존). check 정상.
+- 권리 조사: Anthropic Commercial Terms(2025-06-17 시행, WebFetch로 확인): 고객이 Output 소유, Anthropic이 권리 양도(약관 준수·법이 허용하는 범위), 소비자용(Claude.ai)은 별도 Consumer Terms. OpenAI 약관 페이지는 WebFetch 403으로 원문 확인 실패.
+
+## 2026-11-19 VD-044·045 모서리 토큰화·승인, 공식 테마 갱신
+- 사용자 결정: 버튼 radius.md, 시트·대화상자 radius.sheet, 알약은 기존 공통 pill, SCR-103 배지 글자 color.text.accent. 확인: 04 radius 토큰은 radius.sm 6·radius.md 10·radius.sheet 16뿐, pill 토큰 없음 → 새 토큰 만들지 않고 VD-034(승인)의 '완전히 둥근 알약' 모서리 표현을 참조. SCR-102·103 승인 컴포넌트에 CMP-005가 없어 '관련'에 넣지 않음(모서리 표현만 같음).
+- VD-044·045 수정 후 승인 기록(상태에 사용자 결정 원문). VD-045 안내 상자 12px → radius.md. 시트 그림자는 토큰 밖 값(elevation.sheet 대체 여부 Preview 확인).
+- 공식 테마 docs/design-profile/theme.json(엔진 백업 대상 아님 not_design_path, Git 추적·변경 없음 상태에서 수정): 0.2.0-draft, tokens 55개 = 채택 후보 테마(VD-038–041 승인 값), primitives 비움. 바뀐 값 primary #006D68→#0B9E8B, focus #008F89→#087F73. 04 기본값과 다른 테마 값: primary·focus·bg.page(#FAFFFD, CR-011)·font.family(VD-001) — 모두 승인 결정 근거 있음. 04 밖 토큰 0.
+- 검사: trace DD 오류 1(VD-046 미결정), 경고 12(토큰 밖 값 기록 11, 렌더 범위 밖 화면 19 — 기존). check 정상. adoption_theme_errors 0. theme-check 오류 6 = design-preview/src/tokens.css(Preview 산출물)가 새 테마와 다름 — Preview 단계 검사(pd_theme preview trace)에만 쓰이고 DD 제출은 막지 않음. Preview 단계에서 재생성 필요.
+- VD-046 자산별 정리: design-profile/asset-rights-proposal-2026-11-19.md '갱신 3'. Anthropic Commercial Terms 원문 확인, OpenAI 약관 원문은 403으로 재확인 실패.
+
+## 2026-11-19 VD-046 권리 확인·승인, DD trace 0
+- 사용자 사실 확인으로 AST-028–037·046 explore-asset confirm(license "OpenAI Terms of Use — Output 권리 조항(사용자 소유·OpenAI 권리 양도)", note=사용자 원문). OpenAI 약관 원문은 이번 세션 재열람 실패(403, 아카이브 조회는 권한 분류기 거부 — 우회 안 함).
+- AST-046 레지스트리 source self_made→generated_tool 정정(엔진 명령 없음, source_corrections 기록, confirm 전, 파일 불변). 백업: scratchpad assets_before_fix.json.
+- AST-018: V04-A intro-1 썸네일 전용(V05에는 없음), 장식이라 기능상 필수 아님 → VD-046 의존성에서 제외, intro-1은 연민트 면. 권리 확인 시 VD-046 개정.
+- VD-046 승인(확인 자산만 '관련'), 결정표 E·E2·G 갱신. trace DD 오류 0·경고 12, VD 35/35 승인, explore-asset check 오류 0, check 정상.
+- 미실행: 07 done, DD submit·approve, Preview, 코드, 커밋.
+
+## 2026-11-19 DD r4 제출(승인 대기)
+- AST-018 미사용 확정(사용자). intro-1 대체 후보: 권리 확인된 생성 자산(AST-028–037·046)은 모두 다른 자리에 사용 중 → 대체 없음, 연민트 면 유지(새 이미지 생성 안 함). 참고: AST-027(intro-1 '코트와 번호 익히기', smapsh_assets_v2/stages/12-course-strategy)이 있으나 권리 미확인(사용자 확인 문장 범위 AST-028–037·046 밖) → 사용 안 함.
+- 07 done → trace 오류 0·경고 12 → check 정상 → explore-asset check 오류 0 → explore-status 선택 EXP-V05-MIX 무결·최신 → submit design_direction r4 → awaiting_approval.
+- 제출 후 발견: 07 6장 렌더 범위 표의 SCR-101·102·103 '적용 VD' 열에 이번 승인 VD(VD-024·026–046)가 반영되지 않았고 표 아래 메모도 '후보는 승인 뒤 넣음'으로 남음. trace는 이를 검사하지 않음(누락이어도 오류 아님). 승인 전에 고치려면 reopen --stage design_direction(changes_requested) → 수정 → done → submit 필요. 사용자 결정 대기.
+
+## 2026-11-19 DD r5 수정·재제출(승인 대기)
+- reopen design_direction(사용자 원문 사유: "승인된 VD가 07 렌더 범위 표에 반영되지 않았고, 이번 Preview에서 핵심 탭 화면을 함께 검증하기 위해 렌더 범위를 보완합니다.") → preparing r5, 하위 무효화 없음. 07 backup.
+- AST-027 explore-asset confirm(사용자 원문 note, license 'OpenAI Terms of Use — Output 권리 조항(사용자 소유·OpenAI 권리 양도)'), official_ok. 시각 일관성 확인(review/V05/thumbs-intro1-AST027.png): 색·그림체 같은 계열, 내용은 셔틀 경로(번호 미표시). VD-046에 AST-027 연결, AST-018 미사용.
+- 07 r5: front matter revision 5, 렌더 범위 SCR-101·102·103 적용 VD 갱신(승인 VD), SCR-103 ST2·ST4 추가, SCR-102 상황 재생 렌더 메모, SCR-111(ST1·3·4)·112(ST1·3·7·8)·121(ST1·3·7)·122(ST1·4) 추가(02 정의 상태만), 오래된 후보 메모 교체, 머리 메모·결정표 E2.
+- 명세에 없는 것(설계 안 함, 보고): 회원용 청백전 일정·참여 신청(참가자는 운영진이 SCR-223에서 지정), 마이페이지 별도 활동 내역(전적 요약 + '청백전 기록 보기' → SCR-111). 카드 표현이 탭마다 다름(튜토리얼 옅은 그림자 / 청백전·마이페이지 그림자 없음, VD-024).
+- done → trace 오류 0(경고: 토큰 밖 값 기록 11, 렌더 범위 밖 15개) · check 정상 · asset check 0 · 선택 무결 → submit design_direction r5.
+
+## 2026-11-19 DD r5 승인 · Preview r3 제작·검증(사용자 승인 전)
+- approve design_direction r5 — 사용자 원문: "Design Direction r5를 최종 승인합니다. 승인된 VD 35개, V04-A 및 V05 혼합 선택, 갱신된 14개 화면의 렌더 범위와 공식 테마를 기준으로 Preview r3를 진행하세요." 승인 해시: 07·theme.json 일치 확인, approved_vds 35, 자산 스냅샷 12(AST-027–037·046).
+- begin preview(based_on ux_spec r5). design-preview 변경: tokens.css를 theme-check --print-css로 재생성, app.css에 accent·court 별칭, DD 4.1 대비 반영(ActionButton primary 22px, Segmented·ChoiceGrid·필터 칩·SCR-223 결과 버튼 선택 = 보조 면 + 강조 글자, 탭 현재 글자 color.text.accent), 공식 자산 12개 public/assets 복사, tutorial.css·TutorialCourt·StateBlock 신규, SCR-101·102·103·111·112·121·122 신규, registry·manifest(ux_spec 5, DD 5, 14화면 38상태, VD는 07 6장과 동일).
+- SCR-102 보기 항목 'SCR-102-PLAY'(상황 재생)·'SCR-102-ST1-G9'(9칸)은 registry에만(manifest는 02 상태 ID).
+- preview-verify pass(오류 0, 14화면·38상태). 측정 98건(튜토리얼·청백전·마이페이지 390×844·360×640·360×560, 운영 7화면 390): 가로 스크롤·버튼 글자 잘림·44px 미만·콘솔 오류 0. SCR-102 재생 격자 0·누름 0, 선택 대기부터 내 편만(네트 위 0), 번호 22.2/14.6/11.6px, 9칸 84×92/55×60/43×48(360×560 확인 단계 조건), 시트 160px 넘침 0. SCR-103 버튼 고정 3폭 모두 보임. 카드 그림자: 튜토리얼 있음, 청백전·마이페이지·운영 없음(VD-024 r4/r3 차이).
+- 검토 자료: design-explore/review/preview-r3/(index.html, shots, measure.json, 모음 이미지). 06 문서·submit·approve 미실행.
+
+## 2026-11-19 Preview r3 튜토리얼 흐름 모드(사용자 피드백 반영)
+- 사용자 피드백: 튜토리얼 먼저 완성, 청백전·마이페이지 디자인은 마음에 들지 않음(추후 재검토) — 이번 작업에서 튜토리얼 외 화면 수정 안 함.
+- 추가(design-preview, 프리뷰 전용 상호작용, API·DB 없음): mock/tutorialFlow.ts(스테이지 8개 × 상황 5개 예시, 판정 규칙 02 그대로, 메모리 진행 기록), SCR-102 흐름 모드 'SCR-102-FLOW-<스테이지>'(재생 1.1초·코트 누르면 건너뜀 → 선택 → 이동 → 판정 → 다시 도전·올바른 움직임 보기·느리게 보기·다음 상황, 나가기 확인 창, UXD-078 실제 칸 크기 < 44px이면 확인 단계, 움직임 줄이기 존중, 파트너 자동 이동), SCR-103 흐름 모드 'SCR-103-FLOW'(저장 중 0.9초 → 통과·미통과, 다음 스테이지·다시 하기·목록, 틀린 상황 누르면 화면 안 정답 움직임 재생), SCR-101 ST1이 흐름 진행 기록 반영(이어서 하기·행 상태·전체 진행률), 행·이어서 하기 → 흐름 모드.
+- 점검(브라우저 자동 클릭, 27단계): 목록 → 왕초급 2단계 → 재생(격자 0·누름 0) → 선택(격자 내 편만, 네트 위 0) → 정답 +1 → 오답 → 올바른 움직임 보기 → 느리게 → 다시 도전(재도전·0점 표시) → 허용 → 5상황 → 결과(저장 중 → 미통과 3/5) → 틀린 상황 재생 → 목록(최고 3/5·미완료, 전체 3/8). 360×560 초급 9칸 확인 단계(3번 강조 → 2번 변경 → '이 칸으로 이동'), 입문자 첫 상황(재생 없음·안내 한 줄), 나가기 확인 창 → 목록. 콘솔 오류 0. 시트 160px 유지.
+- 수정: 판정 문구 조사(은/는), 파트너 이동(판정과 무관하게 자동 이동). preview-verify pass(14·38), 정적 상태 98건 재측정 문제 0.
+- 자료: design-explore/review/preview-r3/flow/(단계 캡처, flow-log.json), sheet-flow.png.
+
+## 2026-11-19 SCR-102 UI 디자인 핸드오프 문서(ChatGPT 전달용)
+- 사용자 요청: SCR-101은 유지, SCR-102 모바일 UI를 ChatGPT에서 다시 탐색하기 위한 독립 문서. 승인 문서·Preview·로직 수정 없음.
+- 산출: design-handoff/SCR-102/SCR-102-UI-DESIGN-HANDOFF.md(10장 구성, [승인]/[구현]/[차이]/[미확인] 표기), screenshots/ 15장(Preview r3 캡처: SCR-101 첫 화면·전체, 재생, 6칸·9칸, ST7·ST8·ST9·ST10, 재도전, 360×560 ST12·ST9·ST11, 나가기 창, 360×640).
+- 문서에 적은 승인·구현 차이: 입문자 질문 위치(UXD-080 '상단' vs 02·구현 아래 영역), ST8·ST9 장면 연출 없음, 재생 애니메이션 간이, ST2·4·5 미렌더, 뒤로 가기·새로고침 경고 미동작, 입문자 판정 제목.
+- 외부(ChatGPT) 전달 전 사용자 확인 필요: 기밀·개인정보 포함 여부(가상 데이터만 사용).
+
+## 2026-11-19 SCR-102 경기장 이미지판 구현(game-images·game-storyboard)
+- 입력: game-images/(경기장.png 1086×1448 원근 경기장·네트 포함, 나·우리편 여자(파란 옷 뒷모습), 상대편 남자·여자(흰 옷 앞모습) 1312×1199 투명, 셔틀콕 1536×1024 투명). game-storyboard/(storyboard.png 8화면 흐름, screens 9장, README '승인 UX Spec과 일치하는 명세 아님'). 원본 미변경.
+- 원근 검증(구현 전): 흰 라인 픽셀로 세로 5선 직선 맞춤(잔차 ≤2.1px, 소실점 x≈542 일치), 가로선 395·427·839·1145·1217. 대응점 16개 최소제곱 호모그래피 평균 4.5·최대 13px(가까운 숏 서비스 라인이 약 1.5단위 뒤에 그려짐). 네트 y=67 → 이미지 703(그물 아래 띠 693). 중대한 불일치 없음으로 판단, 진행. 이미지 자체의 규격 차이: 센터 라인이 네트까지 이어짐, 먼 숏 서비스 라인 없음, 네트 기둥 바닥 약 74단위.
+- 구현(design-preview): public/game/(webp 최적화 사본·meta.json, 발 기준점), courtProjection.ts(H 행렬·project·unitScale), StadiumCourt.tsx(경기장 이미지 → 원근 SVG 격자·강조·판정·방향·동선 → 그림자 → 선수 4명·셔틀 독립 레이어 → 번호 → 다각형 누름 영역), SCR-102.tsx 셸 재구성(흐린 경기장 상단 + 헤더 56·진행 5단계·상황 카드 + 경기장판 + 시트 160), 흐름 로직·판정·점수 그대로. 이미지 맞춤은 비율 유지(0.75), 바닥을 시트에 붙이고 focus(300–1250px) 보장. 셔틀 rAF 포물선(재생 1.1s, 착지 0.6s), 선수 left/top 전환(0.6s, 느리게 1.2s), 움직임 줄이기 즉시. 첫 줄 번호 원이 네트 위로 넘치지 않게 보정.
+- 검증: 세 크기 21 상태 측정(비율 유지, 코트 전체 보임, 네트 위 번호 0, 선수 상자 안, 시트 160, 스크롤 0), 흐름 27단계 통과(재생 중 격자 0, 네트 위 격자·누름 0, 360×560 확인 단계), 전체 98건 회귀 문제 0, preview-verify pass, 콘솔 오류 0. 칸 최소(행1) 390 50px·360×640 47px·360×560 40/36px(6칸·9칸 모두 확인 단계로 전환 — 이전 2D 코트에서는 6칸 단일 터치였음).
+- 승인 문서와 차이(보고): 새 이미지 에셋은 미등록·권리 미확인·VD 없음(DD 개정 필요), 코트 표현이 VD-026–031·VD-044 2D 초록 코트와 다름, 스토리보드의 파란 버튼·타일형 칸·재생 중 궤적/착지 표시(UXD-079 위반 소지)는 따르지 않음, 시트 160 유지(스토리보드는 더 큼), 재생 중 시트 '상황 재생 중' 안내(02 정의 외 문구).
+
+### 2026-11-19 SCR-102 Preview UI 개선 — 반전 캐릭터·선택 영역 바닥 면·번호 원 제거 (Preview r3 진행 중, 미제출)
+- 반전본: design-preview/public/game/player-{me,partner,opp-male,opp-female}-flipped.png(원본 1312×1199 RGBA 그대로 좌우 반전, 알파 대칭 확인) + 렌더용 {me,partner,oppM,oppF}-flipped.webp(높이 420, 발 기준점 재측정). game-images 원본 수정 없음. meta.json에 변형·방향·해시 기록.
+- 원본 방향(육안): 나·우리편 여자·상대편 남자 = 오른쪽, 상대편 여자 = 왼쪽. 규칙: 코트 x<30.5(화면 왼쪽) → 오른쪽 보기, 그 외 왼쪽. 가운데 ±2.5단위는 직전 방향 유지, 방향은 목표 위치로 이동 시작 때 한 번 결정.
+- 선택 영역: 선택 대기에서만 내 반 코트 칸마다 원근 다각형(민트 24% 면·75% 테두리), 선택 칸 민트 50% 면 + 흰 테두리 7, 번호 불투명 1. "이 영역으로 이동" 안내(bg.page·text.accent·caption 13px)는 번호와 겹치지 않고 코트 상자 안에서 선수와 덜 겹치는 위치 탐색. 이동 시작 시 면·안내 페이드아웃. 선택 대기 중 말풍선 숨김. selectWait/select 마크 대신 선택 면 사용(ST12 정적 상태 selected=3).
+- 번호(사용자 추가 요청): 원·배경 제거, 칸 실제 중심(센터 라인과 겹치는 9칸 가운데 열 5·8만 라인 옆으로 1.4단위 비킴), 흰색 60%, 4단위 원근 크기 + 세로 0.82 눌림, 얇은 코트색 외곽선(35%). 선택 대기는 선수 위 층, 결과·재생은 바닥 층.
+- 검증: tsc·build 통과. 3크기 50측정(원 0, 번호 9/9 칸 안, 네트 위 면 0, 재생 중 면·번호 0, 방향 오류 0, 안내-번호 겹침 0·상자 밖 0, 콘솔 오류 0). 번호 글자 390 19.7–24px, 360×640 18.1–22.1px, 360×560 14.2–18.8px. 흐름 테스트 통과(점수·재도전·허용·결과·목록 복귀·ST12 변경/확정·ST11·나가기). 전체 회귀 98건 문제 0, preview-verify pass.
+- 남은 차이: 360×560 9칸 3번 선택 시 안내가 '나'와 약 438px² 겹침(번호 회피·상자 안 조건에서 최소). 반전본도 미등록 자산(DD 개정 필요 사항 그대로).
+- 2026-11-19 추가 수정(번호 위치만): 센터 라인 회피 오프셋(5·8번 +1.4단위)과 라인 회피 함수 제거. 모든 번호 = 칸 정중앙 코트 좌표 → project(). 9칸 2·5·8번 코트 x=30.5(센터 라인과 같은 축). 3크기 측정: 투영 위치와 렌더 위치 차 0px, 2·5·8 ↔ 센터 라인 투영 0.00px. 흐름 27단계 통과, 선택 영역 측정 50건 문제 0, preview-verify pass. 자료: design-explore/review/preview-r3-game/num-align/.
+
+### 2026-11-19 Design Direction r6 — 경기장 디자인 반영·자산 등록·제출
+- reopen(사용자 원문 사유) → 자산 등록 AST-057–062(game-images 원본), AST-063–066(반전본), 권리 confirm(사용자 선택 문장, license own). 다른 라이선스 근거(약관 조항)는 사용자 문장에 없어 기록하지 않음.
+- VD-047(경기장·원근 변환)·VD-048(선수·셔틀 레이어·반전) 신규, VD-026–030·044 개정, 4.2 경기장 바닥 기준 대비 재계산(번호·격자·바닥 면·판정 채움 미달 — 사용자 결정 필요), 렌더 범위 SCR-102·103에 VD-047·048.
+- done·trace(오류 0)·check 통과 → submit(awaiting_approval r6, VD 37/37 승인 상태). Preview는 reopen으로 무효화 — DD 승인 후 SCR-103 다시 보기 코트를 경기장 컴포넌트로 바꾸고 preview-verify 후 제출 예정.
+- 제품 준비: docs/workflow-proposals/tutorial-mvp-implementation-plan.md(PRD ASM-034 편차 D-T1·D-T2, 서버 판정 방식, 작업 단위 7개).

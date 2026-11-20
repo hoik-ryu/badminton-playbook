@@ -83,3 +83,41 @@ export const clubMatch = {
 }
 
 export const mock = { roster, opsHome, session, attendance, clubMatch } as const
+
+// ---- (r3) 청백전 회원 화면 SCR-111·112, 마이페이지 SCR-121·122(가상 인물·가상 값) ----
+// 회원 화면에는 1–10 점수·팀 점수 합·실력차를 넣지 않음(AC-066·068, NFR-005)
+export type MemberGame = { no: number; blue: string[]; white: string[]; result?: 'blue' | 'white'; mine?: boolean; myTeam?: 'blue' | 'white'; changed?: boolean }
+export const memberClubMatches = {
+  list: [
+    { id: 'm1', date: '11/08', name: '가을 청백전', type: '팀전', status: '진행 중', summary: '청 3 : 백 2 · 미기록 4' },
+    { id: 'm2', date: '10/25', name: '시월 개인전', type: '개인전', status: '종료', summary: '1위 박다온' },
+    { id: 'm3', date: '10/11', name: '추석 맞이 청백전', type: '팀전', status: '종료', summary: '백팀 승리 (청 4 : 백 5)' },
+  ],
+  detail: {
+    name: '가을 청백전',
+    date: '11/08',
+    type: '팀전',
+    wins: { blue: 3, white: 2 },
+    unrecorded: 4,
+    me: '김가람',
+    modifiedAt: '14:05',
+    resultModifiedAt: '15:20',
+    games: [
+      { no: 1, blue: ['김가람', '권초록'], white: ['박다온', '오아라'], result: 'blue', mine: true, myTeam: 'blue' },
+      { no: 2, blue: ['한바다', '이나래'], white: ['정마루', '최라온'], result: 'white' },
+      { no: 3, blue: ['김가람', '신자람'], white: ['윤새벽', '오아라'], mine: true, myTeam: 'blue', changed: true },
+      { no: 4, blue: ['권초록', '한바다'], white: ['박다온', '최라온'] },
+      { no: 5, blue: ['이나래', '김가람'], white: ['정마루', '윤새벽'], mine: true, myTeam: 'blue' },
+    ] as MemberGame[],
+    final: { blue: 6, white: 4 },
+  },
+}
+
+export const me = {
+  name: '김가람',
+  gender: '남' as const,
+  grade: 'C조',
+  rank: { grade: 'A', winRate: 58 },
+  record: { games: 24, wins: 14, losses: 10, winRate: 58 },
+  noRank: { games: 7, toRank: 3, wins: 4, losses: 3, winRate: 57 },
+}

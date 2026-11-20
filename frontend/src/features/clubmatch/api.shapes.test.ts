@@ -53,7 +53,7 @@ const memberStanding = spec<MemberStanding>({ key: true, name: true, guest: true
 const publicMatch = spec<PublicClubMatch>({ id: true, name: true, date: true, method: true, status: true, modifiedAt: true, resultModifiedAt: true, games: list(memberGame), standings: list(memberStanding), team: teamWins, unrecorded: true, participating: true })
 const publicItem = spec<PublicClubMatchItem>({ id: true, name: true, date: true, method: true, status: true, team: teamWins, games: true, participants: true, unrecorded: true, resultText: true })
 const myRecord = spec<MyRecord>({ rank: true, gamesToRank: true, games: true, wins: true, losses: true, rate: true })
-const memberStatus = spec<MemberStatus>({ referrer: true, rank: true, gamesToRank: true, record: { games: true, wins: true, losses: true }, tutorial: { beginner: true, novice: true, total: true }, recommended: true })
+const memberStatus = spec<MemberStatus>({ referrer: true, rank: true, gamesToRank: true, record: { games: true, wins: true, losses: true }, tutorial: list({ course: true, name: true, passed: true, total: true }), recommended: true })
 
 /** 골든과 같은 형식(키 정렬)으로 */
 function norm(s: Spec): unknown {

@@ -7,7 +7,7 @@ import { Switch } from '../ui/switch'
 function FilterChip({ label, pressed, onChange }: { label: string; pressed: boolean; onChange: (v: boolean) => void }) {
   return (
     <Toggle data-cmp="CMP-004" pressed={pressed} onPressedChange={onChange} className="group relative h-8 min-w-0 rounded-none bg-transparent p-0 before:absolute before:inset-x-0 before:-inset-y-1.5 before:content-[''] hover:bg-transparent data-[state=on]:bg-transparent">
-      <span className="flex h-8 items-center gap-1 rounded-md border border-line-strong bg-page px-3.5 text-body font-normal text-ink group-data-[state=on]:border-action group-data-[state=on]:bg-action group-data-[state=on]:text-on-action">
+      <span className="flex h-8 items-center gap-1 rounded-md border border-line-strong bg-page px-3.5 text-body font-normal text-ink group-data-[state=on]:border-ink-accent group-data-[state=on]:bg-mint-subtle group-data-[state=on]:font-bold group-data-[state=on]:text-ink-accent">
         {pressed && <Check aria-hidden className="size-4" />}
         {label}
       </span>

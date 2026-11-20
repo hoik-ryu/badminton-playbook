@@ -1,0 +1,178 @@
+{
+ "format": "design-quality-review/v1",
+ "round": "V04",
+ "reviewer": "model",
+ "note": "모델 평가(visually_reviewed: model). 근거는 explore-verify 측정 스크린샷(M20261119-020127-3e7ee5). 사람 평가·사용자 선택을 대신하지 않음.",
+ "variants": {
+  "A": {
+   "criteria": {
+    "hierarchy": {
+     "rating": "strong",
+     "observations": "제목 → 민트 배너(소개·전체 진행률) → 흰 이어서 하기 카드 → 과정 머리 → 스테이지 행 순서가 390·360 모두에서 크기·굵기 차이로 분명히 읽힌다. 상태 배지가 제목 옆에 붙어 행이 두 줄로 유지된다.",
+     "evidence": [
+      "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-mobile.png",
+      "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-mobile-sm.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "과정 진행 배지(2/2)와 시간 알약(약 2분)이 같은 연민트 알약 모양이라 위계가 비슷해 보인다",
+       "where": "SCR-101",
+       "fix": "과정 진행 배지는 조금 더 크거나 굵게(현재 26px 높이 유지) 두고 시간 알약은 글자 굵기를 한 단계 낮춘다"
+      }
+     ]
+    },
+    "density_balance": {
+     "rating": "adequate",
+     "observations": "390×844 첫 화면에 배너·이어서 하기·과정 2개 머리와 스테이지 행 5개가 보이고 360×640에서는 행 2개와 다음 과정 머리가 보여 V03-A와 같은 밀도다. 겹침 경고는 없다.",
+     "evidence": [
+      "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-mobile.png",
+      "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-mobile-sm.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "360×640 첫 화면에서 다음 과정 머리(왕초급 과정)가 하단 탭에 반쯤 가려 잘린 채 보인다",
+       "where": "SCR-101",
+       "fix": "콘텐츠 아래 여백을 하단 탭 높이만큼 확보하거나 과정 사이 간격을 2–4px 줄여 머리가 온전히 보이거나 완전히 아래로 내려가게 한다"
+      }
+     ]
+    },
+    "typography": {
+     "rating": "strong",
+     "observations": "작은 글자는 모두 13px 이상이고 강조 글자는 color.text.accent(#10776C)로 흰 바탕 5.42:1, 연민트 4.84:1이다. 측정에서 contrast_low 경고가 없다. 제목 21px 800, 행 제목 14.5px 800으로 단계가 분명하다.",
+     "evidence": [
+      "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-mobile.png",
+      "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-mobile-sm.png",
+      "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-desktop.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "배너 설명 문구가 360px에서 오른쪽 끝까지 붙어 셔틀콕 아래 여백이 좁아 보인다",
+       "where": "SCR-101",
+       "fix": "배너 설명 최대 너비를 배너 폭의 85% 정도로 두거나 셔틀콕을 2–4px 위로 옮긴다"
+      }
+     ]
+    },
+    "component_consistency": {
+     "rating": "strong",
+     "observations": "스테이지 행 8개가 같은 높이·모서리·그림자·배지 규칙을 쓰고, 과정 머리 3개도 같은 구조다. 측정에서 component_inconsistent가 없고 흰 카드 그림자 규칙이 이어서 하기 카드와 행 카드에 일관된다.",
+     "evidence": [
+      "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-mobile.png",
+      "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-desktop.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "intro-1 썸네일(AST-018 SVG)만 그림체가 다른 7개(래스터 일러스트)와 다르다",
+       "where": "SCR-101",
+       "fix": "사용자 결정으로 유지하되, 공식 자산화 때 같은 그림체의 번호 격자 일러스트를 별도로 만들지 검토한다"
+      }
+     ]
+    },
+    "iconography": {
+     "rating": "adequate",
+     "observations": "썸네일이 코트·인물·방패·라켓·셔틀콕·화살표로 나뉘어 학습 목표가 그림으로 구분되고, 과정 장식(새싹·왕관·메달)과 배너 셔틀콕(AST-046)이 입체 질감으로 원본 레퍼런스에 가깝다. 탭 아이콘은 Lucide 선 아이콘이다.",
+     "evidence": [
+      "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-mobile.png",
+      "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-mobile-sm.png"
+     ],
+     "issues": [
+      {
+       "severity": "major",
+       "what": "새 일러스트 자산(AST-028–037·046)의 권리가 아직 확인되지 않아 공식 채택할 수 없다",
+       "where": "SCR-101",
+       "fix": "자산별로 사용자 권리 확인 문장과 라이선스를 explore-asset confirm으로 기록한다"
+      },
+      {
+       "severity": "minor",
+       "what": "입체 래스터 장식과 선형 Lucide 탭 아이콘의 스타일 차이가 있다",
+       "where": "SCR-101",
+       "fix": "탭 아이콘은 VD-002 원칙대로 유지하고, 장식 일러스트는 탭·버튼에 쓰지 않는다는 규칙을 07에 명시한다"
+      }
+     ]
+    },
+    "reference_alignment": {
+     "rating": "strong",
+     "observations": "REF-001 왼쪽 화면의 밝은 민트 배너·흰 진행률 카드·오른쪽 위 입체 셔틀콕·과정 장식 아이콘·흰 행 카드와 입체 썸네일·하단 탭 구성을 따르면서, 원본 이미지 자체는 쓰지 않았다.",
+     "evidence": [
+      "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-mobile.png",
+      "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-mobile-sm.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "원본에 없는 이어서 하기 카드와 상태 배지 때문에 첫 화면의 스테이지 행 수가 원본보다 1개 적다",
+       "where": "SCR-101",
+       "fix": "승인된 구조(SCR-101 info-3)라 유지하고, 필요하면 이어서 하기 카드 세로 여백을 2–4px 줄인다"
+      }
+     ]
+    },
+    "mobile_balance": {
+     "rating": "adequate",
+     "observations": "390·360 모두 가로 넘침 없이 같은 배치를 유지하고 셔틀콕이 설명 문구와 겹치지 않는다. 측정에서 하단 고정 탭이 과정 목록 위에 겹친다는 fixed_overlap 경고가 뷰포트마다 1건 있다(스크롤 목록 위 고정 탭 구조).",
+     "evidence": [
+      "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-mobile.png",
+      "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-mobile-sm.png",
+      "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-desktop.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "하단 고정 탭이 목록 마지막 부분을 가릴 수 있다(fixed_overlap)",
+       "where": "SCR-101",
+       "fix": "콘텐츠 영역에 하단 탭 높이(64px)+안전 영역만큼 아래 여백을 두어 마지막 행이 탭 위로 스크롤되게 한다"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "goals": {
+  "G1": {
+   "status": "addressed",
+   "before": [
+    "shots/M20261119-020055-9258a3/shots/A-SCR-101-mobile.png",
+    "shots/M20261119-020055-9258a3/shots/A-SCR-101-mobile-sm.png"
+   ],
+   "after": [
+    "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-mobile.png",
+    "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-mobile-sm.png"
+   ],
+   "note": "V03-A의 배치·카드·간격·13px 이상 글자·반응형을 그대로 두고 자산과 Primary 색 값만 바꿨다(측정 스크린샷 비교에서 레이아웃 동일)."
+  },
+  "G2": {
+   "status": "addressed",
+   "before": [
+    "shots/M20261119-020055-9258a3/shots/A-SCR-101-mobile.png"
+   ],
+   "after": [
+    "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-mobile.png"
+   ],
+   "note": "썸네일 7종을 smapsh_assets_v2 그림(AST-028–034)으로 바꾸고 Planning r7 학습 목표에 맞춰 짝지었다. intro-1은 사용자 결정으로 V03 번호 격자 AST-018 유지."
+  },
+  "G3": {
+   "status": "addressed",
+   "before": [
+    "shots/M20261119-020055-9258a3/shots/A-SCR-101-mobile.png"
+   ],
+   "after": [
+    "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-mobile.png"
+   ],
+   "note": "과정 장식을 학습 UI 보드에서 추출한 새싹·왕관·메달(AST-035–037)로 교체. 상태·점수 배지는 이미지가 아닌 CSS 배지 그대로."
+  },
+  "G4": {
+   "status": "addressed",
+   "before": [
+    "shots/M20261119-020055-9258a3/shots/A-SCR-101-mobile.png",
+    "shots/M20261119-020055-9258a3/shots/A-SCR-101-mobile-sm.png"
+   ],
+   "after": [
+    "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-mobile.png",
+    "shots/M20261119-020127-3e7ee5/shots/A-SCR-101-mobile-sm.png"
+   ],
+   "note": "배너 비교(유지·라켓 추가·궤적선) 후 사용자 결정으로 셔틀콕 유지안 → 이후 사용자 새 원본으로 AST-046 교체(잘림 없음, 비율 유지, 문구와 겹침 없음)."
+  }
+ }
+}

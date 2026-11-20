@@ -3,9 +3,11 @@
   --breakpoint-base: 0–767px;
   --breakpoint-desktop: ≥1024px;
   --breakpoint-tablet: 768–1023px;
+  --color-accent-mint: #8EE3CC;
+  --color-accent-subtle: #DDF8EF;
   --color-action-onPrimary: #FFFFFF;
-  --color-action-primary: #006D68;
-  --color-bg-page: #FFFFFF;
+  --color-action-primary: #0B9E8B;
+  --color-bg-page: #FAFFFD;
   --color-bg-surface: #F4F5F7;
   --color-border-default: #D5D9E0;
   --color-border-strong: #6B7280;
@@ -15,7 +17,7 @@
   --color-court-me: #1D5BD0;
   --color-court-opponent: #F2C14E;
   --color-court-surface: #2F7D4F;
-  --color-focus-ring: #008F89;
+  --color-focus-ring: #087F73;
   --color-status-danger-bg: #FDE7E5;
   --color-status-danger-fg: #B3261E;
   --color-status-info-bg: #E3ECFC;
@@ -27,6 +29,7 @@
   --color-team-blue-fg: #1747A6;
   --color-team-white-bg: #FFFFFF;
   --color-team-white-fg: #1A1D23;
+  --color-text-accent: #10776C;
   --color-text-disabled: #6B7280;
   --color-text-primary: #1A1D23;
   --color-text-secondary: #545A65;

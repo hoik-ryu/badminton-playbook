@@ -1,13 +1,22 @@
 {
-  "comment": "튜토리얼 스테이지 레지스트리(D4): 서버는 스테이지 id·난이도·상황 수만 압니다. 시나리오 본문은 frontend/src/features/tutorial/content/stages.ts. 프런트 테스트(registry.test.ts)가 두 곳이 일치하는지 확인합니다.",
+  "comment": "튜토리얼 스테이지 레지스트리(PRD r7 ASM-033·034, C-28). 과정(id·이름·순서·코트 분할·출시 여부·입문자 안내형 여부·목록 설명·장식 자산 ID)과 현재 스테이지(id·과정·순번·상황 수). 개편 전 스테이지 id(beginner-*·novice-*)는 넣지 않습니다 — 그 기록은 DB에 남지만 진행률·현황에서 빠지고 저장은 404(AC-118·119). 콘텐츠가 바뀌면 버전을 올린 새 id를 씁니다. 시나리오 본문은 content/<stage_id>.json.",
   "passNumerator": 7,
   "passDenominator": 10,
+  "courses": [
+    { "id": "intro", "name": "입문자", "order": 1, "grid": "grid-2x3", "released": true, "guided": true, "description": "처음 시작하는 분을 위한 코트와 번호", "icon": "AST-035" },
+    { "id": "starter", "name": "왕초급", "order": 2, "grid": "grid-2x3", "released": true, "guided": false, "description": "기본 수비 대형과 위치 판단", "icon": "AST-036" },
+    { "id": "basic", "name": "초급", "order": 3, "grid": "grid-3x3", "released": true, "guided": false, "description": "공격·수비 전환과 복귀 위치", "icon": "AST-037" },
+    { "id": "mid", "name": "중급", "order": 4, "grid": "grid-5x3", "released": false, "guided": false, "description": null, "icon": null },
+    { "id": "high", "name": "고급", "order": 5, "grid": "grid-5x3", "released": false, "guided": false, "description": null, "icon": null }
+  ],
   "stages": [
-    { "id": "beginner-1", "level": "beginner", "situations": 5 },
-    { "id": "beginner-2", "level": "beginner", "situations": 5 },
-    { "id": "beginner-3", "level": "beginner", "situations": 5 },
-    { "id": "novice-1", "level": "novice", "situations": 5 },
-    { "id": "novice-2", "level": "novice", "situations": 5 },
-    { "id": "novice-3", "level": "novice", "situations": 5 }
+    { "id": "intro-1-v1", "course": "intro", "no": 1, "situations": 5 },
+    { "id": "intro-2-v1", "course": "intro", "no": 2, "situations": 5 },
+    { "id": "starter-1-v1", "course": "starter", "no": 1, "situations": 5 },
+    { "id": "starter-2-v1", "course": "starter", "no": 2, "situations": 5 },
+    { "id": "starter-3-v1", "course": "starter", "no": 3, "situations": 5 },
+    { "id": "basic-1-v1", "course": "basic", "no": 1, "situations": 5 },
+    { "id": "basic-2-v1", "course": "basic", "no": 2, "situations": 5 },
+    { "id": "basic-3-v1", "course": "basic", "no": 3, "situations": 5 }
   ]
 }

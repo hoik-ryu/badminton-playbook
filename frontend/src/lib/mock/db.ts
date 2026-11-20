@@ -16,8 +16,8 @@ export type MockUser = {
   appliedAt: string
   /** 1–10 실력 점수(운영진만, 미설정 null) */
   score: number | null
-  /** 튜토리얼 통과 현황(난이도별 통과 스테이지 수 / 3) */
-  tutorial: { beginner: number; novice: number }
+  /** 튜토리얼 통과 현황 씨앗(새 과정별 앞에서부터 통과한 스테이지 수, PRD r7 ASM-033) */
+  tutorial: { intro: number; starter: number; basic: number }
   /** 서버가 판정하는 '튜토리얼 미통과'(정의는 명세 미확정 — docs/workflow-proposals/frontend-implementation-deviations.md) */
   tutorialUnpassed: boolean
   /** 랭크(S/A/B/C) 또는 없음 + 랭크까지 남은 경기 수 */
@@ -130,6 +130,10 @@ export type MockDb = {
   tutorialProgress?: Record<string, Record<string, MockStageProgress>>
   /** 개발·테스트: 다음 튜토리얼 진행 불러오기 / 저장을 실패로 */
   failNextTutorialLoad?: boolean
+  /** 튜토리얼 서버 판정 회차(Mock, mock/server.ts). 첫 판정 문자열만 — 고른 칸은 저장하지 않음(NFR-006) */
+  tutorialRuns?: Record<string, { stageId: string; userId: string; verdicts: string[]; expiresAt: number; completed: boolean }>
+  /** 다음 튜토리얼 과정 목록 조회 한 번 실패(SCR-101 콘텐츠 오류 시험) */
+  failNextTutorialCoursesLoad?: boolean
   failNextTutorialSave?: boolean
 }
 
@@ -150,7 +154,7 @@ const u = (id: string, name: string, gender: Gender, grade: Grade, role: Role, s
   status,
   appliedAt,
   score: null,
-  tutorial: { beginner: 0, novice: 0 },
+  tutorial: { intro: 0, starter: 0, basic: 0 },
   tutorialUnpassed: false,
   rank: null,
   gamesToRank: 10,
@@ -161,20 +165,20 @@ const rec = (games: number, wins: number) => ({ record: { games, wins, losses: g
 
 // 개발용 역할 전환 대상(devPersona)과 가입 승인 목록·명단 비교용 샘플
 export const SEED_USERS: MockUser[] = [
-  u('u-member', '김가람', '남', 'C조', 'member', 'approved', day(1), '박다온', { score: 7, tutorial: { beginner: 3, novice: 1 }, rank: 'B', gamesToRank: null, ...rec(24, 14) }),
-  u('u-admin', '박다온', '남', 'A조', 'admin', 'approved', day(1), null, { score: 9, tutorial: { beginner: 3, novice: 3 }, rank: 'A', gamesToRank: null, ...rec(31, 20) }),
-  u('u-super', '정마루', '남', '자강조', 'superAdmin', 'approved', day(1), null, { score: 10, tutorial: { beginner: 3, novice: 3 }, rank: 'S', gamesToRank: null, ...rec(40, 30) }),
+  u('u-member', '김가람', '남', 'C조', 'member', 'approved', day(1), '박다온', { score: 7, tutorial: { intro: 2, starter: 2, basic: 1 }, rank: 'B', gamesToRank: null, ...rec(24, 14) }),
+  u('u-admin', '박다온', '남', 'A조', 'admin', 'approved', day(1), null, { score: 9, tutorial: { intro: 2, starter: 2, basic: 3 }, rank: 'A', gamesToRank: null, ...rec(31, 20) }),
+  u('u-super', '정마루', '남', '자강조', 'superAdmin', 'approved', day(1), null, { score: 10, tutorial: { intro: 2, starter: 2, basic: 3 }, rank: 'S', gamesToRank: null, ...rec(40, 30) }),
   u('u-pending', '신규가입', '여', '입문자', 'member', 'pending', day(9)),
   u('u-rejected', '거절계정', '남', 'D조', 'member', 'rejected', day(5)),
   u('u-inactive', '비활성', '여', 'B조', 'member', 'inactive', day(2), null, { score: 6 }),
   // 명단(승인된 회원, design-preview SCR-211 샘플과 같은 가상 인물) — 가입 승인 중복 이름 경고 비교 대상
-  u('m-1', '권초록', '여', 'B조', 'member', 'approved', day(1), null, { score: 6, tutorial: { beginner: 2, novice: 0 }, rank: 'C', gamesToRank: null, ...rec(12, 5) }),
+  u('m-1', '권초록', '여', 'B조', 'member', 'approved', day(1), null, { score: 6, tutorial: { intro: 2, starter: 1, basic: 0 }, rank: 'C', gamesToRank: null, ...rec(12, 5) }),
   u('m-2', '오아라', '여', 'D조', 'member', 'approved', day(1), null, { score: 5, rank: null, gamesToRank: 4, ...rec(6, 3) }),
-  u('m-3', '한바다', '남', 'B조', 'member', 'approved', day(1), null, { score: 8, tutorial: { beginner: 3, novice: 2 }, rank: 'A', gamesToRank: null, ...rec(28, 17) }),
+  u('m-3', '한바다', '남', 'B조', 'member', 'approved', day(1), null, { score: 8, tutorial: { intro: 2, starter: 2, basic: 2 }, rank: 'A', gamesToRank: null, ...rec(28, 17) }),
   u('m-4', '서이든', '남', '입문자', 'member', 'approved', day(2), '김가람', { score: null, tutorialUnpassed: true }),
-  u('m-5', '신자람', '여', '왕초심', 'member', 'approved', day(2), null, { score: 2, tutorial: { beginner: 1, novice: 0 }, tutorialUnpassed: true, gamesToRank: 7, ...rec(3, 1) }),
-  u('m-6', '윤새벽', '남', '초심', 'member', 'approved', day(3), null, { score: 3, tutorial: { beginner: 3, novice: 0 }, gamesToRank: 6, ...rec(4, 2) }),
-  u('m-7', '이나래', '여', 'C조', 'member', 'approved', day(3), null, { score: null, tutorial: { beginner: 1, novice: 0 }, tutorialUnpassed: true }),
+  u('m-5', '신자람', '여', '왕초심', 'member', 'approved', day(2), null, { score: 2, tutorial: { intro: 1, starter: 0, basic: 0 }, tutorialUnpassed: true, gamesToRank: 7, ...rec(3, 1) }),
+  u('m-6', '윤새벽', '남', '초심', 'member', 'approved', day(3), null, { score: 3, tutorial: { intro: 2, starter: 2, basic: 0 }, gamesToRank: 6, ...rec(4, 2) }),
+  u('m-7', '이나래', '여', 'C조', 'member', 'approved', day(3), null, { score: null, tutorial: { intro: 1, starter: 0, basic: 0 }, tutorialUnpassed: true }),
   u('m-8', '정마음', '여', 'A조', 'member', 'approved', day(4), null, { score: 9, rank: 'S', gamesToRank: null, ...rec(35, 26) }),
   u('m-9', '최라온', '여', '초심', 'member', 'approved', day(4), null, { score: null, tutorialUnpassed: true }),
   u('m-10', '김민결', '남', '자강조', 'member', 'approved', day(5), null, { score: 10, rank: 'S', gamesToRank: null, ...rec(38, 29), kakaoId: null }), // 운영진 직접 추가 회원(카카오 없음)
@@ -247,7 +251,7 @@ export function newMockMember(input: Pick<MockUser, 'kakaoId' | 'name' | 'gender
     id: `u-${Date.now().toString(36)}${Math.random().toString(36).slice(2, 5)}`,
     role: 'member',
     appliedAt: new Date().toISOString(),
-    tutorial: { beginner: 0, novice: 0 },
+    tutorial: { intro: 0, starter: 0, basic: 0 },
     tutorialUnpassed: false,
     rank: null,
     gamesToRank: 10,

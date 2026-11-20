@@ -26,6 +26,16 @@
   --color-danger-fg: var(--color-status-danger-fg);
   --color-success-fg: var(--color-status-success-fg);
   --color-success-bg: var(--color-status-success-bg);
+  --color-danger-bg: var(--color-status-danger-bg);
+  /* (r3, UX Spec r4 CR-011) 강조 글자·보조 면·장식 면 */
+  --color-ink-accent: var(--color-text-accent);
+  --color-mint-subtle: var(--color-accent-subtle);
+  --color-mint: var(--color-accent-mint);
+  /* 튜토리얼 코트(CMP-046) */
+  --color-court: var(--color-court-surface);
+  --color-court-line: var(--color-court-line);
+  --color-court-me: var(--color-court-me);
+  --color-court-opp: var(--color-court-opponent);
   /* shadcn/ui 부품이 쓰는 이름(token-mapping.md 3장 별칭) */
   --color-background: var(--color-bg-page);
   --color-foreground: var(--color-text-primary);
@@ -47,6 +57,7 @@
   --shadow-card: var(--elevation-card);
   --shadow-sheet: var(--elevation-sheet); /* VD-025 */
   --text-display: var(--font-size-display);
+  --radius-sheet: var(--radius-sheet);
 }
 
 @layer base {

@@ -1,0 +1,1912 @@
+{
+  "format": "design-explore/v1",
+  "experimental": true,
+  "renderer": {
+    "kind": "html",
+    "adapter": null
+  },
+  "guidance": [
+    {
+      "name": "engine-procedure",
+      "version": "exploration.md(18bf645)",
+      "used_for": [
+        "plan",
+        "contrast",
+        "critique"
+      ]
+    }
+  ],
+  "rounds": {
+    "V01": {
+      "phase": "visual",
+      "mode": "reference",
+      "intent": "INT-001",
+      "kind": "explore",
+      "parent": null,
+      "base": null,
+      "coverage": null,
+      "basis": {
+        "planning_revision": "7",
+        "screen_types": "default",
+        "screen_types_hash": null,
+        "ux_spec_revision": 3,
+        "fingerprints": {
+          "SCR-101": "cbd937631a69b7fa5bd36ffd659ed2a351c02107c40b08468cd823a09af0e864",
+          "SCR-102": "58164cc5563d9c5f067ca35e569bf482dff71398c07e3d76c2767adcd27ff0d2"
+        }
+      },
+      "targets": [
+        {
+          "id": "SCR-101",
+          "label": "튜토리얼 홈",
+          "anchor": [
+            "SCR-101"
+          ],
+          "type": "guidance",
+          "states": [
+            "SCR-101-ST1"
+          ],
+          "basis": [
+            "사용자 지정"
+          ],
+          "fingerprint": "cbd937631a69b7fa5bd36ffd659ed2a351c02107c40b08468cd823a09af0e864",
+          "source_label": "튜토리얼 홈"
+        },
+        {
+          "id": "SCR-102",
+          "label": "스테이지 플레이",
+          "anchor": [
+            "SCR-102"
+          ],
+          "type": "browse",
+          "states": [
+            "SCR-102-ST1"
+          ],
+          "basis": [
+            "사용자 지정"
+          ],
+          "fingerprint": "58164cc5563d9c5f067ca35e569bf482dff71398c07e3d76c2767adcd27ff0d2",
+          "source_label": "스테이지 플레이"
+        }
+      ],
+      "variants": {
+        "A": {
+          "title": "REF-001 충실안",
+          "concept": "연민트 소개 배너 안의 전체 진행률, 카드 밖 과정 머리 + 개별 스테이지 행 카드, 넉넉한 여백으로 참고 이미지 분위기를 그대로 옮김",
+          "distinct_axes": [
+            "density",
+            "hierarchy",
+            "component"
+          ],
+          "plan": "V01/A/plan.md",
+          "render": {
+            "html": "V01/A/index.html"
+          },
+          "elements": [
+            {
+              "id": "s101-intro",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-1"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-overall",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-2",
+                "CMP-049"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-continue-info",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-3"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-continue",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-1",
+                "CMP-050"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-courses",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-4",
+                "CMP-048"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-stages",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-5",
+                "CMP-047"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-stage-row",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-2",
+                "CMP-047"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-soon",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-6",
+                "CMP-048"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-soon-card",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-3",
+                "CMP-048"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-retry",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-4",
+                "CMP-023"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-court",
+              "target": "SCR-102",
+              "kind": "info",
+              "refs": [
+                "SCR-102:info-1",
+                "CMP-046"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s102-question",
+              "target": "SCR-102",
+              "kind": "info",
+              "refs": [
+                "SCR-102:info-2"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s102-cell-single",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-1",
+                "CMP-046"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-exit",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-8",
+                "CMP-026"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-cell-confirm",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-2",
+                "CMP-046"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-move",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-3",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-result",
+              "target": "SCR-102",
+              "kind": "info",
+              "refs": [
+                "SCR-102:info-3"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s102-best",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-6",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-retry",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-5",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-next",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-4",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-replay",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-7",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-progress",
+              "target": "SCR-102",
+              "kind": "info",
+              "refs": [
+                "SCR-102:info-4"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s102-sys-back",
+              "target": "SCR-102",
+              "kind": "navigation",
+              "refs": [
+                "SCR-102:action-9"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-sys-reload",
+              "target": "SCR-102",
+              "kind": "navigation",
+              "refs": [
+                "SCR-102:action-10"
+              ],
+              "region": "main"
+            }
+          ],
+          "theme_candidate": "V01/A/theme.json",
+          "emphasis": [],
+          "mode": "reference",
+          "axis_sources": {
+            "palette": "REF-001",
+            "typography": "REF-001",
+            "layout": "REF-001",
+            "components": "REF-001",
+            "emphasis_mood": "REF-001",
+            "navigation": "REF-001",
+            "spacing_density": "ai"
+          },
+          "rules": [
+            "RX-001-01",
+            "RX-001-02",
+            "RX-001-03",
+            "RX-001-06",
+            "RX-001-09",
+            "RX-001-10",
+            "RX-001-11",
+            "RX-001-13",
+            "RX-001-14",
+            "RX-001-15",
+            "RX-001-18",
+            "RX-001-19"
+          ],
+          "reinterpretation": "이미지의 문구·스테이지 개수(과정당 3개)·맞춤 추천·도움 아이콘·3D 셔틀콕 대신 승인 구조(8스테이지, 이어서 하기, 준비 중)와 미니 코트 썸네일·단순 벡터 셔틀콕(CSS)을 씀. 큰 제목·간격 수치(RX-001-08·17)는 참고 수준이라 04 토큰 값으로 대체. 연민트는 임시 토큰."
+        },
+        "B": {
+          "title": "밀도·강조 조정안",
+          "concept": "같은 디자인 언어에서 과정을 카드 하나로 묶고 행을 평평하게 해 밀도를 높이고, 이어서 하기 한 곳만 진한 Teal로 강하게 강조",
+          "distinct_axes": [
+            "density",
+            "hierarchy",
+            "component",
+            "typography"
+          ],
+          "plan": "V01/B/plan.md",
+          "render": {
+            "html": "V01/B/index.html"
+          },
+          "elements": [
+            {
+              "id": "s101-intro",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-1"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-overall",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-2",
+                "CMP-049"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-continue-info",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-3"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-continue",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-1",
+                "CMP-050"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-courses",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-4",
+                "CMP-048"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-stages",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-5",
+                "CMP-047"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-stage-row",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-2",
+                "CMP-047"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-soon",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-6",
+                "CMP-048"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-soon-card",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-3",
+                "CMP-048"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-retry",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-4",
+                "CMP-023"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-court",
+              "target": "SCR-102",
+              "kind": "info",
+              "refs": [
+                "SCR-102:info-1",
+                "CMP-046"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s102-question",
+              "target": "SCR-102",
+              "kind": "info",
+              "refs": [
+                "SCR-102:info-2"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s102-cell-single",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-1",
+                "CMP-046"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-exit",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-8",
+                "CMP-026"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-cell-confirm",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-2",
+                "CMP-046"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-move",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-3",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-result",
+              "target": "SCR-102",
+              "kind": "info",
+              "refs": [
+                "SCR-102:info-3"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s102-best",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-6",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-retry",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-5",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-next",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-4",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-replay",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-7",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-progress",
+              "target": "SCR-102",
+              "kind": "info",
+              "refs": [
+                "SCR-102:info-4"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s102-sys-back",
+              "target": "SCR-102",
+              "kind": "navigation",
+              "refs": [
+                "SCR-102:action-9"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-sys-reload",
+              "target": "SCR-102",
+              "kind": "navigation",
+              "refs": [
+                "SCR-102:action-10"
+              ],
+              "region": "main"
+            }
+          ],
+          "theme_candidate": "V01/B/theme.json",
+          "emphasis": [],
+          "mode": "reference",
+          "axis_sources": {
+            "palette": "REF-001",
+            "typography": "REF-001",
+            "layout": "REF-001",
+            "components": "REF-001",
+            "emphasis_mood": "REF-001",
+            "navigation": "REF-001",
+            "spacing_density": "ai"
+          },
+          "rules": [
+            "RX-001-01",
+            "RX-001-02",
+            "RX-001-03",
+            "RX-001-06",
+            "RX-001-09",
+            "RX-001-10",
+            "RX-001-11",
+            "RX-001-13",
+            "RX-001-14",
+            "RX-001-15",
+            "RX-001-18",
+            "RX-001-19"
+          ],
+          "reinterpretation": "A와 같은 재해석에 더해, 이미지의 개별 행 카드 대신 과정 카드 안의 평평한 행(VD-024 r4 개정안), 배너 그라데이션 대신 연민트 단색, 강조를 이어서 하기 한 곳으로 모음."
+        }
+      }
+    },
+    "V02": {
+      "phase": "visual",
+      "mode": "reference",
+      "intent": "INT-001",
+      "kind": "explore",
+      "parent": null,
+      "base": null,
+      "coverage": null,
+      "basis": {
+        "planning_revision": "7",
+        "screen_types": "default",
+        "screen_types_hash": null,
+        "ux_spec_revision": 3,
+        "fingerprints": {
+          "SCR-101": "cbd937631a69b7fa5bd36ffd659ed2a351c02107c40b08468cd823a09af0e864"
+        }
+      },
+      "targets": [
+        {
+          "id": "SCR-101",
+          "label": "튜토리얼 홈",
+          "anchor": [
+            "SCR-101"
+          ],
+          "type": "guidance",
+          "states": [
+            "SCR-101-ST1"
+          ],
+          "basis": [
+            "사용자 지정"
+          ],
+          "fingerprint": "cbd937631a69b7fa5bd36ffd659ed2a351c02107c40b08468cd823a09af0e864",
+          "source_label": "튜토리얼 홈"
+        }
+      ],
+      "variants": {
+        "A": {
+          "title": "원본 충실 재현안",
+          "concept": "REF-001 왼쪽 목록 화면의 배너·카드·일러스트·글자 위계·여백을 최대한 그대로 재현(승인 구조 유지)",
+          "distinct_axes": [
+            "density",
+            "component"
+          ],
+          "plan": "V02/A/plan.md",
+          "render": {
+            "html": "V02/A/index.html"
+          },
+          "elements": [
+            {
+              "id": "s101-intro",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-1"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-overall",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-2",
+                "CMP-049"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-continue-info",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-3"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-continue",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-1",
+                "CMP-050"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-courses",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-4",
+                "CMP-048"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-stages",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-5",
+                "CMP-047"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-stage-row",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-2",
+                "CMP-047"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-soon",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-6",
+                "CMP-048"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-soon-card",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-3",
+                "CMP-048"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-retry",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-4",
+                "CMP-023"
+              ],
+              "region": "main"
+            }
+          ],
+          "theme_candidate": "V02/A/theme.json",
+          "emphasis": [],
+          "mode": "reference",
+          "axis_sources": {
+            "palette": "REF-001",
+            "typography": "REF-001",
+            "layout": "REF-001",
+            "components": "REF-001",
+            "emphasis_mood": "REF-001",
+            "navigation": "REF-001",
+            "spacing_density": "REF-001"
+          },
+          "rules": [
+            "RX-001-01",
+            "RX-001-02",
+            "RX-001-03",
+            "RX-001-06",
+            "RX-001-09",
+            "RX-001-10",
+            "RX-001-11",
+            "RX-001-13",
+            "RX-001-14",
+            "RX-001-15",
+            "RX-001-18",
+            "RX-001-19"
+          ],
+          "reinterpretation": "원본 문구·과정당 3스테이지·맞춤 추천·도움 아이콘 대신 승인 구조(8스테이지, 이어서 하기, 준비 중). 3D 셔틀콕·썸네일 원본 그림 대신 새로 그린 SVG 자산(AST-002–013). 행에 학습 목표·상태 줄을 더해 원본보다 행이 조금 높음. 연민트는 임시 토큰."
+        },
+        "B": {
+          "title": "충실형 · 큰 일러스트",
+          "concept": "A와 같은 충실 재현에서 스테이지 행과 미니 코트 일러스트를 키워 일러스트 완성도를 강조",
+          "distinct_axes": [
+            "density",
+            "component"
+          ],
+          "plan": "V02/B/plan.md",
+          "render": {
+            "html": "V02/B/index.html"
+          },
+          "elements": [
+            {
+              "id": "s101-intro",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-1"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-overall",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-2",
+                "CMP-049"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-continue-info",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-3"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-continue",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-1",
+                "CMP-050"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-courses",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-4",
+                "CMP-048"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-stages",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-5",
+                "CMP-047"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-stage-row",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-2",
+                "CMP-047"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-soon",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-6",
+                "CMP-048"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-soon-card",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-3",
+                "CMP-048"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-retry",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-4",
+                "CMP-023"
+              ],
+              "region": "main"
+            }
+          ],
+          "theme_candidate": "V02/B/theme.json",
+          "emphasis": [],
+          "mode": "reference",
+          "axis_sources": {
+            "palette": "REF-001",
+            "typography": "REF-001",
+            "layout": "REF-001",
+            "components": "REF-001",
+            "emphasis_mood": "REF-001",
+            "navigation": "REF-001",
+            "spacing_density": "REF-001"
+          },
+          "rules": [
+            "RX-001-01",
+            "RX-001-02",
+            "RX-001-03",
+            "RX-001-06",
+            "RX-001-09",
+            "RX-001-10",
+            "RX-001-11",
+            "RX-001-13",
+            "RX-001-14",
+            "RX-001-15",
+            "RX-001-18",
+            "RX-001-19"
+          ],
+          "reinterpretation": "A와 같음. 행 높이와 썸네일만 키움."
+        }
+      }
+    },
+    "V03": {
+      "phase": "visual",
+      "mode": "reference",
+      "intent": "INT-001",
+      "kind": "revision",
+      "parent": "V02",
+      "base": "V02-A",
+      "coverage": null,
+      "basis": {
+        "planning_revision": "7",
+        "screen_types": "default",
+        "screen_types_hash": null,
+        "ux_spec_revision": 3,
+        "fingerprints": {
+          "SCR-101": "cbd937631a69b7fa5bd36ffd659ed2a351c02107c40b08468cd823a09af0e864"
+        }
+      },
+      "targets": [
+        {
+          "id": "SCR-101",
+          "label": "튜토리얼 홈",
+          "anchor": [
+            "SCR-101"
+          ],
+          "type": "guidance",
+          "states": [
+            "SCR-101-ST1"
+          ],
+          "basis": [
+            "사용자 지정"
+          ],
+          "fingerprint": "cbd937631a69b7fa5bd36ffd659ed2a351c02107c40b08468cd823a09af0e864",
+          "source_label": "튜토리얼 홈"
+        }
+      ],
+      "variants": {
+        "A": {
+          "title": "원본 충실 재현안",
+          "concept": "REF-001 왼쪽 목록 화면의 배너·카드·일러스트·글자 위계·여백을 최대한 그대로 재현(승인 구조 유지)",
+          "distinct_axes": [
+            "density",
+            "component"
+          ],
+          "plan": "V03/A/plan.md",
+          "render": {
+            "html": "V03/A/index.html"
+          },
+          "elements": [
+            {
+              "id": "s101-intro",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-1"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-overall",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-2",
+                "CMP-049"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-continue-info",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-3"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-continue",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-1",
+                "CMP-050"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-courses",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-4",
+                "CMP-048"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-stages",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-5",
+                "CMP-047"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-stage-row",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-2",
+                "CMP-047"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-soon",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-6",
+                "CMP-048"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-soon-card",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-3",
+                "CMP-048"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-retry",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-4",
+                "CMP-023"
+              ],
+              "region": "main"
+            }
+          ],
+          "theme_candidate": "V03/A/theme.json",
+          "emphasis": [],
+          "mode": "reference",
+          "axis_sources": {
+            "palette": "REF-001",
+            "typography": "REF-001",
+            "layout": "REF-001",
+            "components": "REF-001",
+            "emphasis_mood": "REF-001",
+            "navigation": "REF-001",
+            "spacing_density": "REF-001"
+          },
+          "rules": [
+            "RX-001-01",
+            "RX-001-02",
+            "RX-001-03",
+            "RX-001-06",
+            "RX-001-09",
+            "RX-001-10",
+            "RX-001-11",
+            "RX-001-13",
+            "RX-001-14",
+            "RX-001-15",
+            "RX-001-18",
+            "RX-001-19"
+          ],
+          "reinterpretation": "원본 문구·과정당 3스테이지·맞춤 추천·도움 아이콘 대신 승인 구조(8스테이지, 이어서 하기, 준비 중). 3D 셔틀콕·썸네일 원본 그림 대신 새로 그린 SVG 자산(AST-002–013). 행에 학습 목표·상태 줄을 더해 원본보다 행이 조금 높음. 연민트는 임시 토큰.",
+          "revised_from": "V02-A"
+        }
+      }
+    },
+    "V04": {
+      "phase": "visual",
+      "mode": "reference",
+      "intent": "INT-001",
+      "kind": "revision",
+      "parent": "V03",
+      "base": "V03-A",
+      "coverage": null,
+      "basis": {
+        "planning_revision": "7",
+        "screen_types": "default",
+        "screen_types_hash": null,
+        "ux_spec_revision": 3,
+        "fingerprints": {
+          "SCR-101": "cbd937631a69b7fa5bd36ffd659ed2a351c02107c40b08468cd823a09af0e864"
+        }
+      },
+      "targets": [
+        {
+          "id": "SCR-101",
+          "label": "튜토리얼 홈",
+          "anchor": [
+            "SCR-101"
+          ],
+          "type": "guidance",
+          "states": [
+            "SCR-101-ST1"
+          ],
+          "basis": [
+            "사용자 지정"
+          ],
+          "fingerprint": "cbd937631a69b7fa5bd36ffd659ed2a351c02107c40b08468cd823a09af0e864",
+          "source_label": "튜토리얼 홈"
+        }
+      ],
+      "variants": {
+        "A": {
+          "title": "원본 충실 재현안",
+          "concept": "REF-001 왼쪽 목록 화면의 배너·카드·일러스트·글자 위계·여백을 최대한 그대로 재현(승인 구조 유지)",
+          "distinct_axes": [
+            "density",
+            "component"
+          ],
+          "plan": "V04/A/plan.md",
+          "render": {
+            "html": "V04/A/index.html"
+          },
+          "elements": [
+            {
+              "id": "s101-intro",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-1"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-overall",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-2",
+                "CMP-049"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-continue-info",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-3"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-continue",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-1",
+                "CMP-050"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-courses",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-4",
+                "CMP-048"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-stages",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-5",
+                "CMP-047"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s101-stage-row",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-2",
+                "CMP-047"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-soon",
+              "target": "SCR-101",
+              "kind": "info",
+              "refs": [
+                "SCR-101:info-6",
+                "CMP-048"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-soon-card",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-3",
+                "CMP-048"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s101-retry",
+              "target": "SCR-101",
+              "kind": "action",
+              "refs": [
+                "SCR-101:action-4",
+                "CMP-023"
+              ],
+              "region": "main"
+            }
+          ],
+          "theme_candidate": "V04/A/theme.json",
+          "emphasis": [],
+          "mode": "reference",
+          "axis_sources": {
+            "palette": "REF-001",
+            "typography": "REF-001",
+            "layout": "REF-001",
+            "components": "REF-001",
+            "emphasis_mood": "REF-001",
+            "navigation": "REF-001",
+            "spacing_density": "REF-001"
+          },
+          "rules": [
+            "RX-001-01",
+            "RX-001-02",
+            "RX-001-03",
+            "RX-001-06",
+            "RX-001-09",
+            "RX-001-10",
+            "RX-001-11",
+            "RX-001-13",
+            "RX-001-14",
+            "RX-001-15",
+            "RX-001-18",
+            "RX-001-19"
+          ],
+          "reinterpretation": "원본 문구·과정당 3스테이지·맞춤 추천·도움 아이콘 대신 승인 구조(8스테이지, 이어서 하기, 준비 중). 3D 셔틀콕·썸네일 원본 그림 대신 새로 그린 SVG 자산(AST-002–013). 행에 학습 목표·상태 줄을 더해 원본보다 행이 조금 높음. 연민트는 임시 토큰.",
+          "revised_from": "V03-A"
+        }
+      }
+    },
+    "V05": {
+      "phase": "visual",
+      "mode": "ai",
+      "intent": null,
+      "kind": "explore",
+      "parent": null,
+      "base": null,
+      "coverage": null,
+      "basis": {
+        "planning_revision": "7",
+        "screen_types": "default",
+        "screen_types_hash": null,
+        "ux_spec_revision": 4,
+        "fingerprints": {
+          "SCR-102": "58164cc5563d9c5f067ca35e569bf482dff71398c07e3d76c2767adcd27ff0d2",
+          "SCR-103": "3f739c8b64ef0f79ad593e75b62d409a0ecfe6921a813a29d319e522a1b47125"
+        }
+      },
+      "targets": [
+        {
+          "id": "SCR-102",
+          "label": "스테이지 플레이",
+          "anchor": [
+            "SCR-102"
+          ],
+          "type": "browse",
+          "states": [
+            "SCR-102-ST1"
+          ],
+          "basis": [
+            "사용자 지정"
+          ],
+          "fingerprint": "58164cc5563d9c5f067ca35e569bf482dff71398c07e3d76c2767adcd27ff0d2",
+          "source_label": "스테이지 플레이"
+        },
+        {
+          "id": "SCR-103",
+          "label": "스테이지 결과",
+          "anchor": [
+            "SCR-103"
+          ],
+          "type": "input",
+          "states": [
+            "SCR-103-ST1"
+          ],
+          "basis": [
+            "사용자 지정"
+          ],
+          "fingerprint": "3f739c8b64ef0f79ad593e75b62d409a0ecfe6921a813a29d319e522a1b47125",
+          "source_label": "스테이지 결과"
+        }
+      ],
+      "variants": {
+        "A": {
+          "title": "떠 있는 시트형",
+          "concept": "V04-A 카드 언어를 그대로: 아래 영역을 둥근 흰 시트로 띄우고, 결과 화면은 점수·진행·틀린 상황을 각각 흰 카드로 나눔",
+          "distinct_axes": [
+            "component",
+            "hierarchy",
+            "density"
+          ],
+          "plan": "V05/A/plan.md",
+          "render": {
+            "html": "V05/A/index.html"
+          },
+          "elements": [
+            {
+              "id": "s102-court",
+              "target": "SCR-102",
+              "kind": "info",
+              "refs": [
+                "SCR-102:info-1",
+                "CMP-046"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s102-question",
+              "target": "SCR-102",
+              "kind": "info",
+              "refs": [
+                "SCR-102:info-2"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s102-judge",
+              "target": "SCR-102",
+              "kind": "info",
+              "refs": [
+                "SCR-102:info-3"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s102-progress",
+              "target": "SCR-102",
+              "kind": "info",
+              "refs": [
+                "SCR-102:info-4",
+                "CMP-026"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s102-cell",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-1",
+                "CMP-046"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-cell-confirm",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-2",
+                "CMP-046"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-move",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-3",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-next",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-4",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-retry",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-5",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-show",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-6",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-replay",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-7",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-exit",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-8",
+                "CMP-026"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-exit-cancel",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-9",
+                "CMP-022"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-exit-confirm",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-8",
+                "SCR-102:action-9",
+                "SCR-102:action-10",
+                "CMP-022"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s103-score",
+              "target": "SCR-103",
+              "kind": "info",
+              "refs": [
+                "SCR-103:info-1"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s103-best",
+              "target": "SCR-103",
+              "kind": "info",
+              "refs": [
+                "SCR-103:info-2"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s103-progress",
+              "target": "SCR-103",
+              "kind": "info",
+              "refs": [
+                "SCR-103:info-3",
+                "CMP-049"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s103-wrong",
+              "target": "SCR-103",
+              "kind": "info",
+              "refs": [
+                "SCR-103:info-4",
+                "CMP-030"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s103-actions",
+              "target": "SCR-103",
+              "kind": "info",
+              "refs": [
+                "SCR-103:info-5"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s103-wrong-row",
+              "target": "SCR-103",
+              "kind": "action",
+              "refs": [
+                "SCR-103:action-3",
+                "CMP-030"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s103-next",
+              "target": "SCR-103",
+              "kind": "action",
+              "refs": [
+                "SCR-103:action-4",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s103-again",
+              "target": "SCR-103",
+              "kind": "action",
+              "refs": [
+                "SCR-103:action-5",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s103-list",
+              "target": "SCR-103",
+              "kind": "action",
+              "refs": [
+                "SCR-103:action-6",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s103-resave",
+              "target": "SCR-103",
+              "kind": "action",
+              "refs": [
+                "SCR-103:action-1",
+                "SCR-103:action-2",
+                "CMP-023"
+              ],
+              "region": "main"
+            }
+          ],
+          "theme_candidate": "V05/A/theme.json",
+          "emphasis": []
+        },
+        "B": {
+          "title": "밴드·구획형",
+          "concept": "상단 바에 상황 5칸 진행 띠, 상황 설명은 민트 안내 띠, 판정은 상태색 띠, 아래 영역은 평면 도구 막대. 결과 화면은 가운데 정렬 점수 + 구분선 구획",
+          "distinct_axes": [
+            "component",
+            "hierarchy",
+            "density"
+          ],
+          "plan": "V05/B/plan.md",
+          "render": {
+            "html": "V05/B/index.html"
+          },
+          "elements": [
+            {
+              "id": "s102-court",
+              "target": "SCR-102",
+              "kind": "info",
+              "refs": [
+                "SCR-102:info-1",
+                "CMP-046"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s102-question",
+              "target": "SCR-102",
+              "kind": "info",
+              "refs": [
+                "SCR-102:info-2"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s102-judge",
+              "target": "SCR-102",
+              "kind": "info",
+              "refs": [
+                "SCR-102:info-3"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s102-progress",
+              "target": "SCR-102",
+              "kind": "info",
+              "refs": [
+                "SCR-102:info-4",
+                "CMP-026"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s102-cell",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-1",
+                "CMP-046"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-cell-confirm",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-2",
+                "CMP-046"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-move",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-3",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-next",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-4",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-retry",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-5",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-show",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-6",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-replay",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-7",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-exit",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-8",
+                "CMP-026"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-exit-cancel",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-9",
+                "CMP-022"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s102-exit-confirm",
+              "target": "SCR-102",
+              "kind": "action",
+              "refs": [
+                "SCR-102:action-8",
+                "SCR-102:action-9",
+                "SCR-102:action-10",
+                "CMP-022"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s103-score",
+              "target": "SCR-103",
+              "kind": "info",
+              "refs": [
+                "SCR-103:info-1"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s103-best",
+              "target": "SCR-103",
+              "kind": "info",
+              "refs": [
+                "SCR-103:info-2"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s103-progress",
+              "target": "SCR-103",
+              "kind": "info",
+              "refs": [
+                "SCR-103:info-3",
+                "CMP-049"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s103-wrong",
+              "target": "SCR-103",
+              "kind": "info",
+              "refs": [
+                "SCR-103:info-4",
+                "CMP-030"
+              ],
+              "region": "main",
+              "sample": true
+            },
+            {
+              "id": "s103-actions",
+              "target": "SCR-103",
+              "kind": "info",
+              "refs": [
+                "SCR-103:info-5"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s103-wrong-row",
+              "target": "SCR-103",
+              "kind": "action",
+              "refs": [
+                "SCR-103:action-3",
+                "CMP-030"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s103-next",
+              "target": "SCR-103",
+              "kind": "action",
+              "refs": [
+                "SCR-103:action-4",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s103-again",
+              "target": "SCR-103",
+              "kind": "action",
+              "refs": [
+                "SCR-103:action-5",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s103-list",
+              "target": "SCR-103",
+              "kind": "action",
+              "refs": [
+                "SCR-103:action-6",
+                "CMP-001"
+              ],
+              "region": "main"
+            },
+            {
+              "id": "s103-resave",
+              "target": "SCR-103",
+              "kind": "action",
+              "refs": [
+                "SCR-103:action-1",
+                "SCR-103:action-2",
+                "CMP-023"
+              ],
+              "region": "main"
+            }
+          ],
+          "theme_candidate": "V05/B/theme.json",
+          "emphasis": []
+        }
+      }
+    }
+  }
+}

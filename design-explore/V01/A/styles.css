@@ -1,0 +1,162 @@
+/* V01-A: REF-001에 충실한 안. 색은 var(--토큰)만(날 색 값 금지). 외부 리소스 금지 */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { word-break: keep-all; font-family: var(--font-family-base); color: var(--color-text-primary); background: var(--color-bg-page); font-size: var(--font-size-body); line-height: 1.5; }
+section[data-target] { max-width: var(--size-content-member); margin: 0 auto; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; text-align: left; }
+button:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+
+/* ---------- SCR-101 튜토리얼 목록 ---------- */
+.app { padding: 0 var(--space-5) var(--space-8); }
+.page-header { padding: var(--space-5) 0 var(--space-4); }
+.page-header h1 { font-size: var(--font-size-heading); font-weight: 800; letter-spacing: -0.01em; }
+
+/* 소개 배너: 연민트 → 흰 그라데이션(VD-033), 진행률 카드를 배너 안에 겹침(RX-001-10) */
+.banner { position: relative; overflow: hidden; border-radius: var(--radius-md); padding: var(--space-5) var(--space-5) var(--space-4);
+  background: linear-gradient(135deg, var(--color-accent-subtle) 0%, var(--color-accent-subtle) 35%, var(--color-bg-page) 100%); }
+.eyebrow { font-size: var(--font-size-caption); font-weight: var(--font-weight-bold); color: var(--color-action-primary); }
+.banner-title { font-size: var(--font-size-heading); font-weight: 800; line-height: 1.3; margin-top: var(--space-1); max-width: 70%; }
+.banner-desc { font-size: var(--font-size-caption); color: var(--color-text-secondary); margin-top: var(--space-2); }
+.shuttle { position: absolute; right: var(--space-5); top: var(--space-5); width: 56px; height: 72px; transform: rotate(-24deg); }
+.sh-skirt { position: absolute; left: 6px; top: 0; width: 44px; height: 50px; border: 2px solid var(--color-action-primary);
+  border-bottom: 0; clip-path: polygon(0 0, 100% 0, 78% 100%, 22% 100%); border-radius: 4px 4px 0 0; background: var(--color-bg-page); }
+.sh-cork { position: absolute; left: 14px; top: 44px; width: 28px; height: 26px; border-radius: 0 0 14px 14px; background: var(--color-action-primary); }
+.overall { display: flex; align-items: center; gap: var(--space-3); margin-top: var(--space-4); background: var(--color-bg-page);
+  border: 1px solid var(--color-border-default); border-radius: var(--radius-md); padding: var(--space-3) var(--space-4); }
+.pg-label { font-size: var(--font-size-caption); font-weight: var(--font-weight-bold); white-space: nowrap; }
+.pg-bar { flex: 1; height: 8px; border-radius: var(--radius-md); background: var(--color-bg-surface); overflow: hidden; }
+.pg-bar i { display: block; height: 100%; width: var(--p); border-radius: var(--radius-md); background: var(--color-action-primary); }
+.pg-num { font-size: var(--font-size-caption); font-weight: var(--font-weight-bold); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* 이어서 하기(VD-035) */
+.continue { display: flex; align-items: center; gap: var(--space-3); width: 100%; min-height: 72px; margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--color-accent-subtle); }
+.play { flex: none; width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--color-action-primary); display: grid; place-items: center; }
+.play i { width: 0; height: 0; border-left: 11px solid var(--color-action-primary); border-top: 7px solid transparent; border-bottom: 7px solid transparent; margin-left: 3px; }
+.ct-text { flex: 1; display: grid; }
+.ct-eyebrow { font-size: var(--font-size-caption); font-weight: var(--font-weight-bold); color: var(--color-action-primary); }
+.ct-title { font-size: var(--font-size-title); font-weight: var(--font-weight-bold); line-height: 1.35; }
+.ct-meta { font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.chev { flex: none; width: 9px; height: 9px; border-right: 2px solid var(--color-text-secondary); border-top: 2px solid var(--color-text-secondary); transform: rotate(45deg); margin-right: var(--space-1); }
+
+/* 과정: 섹션 머리(카드 밖) + 스테이지 행 카드(REF-001 RX-001-10·11) */
+.courses { margin-top: var(--space-8); display: grid; gap: var(--space-8); }
+.course-head { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3); }
+.c-icon { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--color-accent-subtle); position: relative; }
+.c-icon::after { content: ""; position: absolute; inset: 8px; border: 2px solid var(--color-action-primary); }
+.c-icon-intro::after { border-radius: 50% 0 50% 0; }
+.c-icon-starter::after { border-radius: 2px 2px 50% 50%; }
+.c-icon-basic::after { transform: rotate(45deg); border-radius: 2px; }
+.c-text { flex: 1; display: grid; }
+.c-name { font-size: var(--font-size-title); font-weight: var(--font-weight-bold); }
+.c-desc { font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.pill { flex: none; display: inline-flex; align-items: center; height: 24px; padding: 0 var(--space-2); border-radius: 12px;
+  background: var(--color-accent-subtle); color: var(--color-action-primary); font-size: var(--font-size-caption); font-weight: var(--font-weight-bold); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.stages { list-style: none; display: grid; gap: 10px; }
+.stage { display: flex; align-items: center; gap: var(--space-3); width: 100%; min-height: 76px; padding: var(--space-2) var(--space-3) var(--space-2) var(--space-2);
+  background: var(--color-bg-page); border: 1px solid var(--color-border-default); border-radius: var(--radius-md); }
+.s-text { flex: 1; display: grid; min-width: 0; }
+.s-title { font-size: var(--font-size-body); font-weight: var(--font-weight-bold); line-height: 1.35; display: flex; align-items: center; gap: var(--space-1); }
+.s-status { font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.ok { flex: none; width: 16px; height: 16px; border-radius: 50%; background: var(--color-status-success-fg); position: relative; }
+.ok::after { content: ""; position: absolute; left: 5px; top: 3px; width: 4px; height: 7px; border: solid var(--color-bg-page); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+
+/* 미니 코트 썸네일(CR-012 A): 내 편 반 코트 축소, 장식 */
+.thumb { flex: none; position: relative; width: 88px; height: 56px; border-radius: var(--radius-sm); background: var(--color-accent-subtle); overflow: hidden; }
+.th-net { position: absolute; left: 22px; right: 22px; top: 6px; height: 0; border-top: 2px solid var(--color-court-surface); }
+.th-line { position: absolute; left: 22px; right: 22px; top: 6px; bottom: 6px; border: 1px solid var(--color-court-surface); border-top: 0; opacity: .55; }
+.th-me, .th-pt { position: absolute; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; }
+.th-me { left: calc(22px + var(--mx) * 0.44px); top: calc(6px + var(--my) * 0.44px); background: var(--color-action-primary); }
+.th-pt { left: calc(22px + var(--px) * 0.44px); top: calc(6px + var(--py) * 0.44px); background: var(--color-bg-page); border: 2px solid var(--color-action-primary); }
+.th-arrow { position: absolute; left: calc(22px + var(--mx) * 0.44px); top: calc(6px + var(--my) * 0.44px); width: 0; height: 0; }
+.th-arrow::before { content: ""; position: absolute; left: 0; top: -1px; width: calc(hypot(var(--ax), var(--ay)) * 0.6px); border-top: 2px dashed var(--color-action-primary);
+  transform-origin: 0 50%; transform: rotate(atan2(var(--ay), var(--ax))); }
+
+/* 준비 중(VD-035) */
+.soon { display: grid; gap: var(--space-2); margin-top: var(--space-6); }
+.soon-card { display: flex; justify-content: space-between; align-items: center; width: 100%; height: 56px; padding: 0 var(--space-4);
+  border: 1px dashed var(--color-border-strong); border-radius: var(--radius-md); background: var(--color-bg-page); cursor: default; }
+.soon-name { color: var(--color-text-disabled); }
+.soon-badge { font-size: var(--font-size-caption); color: var(--color-text-secondary); background: var(--color-bg-surface); border-radius: 12px; padding: 2px var(--space-2); }
+
+.state-sample { margin-top: var(--space-8); }
+.state-label, .scene-label { font-size: var(--font-size-caption); color: var(--color-text-secondary); margin-bottom: var(--space-2); }
+.notice { display: flex; justify-content: space-between; align-items: center; gap: var(--space-2); padding: var(--space-3) var(--space-4); border-radius: var(--radius-md);
+  background: var(--color-status-danger-bg); color: var(--color-status-danger-fg); font-size: var(--font-size-caption); }
+.link-btn { font-weight: var(--font-weight-bold); text-decoration: underline; min-height: var(--size-touch-min); }
+.tabbar { display: grid; grid-template-columns: repeat(4, 1fr); margin: var(--space-8) calc(-1 * var(--space-5)) 0; border-top: 1px solid var(--color-border-default); height: 56px; align-items: center; text-align: center; }
+.tab { font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.tab.on { color: var(--color-action-primary); font-weight: var(--font-weight-bold); }
+
+/* ---------- SCR-102 코트 학습 ---------- */
+#SCR-102 { padding: var(--space-6) var(--space-4) var(--space-8); display: grid; gap: var(--space-8); }
+.scene { display: flex; flex-direction: column; border-top: 1px solid var(--color-border-default); padding-top: var(--space-3); }
+.scene-label { order: -2; }
+.topbar { order: -1; display: flex; align-items: center; gap: var(--space-3); height: 56px; }
+.exit { min-height: var(--size-touch-min); font-weight: var(--font-weight-bold); color: var(--color-text-secondary); }
+.tb-title { flex: 1; font-weight: var(--font-weight-bold); }
+.tb-prog { font-size: var(--font-size-caption); font-weight: var(--font-weight-bold); color: var(--color-action-primary); background: var(--color-accent-subtle); border-radius: 12px; padding: 2px var(--space-2); font-variant-numeric: tabular-nums; }
+.court-wrap { display: flex; justify-content: center; padding: var(--space-2) 0; }
+.court { position: relative; width: min(72vw, 280px); aspect-ratio: 61 / 134; background: var(--color-court-surface); border-radius: var(--radius-sm); outline: 10px solid var(--color-court-surface); }
+.court[data-playing="true"] .grid { opacity: .35; }
+.ln { position: absolute; border-color: var(--color-court-line); border-style: solid; border-width: 0; opacity: .9; }
+.ln-out { inset: 0; border-width: 1.5px; }
+.ln-net { left: -6px; right: -6px; top: 50%; border-top-width: 3px; opacity: 1; }
+.ln-ss-t { left: 0; right: 0; top: calc(50% - 14.78%); border-top-width: 1.5px; }
+.ln-ss-b { left: 0; right: 0; top: calc(50% + 14.78%); border-top-width: 1.5px; }
+.ln-ls-t { left: 0; right: 0; top: 5.67%; border-top-width: 1.5px; }
+.ln-ls-b { left: 0; right: 0; top: 94.33%; border-top-width: 1.5px; }
+.ln-sg-l { top: 0; bottom: 0; left: 7.54%; border-left-width: 1.5px; }
+.ln-sg-r { top: 0; bottom: 0; right: 7.54%; border-left-width: 1.5px; }
+.ln-c-t { left: 50%; top: 0; height: 35.22%; border-left-width: 1.5px; }
+.ln-c-b { left: 50%; top: 64.78%; bottom: 0; border-left-width: 1.5px; }
+/* 번호 격자(VD-026·027): 내 편 반 코트, 점선 70% */
+.grid { position: absolute; left: 0; right: 0; top: 50%; bottom: 0; display: grid; grid-template-columns: repeat(var(--cols), 1fr); grid-template-rows: repeat(3, 1fr); z-index: 3; }
+.cell { position: relative; border: 1px dashed var(--color-court-line); border-width: 0 1px 1px 0; outline: none; }
+.cell::before { content: ""; position: absolute; inset: 0; border: 1px dashed var(--color-court-line); opacity: .7; border-width: 0; }
+.grid .cell:nth-child(n) { border-color: color-mix(in srgb, var(--color-court-line) 70%, transparent); }
+.num { position: absolute; left: 4px; top: 4px; min-width: 22px; height: 22px; border-radius: 11px; display: grid; place-items: center;
+  font-size: var(--font-size-caption); font-weight: var(--font-weight-bold); color: var(--color-court-line); background: color-mix(in srgb, var(--color-court-surface) 60%, transparent); }
+.cell.selected { box-shadow: inset 0 0 0 3px var(--color-court-line); background: color-mix(in srgb, var(--color-court-line) 25%, transparent); }
+.cell.correct, .cell.wrong, .cell.acceptable { background: none; }
+.cell.correct::after, .cell.wrong::after, .cell.acceptable::after { content: ""; position: absolute; inset: 3px; border-radius: 4px; opacity: .9; z-index: -1; }
+.cell.correct::after { background: var(--color-status-success-bg); }
+.cell.wrong::after { background: var(--color-status-danger-bg); }
+.cell.acceptable::after { background: var(--color-status-warning-bg); }
+.cell.correct { box-shadow: inset 0 0 0 2px var(--color-court-line); }
+.cell.wrong { box-shadow: inset 0 0 0 4px var(--color-court-line); }
+.cell.acceptable { outline: 2px dashed var(--color-court-line); outline-offset: -4px; }
+.cell.correct .num { background: var(--color-status-success-fg); }
+.cell.wrong .num { background: var(--color-status-danger-fg); }
+.cell.acceptable .num { background: var(--color-status-warning-fg); }
+/* 선수·셔틀(기존 TutorialCourt 표현 재사용): 누름을 가로채지 않음 */
+.pl, .sc, .sc-ring, .path { position: absolute; left: var(--x); top: var(--y); pointer-events: none; z-index: 4; }
+.path { width: 100%; height: 0; }
+.pl i { display: block; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; border: 1.5px solid var(--color-court-line); }
+.pl b { position: absolute; left: 50%; top: 16px; transform: translateX(-50%); font-size: 11px; line-height: 1.4; padding: 0 4px; border-radius: 4px; background: var(--color-court-surface); color: var(--color-court-line); white-space: nowrap; }
+.pl-me i, .pl-pt i { background: var(--color-court-me); }
+.pl-me i { box-shadow: 0 0 0 4px var(--color-court-surface), 0 0 0 6px var(--color-court-line); }
+.pl-opp i { background: var(--color-court-opponent); }
+.sc { width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: var(--color-court-line); border: 2px solid var(--color-text-primary); }
+.sc-ring { width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; border: 2px dashed var(--color-court-line); }
+.path i { position: absolute; left: 0; top: -1.5px; height: 3px; width: calc(var(--len) * 100%); background: var(--color-court-line);
+  transform-origin: 0 50%; transform: rotate(var(--ang)); box-shadow: 0 0 0 2px var(--color-court-surface); }
+.path i::after { content: ""; position: absolute; right: -2px; top: -5px; width: 0; height: 0; border-left: 10px solid var(--color-court-line); border-top: 6.5px solid transparent; border-bottom: 6.5px solid transparent; }
+.bottom { display: grid; gap: var(--space-3); margin-top: var(--space-3); padding: var(--space-4); border-radius: var(--radius-md); background: var(--color-accent-subtle); }
+.question { font-size: var(--font-size-title); font-weight: var(--font-weight-bold); line-height: 1.4; }
+.result { display: grid; gap: var(--space-1); }
+.r-head { display: flex; align-items: center; gap: var(--space-2); font-weight: var(--font-weight-bold); color: var(--color-status-danger-fg); }
+.r-icon { width: 18px; height: 18px; border-radius: 50%; background: var(--color-status-danger-fg); }
+.r-body { font-size: var(--font-size-body); }
+.legend { display: flex; flex-wrap: wrap; gap: var(--space-2); font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.lg::before { content: ""; display: inline-block; width: 12px; height: 12px; margin-right: 4px; vertical-align: -2px; border-radius: 3px; }
+.lg-mine::before { border: 3px solid var(--color-text-primary); }
+.lg-correct::before { background: var(--color-status-success-fg); }
+.lg-ok::before { border: 2px dashed var(--color-status-warning-fg); }
+.lg-shuttle::before { border: 2px dashed var(--color-text-primary); border-radius: 50%; }
+.btn-row { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.btn-row.slim { justify-content: center; }
+.btn-primary, .btn-secondary { flex: 1 1 30%; min-height: 56px; padding: 0 var(--space-3); border-radius: var(--radius-md); font-weight: var(--font-weight-bold); text-align: center; }
+.btn-primary { background: var(--color-action-primary); color: var(--color-action-onPrimary); }
+.btn-secondary { background: var(--color-bg-page); border: 1px solid var(--color-border-strong); }
+.btn-text { min-height: var(--size-touch-min); color: var(--color-action-primary); font-weight: var(--font-weight-bold); }
+.sys-note { order: 9; margin-top: var(--space-2); font-size: var(--font-size-caption); color: var(--color-text-secondary); }

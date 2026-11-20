@@ -9,7 +9,7 @@ from app.modules.clubmatch.models import (
     ClubMatchParticipant,
 )
 from app.modules.roster.models import Guest, MemberRating
-from app.modules.tutorial.models import TutorialProgress
+from app.modules.tutorial.models import TutorialProgress, TutorialRun
 from app.modules.user.models import User, UserIdentity
 
 __all__ = [
@@ -22,6 +22,7 @@ __all__ = [
     "Guest",
     "MemberRating",
     "TutorialProgress",
+    "TutorialRun",
     "User",
     "UserIdentity",
 ]

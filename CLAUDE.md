@@ -35,7 +35,7 @@ backend/
     modules/roster/    # 명단(I1): member_ratings(운영진 평가 점수, 프로필과 분리)·guests(소프트 삭제 + 이름·급수·성별·점수 비식별화, U5·C안), 내용 기반 version으로 동시 수정 감지
     modules/clubmatch/ # 청백전(I3-a 확정 전·I3-b 대진 생성·I3-c 확정 이후 운영 API·I3-d 정책 P-1~P-10, I3-d4부터 api 모드 화면 연결): 4개 테이블, 모든 변경은 행 잠금 + version(U9). 계산 schedule.py는 FE schedule.ts와 골든 JSON(backend/tests/golden)으로 일치 확인
                        #   member.py·member_schemas.py: 회원 조회·/api/me/record(운영진 스키마와 분리된 허용 목록, 키는 청백전 범위 p:<참가자 id>). record.py: 전적·랭크 계산
-    modules/tutorial/  # 튜토리얼 진행(I2): tutorial_progress, 스테이지 레지스트리(stage_registry.json — 프런트 stages.ts와 일치 필수), 원자적 upsert
+    modules/tutorial/  # 튜토리얼 진행(I2): tutorial_progress, 스테이지 레지스트리(stage_registry.json: 과정 intro·starter·basic·mid·high + 스테이지 `<과정>-<순번>-v<버전>`, ASM-033 — 프런트 Mock 사본 features/tutorial/mockRegistry.ts와 일치 필수), 원자적 upsert, 서버 콘텐츠 content/<stage_id>.json + content.py(검사, AC-117 — 판정 데이터는 공개 API에 넣지 않음), GET /courses·/stages/{id}, 서버 판정 회차 tutorial_runs(첫 판정만 임시 보관, 0010 — 로컬 Compose DB만 적용)·POST /stages/{id}/runs·/runs/{id}/judge·PUT /stages/{id} {runId}·GET /runs/{id}(완료된 본인 회차). 계획은 docs/workflow-proposals/tutorial-mvp-implementation-plan.md
     models.py          # Alembic autogenerate용 모델 import 모음
   alembic/versions/    # 마이그레이션 (0001 = 빈 baseline)
   tests/
@@ -47,7 +47,7 @@ frontend/
     features/<domain>/ # 기능 단위: api.ts(mock/api 분기), 훅, 컴포넌트, 테스트
     features/auth/     # 계정·역할 타입, getMe, 개발용 역할 전환(devPersona)
     features/intro/    # 시네마틱 인트로(최초 방문 1회 정책)
-    features/tutorial/ # 게임형 튜토리얼: engine/(렌더링과 분리된 로직·애니메이션), content/(시나리오 데이터, 검수 전 초안), 진행 기록(Mock)
+    features/tutorial/ # 게임형 튜토리얼: court/(경기장 StadiumCourt·원근 변환·칸), play/(SCR-102 부품·진행 규칙), progress.ts(저장 규칙), mock/(Mock 판정 서버·서버 콘텐츠 사본, mock 빌드 전용), api.ts
     pages/             # 라우트에 연결되는 페이지 컴포넌트
     routes/router.tsx  # 라우트 정의 (확장 지점)
     routes/guards.ts   # 접근 규칙 loader(비로그인·계정 제한·역할)
@@ -84,6 +84,7 @@ frontend/
   - FE `VITE_DATA_SOURCE=api`면 인증·승인·역할·본인 프로필·명단·튜토리얼 진행·청백전(운영진·회원 조회·마이페이지 전적, I3-d4)은 실제 API, 오늘 운동(session)은 I4 전까지 Mock.
   - 1–10 점수는 `member_ratings`(운영진 전용)에만 저장하고 회원 권한 응답(`/api/auth/me`, `/api/me/*`)에는 넣지 않습니다(AC-017·066). `?as=` 역할 전환은 Mock 모드 전용.
   - 개발용 운영진 ID/PW 로그인(`DEV_LOGIN_*`)은 `APP_ENV=local`·`e2e` 전용, 기본 꺼짐(사용자 결정 2026-11-12: e2e는 임시 테스트 DB 검사 통과 시에만 서버 시작).
+- 임시 산출물(테스트·디버깅 캡처, E2E 로그, 디자인 비교 이미지, 일회성 측정)은 저장소 밖 `~/smapsh-work/<날짜>-<작업>/`(불가피하면 `.tmp/`)에 만들고 Git에 넣지 않습니다. 승인 근거로 인용할 자료만 골라 저장소에 둡니다. 정리 전 참조·해시 확인, 승인 자료 자동 삭제 금지(`docs/workflow-proposals/temp-artifacts-policy.md`).
 - 테스트 격리: DB 테스트는 `TEST_DATABASE_URL`(임시 테스트 DB)만, 원본 `smapsh`·Neon은 `app/core/dbguard.py`가 차단. FE 테스트는 실제 네트워크 차단(`src/test/setup.ts`). API 모드 E2E는 `e2e-guard.mjs`로 `APP_ENV=e2e` 서버만.
 - 범위 외(현재 미포함): Redis, Celery, WebSocket, Storybook.
 

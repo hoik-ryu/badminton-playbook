@@ -1,10 +1,10 @@
 ---
 doc: design-traceability
-revision: 3
+revision: 5
 language: ko
 based_on:
   planning_revision: 7
-  ux_planning_revision: 5
+  ux_planning_revision: 6
 ---
 
 # 디자인 추적성 (Design Traceability): 배드민턴 플레이북 (badminton-playbook)
@@ -17,6 +17,10 @@ based_on:
 > - US-024·025·026 행의 UX 결정을 갱신했습니다.
 > - AC-090·091·093·094·067·097·100 행을 개정하고, AC-111–AC-121 행을 추가했습니다(활성 AC 118개).
 > - 커버리지(FLOW 88단계, 컴포넌트 28개, UXD 활성 67개), 체크리스트, 기획 정합성의 튜토리얼 항목을 갱신했습니다.
+
+> **r4 개정(2026-11-19)**: Design Direction CR-011(사용자 결정 2026-11-19)에 따라 `04` 1.2에 색 토큰 3개(`color.accent.subtle`, `color.accent.mint`, `color.text.accent`)를 추가하고 `color.action.primary` 용도를 채움·아이콘으로 정리했습니다. 또 CMP-001 큰 CTA 버튼 글자 규칙(22px 굵게)과 주 버튼 글자 대비 규칙(일반 4.5:1 / 큰 글자 3:1)을 넣었습니다. US·AC·화면·흐름·UXD 대응은 바뀌지 않아 이 문서의 표는 그대로입니다.
+
+> **r5 개정(2026-11-19)**: UX 결정 r6(UXD-077 개정)을 기준으로 맞췄습니다. SCR-102·CMP-046의 재생 중 격자 표시 문구만 바뀌었고, 요구사항(AC·FR·FLOW)과 화면·컴포넌트의 추적 관계는 바뀌지 않았습니다.
 
 ## 1. User Story → 화면
 

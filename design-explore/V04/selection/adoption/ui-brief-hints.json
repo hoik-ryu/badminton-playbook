@@ -1,0 +1,306 @@
+{
+  "format": "design-explore-ui-brief-hints/v1",
+  "choice": "EXP-V04-A",
+  "approved": false,
+  "note": "Build UI Brief 근거 후보. VD가 승인되면 VD의 '관련' SCR·CMP·토큰으로 UI Brief에 연결됩니다(product-build 기존 규칙).",
+  "screens": {
+    "SCR-101": {
+      "type": "guidance",
+      "variant": "A",
+      "vds": [
+        "VD-038",
+        "VD-039",
+        "VD-040",
+        "VD-041",
+        "VD-042",
+        "VD-043"
+      ],
+      "components": [
+        "CMP-023",
+        "CMP-047",
+        "CMP-048",
+        "CMP-049",
+        "CMP-050"
+      ],
+      "tokens": [
+        "color.accent.mint",
+        "color.accent.subtle",
+        "color.action.onPrimary",
+        "color.action.primary",
+        "color.bg.page",
+        "color.bg.surface",
+        "color.border.default",
+        "color.border.strong",
+        "color.brand.kakao.bg",
+        "color.brand.kakao.fg",
+        "color.court.line",
+        "color.court.me",
+        "color.court.opponent",
+        "color.court.surface",
+        "color.focus.ring",
+        "color.status.danger.bg",
+        "color.status.danger.fg",
+        "color.status.info.bg",
+        "color.status.success.bg",
+        "color.status.success.fg",
+        "color.status.warning.bg",
+        "color.status.warning.fg",
+        "color.team.blue.bg",
+        "color.team.blue.fg",
+        "color.team.white.bg",
+        "color.team.white.fg",
+        "color.text.accent",
+        "color.text.disabled",
+        "color.text.primary",
+        "color.text.secondary",
+        "font.family.base",
+        "font.size.body",
+        "font.size.caption",
+        "font.size.display",
+        "font.size.heading",
+        "font.size.title",
+        "font.weight.bold",
+        "font.weight.regular",
+        "radius.md",
+        "radius.sheet",
+        "radius.sm",
+        "size.content.member",
+        "size.content.ops.max",
+        "size.nav.side",
+        "size.panel.side",
+        "size.touch.min",
+        "space.1",
+        "space.2",
+        "space.3",
+        "space.4",
+        "space.5",
+        "space.6",
+        "space.8",
+        "space.gutter.desktop",
+        "space.gutter.mobile"
+      ]
+    }
+  },
+  "component_rules": {
+    "CMP-026": {
+      "variant": "A",
+      "style": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "background-image": "none",
+        "color": "rgb(26, 29, 35)",
+        "border-radius": "0px",
+        "border-top-width": "0px",
+        "border-top-style": "none",
+        "border-top-color": "rgb(26, 29, 35)",
+        "box-shadow": "none",
+        "font-family": "\"Pretendard Variable\", Pretendard, system-ui, sans-serif",
+        "font-size": "16px",
+        "font-weight": "400",
+        "padding-top": "14px",
+        "padding-left": "18px"
+      },
+      "run_id": "M20261119-020301-4d5c67"
+    },
+    "CMP-049/overall": {
+      "variant": "A",
+      "style": {
+        "background-color": "rgb(250, 255, 253)",
+        "background-image": "none",
+        "color": "rgb(26, 29, 35)",
+        "border-radius": "12px",
+        "border-top-width": "0px",
+        "border-top-style": "none",
+        "border-top-color": "rgb(26, 29, 35)",
+        "box-shadow": "color(srgb 0.0431373 0.619608 0.545098 / 0.14) 0px 3px 12px 0px",
+        "font-family": "\"Pretendard Variable\", Pretendard, system-ui, sans-serif",
+        "font-size": "16px",
+        "font-weight": "400",
+        "padding-top": "0px",
+        "padding-left": "12px"
+      },
+      "run_id": "M20261119-020301-4d5c67"
+    },
+    "CMP-050": {
+      "variant": "A",
+      "style": {
+        "background-color": "rgb(250, 255, 253)",
+        "background-image": "none",
+        "color": "rgb(26, 29, 35)",
+        "border-radius": "16px",
+        "border-top-width": "1px",
+        "border-top-style": "solid",
+        "border-top-color": "color(srgb 0.878824 0.895686 0.912549)",
+        "box-shadow": "color(srgb 0.0431373 0.619608 0.545098 / 0.1) 0px 6px 18px 0px, color(srgb 0.101961 0.113725 0.137255 / 0.06) 0px 1px 3px 0px",
+        "font-family": "\"Pretendard Variable\", Pretendard, system-ui, sans-serif",
+        "font-size": "16px",
+        "font-weight": "400",
+        "padding-top": "10px",
+        "padding-left": "12px"
+      },
+      "run_id": "M20261119-020301-4d5c67"
+    },
+    "CMP-048/available": {
+      "variant": "A",
+      "style": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "background-image": "none",
+        "color": "rgb(26, 29, 35)",
+        "border-radius": "0px",
+        "border-top-width": "0px",
+        "border-top-style": "none",
+        "border-top-color": "rgb(26, 29, 35)",
+        "box-shadow": "none",
+        "font-family": "\"Pretendard Variable\", Pretendard, system-ui, sans-serif",
+        "font-size": "16px",
+        "font-weight": "400",
+        "padding-top": "0px",
+        "padding-left": "0px"
+      },
+      "run_id": "M20261119-020301-4d5c67"
+    },
+    "CMP-047/passed": {
+      "variant": "A",
+      "style": {
+        "background-color": "rgb(250, 255, 253)",
+        "background-image": "none",
+        "color": "rgb(26, 29, 35)",
+        "border-radius": "12px",
+        "border-top-width": "1px",
+        "border-top-style": "solid",
+        "border-top-color": "color(srgb 0.878824 0.895686 0.912549)",
+        "box-shadow": "color(srgb 0.0431373 0.619608 0.545098 / 0.07) 0px 3px 10px 0px, color(srgb 0.101961 0.113725 0.137255 / 0.05) 0px 1px 2px 0px",
+        "font-family": "\"Pretendard Variable\", Pretendard, system-ui, sans-serif",
+        "font-size": "16px",
+        "font-weight": "400",
+        "padding-top": "5px",
+        "padding-left": "5px"
+      },
+      "run_id": "M20261119-020301-4d5c67"
+    },
+    "CMP-047/failed": {
+      "variant": "A",
+      "style": {
+        "background-color": "rgb(250, 255, 253)",
+        "background-image": "none",
+        "color": "rgb(26, 29, 35)",
+        "border-radius": "12px",
+        "border-top-width": "1px",
+        "border-top-style": "solid",
+        "border-top-color": "color(srgb 0.878824 0.895686 0.912549)",
+        "box-shadow": "color(srgb 0.0431373 0.619608 0.545098 / 0.07) 0px 3px 10px 0px, color(srgb 0.101961 0.113725 0.137255 / 0.05) 0px 1px 2px 0px",
+        "font-family": "\"Pretendard Variable\", Pretendard, system-ui, sans-serif",
+        "font-size": "16px",
+        "font-weight": "400",
+        "padding-top": "5px",
+        "padding-left": "5px"
+      },
+      "run_id": "M20261119-020301-4d5c67"
+    },
+    "CMP-047/notPlayed": {
+      "variant": "A",
+      "style": {
+        "background-color": "rgb(250, 255, 253)",
+        "background-image": "none",
+        "color": "rgb(26, 29, 35)",
+        "border-radius": "12px",
+        "border-top-width": "1px",
+        "border-top-style": "solid",
+        "border-top-color": "color(srgb 0.878824 0.895686 0.912549)",
+        "box-shadow": "color(srgb 0.0431373 0.619608 0.545098 / 0.07) 0px 3px 10px 0px, color(srgb 0.101961 0.113725 0.137255 / 0.05) 0px 1px 2px 0px",
+        "font-family": "\"Pretendard Variable\", Pretendard, system-ui, sans-serif",
+        "font-size": "16px",
+        "font-weight": "400",
+        "padding-top": "5px",
+        "padding-left": "5px"
+      },
+      "run_id": "M20261119-020301-4d5c67"
+    },
+    "CMP-048/comingSoon": {
+      "variant": "A",
+      "style": {
+        "background-color": "rgb(250, 255, 253)",
+        "background-image": "none",
+        "color": "rgb(26, 29, 35)",
+        "border-radius": "12px",
+        "border-top-width": "1px",
+        "border-top-style": "dashed",
+        "border-top-color": "rgb(213, 217, 224)",
+        "box-shadow": "none",
+        "font-family": "\"Pretendard Variable\", Pretendard, system-ui, sans-serif",
+        "font-size": "16px",
+        "font-weight": "400",
+        "padding-top": "0px",
+        "padding-left": "14px"
+      },
+      "run_id": "M20261119-020301-4d5c67"
+    },
+    "CMP-025": {
+      "variant": "A",
+      "style": {
+        "background-color": "rgb(250, 255, 253)",
+        "background-image": "none",
+        "color": "rgb(26, 29, 35)",
+        "border-radius": "0px",
+        "border-top-width": "1px",
+        "border-top-style": "solid",
+        "border-top-color": "color(srgb 0.893333 0.910588 0.923922)",
+        "box-shadow": "none",
+        "font-family": "\"Pretendard Variable\", Pretendard, system-ui, sans-serif",
+        "font-size": "16px",
+        "font-weight": "400",
+        "padding-top": "0px",
+        "padding-left": "0px"
+      },
+      "run_id": "M20261119-020301-4d5c67"
+    },
+    "CMP-023": {
+      "variant": "A",
+      "style": {
+        "background-color": "rgb(253, 231, 229)",
+        "background-image": "none",
+        "color": "rgb(179, 38, 30)",
+        "border-radius": "12px",
+        "border-top-width": "0px",
+        "border-top-style": "none",
+        "border-top-color": "rgb(179, 38, 30)",
+        "box-shadow": "none",
+        "font-family": "\"Pretendard Variable\", Pretendard, system-ui, sans-serif",
+        "font-size": "13px",
+        "font-weight": "400",
+        "padding-top": "10px",
+        "padding-left": "14px"
+      },
+      "run_id": "M20261119-020301-4d5c67"
+    }
+  },
+  "assets": {
+    "adoptable": [],
+    "blocked": {
+      "AST-001": "권리 미확인(explore-asset confirm 필요)",
+      "AST-014": "권리 미확인(explore-asset confirm 필요)",
+      "AST-015": "권리 미확인(explore-asset confirm 필요)",
+      "AST-016": "권리 미확인(explore-asset confirm 필요)",
+      "AST-018": "권리 미확인(explore-asset confirm 필요)",
+      "AST-028": "권리 미확인(explore-asset confirm 필요)",
+      "AST-029": "권리 미확인(explore-asset confirm 필요)",
+      "AST-030": "권리 미확인(explore-asset confirm 필요)",
+      "AST-031": "권리 미확인(explore-asset confirm 필요)",
+      "AST-032": "권리 미확인(explore-asset confirm 필요)",
+      "AST-033": "권리 미확인(explore-asset confirm 필요)",
+      "AST-034": "권리 미확인(explore-asset confirm 필요)",
+      "AST-035": "권리 미확인(explore-asset confirm 필요)",
+      "AST-036": "권리 미확인(explore-asset confirm 필요)",
+      "AST-037": "권리 미확인(explore-asset confirm 필요)",
+      "AST-046": "권리 미확인(explore-asset confirm 필요)"
+    },
+    "icon_style": {
+      "style": "outline",
+      "stroke_width": 2.0,
+      "grid": 24,
+      "linecap": "round",
+      "color": "currentColor",
+      "statement": "승인된 VD-002(사용자 결정 2026-11-10): lucide-react 아이콘만 씀 — Lucide 기본 스타일(외곽선, 선 굵기 2, 24 격자, 둥근 선 끝)을 그대로 기록",
+      "at": "2026-11-19T00:05:28Z"
+    }
+  }
+}

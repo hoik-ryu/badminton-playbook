@@ -3,12 +3,12 @@ import type { ReactNode } from 'react'
 
 // 입력 부품(시트 안은 Flat, 04 3.1). 누름 영역 44 이상(size.touch.min), 글자 16(font.size.body)
 
-// CMP-001 Button lg(48)
+// CMP-001 Button lg(48). (r3, UX Spec r4 CMP-001·DD 4.1) primary는 흰 글자를 22px 굵게(큰 글자 3:1 기준) — color.action.primary #0B9E8B 위 흰 글자 3.35:1
 export function ActionButton({ children, variant = 'primary', disabled, grow = true, testId }: { children: ReactNode; variant?: 'primary' | 'secondary' | 'danger-text'; disabled?: boolean; grow?: boolean; testId?: string }) {
   const base = 'flex h-12 items-center justify-center gap-1.5 rounded-md px-4 text-body font-bold'
   const cls =
     variant === 'primary'
-      ? 'bg-action text-on-action disabled:bg-surface disabled:text-ink-disabled'
+      ? 'bg-action text-heading text-on-action disabled:bg-surface disabled:text-body disabled:text-ink-disabled'
       : variant === 'secondary'
         ? 'border border-line-strong bg-page text-ink'
         : 'bg-transparent text-danger-fg'
@@ -41,14 +41,14 @@ export function TextField({ value, placeholder }: { value?: string; placeholder?
   )
 }
 
-// CMP-002 SegmentedControl
+// CMP-002 SegmentedControl. (r3, DD 4.1) 선택 = color.accent.subtle 바탕 + color.text.accent 글자 + 체크 아이콘(흰 글자 on primary 미사용)
 export function Segmented({ options, value }: { options: string[]; value?: string }) {
   return (
     <div data-cmp="CMP-002" role="radiogroup" className="flex h-11 rounded-md border border-line-strong p-0.5">
       {options.map((o) => {
         const on = o === value
         return (
-          <button key={o} type="button" role="radio" aria-checked={on} className={`flex flex-1 items-center justify-center gap-1 rounded-sm text-body ${on ? 'bg-action font-bold text-on-action' : 'text-ink'}`}>
+          <button key={o} type="button" role="radio" aria-checked={on} className={`flex flex-1 items-center justify-center gap-1 rounded-sm text-body ${on ? 'bg-mint-subtle font-bold text-ink-accent' : 'text-ink'}`}>
             {on && <Check aria-hidden className="size-4" />}
             {o}
           </button>
@@ -58,14 +58,14 @@ export function Segmented({ options, value }: { options: string[]; value?: strin
   )
 }
 
-// CMP-003 ChoiceGrid: kind=grade(4열)·score(5열), 칸 최소 44×44
+// CMP-003 ChoiceGrid: kind=grade(4열)·score(5열), 칸 최소 44×44. (r3, DD 4.1) 선택 = 보조 면 + 강조 글자·테두리 2px
 export function ChoiceGrid({ options, value, cols }: { options: (string | number)[]; value?: string | number | null; cols: 4 | 5 }) {
   return (
     <div data-cmp="CMP-003" role="radiogroup" className={`grid gap-2 ${cols === 4 ? 'grid-cols-4' : 'grid-cols-5'}`}>
       {options.map((o) => {
         const on = o === value
         return (
-          <button key={o} type="button" role="radio" aria-checked={on} className={`h-11 rounded-md border text-body tabular-nums ${on ? 'border-action bg-action font-bold text-on-action' : 'border-line-strong bg-page text-ink'}`}>
+          <button key={o} type="button" role="radio" aria-checked={on} className={`h-11 rounded-md border text-body tabular-nums ${on ? 'border-2 border-ink-accent bg-mint-subtle font-bold text-ink-accent' : 'border-line-strong bg-page text-ink'}`}>
             {o}
           </button>
         )

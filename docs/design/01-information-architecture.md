@@ -1,10 +1,10 @@
 ---
 doc: information-architecture
-revision: 3
+revision: 5
 language: ko
 based_on:
   planning_revision: 7
-  ux_planning_revision: 5
+  ux_planning_revision: 6
 ---
 
 # 정보 구조 (Information Architecture): 배드민턴 플레이북 (badminton-playbook)
@@ -21,6 +21,8 @@ based_on:
 > - **구조 변경 없음**: 화면 ID·이름·라우트·셸·접근 역할·플랫폼·사이트맵 계층은 그대로입니다. SCR-101(튜토리얼 홈)은 같은 경로에서 '튜토리얼 목록'(UXD-083)으로 내용만 바뀝니다.
 > - **이동 추가**: SCR-101의 '이어서 하기'(UXD-084)가 SCR-102로 바로 갑니다(5장 전역 내비게이션 규칙).
 > - **스테이지 주소**: `:stageId`는 새 스테이지 ID(`intro-1-v1` 등, 기획 ASM-033)입니다. 개편 전 ID 주소는 '준비 중인 스테이지' 상태(SCR-102-ST5)로 처리합니다(C-28).
+
+> **r5 개정(2026-11-19)**: UX 결정 r6(UXD-077 개정)을 기준으로 맞췄습니다. 라우트·화면 목록·내비게이션은 바뀌지 않았고, 이 문서는 기준 revision만 올렸습니다.
 
 ## 1. 역할과 레이아웃 셸
 

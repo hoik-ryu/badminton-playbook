@@ -1,0 +1,3380 @@
+{
+ "res": [
+  {
+   "vp": "390x844",
+   "st": "SCR-102-PLAY",
+   "scale": 0.359,
+   "phase": null,
+   "nums": 0,
+   "circles": 0,
+   "minFont": null,
+   "maxFont": null,
+   "minTextH": null,
+   "numsInCell": 0,
+   "numsBelowNet": 0,
+   "numOpacity": [],
+   "numPlayerOverlap": [],
+   "numBubbleOverlap": 0,
+   "tiles": 0,
+   "tilesOn": null,
+   "tilesOpacity": null,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": null,
+   "cta": false
+  },
+  {
+   "vp": "390x844",
+   "st": "SCR-102-ST11",
+   "scale": 0.359,
+   "phase": null,
+   "nums": 6,
+   "circles": 0,
+   "minFont": 19.7,
+   "maxFont": 24,
+   "minTextH": 18.8,
+   "numsInCell": 6,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "2:0.96",
+    "4:0.42"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 6,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    157,
+    50
+   ],
+   "sheetH": 160,
+   "confirm": null,
+   "cta": false
+  },
+  {
+   "vp": "390x844",
+   "st": "SCR-102-ST1",
+   "scale": 0.359,
+   "phase": null,
+   "nums": 6,
+   "circles": 0,
+   "minFont": 19.7,
+   "maxFont": 24,
+   "minTextH": 18.8,
+   "numsInCell": 6,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "2:0.96",
+    "4:0.42"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 6,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    157,
+    50
+   ],
+   "sheetH": 160,
+   "confirm": null,
+   "cta": false
+  },
+  {
+   "vp": "390x844",
+   "st": "SCR-102-ST1-G9",
+   "scale": 0.359,
+   "phase": null,
+   "nums": 9,
+   "circles": 0,
+   "minFont": 19.7,
+   "maxFont": 24,
+   "minTextH": 18.8,
+   "numsInCell": 9,
+   "numsBelowNet": 9,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "2:0.55"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 9,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    105,
+    50
+   ],
+   "sheetH": 160,
+   "confirm": null,
+   "cta": false
+  },
+  {
+   "vp": "390x844",
+   "st": "SCR-102-ST12",
+   "scale": 0.359,
+   "phase": null,
+   "nums": 9,
+   "circles": 0,
+   "minFont": 19.7,
+   "maxFont": 24,
+   "minTextH": 18.8,
+   "numsInCell": 9,
+   "numsBelowNet": 9,
+   "numOpacity": [
+    "off:0.6",
+    "on:1"
+   ],
+   "numPlayerOverlap": [
+    "2:0.55"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 9,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": "3",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "true",
+    "op": 1,
+    "w": 101,
+    "h": 20,
+    "numOverlap": [],
+    "playerOverlapPx": 8,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    105,
+    50
+   ],
+   "sheetH": 160,
+   "confirm": null,
+   "cta": true
+  },
+  {
+   "vp": "390x844",
+   "st": "SCR-102-ST7",
+   "scale": 0.359,
+   "phase": null,
+   "nums": 6,
+   "circles": 0,
+   "minFont": 19.7,
+   "maxFont": 24,
+   "minTextH": 18.8,
+   "numsInCell": 0,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "1:1",
+    "3:0.5",
+    "4:0.85",
+    "6:0.5"
+   ],
+   "numBubbleOverlap": 1,
+   "tiles": 6,
+   "tilesOn": "false",
+   "tilesOpacity": 0,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": null,
+   "cta": false
+  },
+  {
+   "vp": "390x844",
+   "st": "SCR-102-ST9",
+   "scale": 0.359,
+   "phase": null,
+   "nums": 6,
+   "circles": 0,
+   "minFont": 19.7,
+   "maxFont": 24,
+   "minTextH": 18.8,
+   "numsInCell": 0,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "1:1",
+    "3:0.5"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 6,
+   "tilesOn": "false",
+   "tilesOpacity": 0,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "left",
+     "facing": "right",
+     "file": "me.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": null,
+   "cta": false
+  },
+  {
+   "vp": "390x844",
+   "st": "SCR-102-ST10",
+   "scale": 0.359,
+   "phase": null,
+   "nums": 6,
+   "circles": 0,
+   "minFont": 19.7,
+   "maxFont": 24,
+   "minTextH": 18.8,
+   "numsInCell": 0,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "1:1",
+    "3:0.5",
+    "4:0.85",
+    "6:0.5"
+   ],
+   "numBubbleOverlap": 1,
+   "tiles": 6,
+   "tilesOn": "false",
+   "tilesOpacity": 0,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": null,
+   "cta": false
+  },
+  {
+   "vp": "390x844",
+   "st": "FLOW-starter-2-선택대기",
+   "scale": 0.359,
+   "phase": "choose",
+   "nums": 6,
+   "circles": 0,
+   "minFont": 19.7,
+   "maxFont": 24,
+   "minTextH": 18.8,
+   "numsInCell": 6,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "2:0.96",
+    "4:0.42"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 6,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    157,
+    50
+   ],
+   "sheetH": 160,
+   "confirm": "false",
+   "cta": false
+  },
+  {
+   "vp": "390x844",
+   "st": "FLOW-starter-2-5번누름(직후)",
+   "scale": 0.359,
+   "phase": "choose",
+   "nums": 6,
+   "circles": 0,
+   "minFont": 19.7,
+   "maxFont": 24,
+   "minTextH": 18.8,
+   "numsInCell": 6,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6",
+    "on:0.666708"
+   ],
+   "numPlayerOverlap": [
+    "2:0.96",
+    "4:0.42"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 6,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": "5",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "true",
+    "op": 0.16677,
+    "w": 105,
+    "h": 26,
+    "numOverlap": [],
+    "playerOverlapPx": 0,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    157,
+    50
+   ],
+   "sheetH": 160,
+   "confirm": "false",
+   "cta": false
+  },
+  {
+   "vp": "390x844",
+   "st": "FLOW-starter-2-이동시작+350ms",
+   "scale": 0.359,
+   "phase": "moving",
+   "nums": 6,
+   "circles": 0,
+   "minFont": 19.7,
+   "maxFont": 24,
+   "minTextH": 18.8,
+   "numsInCell": 0,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "1:1",
+    "3:0.83"
+   ],
+   "numBubbleOverlap": 1,
+   "tiles": 6,
+   "tilesOn": "false",
+   "tilesOpacity": 0,
+   "tileSel": "5",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "false",
+    "op": 0,
+    "w": 105,
+    "h": 26,
+    "numOverlap": [],
+    "playerOverlapPx": 0,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "left",
+     "facing": "right",
+     "file": "me.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": "false",
+   "cta": false
+  },
+  {
+   "vp": "390x844",
+   "st": "FLOW-starter-2-판정",
+   "scale": 0.359,
+   "phase": "judged",
+   "nums": 6,
+   "circles": 0,
+   "minFont": 19.7,
+   "maxFont": 24,
+   "minTextH": 18.8,
+   "numsInCell": 0,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "1:1",
+    "3:0.85",
+    "5:0.5"
+   ],
+   "numBubbleOverlap": 1,
+   "tiles": 6,
+   "tilesOn": "false",
+   "tilesOpacity": 0,
+   "tileSel": "5",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "false",
+    "op": 0,
+    "w": 105,
+    "h": 26,
+    "numOverlap": [],
+    "playerOverlapPx": 0,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "left",
+     "facing": "right",
+     "file": "me.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": "false",
+   "cta": false
+  },
+  {
+   "vp": "390x844",
+   "st": "FLOW-basic-1-선택대기",
+   "scale": 0.359,
+   "phase": "choose",
+   "nums": 9,
+   "circles": 0,
+   "minFont": 19.7,
+   "maxFont": 24,
+   "minTextH": 18.8,
+   "numsInCell": 9,
+   "numsBelowNet": 9,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [],
+   "numBubbleOverlap": 0,
+   "tiles": 9,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    105,
+    50
+   ],
+   "sheetH": 160,
+   "confirm": "false",
+   "cta": false
+  },
+  {
+   "vp": "390x844",
+   "st": "FLOW-basic-1-3번누름(직후)",
+   "scale": 0.359,
+   "phase": "choose",
+   "nums": 9,
+   "circles": 0,
+   "minFont": 19.7,
+   "maxFont": 24,
+   "minTextH": 18.8,
+   "numsInCell": 9,
+   "numsBelowNet": 9,
+   "numOpacity": [
+    "off:0.6",
+    "on:0.66683"
+   ],
+   "numPlayerOverlap": [],
+   "numBubbleOverlap": 0,
+   "tiles": 9,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": "3",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "true",
+    "op": 0.167076,
+    "w": 101,
+    "h": 20,
+    "numOverlap": [],
+    "playerOverlapPx": 8,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    105,
+    50
+   ],
+   "sheetH": 160,
+   "confirm": "false",
+   "cta": false
+  },
+  {
+   "vp": "390x844",
+   "st": "FLOW-basic-1-이동시작+350ms",
+   "scale": 0.359,
+   "phase": "moving",
+   "nums": 9,
+   "circles": 0,
+   "minFont": 19.7,
+   "maxFont": 24,
+   "minTextH": 18.8,
+   "numsInCell": 0,
+   "numsBelowNet": 9,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "3:1",
+    "4:1"
+   ],
+   "numBubbleOverlap": 1,
+   "tiles": 9,
+   "tilesOn": "false",
+   "tilesOpacity": 0,
+   "tileSel": "3",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "false",
+    "op": 0,
+    "w": 101,
+    "h": 20,
+    "numOverlap": [],
+    "playerOverlapPx": 305,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": "false",
+   "cta": false
+  },
+  {
+   "vp": "390x844",
+   "st": "FLOW-basic-1-판정",
+   "scale": 0.359,
+   "phase": "judged",
+   "nums": 9,
+   "circles": 0,
+   "minFont": 19.7,
+   "maxFont": 24,
+   "minTextH": 18.8,
+   "numsInCell": 0,
+   "numsBelowNet": 9,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "3:0.5",
+    "4:0.85",
+    "7:0.5"
+   ],
+   "numBubbleOverlap": 1,
+   "tiles": 9,
+   "tilesOn": "false",
+   "tilesOpacity": 0,
+   "tileSel": "3",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "false",
+    "op": 0,
+    "w": 101,
+    "h": 20,
+    "numOverlap": [],
+    "playerOverlapPx": 0,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": "false",
+   "cta": false
+  },
+  {
+   "vp": "360x640",
+   "st": "SCR-102-PLAY",
+   "scale": 0.331,
+   "phase": "play",
+   "nums": 0,
+   "circles": 0,
+   "minFont": null,
+   "maxFont": null,
+   "minTextH": null,
+   "numsInCell": 0,
+   "numsBelowNet": 0,
+   "numOpacity": [],
+   "numPlayerOverlap": [],
+   "numBubbleOverlap": 0,
+   "tiles": 0,
+   "tilesOn": null,
+   "tilesOpacity": null,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": "false",
+   "cta": false
+  },
+  {
+   "vp": "360x640",
+   "st": "SCR-102-ST11",
+   "scale": 0.331,
+   "phase": null,
+   "nums": 6,
+   "circles": 0,
+   "minFont": 18.1,
+   "maxFont": 22.1,
+   "minTextH": 17.9,
+   "numsInCell": 6,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "2:0.94",
+    "4:0.42"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 6,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    145,
+    47
+   ],
+   "sheetH": 160,
+   "confirm": null,
+   "cta": false
+  },
+  {
+   "vp": "360x640",
+   "st": "SCR-102-ST1",
+   "scale": 0.331,
+   "phase": null,
+   "nums": 6,
+   "circles": 0,
+   "minFont": 18.1,
+   "maxFont": 22.1,
+   "minTextH": 17.9,
+   "numsInCell": 6,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "2:0.94",
+    "4:0.42"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 6,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    145,
+    47
+   ],
+   "sheetH": 160,
+   "confirm": null,
+   "cta": false
+  },
+  {
+   "vp": "360x640",
+   "st": "SCR-102-ST1-G9",
+   "scale": 0.331,
+   "phase": null,
+   "nums": 9,
+   "circles": 0,
+   "minFont": 18.1,
+   "maxFont": 22.1,
+   "minTextH": 17.9,
+   "numsInCell": 9,
+   "numsBelowNet": 9,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "2:0.54"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 9,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    97,
+    47
+   ],
+   "sheetH": 160,
+   "confirm": null,
+   "cta": false
+  },
+  {
+   "vp": "360x640",
+   "st": "SCR-102-ST12",
+   "scale": 0.331,
+   "phase": null,
+   "nums": 9,
+   "circles": 0,
+   "minFont": 18.1,
+   "maxFont": 22.1,
+   "minTextH": 17.9,
+   "numsInCell": 9,
+   "numsBelowNet": 9,
+   "numOpacity": [
+    "off:0.6",
+    "on:1"
+   ],
+   "numPlayerOverlap": [
+    "2:0.54"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 9,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": "3",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "true",
+    "op": 1,
+    "w": 101,
+    "h": 20,
+    "numOverlap": [],
+    "playerOverlapPx": 83,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    97,
+    47
+   ],
+   "sheetH": 160,
+   "confirm": null,
+   "cta": true
+  },
+  {
+   "vp": "360x640",
+   "st": "SCR-102-ST7",
+   "scale": 0.331,
+   "phase": null,
+   "nums": 6,
+   "circles": 0,
+   "minFont": 18.1,
+   "maxFont": 22.1,
+   "minTextH": 17.9,
+   "numsInCell": 0,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "1:1",
+    "3:0.5",
+    "4:0.87",
+    "6:0.5"
+   ],
+   "numBubbleOverlap": 1,
+   "tiles": 6,
+   "tilesOn": "false",
+   "tilesOpacity": 0,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": null,
+   "cta": false
+  },
+  {
+   "vp": "360x640",
+   "st": "SCR-102-ST9",
+   "scale": 0.331,
+   "phase": null,
+   "nums": 6,
+   "circles": 0,
+   "minFont": 18.1,
+   "maxFont": 22.1,
+   "minTextH": 17.9,
+   "numsInCell": 0,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "1:1",
+    "3:0.5"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 6,
+   "tilesOn": "false",
+   "tilesOpacity": 0,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "left",
+     "facing": "right",
+     "file": "me.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": null,
+   "cta": false
+  },
+  {
+   "vp": "360x640",
+   "st": "SCR-102-ST10",
+   "scale": 0.331,
+   "phase": null,
+   "nums": 6,
+   "circles": 0,
+   "minFont": 18.1,
+   "maxFont": 22.1,
+   "minTextH": 17.9,
+   "numsInCell": 0,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "1:1",
+    "3:0.5",
+    "4:0.87",
+    "6:0.5"
+   ],
+   "numBubbleOverlap": 1,
+   "tiles": 6,
+   "tilesOn": "false",
+   "tilesOpacity": 0,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": null,
+   "cta": false
+  },
+  {
+   "vp": "360x640",
+   "st": "FLOW-starter-2-선택대기",
+   "scale": 0.331,
+   "phase": "choose",
+   "nums": 6,
+   "circles": 0,
+   "minFont": 18.1,
+   "maxFont": 22.1,
+   "minTextH": 17.9,
+   "numsInCell": 6,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "2:0.94",
+    "4:0.42"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 6,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    145,
+    47
+   ],
+   "sheetH": 160,
+   "confirm": "false",
+   "cta": false
+  },
+  {
+   "vp": "360x640",
+   "st": "FLOW-starter-2-5번누름(직후)",
+   "scale": 0.331,
+   "phase": "choose",
+   "nums": 6,
+   "circles": 0,
+   "minFont": 18.1,
+   "maxFont": 22.1,
+   "minTextH": 17.9,
+   "numsInCell": 6,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6",
+    "on:0.6"
+   ],
+   "numPlayerOverlap": [
+    "2:0.94",
+    "4:0.42"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 6,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": "5",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "true",
+    "op": 0,
+    "w": 105,
+    "h": 26,
+    "numOverlap": [],
+    "playerOverlapPx": 0,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    145,
+    47
+   ],
+   "sheetH": 160,
+   "confirm": "false",
+   "cta": false
+  },
+  {
+   "vp": "360x640",
+   "st": "FLOW-starter-2-이동시작+350ms",
+   "scale": 0.331,
+   "phase": "moving",
+   "nums": 6,
+   "circles": 0,
+   "minFont": 18.1,
+   "maxFont": 22.1,
+   "minTextH": 17.9,
+   "numsInCell": 0,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "1:1",
+    "3:0.39"
+   ],
+   "numBubbleOverlap": 1,
+   "tiles": 6,
+   "tilesOn": "false",
+   "tilesOpacity": 0,
+   "tileSel": "5",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "false",
+    "op": 0,
+    "w": 105,
+    "h": 26,
+    "numOverlap": [],
+    "playerOverlapPx": 0,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "left",
+     "facing": "right",
+     "file": "me.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": "false",
+   "cta": false
+  },
+  {
+   "vp": "360x640",
+   "st": "FLOW-starter-2-판정",
+   "scale": 0.331,
+   "phase": "judged",
+   "nums": 6,
+   "circles": 0,
+   "minFont": 18.1,
+   "maxFont": 22.1,
+   "minTextH": 17.9,
+   "numsInCell": 0,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "1:1",
+    "3:0.87",
+    "5:0.5"
+   ],
+   "numBubbleOverlap": 1,
+   "tiles": 6,
+   "tilesOn": "false",
+   "tilesOpacity": 0,
+   "tileSel": "5",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "false",
+    "op": 0,
+    "w": 105,
+    "h": 26,
+    "numOverlap": [],
+    "playerOverlapPx": 0,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "left",
+     "facing": "right",
+     "file": "me.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": "false",
+   "cta": false
+  },
+  {
+   "vp": "360x640",
+   "st": "FLOW-basic-1-선택대기",
+   "scale": 0.331,
+   "phase": "choose",
+   "nums": 9,
+   "circles": 0,
+   "minFont": 18.1,
+   "maxFont": 22.1,
+   "minTextH": 17.9,
+   "numsInCell": 9,
+   "numsBelowNet": 9,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [],
+   "numBubbleOverlap": 0,
+   "tiles": 9,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    97,
+    47
+   ],
+   "sheetH": 160,
+   "confirm": "false",
+   "cta": false
+  },
+  {
+   "vp": "360x640",
+   "st": "FLOW-basic-1-3번누름(직후)",
+   "scale": 0.331,
+   "phase": "choose",
+   "nums": 9,
+   "circles": 0,
+   "minFont": 18.1,
+   "maxFont": 22.1,
+   "minTextH": 17.9,
+   "numsInCell": 9,
+   "numsBelowNet": 9,
+   "numOpacity": [
+    "off:0.6",
+    "on:0.6"
+   ],
+   "numPlayerOverlap": [],
+   "numBubbleOverlap": 0,
+   "tiles": 9,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": "3",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "true",
+    "op": 0,
+    "w": 101,
+    "h": 20,
+    "numOverlap": [],
+    "playerOverlapPx": 83,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    97,
+    47
+   ],
+   "sheetH": 160,
+   "confirm": "false",
+   "cta": false
+  },
+  {
+   "vp": "360x640",
+   "st": "FLOW-basic-1-이동시작+350ms",
+   "scale": 0.331,
+   "phase": "moving",
+   "nums": 9,
+   "circles": 0,
+   "minFont": 18.1,
+   "maxFont": 22.1,
+   "minTextH": 17.9,
+   "numsInCell": 0,
+   "numsBelowNet": 9,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "3:1",
+    "4:1"
+   ],
+   "numBubbleOverlap": 1,
+   "tiles": 9,
+   "tilesOn": "false",
+   "tilesOpacity": 0,
+   "tileSel": "3",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "false",
+    "op": 0,
+    "w": 101,
+    "h": 20,
+    "numOverlap": [],
+    "playerOverlapPx": 77,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": "false",
+   "cta": false
+  },
+  {
+   "vp": "360x640",
+   "st": "FLOW-basic-1-판정",
+   "scale": 0.331,
+   "phase": "judged",
+   "nums": 9,
+   "circles": 0,
+   "minFont": 18.1,
+   "maxFont": 22.1,
+   "minTextH": 17.9,
+   "numsInCell": 0,
+   "numsBelowNet": 9,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "3:0.5",
+    "4:0.87",
+    "7:0.5"
+   ],
+   "numBubbleOverlap": 1,
+   "tiles": 9,
+   "tilesOn": "false",
+   "tilesOpacity": 0,
+   "tileSel": "3",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "false",
+    "op": 0,
+    "w": 101,
+    "h": 20,
+    "numOverlap": [],
+    "playerOverlapPx": 0,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": "false",
+   "cta": false
+  },
+  {
+   "vp": "360x560",
+   "st": "SCR-102-PLAY",
+   "scale": 0.259,
+   "phase": "play",
+   "nums": 0,
+   "circles": 0,
+   "minFont": null,
+   "maxFont": null,
+   "minTextH": null,
+   "numsInCell": 0,
+   "numsBelowNet": 0,
+   "numOpacity": [],
+   "numPlayerOverlap": [],
+   "numBubbleOverlap": 0,
+   "tiles": 0,
+   "tilesOn": null,
+   "tilesOpacity": null,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": "true",
+   "cta": false
+  },
+  {
+   "vp": "360x560",
+   "st": "SCR-102-ST11",
+   "scale": 0.282,
+   "phase": null,
+   "nums": 6,
+   "circles": 0,
+   "minFont": 15.4,
+   "maxFont": 18.8,
+   "minTextH": 14.3,
+   "numsInCell": 6,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "2:0.97",
+    "4:0.41"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 6,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    123,
+    40
+   ],
+   "sheetH": 160,
+   "confirm": null,
+   "cta": false
+  },
+  {
+   "vp": "360x560",
+   "st": "SCR-102-ST1",
+   "scale": 0.282,
+   "phase": null,
+   "nums": 6,
+   "circles": 0,
+   "minFont": 15.4,
+   "maxFont": 18.8,
+   "minTextH": 14.3,
+   "numsInCell": 6,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "2:0.97",
+    "4:0.41"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 6,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    123,
+    40
+   ],
+   "sheetH": 160,
+   "confirm": null,
+   "cta": false
+  },
+  {
+   "vp": "360x560",
+   "st": "SCR-102-ST1-G9",
+   "scale": 0.259,
+   "phase": null,
+   "nums": 9,
+   "circles": 0,
+   "minFont": 14.2,
+   "maxFont": 17.3,
+   "minTextH": 13.5,
+   "numsInCell": 9,
+   "numsBelowNet": 9,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "2:0.55"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 9,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    75,
+    36
+   ],
+   "sheetH": 160,
+   "confirm": null,
+   "cta": false
+  },
+  {
+   "vp": "360x560",
+   "st": "SCR-102-ST12",
+   "scale": 0.259,
+   "phase": null,
+   "nums": 9,
+   "circles": 0,
+   "minFont": 14.2,
+   "maxFont": 17.3,
+   "minTextH": 13.5,
+   "numsInCell": 9,
+   "numsBelowNet": 9,
+   "numOpacity": [
+    "off:0.6",
+    "on:1"
+   ],
+   "numPlayerOverlap": [
+    "2:0.55"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 9,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": "3",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "true",
+    "op": 1,
+    "w": 101,
+    "h": 20,
+    "numOverlap": [],
+    "playerOverlapPx": 438,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    75,
+    36
+   ],
+   "sheetH": 160,
+   "confirm": null,
+   "cta": true
+  },
+  {
+   "vp": "360x560",
+   "st": "SCR-102-ST7",
+   "scale": 0.282,
+   "phase": null,
+   "nums": 6,
+   "circles": 0,
+   "minFont": 15.4,
+   "maxFont": 18.8,
+   "minTextH": 14.3,
+   "numsInCell": 0,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "1:1",
+    "3:0.5",
+    "4:0.85",
+    "6:0.5"
+   ],
+   "numBubbleOverlap": 1,
+   "tiles": 6,
+   "tilesOn": "false",
+   "tilesOpacity": 0,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": null,
+   "cta": false
+  },
+  {
+   "vp": "360x560",
+   "st": "SCR-102-ST9",
+   "scale": 0.282,
+   "phase": null,
+   "nums": 6,
+   "circles": 0,
+   "minFont": 15.4,
+   "maxFont": 18.8,
+   "minTextH": 14.3,
+   "numsInCell": 0,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "1:1",
+    "3:0.5"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 6,
+   "tilesOn": "false",
+   "tilesOpacity": 0,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "left",
+     "facing": "right",
+     "file": "me.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": null,
+   "cta": false
+  },
+  {
+   "vp": "360x560",
+   "st": "SCR-102-ST10",
+   "scale": 0.282,
+   "phase": null,
+   "nums": 6,
+   "circles": 0,
+   "minFont": 15.4,
+   "maxFont": 18.8,
+   "minTextH": 14.3,
+   "numsInCell": 0,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "1:1",
+    "3:0.5",
+    "4:0.85",
+    "6:0.5"
+   ],
+   "numBubbleOverlap": 1,
+   "tiles": 6,
+   "tilesOn": "false",
+   "tilesOpacity": 0,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": null,
+   "cta": false
+  },
+  {
+   "vp": "360x560",
+   "st": "FLOW-starter-2-선택대기",
+   "scale": 0.282,
+   "phase": "choose",
+   "nums": 6,
+   "circles": 0,
+   "minFont": 15.4,
+   "maxFont": 18.8,
+   "minTextH": 14.3,
+   "numsInCell": 6,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "2:0.97",
+    "4:0.41"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 6,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    123,
+    40
+   ],
+   "sheetH": 160,
+   "confirm": "true",
+   "cta": false
+  },
+  {
+   "vp": "360x560",
+   "st": "FLOW-starter-2-5번누름(직후)",
+   "scale": 0.282,
+   "phase": "choose",
+   "nums": 6,
+   "circles": 0,
+   "minFont": 15.4,
+   "maxFont": 18.8,
+   "minTextH": 14.3,
+   "numsInCell": 6,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6",
+    "on:0.6"
+   ],
+   "numPlayerOverlap": [
+    "2:0.97",
+    "4:0.41"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 6,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": "5",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "true",
+    "op": 0,
+    "w": 105,
+    "h": 26,
+    "numOverlap": [],
+    "playerOverlapPx": 0,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    123,
+    40
+   ],
+   "sheetH": 160,
+   "confirm": "true",
+   "cta": true
+  },
+  {
+   "vp": "360x560",
+   "st": "FLOW-starter-2-2번으로변경",
+   "scale": 0.282,
+   "phase": "choose",
+   "nums": 6,
+   "circles": 0,
+   "minFont": 15.4,
+   "maxFont": 18.8,
+   "minTextH": 14.3,
+   "numsInCell": 6,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6",
+    "on:0.666528",
+    "off:0.93073"
+   ],
+   "numPlayerOverlap": [
+    "2:0.97",
+    "4:0.41"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 6,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": "2",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "true",
+    "op": 1,
+    "w": 101,
+    "h": 20,
+    "numOverlap": [],
+    "playerOverlapPx": 26,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    123,
+    40
+   ],
+   "sheetH": 160,
+   "confirm": "true",
+   "cta": true
+  },
+  {
+   "vp": "360x560",
+   "st": "FLOW-starter-2-이동시작+350ms",
+   "scale": 0.282,
+   "phase": "moving",
+   "nums": 6,
+   "circles": 0,
+   "minFont": 15.4,
+   "maxFont": 18.8,
+   "minTextH": 14.3,
+   "numsInCell": 0,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "1:1",
+    "2:1"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 6,
+   "tilesOn": "false",
+   "tilesOpacity": 0,
+   "tileSel": "2",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "false",
+    "op": 0,
+    "w": 101,
+    "h": 20,
+    "numOverlap": [],
+    "playerOverlapPx": 328,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": "true",
+   "cta": false
+  },
+  {
+   "vp": "360x560",
+   "st": "FLOW-starter-2-판정",
+   "scale": 0.282,
+   "phase": "judged",
+   "nums": 6,
+   "circles": 0,
+   "minFont": 15.4,
+   "maxFont": 18.8,
+   "minTextH": 14.3,
+   "numsInCell": 0,
+   "numsBelowNet": 6,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "1:1",
+    "2:0.5",
+    "3:0.5"
+   ],
+   "numBubbleOverlap": 0,
+   "tiles": 6,
+   "tilesOn": "false",
+   "tilesOpacity": 0,
+   "tileSel": "2",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "false",
+    "op": 0,
+    "w": 101,
+    "h": 20,
+    "numOverlap": [],
+    "playerOverlapPx": 0,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": "true",
+   "cta": false
+  },
+  {
+   "vp": "360x560",
+   "st": "FLOW-basic-1-선택대기",
+   "scale": 0.259,
+   "phase": "choose",
+   "nums": 9,
+   "circles": 0,
+   "minFont": 14.2,
+   "maxFont": 17.3,
+   "minTextH": 13.5,
+   "numsInCell": 9,
+   "numsBelowNet": 9,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [],
+   "numBubbleOverlap": 0,
+   "tiles": 9,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": null,
+   "tilesAboveNet": 0,
+   "go": null,
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    75,
+    36
+   ],
+   "sheetH": 160,
+   "confirm": "true",
+   "cta": false
+  },
+  {
+   "vp": "360x560",
+   "st": "FLOW-basic-1-3번누름(직후)",
+   "scale": 0.259,
+   "phase": "choose",
+   "nums": 9,
+   "circles": 0,
+   "minFont": 14.2,
+   "maxFont": 17.3,
+   "minTextH": 13.5,
+   "numsInCell": 9,
+   "numsBelowNet": 9,
+   "numOpacity": [
+    "off:0.6",
+    "on:0.6"
+   ],
+   "numPlayerOverlap": [],
+   "numBubbleOverlap": 0,
+   "tiles": 9,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": "3",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "true",
+    "op": 0,
+    "w": 101,
+    "h": 20,
+    "numOverlap": [],
+    "playerOverlapPx": 438,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    75,
+    36
+   ],
+   "sheetH": 160,
+   "confirm": "true",
+   "cta": true
+  },
+  {
+   "vp": "360x560",
+   "st": "FLOW-basic-1-8번으로변경",
+   "scale": 0.259,
+   "phase": "choose",
+   "nums": 9,
+   "circles": 0,
+   "minFont": 14.2,
+   "maxFont": 17.3,
+   "minTextH": 13.5,
+   "numsInCell": 9,
+   "numsBelowNet": 9,
+   "numOpacity": [
+    "off:0.6",
+    "off:0.930342",
+    "on:0.666911"
+   ],
+   "numPlayerOverlap": [],
+   "numBubbleOverlap": 0,
+   "tiles": 9,
+   "tilesOn": "true",
+   "tilesOpacity": 1,
+   "tileSel": "8",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "true",
+    "op": 1,
+    "w": 101,
+    "h": 20,
+    "numOverlap": [],
+    "playerOverlapPx": 0,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 0,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": [
+    75,
+    36
+   ],
+   "sheetH": 160,
+   "confirm": "true",
+   "cta": true
+  },
+  {
+   "vp": "360x560",
+   "st": "FLOW-basic-1-이동시작+350ms",
+   "scale": 0.259,
+   "phase": "moving",
+   "nums": 9,
+   "circles": 0,
+   "minFont": 14.2,
+   "maxFont": 17.3,
+   "minTextH": 13.5,
+   "numsInCell": 0,
+   "numsBelowNet": 9,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "4:1",
+    "5:1"
+   ],
+   "numBubbleOverlap": 2,
+   "tiles": 9,
+   "tilesOn": "false",
+   "tilesOpacity": 0,
+   "tileSel": "8",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "false",
+    "op": 0,
+    "w": 101,
+    "h": 20,
+    "numOverlap": [],
+    "playerOverlapPx": 0,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "right",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": "true",
+   "cta": false
+  },
+  {
+   "vp": "360x560",
+   "st": "FLOW-basic-1-판정",
+   "scale": 0.259,
+   "phase": "judged",
+   "nums": 9,
+   "circles": 0,
+   "minFont": 14.2,
+   "maxFont": 17.3,
+   "minTextH": 13.5,
+   "numsInCell": 0,
+   "numsBelowNet": 9,
+   "numOpacity": [
+    "off:0.6"
+   ],
+   "numPlayerOverlap": [
+    "4:0.86",
+    "5:0.86",
+    "7:0.5",
+    "8:0.5"
+   ],
+   "numBubbleOverlap": 2,
+   "tiles": 9,
+   "tilesOn": "false",
+   "tilesOpacity": 0,
+   "tileSel": "8",
+   "tilesAboveNet": 0,
+   "go": {
+    "on": "false",
+    "op": 0,
+    "w": 101,
+    "h": 20,
+    "numOverlap": [],
+    "playerOverlapPx": 0,
+    "inBox": true,
+    "sheetOverlap": false
+   },
+   "bubbles": 2,
+   "players": [
+    {
+     "id": "oppF",
+     "side": "left",
+     "facing": "right",
+     "file": "oppF-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "oppM",
+     "side": "right",
+     "facing": "left",
+     "file": "oppM-flipped.webp",
+     "ok": true
+    },
+    {
+     "id": "partner",
+     "side": "left",
+     "facing": "right",
+     "file": "partner.webp",
+     "ok": true
+    },
+    {
+     "id": "me",
+     "side": "left",
+     "facing": "left",
+     "file": "me-flipped.webp",
+     "ok": true
+    }
+   ],
+   "hitMin": null,
+   "sheetH": 160,
+   "confirm": "true",
+   "cta": false
+  }
+ ],
+ "consoleErrors": []
+}

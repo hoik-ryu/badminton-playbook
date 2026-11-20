@@ -1,0 +1,160 @@
+{
+ "me": {
+  "file": "me.webp",
+  "w": 399,
+  "h": 420,
+  "footX": 0.4974,
+  "source": "game-images/나.png",
+  "sourceSha256": "c76bb6c4f6d090de93a96832dde4b3611186ff5d65b2d27934951f8031721882",
+  "variant-original": {
+   "file": "me.webp",
+   "w": 399,
+   "h": 420,
+   "footX": 0.4974,
+   "faces": "right",
+   "bbox": [
+    145,
+    87,
+    1151,
+    1147
+   ]
+  },
+  "variant-flipped": {
+   "file": "me-flipped.webp",
+   "w": 399,
+   "h": 420,
+   "footX": 0.5016,
+   "faces": "left",
+   "bbox": [
+    160,
+    87,
+    1166,
+    1147
+   ]
+  },
+  "flippedPng": "player-me-flipped.png",
+  "flippedPngSha256": "ceae043175e5b03e4f9814a69a27922c441f49df55e3689abbd77e25d3793e79"
+ },
+ "partner": {
+  "file": "partner.webp",
+  "w": 337,
+  "h": 420,
+  "footX": 0.5829,
+  "source": "game-images/우리편 여자.png",
+  "sourceSha256": "703cc1ac5ae90ca8d6d22d60a7ae61fc0b3cb186b441237bf507d20dbd168d70",
+  "variant-original": {
+   "file": "partner.webp",
+   "w": 337,
+   "h": 420,
+   "footX": 0.5829,
+   "faces": "right",
+   "bbox": [
+    256,
+    88,
+    1075,
+    1108
+   ]
+  },
+  "variant-flipped": {
+   "file": "partner-flipped.webp",
+   "w": 337,
+   "h": 420,
+   "footX": 0.4159,
+   "faces": "left",
+   "bbox": [
+    236,
+    88,
+    1055,
+    1108
+   ]
+  },
+  "flippedPng": "player-partner-flipped.png",
+  "flippedPngSha256": "ac1fa43f644c39738170673ca20d1d66a64fce9bd34c5b58e2569e5109b3393f"
+ },
+ "oppM": {
+  "file": "oppM.webp",
+  "w": 351,
+  "h": 420,
+  "footX": 0.376,
+  "source": "game-images/상대편 남자.png",
+  "sourceSha256": "14ce1f8671f79c197aa04045f5f250e315b280c764968d4f1a8ab4e3c1476be4",
+  "variant-original": {
+   "file": "oppM.webp",
+   "w": 351,
+   "h": 420,
+   "footX": 0.376,
+   "faces": "right",
+   "bbox": [
+    207,
+    59,
+    1120,
+    1151
+   ]
+  },
+  "variant-flipped": {
+   "file": "oppM-flipped.webp",
+   "w": 351,
+   "h": 420,
+   "footX": 0.6229,
+   "faces": "left",
+   "bbox": [
+    191,
+    59,
+    1104,
+    1151
+   ]
+  },
+  "flippedPng": "player-opp-male-flipped.png",
+  "flippedPngSha256": "54e20be1ed88506fe12947079f411b34444d0e593a9466b6bd87f85a26736bc0"
+ },
+ "oppF": {
+  "file": "oppF.webp",
+  "w": 360,
+  "h": 420,
+  "footX": 0.5553,
+  "source": "game-images/상대편 여자.png",
+  "sourceSha256": "ed800ffc52c285136837f734b4cad92d95bdcd450b10575f6d9c99703a9ff74e",
+  "variant-original": {
+   "file": "oppF.webp",
+   "w": 360,
+   "h": 420,
+   "footX": 0.5553,
+   "faces": "left",
+   "bbox": [
+    219,
+    134,
+    1030,
+    1081
+   ]
+  },
+  "variant-flipped": {
+   "file": "oppF-flipped.webp",
+   "w": 360,
+   "h": 420,
+   "footX": 0.4435,
+   "faces": "right",
+   "bbox": [
+    281,
+    134,
+    1092,
+    1081
+   ]
+  },
+  "flippedPng": "player-opp-female-flipped.png",
+  "flippedPngSha256": "30a9fea67082507484ae2bb0e301cde7a2a6b773c6cfcc5dba398d17fc132130"
+ },
+ "shuttle": {
+  "file": "shuttle.webp",
+  "w": 160,
+  "h": 156,
+  "source": "game-images/셔틀콕.png",
+  "sourceSha256": "fe78bb41ff9cf8b68d77b94a302b6129a458963030dd258fac5d4a94a269f5c7"
+ },
+ "stadium": {
+  "file": "stadium.webp",
+  "w": 1086,
+  "h": 1448,
+  "source": "game-images/경기장.png",
+  "sourceSha256": "0110deea8d598b65a092cdaa764bca7d80838d06c0cbb2f5745fd0f543ef2dcf"
+ }
+}

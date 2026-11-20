@@ -1,8 +1,12 @@
-/* 디자인 토큰(생성): 승인 04 토큰 + docs/design-profile/theme.json(C안 테마 값). 원본: /product-design theme-check --print-css. 손으로 값을 바꾸지 않습니다. */
+/* 디자인 토큰(생성): 승인 04 토큰 + docs/design-profile/theme.json(C안 테마 값). 원본: /product-design theme-check --print-css. 손으로 값을 바꾸지 않습니다.
+   (2026-11-20, 튜토리얼 4단계) UX Spec r4에서 승인된 새 토큰 3개(accent.mint·accent.subtle·text.accent)만 theme-check 출력값 그대로 추가했습니다.
+   나머지 테마 값(action.primary·bg.page·focus.ring)의 DD r6 테마 반영은 앱 전체에 영향이 있어 별도 결정 대기입니다. */
 :root {
   --breakpoint-base: 0–767px;
   --breakpoint-desktop: ≥1024px;
   --breakpoint-tablet: 768–1023px;
+  --color-accent-mint: #8EE3CC;
+  --color-accent-subtle: #DDF8EF;
   --color-action-onPrimary: #FFFFFF;
   --color-action-primary: #006D68;
   --color-bg-page: #FFFFFF;
@@ -27,6 +31,7 @@
   --color-team-blue-fg: #1747A6;
   --color-team-white-bg: #FFFFFF;
   --color-team-white-fg: #1A1D23;
+  --color-text-accent: #10776C;
   --color-text-disabled: #6B7280;
   --color-text-primary: #1A1D23;
   --color-text-secondary: #545A65;

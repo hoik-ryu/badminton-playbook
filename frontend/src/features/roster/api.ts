@@ -5,6 +5,7 @@ import type { Gender, Grade } from '../auth/types'
 import { clubRecordOf, guestClubInvolvement, removeGuestFromClubMatches } from '../clubmatch/api'
 import { rankFor } from '../me/rank'
 import { passedCountsOf } from '../tutorial/api'
+import type { CoursePassCount } from '../tutorial/mockRegistry'
 import { discardGuestFromSessions, guestSessionInvolvement } from '../session/api'
 
 const dataSource = featureSource('roster') // api 모드: backend/app/modules/roster(I1)
@@ -34,7 +35,8 @@ export type MemberStatus = {
   rank: 'S' | 'A' | 'B' | 'C' | null
   gamesToRank: number | null
   record: { games: number; wins: number; losses: number }
-  tutorial: { beginner: number; novice: number; total: number }
+  /** 출시된 과정별 통과 스테이지 수 / 스테이지 수(AC-100 r7) */
+  tutorial: CoursePassCount[]
   recommended: boolean
 }
 
@@ -77,7 +79,7 @@ export async function getMemberStatus(id: string): Promise<MemberStatus> {
   const wins = u.record.wins + club.wins
   const games = u.record.games + club.wins + club.losses
   const { rank, gamesToRank } = rankFor(games, wins)
-  return mockDelay({ referrer: u.referrer, rank, gamesToRank, record: { games, wins, losses: games - wins }, tutorial: { ...passedCountsOf(db, id), total: 3 }, recommended: isRecommended(u) }, 300)
+  return mockDelay({ referrer: u.referrer, rank, gamesToRank, record: { games, wins, losses: games - wins }, tutorial: passedCountsOf(db, id), recommended: isRecommended(u) }, 300)
 }
 
 export async function getGuestDeleteInfo(id: string): Promise<GuestDeleteInfo> {

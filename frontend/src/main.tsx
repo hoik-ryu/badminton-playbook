@@ -6,6 +6,7 @@ import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css' // V
 import './styles/tokens.css'
 import './styles/tailwind.css'
 import './styles/base.css'
+import './styles/tutorial.css'
 // 인트로 결정은 라우터가 '/'를 리다이렉트하기 전에 계산해야 하므로 라우터보다 먼저 import
 import './features/intro/initialEntry'
 import { router } from './routes/router'

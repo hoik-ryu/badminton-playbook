@@ -1,0 +1,1384 @@
+{
+  "format": "design-assets/v1",
+  "icon_style": {
+    "style": "outline",
+    "stroke_width": 2.0,
+    "grid": 24,
+    "linecap": "round",
+    "color": "currentColor",
+    "statement": "승인된 VD-002(사용자 결정 2026-11-10): lucide-react 아이콘만 씀 — Lucide 기본 스타일(외곽선, 선 굵기 2, 24 격자, 둥근 선 끝)을 그대로 기록",
+    "at": "2026-11-19T00:05:28Z"
+  },
+  "assets": {
+    "AST-001": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [],
+      "depicts": "하단 탭 튜토리얼 아이콘(Lucide graduation-cap v1.70.0)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:02:52Z",
+      "file": "design-profile/assets/AST-001.svg",
+      "sha256": "c59ddf6c92d493fcc4cf7e2523dc9396b13ba7028fc3d5f27e87dff14a30805a",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 387
+    },
+    "AST-002": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "model_drawn",
+      "refs": [],
+      "depicts": "튜토리얼 소개 배너 장식 셔틀콕(모델 제작 SVG, REF-001 원본 미사용)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:03:00Z",
+      "file": "design-profile/assets/AST-002.svg",
+      "sha256": "99fe6d184b35cc24f346c2c5b94091d153419dec1e5d2bce5fd327bcfebea82f",
+      "format": "svg",
+      "width": 200,
+      "height": 210,
+      "bytes": 2676
+    },
+    "AST-003": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "model_drawn",
+      "refs": [],
+      "depicts": "스테이지 intro-1 미니 코트 썸네일(TutorialCourt 좌표 재사용, 모델 제작)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:03:00Z",
+      "file": "design-profile/assets/AST-003.svg",
+      "sha256": "cef8a98899841947c6b51c143eb61bfd9415423afbc93adf0fbc1df1bd601128",
+      "format": "svg",
+      "width": 160,
+      "height": 96,
+      "bytes": 2871
+    },
+    "AST-004": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "model_drawn",
+      "refs": [],
+      "depicts": "스테이지 intro-2 미니 코트 썸네일(TutorialCourt 좌표 재사용, 모델 제작)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:03:00Z",
+      "file": "design-profile/assets/AST-004.svg",
+      "sha256": "698a63cbc58c01335f34d5a1dee7ef09db2f314ec841abf02cad856987ebaf12",
+      "format": "svg",
+      "width": 160,
+      "height": 96,
+      "bytes": 2401
+    },
+    "AST-005": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "model_drawn",
+      "refs": [],
+      "depicts": "스테이지 starter-1 미니 코트 썸네일(TutorialCourt 좌표 재사용, 모델 제작)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:03:00Z",
+      "file": "design-profile/assets/AST-005.svg",
+      "sha256": "04f8cc34de7599a5882a5c1124f4900549c2df4cc9820f6e61eb3e7c0a93aa9f",
+      "format": "svg",
+      "width": 160,
+      "height": 96,
+      "bytes": 2400
+    },
+    "AST-006": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "model_drawn",
+      "refs": [],
+      "depicts": "스테이지 starter-2 미니 코트 썸네일(TutorialCourt 좌표 재사용, 모델 제작)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:03:00Z",
+      "file": "design-profile/assets/AST-006.svg",
+      "sha256": "16d5e9fa0c8d8a451a23b4eeaa36854d6a6d85a28766a3f991c2440d331b067f",
+      "format": "svg",
+      "width": 160,
+      "height": 96,
+      "bytes": 2722
+    },
+    "AST-007": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "model_drawn",
+      "refs": [],
+      "depicts": "스테이지 starter-3 미니 코트 썸네일(TutorialCourt 좌표 재사용, 모델 제작)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:03:00Z",
+      "file": "design-profile/assets/AST-007.svg",
+      "sha256": "82bf48db175cb6dec10e15ab4bde7b1d0e34371e716f9fb05ee8e87c7dc69236",
+      "format": "svg",
+      "width": 160,
+      "height": 96,
+      "bytes": 2559
+    },
+    "AST-008": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "model_drawn",
+      "refs": [],
+      "depicts": "스테이지 basic-1 미니 코트 썸네일(TutorialCourt 좌표 재사용, 모델 제작)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:03:01Z",
+      "file": "design-profile/assets/AST-008.svg",
+      "sha256": "6638d74e920a8262a3ab7bd0e597f768d09c970933da54d5f19abf950ba70d20",
+      "format": "svg",
+      "width": 160,
+      "height": 96,
+      "bytes": 2398
+    },
+    "AST-009": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "model_drawn",
+      "refs": [],
+      "depicts": "스테이지 basic-2 미니 코트 썸네일(TutorialCourt 좌표 재사용, 모델 제작)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:03:01Z",
+      "file": "design-profile/assets/AST-009.svg",
+      "sha256": "f1877670b9198844daaf39613ce4fd81010529a7214b1a3f6c1069bbf8f707eb",
+      "format": "svg",
+      "width": 160,
+      "height": 96,
+      "bytes": 2718
+    },
+    "AST-010": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "model_drawn",
+      "refs": [],
+      "depicts": "스테이지 basic-3 미니 코트 썸네일(TutorialCourt 좌표 재사용, 모델 제작)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:03:01Z",
+      "file": "design-profile/assets/AST-010.svg",
+      "sha256": "9118955e2a2bc25b2210eb6e956650d3fe1f519484fd2183bdf0264c535da3c1",
+      "format": "svg",
+      "width": 160,
+      "height": 96,
+      "bytes": 2720
+    },
+    "AST-011": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "model_drawn",
+      "refs": [],
+      "depicts": "입문자 과정 장식 아이콘(새싹)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:03:01Z",
+      "file": "design-profile/assets/AST-011.svg",
+      "sha256": "72e94602befcad9603f8458ecd82ee63cd2455a0eb50c71b510fad2ea4718709",
+      "format": "svg",
+      "width": 32,
+      "height": 32,
+      "bytes": 401
+    },
+    "AST-012": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "model_drawn",
+      "refs": [],
+      "depicts": "왕초급 과정 장식 아이콘(왕관)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:03:01Z",
+      "file": "design-profile/assets/AST-012.svg",
+      "sha256": "026c600d6662a2d4fc81775936ce5f25515d4aa0d8c0ebacb5dea162b302f2ed",
+      "format": "svg",
+      "width": 32,
+      "height": 32,
+      "bytes": 536
+    },
+    "AST-013": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "model_drawn",
+      "refs": [],
+      "depicts": "초급 과정 장식 아이콘(메달)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:03:01Z",
+      "file": "design-profile/assets/AST-013.svg",
+      "sha256": "b3e802770a237cde0bfda93e86184cb99c4677492eff7344f458f19a7f66c4c4",
+      "format": "svg",
+      "width": 32,
+      "height": 32,
+      "bytes": 358
+    },
+    "AST-014": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [],
+      "depicts": "하단 탭 청백전 아이콘(Lucide swords v1.70.0)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:03:08Z",
+      "file": "design-profile/assets/AST-014.svg",
+      "sha256": "423931822a54c885734d040f322697172d5fe8f682c97e075987f4bf10181ca0",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 511
+    },
+    "AST-015": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [],
+      "depicts": "하단 탭 아이콘(Lucide circle-user-round v1.70.0)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:03:14Z",
+      "file": "design-profile/assets/AST-015.svg",
+      "sha256": "968cc037f6491c5618c541edfe7d604a7df29fcf5d0274e6f17145d669961f56",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 305
+    },
+    "AST-016": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [],
+      "depicts": "하단 탭 아이콘(Lucide clipboard-list v1.70.0)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:03:14Z",
+      "file": "design-profile/assets/AST-016.svg",
+      "sha256": "529444b462f004fa981f8cdc5deb95c2014456557f865bc84cdee7bfafb1feb1",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 415
+    },
+    "AST-017": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "model_drawn",
+      "refs": [],
+      "depicts": "배너 셔틀콕 개선 SVG(임시 후보, 이미지 생성 결정 전까지)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:23:36Z",
+      "file": "design-profile/assets/AST-017.svg",
+      "sha256": "7e8b36f44a59e021dcbe6a099ee746c616151151cd906441a96de4afdb32844f",
+      "format": "svg",
+      "width": 200,
+      "height": 215,
+      "bytes": 4299
+    },
+    "AST-018": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "model_drawn",
+      "refs": [],
+      "depicts": "입문자1 썸네일: 6칸 번호 격자와 탭(TutorialCourt 좌표계 기반 장식)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:23:36Z",
+      "file": "design-profile/assets/AST-018.svg",
+      "sha256": "fd2578555b9ff71d3c1bfc11138f324fda73fe55136acbc329f19766dbe6897a",
+      "format": "svg",
+      "width": 160,
+      "height": 96,
+      "bytes": 3729
+    },
+    "AST-019": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "model_drawn",
+      "refs": [],
+      "depicts": "입문자2 썸네일: 기본 자리 표시와 복귀 화살표",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:23:36Z",
+      "file": "design-profile/assets/AST-019.svg",
+      "sha256": "7d1bb2f5f239f523c89fa94a6d09f53b8b7e8dd50bd5f2f77dd44df8a9d51e42",
+      "format": "svg",
+      "width": 160,
+      "height": 96,
+      "bytes": 3218
+    },
+    "AST-020": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "model_drawn",
+      "refs": [],
+      "depicts": "왕초급1 썸네일: 나란히 선 두 선수와 방패",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:23:36Z",
+      "file": "design-profile/assets/AST-020.svg",
+      "sha256": "59d914fa674d0e5de8a278dd2fbb860686953c6b24613a3991510caa8a27de4d",
+      "format": "svg",
+      "width": 160,
+      "height": 96,
+      "bytes": 3335
+    },
+    "AST-021": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "model_drawn",
+      "refs": [],
+      "depicts": "왕초급2 썸네일: 좌우 담당 영역 구분과 셔틀",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:23:36Z",
+      "file": "design-profile/assets/AST-021.svg",
+      "sha256": "1fb032933a302a6bd7add23e24a3e986bd3e7533af2cdcfbc1a85bbca110ab3e",
+      "format": "svg",
+      "width": 160,
+      "height": 96,
+      "bytes": 3061
+    },
+    "AST-022": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "model_drawn",
+      "refs": [],
+      "depicts": "왕초급3 썸네일: 라켓으로 받기와 복귀 화살표",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:23:36Z",
+      "file": "design-profile/assets/AST-022.svg",
+      "sha256": "2781fc8e83d60926cbc8a6f872e9c50f52e91c14382fb296ad686b076f7e4ac6",
+      "format": "svg",
+      "width": 160,
+      "height": 96,
+      "bytes": 5234
+    },
+    "AST-023": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "model_drawn",
+      "refs": [],
+      "depicts": "초급1 썸네일: 앞·뒤 공격 대형과 공격 방향",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:23:36Z",
+      "file": "design-profile/assets/AST-023.svg",
+      "sha256": "0bacdedbe169e249d0152125959105a0a835256999f69b4dc2d092aa6674016c",
+      "format": "svg",
+      "width": 160,
+      "height": 96,
+      "bytes": 3750
+    },
+    "AST-024": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "model_drawn",
+      "refs": [],
+      "depicts": "초급2 썸네일: 공격(앞뒤) → 수비(나란히) 전환 두 장면",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:23:36Z",
+      "file": "design-profile/assets/AST-024.svg",
+      "sha256": "1471d498fe79a90816f627fc6f7b9405b943ba9be2af5918d2c6b48b56d86061",
+      "format": "svg",
+      "width": 160,
+      "height": 96,
+      "bytes": 3193
+    },
+    "AST-025": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "model_drawn",
+      "refs": [],
+      "depicts": "초급3 썸네일: 좌우 수비 화살표와 전진 화살표, 라켓",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:23:37Z",
+      "file": "design-profile/assets/AST-025.svg",
+      "sha256": "eda2a886c351dbd0153f49327b84dcaf13d2f6a6333e16852046aedafbf479a5",
+      "format": "svg",
+      "width": 160,
+      "height": 96,
+      "bytes": 5118
+    },
+    "AST-026": {
+      "kind": "image",
+      "role": "decorative",
+      "source": "self_made",
+      "refs": [],
+      "depicts": "배너 셔틀콕(사용자 제공 이미지 2026-11-19에서 셔틀콕만 분리, 배경·그림자·구름 가장자리 제거)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T00:54:32Z",
+      "file": "design-profile/assets/AST-026.png",
+      "sha256": "5f245753a5ebaedb95c995740ecd280c7942100fb8c6626ef8c2fae95a5a830f",
+      "format": "png",
+      "width": 420,
+      "height": 394,
+      "bytes": 171806
+    },
+    "AST-027": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [],
+      "depicts": "썸네일 intro-1 코트와 번호 익히기 ← 원본 smapsh_assets_v2/stages/12-course-strategy.png: x110–650 크롭, 위아래 배경 연장, 240×144",
+      "fallback": "hide",
+      "rights": {
+        "license": "OpenAI Terms of Use — Output 권리 조항(사용자 소유·OpenAI 권리 양도)",
+        "confirmed_by_user": true,
+        "statement": "AST-027은 제가 ChatGPT에 직접 프롬프트를 입력해 생성한 동일한 이미지 보드에서 잘라낸 자산입니다. 기존 AST-028–037·046과 동일한 생성 경위로 기록하고, 적용되는 OpenAI 이용약관의 출력물 권리 조항을 근거로 권리 확인 절차를 진행하세요.",
+        "at": "2026-11-19T05:26:45Z"
+      },
+      "added_at": "2026-11-19T01:27:55Z",
+      "file": "design-profile/assets/AST-027.png",
+      "sha256": "a0f00ba6cada12253d066f17047605331be13395f3d20ffb322999147c9922e3",
+      "format": "png",
+      "width": 240,
+      "height": 144,
+      "bytes": 36493
+    },
+    "AST-028": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [],
+      "depicts": "썸네일 intro-2 기본 자리와 복귀 ← 원본 smapsh_assets_v2/stages/02-serve-recovery.png: x140–620 크롭(모서리 제외), 240×144",
+      "fallback": "hide",
+      "rights": {
+        "license": "OpenAI Terms of Use — Output 권리 조항(사용자 소유·OpenAI 권리 양도)",
+        "confirmed_by_user": true,
+        "statement": "AST-028–037 및 AST-046은 제가 ChatGPT에 직접 프롬프트를 입력하여 생성한 이미지입니다. AST-046은 ChatGPT 생성 원본에서 배경을 제거한 자산입니다. OpenAI에 별도 사용 허가를 요청할 필요는 없습니다. 적용되는 OpenAI 이용약관의 출력물 권리 조항을 근거로 정리하세요.",
+        "at": "2026-11-19T05:19:15Z"
+      },
+      "added_at": "2026-11-19T01:27:55Z",
+      "file": "design-profile/assets/AST-028.png",
+      "sha256": "53da5e7ab9f71150194635b3145c2f0b23934a0d69eef39f6227e01fd6c38ce7",
+      "format": "png",
+      "width": 240,
+      "height": 144,
+      "bytes": 40535
+    },
+    "AST-029": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [],
+      "depicts": "썸네일 starter-1 나란히 수비 대형 ← 원본 smapsh_assets_v2/stages/05-defense.png: x140–620 크롭, 240×144",
+      "fallback": "hide",
+      "rights": {
+        "license": "OpenAI Terms of Use — Output 권리 조항(사용자 소유·OpenAI 권리 양도)",
+        "confirmed_by_user": true,
+        "statement": "AST-028–037 및 AST-046은 제가 ChatGPT에 직접 프롬프트를 입력하여 생성한 이미지입니다. AST-046은 ChatGPT 생성 원본에서 배경을 제거한 자산입니다. OpenAI에 별도 사용 허가를 요청할 필요는 없습니다. 적용되는 OpenAI 이용약관의 출력물 권리 조항을 근거로 정리하세요.",
+        "at": "2026-11-19T05:19:15Z"
+      },
+      "added_at": "2026-11-19T01:27:55Z",
+      "file": "design-profile/assets/AST-029.png",
+      "sha256": "f305f736ce0665d2ab1e203c3d0c37fd18a0c51a3e13d83ca32a4dede1efd377",
+      "format": "png",
+      "width": 240,
+      "height": 144,
+      "bytes": 46265
+    },
+    "AST-030": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [],
+      "depicts": "썸네일 starter-2 담당 영역 나누기 ← 원본 smapsh_assets_v2/stages/08-defense-zones.png: x110–650 크롭, 위아래 배경 연장, 240×144",
+      "fallback": "hide",
+      "rights": {
+        "license": "OpenAI Terms of Use — Output 권리 조항(사용자 소유·OpenAI 권리 양도)",
+        "confirmed_by_user": true,
+        "statement": "AST-028–037 및 AST-046은 제가 ChatGPT에 직접 프롬프트를 입력하여 생성한 이미지입니다. AST-046은 ChatGPT 생성 원본에서 배경을 제거한 자산입니다. OpenAI에 별도 사용 허가를 요청할 필요는 없습니다. 적용되는 OpenAI 이용약관의 출력물 권리 조항을 근거로 정리하세요.",
+        "at": "2026-11-19T05:19:15Z"
+      },
+      "added_at": "2026-11-19T01:27:55Z",
+      "file": "design-profile/assets/AST-030.png",
+      "sha256": "305ca3428adbe0da605fdb5ff77e36c68ea1587ba6075b3489401e89c475a840",
+      "format": "png",
+      "width": 240,
+      "height": 144,
+      "bytes": 36516
+    },
+    "AST-031": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [],
+      "depicts": "썸네일 starter-3 셔틀콕을 받은 뒤 복귀 ← 원본 smapsh_assets_v2/stages/03-receive-position.png: x140–660 크롭, 위쪽 배경 연장, 240×144",
+      "fallback": "hide",
+      "rights": {
+        "license": "OpenAI Terms of Use — Output 권리 조항(사용자 소유·OpenAI 권리 양도)",
+        "confirmed_by_user": true,
+        "statement": "AST-028–037 및 AST-046은 제가 ChatGPT에 직접 프롬프트를 입력하여 생성한 이미지입니다. AST-046은 ChatGPT 생성 원본에서 배경을 제거한 자산입니다. OpenAI에 별도 사용 허가를 요청할 필요는 없습니다. 적용되는 OpenAI 이용약관의 출력물 권리 조항을 근거로 정리하세요.",
+        "at": "2026-11-19T05:19:15Z"
+      },
+      "added_at": "2026-11-19T01:27:56Z",
+      "file": "design-profile/assets/AST-031.png",
+      "sha256": "cf023a9128bd0bf1ee98de690745510c888a29fc99ca0149f0e253bcd3615c2b",
+      "format": "png",
+      "width": 240,
+      "height": 144,
+      "bytes": 37667
+    },
+    "AST-032": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [],
+      "depicts": "썸네일 basic-1 앞뒤 공격 대형 ← 원본 smapsh_assets_v2/stages/09-front-back-position.png: x160–640 크롭, 240×144",
+      "fallback": "hide",
+      "rights": {
+        "license": "OpenAI Terms of Use — Output 권리 조항(사용자 소유·OpenAI 권리 양도)",
+        "confirmed_by_user": true,
+        "statement": "AST-028–037 및 AST-046은 제가 ChatGPT에 직접 프롬프트를 입력하여 생성한 이미지입니다. AST-046은 ChatGPT 생성 원본에서 배경을 제거한 자산입니다. OpenAI에 별도 사용 허가를 요청할 필요는 없습니다. 적용되는 OpenAI 이용약관의 출력물 권리 조항을 근거로 정리하세요.",
+        "at": "2026-11-19T05:19:15Z"
+      },
+      "added_at": "2026-11-19T01:27:56Z",
+      "file": "design-profile/assets/AST-032.png",
+      "sha256": "6ac3e716834c200d833c1057767b2b7b6f09f328a8461933adbe98f400bc8be9",
+      "format": "png",
+      "width": 240,
+      "height": 144,
+      "bytes": 39067
+    },
+    "AST-033": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [],
+      "depicts": "썸네일 basic-2 공격에서 수비로 전환 ← 원본 smapsh_assets_v2/stages/07-attack-defense-transition.png: x140–620 크롭, 240×144",
+      "fallback": "hide",
+      "rights": {
+        "license": "OpenAI Terms of Use — Output 권리 조항(사용자 소유·OpenAI 권리 양도)",
+        "confirmed_by_user": true,
+        "statement": "AST-028–037 및 AST-046은 제가 ChatGPT에 직접 프롬프트를 입력하여 생성한 이미지입니다. AST-046은 ChatGPT 생성 원본에서 배경을 제거한 자산입니다. OpenAI에 별도 사용 허가를 요청할 필요는 없습니다. 적용되는 OpenAI 이용약관의 출력물 권리 조항을 근거로 정리하세요.",
+        "at": "2026-11-19T05:19:16Z"
+      },
+      "added_at": "2026-11-19T01:27:56Z",
+      "file": "design-profile/assets/AST-033.png",
+      "sha256": "d99e8a2ce385c455c5abc8d91296a2bfbaef28f6bfef99f63c79501229d21757",
+      "format": "png",
+      "width": 240,
+      "height": 144,
+      "bytes": 43240
+    },
+    "AST-034": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [],
+      "depicts": "썸네일 basic-3 수비에서 공격으로 전환과 좌우 수비 ← 원본 smapsh_assets_v2/stages/06-attack.png: x180–660 크롭, 240×144",
+      "fallback": "hide",
+      "rights": {
+        "license": "OpenAI Terms of Use — Output 권리 조항(사용자 소유·OpenAI 권리 양도)",
+        "confirmed_by_user": true,
+        "statement": "AST-028–037 및 AST-046은 제가 ChatGPT에 직접 프롬프트를 입력하여 생성한 이미지입니다. AST-046은 ChatGPT 생성 원본에서 배경을 제거한 자산입니다. OpenAI에 별도 사용 허가를 요청할 필요는 없습니다. 적용되는 OpenAI 이용약관의 출력물 권리 조항을 근거로 정리하세요.",
+        "at": "2026-11-19T05:19:16Z"
+      },
+      "added_at": "2026-11-19T01:27:56Z",
+      "file": "design-profile/assets/AST-034.png",
+      "sha256": "935382a96bc4fe89f8e01b95c2ed47db0517dffb962f659716f132c629c99f2b",
+      "format": "png",
+      "width": 240,
+      "height": 144,
+      "bytes": 39564
+    },
+    "AST-035": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [],
+      "depicts": "과정 장식 입문자 새싹 ← 원본 학습 UI 보드(배드민턴 코트 위치 학습 UI 보드.png) 과정 아이콘 영역: 배경 제거(색 거리 알파)·정사각 여백",
+      "fallback": "hide",
+      "rights": {
+        "license": "OpenAI Terms of Use — Output 권리 조항(사용자 소유·OpenAI 권리 양도)",
+        "confirmed_by_user": true,
+        "statement": "AST-028–037 및 AST-046은 제가 ChatGPT에 직접 프롬프트를 입력하여 생성한 이미지입니다. AST-046은 ChatGPT 생성 원본에서 배경을 제거한 자산입니다. OpenAI에 별도 사용 허가를 요청할 필요는 없습니다. 적용되는 OpenAI 이용약관의 출력물 권리 조항을 근거로 정리하세요.",
+        "at": "2026-11-19T05:19:16Z"
+      },
+      "added_at": "2026-11-19T01:27:56Z",
+      "file": "design-profile/assets/AST-035.png",
+      "sha256": "14b5914c8eb4b30a4e34e62664ebe25fb389724b00b9d7d8bdfbd9438b31cacd",
+      "format": "png",
+      "width": 79,
+      "height": 79,
+      "bytes": 7291
+    },
+    "AST-036": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [],
+      "depicts": "과정 장식 왕초급 왕관 ← 원본 학습 UI 보드(배드민턴 코트 위치 학습 UI 보드.png): 배경 제거·정사각 여백",
+      "fallback": "hide",
+      "rights": {
+        "license": "OpenAI Terms of Use — Output 권리 조항(사용자 소유·OpenAI 권리 양도)",
+        "confirmed_by_user": true,
+        "statement": "AST-028–037 및 AST-046은 제가 ChatGPT에 직접 프롬프트를 입력하여 생성한 이미지입니다. AST-046은 ChatGPT 생성 원본에서 배경을 제거한 자산입니다. OpenAI에 별도 사용 허가를 요청할 필요는 없습니다. 적용되는 OpenAI 이용약관의 출력물 권리 조항을 근거로 정리하세요.",
+        "at": "2026-11-19T05:19:16Z"
+      },
+      "added_at": "2026-11-19T01:27:56Z",
+      "file": "design-profile/assets/AST-036.png",
+      "sha256": "7dd56ca4015b64256abddf95eb02ab96f9a2844a5e4170c0089e0b3f629db381",
+      "format": "png",
+      "width": 83,
+      "height": 83,
+      "bytes": 7607
+    },
+    "AST-037": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [],
+      "depicts": "과정 장식 초급 메달 ← 원본 학습 UI 보드(배드민턴 코트 위치 학습 UI 보드.png): 배경 제거·정사각 여백",
+      "fallback": "hide",
+      "rights": {
+        "license": "OpenAI Terms of Use — Output 권리 조항(사용자 소유·OpenAI 권리 양도)",
+        "confirmed_by_user": true,
+        "statement": "AST-028–037 및 AST-046은 제가 ChatGPT에 직접 프롬프트를 입력하여 생성한 이미지입니다. AST-046은 ChatGPT 생성 원본에서 배경을 제거한 자산입니다. OpenAI에 별도 사용 허가를 요청할 필요는 없습니다. 적용되는 OpenAI 이용약관의 출력물 권리 조항을 근거로 정리하세요.",
+        "at": "2026-11-19T05:19:16Z"
+      },
+      "added_at": "2026-11-19T01:27:56Z",
+      "file": "design-profile/assets/AST-037.png",
+      "sha256": "ac763c8121cc4dcaf5aa0c0d417b362ff721475690721b1bf80b1cf5a20c48cb",
+      "format": "png",
+      "width": 91,
+      "height": 91,
+      "bytes": 11754
+    },
+    "AST-038": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [],
+      "depicts": "공통 장식 attack-arrow ← 원본 smapsh_assets_v2/common/attack-arrow.png: 배경 제거·여백 정리(약 64px 원본 해상도, 32px 이하 표시용)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T01:27:56Z",
+      "file": "design-profile/assets/AST-038.png",
+      "sha256": "336ff7d930344a80738e4a730834efd8b8b82229b02cd42ff83437099bea15e1",
+      "format": "png",
+      "width": 50,
+      "height": 50,
+      "bytes": 2765
+    },
+    "AST-039": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [],
+      "depicts": "공통 장식 court ← 원본 smapsh_assets_v2/common/court.png: 배경 제거·여백 정리(약 64px 원본 해상도, 32px 이하 표시용)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T01:27:56Z",
+      "file": "design-profile/assets/AST-039.png",
+      "sha256": "9e1302fecf444adfb1db76918943bab8875ddc6111bf733e790aea99930fe1b9",
+      "format": "png",
+      "width": 83,
+      "height": 83,
+      "bytes": 7369
+    },
+    "AST-040": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [],
+      "depicts": "공통 장식 dashed-path ← 원본 smapsh_assets_v2/common/dashed-path.png: 배경 제거·여백 정리(약 64px 원본 해상도, 32px 이하 표시용)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T01:27:56Z",
+      "file": "design-profile/assets/AST-040.png",
+      "sha256": "3e2b171647601ae1f1763eca54e7d22efa850ccd5a25f024768ab275cfaedb3b",
+      "format": "png",
+      "width": 70,
+      "height": 70,
+      "bytes": 2253
+    },
+    "AST-041": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [],
+      "depicts": "공통 장식 pair ← 원본 smapsh_assets_v2/common/pair.png: 배경 제거·여백 정리(약 64px 원본 해상도, 32px 이하 표시용)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T01:27:56Z",
+      "file": "design-profile/assets/AST-041.png",
+      "sha256": "49b96f8b9900bdbd6b4c9a8663d9fabd5b1df773aa498cad08b10cfe70dc31e8",
+      "format": "png",
+      "width": 64,
+      "height": 64,
+      "bytes": 5636
+    },
+    "AST-042": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [],
+      "depicts": "공통 장식 player ← 원본 smapsh_assets_v2/common/player.png: 배경 제거·여백 정리(약 64px 원본 해상도, 32px 이하 표시용)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T01:27:56Z",
+      "file": "design-profile/assets/AST-042.png",
+      "sha256": "23b56e71e8c15fb04f17b2f2f3f7d0a13229f685566c7971cf379f9b71d64f13",
+      "format": "png",
+      "width": 61,
+      "height": 61,
+      "bytes": 3927
+    },
+    "AST-043": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [],
+      "depicts": "공통 장식 rotate-arrow ← 원본 smapsh_assets_v2/common/rotate-arrow.png: 배경 제거·여백 정리(약 64px 원본 해상도, 32px 이하 표시용)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T01:27:57Z",
+      "file": "design-profile/assets/AST-043.png",
+      "sha256": "e9e656bb65d31752851c64cbcec29261b697126599f94df6fb4352d5149bd37b",
+      "format": "png",
+      "width": 61,
+      "height": 61,
+      "bytes": 2406
+    },
+    "AST-044": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [],
+      "depicts": "공통 장식 shield ← 원본 smapsh_assets_v2/common/shield.png: 배경 제거·여백 정리(약 64px 원본 해상도, 32px 이하 표시용)",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T01:27:57Z",
+      "file": "design-profile/assets/AST-044.png",
+      "sha256": "e7738c0ef518d52f97161ee0bb94808a5b3a8acdda65d3657ece3912b19c7d0e",
+      "format": "png",
+      "width": 65,
+      "height": 65,
+      "bytes": 5489
+    },
+    "AST-045": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [],
+      "depicts": "공통 장식 racket ← 원본 학습 UI 보드(배드민턴 코트 위치 학습 UI 보드.png) 공통 요소 영역(ZIP 사본은 손잡이 잘림): 배경 제거·여백 정리",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T01:27:57Z",
+      "file": "design-profile/assets/AST-045.png",
+      "sha256": "e79b83ab3740c1f3351e599e499569da05009dfcbaab7c6075f880a2faf2b409",
+      "format": "png",
+      "width": 73,
+      "height": 73,
+      "bytes": 8342
+    },
+    "AST-046": {
+      "kind": "image",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [],
+      "depicts": "배너 셔틀콕 v2 — 사용자가 ChatGPT에 직접 프롬프트를 입력해 생성한 이미지(사용자 제공 '셔틀콕 단독 v2' 원본)에서 그려진 체크무늬 배경을 제거(scripts/cut_checker3.py: 평평함·색·가장자리 연결 판정), 480×454. AST-026 대체",
+      "fallback": "hide",
+      "rights": {
+        "license": "OpenAI Terms of Use — Output 권리 조항(사용자 소유·OpenAI 권리 양도)",
+        "confirmed_by_user": true,
+        "statement": "AST-028–037 및 AST-046은 제가 ChatGPT에 직접 프롬프트를 입력하여 생성한 이미지입니다. AST-046은 ChatGPT 생성 원본에서 배경을 제거한 자산입니다. OpenAI에 별도 사용 허가를 요청할 필요는 없습니다. 적용되는 OpenAI 이용약관의 출력물 권리 조항을 근거로 정리하세요.",
+        "at": "2026-11-19T05:19:16Z"
+      },
+      "added_at": "2026-11-19T01:55:59Z",
+      "file": "design-profile/assets/AST-046.png",
+      "sha256": "a43abbd331d64a2567fa781b41d2771fc12151ed86b81cf97aa6fe1d200995df",
+      "format": "png",
+      "width": 480,
+      "height": 454,
+      "bytes": 222682,
+      "source_corrections": [
+        {
+          "at": "2026-11-19T05:19:15Z",
+          "from": "self_made",
+          "to": "generated_tool",
+          "reason": "사용자 사실 확인(2026-11-19): 'AST-046은 ChatGPT 생성 원본에서 배경을 제거한 자산입니다.' — 엔진에 출처 변경 명령이 없어 레지스트리 출처 필드만 정정(파일·SHA-256 불변, 권리 확인 전)"
+        }
+      ]
+    },
+    "AST-047": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [],
+      "depicts": "V05 SCR-102·103 아이콘(Lucide check v1.70.0, 버튼·판정 문구 옆 장식)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T03:37:16Z",
+      "file": "design-profile/assets/AST-047.svg",
+      "sha256": "d9924d230eaabc2857c57fa0471f2b821d7031ecb61c83efed9254479a56ed7a",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 222
+    },
+    "AST-048": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [],
+      "depicts": "V05 SCR-102·103 아이콘(Lucide x v1.70.0, 버튼·판정 문구 옆 장식)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T03:37:16Z",
+      "file": "design-profile/assets/AST-048.svg",
+      "sha256": "0f0b07934007010cf539557149b1ee5099087d97732f10a8a6f94ea410554f0e",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 239
+    },
+    "AST-049": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [],
+      "depicts": "V05 SCR-102·103 아이콘(Lucide waves-horizontal v1.70.0, 버튼·판정 문구 옆 장식)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T03:37:16Z",
+      "file": "design-profile/assets/AST-049.svg",
+      "sha256": "481e01d2c1d49731629ebcda2f6ef1c8c4392376252c9afda393638f6f84fda8",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 311
+    },
+    "AST-050": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [],
+      "depicts": "V05 SCR-102·103 아이콘(Lucide play v1.70.0, 버튼·판정 문구 옆 장식)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T03:37:16Z",
+      "file": "design-profile/assets/AST-050.svg",
+      "sha256": "47b47c4629e0c2de4216d3b369cf1dc10a996639c7c2aa9429a8d508bdff49cc",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 289
+    },
+    "AST-051": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [],
+      "depicts": "V05 SCR-102·103 아이콘(Lucide snail v1.70.0, 버튼·판정 문구 옆 장식)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T03:37:16Z",
+      "file": "design-profile/assets/AST-051.svg",
+      "sha256": "c87c1c480e21227842846b35ea11c7f31a71cf99a531fadbd12c74016acf45c7",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 392
+    },
+    "AST-052": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [],
+      "depicts": "V05 SCR-102·103 아이콘(Lucide rotate-ccw v1.70.0, 버튼·판정 문구 옆 장식)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T03:37:16Z",
+      "file": "design-profile/assets/AST-052.svg",
+      "sha256": "740232feb6ab2d360d7cf7434985984a94bc03e63837503d022cb2409c102771",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 276
+    },
+    "AST-053": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [],
+      "depicts": "V05 SCR-102·103 아이콘(Lucide arrow-right v1.70.0, 버튼·판정 문구 옆 장식)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T03:37:16Z",
+      "file": "design-profile/assets/AST-053.svg",
+      "sha256": "e3ef475f3e6d40d15be54b07296e73c420bf53e70a9688996c411c2e1c4b1944",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 240
+    },
+    "AST-054": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [],
+      "depicts": "V05 SCR-102·103 아이콘(Lucide list v1.70.0, 버튼·판정 문구 옆 장식)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T03:37:16Z",
+      "file": "design-profile/assets/AST-054.svg",
+      "sha256": "087986481f55d3d15da05c3ff5796cd8bcdf1c7fcf2d93d5db0d5fd095b0e5d2",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 316
+    },
+    "AST-055": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [],
+      "depicts": "V05 SCR-102·103 아이콘(Lucide loader-circle v1.70.0, 버튼·판정 문구 옆 장식)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T03:37:17Z",
+      "file": "design-profile/assets/AST-055.svg",
+      "sha256": "06b4c0537d06bd3f6c482e872b0803da5bd2be2008d6bcae4e7cc428df96c435",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 234
+    },
+    "AST-056": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [],
+      "depicts": "V05 SCR-102·103 아이콘(Lucide circle-alert v1.70.0, 버튼·판정 문구 옆 장식)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-19T03:37:17Z",
+      "file": "design-profile/assets/AST-056.svg",
+      "sha256": "13f1dfef027e6c60f3ef9ef3b12c0b7265df418e6fa7975dda5b53d45572188f",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 307
+    },
+    "AST-057": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [
+        "SCR-102"
+      ],
+      "depicts": "SMAPSH 실내 경기장·코트·네트(원근 시점)",
+      "fallback": "hide",
+      "rights": {
+        "license": "own",
+        "confirmed_by_user": true,
+        "statement": "(사용자 선택 문장, 2026-11-19) game-images/의 경기장·선수 4명·셔틀콕 이미지는 제가 ChatGPT에 직접 프롬프트를 입력하여 생성한 이미지이며, 이 프로젝트에서 사용할 권리가 있음을 확인합니다. 좌우 반전본은 이 원본을 반전한 파생 자산입니다.",
+        "at": "2026-11-19T07:36:11Z"
+      },
+      "added_at": "2026-11-19T07:35:31Z",
+      "file": "design-profile/assets/AST-057.png",
+      "sha256": "0110deea8d598b65a092cdaa764bca7d80838d06c0cbb2f5745fd0f543ef2dcf",
+      "format": "png",
+      "width": 1086,
+      "height": 1448,
+      "bytes": 1698073
+    },
+    "AST-058": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [
+        "SCR-102"
+      ],
+      "depicts": "우리 편 선수 '나'(뒷모습, 원본은 오른쪽을 봄)",
+      "fallback": "hide",
+      "rights": {
+        "license": "own",
+        "confirmed_by_user": true,
+        "statement": "(사용자 선택 문장, 2026-11-19) game-images/의 경기장·선수 4명·셔틀콕 이미지는 제가 ChatGPT에 직접 프롬프트를 입력하여 생성한 이미지이며, 이 프로젝트에서 사용할 권리가 있음을 확인합니다. 좌우 반전본은 이 원본을 반전한 파생 자산입니다.",
+        "at": "2026-11-19T07:36:11Z"
+      },
+      "added_at": "2026-11-19T07:35:31Z",
+      "file": "design-profile/assets/AST-058.png",
+      "sha256": "c76bb6c4f6d090de93a96832dde4b3611186ff5d65b2d27934951f8031721882",
+      "format": "png",
+      "width": 1312,
+      "height": 1199,
+      "bytes": 763029
+    },
+    "AST-059": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [
+        "SCR-102"
+      ],
+      "depicts": "우리 편 파트너 선수(뒷모습, 원본은 오른쪽을 봄)",
+      "fallback": "hide",
+      "rights": {
+        "license": "own",
+        "confirmed_by_user": true,
+        "statement": "(사용자 선택 문장, 2026-11-19) game-images/의 경기장·선수 4명·셔틀콕 이미지는 제가 ChatGPT에 직접 프롬프트를 입력하여 생성한 이미지이며, 이 프로젝트에서 사용할 권리가 있음을 확인합니다. 좌우 반전본은 이 원본을 반전한 파생 자산입니다.",
+        "at": "2026-11-19T07:36:11Z"
+      },
+      "added_at": "2026-11-19T07:35:31Z",
+      "file": "design-profile/assets/AST-059.png",
+      "sha256": "703cc1ac5ae90ca8d6d22d60a7ae61fc0b3cb186b441237bf507d20dbd168d70",
+      "format": "png",
+      "width": 1312,
+      "height": 1199,
+      "bytes": 709260
+    },
+    "AST-060": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [
+        "SCR-102"
+      ],
+      "depicts": "상대 편 남자 선수(앞모습, 원본은 오른쪽을 봄)",
+      "fallback": "hide",
+      "rights": {
+        "license": "own",
+        "confirmed_by_user": true,
+        "statement": "(사용자 선택 문장, 2026-11-19) game-images/의 경기장·선수 4명·셔틀콕 이미지는 제가 ChatGPT에 직접 프롬프트를 입력하여 생성한 이미지이며, 이 프로젝트에서 사용할 권리가 있음을 확인합니다. 좌우 반전본은 이 원본을 반전한 파생 자산입니다.",
+        "at": "2026-11-19T07:36:12Z"
+      },
+      "added_at": "2026-11-19T07:35:31Z",
+      "file": "design-profile/assets/AST-060.png",
+      "sha256": "14ce1f8671f79c197aa04045f5f250e315b280c764968d4f1a8ab4e3c1476be4",
+      "format": "png",
+      "width": 1312,
+      "height": 1199,
+      "bytes": 903675
+    },
+    "AST-061": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [
+        "SCR-102"
+      ],
+      "depicts": "상대 편 여자 선수(앞모습, 원본은 왼쪽을 봄)",
+      "fallback": "hide",
+      "rights": {
+        "license": "own",
+        "confirmed_by_user": true,
+        "statement": "(사용자 선택 문장, 2026-11-19) game-images/의 경기장·선수 4명·셔틀콕 이미지는 제가 ChatGPT에 직접 프롬프트를 입력하여 생성한 이미지이며, 이 프로젝트에서 사용할 권리가 있음을 확인합니다. 좌우 반전본은 이 원본을 반전한 파생 자산입니다.",
+        "at": "2026-11-19T07:36:12Z"
+      },
+      "added_at": "2026-11-19T07:35:32Z",
+      "file": "design-profile/assets/AST-061.png",
+      "sha256": "ed800ffc52c285136837f734b4cad92d95bdcd450b10575f6d9c99703a9ff74e",
+      "format": "png",
+      "width": 1312,
+      "height": 1199,
+      "bytes": 717262
+    },
+    "AST-062": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [
+        "SCR-102"
+      ],
+      "depicts": "셔틀콕",
+      "fallback": "hide",
+      "rights": {
+        "license": "own",
+        "confirmed_by_user": true,
+        "statement": "(사용자 선택 문장, 2026-11-19) game-images/의 경기장·선수 4명·셔틀콕 이미지는 제가 ChatGPT에 직접 프롬프트를 입력하여 생성한 이미지이며, 이 프로젝트에서 사용할 권리가 있음을 확인합니다. 좌우 반전본은 이 원본을 반전한 파생 자산입니다.",
+        "at": "2026-11-19T07:36:12Z"
+      },
+      "added_at": "2026-11-19T07:35:32Z",
+      "file": "design-profile/assets/AST-062.png",
+      "sha256": "fe78bb41ff9cf8b68d77b94a302b6129a458963030dd258fac5d4a94a269f5c7",
+      "format": "png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1239418
+    },
+    "AST-063": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [
+        "SCR-102"
+      ],
+      "depicts": "AST-058 좌우 반전본(왼쪽을 봄)",
+      "fallback": "hide",
+      "rights": {
+        "license": "own",
+        "confirmed_by_user": true,
+        "statement": "(사용자 선택 문장, 2026-11-19) game-images/의 경기장·선수 4명·셔틀콕 이미지는 제가 ChatGPT에 직접 프롬프트를 입력하여 생성한 이미지이며, 이 프로젝트에서 사용할 권리가 있음을 확인합니다. 좌우 반전본은 이 원본을 반전한 파생 자산입니다.",
+        "at": "2026-11-19T07:36:12Z"
+      },
+      "added_at": "2026-11-19T07:35:43Z",
+      "file": "design-profile/assets/AST-063.png",
+      "sha256": "ceae043175e5b03e4f9814a69a27922c441f49df55e3689abbd77e25d3793e79",
+      "format": "png",
+      "width": 1312,
+      "height": 1199,
+      "bytes": 685803
+    },
+    "AST-064": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [
+        "SCR-102"
+      ],
+      "depicts": "AST-059 좌우 반전본(왼쪽을 봄)",
+      "fallback": "hide",
+      "rights": {
+        "license": "own",
+        "confirmed_by_user": true,
+        "statement": "(사용자 선택 문장, 2026-11-19) game-images/의 경기장·선수 4명·셔틀콕 이미지는 제가 ChatGPT에 직접 프롬프트를 입력하여 생성한 이미지이며, 이 프로젝트에서 사용할 권리가 있음을 확인합니다. 좌우 반전본은 이 원본을 반전한 파생 자산입니다.",
+        "at": "2026-11-19T07:36:12Z"
+      },
+      "added_at": "2026-11-19T07:35:43Z",
+      "file": "design-profile/assets/AST-064.png",
+      "sha256": "ac1fa43f644c39738170673ca20d1d66a64fce9bd34c5b58e2569e5109b3393f",
+      "format": "png",
+      "width": 1312,
+      "height": 1199,
+      "bytes": 637075
+    },
+    "AST-065": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [
+        "SCR-102"
+      ],
+      "depicts": "AST-060 좌우 반전본(왼쪽을 봄)",
+      "fallback": "hide",
+      "rights": {
+        "license": "own",
+        "confirmed_by_user": true,
+        "statement": "(사용자 선택 문장, 2026-11-19) game-images/의 경기장·선수 4명·셔틀콕 이미지는 제가 ChatGPT에 직접 프롬프트를 입력하여 생성한 이미지이며, 이 프로젝트에서 사용할 권리가 있음을 확인합니다. 좌우 반전본은 이 원본을 반전한 파생 자산입니다.",
+        "at": "2026-11-19T07:36:12Z"
+      },
+      "added_at": "2026-11-19T07:35:43Z",
+      "file": "design-profile/assets/AST-065.png",
+      "sha256": "54e20be1ed88506fe12947079f411b34444d0e593a9466b6bd87f85a26736bc0",
+      "format": "png",
+      "width": 1312,
+      "height": 1199,
+      "bytes": 781157
+    },
+    "AST-066": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [
+        "SCR-102"
+      ],
+      "depicts": "AST-061 좌우 반전본(오른쪽을 봄)",
+      "fallback": "hide",
+      "rights": {
+        "license": "own",
+        "confirmed_by_user": true,
+        "statement": "(사용자 선택 문장, 2026-11-19) game-images/의 경기장·선수 4명·셔틀콕 이미지는 제가 ChatGPT에 직접 프롬프트를 입력하여 생성한 이미지이며, 이 프로젝트에서 사용할 권리가 있음을 확인합니다. 좌우 반전본은 이 원본을 반전한 파생 자산입니다.",
+        "at": "2026-11-19T07:36:12Z"
+      },
+      "added_at": "2026-11-19T07:35:44Z",
+      "file": "design-profile/assets/AST-066.png",
+      "sha256": "30a9fea67082507484ae2bb0e301cde7a2a6b773c6cfcc5dba398d17fc132130",
+      "format": "png",
+      "width": 1312,
+      "height": 1199,
+      "bytes": 638453
+    }
+  }
+}

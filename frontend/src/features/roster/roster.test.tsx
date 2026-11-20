@@ -47,7 +47,7 @@ describe('B2 roster and scores (mock)', () => {
     renderAt('/ops/roster')
     fireEvent.click(await rowOf('서이든'))
     const sheet = await screen.findByTestId('edit-sheet')
-    expect(await within(sheet).findByText(/입문자 0\/3/)).toBeInTheDocument() // 회원 현황(AC-100)
+    expect(await within(sheet).findByText(/입문자 0\/2 · 왕초급 0\/3 · 초급 0\/3/)).toBeInTheDocument() // 회원 현황(AC-100)
     expect(within(sheet).getByText(/권장 대상/)).toBeInTheDocument()
 
     fireEvent.click(within(sheet).getByRole('radio', { name: '4' }))

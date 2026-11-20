@@ -22,7 +22,7 @@ export function RecordSummary({ status, audience = 'ops' }: { status: MemberStat
         <>
           <dt className="text-ink-muted">튜토리얼</dt>
           <dd className="m-0 text-ink">
-            입문자 {tutorial.beginner}/{tutorial.total} · 왕초보 {tutorial.novice}/{tutorial.total}
+            {tutorial.map((c) => `${c.name} ${c.passed}/${c.total}`).join(' · ')}
             {status.recommended && <span className="font-bold"> · 권장 대상</span>}
           </dd>
         </>

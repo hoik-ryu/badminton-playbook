@@ -4,6 +4,7 @@ from typing import Literal
 
 from pydantic import BaseModel, Field, field_validator
 
+from app.modules.tutorial.schemas import CoursePassCount
 from app.modules.user.schemas import Gender, Grade
 
 PersonKind = Literal["member", "guest"]
@@ -34,7 +35,7 @@ class MemberStatus(BaseModel):
     rank: Literal["S", "A", "B", "C"] | None
     gamesToRank: int | None  # noqa: N815
     record: dict[str, int]
-    tutorial: dict[str, int]
+    tutorial: list[CoursePassCount]  # 출시된 과정 순서(AC-100 r7)
     recommended: bool
 
 

@@ -278,11 +278,20 @@ describe('My Page profile (SCR-122, API mode)', () => {
   })
 })
 
+const COURSES = {
+  courses: [
+    { id: 'intro', name: '입문자', order: 1, grid: { id: 'grid-2x3', cols: 2, rows: 3 }, released: true, guided: true, description: '설명', icon: 'AST-035',
+      stages: [{ id: 'intro-1-v1', no: 1, version: 1, title: '코트와 번호 익히기', minutes: 2, thumbnail: 'AST-027', situations: 5 }] },
+    { id: 'mid', name: '중급', order: 4, grid: { id: 'grid-5x3', cols: 5, rows: 3 }, released: false, guided: false, description: null, icon: null, stages: [] },
+  ],
+  passRule: { numerator: 7, denominator: 10 },
+}
+
 describe('Tutorial in API mode (I2)', () => {
   beforeEach(() => window.localStorage.clear())
   afterEach(() => vi.unstubAllGlobals())
 
-  it('progress comes from the server; saving sends only score and total (server recomputes pass)', async () => {
+  it('progress comes from the server; saving sends only the run id (server computes score and pass)', async () => {
     const calls: { method: string; url: string; body?: unknown }[] = []
     let stored: Record<string, { passed: boolean; best: number; firstPassedAt: string | null }> = {}
     vi.stubGlobal('fetch', (input: RequestInfo | URL, init?: RequestInit) => {
@@ -291,19 +300,28 @@ describe('Tutorial in API mode (I2)', () => {
       calls.push({ method, url, body: init?.body ? JSON.parse(String(init.body)) : undefined })
       if (url === '/api/auth/me') return Promise.resolve(json({ id: 'real-uuid', name: '실회원', role: 'member', status: 'approved' }))
       if (url === '/api/me/tutorial/progress') return Promise.resolve(json(stored))
-      if (url === '/api/me/tutorial/stages/beginner-1' && method === 'PUT') {
-        stored = { 'beginner-1': { passed: true, best: 5, firstPassedAt: '2026-11-12T00:00:00Z' } }
-        return Promise.resolve(json(stored['beginner-1']))
+      if (url === '/api/me/tutorial/courses') return Promise.resolve(json(COURSES))
+      if (url === '/api/me/tutorial/runs/run-1' && method === 'GET') return Promise.resolve(json({ runId: 'run-1', stageId: 'intro-1-v1', run: { score: 5, total: 5, passed: true, wrong: [] }, review: [] }))
+      if (url === '/api/me/tutorial/stages/intro-1-v1' && method === 'PUT') {
+        stored = { 'intro-1-v1': { passed: true, best: 5, firstPassedAt: '2026-11-12T00:00:00Z' } }
+        return Promise.resolve(json({ ...stored['intro-1-v1'], run: { score: 5, total: 5, passed: true, wrong: [] } }))
       }
       return Promise.resolve(json({ error: { code: 'http_404', message: 'Not Found' } }, 404))
     })
     renderAt('/tutorial')
     await waitFor(() => expect(document.querySelector('[data-scr=SCR-101]')).toHaveAttribute('data-st', 'SCR-101-ST3'))
     expect(calls.some((c) => c.url === '/api/me/tutorial/progress')).toBe(true)
-    const { saveStageResult } = await import('../tutorial/api')
-    await expect(saveStageResult('real-uuid', { stageId: 'beginner-1', score: 5, total: 5 })).resolves.toMatchObject({ passed: true, best: 5 })
+    expect(calls.some((c) => c.url === '/api/me/tutorial/courses')).toBe(true) // 목록은 서버 콘텐츠(D-T1)
+    expect(document.querySelectorAll('a[data-cmp=CMP-047]')).toHaveLength(1)
+    // 6단계: 저장 요청은 {runId}만(점수·통과 여부는 서버가 회차의 첫 판정으로 계산, D-T2)
+    const { completeTutorialRun } = await import('../tutorial/api')
+    await expect(completeTutorialRun('real-uuid', 'intro-1-v1', 'run-1')).resolves.toMatchObject({ passed: true, best: 5, run: { score: 5 } })
     const put = calls.find((c) => c.method === 'PUT')!
-    expect(put.body).toEqual({ score: 5, total: 5 }) // passed·best는 보내지 않음
+    expect(put.body).toEqual({ runId: 'run-1' })
+    // 새로고침 복구: 완료된 본인 회차 조회(읽기만)
+    const { getTutorialRun } = await import('../tutorial/api')
+    await expect(getTutorialRun('run-1')).resolves.toMatchObject({ stageId: 'intro-1-v1', run: { score: 5 } })
+    expect(calls.some((c) => c.method === 'GET' && c.url === '/api/me/tutorial/runs/run-1')).toBe(true)
   })
 })
 
@@ -324,7 +342,7 @@ describe('Roster in API mode (I1)', () => {
       if (url === '/api/auth/me') return Promise.resolve(json(admin))
       if (url === '/api/approvals/count') return Promise.resolve(json({ count: 0 }))
       if (url === '/api/roster') return Promise.resolve(json({ members: [current], guests: [] }))
-      if (url === '/api/roster/members/m1/status') return Promise.resolve(json({ referrer: null, rank: null, gamesToRank: 10, record: { games: 0, wins: 0, losses: 0 }, tutorial: { beginner: 0, novice: 0, total: 3 }, recommended: false }))
+      if (url === '/api/roster/members/m1/status') return Promise.resolve(json({ referrer: null, rank: null, gamesToRank: 10, record: { games: 0, wins: 0, losses: 0 }, tutorial: [{ course: 'intro', name: '입문자', passed: 0, total: 2 }], recommended: false }))
       if (init?.method === 'PUT') {
         const body = JSON.parse(String(init.body)) as Record<string, unknown>
         writes.push({ url, body })
@@ -364,5 +382,50 @@ describe('Roster in API mode (I1)', () => {
     expect(writes[0]).toEqual({ url: '/api/roster/members/m1/score', body: { score: 6, previous: null } })
     await setMockScore('member', 'u-member', 4) // 오늘 운동(I4 전 Mock)의 사람
     expect(writes).toHaveLength(1)
+  })
+})
+
+describe('Tutorial play in API mode (5단계, 서버 판정)', () => {
+  beforeEach(() => {
+    window.localStorage.clear()
+    vi.stubGlobal('matchMedia', (q: string) => ({ matches: q.includes('reduce'), media: q, addEventListener() {}, removeEventListener() {}, addListener() {}, removeListener() {}, onchange: null, dispatchEvent: () => false }))
+    vi.stubGlobal('ResizeObserver', class { observe() {} disconnect() {} unobserve() {} })
+  })
+  afterEach(() => vi.unstubAllGlobals())
+
+  it('GET stage → POST runs → POST judge {situation, cell}; the screen shows the server verdict and points', async () => {
+    const calls: { method: string; url: string; body?: unknown }[] = []
+    const stage = {
+      id: 'starter-2-v1', course: 'starter', courseName: '왕초급', no: 2, version: 1, title: '담당 영역 나누기', minutes: 3, thumbnail: 'AST-030', guided: false,
+      grid: { id: 'grid-2x3', cols: 2, rows: 3 }, passRule: { numerator: 7, denominator: 10 },
+      situations: [1, 2, 3, 4, 5].map((no) => ({ no, description: `상황 ${no} 설명`, question: '어디로 이동해야 할까요?', start: { me: [40, 102], partner: [24, 84], opponents: [[18, 26], [43, 38]] }, shuttle: { from: [43, 38], stop: [47, 82] } })),
+    }
+    const judged = { situation: 1, verdict: 'correct', firstVerdict: 'correct', points: 1, answer: 6, allow: [4], landing: [49, 126], landingCell: 6,
+      move: { cell: 6, me: [45.75, 122.83], partnerCell: 3, partner: [15.25, 100.5] }, correctMove: { cell: 6, me: [45.75, 122.83], partnerCell: 3, partner: [15.25, 100.5] },
+      reason: '서버 해설 문장', correctReason: '서버 해설 문장', judged: 1 }
+    vi.stubGlobal('fetch', (input: RequestInfo | URL, init?: RequestInit) => {
+      const url = new URL(String(input), 'http://localhost:5173').pathname
+      const method = init?.method ?? 'GET'
+      expect(init?.credentials).toBe('include')
+      calls.push({ method, url, body: init?.body ? JSON.parse(String(init.body)) : undefined })
+      if (url === '/api/auth/me') return Promise.resolve(json({ id: 'real-uuid', name: '실회원', role: 'member', status: 'approved' }))
+      if (url === '/api/me/tutorial/stages/starter-2-v1' && method === 'GET') return Promise.resolve(json(stage))
+      if (url === '/api/me/tutorial/stages/starter-2-v1/runs' && method === 'POST') return Promise.resolve(json({ runId: 'run-1', stageId: 'starter-2-v1', situations: 5, expiresAt: '2026-11-20T02:00:00Z' }))
+      if (url === '/api/me/tutorial/runs/run-1/judge' && method === 'POST') return Promise.resolve(json(judged))
+      return Promise.resolve(json({ error: { code: 'http_404', message: 'Not Found' } }, 404))
+    })
+    renderAt('/tutorial/stages/starter-2-v1')
+    await waitFor(() => expect(document.querySelector('[data-scr=SCR-102]')).toHaveAttribute('data-phase', 'choose'))
+    const hit = [...document.querySelectorAll('polygon.sc-hit')].find((x) => x.getAttribute('aria-label')!.startsWith('6번 칸'))!
+    fireEvent.click(hit)
+    await waitFor(() => expect(document.querySelector('[data-scr=SCR-102]')).toHaveAttribute('data-st', 'SCR-102-ST7'))
+    expect(screen.getByTestId('bottom-sheet')).toHaveTextContent('득점! +1점')
+    expect(screen.getByTestId('bottom-sheet')).toHaveTextContent('서버 해설 문장')
+    expect(calls.filter((c) => c.url.startsWith('/api/me/tutorial')).map((c) => `${c.method} ${c.url}`)).toEqual([
+      'GET /api/me/tutorial/stages/starter-2-v1',
+      'POST /api/me/tutorial/stages/starter-2-v1/runs',
+      'POST /api/me/tutorial/runs/run-1/judge',
+    ])
+    expect(calls.find((c) => c.url.endsWith('/judge'))!.body).toEqual({ situation: 1, cell: 6 }) // 점수·통과 여부는 보내지 않음
   })
 })

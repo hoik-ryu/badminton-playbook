@@ -1,42 +1,215 @@
 {
-  "ux_spec_revision": 2,
-  "design_direction_revision": 3,
+  "ux_spec_revision": 5,
+  "design_direction_revision": 6,
   "screens": {
     "SCR-001": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "skip": "Design Direction r5 렌더 범위 밖(이번 Preview는 07 6장의 14개 화면)"
     },
     "SCR-002": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "skip": "Design Direction r5 렌더 범위 밖(이번 Preview는 07 6장의 14개 화면)"
     },
     "SCR-003": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "skip": "Design Direction r5 렌더 범위 밖(이번 Preview는 07 6장의 14개 화면)"
     },
     "SCR-004": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "skip": "Design Direction r5 렌더 범위 밖(이번 Preview는 07 6장의 14개 화면)"
     },
     "SCR-005": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "skip": "Design Direction r5 렌더 범위 밖(이번 Preview는 07 6장의 14개 화면)"
     },
     "SCR-101": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "file": "src/screens/SCR-101.tsx",
+      "states": [
+        "SCR-101-ST1",
+        "SCR-101-ST3",
+        "SCR-101-ST4",
+        "SCR-101-ST7"
+      ],
+      "vd": [
+        "VD-001",
+        "VD-002",
+        "VD-003",
+        "VD-004",
+        "VD-019",
+        "VD-020",
+        "VD-021",
+        "VD-022",
+        "VD-023",
+        "VD-024",
+        "VD-032",
+        "VD-033",
+        "VD-034",
+        "VD-035",
+        "VD-036",
+        "VD-038",
+        "VD-039",
+        "VD-040",
+        "VD-041",
+        "VD-042",
+        "VD-043",
+        "VD-046"
+      ]
     },
     "SCR-102": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "file": "src/screens/SCR-102.tsx",
+      "states": [
+        "SCR-102-ST1",
+        "SCR-102-ST7",
+        "SCR-102-ST8",
+        "SCR-102-ST9",
+        "SCR-102-ST10",
+        "SCR-102-ST11",
+        "SCR-102-ST12"
+      ],
+      "vd": [
+        "VD-001",
+        "VD-002",
+        "VD-003",
+        "VD-004",
+        "VD-020",
+        "VD-021",
+        "VD-026",
+        "VD-027",
+        "VD-028",
+        "VD-029",
+        "VD-030",
+        "VD-031",
+        "VD-038",
+        "VD-039",
+        "VD-040",
+        "VD-041",
+        "VD-042",
+        "VD-044",
+        "VD-047",
+        "VD-048"
+      ]
     },
     "SCR-103": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "file": "src/screens/SCR-103.tsx",
+      "states": [
+        "SCR-103-ST1",
+        "SCR-103-ST2",
+        "SCR-103-ST4",
+        "SCR-103-ST7"
+      ],
+      "vd": [
+        "VD-001",
+        "VD-002",
+        "VD-003",
+        "VD-004",
+        "VD-020",
+        "VD-021",
+        "VD-022",
+        "VD-023",
+        "VD-029",
+        "VD-031",
+        "VD-033",
+        "VD-037",
+        "VD-038",
+        "VD-039",
+        "VD-040",
+        "VD-041",
+        "VD-042",
+        "VD-045",
+        "VD-047",
+        "VD-048"
+      ]
     },
     "SCR-111": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "file": "src/screens/SCR-111.tsx",
+      "states": [
+        "SCR-111-ST1",
+        "SCR-111-ST3",
+        "SCR-111-ST4"
+      ],
+      "vd": [
+        "VD-001",
+        "VD-002",
+        "VD-003",
+        "VD-004",
+        "VD-019",
+        "VD-020",
+        "VD-021",
+        "VD-022",
+        "VD-023",
+        "VD-024",
+        "VD-038",
+        "VD-039",
+        "VD-040",
+        "VD-041",
+        "VD-042"
+      ]
     },
     "SCR-112": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "file": "src/screens/SCR-112.tsx",
+      "states": [
+        "SCR-112-ST1",
+        "SCR-112-ST3",
+        "SCR-112-ST7",
+        "SCR-112-ST8"
+      ],
+      "vd": [
+        "VD-001",
+        "VD-002",
+        "VD-003",
+        "VD-004",
+        "VD-019",
+        "VD-020",
+        "VD-021",
+        "VD-022",
+        "VD-023",
+        "VD-024",
+        "VD-038",
+        "VD-039",
+        "VD-040",
+        "VD-041",
+        "VD-042"
+      ]
     },
     "SCR-121": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "file": "src/screens/SCR-121.tsx",
+      "states": [
+        "SCR-121-ST1",
+        "SCR-121-ST3",
+        "SCR-121-ST7"
+      ],
+      "vd": [
+        "VD-001",
+        "VD-002",
+        "VD-003",
+        "VD-004",
+        "VD-019",
+        "VD-020",
+        "VD-021",
+        "VD-022",
+        "VD-023",
+        "VD-024",
+        "VD-038",
+        "VD-039",
+        "VD-040",
+        "VD-041",
+        "VD-042"
+      ]
     },
     "SCR-122": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "file": "src/screens/SCR-122.tsx",
+      "states": [
+        "SCR-122-ST1",
+        "SCR-122-ST4"
+      ],
+      "vd": [
+        "VD-001",
+        "VD-002",
+        "VD-003",
+        "VD-020",
+        "VD-021",
+        "VD-025",
+        "VD-038",
+        "VD-039",
+        "VD-040",
+        "VD-041",
+        "VD-042"
+      ]
     },
     "SCR-201": {
       "file": "src/screens/SCR-201.tsx",
@@ -94,10 +267,10 @@
       "note": "SCR-202 위 하단 시트(70%), 인원 요약 고정. 중첩은 SCR-213-ST1에서 확인"
     },
     "SCR-204": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "skip": "Design Direction r5 렌더 범위 밖(이번 Preview는 07 6장의 14개 화면)"
     },
     "SCR-205": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "skip": "Design Direction r5 렌더 범위 밖(이번 Preview는 07 6장의 14개 화면)"
     },
     "SCR-211": {
       "file": "src/screens/SCR-211.tsx",
@@ -157,13 +330,13 @@
       "note": "ST1 게스트 추가 = SCR-203 참석 시트 위 두 번째 시트(중첩, 딤 한 겹). ST7 회원 직접 추가 = SCR-211 위 시트"
     },
     "SCR-214": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "skip": "Design Direction r5 렌더 범위 밖(이번 Preview는 07 6장의 14개 화면)"
     },
     "SCR-221": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "skip": "Design Direction r5 렌더 범위 밖(이번 Preview는 07 6장의 14개 화면)"
     },
     "SCR-222": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "skip": "Design Direction r5 렌더 범위 밖(이번 Preview는 07 6장의 14개 화면)"
     },
     "SCR-223": {
       "file": "src/screens/SCR-223.tsx",
@@ -186,19 +359,19 @@
       "note": "팀전. ST7 대진 검토, ST8 확정(결과 버튼·미기록으로 되돌리기·완화 사유 배지·결과 요약 카드). 하단 고정 행동 바"
     },
     "SCR-224": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "skip": "Design Direction r5 렌더 범위 밖(이번 Preview는 07 6장의 14개 화면)"
     },
     "SCR-225": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "skip": "Design Direction r5 렌더 범위 밖(이번 Preview는 07 6장의 14개 화면)"
     },
     "SCR-226": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "skip": "Design Direction r5 렌더 범위 밖(이번 Preview는 07 6장의 14개 화면)"
     },
     "SCR-231": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "skip": "Design Direction r5 렌더 범위 밖(이번 Preview는 07 6장의 14개 화면)"
     },
     "SCR-232": {
-      "skip": "Design Direction r2 렌더 범위 밖(이번 Preview는 SCR-211·201·212·213·202·203·223 7개 화면)"
+      "skip": "Design Direction r5 렌더 범위 밖(이번 Preview는 07 6장의 14개 화면)"
     }
   }
 }

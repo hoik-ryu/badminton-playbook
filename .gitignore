@@ -40,3 +40,41 @@ experiments/brand-assets/out/
 experiments/brand-assets/v4/out/
 experiments/brand-assets/v4/compare/
 experiments/brand-assets/v4/.work/
+
+# 저장소 정리(2026-11-20): 저장소 밖 보관본(~/smapsh-archive/2026-11-20/MANIFEST.tsv)으로 옮긴 검토 캡처·측정. 로컬 사본이 다시 추적되지 않도록 제외
+#  - 승인 문서(06·07)·해시 대상 라운드(V05)가 인용하는 근거는 제외하지 않음(Git 유지)
+docs/workflow-proposals/review/
+design-handoff/
+design-explore/review/V03/
+design-explore/review/preview-r3/
+design-explore/review/preview-r3-game/*.png
+design-explore/review/preview-r3-game/measure.json
+design-explore/review/preview-r3-game/flow/
+design-explore/review/preview-r3-game/flow2/
+design-explore/review/preview-r3-game/shots/
+design-explore/review/preview-r3-game/regression/
+design-explore/review/preview-r3-game/select/*.png
+design-explore/review/V04/*.html
+design-explore/review/V04/*.png
+!design-explore/review/V04/dd41-contrast.*
+!design-explore/review/V04/primary390.*
+!design-explore/review/V04/primary360.*
+!design-explore/review/V04/primary-zoom.*
+design-explore/review/V04/primary/
+design-explore/review/V04/ref/
+design-explore/review/V04/var-deco/
+design-explore/review/V04/var-racket/
+design-explore/review/V04/snapshots/V04-A_primary-0B9E8B_AST-026/
+
+# 임시 산출물(정책: docs/workflow-proposals/temp-artifacts-policy.md). 기본 생성 위치는 저장소 밖 ~/smapsh-work/
+#  - 저장소 안에서 꼭 만들어야 하면 .tmp/ 아래에 둠(테스트 캡처·E2E 로그·디자인 비교 이미지·중간 렌더·디버깅 스크린샷·일회성 측정)
+#  - 확장자 전체(*.png 등)는 제외하지 않음: 제품 자산·승인 근거는 계속 추적
+.tmp/
+# Playwright 기본 출력(리포트·실행 결과·추적·브라우저 캐시)
+playwright-report/
+test-results/
+blob-report/
+**/playwright/.cache/
+.pw-browsers/
+*.har
+trace.zip

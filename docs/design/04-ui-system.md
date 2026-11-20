@@ -1,10 +1,10 @@
 ---
 doc: ui-system
-revision: 3
+revision: 5
 language: ko
 based_on:
   planning_revision: 7
-  ux_planning_revision: 5
+  ux_planning_revision: 6
 ---
 
 # UI 컴포넌트와 디자인 토큰 (UI System): 배드민턴 플레이북 (badminton-playbook)
@@ -24,6 +24,17 @@ based_on:
 > - 새 컴포넌트: CMP-048 CourseCard, CMP-049 LearningProgress, CMP-050 ContinueCard
 > - 토큰은 추가하거나 바꾸지 않았습니다. 격자 선·번호·선택·판정·동선의 색과 굵기, 카드·진행률 표현은 Design Direction에서 정하며, 새 의미 토큰이 필요하면 그때 이 문서를 개정합니다.
 > - 기존 CMP ID는 그대로입니다.
+
+> **r4 개정(2026-11-19)**: Design Direction 변경 요청 CR-011(사용자 결정 2026-11-19)을 반영했습니다.
+> - 새 의미 토큰 3개(1.2): `color.accent.subtle`(강조 보조 면), `color.accent.mint`(장식 면 전용), `color.text.accent`(강조 글자)
+> - `color.action.primary`의 용도에서 '링크'(글자색)를 빼고 채움·아이콘 전용으로 정리했습니다. 링크·강조 글자는 `color.text.accent`를 씁니다.
+> - 1.2에 역할 분리와 대비 유지 규칙을 추가했습니다(채움·아이콘 / 강조 글자 / 포커스 링을 서로 다른 토큰으로).
+> - (사용자 결정 2026-11-19) 큰 CTA 버튼(CMP-001 `variant=primary`·`size=lg`) 글자를 `font.size.heading` 22px·굵게로 정하고, 주 버튼 글자 대비 규칙을 '일반 글자 4.5:1 이상 또는 큰 글자 3:1 이상'으로 고쳤습니다. 22px를 쓰기 어려운 작은 주 버튼·세그먼트 등은 별도 검토 대상으로 남겼습니다(CMP-001).
+> - 기존 토큰 값(`color.action.primary`·`color.focus.ring`·`color.bg.page`)의 테마 값 변경은 Design Direction 테마(③)에서 다룹니다. 화면 구조·컴포넌트·학습 목표·기능 요구사항은 바꾸지 않았습니다.
+
+> **r5 개정(2026-11-19)**: UX 결정 r6(UXD-077 개정)을 반영했습니다.
+> - CMP-046 TutorialCourt: 재생 중 상태의 '번호 흐림'을 '번호 격자(격자 선·번호) 숨김'으로 바꾸고, 선택 대기부터 내 편 반 코트에 표시하도록 상태 설명을 맞췄습니다. 번호 위치는 실제 코트 라인과 겹치지 않게 둡니다(UXD-077).
+> - 토큰·컴포넌트·변형 값은 추가하거나 바꾸지 않았습니다. 나타나는 전환·번호 위치 값은 Design Direction에서 정합니다.
 
 ## 1. 디자인 토큰
 
@@ -50,7 +61,7 @@ based_on:
 | color.text.disabled | #6B7280 | 비활성 글자·사유 | 4.43:1(surface) · 비활성 요소라 기준 예외지만 사유 글자는 page 배경(4.83:1)에 둠 |
 | color.border.default | #D5D9E0 | 장식 구분선(카드 경계 보조) | 1.42:1 · 장식용만 |
 | color.border.strong | #6B7280 | 입력칸·체크박스·보조 버튼 테두리, 백팀 표식 | 4.83:1 |
-| color.action.primary | #1D5BD0 | 주 버튼 배경, 링크, 선택 상태 | 6.07:1 |
+| color.action.primary | #1D5BD0 | 주 버튼 배경, ~~링크,~~ 선택 상태, (r4) 진행 막대·재생 아이콘·선택 탭 아이콘 등 **채움·아이콘**. (r4) 글자색으로 쓰지 않습니다(링크·강조 글자는 color.text.accent) | 6.07:1 |
 | color.action.onPrimary | #FFFFFF | 주 버튼 글자 | 6.07:1 |
 | color.focus.ring | #1D5BD0 | 키보드 포커스 링(2px + 2px 간격) | 6.07:1 |
 | color.status.danger.fg | #B3261E | 오류 글자, 위험 버튼 | 6.54:1(page), 5.52:1(danger.bg) |
@@ -60,6 +71,9 @@ based_on:
 | color.status.success.fg | #1B6E35 | 통과·승·완료 | 6.31:1(page), 5.53:1(success.bg) |
 | color.status.success.bg | #E4F4E8 | 성공 안내 상자·배지 배경 | - |
 | color.status.info.bg | #E3ECFC | 정보 안내 상자 배경 | - |
+| color.accent.subtle | #DDF8EF | (r4) 강조 보조 면: 상태·시간 배지(CMP-005) 배경, 스테이지 썸네일 바탕(CMP-047), 과정 진행 배지(CMP-048), 이어서 하기 카드(CMP-050) 강조 면, 소개 배너(SCR-101) 그라데이션. 정보 안내 상자(color.status.info.bg)와 의미가 다릅니다 | text.primary 15.07:1, text.secondary 6.19:1, text.accent 4.84:1 |
+| color.accent.mint | #8EE3CC | (r4) 장식 면 전용: 소개 배너 그라데이션의 진한 끝. 글자·아이콘의 바탕으로 쓰지 않습니다 | 장식용만(text.primary 11.26:1) |
+| color.text.accent | #10776C | (r4) 강조 글자: 링크, 배너·카드 머리글, 선택된 하단 탭 글자, 통과·시간 배지 글자 등 작은 글자를 포함한 강조색 글자 | 5.42:1(#FFFFFF), 5.36:1(#FAFFFD), 4.84:1(accent.subtle) |
 | color.team.blue.fg | #1747A6 | 청팀 글자 | 7.10:1(team.blue.bg) |
 | color.team.blue.bg | #E3ECFC | 청팀 띠·배지 배경 | - |
 | color.team.white.fg | #1A1D23 | 백팀 글자 | 16.88:1 |
@@ -71,6 +85,7 @@ based_on:
 | color.court.me | #1D5BD0 | 내 선수(흰 글자 표식) | 6.07:1 |
 | color.court.opponent | #F2C14E | 상대 선수(진한 글자 표식) | 10.06:1 |
 
+- (r4) **역할 분리와 대비 유지(CR-011)**: 강조색은 쓰임새별로 토큰을 나눕니다 — 채움·아이콘 `color.action.primary`, 강조 글자 `color.text.accent`, 키보드 포커스 `color.focus.ring`(서로 같은 값일 필요 없음). 테마 값이 바뀌어도 다음을 유지합니다: `color.text.accent` 대 페이지·`color.accent.subtle` 4.5:1 이상, `color.action.onPrimary` 대 `color.action.primary`는 일반 글자 4.5:1 이상, 큰 글자(굵게 18.66px(14pt) 이상 또는 24px 이상) 3:1 이상(주 버튼 글자, WCAG 1.4.3), `color.action.primary`로 그린 아이콘·막대·선택 표시 대 인접 배경 3:1 이상, `color.focus.ring` 대 페이지 3:1 이상. 정보는 색만으로 전달하지 않습니다(진행률은 숫자 글자 병기).
 - 개인전의 '1팀 / 2팀'은 팀 색을 쓰지 않고 글자 레이블만 씁니다(청·백 팀전과 혼동 방지, C-24).
 - 카카오 버튼 색·문구는 카카오 로그인 버튼 가이드를 따르며 위 값은 가이드 확인 후 확정합니다.
 
@@ -85,7 +100,7 @@ based_on:
 | radius.md | 10px | 버튼·입력·카드 |
 | radius.sheet | 16px | 하단 시트 위쪽 모서리 |
 | font.family.base | 시스템 기본 sans-serif 글꼴 스택(웹 글꼴 도입 여부는 시각 디자인 단계에서 결정) | 본문 |
-| font.size.caption / body / title / heading / display | 13 / 16 / 18 / 22 / 32px | 보조·본문(모바일 최소 16px)·카드 제목·화면 제목·결과 점수 |
+| font.size.caption / body / title / heading / display | 13 / 16 / 18 / 22 / 32px | 보조·본문(모바일 최소 16px)·카드 제목·화면 제목·결과 점수. (r4) heading은 큰 CTA 버튼 글자(CMP-001 `variant=primary`·`size=lg`)에도 씁니다 |
 | font.weight.regular / bold | 400 / 700 | |
 | font.lineHeight.body | 1.5 | 본문 |
 | size.touch.min | 44px | 터치 영역 최소(주요 버튼 48px, 튜토리얼 선택 버튼 56px) |
@@ -129,6 +144,11 @@ based_on:
 - **상태**: 기본, 눌림, 비활성(사유 문구를 근처에 표시), 로딩(진행 표시·중복 제출 막기)
 - **사용 화면**: SCR-001, SCR-002, SCR-003, SCR-004, SCR-005, SCR-102, SCR-103, SCR-121, SCR-122, SCR-202, SCR-203, SCR-211, SCR-212, SCR-213, SCR-221, SCR-222, SCR-223, SCR-226, SCR-231, SCR-232
 - **접근성**: 버튼 글자가 곧 레이블, 비활성 사유는 `aria-describedby`, 포커스 링 color.focus.ring
+- (r4) **큰 CTA 버튼 글자(CR-011, 사용자 결정 2026-11-19)**: `variant=primary`·`size=lg`(48px) 버튼은 글자를 `font.size.heading`(22px)·`font.weight.bold`로 씁니다. 이때 `color.action.onPrimary` 대 `color.action.primary`는 큰 글자 기준 3:1 이상이면 됩니다(1.2 대비 규칙).
+- (r4) **별도 검토 대상(아직 기준 충족을 확인하지 않음)**: 22px를 적용하기 어려운 아래 경우는 큰 글자 예외를 쓸 수 없으므로 일반 글자 기준 4.5:1을 따로 확인해야 합니다. 테마 값에서 흰 글자 대 `color.action.primary`가 4.5:1 미만이면 **미달**이며, Design Direction에서 해결 방법(글자 크기·배경 값 등)을 정하기 전에는 통과로 기록하지 않습니다.
+  - `variant=primary`·`size=md`(44px) 버튼과 목록 행·시트 안의 작은 주 버튼(저장·확정·승인 등)
+  - 흰 글자가 `color.action.primary` 위에 놓이는 다른 컴포넌트: CMP-002 SegmentedControl 선택 상태 등
+  - 로그인 화면 버튼: 카카오 버튼(`variant=kakao`)은 카카오 가이드 색을 쓰므로 이 규칙과 별개이며, 개발용 로그인 등 `variant=primary` 버튼이 있으면 위 기준을 따릅니다
 
 ### CMP-002: SegmentedControl
 - **용도**: 2–3개 중 하나 고르기(남·여, 개인전·팀전, 레벨별·무작위, 청·백·불참)
@@ -301,9 +321,9 @@ based_on:
   - (r3) `select=single|confirm`: 단일 터치 / 확인 단계, UXD-078
   - (r3) `guided=true|false`: 입문자 안내형은 셔틀 없음, UXD-080
 - **상태**:
-  - 멈춤·선택 대기: 번호 선명, 누름 활성
+  - 멈춤·선택 대기: ~~번호 선명,~~ (r5) 셔틀이 멈추면 내 편 반 코트에만 격자 선·번호가 나타나 선명하게 표시(나타나는 전환은 Design Direction, 움직임 줄이기면 바로), 누름 활성. 입문자 안내형(`guided`)은 처음부터 표시
   - (r3) 칸 선택됨·확정 대기: `confirm`일 때 고른 칸 강조
-  - 재생 중: 누름 영역 꺼짐, 번호 흐림, 눌러서 건너뛰기
+  - 재생 중: 누름 영역 꺼짐, ~~번호 흐림~~ (r5) 번호 격자(격자 선·번호) 숨김 — 실제 코트 라인·네트는 유지, 눌러서 건너뛰기. 다음 상황으로 넘어가면 다시 숨긴 상태로 재생
   - 결과: 정답·허용·오답과 칸 표시
   - 정답 다시 보기: 동선 화살표
 - **사용 화면**: SCR-102, SCR-103

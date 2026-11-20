@@ -8,7 +8,7 @@ import { previewHref } from "../../previewLinks";
 import { COLUMN } from "./Layout";
 
 // CMP-025 AppNav(하단, 운영진). 탭 높이 56(CR-005 거절) + 안전 영역(VD-020).
-// VD-019: Lucide 아이콘, 글자 레이블 유지, 현재 탭 = color.action.primary + 굵은 글자 + 위쪽 표시 막대(새 토큰 없음)
+// VD-019: Lucide 아이콘, 글자 레이블 유지, 현재 탭 = 아이콘·위쪽 막대 color.action.primary + 굵은 글자 color.text.accent(13px 글자 대비, UX Spec r4 역할 분리)
 // (r2) 순서는 UXD-066 '튜토리얼 / 청백전 / 마이페이지' + 운영진 '운영'. PC·모바일 같은 하단 탭, 600px 열 너비(04 CMP-025 layout=bottom, VD-019)
 // 탭을 누르면 그 탭의 첫 화면(03 공통 이동: SCR-101, SCR-111, SCR-121, SCR-201)
 // 04 CMP-025 상태 '배지(운영 탭 승인 대기 건수)': opsBadge가 1 이상일 때만 표시, 건수를 레이블에 포함
@@ -51,10 +51,10 @@ export function AppNav({
                 aria-label={
                   count ? `${label}, 승인 대기 ${count}건` : undefined
                 }
-                className={`flex h-full flex-col items-center justify-center gap-0.5 ${on ? "font-bold text-action" : "text-ink-muted"}`}
+                className={`flex h-full flex-col items-center justify-center gap-0.5 ${on ? "font-bold text-ink-accent" : "text-ink-muted"}`}
               >
                 <span className="relative">
-                  <Icon aria-hidden className="size-6" />
+                  <Icon aria-hidden className={`size-6 ${on ? "text-action" : ""}`} />
                   {count > 0 && (
                     <span
                       aria-hidden

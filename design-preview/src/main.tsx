@@ -4,6 +4,7 @@ import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css' // V
 import './app.css'
 import './tokens.css'
 import './preview.css'
+import './tutorial.css'
 import { PreviewApp } from './PreviewApp'
 
 // ?safe=34: 기기 하단 안전 영역(가정값)을 흉내 냄. 실제 기기는 env(safe-area-inset-bottom)
