@@ -71,7 +71,7 @@ export function Scr121({ stateId }: { stateId: string }) {
         </Section>
         <ScrollSafeArea withBar={false} />
       </main>
-      <AppNav active="my" />
+      <AppNav active="my" role="member" />
     </Screen>
   )
 }

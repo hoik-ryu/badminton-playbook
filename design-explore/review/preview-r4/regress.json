@@ -1,0 +1,1511 @@
+{
+ "390x844|SCR-101-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-101-ST3": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-101-ST4": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-101-ST7": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-102-PLAY": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-102-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-102-ST1-G9": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-102-ST11": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-102-ST12": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-102-ST7": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-102-ST8": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-102-ST9": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-102-ST10": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-103-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-103-ST2": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-103-ST4": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-103-ST7": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-111-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-111-ST1-OPS": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-111-ST3": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-111-ST4": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-112-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-112-ST3": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-112-ST7": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-112-ST8": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-112-ST12": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "개인전",
+    "w": 176,
+    "h": 38
+   },
+   {
+    "t": "팀전",
+    "w": 176,
+    "h": 38
+   }
+  ],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-112-ST13": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-121-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-121-ST3": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-121-ST7": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-122-ST1": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "남",
+    "w": 176,
+    "h": 38
+   },
+   {
+    "t": "여",
+    "w": 176,
+    "h": 38
+   }
+  ],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-122-ST4": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "남",
+    "w": 176,
+    "h": 38
+   },
+   {
+    "t": "여",
+    "w": 176,
+    "h": 38
+   }
+  ],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-201-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-202-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-202-ST7": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-203-ST1": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "INPUT",
+    "w": 304,
+    "h": 24
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   }
+  ],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-211-ST1": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "INPUT",
+    "w": 304,
+    "h": 24
+   },
+   {
+    "t": "점수 미설정 3명",
+    "w": 131,
+    "h": 32
+   },
+   {
+    "t": "튜토리얼 권장 · 미통과 5명",
+    "w": 198,
+    "h": 32
+   },
+   {
+    "t": "BUTTON",
+    "w": 44,
+    "h": 24
+   }
+  ],
+  "over": [
+   ""
+  ],
+  "errors": 0
+ },
+ "390x844|SCR-212-ST1": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "INPUT",
+    "w": 304,
+    "h": 24
+   },
+   {
+    "t": "점수 미설정 3명",
+    "w": 131,
+    "h": 32
+   },
+   {
+    "t": "튜토리얼 권장 · 미통과 5명",
+    "w": 198,
+    "h": 32
+   },
+   {
+    "t": "BUTTON",
+    "w": 44,
+    "h": 24
+   },
+   {
+    "t": "남",
+    "w": 176,
+    "h": 38
+   },
+   {
+    "t": "여",
+    "w": 176,
+    "h": 38
+   }
+  ],
+  "over": [
+   ""
+  ],
+  "errors": 0
+ },
+ "390x844|SCR-212-ST7": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "INPUT",
+    "w": 304,
+    "h": 24
+   },
+   {
+    "t": "점수 미설정 3명",
+    "w": 131,
+    "h": 32
+   },
+   {
+    "t": "튜토리얼 권장 · 미통과 5명",
+    "w": 198,
+    "h": 32
+   },
+   {
+    "t": "BUTTON",
+    "w": 44,
+    "h": 24
+   },
+   {
+    "t": "남",
+    "w": 176,
+    "h": 38
+   },
+   {
+    "t": "여",
+    "w": 176,
+    "h": 38
+   }
+  ],
+  "over": [
+   ""
+  ],
+  "errors": 0
+ },
+ "390x844|SCR-213-ST1": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "INPUT",
+    "w": 304,
+    "h": 24
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "남",
+    "w": 176,
+    "h": 38
+   },
+   {
+    "t": "여",
+    "w": 176,
+    "h": 38
+   }
+  ],
+  "over": [],
+  "errors": 0
+ },
+ "390x844|SCR-213-ST7": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "INPUT",
+    "w": 304,
+    "h": 24
+   },
+   {
+    "t": "점수 미설정 3명",
+    "w": 131,
+    "h": 32
+   },
+   {
+    "t": "튜토리얼 권장 · 미통과 5명",
+    "w": 198,
+    "h": 32
+   },
+   {
+    "t": "BUTTON",
+    "w": 44,
+    "h": 24
+   },
+   {
+    "t": "남",
+    "w": 176,
+    "h": 38
+   },
+   {
+    "t": "여",
+    "w": 176,
+    "h": 38
+   }
+  ],
+  "over": [
+   ""
+  ],
+  "errors": 0
+ },
+ "360x640|SCR-101-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-101-ST3": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-101-ST4": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-101-ST7": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-102-PLAY": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-102-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-102-ST1-G9": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-102-ST11": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-102-ST12": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-102-ST7": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-102-ST8": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-102-ST9": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-102-ST10": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-103-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-103-ST2": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-103-ST4": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-103-ST7": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-111-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-111-ST1-OPS": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-111-ST3": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-111-ST4": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-112-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-112-ST3": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-112-ST7": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-112-ST8": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-112-ST12": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "개인전",
+    "w": 161,
+    "h": 38
+   },
+   {
+    "t": "팀전",
+    "w": 161,
+    "h": 38
+   }
+  ],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-112-ST13": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-121-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-121-ST3": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-121-ST7": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-122-ST1": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "남",
+    "w": 161,
+    "h": 38
+   },
+   {
+    "t": "여",
+    "w": 161,
+    "h": 38
+   }
+  ],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-122-ST4": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "남",
+    "w": 161,
+    "h": 38
+   },
+   {
+    "t": "여",
+    "w": 161,
+    "h": 38
+   }
+  ],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-201-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-202-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-202-ST7": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-203-ST1": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "INPUT",
+    "w": 274,
+    "h": 24
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   }
+  ],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-211-ST1": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "INPUT",
+    "w": 274,
+    "h": 24
+   },
+   {
+    "t": "점수 미설정 3명",
+    "w": 131,
+    "h": 32
+   },
+   {
+    "t": "튜토리얼 권장 · 미통과 5명",
+    "w": 198,
+    "h": 32
+   },
+   {
+    "t": "BUTTON",
+    "w": 44,
+    "h": 24
+   }
+  ],
+  "over": [
+   ""
+  ],
+  "errors": 0
+ },
+ "360x640|SCR-212-ST1": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "INPUT",
+    "w": 274,
+    "h": 24
+   },
+   {
+    "t": "점수 미설정 3명",
+    "w": 131,
+    "h": 32
+   },
+   {
+    "t": "튜토리얼 권장 · 미통과 5명",
+    "w": 198,
+    "h": 32
+   },
+   {
+    "t": "BUTTON",
+    "w": 44,
+    "h": 24
+   },
+   {
+    "t": "남",
+    "w": 161,
+    "h": 38
+   },
+   {
+    "t": "여",
+    "w": 161,
+    "h": 38
+   }
+  ],
+  "over": [
+   ""
+  ],
+  "errors": 0
+ },
+ "360x640|SCR-212-ST7": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "INPUT",
+    "w": 274,
+    "h": 24
+   },
+   {
+    "t": "점수 미설정 3명",
+    "w": 131,
+    "h": 32
+   },
+   {
+    "t": "튜토리얼 권장 · 미통과 5명",
+    "w": 198,
+    "h": 32
+   },
+   {
+    "t": "BUTTON",
+    "w": 44,
+    "h": 24
+   },
+   {
+    "t": "남",
+    "w": 161,
+    "h": 38
+   },
+   {
+    "t": "여",
+    "w": 161,
+    "h": 38
+   }
+  ],
+  "over": [
+   ""
+  ],
+  "errors": 0
+ },
+ "360x640|SCR-213-ST1": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "INPUT",
+    "w": 274,
+    "h": 24
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "남",
+    "w": 161,
+    "h": 38
+   },
+   {
+    "t": "여",
+    "w": 161,
+    "h": 38
+   }
+  ],
+  "over": [],
+  "errors": 0
+ },
+ "360x640|SCR-213-ST7": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "INPUT",
+    "w": 274,
+    "h": 24
+   },
+   {
+    "t": "점수 미설정 3명",
+    "w": 131,
+    "h": 32
+   },
+   {
+    "t": "튜토리얼 권장 · 미통과 5명",
+    "w": 198,
+    "h": 32
+   },
+   {
+    "t": "BUTTON",
+    "w": 44,
+    "h": 24
+   },
+   {
+    "t": "남",
+    "w": 161,
+    "h": 38
+   },
+   {
+    "t": "여",
+    "w": 161,
+    "h": 38
+   }
+  ],
+  "over": [
+   ""
+  ],
+  "errors": 0
+ },
+ "1440x900|SCR-101-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-101-ST3": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-101-ST4": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-101-ST7": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-102-PLAY": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-102-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-102-ST1-G9": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-102-ST11": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-102-ST12": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-102-ST7": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-102-ST8": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-102-ST9": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-102-ST10": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-103-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-103-ST2": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-103-ST4": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-103-ST7": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-111-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-111-ST1-OPS": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-111-ST3": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-111-ST4": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-112-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-112-ST3": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-112-ST7": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-112-ST8": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-112-ST12": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "개인전",
+    "w": 281,
+    "h": 38
+   },
+   {
+    "t": "팀전",
+    "w": 281,
+    "h": 38
+   }
+  ],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-112-ST13": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-121-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-121-ST3": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-121-ST7": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-122-ST1": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "남",
+    "w": 281,
+    "h": 38
+   },
+   {
+    "t": "여",
+    "w": 281,
+    "h": 38
+   }
+  ],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-122-ST4": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "남",
+    "w": 281,
+    "h": 38
+   },
+   {
+    "t": "여",
+    "w": 281,
+    "h": 38
+   }
+  ],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-201-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-202-ST1": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-202-ST7": {
+  "hscroll": false,
+  "small": [],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-203-ST1": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "INPUT",
+    "w": 514,
+    "h": 24
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   }
+  ],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-211-ST1": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "INPUT",
+    "w": 514,
+    "h": 24
+   },
+   {
+    "t": "점수 미설정 3명",
+    "w": 131,
+    "h": 32
+   },
+   {
+    "t": "튜토리얼 권장 · 미통과 5명",
+    "w": 198,
+    "h": 32
+   },
+   {
+    "t": "BUTTON",
+    "w": 44,
+    "h": 24
+   }
+  ],
+  "over": [
+   ""
+  ],
+  "errors": 0
+ },
+ "1440x900|SCR-212-ST1": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "INPUT",
+    "w": 514,
+    "h": 24
+   },
+   {
+    "t": "점수 미설정 3명",
+    "w": 131,
+    "h": 32
+   },
+   {
+    "t": "튜토리얼 권장 · 미통과 5명",
+    "w": 198,
+    "h": 32
+   },
+   {
+    "t": "BUTTON",
+    "w": 44,
+    "h": 24
+   },
+   {
+    "t": "남",
+    "w": 281,
+    "h": 38
+   },
+   {
+    "t": "여",
+    "w": 281,
+    "h": 38
+   }
+  ],
+  "over": [
+   ""
+  ],
+  "errors": 0
+ },
+ "1440x900|SCR-212-ST7": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "INPUT",
+    "w": 514,
+    "h": 24
+   },
+   {
+    "t": "점수 미설정 3명",
+    "w": 131,
+    "h": 32
+   },
+   {
+    "t": "튜토리얼 권장 · 미통과 5명",
+    "w": 198,
+    "h": 32
+   },
+   {
+    "t": "BUTTON",
+    "w": 44,
+    "h": 24
+   },
+   {
+    "t": "남",
+    "w": 281,
+    "h": 38
+   },
+   {
+    "t": "여",
+    "w": 281,
+    "h": 38
+   }
+  ],
+  "over": [
+   ""
+  ],
+  "errors": 0
+ },
+ "1440x900|SCR-213-ST1": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "INPUT",
+    "w": 514,
+    "h": 24
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "INPUT",
+    "w": 1,
+    "h": 1
+   },
+   {
+    "t": "남",
+    "w": 281,
+    "h": 38
+   },
+   {
+    "t": "여",
+    "w": 281,
+    "h": 38
+   }
+  ],
+  "over": [],
+  "errors": 0
+ },
+ "1440x900|SCR-213-ST7": {
+  "hscroll": false,
+  "small": [
+   {
+    "t": "INPUT",
+    "w": 514,
+    "h": 24
+   },
+   {
+    "t": "점수 미설정 3명",
+    "w": 131,
+    "h": 32
+   },
+   {
+    "t": "튜토리얼 권장 · 미통과 5명",
+    "w": 198,
+    "h": 32
+   },
+   {
+    "t": "BUTTON",
+    "w": 44,
+    "h": 24
+   },
+   {
+    "t": "남",
+    "w": 281,
+    "h": 38
+   },
+   {
+    "t": "여",
+    "w": 281,
+    "h": 38
+   }
+  ],
+  "over": [
+   ""
+  ],
+  "errors": 0
+ }
+}

@@ -1,0 +1,383 @@
+{
+  "id": "EXP-V08-A",
+  "round": "V08",
+  "phase": "visual",
+  "kind": "revision",
+  "base": "V07-A",
+  "variants": [
+    "A"
+  ],
+  "per_target": {
+    "SCR-111": "A"
+  },
+  "axes": null,
+  "statement": "V08-A를 최종 디자인 후보로 선택합니다. AI Product Workflow의 정식 탐색 선택 절차를 진행하되, Design Direction의 최종 승인과는 구분하세요.",
+  "feedback": [],
+  "at": "2026-11-20T08:22:03Z",
+  "measurement": "passed",
+  "measurement_detail": {
+    "status": "passed",
+    "waiver": null,
+    "variants": {
+      "A": {
+        "status": "passed",
+        "run_id": "M20261120-075509-f6c5d1",
+        "at": "2026-11-20T07:55:09Z",
+        "reason": null,
+        "warnings": [
+          "SCR-111@desktop: fixed_overlap:s111-item-past-team<nav.tabs",
+          "SCR-111@desktop: fixed_overlap:s111-past<nav.tabs",
+          "SCR-111@desktop: fixed_overlap:s111-refresh<nav.tabs",
+          "SCR-111@mobile-sm: fixed_overlap:s111-item-pending<nav.tabs",
+          "SCR-111@mobile-sm: fixed_overlap:s111-item-upcoming<nav.tabs",
+          "SCR-111@mobile-sm: fixed_overlap:s111-refresh<nav.tabs",
+          "SCR-111@mobile-sm: fixed_overlap:s111-upcoming<nav.tabs",
+          "SCR-111@mobile: fixed_overlap:s111-item-past-team<nav.tabs",
+          "SCR-111@mobile: fixed_overlap:s111-past<nav.tabs",
+          "SCR-111@mobile: fixed_overlap:s111-refresh<nav.tabs"
+        ],
+        "report": "design-explore/V08/shots/M20261120-075509-f6c5d1/report.json",
+        "report_sha256": "360537be76a1d364165922fc222a30fc76356c5899f5bc9277c07b2722800c1d"
+      }
+    },
+    "level": "measured"
+  },
+  "visually_reviewed": "model",
+  "renderers": {
+    "A": "html"
+  },
+  "check": {
+    "ok": true,
+    "warnings": [
+      "V08-A: REF-003 권리 미상(reference_rights_unknown) — 참고 전용, 자산을 옮기지 않음",
+      "V08-A: REF-002 권리 미상(reference_rights_unknown) — 참고 전용, 자산을 옮기지 않음",
+      "V08-A: AST-001: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V08-A: AST-014: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V08-A: AST-015: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V08-A: AST-016: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V08-A: AST-070: 권리 미확인(generated_tool·unknown) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V08-A: AST-071: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V08-A: AST-072: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V08-A: AST-073: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V08-A: AST-074: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V08-A: AST-075: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V08-A: AST-076: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V08-A: AST-077: 권리 미확인(licensed·ISC) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)",
+      "V08-A: AST-079: 권리 미확인(generated_tool·unknown) — 탐색에만 쓰고 공식 채택하지 않습니다(asset_rights_unconfirmed)"
+    ]
+  },
+  "coverage": {
+    "variants": {
+      "A": {
+        "SCR-111": {
+          "covered": [],
+          "missing": [],
+          "total": 0
+        }
+      }
+    },
+    "confirmations": [],
+    "confirmation_statement": null,
+    "not_ui": []
+  },
+  "files": {
+    "design-explore/V08/A/index.html": "bc0a94aa0b1dbed10cf8a2baba669f1103884f4e19db2dca28e0b36348d2335e",
+    "design-explore/V08/A/plan.md": "88fd9f2607a3dfe6cda17e89b75bdb052d911c854f65c2f47ac83bfee6304dc5",
+    "design-explore/V08/A/styles.css": "18540b4da17f9b6faafc06ba6e148cd077fda36aec07b84e7eae1a8fb9879244",
+    "design-explore/V08/A/theme.json": "fb1b72faec959c83453f2a8bf3871e8ac5aa8f7524c21223d5c348c0f54f8834",
+    "design-explore/V08/A/tokens.css": "d0796eb23cc6b9715f043940b60eb787875261ea0d699439de3f4632339199b9",
+    "design-explore/V08/_assets/AST-001.svg": "c59ddf6c92d493fcc4cf7e2523dc9396b13ba7028fc3d5f27e87dff14a30805a",
+    "design-explore/V08/_assets/AST-002.svg": "99fe6d184b35cc24f346c2c5b94091d153419dec1e5d2bce5fd327bcfebea82f",
+    "design-explore/V08/_assets/AST-003.svg": "cef8a98899841947c6b51c143eb61bfd9415423afbc93adf0fbc1df1bd601128",
+    "design-explore/V08/_assets/AST-004.svg": "698a63cbc58c01335f34d5a1dee7ef09db2f314ec841abf02cad856987ebaf12",
+    "design-explore/V08/_assets/AST-005.svg": "04f8cc34de7599a5882a5c1124f4900549c2df4cc9820f6e61eb3e7c0a93aa9f",
+    "design-explore/V08/_assets/AST-006.svg": "16d5e9fa0c8d8a451a23b4eeaa36854d6a6d85a28766a3f991c2440d331b067f",
+    "design-explore/V08/_assets/AST-007.svg": "82bf48db175cb6dec10e15ab4bde7b1d0e34371e716f9fb05ee8e87c7dc69236",
+    "design-explore/V08/_assets/AST-008.svg": "6638d74e920a8262a3ab7bd0e597f768d09c970933da54d5f19abf950ba70d20",
+    "design-explore/V08/_assets/AST-009.svg": "f1877670b9198844daaf39613ce4fd81010529a7214b1a3f6c1069bbf8f707eb",
+    "design-explore/V08/_assets/AST-010.svg": "9118955e2a2bc25b2210eb6e956650d3fe1f519484fd2183bdf0264c535da3c1",
+    "design-explore/V08/_assets/AST-011.svg": "72e94602befcad9603f8458ecd82ee63cd2455a0eb50c71b510fad2ea4718709",
+    "design-explore/V08/_assets/AST-012.svg": "026c600d6662a2d4fc81775936ce5f25515d4aa0d8c0ebacb5dea162b302f2ed",
+    "design-explore/V08/_assets/AST-013.svg": "b3e802770a237cde0bfda93e86184cb99c4677492eff7344f458f19a7f66c4c4",
+    "design-explore/V08/_assets/AST-014.svg": "423931822a54c885734d040f322697172d5fe8f682c97e075987f4bf10181ca0",
+    "design-explore/V08/_assets/AST-015.svg": "968cc037f6491c5618c541edfe7d604a7df29fcf5d0274e6f17145d669961f56",
+    "design-explore/V08/_assets/AST-016.svg": "529444b462f004fa981f8cdc5deb95c2014456557f865bc84cdee7bfafb1feb1",
+    "design-explore/V08/_assets/AST-017.svg": "7e8b36f44a59e021dcbe6a099ee746c616151151cd906441a96de4afdb32844f",
+    "design-explore/V08/_assets/AST-018.svg": "fd2578555b9ff71d3c1bfc11138f324fda73fe55136acbc329f19766dbe6897a",
+    "design-explore/V08/_assets/AST-019.svg": "7d1bb2f5f239f523c89fa94a6d09f53b8b7e8dd50bd5f2f77dd44df8a9d51e42",
+    "design-explore/V08/_assets/AST-020.svg": "59d914fa674d0e5de8a278dd2fbb860686953c6b24613a3991510caa8a27de4d",
+    "design-explore/V08/_assets/AST-021.svg": "1fb032933a302a6bd7add23e24a3e986bd3e7533af2cdcfbc1a85bbca110ab3e",
+    "design-explore/V08/_assets/AST-022.svg": "2781fc8e83d60926cbc8a6f872e9c50f52e91c14382fb296ad686b076f7e4ac6",
+    "design-explore/V08/_assets/AST-023.svg": "0bacdedbe169e249d0152125959105a0a835256999f69b4dc2d092aa6674016c",
+    "design-explore/V08/_assets/AST-024.svg": "1471d498fe79a90816f627fc6f7b9405b943ba9be2af5918d2c6b48b56d86061",
+    "design-explore/V08/_assets/AST-025.svg": "eda2a886c351dbd0153f49327b84dcaf13d2f6a6333e16852046aedafbf479a5",
+    "design-explore/V08/_assets/AST-026.png": "5f245753a5ebaedb95c995740ecd280c7942100fb8c6626ef8c2fae95a5a830f",
+    "design-explore/V08/_assets/AST-027.png": "a0f00ba6cada12253d066f17047605331be13395f3d20ffb322999147c9922e3",
+    "design-explore/V08/_assets/AST-028.png": "53da5e7ab9f71150194635b3145c2f0b23934a0d69eef39f6227e01fd6c38ce7",
+    "design-explore/V08/_assets/AST-029.png": "f305f736ce0665d2ab1e203c3d0c37fd18a0c51a3e13d83ca32a4dede1efd377",
+    "design-explore/V08/_assets/AST-030.png": "305ca3428adbe0da605fdb5ff77e36c68ea1587ba6075b3489401e89c475a840",
+    "design-explore/V08/_assets/AST-031.png": "cf023a9128bd0bf1ee98de690745510c888a29fc99ca0149f0e253bcd3615c2b",
+    "design-explore/V08/_assets/AST-032.png": "6ac3e716834c200d833c1057767b2b7b6f09f328a8461933adbe98f400bc8be9",
+    "design-explore/V08/_assets/AST-033.png": "d99e8a2ce385c455c5abc8d91296a2bfbaef28f6bfef99f63c79501229d21757",
+    "design-explore/V08/_assets/AST-034.png": "935382a96bc4fe89f8e01b95c2ed47db0517dffb962f659716f132c629c99f2b",
+    "design-explore/V08/_assets/AST-035.png": "14b5914c8eb4b30a4e34e62664ebe25fb389724b00b9d7d8bdfbd9438b31cacd",
+    "design-explore/V08/_assets/AST-036.png": "7dd56ca4015b64256abddf95eb02ab96f9a2844a5e4170c0089e0b3f629db381",
+    "design-explore/V08/_assets/AST-037.png": "ac763c8121cc4dcaf5aa0c0d417b362ff721475690721b1bf80b1cf5a20c48cb",
+    "design-explore/V08/_assets/AST-038.png": "336ff7d930344a80738e4a730834efd8b8b82229b02cd42ff83437099bea15e1",
+    "design-explore/V08/_assets/AST-039.png": "9e1302fecf444adfb1db76918943bab8875ddc6111bf733e790aea99930fe1b9",
+    "design-explore/V08/_assets/AST-040.png": "3e2b171647601ae1f1763eca54e7d22efa850ccd5a25f024768ab275cfaedb3b",
+    "design-explore/V08/_assets/AST-041.png": "49b96f8b9900bdbd6b4c9a8663d9fabd5b1df773aa498cad08b10cfe70dc31e8",
+    "design-explore/V08/_assets/AST-042.png": "23b56e71e8c15fb04f17b2f2f3f7d0a13229f685566c7971cf379f9b71d64f13",
+    "design-explore/V08/_assets/AST-043.png": "e9e656bb65d31752851c64cbcec29261b697126599f94df6fb4352d5149bd37b",
+    "design-explore/V08/_assets/AST-044.png": "e7738c0ef518d52f97161ee0bb94808a5b3a8acdda65d3657ece3912b19c7d0e",
+    "design-explore/V08/_assets/AST-045.png": "e79b83ab3740c1f3351e599e499569da05009dfcbaab7c6075f880a2faf2b409",
+    "design-explore/V08/_assets/AST-046.png": "a43abbd331d64a2567fa781b41d2771fc12151ed86b81cf97aa6fe1d200995df",
+    "design-explore/V08/_assets/AST-047.svg": "d9924d230eaabc2857c57fa0471f2b821d7031ecb61c83efed9254479a56ed7a",
+    "design-explore/V08/_assets/AST-048.svg": "0f0b07934007010cf539557149b1ee5099087d97732f10a8a6f94ea410554f0e",
+    "design-explore/V08/_assets/AST-049.svg": "481e01d2c1d49731629ebcda2f6ef1c8c4392376252c9afda393638f6f84fda8",
+    "design-explore/V08/_assets/AST-050.svg": "47b47c4629e0c2de4216d3b369cf1dc10a996639c7c2aa9429a8d508bdff49cc",
+    "design-explore/V08/_assets/AST-051.svg": "c87c1c480e21227842846b35ea11c7f31a71cf99a531fadbd12c74016acf45c7",
+    "design-explore/V08/_assets/AST-052.svg": "740232feb6ab2d360d7cf7434985984a94bc03e63837503d022cb2409c102771",
+    "design-explore/V08/_assets/AST-053.svg": "e3ef475f3e6d40d15be54b07296e73c420bf53e70a9688996c411c2e1c4b1944",
+    "design-explore/V08/_assets/AST-054.svg": "087986481f55d3d15da05c3ff5796cd8bcdf1c7fcf2d93d5db0d5fd095b0e5d2",
+    "design-explore/V08/_assets/AST-055.svg": "06b4c0537d06bd3f6c482e872b0803da5bd2be2008d6bcae4e7cc428df96c435",
+    "design-explore/V08/_assets/AST-056.svg": "13f1dfef027e6c60f3ef9ef3b12c0b7265df418e6fa7975dda5b53d45572188f",
+    "design-explore/V08/_assets/AST-057.png": "0110deea8d598b65a092cdaa764bca7d80838d06c0cbb2f5745fd0f543ef2dcf",
+    "design-explore/V08/_assets/AST-058.png": "c76bb6c4f6d090de93a96832dde4b3611186ff5d65b2d27934951f8031721882",
+    "design-explore/V08/_assets/AST-059.png": "703cc1ac5ae90ca8d6d22d60a7ae61fc0b3cb186b441237bf507d20dbd168d70",
+    "design-explore/V08/_assets/AST-060.png": "14ce1f8671f79c197aa04045f5f250e315b280c764968d4f1a8ab4e3c1476be4",
+    "design-explore/V08/_assets/AST-061.png": "ed800ffc52c285136837f734b4cad92d95bdcd450b10575f6d9c99703a9ff74e",
+    "design-explore/V08/_assets/AST-062.png": "fe78bb41ff9cf8b68d77b94a302b6129a458963030dd258fac5d4a94a269f5c7",
+    "design-explore/V08/_assets/AST-063.png": "ceae043175e5b03e4f9814a69a27922c441f49df55e3689abbd77e25d3793e79",
+    "design-explore/V08/_assets/AST-064.png": "ac1fa43f644c39738170673ca20d1d66a64fce9bd34c5b58e2569e5109b3393f",
+    "design-explore/V08/_assets/AST-065.png": "54e20be1ed88506fe12947079f411b34444d0e593a9466b6bd87f85a26736bc0",
+    "design-explore/V08/_assets/AST-066.png": "30a9fea67082507484ae2bb0e301cde7a2a6b773c6cfcc5dba398d17fc132130",
+    "design-explore/V08/_assets/AST-067.png": "64cf674ec86ad27d9305e6603f9170f4666ad0163ef41750088c2540eb945fec",
+    "design-explore/V08/_assets/AST-068.png": "9a053a2cd95fb4e532ab66a6a38c4951efcfb4a4757dbfca895f71d5c2912df1",
+    "design-explore/V08/_assets/AST-069.png": "060b6748f1f88b93302afccc8931b5863014dc2411cd94557f21ac9456eb7a00",
+    "design-explore/V08/_assets/AST-070.png": "cdbde68a348820550b6ebf6751d26597f5f433fa83d5a8a5a8f25375a0153b12",
+    "design-explore/V08/_assets/AST-071.svg": "9d7645b67d5188c4dce7b1200e61bb22ef369dce862e29e1a64878633ea734b8",
+    "design-explore/V08/_assets/AST-072.svg": "d5228e8c292770650c821a0938b7ea18e054dad36896286b7a8c9aeb6f53a5b9",
+    "design-explore/V08/_assets/AST-073.svg": "1c6fd2dc0350c55edf8dadefee19cb46c94c97004fa0e905f4a1b773a6150ff4",
+    "design-explore/V08/_assets/AST-074.svg": "cddd1bc94477b88e7de52cbd0a98c5bc7161eae83e3874ea8cf937584ef10b34",
+    "design-explore/V08/_assets/AST-075.svg": "80b764b321ffc35a4dc84280571cd5970ee940ea635248f8f199bd8429a37947",
+    "design-explore/V08/_assets/AST-076.svg": "734ffa3577623ae2b8e64c5dd7d4d44510a6d837dc1fd33bf81cfdcec142481c",
+    "design-explore/V08/_assets/AST-077.svg": "9a50482d82bb88200058513e0f9b7481027c71288c20200b718bba0c5bca3e55",
+    "design-explore/V08/_assets/AST-078.svg": "6d805e5d9162d2581728acff146589b064f0f93ca7db6442f28ac317fb4c2b35",
+    "design-explore/V08/_assets/AST-079.png": "20b509f6e838385e6685b00f599796fe4b324b8138b0183b5a8b63283310c701",
+    "design-explore/V08/brief.md": "ed2de864c71a41d1ec01ab8b8780e2d6288041002cf28c56ecb5d34d8f90fc07",
+    "design-explore/V08/critique.md": "dab9bf0a28d8ed34217d1c333bc38c516fffa2e89abb684ae3e41f0587805e56",
+    "design-explore/V08/quality.json": "7416f737ed441c875c3f0b08428faca6b775d78be5c81e91d4dec00b66863f69"
+  },
+  "retention": {
+    "design-explore/V08/A/index.html": "bc0a94aa0b1dbed10cf8a2baba669f1103884f4e19db2dca28e0b36348d2335e",
+    "design-explore/V08/A/plan.md": "88fd9f2607a3dfe6cda17e89b75bdb052d911c854f65c2f47ac83bfee6304dc5",
+    "design-explore/V08/A/styles.css": "18540b4da17f9b6faafc06ba6e148cd077fda36aec07b84e7eae1a8fb9879244",
+    "design-explore/V08/A/theme.json": "fb1b72faec959c83453f2a8bf3871e8ac5aa8f7524c21223d5c348c0f54f8834",
+    "design-explore/V08/A/tokens.css": "d0796eb23cc6b9715f043940b60eb787875261ea0d699439de3f4632339199b9",
+    "design-explore/V08/brief.md": "ed2de864c71a41d1ec01ab8b8780e2d6288041002cf28c56ecb5d34d8f90fc07",
+    "design-explore/V08/critique.md": "dab9bf0a28d8ed34217d1c333bc38c516fffa2e89abb684ae3e41f0587805e56",
+    "design-explore/explore.manifest.json": "4be0b77c804c70b900d9e20000ff620a895e54cda60d0172e5cf1ca147eec7b2",
+    "design-explore/references/REF-002/reference.json": "9e06c7eb8a4c850481bc5124df15ae8d8dfb147985e4e769f458b4aaeafff5bb",
+    "design-explore/references/REF-002/extraction.json": "bb77706c06091e731ba38077267f8fb705421ab4e52574df5ac5ccf6dfab3b2e",
+    "design-explore/references/REF-003/reference.json": "5c29add7315777793775bd60b54ae64754abe498aeca25604a0641e7f0eecbd9",
+    "design-explore/references/REF-003/extraction.json": "9b0c3d33d6f17affd8bfb99524052c502cb08bdf189065684902ede206b4cc0e"
+  },
+  "evidence": [
+    {
+      "path": "design-explore/V08/selection/evidence/m-A-SCR-111-mobile.png",
+      "sha256": "e0347a007f07d0314c294bfe123dd42f2aaddd6a655ad62836ac2560bcbea7f4",
+      "bytes": 338583,
+      "source": "measurement",
+      "variant": "A",
+      "target": "SCR-111",
+      "viewport": "mobile",
+      "measured_sha256": "e0347a007f07d0314c294bfe123dd42f2aaddd6a655ad62836ac2560bcbea7f4"
+    },
+    {
+      "path": "design-explore/V08/selection/evidence/m-A-SCR-111-mobile-sm.png",
+      "sha256": "d10ef0e917c19f7acd9aca49ce6a35d98cba6475b8b3fbe16c4c85e23d88713d",
+      "bytes": 269133,
+      "source": "measurement",
+      "variant": "A",
+      "target": "SCR-111",
+      "viewport": "mobile-sm",
+      "measured_sha256": "d10ef0e917c19f7acd9aca49ce6a35d98cba6475b8b3fbe16c4c85e23d88713d"
+    },
+    {
+      "path": "design-explore/V08/selection/evidence/m-A-SCR-111-desktop.png",
+      "sha256": "fde4f7605d74ae582b67beb3a5d28c7a2c81ef15a67a915e1a5f125dd6ba3aa1",
+      "bytes": 202858,
+      "source": "measurement",
+      "variant": "A",
+      "target": "SCR-111",
+      "viewport": "desktop",
+      "measured_sha256": "fde4f7605d74ae582b67beb3a5d28c7a2c81ef15a67a915e1a5f125dd6ba3aa1"
+    }
+  ],
+  "guidance": [
+    {
+      "name": "engine-procedure",
+      "version": "exploration.md(18bf645)",
+      "used_for": [
+        "plan",
+        "contrast",
+        "critique"
+      ]
+    }
+  ],
+  "mode": "reference",
+  "reference": {
+    "intent": "INT-003",
+    "statement": "글씨가 있는 배너 이미지 — 디자인 레퍼런스. 실제 서비스의 배경 이미지로 사용하지 않습니다. 텍스트 위치, 크기, 굵기, 색상, 줄바꿈, 여백을 참고합니다. 'SMAPSH 청백전' 배지와 제목, 설명 문구를 재현하는 기준입니다. 오른쪽의 청팀 VS 백팀 그래픽 위치와 전체 구도도 참고합니다.",
+    "uses": [
+      {
+        "ref": "REF-003",
+        "axes": [
+          "palette",
+          "typography",
+          "layout"
+        ],
+        "sha256": "f0f121c8a940497734d3173fd90dea36cca04d3c602e01fd32b1ce61579297aa",
+        "extraction_hash": "9b0c3d33d6f17affd8bfb99524052c502cb08bdf189065684902ede206b4cc0e"
+      },
+      {
+        "ref": "REF-002",
+        "axes": [
+          "components",
+          "spacing_density",
+          "emphasis_mood",
+          "navigation"
+        ],
+        "sha256": "722e7d7b0213c47a8ff25e18e47a90e59c0f37b6b5363c2ab564752edaf1f1bc",
+        "extraction_hash": "bb77706c06091e731ba38077267f8fb705421ab4e52574df5ac5ccf6dfab3b2e"
+      }
+    ],
+    "variants": {
+      "A": {
+        "mode": "reference",
+        "rules": [
+          "RX-003-01",
+          "RX-003-02",
+          "RX-003-03",
+          "RX-003-04",
+          "RX-003-05",
+          "RX-003-06",
+          "RX-003-07",
+          "RX-003-08",
+          "RX-003-09",
+          "RX-003-10",
+          "RX-003-11",
+          "RX-003-12",
+          "RX-002-15",
+          "RX-002-16",
+          "RX-002-17",
+          "RX-002-19",
+          "RX-002-21",
+          "RX-002-22",
+          "RX-002-23",
+          "RX-002-24"
+        ],
+        "axis_sources": {
+          "palette": "REF-003",
+          "typography": "REF-003",
+          "layout": "REF-003",
+          "components": "REF-002",
+          "spacing_density": "REF-002",
+          "emphasis_mood": "REF-002",
+          "navigation": "REF-002"
+        },
+        "reinterpretation": "배너는 REF-003(글씨 있는 판)을 배경으로 쓰지 않고, 사용자가 준 글씨 없는 판(AST-079) 위에 승인된 02 고정 문구를 HTML 글자로 놓음. 대결 그래픽·월계수·셔틀콕은 이미지에 들어 있으므로 CSS·다른 이미지로 다시 만들지 않음(기존 AST-067–069·배너용 AST-062 제거). 모바일(배너 폭 560px 미만)은 3:1 비율을 그대로 줄이면 글자가 약 8–15px로 작아져, 이미지 위에 같은 청록의 글자 띠를 더하고 설명을 3줄로 다시 나눔(이미지 비율·크기 유지, 오른쪽 잘림 없음). 배지 민트(RX-003-09 #29B9A8)는 흰 글자 대비 2.44:1이라 공식 테마 틸 #087F73(4.89:1)로 어둡게 하고 민트 테두리로 느낌을 유지. REF-002의 초록 계열 색(RX-002-03·05·06·24의 초록)은 사용자 요청('초록색이 지나치게 강했습니다')에 따라 쓰지 않고 공식 테마의 민트·틸로 바꿈. 하단 탭 4개(운영 포함)·운영진 '새 청백전'·준비 중 표시는 승인된 UX Spec r6 그대로. 이미지에만 있는 알림·설정·바로가기·장소는 넣지 않음(UXD-088)"
+      }
+    },
+    "refs": {
+      "REF-002": {
+        "sha256": "722e7d7b0213c47a8ff25e18e47a90e59c0f37b6b5363c2ab564752edaf1f1bc",
+        "extraction_hash": "bb77706c06091e731ba38077267f8fb705421ab4e52574df5ac5ccf6dfab3b2e",
+        "rights": "unknown",
+        "privacy": {
+          "model": "none",
+          "user": "none",
+          "worst": "none",
+          "user_confirmed": true,
+          "effective": "none",
+          "safe_confirmed": true
+        },
+        "confirmations": {}
+      },
+      "REF-003": {
+        "sha256": "f0f121c8a940497734d3173fd90dea36cca04d3c602e01fd32b1ce61579297aa",
+        "extraction_hash": "9b0c3d33d6f17affd8bfb99524052c502cb08bdf189065684902ede206b4cc0e",
+        "rights": "unknown",
+        "privacy": {
+          "model": "none",
+          "user": "none",
+          "worst": "none",
+          "user_confirmed": true,
+          "effective": "none",
+          "safe_confirmed": true
+        },
+        "confirmations": {}
+      }
+    },
+    "retention": {
+      "design-explore/references/REF-002/reference.json": "9e06c7eb8a4c850481bc5124df15ae8d8dfb147985e4e769f458b4aaeafff5bb",
+      "design-explore/references/REF-002/extraction.json": "bb77706c06091e731ba38077267f8fb705421ab4e52574df5ac5ccf6dfab3b2e",
+      "design-explore/references/REF-003/reference.json": "5c29add7315777793775bd60b54ae64754abe498aeca25604a0641e7f0eecbd9",
+      "design-explore/references/REF-003/extraction.json": "9b0c3d33d6f17affd8bfb99524052c502cb08bdf189065684902ede206b4cc0e"
+    }
+  },
+  "basis": {
+    "planning_revision": "7",
+    "planning_hashes_sha256": "04693e9424174b2bd1e3cf147c7832d12a126a6111ea45968733f417384d6c72",
+    "ux_spec_revision": 6,
+    "fingerprints": {
+      "SCR-111": {
+        "screen": "SCR-111",
+        "name": "청백전 목록",
+        "info": [
+          "청백전 소개 배너(고정 문구·장식)",
+          "'새 청백전'",
+          "진행 중인 청백전(건수): 이름, 날짜, 방식 배지, 상태 배지 '진행 중', 팀전 점수판(청팀 x : 백팀 y, 팀 이름 글자 포함) 또는 개인전 '경기 n · 참가 m명', 남은 경기 n개(0이면 숨김)",
+          "예정된 청백전: 이름, 날짜, 방식 배지, 상태 배지('진행 예정' 또는 '준비 중'), 진행 예정은 '경기 n · 참가 m명', 준비 중은 '참가 n명 · 대진 미확정'과 '운영진에게만 보임' 표시",
+          "지난 청백전: 이름, 날짜, 방식 배지, 상태 배지 '종료', 최종 결과 강조(팀전 '청팀 승리'·'백팀 승리'·'무승부' + '최종 x : y', 개인전 '1위 이름' 또는 '공동 1위 · n명')"
+        ],
+        "actions": [
+          "항목 누르기(모든 상태)",
+          "(운영진) '새 청백전'",
+          "아래로 당겨 새로고침"
+        ],
+        "inputs": [],
+        "states": [
+          "SCR-111-ST1",
+          "SCR-111-ST2",
+          "SCR-111-ST3",
+          "SCR-111-ST4",
+          "SCR-111-ST5",
+          "SCR-111-ST7"
+        ],
+        "cmps": [
+          "CMP-001",
+          "CMP-005",
+          "CMP-025",
+          "CMP-026",
+          "CMP-027",
+          "CMP-043",
+          "CMP-051",
+          "CMP-052"
+        ],
+        "uxd": [
+          "UXD-044",
+          "UXD-046",
+          "UXD-049",
+          "UXD-085",
+          "UXD-086",
+          "UXD-087",
+          "UXD-088",
+          "UXD-089"
+        ],
+        "hash": "e2220c0abd2188b5a5f75a9a351d2922f4b4466af1c204ed690064bfffe7823e"
+      }
+    }
+  }
+}

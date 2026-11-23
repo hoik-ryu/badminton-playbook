@@ -82,32 +82,39 @@
 .sc-bg { inset: 0; width: 100%; height: 100%; user-select: none; }
 .sc-svg { inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 .sc-top { z-index: 4; }
-.sc-top .sc-num { pointer-events: none; }
+.sc-top .sc-numg { pointer-events: none; }
 .sc-top .sc-hit { pointer-events: auto; cursor: pointer; fill: transparent; }
 .sc-top .sc-hit:focus-visible { outline: none; stroke: var(--color-focus-ring); stroke-width: 6; }
-/* VD-026 격자: 흰 70% 점선 */
-.sc-grid line { stroke: color-mix(in srgb, var(--color-court-line) 70%, transparent); stroke-width: 4; stroke-dasharray: 16 12; stroke-linecap: butt; }
-.sc-grid, .sc-num { animation: tc-in 240ms ease-out both; }
-@media (prefers-reduced-motion: reduce) { .sc-grid, .sc-num { animation: none; } }
+/* VD-026 격자(DD r8): color.text.primary 85% 어두운 점선 — 흰 실선 코트 라인과 색·모양으로 구분 */
+.sc-grid line { stroke: color-mix(in srgb, var(--color-text-primary) 85%, transparent); stroke-width: 4; stroke-dasharray: 16 12; stroke-linecap: butt; }
+.sc-grid, .sc-numg { animation: tc-in 240ms ease-out both; }
+@media (prefers-reduced-motion: reduce) { .sc-grid, .sc-numg { animation: none; } }
 /* VD-027 번호: 바닥색 불투명 원 + 흰 굵은 숫자 */
 /* 번호: 원·배경 없이 숫자만(은은하게). 얇은 코트색 외곽선은 밝은 코트 라인 위 가독성용(배경 아님) */
-.sc-num { fill: var(--color-court-line); fill-opacity: 0.6; font-weight: 700; font-family: var(--font-family-base); font-variant-numeric: tabular-nums;
-  stroke: var(--color-court-surface); stroke-opacity: 0.35; stroke-width: 0.08em; paint-order: stroke; transition: fill-opacity 160ms ease-out; }
-.sc-num-on { fill-opacity: 1; stroke-opacity: 0.6; }
+/* VD-027(DD r8): 흰 숫자 100%(모든 상태) + 받침 color.text.primary 60% */
+.sc-num { fill: var(--color-court-line); font-weight: 700; font-family: var(--font-family-base); font-variant-numeric: tabular-nums; }
+.sc-num-plate { fill: color-mix(in srgb, var(--color-text-primary) 60%, transparent); }
 /* 선택 영역 바닥 면(UXD-077 선택 대기): 기본 반투명 민트, 선택 칸은 더 진한 면 + 흰 테두리. 이동 시작 시 흐려지며 사라짐 */
 .sc-tiles { transition: opacity 240ms ease-out; }
 .sc-tiles[data-on='false'] { opacity: 0; }
-.sc-tile { fill: color-mix(in srgb, var(--color-accent-mint) 24%, transparent); stroke: color-mix(in srgb, var(--color-accent-mint) 75%, transparent); stroke-width: 3; stroke-linejoin: round;
+.sc-tile { fill: color-mix(in srgb, var(--color-accent-mint) 24%, transparent); stroke: var(--color-text-primary); stroke-width: 3; stroke-linejoin: round;
   transition: fill 160ms ease-out, stroke 160ms ease-out, stroke-width 160ms ease-out; }
-.sc-tile-on { fill: color-mix(in srgb, var(--color-accent-mint) 50%, transparent); stroke: var(--color-court-line); stroke-width: 7; }
+.sc-tile.sc-tile-on { fill: color-mix(in srgb, var(--color-accent-mint) 50%, transparent); stroke: var(--color-court-line); stroke-width: 7; }
+/* VD-028(DD r8): 고른 칸 바깥쪽 어두운 선(흰 7px 양쪽으로 5px씩 보이는 17px) */
+.sc-tiles polygon.sc-tile-out { fill: none; stroke: var(--color-text-primary); stroke-width: 17; stroke-linejoin: round; }
 .sc-go { z-index: 5; transform: translate(-50%, -50%); padding: 3px 10px; border-radius: 9999px; background: var(--color-bg-page); color: var(--color-text-accent);
   font-size: var(--font-size-caption); font-weight: 700; line-height: 1.5; white-space: nowrap; pointer-events: none;
   box-shadow: 0 1px 4px color-mix(in srgb, var(--color-text-primary) 25%, transparent); transition: opacity 200ms ease-out; animation: tc-in 160ms ease-out both; }
 .sc-go-sm { padding: 0 8px; }
 .sc-go[data-on='false'] { opacity: 0; animation: none; }
-@media (prefers-reduced-motion: reduce) { .sc-tiles, .sc-tile, .sc-num, .sc-go { transition: none; animation: none; } }
+@media (prefers-reduced-motion: reduce) { .sc-tiles, .sc-tile, .sc-numg, .sc-go { transition: none; animation: none; } }
 /* VD-028 선택 / VD-029 판정 */
 .sc-mk polygon { stroke: var(--color-court-line); stroke-width: 4; stroke-linejoin: round; }
+/* VD-029(DD r8): 판정 칸 경계는 어두운 선(상태색 채움·실선/점선 구분 유지) */
+.sc-mk-ok .sc-mk-poly, .sc-mk-allow .sc-mk-poly, .sc-mk-bad .sc-mk-poly { stroke: var(--color-text-primary); }
+/* VD-028(DD r8): 이동 중 '내 선택' 흰 테두리 바깥쪽 어두운 선 */
+.sc-mk polygon.sc-mk-out { fill: none; stroke: var(--color-text-primary); stroke-width: 16; stroke-linejoin: round; }
+.sc-mk-selectWait polygon.sc-mk-out { stroke-width: 19; }
 .sc-mk-select polygon, .sc-mk-selectWait polygon { fill: color-mix(in srgb, var(--color-court-line) 25%, transparent); stroke-width: 6; }
 .sc-mk-selectWait polygon { stroke-width: 9; }
 .sc-mk-ok polygon { fill: color-mix(in srgb, var(--color-status-success-bg) 90%, transparent); }

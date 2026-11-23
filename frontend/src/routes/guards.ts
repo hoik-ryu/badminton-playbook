@@ -122,6 +122,19 @@ export async function adminLoader({ request }: LoaderFunctionArgs): Promise<Shel
   return withBadge(me)
 }
 
+/**
+ * (UX Spec r6 01 5장, UXD-085) 이전 청백전 운영 주소 → 통합 주소. `/ops/club-matches` → `/club-matches`, `/ops/club-matches/:matchId` → `/club-matches/:matchId`.
+ * 운영진 권한을 먼저 확인합니다(회원·제한 계정·비로그인은 adminLoader 규칙 그대로: /forbidden·/account-status·/login). 확인 뒤 loader redirect로 보내므로
+ * 이전 주소는 브라우저 기록에 남지 않고(앱 안 이동: 직전 화면 다음에 새 주소, 북마크·직접 입력: 그 자리를 새 주소로) 쿼리(?…)는 그대로 넘깁니다.
+ * (replace()는 아직 확정되지 않은 이동에서 직전 화면 기록까지 덮어써 뒤로 가기가 끊기므로 쓰지 않음) 화면만 옮길 뿐 서버 API 권한 검사(AdminUser)는 바뀌지 않습니다.
+ */
+export async function legacyClubMatchLoader(args: LoaderFunctionArgs) {
+  await adminLoader(args)
+  const { search } = new URL(args.request.url)
+  const id = args.params.matchId
+  throw redirect(`/club-matches${id ? `/${encodeURIComponent(id)}` : ''}${search}`)
+}
+
 /** 역할 관리 /ops/roles */
 export async function superAdminLoader({ request }: LoaderFunctionArgs) {
   const me = await approved(request)

@@ -6,6 +6,7 @@ AC-078(대체 선수는 실제로 뛴 사람) / AC-088·U10·P-10(대진 수정�
 S-1(청백전 범위 키, 내부 UUID 비노출) / 릴리스 기준 3(허용 목록·OpenAPI 계약)
 """
 
+import datetime as dt
 import json
 import re
 import uuid
@@ -39,6 +40,13 @@ LIST_KEYS = {
     "participants",
     "unrecorded",
     "resultText",
+    # (SCR-111 r6) 표시 상태(UXD-087)와 구조화한 종료 결과(UXD-088) — 공개 결과만(점수·급수 없음)
+    "displayStatus",
+    "result",
+    "outcome",
+    "final",
+    "text",
+    "tiedCount",
 }
 DETAIL_KEYS = {
     "id",
@@ -55,6 +63,8 @@ DETAIL_KEYS = {
     "white",
     "unrecorded",
     "participating",
+    # (SCR-112 r6) 머리글 표시 상태(UXD-087)
+    "displayStatus",
     # MemberGame
     "no",
     "team1",
@@ -420,3 +430,66 @@ def test_ac_045_046_rank_boundaries(
     got, left, rate = rank_for(games, wins)
     assert (got, left) == (rank, to_rank)
     assert rate == (wins / games if games else None)
+
+
+# ── (SCR-111 r6) 표시 상태·결과(UXD-087·088, KST) ──
+
+
+def test_scr111_member_list_display_status_and_result(
+    setup: dict[str, Any], admin: TestClient, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """확정 청백전(날짜 2026-11-15): 기록된 결과가 있으면 날짜 전이라도 진행 중,
+    결과가 없고 날짜 전이면 진행 예정. 기존 status·resultText는 그대로(하위 호환).
+    회원 목록에는 준비 중이 없음."""
+    from app.modules.clubmatch import display
+
+    c: TestClient = setup["member"]
+    view = setup["confirmed"]
+    monkeypatch.setattr(display, "today_kst", lambda now=None: dt.date(2026, 11, 14))
+    item = c.get(MEMBER).json()[0]
+    assert (item["status"], item["displayStatus"], item["result"]) == ("confirmed", "live", None)
+    # 기록된 결과를 되돌리면 날짜 전 + 결과 없음 → 진행 예정
+    view = admin.put(
+        f"{ADMIN}/{view['id']}/games/1/result", json={"winner": None, "version": view["version"]}
+    ).json()
+    item = c.get(MEMBER).json()[0]
+    assert item["displayStatus"] == "upcoming"
+    # KST 날짜 당일이 되면 진행 중
+    monkeypatch.setattr(display, "today_kst", lambda now=None: dt.date(2026, 11, 15))
+    assert c.get(MEMBER).json()[0]["displayStatus"] == "live"
+    assert {i["displayStatus"] for i in c.get(MEMBER).json()} <= {"upcoming", "live", "ended"}
+    # 종료: 개인전 결과 구조와 기존 resultText 함께
+    for no in (1, 2):
+        view = admin.put(
+            f"{ADMIN}/{view['id']}/games/{no}/result",
+            json={"winner": 1, "version": view["version"]},
+        ).json()
+    view = admin.post(f"{ADMIN}/{view['id']}/finish", json={"version": view["version"]}).json()
+    item = c.get(MEMBER).json()[0]
+    assert (item["status"], item["displayStatus"]) == ("finished", "ended")
+    assert item["result"]["method"] == "individual" and item["result"]["final"] is None
+    assert re.fullmatch(r"1위 .+|공동 1위 · \d+명", item["result"]["text"])
+    assert item["resultText"] is not None  # 기존 필드(UXD-075 형식) 유지
+    assert item["result"]["tiedCount"] >= 1
+
+
+def test_scr112_member_detail_display_status_kst(
+    setup: dict[str, Any], admin: TestClient, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """상세 머리글 상태(ST15 진행 예정 / 진행 중 / 종료)는 서버가 KST로 계산.
+    status(DB 상태)는 그대로."""
+    from app.modules.clubmatch import display
+
+    c: TestClient = setup["member"]
+    view = setup["confirmed"]
+    url = f"{MEMBER}/{view['id']}"
+    view = admin.put(
+        f"{ADMIN}/{view['id']}/games/1/result", json={"winner": None, "version": view["version"]}
+    ).json()
+    monkeypatch.setattr(display, "today_kst", lambda now=None: dt.date(2026, 11, 14))
+    assert (c.get(url).json()["status"], c.get(url).json()["displayStatus"]) == (
+        "confirmed",
+        "upcoming",
+    )
+    monkeypatch.setattr(display, "today_kst", lambda now=None: dt.date(2026, 11, 15))
+    assert c.get(url).json()["displayStatus"] == "live"

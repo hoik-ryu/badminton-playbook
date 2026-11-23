@@ -24,24 +24,68 @@ describe('B5 member club matches (SCR-111·112)', () => {
     seed()
   })
 
-  it('SCR-111 / AC-069·087 / UXD-075: only confirmed matches, latest first, with summary or final result', async () => {
+  // (UX Spec r6) SCR-111이 진행 중·예정된·지난 섹션으로 바뀌어 UXD-075 한 목록 표기(청 x : 백 y · 미기록 n) 대신 UXD-087·088 표기를 확인
+  const region = (name: RegExp) => screen.getByRole('region', { name })
+  const links = (el: HTMLElement) => within(el).getAllByRole('link')
+
+  it('SCR-111 / AC-069·087 / UXD-086–088: member sees confirmed matches only, by section, with scoreboard or final result', async () => {
     renderAt('/club-matches')
-    const list = await screen.findByRole('list', { name: '청백전' })
-    const items = within(list).getAllByRole('link')
-    expect(items.map((a) => a.getAttribute('data-match'))).toEqual(['cm-1', 'cm-3'])
-    expect(list).not.toHaveTextContent('연말 청백전') // 미확정은 이름도 없음
-    expect(list).not.toHaveTextContent('대진 미확정')
-    expect(items[0]).toHaveTextContent(/팀전.*진행 중.*청 \d+ : 백 \d+ · 미기록 4/)
-    expect(items[1]).toHaveTextContent(/개인전.*종료.*(공동 )?1위/)
-    expect(items[0]).toHaveAttribute('href', '/club-matches/cm-1')
+    const live = await screen.findByRole('region', { name: /진행 중인 청백전/ })
+    expect(live).toHaveAccessibleName('진행 중인 청백전 1건')
+    expect(links(live).map((a) => a.getAttribute('data-match'))).toEqual(['cm-1'])
+    expect(links(live)[0]).toHaveAttribute('href', '/club-matches/cm-1')
+    expect(links(live)[0]).toHaveTextContent(/팀전.*진행 중/)
+    expect(within(links(live)[0]!).getByText('청팀').closest('[data-cmp="CMP-052"]')).not.toBeNull() // 팀 이름 글자 포함 점수판
+    expect(links(live)[0]).toHaveTextContent('남은 경기 4개')
+    const past = region(/지난 청백전/)
+    expect(links(past).map((a) => a.getAttribute('data-match'))).toEqual(['cm-3'])
+    expect(links(past)[0]).toHaveTextContent(/개인전.*종료.*(1위 \S+|공동 1위 · \d+명)/)
+    // 준비 중은 이름·카드·표시 모두 없음(AC-069, UXD-086), 운영 기능 없음(UXD-089)
+    const page = document.querySelector('[data-scr="SCR-111"]') as HTMLElement
+    expect(page).toHaveAttribute('data-role', 'member')
+    expect(page).not.toHaveTextContent('연말 청백전')
+    expect(page).not.toHaveTextContent('대진 미확정')
+    expect(page).not.toHaveTextContent('운영진에게만 보임')
+    expect(screen.queryByRole('button', { name: '새 청백전' })).toBeNull()
+    expect(screen.queryByRole('region', { name: /예정된 청백전/ })).toBeNull() // 예정 항목이 없으면 섹션 숨김(UXD-088)
+    expect(screen.getByTestId('cm-hero')).toHaveTextContent('우리 동호회의청팀 vs 백팀 대결')
   })
 
   it('SCR-111-ST3 / AC-089: no ongoing match → notice + past matches', async () => {
     updateDb((db) => void (db.clubMatches!.find((m) => m.id === 'cm-1')!.status = 'draft'))
     renderAt('/club-matches')
     expect(await screen.findByText('아직 공개된 청백전이 없습니다')).toBeInTheDocument()
-    const past = screen.getByRole('list', { name: '지난 청백전' })
-    expect(within(past).getAllByRole('link').map((a) => a.getAttribute('data-match'))).toEqual(['cm-3'])
+    expect(links(region(/지난 청백전/)).map((a) => a.getAttribute('data-match'))).toEqual(['cm-3'])
+    expect(document.querySelector('[data-scr="SCR-111"]')).toHaveAttribute('data-st', 'SCR-111-ST3')
+  })
+
+  it('SCR-111 / UXD-087: confirmed, date after today (KST) and no recorded result → upcoming', async () => {
+    updateDb((db) => {
+      const m = db.clubMatches!.find((x) => x.id === 'cm-1')!
+      m.date = '2999-12-31'
+      m.games.forEach((g) => (g.winner = null))
+    })
+    renderAt('/club-matches')
+    const planned = await screen.findByRole('region', { name: /예정된 청백전/ })
+    const card = links(planned)[0]!
+    expect(card).toHaveAttribute('data-status', 'upcoming')
+    expect(card).toHaveTextContent(/진행 예정/)
+    expect(card).toHaveTextContent(/경기 \d+ · 참가 \d+명/)
+    expect(screen.queryByRole('region', { name: /진행 중인 청백전/ })).toBeNull()
+  })
+
+  it('SCR-111 / UXD-086·089: admin sees create button and pending card (ops-only) in the same list', async () => {
+    renderAt('/club-matches', 'admin')
+    const planned = await screen.findByRole('region', { name: /예정된 청백전/ })
+    const pending = within(planned).getByText('연말 청백전').closest('a')!
+    expect(pending).toHaveAttribute('data-status', 'pending')
+    expect(pending).toHaveTextContent(/개인전.*준비 중/)
+    expect(pending).toHaveTextContent('운영진에게만 보임')
+    expect(pending).toHaveTextContent(/참가 \d+명 · 대진 미확정/)
+    expect(pending).toHaveAttribute('href', '/club-matches/cm-2') // 통합 상세 SCR-112(3단계)
+    expect(document.querySelector('[data-scr="SCR-111"]')).toHaveAttribute('data-role', 'admin')
+    fireEvent.click(screen.getByRole('button', { name: '새 청백전' }))
+    expect(await screen.findByTestId('create-sheet')).toBeInTheDocument() // SCR-222
   })
 
   it('SCR-112-ST5 / AC-069: unconfirmed and missing matches look the same', async () => {
@@ -65,7 +109,9 @@ describe('B5 member club matches (SCR-111·112)', () => {
     expect(within(card).getByText(/청팀|백팀/, { selector: 'h3 span' })).toBeInTheDocument()
     // 팀 승수, 전체 대진
     expect(screen.getByRole('region', { name: '팀 승수' })).toHaveTextContent(/청 \d+ : 백 \d+/)
-    fireEvent.click(screen.getByText(/전체 대진 · 9경기/))
+    const all = screen.getByRole('button', { name: /전체 대진/ })
+    expect(all).toHaveTextContent('9경기')
+    fireEvent.click(all)
     const page = document.querySelector('[data-scr=SCR-112]')!
     expect(page.querySelectorAll('[data-cmp=CMP-041]').length).toBeGreaterThanOrEqual(9)
     // 운영 정보 없음
@@ -102,10 +148,12 @@ describe('B5 member club matches (SCR-111·112)', () => {
     expect(document.querySelector('[data-cmp=CMP-042] li[data-me=true]')).toHaveTextContent('김가람')
   })
 
-  it('SCR-112-ST3 / UXD-047: an admin who did not play sees the notice and the management link', async () => {
+  // (UX Spec r6) '관리 화면으로' 링크(UXD-047)는 없어지고 같은 화면 아래에 운영 기능 영역(UXD-085)
+  it('SCR-112-ST3 / UXD-085: an admin who did not play sees the notice and the ops area on the same screen', async () => {
     renderAt('/club-matches/cm-3', 'superAdmin') // 정마루는 cm-3에 없음
     expect(await screen.findByText('이번 청백전에는 참가하지 않았어요')).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: '관리 화면으로 ›' })).toHaveAttribute('href', '/ops/club-matches/cm-3')
+    expect(screen.getByRole('region', { name: /운영/ })).toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: /관리 화면으로/ })).toBeNull()
   })
 
   it('SCR-111-ST5: signed-out and pending users are redirected', async () => {

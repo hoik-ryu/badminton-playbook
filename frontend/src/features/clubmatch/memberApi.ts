@@ -2,6 +2,7 @@ import { api, ApiError } from '../../lib/api'
 import { featureSource, mockDelay } from '../../lib/data/source'
 import type { MockClubMatch, MockDb } from '../../lib/mock/db'
 import { people, read, type ClubMethod } from './api'
+import { displayStatusOf, individualResult, teamResult, todayKst, type ClubMatchResult, type DisplayStatus } from './display'
 import { gameCounts, individualStandings, teamScore } from './schedule'
 
 const dataSource = featureSource('clubmatch') // I3-d4: api 모드에서 실제 서버(/api/member/club-matches, backend member.py)
@@ -32,6 +33,8 @@ export type PublicClubMatch = {
   team: { blue: number; white: number }
   unrecorded: number
   participating: boolean
+  /** (SCR-112 r6) 머리글 표시 상태(UXD-087, 서버가 KST로 계산): 진행 예정(ST15)·진행 중·종료 */
+  displayStatus: Exclude<DisplayStatus, 'pending'>
 }
 export type PublicClubMatchItem = {
   id: string
@@ -43,8 +46,12 @@ export type PublicClubMatchItem = {
   games: number
   participants: number
   unrecorded: number
-  /** 종료 결과(UXD-075): 팀전 '청팀 승리'·'백팀 승리'·'무승부', 개인전 '1위 이름' / '공동 1위 이름 외 n명' */
+  /** 종료 결과(UXD-075): 팀전 '청팀 승리'·'백팀 승리'·'무승부', 개인전 '1위 이름' / '공동 1위 이름 외 n명' — 기존 필드(하위 호환) */
   resultText: string | null
+  /** (SCR-111 r6) 표시 상태(UXD-087, 서버가 KST로 계산). 회원 목록에는 준비 중이 없음 */
+  displayStatus: Exclude<DisplayStatus, 'pending'>
+  /** (SCR-111 r6) 종료 결과 구조(UXD-088): 팀전 최종 승수, 개인전 '1위 이름'·'공동 1위 · n명' */
+  result: ClubMatchResult | null
 }
 
 export const CLUB_NOT_FOUND = 'club_match_not_found'
@@ -85,12 +92,22 @@ function resultText(db: MockDb, m: MockClubMatch): string | null {
   return top.length === 1 ? `1위 ${first}` : `공동 1위 ${first} 외 ${top.length - 1}명`
 }
 
+function resultOf(db: MockDb, m: MockClubMatch): ClubMatchResult | null {
+  if (m.status !== 'finished') return null
+  if (m.method === 'team') { const t = teamScore(m.games); return teamResult(t.blue, t.white) }
+  const who = nameOf(db)
+  return individualResult(individualStandings(m.games, standingKeys(m), (k) => who(k).name).filter((r) => r.rank === 1).map((r) => who(r.key).name))
+}
+
 /** SCR-111: 확정된 청백전 최신순(미확정은 날짜·이름도 없음, AC-069·089) */
 export async function listPublicClubMatches(): Promise<PublicClubMatchItem[]> {
   if (dataSource === 'api') return api.get<PublicClubMatchItem[]>('/api/member/club-matches')
   const db = read()
+  const today = todayKst()
   const items = db.clubMatches!.filter(isPublic).map((m): PublicClubMatchItem => {
     const counts = gameCounts(m.games)
+    const unrecorded = m.games.filter((g) => !g.winner).length
+    const shown = displayStatusOf(m.status, m.date, m.games.length - unrecorded, today)
     return {
       id: m.id,
       name: m.name,
@@ -100,8 +117,10 @@ export async function listPublicClubMatches(): Promise<PublicClubMatchItem[]> {
       team: m.method === 'team' ? teamScore(m.games) : null,
       games: m.games.length,
       participants: [...counts.keys()].length,
-      unrecorded: m.games.filter((g) => !g.winner).length,
+      unrecorded,
       resultText: resultText(db, m),
+      displayStatus: shown === 'pending' ? 'live' : shown,
+      result: resultOf(db, m),
     }
   })
   return mockDelay(items.sort((a, b) => b.date.localeCompare(a.date) || b.id.localeCompare(a.id)))
@@ -141,5 +160,6 @@ export async function getPublicClubMatch(id: string, meId: string | null): Promi
     team: teamScore(m.games),
     unrecorded: m.games.filter((g) => !g.winner).length,
     participating: games.some((g) => g.mySide !== null),
+    displayStatus: ((s) => (s === 'pending' ? 'live' : s))(displayStatusOf(m.status, m.date, m.games.filter((g) => g.winner).length, todayKst())),
   }
 }

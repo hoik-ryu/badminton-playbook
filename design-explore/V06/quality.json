@@ -1,0 +1,234 @@
+{
+ "format": "design-quality-review/v1",
+ "round": "V06",
+ "reviewer": "model",
+ "note": "모델 평가(visually_reviewed: model). 근거는 explore-verify 측정 스크린샷(M20261120-070741-6a1eb7). 레퍼런스(REF-002) 대비는 사용자 확인용 비교 이미지와 엔진 대조 표 기준. 사람 평가·사용자 선택을 대신하지 않음.",
+ "variants": {
+  "A": {
+   "criteria": {
+    "hierarchy": {
+     "rating": "adequate",
+     "observations": "배너 다음 진행 중 점수판이 가장 크게 읽히고, 지난 카드는 금색 아이콘과 굵은 결과 글자가 먼저 보인다. '새 청백전' 외곽선 버튼이 배너와 섹션 사이에서 무게가 약하다.",
+     "evidence": [
+      "shots/M20261120-070741-6a1eb7/shots/A-SCR-111-mobile.png",
+      "shots/M20261120-070741-6a1eb7/shots/A-SCR-111-mobile-sm.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "운영진 '새 청백전' 버튼이 목록 흐름에서 약해 보임",
+       "where": "SCR-111",
+       "fix": "DD에서 섹션 제목 줄 오른쪽 작은 버튼 또는 채움 버튼 중 결정"
+      }
+     ]
+    },
+    "density_balance": {
+     "rating": "adequate",
+     "observations": "카드 간격 7px·좌우 13px로 레퍼런스와 같지만 진행 중 147pt·지난 95pt 카드가 레퍼런스(약 130·74pt)보다 아직 크다.",
+     "evidence": [
+      "shots/M20261120-070741-6a1eb7/shots/A-SCR-111-mobile.png",
+      "shots/M20261120-070741-6a1eb7/shots/A-SCR-111-mobile-sm.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "카드 높이가 레퍼런스보다 15–20pt 큼",
+       "where": "SCR-111",
+       "fix": "날짜 줄과 요약 줄 사이 여백을 4px 줄이고 결과 줄 높이를 28px로 고정"
+      }
+     ]
+    },
+    "typography": {
+     "rating": "adequate",
+     "observations": "화면 제목 26px, 카드 제목 16px, 점수 26px 굵게로 레퍼런스 비율과 비슷하다. 배지 12px 굵게는 읽기 좋다.",
+     "evidence": [
+      "shots/M20261120-070741-6a1eb7/shots/A-SCR-111-mobile.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "배너 제목 20px가 레퍼런스(약 22pt)보다 조금 작음",
+       "where": "SCR-111",
+       "fix": "배너 제목 22px로 올리고 설명 줄바꿈 위치 유지"
+      }
+     ]
+    },
+    "component_consistency": {
+     "rating": "adequate",
+     "observations": "카드(CMP-043)와 배지(CMP-005) 변형이 data-cmp-variant로 구분되고 측정에서 불일치가 없다. 예정 섹션의 준비 중 카드만 점선 테두리라 구분된다.",
+     "evidence": [
+      "shots/M20261120-070741-6a1eb7/shots/A-SCR-111-mobile.png",
+      "shots/M20261120-070741-6a1eb7/shots/A-SCR-111-mobile-sm.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "'진행 예정' 배지 색이 레퍼런스에 없어 다른 배지와 계열이 어긋남",
+       "where": "SCR-111",
+       "fix": "진행 예정 배지 색을 DD에서 정함(연민트 또는 연파랑)"
+      }
+     ]
+    },
+    "iconography": {
+     "rating": "weak",
+     "observations": "섹션·남은 경기·화살표는 Lucide 선 아이콘으로 통일되지만 우승 트로피·메달이 레퍼런스의 금색 채움 아이콘과 달리 가는 선이라 강조가 약하고, 금색 대비가 1.78:1이다.",
+     "evidence": [
+      "shots/M20261120-070741-6a1eb7/shots/A-SCR-111-mobile.png"
+     ],
+     "issues": [
+      {
+       "severity": "major",
+       "what": "금색 선 아이콘 대비 미달·강조 약함",
+       "where": "SCR-111",
+       "fix": "금색을 B의 #B7791F 계열로 어둡게 하거나, 선 아이콘 뒤에 연한 금색 원 바탕을 두어 채움 느낌을 냄"
+      }
+     ]
+    },
+    "reference_alignment": {
+     "rating": "adequate",
+     "observations": "배너·점수 칸·월계수·카드 간격 수치가 레퍼런스와 거의 같고 주요 색은 엔진 대조에서 same·near다. 유니폼 무늬와 가슴 팀 이름, 우승 아이콘 표현은 다르다.",
+     "evidence": [
+      "shots/M20261120-070741-6a1eb7/shots/A-SCR-111-mobile.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "유니폼 아래 팀 라벨이 레퍼런스의 가슴 글자보다 작아 팀 구분이 약함",
+       "where": "SCR-111",
+       "fix": "라벨을 유니폼 바로 아래 가운데로 키우거나(13px) 배너 왼쪽 제목의 '청팀'·'백팀' 강조로 보완"
+      }
+     ]
+    },
+    "mobile_balance": {
+     "rating": "weak",
+     "observations": "390×844 첫 화면에 배너·새 청백전·진행 중·예정 일부가 보이고, 360×640에서는 예정 섹션까지만 보인다. 진행 중·배너 배지 흰 글자 대비 2.97:1이 측정됐다.",
+     "evidence": [
+      "shots/M20261120-070741-6a1eb7/shots/A-SCR-111-mobile.png",
+      "shots/M20261120-070741-6a1eb7/shots/A-SCR-111-mobile-sm.png"
+     ],
+     "issues": [
+      {
+       "severity": "major",
+       "what": "레퍼런스 초록 배지의 흰 글자 대비 2.97:1",
+       "where": "SCR-111",
+       "fix": "배지 초록을 대비 4.5:1 이상인 진한 초록으로 바꾸거나 글자를 진한 초록으로 바꾼 연초록 배지로"
+      }
+     ]
+    }
+   }
+  },
+  "B": {
+   "criteria": {
+    "hierarchy": {
+     "rating": "adequate",
+     "observations": "섹션 간격 24px로 진행 중·예정·지난이 또렷이 나뉘지만 카드가 길어 점수판 이후 정보가 첫 화면 아래로 밀린다.",
+     "evidence": [
+      "shots/M20261120-070741-6a1eb7/shots/B-SCR-111-mobile.png",
+      "shots/M20261120-070741-6a1eb7/shots/B-SCR-111-mobile-sm.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "첫 화면에서 지난 청백전이 보이지 않음",
+       "where": "SCR-111",
+       "fix": "예정 섹션을 접어 두거나 카드 안쪽 여백을 12px로 줄임"
+      }
+     ]
+    },
+    "density_balance": {
+     "rating": "weak",
+     "observations": "진행 중 190pt·지난 122pt로 레퍼런스보다 1.5배 길고, 같은 화면이 2446px로 늘어난다.",
+     "evidence": [
+      "shots/M20261120-070741-6a1eb7/shots/B-SCR-111-mobile.png",
+      "shots/M20261120-070741-6a1eb7/shots/B-SCR-111-mobile-sm.png"
+     ],
+     "issues": [
+      {
+       "severity": "major",
+       "what": "레퍼런스 대비 밀도가 낮음",
+       "where": "SCR-111",
+       "fix": "카드 간격 8px, 안쪽 12px, 점수 칸 52px로 줄이는 중간값 검토"
+      }
+     ]
+    },
+    "typography": {
+     "rating": "adequate",
+     "observations": "토큰 크기(22/18/16/13px)라 다른 화면과 같은 위계다. 화면 제목 22px는 레퍼런스(약 26pt)보다 작다.",
+     "evidence": [
+      "shots/M20261120-070741-6a1eb7/shots/B-SCR-111-mobile.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "화면 제목이 레퍼런스보다 작음",
+       "where": "SCR-111",
+       "fix": "청백전 화면만 26px을 쓸지 DD에서 결정(토큰 font.size.display 32px와의 관계 포함)"
+      }
+     ]
+    },
+    "component_consistency": {
+     "rating": "adequate",
+     "observations": "카드·배지 변형 표지가 나뉘고 사각 배지(6px)가 튜토리얼 배지와 같은 모양이다. 측정 불일치 없음.",
+     "evidence": [
+      "shots/M20261120-070741-6a1eb7/shots/B-SCR-111-mobile.png",
+      "shots/M20261120-070741-6a1eb7/shots/B-SCR-111-mobile-sm.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "사각 배지가 레퍼런스의 알약 배지와 다름",
+       "where": "SCR-111",
+       "fix": "배지 모양을 알약으로 바꿀지 DD에서 결정"
+      }
+     ]
+    },
+    "iconography": {
+     "rating": "adequate",
+     "observations": "Lucide 선 아이콘으로 통일되고 금색 #B7791F가 3.64:1로 보인다. 남은 경기 hourglass는 '남은 시간'처럼 읽힐 수 있다.",
+     "evidence": [
+      "shots/M20261120-070741-6a1eb7/shots/B-SCR-111-mobile.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "hourglass가 '남은 경기 수'보다 '남은 시간'을 떠올리게 함",
+       "where": "SCR-111",
+       "fix": "list-checks(A) 또는 다른 Lucide 대안과 비교해 결정"
+      }
+     ]
+    },
+    "reference_alignment": {
+     "rating": "weak",
+     "observations": "구성은 같지만 간격·카드 높이·글자 크기·배지 모양·강조색이 레퍼런스와 달라 '충실 재현' 목표와 거리가 있다.",
+     "evidence": [
+      "shots/M20261120-070741-6a1eb7/shots/B-SCR-111-mobile.png"
+     ],
+     "issues": [
+      {
+       "severity": "major",
+       "what": "레퍼런스 대비 시각 차이가 큼",
+       "where": "SCR-111",
+       "fix": "A를 기준으로 대비 미달 색만 B 값으로 바꾼 조합을 검토"
+      }
+     ]
+    },
+    "mobile_balance": {
+     "rating": "adequate",
+     "observations": "대비 경고 0건, 터치 영역 44px 이상. 360×640 첫 화면에는 진행 중 카드와 예정 제목까지만 보인다.",
+     "evidence": [
+      "shots/M20261120-070741-6a1eb7/shots/B-SCR-111-mobile.png",
+      "shots/M20261120-070741-6a1eb7/shots/B-SCR-111-mobile-sm.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "작은 화면에서 첫 화면 정보량이 적음",
+       "where": "SCR-111",
+       "fix": "배너 높이를 360폭에서 132px로 줄이는 반응형 값 검토"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

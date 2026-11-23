@@ -1,0 +1,225 @@
+{
+ "r4": {
+  "390x844 6칸": {
+   "n": 90,
+   "player": 0,
+   "max": 0.0,
+   "over10": 0,
+   "number": 0,
+   "shuttle": 0
+  },
+  "390x844 9칸": {
+   "n": 135,
+   "player": 30,
+   "max": 0.7,
+   "over10": 0,
+   "number": 0,
+   "shuttle": 0
+  },
+  "360x640 6칸": {
+   "n": 90,
+   "player": 0,
+   "max": 0.0,
+   "over10": 0,
+   "number": 0,
+   "shuttle": 0
+  },
+  "360x640 9칸": {
+   "n": 135,
+   "player": 30,
+   "max": 4.5,
+   "over10": 0,
+   "number": 0,
+   "shuttle": 0
+  },
+  "360x560 6칸": {
+   "n": 90,
+   "player": 9,
+   "max": 1.6,
+   "over10": 0,
+   "number": 0,
+   "shuttle": 0
+  },
+  "360x560 9칸": {
+   "n": 135,
+   "player": 27,
+   "max": 22.5,
+   "over10": 15,
+   "number": 0,
+   "shuttle": 0
+  }
+ },
+ "r5": {
+  "390x844 6칸": {
+   "n": 90,
+   "player": 0,
+   "max": 0.0,
+   "over10": 0,
+   "number": 0,
+   "shuttle": 0
+  },
+  "390x844 9칸": {
+   "n": 135,
+   "player": 0,
+   "max": 0.0,
+   "over10": 0,
+   "number": 0,
+   "shuttle": 0
+  },
+  "360x640 6칸": {
+   "n": 90,
+   "player": 0,
+   "max": 0.0,
+   "over10": 0,
+   "number": 0,
+   "shuttle": 0
+  },
+  "360x640 9칸": {
+   "n": 135,
+   "player": 15,
+   "max": 5.7,
+   "over10": 0,
+   "number": 0,
+   "shuttle": 0
+  },
+  "360x560 6칸": {
+   "n": 90,
+   "player": 0,
+   "max": 0.0,
+   "over10": 0,
+   "number": 0,
+   "shuttle": 0
+  },
+  "360x560 9칸": {
+   "n": 135,
+   "player": 15,
+   "max": 19.1,
+   "over10": 15,
+   "number": 0,
+   "shuttle": 0
+  }
+ },
+ "remaining_r5": [
+  [
+   "360x560|basic-1|s2|3",
+   19.1
+  ],
+  [
+   "360x560|basic-1|s3|3",
+   19.1
+  ],
+  [
+   "360x560|basic-1|s4|3",
+   19.1
+  ],
+  [
+   "360x560|basic-1|s5|3",
+   19.1
+  ],
+  [
+   "360x560|basic-2|s2|3",
+   19.1
+  ],
+  [
+   "360x560|basic-2|s3|3",
+   19.1
+  ],
+  [
+   "360x560|basic-2|s4|3",
+   19.1
+  ],
+  [
+   "360x560|basic-2|s5|3",
+   19.1
+  ],
+  [
+   "360x560|basic-3|s2|3",
+   19.1
+  ],
+  [
+   "360x560|basic-3|s3|3",
+   19.1
+  ],
+  [
+   "360x560|basic-3|s4|3",
+   19.1
+  ],
+  [
+   "360x560|basic-3|s5|3",
+   19.1
+  ],
+  [
+   "360x560|basic-1|s1|3",
+   18.8
+  ],
+  [
+   "360x560|basic-2|s1|3",
+   18.8
+  ],
+  [
+   "360x560|basic-3|s1|3",
+   18.8
+  ],
+  [
+   "360x640|basic-1|s1|3",
+   5.7
+  ],
+  [
+   "360x640|basic-1|s2|3",
+   5.7
+  ],
+  [
+   "360x640|basic-1|s3|3",
+   5.7
+  ],
+  [
+   "360x640|basic-1|s4|3",
+   5.7
+  ],
+  [
+   "360x640|basic-1|s5|3",
+   5.7
+  ],
+  [
+   "360x640|basic-2|s1|3",
+   5.7
+  ],
+  [
+   "360x640|basic-2|s2|3",
+   5.7
+  ],
+  [
+   "360x640|basic-2|s3|3",
+   5.7
+  ],
+  [
+   "360x640|basic-2|s4|3",
+   5.7
+  ],
+  [
+   "360x640|basic-2|s5|3",
+   5.7
+  ],
+  [
+   "360x640|basic-3|s1|3",
+   5.7
+  ],
+  [
+   "360x640|basic-3|s2|3",
+   5.7
+  ],
+  [
+   "360x640|basic-3|s3|3",
+   5.7
+  ],
+  [
+   "360x640|basic-3|s4|3",
+   5.7
+  ],
+  [
+   "360x640|basic-3|s5|3",
+   5.7
+  ]
+ ],
+ "method": "same harness both versions: confirm step forced, every cell selected in 6 stages x 5 situations, 390x844/360x640/360x560; overlap = guidance pill rect vs player image rect (.sc-pl)"
+}

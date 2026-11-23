@@ -1,3 +1,4 @@
+// (보존 기록, 2026-11 청백전 5-B2) B5 당시 화면 기준입니다('관리 화면으로' → SCR-223은 UX Spec r6에서 없어짐). 현재 화면 회귀는 check-clubmatch-mock.mjs·check-clubmatch-api.mjs.
 // B5 브라우저 확인(Mock, 390·1440): 회원 청백전 목록(SCR-111) → 상세(SCR-112: 다음 경기·내 경기·승수·전체 대진) → 종료 상세(최종 결과)
 // → 미확정 상세(찾을 수 없음) → 마이페이지(SCR-121: 랭크·전적·프로필, 랭크 기준 시트) → 프로필 수정(SCR-122) → 운영진 '관리 화면으로'
 // 사용: BASE=http://localhost:5175 node experiments/frontend-layout/check-b5.mjs (Mock 모드 Vite)

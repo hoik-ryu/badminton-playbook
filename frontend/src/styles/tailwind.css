@@ -36,6 +36,13 @@
   --color-white-team-bg: var(--color-team-white-bg);
   --color-kakao-bg: var(--color-brand-kakao-bg);
   --color-kakao-fg: var(--color-brand-kakao-fg);
+  /* (2026-11-24, 청백전 1단계) DD r8 VD-049 청백전 토큰 — SCR-111 배너·우승 아이콘·개인전 배지 */
+  --color-hero: var(--color-hero-bg);
+  --color-hero-ink: var(--color-hero-text);
+  --color-hero-highlight: var(--color-hero-accent);
+  --color-gold: var(--color-award-gold);
+  --color-individual-fg: var(--color-method-individual-fg);
+  --color-individual-bg: var(--color-method-individual-bg);
   --font-sans: var(--font-family-base);
   --text-caption: var(--font-size-caption);
   --text-body: var(--font-size-body);

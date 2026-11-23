@@ -5,7 +5,8 @@ import { NavLink, useLocation } from 'react-router'
 import type { Role } from '../features/auth/types'
 
 // CMP-025 AppNav — 04 r2: 하단 탭바(튜토리얼 / 청백전 / 마이페이지 / 운영), layout=bottom만(PC·모바일 공통, UXD-066 r6). r1의 PC 왼쪽 메뉴는 없앰.
-// VD-019: Lucide 24px, 글자 레이블 유지, 현재 탭 = color.action.primary + 굵은 글자 + 위쪽 표시 막대. 탭 높이 56 + 안전 영역(VD-020).
+// VD-019: Lucide 24px, 글자 레이블 유지, 현재 탭 = 아이콘·위쪽 표시 막대 color.action.primary + 굵은 글자. 탭 높이 56 + 안전 영역(VD-020).
+// (DD r8 승인, 청백전 4단계) 현재 탭 글자색만 color.text.accent. 비활성 탭은 그대로
 // 접근성: nav + aria-current="page"(NavLink), 배지 수를 레이블에 포함.
 type Tab = { to: string; label: string; Icon: LucideIcon; match: (path: string) => boolean }
 
@@ -33,9 +34,9 @@ export function AppNav({ role, opsBadge, className }: { role: Role; opsBadge?: n
             <li key={to} className="relative flex-1">
               {on && <span aria-hidden className="absolute inset-x-0 top-0 mx-auto h-[3px] w-8 rounded-b-sm bg-action" />}
               <NavLink to={to} aria-current={on ? 'page' : undefined} aria-label={badge ? `${label}, 승인 대기 ${badge}건` : undefined}
-                className={cn('flex h-full flex-col items-center justify-center gap-0.5 no-underline', on ? 'font-bold text-action' : 'text-ink-muted')}>
+                className={cn('flex h-full flex-col items-center justify-center gap-0.5 no-underline', on ? 'font-bold text-ink-accent' : 'text-ink-muted')}>
                 <span className="relative">
-                  <Icon aria-hidden className="size-6" />
+                  <Icon aria-hidden className={on ? 'size-6 text-action' : 'size-6'} />
                   {badge > 0 && <span aria-hidden data-cmp="CMP-005" className="absolute top-0 left-4 flex h-5 min-w-5 items-center justify-center rounded-sm bg-warning-bg px-1 text-caption leading-none font-bold tabular-nums text-warning-fg">{badge}</span>}
                 </span>
                 <span className="text-caption">{label}</span>

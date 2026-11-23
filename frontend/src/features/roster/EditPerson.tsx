@@ -147,7 +147,8 @@ export function EditPerson({ person, onClose, onChanged }: Props) {
           {deleteInfo?.kind === 'confirmedMatch' && (
             <p className="m-0 text-body text-ink-muted">
               '{deleteInfo.matchName}'의 남은 경기 {deleteInfo.remaining}개에 포함되어 있습니다. 먼저 대체 선수를 정하세요{' '}
-              <Link to={`/ops/club-matches/${deleteInfo.matchId}`} className="font-bold text-action">
+              {/* (청백전 5-B1) 통합 주소(UX Spec r6 UXD-085). 이전 /ops 주소도 운영진에게는 리다이렉트되지만 바로 새 주소로 보냄 */}
+              <Link to={`/club-matches/${deleteInfo.matchId}`} className="font-bold text-action">
                 청백전으로
               </Link>
             </p>

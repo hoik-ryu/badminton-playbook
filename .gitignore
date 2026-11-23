@@ -78,3 +78,13 @@ blob-report/
 .pw-browsers/
 *.har
 trace.zip
+
+# 청백전 에셋 원본·레퍼런스(사용자 제공, 저장소 밖 보관 대상). 최종 후보는 assets/clubmatch/에 둠
+cheongbaek_assets_v3/
+smapsh_cheongbaekje_assets_v2/
+
+# 디자인 탐색 라운드의 자산 사본(design-explore/<라운드>/_assets/). 등록부(design-profile/assets/)와 바이트가 같고
+# `product_design.py explore-asset sync --round <라운드>`로 언제든 다시 만들어지므로 새로 추적하지 않습니다(2026-11 정리).
+# 이미 추적 중인 파일(V02–V05 사본, 승인된 탐색 선택 V08-A가 쓰는 V08 자산 13개)은 이 규칙과 무관하게 계속 추적됩니다.
+# 새 라운드의 자산이 승인 보존 대상이 되면 필요한 파일만 `git add -f <경로>`로 명시해 추적하세요.
+design-explore/*/_assets/

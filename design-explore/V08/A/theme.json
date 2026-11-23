@@ -1,0 +1,88 @@
+{
+ "schema": "design-theme/v1",
+ "name": "candidate-V08-A",
+ "version": "0.0.0-candidate",
+ "approved": false,
+ "note": "V08-A(V07-A 수정 2회차) 후보 테마(승인 아님). 사용자 요청: 초록 과다 → SMAPSH 공식 테마(docs/design-profile/theme.json)의 민트·틸. 바뀐 값: color.action.primary #25AB62 → #087F73(공식 color.focus.ring 값. 공식 primary #0B9E8B는 흰 글자 3.35:1이라 15px 버튼·12px 배지에 못 씀, #087F73은 4.89:1), color.text.accent #0B8655 → #10776C(공식 값, 흰 바탕 5.42:1), color.hero.bg #065B55 → #026C6D(RX-003-11, 배너 이미지 위 가장자리), color.hero.accent #9CCBFF → #5FFFFF(RX-003-08 청팀 시안). 청팀 파랑·백팀 흰색·금색 등 나머지는 V07-A 값 유지",
+ "tokens": {
+  "color.bg.page": "#FFFFFF",
+  "color.bg.surface": "#ECEDF0",
+  "color.text.primary": "#1A1D23",
+  "color.text.secondary": "#545A65",
+  "color.text.disabled": "#6B7280",
+  "color.border.default": "#EFF2F6",
+  "color.border.strong": "#6B7280",
+  "color.action.primary": "#087F73",
+  "color.action.onPrimary": "#FFFFFF",
+  "color.focus.ring": "#087F73",
+  "color.status.danger.fg": "#B3261E",
+  "color.status.danger.bg": "#FDE7E5",
+  "color.status.warning.fg": "#7A4F00",
+  "color.status.warning.bg": "#FFF3D1",
+  "color.status.success.fg": "#1B6E35",
+  "color.status.success.bg": "#E4F4E8",
+  "color.status.info.bg": "#E3ECFC",
+  "color.accent.subtle": "#DDF8EF",
+  "color.accent.mint": "#8EE3CC",
+  "color.text.accent": "#10776C",
+  "color.team.blue.fg": "#033393",
+  "color.team.blue.bg": "#DBEBF9",
+  "color.team.white.fg": "#1A1D23",
+  "color.team.white.bg": "#FFFFFF",
+  "color.brand.kakao.bg": "#FEE500",
+  "color.brand.kakao.fg": "#191919",
+  "color.court.surface": "#2F7D4F",
+  "color.court.line": "#FFFFFF",
+  "color.court.me": "#1D5BD0",
+  "color.court.opponent": "#F2C14E",
+  "color.award.gold": "#BA8200",
+  "color.method.individual.fg": "#062697",
+  "color.method.individual.bg": "#E7E4F1",
+  "color.hero.bg": "#026C6D",
+  "color.hero.text": "#FFFFFF",
+  "color.hero.accent": "#5FFFFF",
+  "space.1": "4px",
+  "space.2": "8px",
+  "space.3": "12px",
+  "space.4": "16px",
+  "space.5": "20px",
+  "space.6": "24px",
+  "space.8": "32px",
+  "space.gutter.mobile": "16px",
+  "space.gutter.desktop": "24px",
+  "radius.sm": "6px",
+  "radius.md": "10px",
+  "radius.sheet": "16px",
+  "font.size.caption": "13px",
+  "font.size.body": "16px",
+  "font.size.title": "18px",
+  "font.size.heading": "22px",
+  "font.size.display": "32px",
+  "font.weight.regular": "400",
+  "font.weight.bold": "700",
+  "size.touch.min": "44px",
+  "size.content.member": "600px",
+  "size.panel.side": "400px",
+  "size.nav.side": "240px",
+  "size.content.ops.max": "1200px",
+  "font.family.base": "\"Pretendard Variable\", Pretendard, system-ui, sans-serif"
+ },
+ "provenance": {
+  "color.hero.bg": [
+   "RX-003-11"
+  ],
+  "color.hero.text": [
+   "RX-003-07",
+   "RX-003-10"
+  ],
+  "color.hero.accent": [
+   "RX-003-08"
+  ],
+  "color.border.default": [
+   "RX-002-15"
+  ],
+  "color.bg.page": [
+   "RX-002-23"
+  ]
+ }
+}

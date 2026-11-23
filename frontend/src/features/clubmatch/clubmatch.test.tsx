@@ -7,7 +7,8 @@ import { routes } from '../../routes/router'
 import { setPersona, type PersonaKey } from '../auth/devPersona'
 import { getClubMatchView, listClubMatches } from './api'
 
-// B4 Mock 흐름: 목록(SCR-221) · 만들기(222) · 운영 상세(223) · 참가자·팀(224) · 교체(225) · 대체 선수(226)
+// B4 Mock 흐름: 목록(SCR-111) · 만들기(222) · 상세 운영 기능 영역(SCR-112, 이전 223) · 참가자·팀(224) · 교체(225) · 대체 선수(226)
+// (4단계) 최종 주소 /club-matches…로 엶. 이전 /ops/club-matches… 리다이렉트·권한은 routes/clubmatchRoutes.test.tsx
 function renderAt(path: string, persona: PersonaKey = 'admin') {
   setPersona(persona)
   const router = createMemoryRouter(routes, { initialEntries: [path] })
@@ -19,26 +20,29 @@ const match = (id: string) => readDb().clubMatches!.find((m) => m.id === id)!
 describe('B4 club matches (mock)', () => {
   beforeEach(() => window.localStorage.clear())
 
-  it('SCR-221 / AC-042: latest first with method and status badges, team score and final result', async () => {
-    renderAt('/ops/club-matches')
-    const list = await screen.findByRole('list', { name: '청백전' })
-    const items = within(list).getAllByRole('link')
-    expect(items.map((a) => a.getAttribute('data-match'))).toEqual(['cm-2', 'cm-1', 'cm-3'])
-    expect(items[0]).toHaveTextContent('대진 미확정')
-    expect(items[1]).toHaveTextContent(/진행 중.*청 \d+ : 백 \d+/)
-    expect(items[2]).toHaveTextContent(/종료.*1위/)
+  // (4단계) 이전 SCR-221 목록은 SCR-111 통합 목록(/club-matches)으로 바뀜. 운영진은 준비 중까지 봄(UXD-086·087)
+  it('SCR-111 (운영진) / AC-042: live, planned(pending) and past sections with status and result', async () => {
+    renderAt('/club-matches')
+    const live = await screen.findByTestId('cm-section-live')
+    const ids = (el: HTMLElement) => [...el.querySelectorAll('a[data-match]')].map((a) => a.getAttribute('data-match'))
+    expect(ids(live)).toEqual(['cm-1'])
+    expect(ids(screen.getByTestId('cm-section-planned'))).toEqual(['cm-2'])
+    expect(ids(screen.getByTestId('cm-section-past'))).toEqual(['cm-3'])
+    expect(live.querySelector('a[data-match=cm-1]')).toHaveTextContent(/청팀\d+:백팀\d+/)
+    expect(screen.getByTestId('cm-section-planned')).toHaveTextContent('준비 중')
+    expect(screen.getByTestId('cm-section-past')).toHaveTextContent(/1위/)
   })
 
   it('SCR-222→223→224 / AC-042·071·073·077·081·085: create, pick participants, generate, confirm, record, finish', async () => {
-    const router = renderAt('/ops/club-matches')
-    fireEvent.click(await screen.findByRole('button', { name: '만들기' }))
+    const router = renderAt('/club-matches')
+    fireEvent.click(await screen.findByRole('button', { name: '새 청백전' }))
     const sheet = await screen.findByTestId('create-sheet')
     fireEvent.click(within(sheet).getByRole('button', { name: '만들기' }))
     expect(await within(sheet).findByText('이름을 입력해 주세요')).toBeInTheDocument()
     fireEvent.click(within(sheet).getByRole('radio', { name: '개인전' }))
     fireEvent.change(within(sheet).getByLabelText('이름'), { target: { value: '테스트 청백전' } })
     fireEvent.click(within(sheet).getByRole('button', { name: '만들기' }))
-    await waitFor(() => expect(router.state.location.pathname).toMatch(/^\/ops\/club-matches\/cm-/))
+    await waitFor(() => expect(router.state.location.pathname).toMatch(/^\/club-matches\/cm-/))
     const id = router.state.location.pathname.split('/').pop()!
     // 참가자 없음 → 패널 자동(UXD-038)
     const panel = await screen.findByTestId('participants-sheet')
@@ -73,7 +77,7 @@ describe('B4 club matches (mock)', () => {
   })
 
   it('SCR-225 / AC-064: swap a player in a draft schedule; same-game candidates are disabled with a reason', async () => {
-    renderAt('/ops/club-matches/cm-2')
+    renderAt('/club-matches/cm-2')
     fireEvent.click(await screen.findByRole('button', { name: '대진 생성' }))
     await waitFor(() => expect(match('cm-2').games.length).toBeGreaterThan(0))
     const before = JSON.stringify(match('cm-2').games[0])
@@ -102,7 +106,7 @@ describe('B4 club matches (mock)', () => {
   })
 
   it('SCR-224→226 / AC-078: leave mid-way, substitutes recommended and applied together', async () => {
-    renderAt('/ops/club-matches/cm-1')
+    renderAt('/club-matches/cm-1')
     const v = await getClubMatchView('cm-1')
     const leaver = v.rows.find((r) => r.participating && r.inUnrecorded > 0 && r.kind === 'member')!
     fireEvent.click(await screen.findByRole('button', { name: /참가자 \d+명/ }))
@@ -123,7 +127,7 @@ describe('B4 club matches (mock)', () => {
   })
 
   it('AC-070 / AC-072: switching to team mode resets teams and fills an algorithm proposal', async () => {
-    renderAt('/ops/club-matches/cm-2')
+    renderAt('/club-matches/cm-2')
     fireEvent.click(await screen.findByRole('radio', { name: '팀전' }))
     await waitFor(() => expect(match('cm-2').method).toBe('team'))
     fireEvent.click(await screen.findByRole('button', { name: /참가자 \d+명/ }))
@@ -132,7 +136,7 @@ describe('B4 club matches (mock)', () => {
   })
 
   it('SCR-223-ST6 / AC-080: a stale confirm is rejected with the conflict dialog', async () => {
-    renderAt('/ops/club-matches/cm-2')
+    renderAt('/club-matches/cm-2')
     fireEvent.click(await screen.findByRole('button', { name: '대진 생성' }))
     await waitFor(() => expect(match('cm-2').games.length).toBeGreaterThan(0))
     await screen.findByRole('button', { name: '확정' })

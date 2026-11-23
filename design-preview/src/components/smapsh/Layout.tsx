@@ -24,7 +24,7 @@ export function FixedInColumn({ bottom, z = 'z-10', children, testId }: { bottom
   )
 }
 
-// 하단 탭 위에 놓는 고정 행동 바(SCR-202, SCR-223). 위쪽 구분선 color.border.default, 좌우 여백 16(VD-021)
+// 하단 탭 위에 놓는 고정 행동 바(SCR-202, SCR-112 운영 기능 영역). 위쪽 구분선 color.border.default, 좌우 여백 16(VD-021)
 export function ActionBar({ children }: { children: ReactNode }) {
   return (
     <FixedInColumn bottom="calc(56px + var(--safe-bottom))" testId="action-bar">

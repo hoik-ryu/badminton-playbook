@@ -20,7 +20,7 @@ from sqlalchemy.orm import Session
 
 from app.core.errors import AppError
 from app.modules.auth.deps import AdminUser, DbSession, verify_origin
-from app.modules.clubmatch import schedule
+from app.modules.clubmatch import display, schedule
 from app.modules.clubmatch.models import (
     ClubMatch,
     ClubMatchGame,
@@ -323,9 +323,17 @@ def list_club_matches(_: AdminUser, db: DbSession) -> list[ClubMatchListItem]:
         select(ClubMatch).order_by(ClubMatch.match_date.desc(), ClubMatch.created_at.desc())
     ).all()
     items = []
+    today = display.today_kst()
     for m in matches:
         view = build_view(db, m)
         winner: str | None = None
+        result: display.ClubMatchResult | None = None
+        if m.status == "finished":
+            result = (
+                display.team_result(view.team["blue"], view.team["white"])
+                if m.method == "team"
+                else display.individual_result([s.name for s in view.standings if s.rank == 1])
+            )
         if m.status == "finished":
             t = view.team
             if m.method == "team":
@@ -347,6 +355,12 @@ def list_club_matches(_: AdminUser, db: DbSession) -> list[ClubMatchListItem]:
                 unrecorded=view.unrecorded,
                 team=view.team if m.method == "team" and m.status != "draft" else None,
                 winnerText=winner,
+                participants=view.summary.count,
+                games=len(view.games),
+                displayStatus=display.display_status(
+                    m.status, m.match_date, len(view.games) - view.unrecorded, today
+                ),
+                result=result,
             )
         )
     return items

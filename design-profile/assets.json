@@ -1379,6 +1379,294 @@
       "width": 1312,
       "height": 1199,
       "bytes": 638453
+    },
+    "AST-067": {
+      "kind": "image",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [
+        "SCR-111"
+      ],
+      "depicts": "청백전 배너 배경: 짙은 청록 실내 배드민턴 경기장(조명·관중석·오른쪽 네트). OpenAI ChatGPT 이미지 생성으로 새로 제작(사용자 2026-11-20). 상용 사용 전 이용 조건·제3자 권리 확인 필요",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-20T06:58:41Z",
+      "file": "design-profile/assets/AST-067.png",
+      "sha256": "64cf674ec86ad27d9305e6603f9170f4666ad0163ef41750088c2540eb945fec",
+      "format": "png",
+      "width": 1983,
+      "height": 793,
+      "bytes": 1722451
+    },
+    "AST-068": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [
+        "SCR-111"
+      ],
+      "depicts": "청팀 유니폼(옷걸이, SMAPSH 라벨·셔틀 로고 포함, 투명 배경). OpenAI ChatGPT 이미지 생성(사용자 2026-11-20). 권리 확인 필요",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-20T06:58:42Z",
+      "file": "design-profile/assets/AST-068.png",
+      "sha256": "9a053a2cd95fb4e532ab66a6a38c4951efcfb4a4757dbfca895f71d5c2912df1",
+      "format": "png",
+      "width": 1199,
+      "height": 1312,
+      "bytes": 1474047
+    },
+    "AST-069": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [
+        "SCR-111"
+      ],
+      "depicts": "백팀 유니폼(옷걸이, SMAPSH 라벨·셔틀 로고 포함, 투명 배경). OpenAI ChatGPT 이미지 생성(사용자 2026-11-20). 권리 확인 필요",
+      "fallback": "hide",
+      "rights": {
+        "license": "unknown",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-20T06:58:42Z",
+      "file": "design-profile/assets/AST-069.png",
+      "sha256": "060b6748f1f88b93302afccc8931b5863014dc2411cd94557f21ac9456eb7a00",
+      "format": "png",
+      "width": 1199,
+      "height": 1312,
+      "bytes": 1448494
+    },
+    "AST-070": {
+      "kind": "illustration",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [
+        "SCR-111"
+      ],
+      "depicts": "월계수 가지(왼쪽, 오른쪽은 CSS 좌우 반전). 원본 좌우 한 쌍 이미지에서 왼쪽 가지만 픽셀 그대로 잘라낸 파생본. OpenAI ChatGPT 이미지 생성(사용자 2026-11-20). 권리 확인 필요",
+      "fallback": "hide",
+      "rights": {
+        "license": "OpenAI-Output (user-owned per OpenAI Terms of Use)",
+        "confirmed_by_user": true,
+        "statement": "AST-079 통합 배너와 AST-070 월계수는 모두 제가 OpenAI ChatGPT 이미지 생성 도구를 이용해 신규 제작한 이미지입니다. 외부 웹사이트의 이미지를 가져오거나 기존 상업용 이미지를 복사하여 제작한 것이 아닙니다. AST-070은 생성된 원본 이미지에서 왼쪽 월계수 가지를 추출한 파생본입니다. 두 이미지를 SMAPSH 프로젝트의 디자인 및 서비스 화면에 사용하는 것을 확인합니다. 이 값은 프로젝트 내부의 생성 이미지 출처 및 이용 권한 분류이며, 독점 저작권이나 제3자 권리 비침해에 대한 법적 보증을 의미하지 않습니다.",
+        "at": "2026-11-20T08:52:35Z"
+      },
+      "added_at": "2026-11-20T06:58:42Z",
+      "file": "design-profile/assets/AST-070.png",
+      "sha256": "cdbde68a348820550b6ebf6751d26597f5f433fa83d5a8a5a8f25375a0153b12",
+      "format": "png",
+      "width": 508,
+      "height": 868,
+      "bytes": 540185
+    },
+    "AST-071": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [
+        "SCR-111"
+      ],
+      "depicts": "V06 SCR-111 아이콘(Lucide activity v1.70.0)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-20T06:58:42Z",
+      "file": "design-profile/assets/AST-071.svg",
+      "sha256": "9d7645b67d5188c4dce7b1200e61bb22ef369dce862e29e1a64878633ea734b8",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 328
+    },
+    "AST-072": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [
+        "SCR-111"
+      ],
+      "depicts": "V06 SCR-111 아이콘(Lucide clock v1.70.0)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-20T06:58:42Z",
+      "file": "design-profile/assets/AST-072.svg",
+      "sha256": "d5228e8c292770650c821a0938b7ea18e054dad36896286b7a8c9aeb6f53a5b9",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 249
+    },
+    "AST-073": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [
+        "SCR-111"
+      ],
+      "depicts": "V06 SCR-111 아이콘(Lucide trophy v1.70.0)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-20T06:58:42Z",
+      "file": "design-profile/assets/AST-073.svg",
+      "sha256": "1c6fd2dc0350c55edf8dadefee19cb46c94c97004fa0e905f4a1b773a6150ff4",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 516
+    },
+    "AST-074": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [
+        "SCR-111"
+      ],
+      "depicts": "V06 SCR-111 아이콘(Lucide medal v1.70.0)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-20T06:58:43Z",
+      "file": "design-profile/assets/AST-074.svg",
+      "sha256": "cddd1bc94477b88e7de52cbd0a98c5bc7161eae83e3874ea8cf937584ef10b34",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 447
+    },
+    "AST-075": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [
+        "SCR-111"
+      ],
+      "depicts": "V06 SCR-111 아이콘(Lucide chevron-right v1.70.0)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-20T06:58:43Z",
+      "file": "design-profile/assets/AST-075.svg",
+      "sha256": "80b764b321ffc35a4dc84280571cd5970ee940ea635248f8f199bd8429a37947",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 219
+    },
+    "AST-076": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [
+        "SCR-111"
+      ],
+      "depicts": "V06 SCR-111 아이콘(Lucide plus v1.70.0)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-20T06:58:43Z",
+      "file": "design-profile/assets/AST-076.svg",
+      "sha256": "734ffa3577623ae2b8e64c5dd7d4d44510a6d837dc1fd33bf81cfdcec142481c",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 234
+    },
+    "AST-077": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [
+        "SCR-111"
+      ],
+      "depicts": "V06 SCR-111 아이콘(Lucide list-checks v1.70.0)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-20T06:58:43Z",
+      "file": "design-profile/assets/AST-077.svg",
+      "sha256": "9a50482d82bb88200058513e0f9b7481027c71288c20200b718bba0c5bca3e55",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 302
+    },
+    "AST-078": {
+      "kind": "icon",
+      "role": "decorative",
+      "source": "licensed",
+      "refs": [
+        "SCR-111"
+      ],
+      "depicts": "V06 SCR-111 아이콘(Lucide hourglass v1.70.0)",
+      "fallback": "hide",
+      "rights": {
+        "license": "ISC",
+        "confirmed_by_user": false,
+        "statement": null
+      },
+      "added_at": "2026-11-20T06:58:43Z",
+      "file": "design-profile/assets/AST-078.svg",
+      "sha256": "6d805e5d9162d2581728acff146589b064f0f93ca7db6442f28ac317fb4c2b35",
+      "format": "svg",
+      "width": 24,
+      "height": 24,
+      "bytes": 402
+    },
+    "AST-079": {
+      "kind": "image",
+      "role": "decorative",
+      "source": "generated_tool",
+      "refs": [
+        "SCR-111"
+      ],
+      "depicts": "청백전 소개 배너 통합 이미지(글씨 없는 판, 2172×724, 3:1): 짙은 청록 실내 코트 배경 + 오른쪽 청팀 VS 백팀 대결 그래픽·월계수·셔틀콕 포함. OpenAI ChatGPT 이미지 생성 도구로 제작(사용자 확인 2026-11-20). 권리 확인 필요",
+      "fallback": "hide",
+      "rights": {
+        "license": "OpenAI-Output (user-owned per OpenAI Terms of Use)",
+        "confirmed_by_user": true,
+        "statement": "AST-079 통합 배너와 AST-070 월계수는 모두 제가 OpenAI ChatGPT 이미지 생성 도구를 이용해 신규 제작한 이미지입니다. 외부 웹사이트의 이미지를 가져오거나 기존 상업용 이미지를 복사하여 제작한 것이 아닙니다. AST-070은 생성된 원본 이미지에서 왼쪽 월계수 가지를 추출한 파생본입니다. 두 이미지를 SMAPSH 프로젝트의 디자인 및 서비스 화면에 사용하는 것을 확인합니다. 이 값은 프로젝트 내부의 생성 이미지 출처 및 이용 권한 분류이며, 독점 저작권이나 제3자 권리 비침해에 대한 법적 보증을 의미하지 않습니다.",
+        "at": "2026-11-20T08:52:35Z"
+      },
+      "added_at": "2026-11-20T07:46:27Z",
+      "file": "design-profile/assets/AST-079.png",
+      "sha256": "20b509f6e838385e6685b00f599796fe4b324b8138b0183b5a8b63283310c701",
+      "format": "png",
+      "width": 2172,
+      "height": 724,
+      "bytes": 1646338
     }
   }
 }

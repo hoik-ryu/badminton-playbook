@@ -83,7 +83,7 @@ describe('B2 roster and scores (mock)', () => {
     fireEvent.click(await rowOf('하솔'))
     sheet = await screen.findByTestId('edit-sheet')
     expect(await within(sheet).findByText(/'가을 청백전'의 남은 경기 \d+개에 포함되어 있습니다/)).toBeInTheDocument()
-    expect(within(sheet).getByRole('link', { name: '청백전으로' })).toHaveAttribute('href', '/ops/club-matches/cm-1')
+    expect(within(sheet).getByRole('link', { name: '청백전으로' })).toHaveAttribute('href', '/club-matches/cm-1')
     fireEvent.click(within(sheet).getByRole('button', { name: '닫기' }))
     await waitFor(() => expect(screen.queryByTestId('edit-sheet')).toBeNull())
 

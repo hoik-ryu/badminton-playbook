@@ -23,7 +23,7 @@ import {
   swapClub,
   type GameView,
 } from './api'
-import { ClubGameCard } from './ClubGameCard'
+import { CmOpsGameCard } from './ui/DetailCards'
 import { getPublicClubMatch, listPublicClubMatches } from './memberApi'
 import { ParticipantsPanel } from './ParticipantsPanel'
 import { SubstituteSheet } from './SubstituteSheet'
@@ -178,7 +178,7 @@ describe('I3-d3 revert UI (SCR-223)', () => {
     updateDb((db) => {
       db.clubMatches!.find((m) => m.id === id)!.games[0]!.winner = 1
     })
-    const router = createMemoryRouter(routes, { initialEntries: [`/ops/club-matches/${id}`] })
+    const router = createMemoryRouter(routes, { initialEntries: [`/club-matches/${id}`] })
     render(<RouterProvider router={router} />)
     const card = await screen.findByRole('article', { name: '1경기' })
     fireEvent.click(within(card).getByRole('button', { name: '미기록으로 되돌리기' }))
@@ -192,7 +192,7 @@ describe('I3-d3 revert UI (SCR-223)', () => {
 
   it('finished matches have no revert button', async () => {
     setPersona('admin')
-    const router = createMemoryRouter(routes, { initialEntries: ['/ops/club-matches/cm-3'] })
+    const router = createMemoryRouter(routes, { initialEntries: ['/club-matches/cm-3'] })
     render(<RouterProvider router={router} />)
     await screen.findByRole('article', { name: '1경기' })
     expect(screen.queryByRole('button', { name: '미기록으로 되돌리기' })).toBeNull()
@@ -242,7 +242,7 @@ describe('I3-d4-a spec alignment', () => {
       [[{ rule: 'matchup', reason: 'search_limit' }], true, false, ['같은 대진 반복 · 자동 탐색 한계']],
     ]
     for (const [relaxations, repeatedMatchup, genderRelaxed, texts] of cases) {
-      const { unmount } = render(<ClubGameCard game={{ ...base, relaxations, repeatedMatchup, genderRelaxed }} method="individual" showResult={false} />)
+      const { unmount } = render(<CmOpsGameCard game={{ ...base, relaxations, repeatedMatchup, genderRelaxed }} method="individual" showResult={false} />)
       for (const t of texts) expect(screen.getByText(t)).toBeInTheDocument()
       unmount()
     }

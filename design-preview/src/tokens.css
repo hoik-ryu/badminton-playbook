@@ -7,6 +7,7 @@
   --color-accent-subtle: #DDF8EF;
   --color-action-onPrimary: #FFFFFF;
   --color-action-primary: #0B9E8B;
+  --color-award-gold: #B7791F;
   --color-bg-page: #FAFFFD;
   --color-bg-surface: #F4F5F7;
   --color-border-default: #D5D9E0;
@@ -18,6 +19,11 @@
   --color-court-opponent: #F2C14E;
   --color-court-surface: #2F7D4F;
   --color-focus-ring: #087F73;
+  --color-hero-accent: #5FFFFF;
+  --color-hero-bg: #026C6D;
+  --color-hero-text: #FFFFFF;
+  --color-method-individual-bg: #EEEAFB;
+  --color-method-individual-fg: #5B3FA8;
   --color-status-danger-bg: #FDE7E5;
   --color-status-danger-fg: #B3261E;
   --color-status-info-bg: #E3ECFC;

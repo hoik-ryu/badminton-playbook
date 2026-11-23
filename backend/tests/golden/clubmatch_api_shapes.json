@@ -93,9 +93,19 @@
   "ClubMatchListItem[]": [
    {
     "date": true,
+    "displayStatus": true,
+    "games": true,
     "id": true,
     "method": true,
     "name": true,
+    "participants": true,
+    "result": {
+     "final": true,
+     "method": true,
+     "outcome": true,
+     "text": true,
+     "tiedCount": true
+    },
     "status": true,
     "team": {
      "blue": true,
@@ -265,6 +275,7 @@
   },
   "PublicClubMatch": {
    "date": true,
+   "displayStatus": true,
    "games": [
     {
      "changed": true,
@@ -318,11 +329,19 @@
   "PublicClubMatchItem[]": [
    {
     "date": true,
+    "displayStatus": true,
     "games": true,
     "id": true,
     "method": true,
     "name": true,
     "participants": true,
+    "result": {
+     "final": true,
+     "method": true,
+     "outcome": true,
+     "text": true,
+     "tiedCount": true
+    },
     "resultText": true,
     "status": true,
     "team": {

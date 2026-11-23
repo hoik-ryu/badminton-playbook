@@ -1,3 +1,5 @@
+// (보존 기록, 2026-11 청백전 5-B2) B4 당시 SCR-221·223 화면(/ops/club-matches…) 확인 스크립트입니다. 그 화면은 UX Spec r6에서 SCR-111·112로 통합·삭제되어
+// 지금은 그대로 실행되지 않습니다. 현재 화면 회귀는 check-clubmatch-mock.mjs(Mock)·check-clubmatch-api.mjs(실제 API)를 쓰세요.
 // B4 브라우저 확인(dev 서버 5173, Mock): 청백전 목록 → 만들기(팀전) → 참가자·팀(배정안·점수 입력 SCR-214) → 경기 수 → 대진 생성 → 교체 → 확정
 // → 결과 기록·종료 비활성 → 확정 후 교체 → 종료·최종 순위 / cm-1 중도 귀가 → 대체 선수(SCR-226) / 권한(회원·비로그인).
 // 사용: node experiments/frontend-layout/check-b4.mjs

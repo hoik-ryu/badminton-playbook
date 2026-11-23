@@ -1,0 +1,25 @@
+{
+  "format": "design-reference/v1",
+  "image_format": "png",
+  "id": "REF-002",
+  "path": "design-explore/references/REF-002/original.png",
+  "sha256": "722e7d7b0213c47a8ff25e18e47a90e59c0f37b6b5363c2ab564752edaf1f1bc",
+  "bytes": 1153805,
+  "width": 1199,
+  "height": 1312,
+  "source": {
+    "kind": "user_file"
+  },
+  "rights": {
+    "basis": "unknown",
+    "statement": ""
+  },
+  "privacy": {
+    "model": null,
+    "user": null
+  },
+  "tracked": false,
+  "added_at": "2026-11-20T06:56:07Z",
+  "withdrawn": null,
+  "extraction": null
+}

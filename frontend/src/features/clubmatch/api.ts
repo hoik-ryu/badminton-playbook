@@ -3,6 +3,7 @@ import { featureSource, mockDelay } from '../../lib/data/source'
 import { readDb, updateDb, type MockClubGame, type MockClubMatch, type MockDb } from '../../lib/mock/db'
 import type { Gender, Grade } from '../auth/types'
 import { matchupKey } from '../session/lineup'
+import { displayStatusOf, individualResult, teamResult, todayKst, type ClubMatchResult, type DisplayStatus } from './display'
 import { distribution, evenProposals, gameCounts, gap, generateClubGames, individualStandings, markGeneratedRepeats, proposeTeams, refreshAfterSwap, substituteDecision, teamScore, type ClubMethod, type ClubRules, type Relaxation, type Team } from './schedule'
 
 const dataSource = featureSource('clubmatch') // I3-d4: api 모드에서 실제 서버(backend/app/modules/clubmatch/router.py)
@@ -98,15 +99,27 @@ const checkVersion = (m: MockClubMatch, version: number) => {
 }
 
 // ── 목록(SCR-221) ──
-export type ClubMatchListItem = { id: string; name: string; date: string; method: ClubMethod; status: ClubStatus; unrecorded: number; team: { blue: number; white: number } | null; winnerText: string | null }
+export type ClubMatchListItem = {
+  id: string; name: string; date: string; method: ClubMethod; status: ClubStatus; unrecorded: number; team: { blue: number; white: number } | null; winnerText: string | null
+  /** (SCR-111 r6, 하위 호환 추가) 선정된 참가 인원 */
+  participants: number
+  /** (SCR-111 r6) 경기 수(대진 생성 전 0) */
+  games: number
+  /** (SCR-111 r6) 표시 상태(UXD-087, 서버가 KST로 계산). DB 상태 status와 다름 */
+  displayStatus: DisplayStatus
+  /** (SCR-111 r6) 종료 결과 구조(UXD-088). 종료 전 null */
+  result: ClubMatchResult | null
+}
 
 export async function listClubMatches(): Promise<ClubMatchListItem[]> {
   if (dataSource === 'api') return api.get<ClubMatchListItem[]>('/api/club-matches')
   const db = read()
   const ps = people(db)
+  const today = todayKst()
   const items = db.clubMatches!.map((m): ClubMatchListItem => {
     const ts = teamScore(m.games)
     let winnerText: string | null = null
+    let topNames: string[] = []
     if (m.status === 'finished') {
       if (m.method === 'team') winnerText = ts.blue === ts.white ? `무승부 (${ts.blue} : ${ts.white})` : `${ts.blue > ts.white ? '청팀' : '백팀'} 승리 (${ts.blue} : ${ts.white})`
       else {
@@ -114,9 +127,16 @@ export async function listClubMatches(): Promise<ClubMatchListItem[]> {
         const keys = Object.keys(m.participants).filter((k) => gameCounts(m.games).has(k) || !m.participants[k]!.left)
         const top = individualStandings(m.games, keys, name).filter((r) => r.rank === 1)
         winnerText = top.length ? `1위 ${top.map((t) => name(t.key)).join(', ')}` : null
+        topNames = top.map((t) => name(t.key))
       }
     }
-    return { id: m.id, name: m.name, date: m.date, method: m.method, status: m.status, unrecorded: m.games.filter((g) => !g.winner).length, team: m.method === 'team' && m.status !== 'draft' ? ts : null, winnerText }
+    const unrecorded = m.games.filter((g) => !g.winner).length
+    const result = m.status !== 'finished' ? null : m.method === 'team' ? teamResult(ts.blue, ts.white) : individualResult(topNames)
+    return {
+      id: m.id, name: m.name, date: m.date, method: m.method, status: m.status, unrecorded, team: m.method === 'team' && m.status !== 'draft' ? ts : null, winnerText,
+      participants: Object.values(m.participants).filter((p) => !p.left).length, games: m.games.length,
+      displayStatus: displayStatusOf(m.status, m.date, m.games.length - unrecorded, today), result,
+    }
   })
   return mockDelay(items.sort((a, b) => b.date.localeCompare(a.date) || b.id.localeCompare(a.id)))
 }

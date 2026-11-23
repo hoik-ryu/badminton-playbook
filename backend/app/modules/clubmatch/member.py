@@ -7,6 +7,7 @@
 """
 
 import uuid
+from typing import Literal
 
 from fastapi import APIRouter, Depends
 from sqlalchemy import select
@@ -14,7 +15,7 @@ from sqlalchemy.orm import Session
 
 from app.core.errors import AppError
 from app.modules.auth.deps import ApprovedUser, DbSession, verify_origin
-from app.modules.clubmatch import schedule
+from app.modules.clubmatch import display, schedule
 from app.modules.clubmatch.member_schemas import (
     MemberGame,
     MemberPlayer,
@@ -124,6 +125,15 @@ class _Match:
     def unrecorded(self) -> int:
         return sum(1 for g, _, _ in self.games if g.winner is None)
 
+    def result(self) -> display.ClubMatchResult | None:
+        """종료 결과 구조(UXD-088 정보 5): 팀전 최종 승수, 개인전 '1위 이름'·'공동 1위 · n명'."""
+        if self.m.status != "finished":
+            return None
+        if self.m.method == "team":
+            t = self.team()
+            return display.team_result(t.blue, t.white)
+        return display.individual_result([s.name for s in self.standings() if s.rank == 1])
+
     def result_text(self) -> str | None:
         """종료 결과(UXD-075): 팀전 청팀 승리·백팀 승리·무승부 / 개인전 1위·공동 1위 이름 외 n명."""
         if self.m.status != "finished":
@@ -139,6 +149,11 @@ class _Match:
         return (
             f"1위 {top[0].name}" if len(top) == 1 else f"공동 1위 {top[0].name} 외 {len(top) - 1}명"
         )
+
+
+def _public_status(shown: display.DisplayStatus) -> Literal["upcoming", "live", "ended"]:
+    """회원 목록에는 확정된 청백전만 나오므로 표시 상태에 '준비 중'이 없습니다."""
+    return "ended" if shown == "ended" else "upcoming" if shown == "upcoming" else "live"
 
 
 def _public(db: Session, match_id: str) -> ClubMatch:
@@ -161,9 +176,12 @@ def list_public_club_matches(user: ApprovedUser, db: DbSession) -> list[PublicCl
         .order_by(ClubMatch.match_date.desc(), ClubMatch.created_at.desc())
     ).all()
     items = []
+    today = display.today_kst()
     for m in matches:
         x = _Match(db, m, user.id)
         players = {k for _, t1, t2 in x.games for k in (*t1, *t2)}
+        unrecorded = x.unrecorded()
+        shown = display.display_status(m.status, m.match_date, len(x.games) - unrecorded, today)
         items.append(
             PublicClubMatchItem(
                 id=str(m.id),
@@ -174,8 +192,10 @@ def list_public_club_matches(user: ApprovedUser, db: DbSession) -> list[PublicCl
                 team=x.team() if m.method == "team" else None,
                 games=len(x.games),
                 participants=len(players),
-                unrecorded=x.unrecorded(),
+                unrecorded=unrecorded,
                 resultText=x.result_text(),
+                displayStatus=_public_status(shown),
+                result=x.result(),
             )
         )
     return items
@@ -214,6 +234,11 @@ def get_public_club_match(match_id: str, user: ApprovedUser, db: DbSession) -> P
         team=x.team(),
         unrecorded=x.unrecorded(),
         participating=any(g.mySide is not None for g in games),
+        displayStatus=_public_status(
+            display.display_status(
+                m.status, m.match_date, len(x.games) - x.unrecorded(), display.today_kst()
+            )
+        ),
     )
 
 

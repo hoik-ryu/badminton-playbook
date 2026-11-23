@@ -66,7 +66,7 @@ export const attendance = {
   guests: [{ name: '문솔빛', gender: '여' as const, score: 4 as number | null, checked: true }],
 }
 
-// SCR-223 청백전 운영 상세(가상 값): 가을 청백전, 팀전 14명(청 7·백 7), 10경기
+// SCR-112 운영 기능 영역(r6, 이전 SCR-223) 가상 값: 가을 청백전, 팀전 14명(청 7·백 7), 10경기
 export const clubMatch = {
   name: '가을 청백전',
   date: '11/08',
@@ -121,3 +121,18 @@ export const me = {
   record: { games: 24, wins: 14, losses: 10, winRate: 58 },
   noRank: { games: 7, toRank: 3, wins: 4, losses: 3, winRate: 57 },
 }
+
+// SCR-111 청백전 목록(회원·운영진 공통, UX Spec r6 02 SCR-111 레이아웃 예시 그대로). 준비 중은 운영진에게만(AC-069, UXD-086)
+export type ClubMatchItem = {
+  id: string; name: string; date: string; method: '팀전' | '개인전'
+  status: 'live' | 'upcoming' | 'pending' | 'ended'
+  score?: { blue: number; white: number }; remaining?: number; summary?: string
+  result?: { kind: 'blueWin' | 'whiteWin' | 'draw' | 'individual'; text: string; final?: { blue: number; white: number } }
+}
+export const clubMatchBoard: ClubMatchItem[] = [
+  { id: 'c1', name: '11월 정기 청백전', date: '11월 15일 (토)', method: '팀전', status: 'live', score: { blue: 3, white: 2 }, remaining: 3 },
+  { id: 'c2', name: '12월 정기 청백전', date: '12월 20일 (토)', method: '팀전', status: 'upcoming', summary: '경기 12 · 참가 14명' },
+  { id: 'c3', name: '12월 번개 청백전', date: '12월 27일 (토)', method: '개인전', status: 'pending', summary: '참가 8명 · 대진 미확정' },
+  { id: 'c4', name: '10월 정기 청백전', date: '10월 24일 (금)', method: '팀전', status: 'ended', result: { kind: 'blueWin', text: '청팀 승리', final: { blue: 8, white: 5 } } },
+  { id: 'c5', name: '9월 정기 청백전', date: '9월 19일 (금)', method: '개인전', status: 'ended', result: { kind: 'individual', text: '공동 1위 · 2명' } },
+]

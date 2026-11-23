@@ -1,0 +1,182 @@
+{
+ "format": "design-quality-review/v1",
+ "round": "V08",
+ "reviewer": "model",
+ "note": "모델 평가(visually_reviewed: model). 근거는 explore-verify 측정 스크린샷(일반 M20261120-075509-f6c5d1, 자산 없이 렌더 M20261120-075541-c51aa7). 수정 전 근거는 V07-A M20261120-072616-563b90. 사람 평가·사용자 선택을 대신하지 않음.",
+ "variants": {
+  "A": {
+   "criteria": {
+    "hierarchy": {
+     "rating": "adequate",
+     "observations": "배너 왼쪽의 흰 두 줄 제목이 가장 먼저 읽히고, 이어서 오른쪽 청팀 VS 백팀 그래픽, 틸 '새 청백전', 진행 중 점수판 순서로 시선이 내려간다. 그래픽이 이미지 한 장이라 V07-A의 유니폼·VS·라벨 여러 조각보다 덜 산만하다.",
+     "evidence": [
+      "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-mobile.png",
+      "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-desktop.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "모바일 배너가 188px로 V07-A(138px)보다 높아 390×844 첫 화면에서 지난 청백전 첫 카드의 결과 줄이 아래로 밀림",
+       "where": "SCR-111",
+       "fix": "Preview에서 글자 띠 높이(배너 폭의 18.4%)를 14~16%로 줄이고 설명을 12.5px로 내리는 안을 겹침·가독성과 함께 비교"
+      }
+     ]
+    },
+    "density_balance": {
+     "rating": "adequate",
+     "observations": "카드·섹션 간격은 V07-A와 같고 배너만 커졌다. 모바일 배너는 위쪽 글자 띠와 아래 3:1 이미지로 나뉘며, 이미지 왼쪽 빈 코트에 설명 일부가 겹쳐 놓여 빈 공간이 크게 남지 않는다.",
+     "evidence": [
+      "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-mobile.png",
+      "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-mobile-sm.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "360×640에서는 배너·버튼 다음 진행 중 카드까지만 첫 화면에 보여 정보량이 적음",
+       "where": "SCR-111",
+       "fix": "작은 화면 전용으로 '새 청백전' 높이 44px 유지 + 배너 위아래 여백 축소를 Preview에서 검토"
+      }
+     ]
+    },
+    "typography": {
+     "rating": "adequate",
+     "observations": "데스크톱 배너 글자는 레퍼런스와 겹쳐 놓았을 때 위치·크기·행간이 거의 일치한다(배지 13.8px, 제목 27.1px, 설명 14.9px). 모바일은 제목 21px·설명 13.5px로 레퍼런스 단순 축소(제목 약 15px, 설명 약 8px)보다 읽기 쉽다.",
+     "evidence": [
+      "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-mobile.png",
+      "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-desktop.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "측정 환경에 Pretendard가 없어 시스템 글꼴로 렌더되어 둘째 줄 '대결' 끝이 레퍼런스와 몇 px 다름",
+       "where": "SCR-111",
+       "fix": "Pretendard를 설치하거나 시안에 글꼴 자산을 등록한 뒤 다시 겹침 비교"
+      }
+     ]
+    },
+    "component_consistency": {
+     "rating": "strong",
+     "observations": "'새 청백전' 버튼, 진행 중 배지, 배너 배지가 같은 틸 채움(#087F73)이고, 섹션 아이콘·남은 경기 아이콘·하단 탭 활성·진행 예정 배지 글자가 같은 강조 틸(#10776C)이라 색 역할이 두 단계로 정리됐다. 측정에서 컴포넌트 불일치 경고가 없다.",
+     "evidence": [
+      "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-mobile.png",
+      "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-mobile-sm.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "진행 중 카드에만 민트 테두리를 줘 다른 카드와 테두리 규칙이 달라짐",
+       "where": "SCR-111",
+       "fix": "Preview에서 진행 중 카드 테두리를 기본색으로 둔 안과 비교해 강조가 필요한지 확인"
+      }
+     ]
+    },
+    "iconography": {
+     "rating": "adequate",
+     "observations": "대결 그래픽·월계수·셔틀콕은 배너 이미지(AST-079)에 들어 있어 CSS·다른 이미지로 다시 만들지 않았다. Lucide 선 아이콘은 틸로 통일됐고 금색 트로피·메달은 3.34:1이다.",
+     "evidence": [
+      "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-mobile.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "배너 이미지 속 월계수(밝은 민트)와 점수판 월계수(AST-070, 투명도 0.28)의 표현이 서로 다름",
+       "where": "SCR-111",
+       "fix": "Preview에서 점수판 월계수 투명도를 올리거나 배너와 같은 계열 자산으로 맞출지 사용자와 결정"
+      }
+     ]
+    },
+    "reference_alignment": {
+     "rating": "adequate",
+     "observations": "글자 위치·크기·색(흰 제목, 시안 '청팀')은 REF-003과 거의 같다. 배지는 레퍼런스 민트(#29B9A8, 흰 글자 2.44:1) 대신 틸(#087F73, 4.89:1)이라 더 어둡다. 데스크톱 설명 아래에 옅은 그늘을 더했다.",
+     "evidence": [
+      "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-desktop.png",
+      "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-mobile.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "배너 배지가 레퍼런스보다 어두운 틸이라 민트 느낌이 약함",
+       "where": "SCR-111",
+       "fix": "흰 글자 4.5:1을 지키면서 민트 테두리·안쪽 밝은 띠로 느낌을 보완하는 안, 또는 배지 글자를 짙은 틸로 바꾸고 바탕을 민트로 두는 안을 Preview에서 비교"
+      }
+     ]
+    },
+    "mobile_balance": {
+     "rating": "adequate",
+     "observations": "390·360에서 글자와 대결 그래픽이 겹치지 않고(제목 끝과 월계수 사이 약 20px), 이미지 오른쪽이 잘리지 않는다. 대비 경고 0건, 터치 영역 44px 이상, 자산 없이 렌더도 차단 없음. 하단 탭이 스크롤 목록을 가리는 fixed_overlap 경고는 V07-A와 같다.",
+     "evidence": [
+      "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-mobile.png",
+      "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-mobile-sm.png"
+     ],
+     "issues": [
+      {
+       "severity": "minor",
+       "what": "390폭에서 제목 둘째 줄 아래와 월계수 윗부분 사이 간격이 약 5px로 좁음",
+       "where": "SCR-111",
+       "fix": "글자 띠를 2~3px 늘리거나 제목 행간을 1.18로 줄여 간격 확보"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "goals": {
+  "G1": {
+   "status": "addressed",
+   "before": [
+    "shots/M20261120-072616-563b90/shots/A-SCR-111-mobile.png"
+   ],
+   "after": [
+    "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-mobile.png",
+    "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-desktop.png"
+   ],
+   "note": "배너 배경·유니폼 2벌·VS 원·셔틀콕·팀 라벨(AST-067·068·069·062)을 통합 배너 이미지 1장(AST-079)으로 교체. 대결 그래픽은 이미지 그대로 쓰고 CSS로 다시 만들지 않음"
+  },
+  "G2": {
+   "status": "addressed",
+   "before": [
+    "shots/M20261120-072616-563b90/shots/A-SCR-111-mobile.png",
+    "shots/M20261120-072616-563b90/shots/A-SCR-111-desktop.png"
+   ],
+   "after": [
+    "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-mobile.png",
+    "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-desktop.png"
+   ],
+   "note": "REF-003 비율로 배지·두 줄 제목·두 줄 설명을 HTML/CSS로 재현(데스크톱 겹침 비교로 크기 보정). 390·360 모바일은 제목 21·19px, 설명 13.5·12.4px로 키우고 설명을 3줄로 다시 나눔. 글자 오른쪽 끝이 그래픽 시작보다 왼쪽"
+  },
+  "G3": {
+   "status": "addressed",
+   "before": [
+    "shots/M20261120-072616-563b90/shots/A-SCR-111-mobile.png"
+   ],
+   "after": [
+    "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-mobile.png",
+    "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-mobile-sm.png",
+    "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-desktop.png"
+   ],
+   "note": "이미지 상자를 3:1 + contain으로 두어 왜곡·잘림 없음. 모바일은 cover 대신 이미지 위에 hero.bg 글자 띠(배너 폭의 18.4%)를 더함. 배너 높이 390폭 188px, 360폭 173px, 데스크톱 191px(=3:1)"
+  },
+  "G4": {
+   "status": "addressed",
+   "before": [
+    "shots/M20261120-072616-563b90/shots/A-SCR-111-mobile.png"
+   ],
+   "after": [
+    "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-mobile.png",
+    "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-mobile-sm.png"
+   ],
+   "note": "초록(#25AB62·#1B6E35·#0B8655)을 공식 테마 틸로: 채움 #087F73(흰 글자 4.89:1), 강조 #10776C(5.42:1, 연민트 배지 위 4.84:1). 청팀 파랑(#033393/#DBEBF9)·백팀 흰색·중립 유지. 전체 글자 대비 최저 4.84:1, 아이콘 최저 3.34:1, 배너 글자는 이미지 픽셀 기준 설명 4.69:1·제목 4.24:1(큰 글자)"
+  },
+  "G5": {
+   "status": "addressed",
+   "before": [
+    "shots/M20261120-072616-563b90/shots/A-SCR-111-mobile.png"
+   ],
+   "after": [
+    "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-mobile.png",
+    "shots/M20261120-075509-f6c5d1/shots/A-SCR-111-mobile-sm.png"
+   ],
+   "note": "SCR-111 정보 5·행동 3·순서(구조 지문) 그대로 explore-check 통과. 운영진 '새 청백전'·준비 중(점선·운영진 칩)·진행 예정 구분 유지. 터치 영역 위반 0건(버튼 364×44, 탭 98×44)"
+  }
+ }
+}

@@ -112,7 +112,7 @@ export function Scr101({ stateId }: { stateId: string }) {
         </div>
         <ScrollSafeArea withBar={false} />
       </main>
-      <AppNav active="tutorial" />
+      <AppNav active="tutorial" role="member" />
     </Screen>
   )
 }

@@ -1,0 +1,43 @@
+{
+  "format": "design-reference-extract/v1",
+  "ref": "REF-003",
+  "sha256": "f0f121c8a940497734d3173fd90dea36cca04d3c602e01fd32b1ce61579297aa",
+  "extracted_by": {
+    "model": "claude-opus-5-5",
+    "at": "2026-11-20",
+    "method": "이미지를 직접 보고 작성. 위치·크기·색은 같은 그림의 글씨 없는 판(사용자 제공)과 픽셀 차이를 로컬에서 측정. 외부 서비스로 보내지 않음"
+  },
+  "scope_note": "SCR-111 청백전 소개 배너(CMP-051)의 글자 배치 기준(사용자 2026-11-20). 이 이미지는 서비스 배경으로 쓰지 않고, 글씨 없는 판을 별도 자산으로 등록해 씀. 위치·크기 비율은 배너 폭(2172px) 기준",
+  "items": [
+    {"id": "RX-003-01", "axis": "layout", "basis": "observed", "confidence": "high", "statement": "배너는 가로:세로 3:1이다. 왼쪽 약 42%는 비어 있는 어두운 코트이고 글자가 놓이며, 오른쪽 약 44%~95%에 청팀 VS 백팀 대결 그래픽(월계수·셔틀콕 포함)이 있다", "evidence": "원본 2172×724. 왼쪽 월계수 시작 x≈950(43.7%), 오른쪽 월계수 끝 x≈2060", "value": "3:1"},
+    {"id": "RX-003-02", "axis": "layout", "basis": "observed", "confidence": "high", "statement": "글자 묶음은 왼쪽 정렬이고 위에서부터 알약 배지, 두 줄 제목, 두 줄 설명 순서다. 글자는 대결 그래픽과 겹치지 않는다", "evidence": "배지 y74–165, 제목 y209–416, 설명 y474–594. 글자 오른쪽 끝 최대 x842(38.8%)"},
+    {"id": "RX-003-03", "axis": "layout", "basis": "estimated", "confidence": "high", "statement": "배너 폭 기준 위치: 배지 왼쪽 5.0%·위 3.4%, 제목 줄 상자 위 약 9.1%·왼쪽 약 5.9%, 설명 줄 상자 위 약 21.3%·왼쪽 약 6.6%", "evidence": "글씨 있는 판과 없는 판의 밝기 차이로 잰 글자 경계", "value": "badge 5.0/3.4, title 5.9/9.1, desc 6.6/21.3 (%W)"},
+    {"id": "RX-003-04", "axis": "typography", "basis": "estimated", "confidence": "high", "statement": "제목은 굵은 산세리프이고 글자 크기는 배너 폭의 약 4.1%, 줄 간격은 글자 크기의 약 1.28배다", "evidence": "제목 글자 높이 93px, 줄 간격 115px, 첫 줄 폭 538px", "value": "4.1%W, line-height 1.28"},
+    {"id": "RX-003-05", "axis": "typography", "basis": "estimated", "confidence": "high", "statement": "설명은 보통 굵기 산세리프이고 글자 크기는 배너 폭의 약 2.35%, 줄 간격은 약 1.41배다", "evidence": "설명 글자 높이 49px, 줄 간격 72px, 첫 줄 폭 624px", "value": "2.35%W, line-height 1.41"},
+    {"id": "RX-003-06", "axis": "typography", "basis": "estimated", "confidence": "high", "statement": "배지 글자는 굵은 산세리프로 배너 폭의 약 2.4%, 알약 높이는 약 4.2%, 좌우 안쪽 여백은 글자 크기와 비슷하다", "evidence": "알약 x108–582·y74–165, 글자 x160–531", "value": "font 2.4%W, pill height 4.24%W"},
+    {"id": "RX-003-07", "axis": "palette", "basis": "observed", "confidence": "high", "statement": "제목 글자는 흰색이다", "evidence": "제목 글자 픽셀 중앙값", "value": "#FBFBFB"},
+    {"id": "RX-003-08", "axis": "palette", "basis": "observed", "confidence": "high", "statement": "제목의 '청팀' 두 글자만 밝은 시안·민트색이고 바깥으로 은은한 빛번짐이 있다", "evidence": "'청팀' 글자 밝은 픽셀", "value": "#5FFFFF"},
+    {"id": "RX-003-09", "axis": "palette", "basis": "observed", "confidence": "high", "statement": "배지는 민트 채움(왼쪽이 조금 밝음)에 흰 글자다. 이 민트와 흰 글자의 대비는 약 2.4:1이다", "evidence": "알약 왼쪽 #28B8A7, 오른쪽 #20AA9B", "value": "#29B9A8"},
+    {"id": "RX-003-10", "axis": "palette", "basis": "observed", "confidence": "high", "statement": "설명 글자는 흰색에 가까운 밝은 회백색이다", "evidence": "설명 글자 픽셀 중앙값", "value": "#F7FAFA"},
+    {"id": "RX-003-11", "axis": "palette", "basis": "observed", "confidence": "high", "statement": "배너 왼쪽 바탕은 짙은 청록이고 위 가장자리가 #01736D에서 가운데 #02636A로 조금 어두워진다", "evidence": "글씨 없는 판 위 가장자리 픽셀", "value": "#026C6D"},
+    {"id": "RX-003-12", "axis": "palette", "basis": "observed", "confidence": "high", "statement": "대결 그래픽에서 청팀은 파란 띠, 백팀은 흰 띠로 색이 뚜렷이 나뉜다", "evidence": "그래픽의 '청팀' 파란 띠, '백팀' 흰 띠"}
+  ],
+  "excluded": [
+    {"kind": "text", "note": "배너 문구는 이미지에서 옮기는 요구사항이 아니라 승인된 02의 고정 문구 범위(SCR-111:info-1)이며, 시안은 HTML 글자로 씀"},
+    {"kind": "photo", "note": "이 이미지(글씨 있는 판)는 배경으로 쓰지 않음. 배경은 사용자가 따로 준 글씨 없는 판을 자산으로 등록해 씀"},
+    {"kind": "brand_asset", "note": "그래픽 속 '청팀'·'VS'·'백팀' 글자와 월계수·셔틀콕은 글씨 없는 판 자산에 이미 들어 있으므로 시안에서 다시 그리지 않음"}
+  ],
+  "system_candidates": {
+    "tokens": [
+      {"role": "color.hero.accent", "value": "#5FFFFF", "from": ["RX-003-08"], "status": "candidate"},
+      {"role": "color.hero.text", "value": "#FBFBFB", "from": ["RX-003-07", "RX-003-10"], "status": "candidate"},
+      {"role": "color.hero.bg", "value": "#026C6D", "from": ["RX-003-11"], "status": "candidate"}
+    ],
+    "components": [
+      {"pattern": "청백전 소개 배너(CMP-051)", "rule": "3:1 배너 이미지 왼쪽 빈 곳에 배지·두 줄 제목·두 줄 설명을 HTML 글자로 왼쪽 정렬, 오른쪽 그래픽과 겹치지 않음", "from": ["RX-003-01", "RX-003-02", "RX-003-03"], "status": "candidate"}
+    ],
+    "layout_principles": [
+      {"screen_type": "detail", "principle": "가로로 긴 배너는 오른쪽 그래픽을 자르지 않고, 좁은 화면에서는 글자 영역을 따로 확보한다", "from": ["RX-003-01"], "status": "candidate"}
+    ]
+  }
+}

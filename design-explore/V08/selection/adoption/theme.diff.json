@@ -1,0 +1,87 @@
+{
+  "changed": {
+    "color.bg.page": {
+      "official": "#FAFFFD",
+      "candidate": "#FFFFFF"
+    },
+    "color.bg.surface": {
+      "official": "#F4F5F7",
+      "candidate": "#ECEDF0"
+    },
+    "color.border.default": {
+      "official": "#D5D9E0",
+      "candidate": "#EFF2F6"
+    },
+    "color.action.primary": {
+      "official": "#0B9E8B",
+      "candidate": "#087F73"
+    },
+    "color.team.blue.fg": {
+      "official": "#1747A6",
+      "candidate": "#033393"
+    },
+    "color.team.blue.bg": {
+      "official": "#E3ECFC",
+      "candidate": "#DBEBF9"
+    }
+  },
+  "added": {
+    "color.award.gold": "#BA8200",
+    "color.method.individual.fg": "#062697",
+    "color.method.individual.bg": "#E7E4F1",
+    "color.hero.bg": "#026C6D",
+    "color.hero.text": "#FFFFFF",
+    "color.hero.accent": "#5FFFFF"
+  },
+  "same": [
+    "color.accent.mint",
+    "color.accent.subtle",
+    "color.action.onPrimary",
+    "color.border.strong",
+    "color.brand.kakao.bg",
+    "color.brand.kakao.fg",
+    "color.court.line",
+    "color.court.me",
+    "color.court.opponent",
+    "color.court.surface",
+    "color.focus.ring",
+    "color.status.danger.bg",
+    "color.status.danger.fg",
+    "color.status.info.bg",
+    "color.status.success.bg",
+    "color.status.success.fg",
+    "color.status.warning.bg",
+    "color.status.warning.fg",
+    "color.team.white.bg",
+    "color.team.white.fg",
+    "color.text.accent",
+    "color.text.disabled",
+    "color.text.primary",
+    "color.text.secondary",
+    "font.family.base",
+    "font.size.body",
+    "font.size.caption",
+    "font.size.display",
+    "font.size.heading",
+    "font.size.title",
+    "font.weight.bold",
+    "font.weight.regular",
+    "radius.md",
+    "radius.sheet",
+    "radius.sm",
+    "size.content.member",
+    "size.content.ops.max",
+    "size.nav.side",
+    "size.panel.side",
+    "size.touch.min",
+    "space.1",
+    "space.2",
+    "space.3",
+    "space.4",
+    "space.5",
+    "space.6",
+    "space.8",
+    "space.gutter.desktop",
+    "space.gutter.mobile"
+  ]
+}

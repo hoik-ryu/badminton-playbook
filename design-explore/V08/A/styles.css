@@ -1,0 +1,88 @@
+/* V08-A(V07-A 수정 2회차): 통합 배너(AST-079) + HTML 글자(REF-003), SMAPSH 민트·틸 — 색은 토큰 변수만 씀 */
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--color-bg-page);font-family:var(--font-family-base);color:var(--color-text-primary);-webkit-font-smoothing:antialiased}
+.screen{max-width:600px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;background:var(--color-bg-page)}
+.ph{padding:14px 13px 10px}
+.ph-title{font-size:26px;font-weight:var(--font-weight-bold);letter-spacing:-0.02em}
+.ic{display:inline-block;flex:none;width:20px;height:20px;background:currentColor;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.ic-plus{-webkit-mask-image:url(../_assets/AST-076.svg);mask-image:url(../_assets/AST-076.svg);width:18px;height:18px}
+.ic-live{-webkit-mask-image:url(../_assets/AST-071.svg);mask-image:url(../_assets/AST-071.svg);color:var(--color-text-accent);width:22px;height:22px}
+.ic-clock{-webkit-mask-image:url(../_assets/AST-072.svg);mask-image:url(../_assets/AST-072.svg);color:var(--color-text-accent);width:22px;height:22px}
+.ic-trophy{-webkit-mask-image:url(../_assets/AST-073.svg);mask-image:url(../_assets/AST-073.svg)}
+.ic-medal{-webkit-mask-image:url(../_assets/AST-074.svg);mask-image:url(../_assets/AST-074.svg)}
+.ic-award{color:var(--color-award-gold);width:22px;height:22px}
+.ic-chev{-webkit-mask-image:url(../_assets/AST-075.svg);mask-image:url(../_assets/AST-075.svg);color:var(--color-text-primary);width:18px;height:18px;margin-left:auto}
+.ic-remain{-webkit-mask-image:url(../_assets/AST-077.svg);mask-image:url(../_assets/AST-077.svg);color:var(--color-text-accent);width:20px;height:20px}
+
+/* 배너(CMP-051): 통합 배너 이미지(AST-079, 3:1) 한 장 + HTML 글자.
+   이미지는 비율 그대로(contain, 상자도 3:1) — 왜곡·오른쪽 잘림 없음. 대결 그래픽은 이미지에 들어 있으므로 다시 만들지 않음.
+   크기는 배너 폭 기준(cqw). 좁은 배너(모바일): 이미지 위에 같은 청록 글자 띠를 더해 글자를 읽히는 크기로 키움. */
+.hero{position:relative;margin:0 13px;border-radius:12px;overflow:hidden;background:var(--color-hero-bg);color:var(--color-hero-text);container-type:inline-size}
+.hero-art{position:relative;width:100%;aspect-ratio:3/1;margin-top:18.4cqw;background:url(../_assets/AST-079.png) center/contain no-repeat}
+.hero-art::before{content:"";position:absolute;left:0;right:0;top:-1px;height:42%;background:linear-gradient(180deg,var(--color-hero-bg),transparent)}
+.hero-copy{position:absolute;left:4.4cqw;top:3.85cqw;right:0}
+.hero-badge{display:inline-block;height:6.05cqw;line-height:6.05cqw;padding:0 2.75cqw;border-radius:999px;font-size:3.16cqw;font-weight:var(--font-weight-bold);letter-spacing:0.01em;background:var(--color-action-primary);color:var(--color-action-onPrimary);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--color-accent-mint) 55%,transparent)}
+.hero-title{margin-top:2.2cqw;font-size:5.77cqw;line-height:1.22;font-weight:var(--font-weight-bold);letter-spacing:-0.02em}
+.hero-accent{color:var(--color-hero-accent);text-shadow:0 0 0.45em color-mix(in srgb,var(--color-hero-accent) 50%,transparent)}
+.hero-desc{margin-top:1.65cqw;max-width:37.5cqw;font-size:3.71cqw;line-height:1.42;font-weight:var(--font-weight-regular);word-break:keep-all;letter-spacing:-0.01em}
+.hero-br{display:none}
+@container (min-width:560px){
+  /* 넓은 배너(데스크톱): REF-003 그대로 — 3:1 이미지 왼쪽 빈 곳에 글자 */
+  .hero-art{margin-top:0}
+  /* 설명 둘째 줄이 밝은 코트 바닥 위에 놓여 대비가 낮아짐 → 그래픽이 없는 왼쪽 아래에만 hero.bg 그늘(이미지 파일은 그대로) */
+  .hero-art::before{top:auto;bottom:0;height:70%;width:44%;background:radial-gradient(ellipse 70% 100% at 30% 72%,color-mix(in srgb,var(--color-hero-bg) 92%,transparent) 0%,color-mix(in srgb,var(--color-hero-bg) 74%,transparent) 60%,transparent 100%)}
+  .hero-copy{left:5.0cqw;top:3.4cqw}
+  .hero-badge{height:4.24cqw;line-height:4.24cqw;padding:0 2.4cqw;font-size:2.4cqw}
+  .hero-title{margin-top:1.28cqw;margin-left:0.9cqw;font-size:4.72cqw;line-height:1.12;letter-spacing:-0.01em}
+  .hero-desc{margin-top:1.62cqw;margin-left:1.5cqw;max-width:none;font-size:2.6cqw;line-height:1.27;letter-spacing:0}
+  .hero-br{display:inline}
+}
+
+/* 새 청백전(CMP-001 primary): 공식 테마 틸 */
+.create{margin:10px 13px 0;height:44px;display:flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:12px;background:var(--color-action-primary);color:var(--color-action-onPrimary);font:inherit;font-size:15px;font-weight:var(--font-weight-bold)}
+.lists{padding:0 13px 12px;flex:1}
+.sec{margin-top:16px}
+.sec-h{display:flex;align-items:center;gap:6px;font-size:17px;font-weight:var(--font-weight-bold);margin-bottom:8px}
+.sec-n{font-weight:var(--font-weight-regular);color:var(--color-text-secondary);font-size:15px;margin-left:4px}
+/* 목록 항목(CMP-043) */
+.card{display:block;text-decoration:none;color:var(--color-text-primary);background:var(--color-bg-page);border:1px solid var(--color-border-default);border-radius:12px;padding:8px 14px 6px;margin-bottom:7px;line-height:1.25}
+.card[data-cmp-variant="live"]{border-color:var(--color-accent-mint)}
+.card-pending{border-style:dashed;border-color:var(--color-border-strong);background:var(--color-bg-surface)}
+.ops-chip{display:inline-block;margin-left:6px;padding:0 6px;border-radius:4px;border:1px solid var(--color-border-strong);font-size:11px;line-height:16px;color:var(--color-text-secondary);background:var(--color-bg-page)}
+.c-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.c-title{font-size:16px;font-weight:var(--font-weight-bold);display:flex;align-items:center;gap:8px;letter-spacing:-0.01em}
+.badges{display:flex;gap:6px;flex:none}
+.c-date{display:block;margin-top:0;font-size:13px;color:var(--color-text-secondary)}
+.c-foot{display:flex;align-items:center;gap:8px;min-height:26px;margin-top:4px;padding-top:4px;border-top:1px solid var(--color-border-default);font-size:14px}
+.c-sub{color:var(--color-text-secondary)}
+.c-win{color:var(--color-team-blue-fg);font-weight:var(--font-weight-bold);font-size:16px}
+.c-res{font-weight:var(--font-weight-bold);font-size:16px}
+.c-final{margin-left:auto;font-size:14px}
+.c-final + .ic-chev{margin-left:0}
+/* 배지(CMP-005) */
+.bdg{display:inline-flex;align-items:center;height:22px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:var(--font-weight-bold);white-space:nowrap}
+.bdg[data-cmp-variant="teamBlue"]{background:var(--color-team-blue-bg);color:var(--color-team-blue-fg)}
+.bdg[data-cmp-variant="live"]{background:var(--color-action-primary);color:var(--color-action-onPrimary)}
+.bdg[data-cmp-variant="upcoming"]{background:var(--color-accent-subtle);color:var(--color-text-accent)}
+.bdg[data-cmp-variant="pending"]{background:var(--color-bg-page);color:var(--color-text-secondary);border:1px dashed var(--color-border-strong)}
+.bdg[data-cmp-variant="individual"]{background:var(--color-method-individual-bg);color:var(--color-method-individual-fg)}
+.bdg[data-cmp-variant="ended"]{background:var(--color-bg-surface);color:var(--color-text-primary)}
+/* 점수판(CMP-052) */
+.board{margin-bottom:0;margin-top:4px !important;display:grid;grid-template-columns:24px 1fr 14px 1fr 24px;align-items:center;gap:6px;margin-top:10px}
+.cell{height:48px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.cell-blue{background:var(--color-team-blue-bg);color:var(--color-team-blue-fg)}
+.cell-white{background:var(--color-bg-surface);color:var(--color-team-white-fg)}
+.cell-name{font-size:12px;font-weight:var(--font-weight-bold)}
+.cell-num{font-size:26px;font-weight:var(--font-weight-bold);line-height:1}
+.colon{text-align:center;font-size:22px;font-weight:var(--font-weight-bold);color:var(--color-text-primary)}
+.laurel{height:40px;background:url(../_assets/AST-070.png) center/contain no-repeat;opacity:0.28}
+.laurel-r{transform:scaleX(-1)}
+/* 하단 탭(CMP-025): 활성은 공식 테마 틸 */
+.tabs{position:sticky;bottom:0;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--color-border-default);background:var(--color-bg-page);padding:6px 0 10px}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;min-height:44px;font-size:12px;color:var(--color-text-secondary);text-decoration:none}
+.tab.is-on{color:var(--color-text-accent);font-weight:var(--font-weight-bold)}
+.ic-tab{width:24px;height:24px}
+.tab:nth-child(1) .ic-tab{-webkit-mask-image:url(../_assets/AST-001.svg);mask-image:url(../_assets/AST-001.svg)}
+.tab:nth-child(2) .ic-tab{-webkit-mask-image:url(../_assets/AST-014.svg);mask-image:url(../_assets/AST-014.svg)}
+.tab:nth-child(3) .ic-tab{-webkit-mask-image:url(../_assets/AST-015.svg);mask-image:url(../_assets/AST-015.svg)}
+.tab:nth-child(4) .ic-tab{-webkit-mask-image:url(../_assets/AST-016.svg);mask-image:url(../_assets/AST-016.svg)}

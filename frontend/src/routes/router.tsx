@@ -2,8 +2,7 @@ import { createBrowserRouter, type RouteObject } from 'react-router'
 
 import { DevHealthPage } from '../pages/DevHealthPage'
 import { AccountStatusPage } from '../pages/AccountStatusPage'
-import { ClubMatchesPage } from '../pages/ClubMatchesPage'
-import { ClubMatchPage } from '../pages/ClubMatchPage'
+import { ClubMatchDetailPage } from '../pages/ClubMatchDetailPage'
 import { ApprovalsPage } from '../pages/ApprovalsPage'
 import { DevToolsPage } from '../pages/DevToolsPage'
 import { ForbiddenPage } from '../pages/ForbiddenPage'
@@ -13,7 +12,6 @@ import { OpsHomePage } from '../pages/OpsHomePage'
 import { RolesPage } from '../pages/RolesPage'
 import { RosterPage } from '../pages/RosterPage'
 import { MemberClubMatchesPage } from '../pages/MemberClubMatchesPage'
-import { MemberClubMatchPage } from '../pages/MemberClubMatchPage'
 import { MyPage } from '../pages/MyPage'
 import { SessionPage } from '../pages/SessionPage'
 import { StagePlayPage } from '../pages/StagePlayPage'
@@ -23,6 +21,7 @@ import { TutorialHomePage } from '../pages/TutorialHomePage'
 import {
   adminLoader,
   indexLoader,
+  legacyClubMatchLoader,
   loginLoader,
   memberLoader,
   restrictedOnlyLoader,
@@ -66,7 +65,7 @@ export const routes: RouteObject[] = [
           { path: 'tutorial/stages/:stageId', handle: hideNav, element: <StagePlayPage /> },
           { path: 'tutorial/stages/:stageId/result', handle: hideNav, element: <StageResultPage /> },
           { path: 'club-matches', element: <MemberClubMatchesPage /> },
-          { path: 'club-matches/:matchId', element: <MemberClubMatchPage /> },
+          { path: 'club-matches/:matchId', element: <ClubMatchDetailPage /> }, // SCR-112 통합 상세(회원·운영진, UXD-085)
           { path: 'me', element: <MyPage /> },
         ],
       },
@@ -79,8 +78,9 @@ export const routes: RouteObject[] = [
           { index: true, element: <OpsHomePage /> },
           { path: 'session', element: <SessionPage /> },
           { path: 'roster', element: <RosterPage /> },
-          { path: 'club-matches', element: <ClubMatchesPage /> },
-          { path: 'club-matches/:matchId', element: <ClubMatchPage /> },
+          // (r6) 이전 청백전 운영 주소: 운영진 확인 후 통합 주소로 바꿔 보냄(회원은 /forbidden). 화면은 SCR-111·112
+          { path: 'club-matches', loader: legacyClubMatchLoader, Component: Empty },
+          { path: 'club-matches/:matchId', loader: legacyClubMatchLoader, Component: Empty },
           { path: 'approvals', element: <ApprovalsPage /> },
           { path: 'roles', loader: superAdminLoader, element: <RolesPage /> },
         ],

@@ -44,7 +44,7 @@ export function OpsHomePage() {
       <ul aria-label="운영 메뉴" className="m-0 list-none border-t border-line p-0">
         <ListItem label="오늘 운동" to="/ops/session" />
         <ListItem label="명단" to="/ops/roster" />
-        <ListItem label="청백전 관리" to="/ops/club-matches" />
+        <ListItem label="청백전 관리" to="/club-matches" />
         <ListItem
          
           label="가입 승인"

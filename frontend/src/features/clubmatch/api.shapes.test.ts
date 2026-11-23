@@ -8,6 +8,7 @@ import { readDb, updateDb, type MockClubGame } from '../../lib/mock/db'
 import type { MyRecord } from '../me/api'
 import type { MemberStatus } from '../roster/api'
 import { CLUB_ERRORS, confirmClub, createClubMatch, excludeWithSubstitutes, finishClub, generateClub, getClubMatchView, recordResult, setParticipating, swapClub, type ClubMatchListItem, type ClubMatchView, type GameView, type ParticipantRow, type Person, type Relaxation } from './api'
+import type { ClubMatchResult } from './display'
 import type { MemberGame, MemberPlayer, MemberStanding, PublicClubMatch, PublicClubMatchItem } from './memberApi'
 
 // I3-d4 계약: 실제 서버 응답의 키 구조(백엔드 test_clubmatch_api_contract.py가 만든 골든)를 FE 타입과 대조합니다.
@@ -46,12 +47,14 @@ const view = spec<ClubMatchView>({
   team: teamWins,
   unrecorded: true,
 })
-const listItem = spec<ClubMatchListItem>({ id: true, name: true, date: true, method: true, status: true, unrecorded: true, team: teamWins, winnerText: true })
+// (SCR-111 r6) 표시 상태·결과 구조(하위 호환 추가)
+const clubResult = spec<ClubMatchResult>({ method: true, outcome: true, final: true, text: true, tiedCount: true }) // 골든 시나리오의 종료 청백전은 개인전이라 final은 값/null로만 기록됨
+const listItem = spec<ClubMatchListItem>({ id: true, name: true, date: true, method: true, status: true, unrecorded: true, team: teamWins, winnerText: true, participants: true, games: true, displayStatus: true, result: clubResult })
 const memberPlayer = spec<MemberPlayer>({ key: true, name: true, guest: true, me: true })
 const memberGame = spec<MemberGame>({ no: true, team1: list(memberPlayer), team2: list(memberPlayer), winner: true, changed: true, resultChanged: true, mySide: true })
 const memberStanding = spec<MemberStanding>({ key: true, name: true, guest: true, me: true, wins: true, games: true, rank: true, tied: true })
-const publicMatch = spec<PublicClubMatch>({ id: true, name: true, date: true, method: true, status: true, modifiedAt: true, resultModifiedAt: true, games: list(memberGame), standings: list(memberStanding), team: teamWins, unrecorded: true, participating: true })
-const publicItem = spec<PublicClubMatchItem>({ id: true, name: true, date: true, method: true, status: true, team: teamWins, games: true, participants: true, unrecorded: true, resultText: true })
+const publicMatch = spec<PublicClubMatch>({ id: true, name: true, date: true, method: true, status: true, modifiedAt: true, resultModifiedAt: true, games: list(memberGame), standings: list(memberStanding), team: teamWins, unrecorded: true, participating: true, displayStatus: true })
+const publicItem = spec<PublicClubMatchItem>({ id: true, name: true, date: true, method: true, status: true, team: teamWins, games: true, participants: true, unrecorded: true, resultText: true, displayStatus: true, result: clubResult })
 const myRecord = spec<MyRecord>({ rank: true, gamesToRank: true, games: true, wins: true, losses: true, rate: true })
 const memberStatus = spec<MemberStatus>({ referrer: true, rank: true, gamesToRank: true, record: { games: true, wins: true, losses: true }, tutorial: list({ course: true, name: true, passed: true, total: true }), recommended: true })
 

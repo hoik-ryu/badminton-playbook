@@ -12,6 +12,9 @@ import { COLUMN } from "./Layout";
 // (r2) 순서는 UXD-066 '튜토리얼 / 청백전 / 마이페이지' + 운영진 '운영'. PC·모바일 같은 하단 탭, 600px 열 너비(04 CMP-025 layout=bottom, VD-019)
 // 탭을 누르면 그 탭의 첫 화면(03 공통 이동: SCR-101, SCR-111, SCR-121, SCR-201)
 // 04 CMP-025 상태 '배지(운영 탭 승인 대기 건수)': opsBadge가 1 이상일 때만 표시, 건수를 레이블에 포함
+// (DD r7 VD-056) 역할별 탭 수: 회원 3탭, 운영진·슈퍼 관리자 4탭(04 CMP-025 role). 운영 탭은 CSS로 숨기지 않고 렌더하지 않으며,
+// 각 탭이 flex: 1 1 0(flex-1)이라 실제로 렌더한 탭 수만큼 같은 너비로 나눔(빈 칸 없음, 키보드 순서에도 없음)
+// (DD r7 VD-019 개정) 현재 탭 글자 color.text.accent, 아이콘·위쪽 막대 color.action.primary
 const TABS = [
   { key: "tutorial", label: "튜토리얼", Icon: GraduationCap, to: "SCR-101" },
   { key: "match", label: "청백전", Icon: Swords, to: "SCR-111" },
@@ -22,10 +25,14 @@ const TABS = [
 export function AppNav({
   active,
   opsBadge,
+  role = "admin",
 }: {
   active: (typeof TABS)[number]["key"];
   opsBadge?: number;
+  /** 04 CMP-025 role: member(3탭) | admin·superAdmin(4탭) */
+  role?: "member" | "admin";
 }) {
+  const tabs = role === "member" ? TABS.filter((t) => t.key !== "ops") : TABS;
   return (
     <nav
       aria-label="주 메뉴"
@@ -33,8 +40,8 @@ export function AppNav({
       data-testid="app-nav"
       className="pointer-events-none fixed inset-x-0 bottom-0 z-10"
     >
-      <ul data-testid="app-nav-inner" className={`${COLUMN} pointer-events-auto flex h-[calc(56px+var(--safe-bottom))] border-t border-line bg-page pb-(--safe-bottom)`}>
-        {TABS.map(({ key, label, Icon, to }) => {
+      <ul data-testid="app-nav-inner" data-role={role} data-tabs={tabs.length} className={`${COLUMN} pointer-events-auto flex h-[calc(56px+var(--safe-bottom))] border-t border-line bg-page pb-(--safe-bottom)`}>
+        {tabs.map(({ key, label, Icon, to }) => {
           const on = key === active;
           const count = key === "ops" && opsBadge ? opsBadge : 0;
           return (

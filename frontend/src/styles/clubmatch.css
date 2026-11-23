@@ -1,0 +1,92 @@
+/* 청백전 영역 스타일(SCR-111·112) — design-preview/src/clubmatch.css(Preview r5 승인)의 기반 부분. 색은 토큰 변수만 씁니다.
+   범위: 모든 규칙은 .cm(청백전 화면 루트, ClubMatchScope) 안에서만 적용됩니다. 공통 컴포넌트(Badge·Button 등)와 다른 화면에는 영향이 없습니다.
+   예외 1개 — 청백전 채움색 #087F73(DD r8 VD-049 '토큰 밖 값', SCR-111 전용): 흰 글자를 올리는 채움('새 청백전', '진행 중' 배지, 배너 'SMAPSH 청백전' 배지).
+   공식 color.focus.ring과 같은 값이지만 의미가 달라 그 토큰 이름을 빌리지 않습니다(VD-049). 제품 tokens.css의 focus.ring(#008F89)과도 무관합니다. */
+/* (2단계) 청백전 화면 범위 테마(사용자 결정 2026-11-24): 앱 전체 tokens.css는 그대로 두고, 청백전 화면 루트(.cm)에서만
+   승인된 Design Direction r8 테마 값(theme-check --print-css 출력값)을 덮어씀. 튜토리얼 .tutorial-theme과 같은 방식 */
+:root { --cm-theme-bg-page: #FAFFFD; }
+.cm {
+  --color-action-primary: #0B9E8B;
+  --color-bg-page: var(--cm-theme-bg-page);
+  --color-focus-ring: #087F73;
+  --cm-fill: #087F73;
+  background: var(--color-bg-page);
+}
+/* 페이지 전체 바탕: 공통 셸(.app-column)·본문 아래 여백(탭 높이만큼)도 청백전 화면일 때만 같은 바탕. 공통 레이아웃 파일은 바꾸지 않음.
+   하단 탭(AppNav)은 .cm 밖이라 앱 전체 토큰 그대로(탭 색 정리는 4단계) */
+.app-column:has(.cm-page) { background: var(--cm-theme-bg-page); }
+
+/* 흰 글자 채움(4.3 청백전 화면 예외 '새 청백전', 배너 배지): 흰 글자 대비 4.89:1 */
+.cm .cm-fill { background: var(--cm-fill); color: var(--color-action-onPrimary); }
+
+/* CMP-005 청백전 상태·방식 배지(VD-053): 알약, 높이 22, 12px 굵게, 좌우 10. 항상 글자를 포함(색만으로 구분하지 않음) */
+.cm .cm-badge { display: inline-flex; flex: none; align-items: center; height: 22px; padding: 0 10px; border-radius: 9999px;
+  font-size: 12px; font-weight: var(--font-weight-bold); line-height: 1; white-space: nowrap; }
+.cm .cm-badge[data-tone='live'] { background: var(--cm-fill); color: var(--color-action-onPrimary); }            /* 4.89:1 */
+.cm .cm-badge[data-tone='upcoming'] { background: var(--color-accent-subtle); color: var(--color-text-accent); }  /* 4.84:1 */
+.cm .cm-badge[data-tone='pending'] { background: var(--color-bg-page); color: var(--color-text-secondary); border: 1px dashed var(--color-border-strong); }
+.cm .cm-badge[data-tone='ended'] { background: var(--color-bg-surface); color: var(--color-text-primary); }       /* 15.48:1 */
+.cm .cm-badge[data-tone='teamBlue'] { background: var(--color-team-blue-bg); color: var(--color-team-blue-fg); }  /* 7.10:1 */
+.cm .cm-badge[data-tone='individual'] { background: var(--color-method-individual-bg); color: var(--color-method-individual-fg); } /* 6.54:1 */
+
+/* 준비 중 카드의 '운영진에게만 보임' 칩(VD-053) */
+.cm .cm-ops-chip { display: inline-block; margin-left: 6px; padding: 0 6px; border-radius: 4px; border: 1px solid var(--color-border-strong);
+  font-size: 11px; line-height: 16px; color: var(--color-text-secondary); background: var(--color-bg-page); vertical-align: 1px; }
+
+/* ─── SCR-111 화면(Preview r5 design-preview/src/clubmatch.css 그대로, .cm 범위) ─── */
+
+/* CMP-051 소개 배너(VD-052): 통합 이미지 AST-079(3:1) 한 장 + HTML 글자. 이미지는 contain(상자도 3:1) — 왜곡·잘림 없음.
+   대결 그래픽(VS·팀 띠·월계수·셔틀)은 이미지에 있으므로 다시 만들지 않음. 글자 크기는 배너 폭 기준(cqw). 이미지가 없으면 hero.bg 바탕 + 글자만 */
+.cm .cm-hero { position: relative; border-radius: var(--radius-md); overflow: hidden; background: var(--color-hero-bg); color: var(--color-hero-text); container-type: inline-size; }
+.cm .cm-hero-art { position: relative; width: 100%; aspect-ratio: 3 / 1; margin-top: 19.2cqw; background: var(--cm-hero-img) center / contain no-repeat; }
+.cm .cm-hero-art::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 42%; background: linear-gradient(180deg, var(--color-hero-bg), transparent); }
+.cm .cm-hero-copy { position: absolute; left: 4.4cqw; top: 3.85cqw; right: 0; }
+.cm .cm-hero-badge { display: inline-block; height: 6.05cqw; line-height: 6.05cqw; padding: 0 2.75cqw; border-radius: 9999px; font-size: 3.16cqw; font-weight: var(--font-weight-bold); letter-spacing: 0.01em;
+  background: var(--cm-fill); color: var(--color-action-onPrimary); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent-mint) 55%, transparent); }
+.cm .cm-hero-title { margin: 2.2cqw 0 0; font-size: 5.77cqw; line-height: 1.22; font-weight: var(--font-weight-bold); letter-spacing: -0.02em; }
+.cm .cm-hero-accent { color: var(--color-hero-accent); text-shadow: 0 0 0.45em color-mix(in srgb, var(--color-hero-accent) 50%, transparent); }
+.cm .cm-hero-desc { margin: 1.65cqw 0 0; max-width: 37.5cqw; font-size: 3.71cqw; line-height: 1.42; font-weight: var(--font-weight-regular); word-break: keep-all; letter-spacing: -0.01em; }
+.cm .cm-hero-br { display: none; }
+@container (min-width: 560px) {
+  /* 넓은 배너: 배너 = 이미지(3:1), 그래픽이 없는 왼쪽 아래(배너 폭 44% 안)에만 hero.bg 타원 그늘 */
+  .cm .cm-hero-art { margin-top: 0; }
+  .cm .cm-hero-art::before { top: auto; bottom: 0; height: 70%; width: 44%;
+    background: radial-gradient(ellipse 70% 100% at 30% 72%, color-mix(in srgb, var(--color-hero-bg) 92%, transparent) 0%, color-mix(in srgb, var(--color-hero-bg) 74%, transparent) 60%, transparent 100%); }
+  .cm .cm-hero-copy { left: 5cqw; top: 3.4cqw; }
+  .cm .cm-hero-badge { height: 4.24cqw; line-height: 4.24cqw; padding: 0 2.4cqw; font-size: 2.4cqw; }
+  .cm .cm-hero-title { margin: 1.28cqw 0 0 0.9cqw; font-size: 4.72cqw; line-height: 1.12; letter-spacing: -0.01em; }
+  .cm .cm-hero-desc { margin: 1.62cqw 0 0 1.5cqw; max-width: none; font-size: 2.6cqw; line-height: 1.27; letter-spacing: 0; }
+  .cm .cm-hero-br { display: inline; }
+}
+
+/* '새 청백전'(CMP-001 primary, 07 4.3 청백전 화면 예외): 청백전 채움색 + 흰 15px 굵게, radius.md, 열 안쪽 전체, 높이 44, 왼쪽 plus */
+.cm .cm-create { display: flex; width: 100%; height: 44px; align-items: center; justify-content: center; gap: 6px; border: 0; border-radius: var(--radius-md);
+  background: var(--cm-fill); color: var(--color-action-onPrimary); font: inherit; font-size: 15px; font-weight: var(--font-weight-bold); cursor: pointer; }
+
+/* CMP-043 목록 카드(VD-054): VD-024 r3 표현(그림자 없음), 카드 안 여백 space.3. 진행 중만 mint 테두리, 준비 중은 surface + 점선 */
+.cm .cm-card { display: block; padding: var(--space-3); border: 1px solid var(--color-border-default); border-radius: var(--radius-md); background: var(--color-bg-page); color: var(--color-text-primary); text-decoration: none; line-height: 1.25; }
+.cm .cm-card[data-status='live'] { border-color: var(--color-accent-mint); }
+.cm .cm-card[data-status='pending'] { border-style: dashed; border-color: var(--color-border-strong); background: var(--color-bg-surface); }
+.cm .cm-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }
+.cm .cm-title { display: flex; min-width: 0; align-items: center; gap: var(--space-2); font-size: var(--font-size-body); font-weight: var(--font-weight-bold); letter-spacing: -0.01em; }
+.cm .cm-badges { display: flex; flex: none; gap: var(--space-1); }
+.cm .cm-date { display: block; margin-top: var(--space-1); font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.cm .cm-foot { display: flex; align-items: center; gap: var(--space-2); min-height: 26px; margin-top: var(--space-2); padding-top: var(--space-1); border-top: 1px solid var(--color-border-default); font-size: 14px; }
+.cm .cm-sub { color: var(--color-text-secondary); }
+.cm .cm-win { font-size: var(--font-size-body); font-weight: var(--font-weight-bold); }
+.cm .cm-win[data-team='blue'] { color: var(--color-team-blue-fg); }
+.cm .cm-final { margin-left: auto; }
+.cm .cm-chev { flex: none; margin-left: auto; color: var(--color-text-primary); }
+.cm .cm-final + .cm-chev { margin-left: 0; }
+.cm .cm-award { flex: none; color: var(--color-award-gold); }
+
+/* CMP-052 팀전 점수판(size=list, VD-054·058): [월계수][청팀]:[백팀][월계수], 칸 높이 48 */
+.cm .cm-board { display: grid; grid-template-columns: 24px 1fr 14px 1fr 24px; align-items: center; gap: var(--space-2); margin-top: var(--space-2); }
+.cm .cm-cell { display: flex; height: 48px; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border-radius: var(--radius-md); }
+.cm .cm-cell[data-team='blue'] { background: var(--color-team-blue-bg); color: var(--color-team-blue-fg); }
+.cm .cm-cell[data-team='white'] { background: var(--color-bg-surface); color: var(--color-team-white-fg); }
+.cm .cm-cell-name { font-size: 12px; font-weight: var(--font-weight-bold); line-height: 1.1; }
+.cm .cm-cell-num { font-size: 26px; font-weight: var(--font-weight-bold); line-height: 1; font-variant-numeric: tabular-nums; }
+.cm .cm-colon { text-align: center; font-size: 22px; font-weight: var(--font-weight-bold); color: var(--color-text-primary); }
+.cm .cm-laurel { height: 40px; background: var(--cm-laurel-img) center / contain no-repeat; opacity: 0.28; }
+.cm .cm-laurel[data-side='r'] { transform: scaleX(-1); }

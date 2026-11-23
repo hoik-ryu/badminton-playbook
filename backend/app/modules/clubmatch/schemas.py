@@ -10,6 +10,7 @@ from typing import Literal
 
 from pydantic import BaseModel, Field, field_validator
 
+from app.modules.clubmatch.display import ClubMatchResult, DisplayStatus
 from app.modules.user.schemas import Gender, Grade
 
 Method = Literal["individual", "team"]
@@ -131,6 +132,12 @@ class ClubMatchListItem(BaseModel):
     unrecorded: int
     team: dict[str, int] | None
     winnerText: str | None  # noqa: N815
+    # (SCR-111 r6, 하위 호환 추가) 통합 목록용: 참가 인원(선정된 참가자), 경기 수,
+    # 표시 상태(UXD-087, KST), 구조화한 종료 결과
+    participants: int
+    games: int
+    displayStatus: DisplayStatus  # noqa: N815
+    result: ClubMatchResult | None
 
 
 class Created(BaseModel):

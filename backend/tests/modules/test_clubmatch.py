@@ -485,3 +485,74 @@ def test_list_shows_team_score_and_winner_text(admin: TestClient, db: Session) -
     assert item["team"] == {"blue": 0, "white": 1}
     assert item["winnerText"] == "백팀 승리 (0 : 1)"
     assert date.fromisoformat(item["date"]) == date(2026, 11, 15)
+
+
+# ── (SCR-111 r6) 통합 목록용 필드 ──
+# 참가 인원·경기 수·표시 상태(UXD-087, KST)·구조화 결과(UXD-088)
+
+
+def test_scr111_admin_list_display_fields_and_back_compat(
+    admin: TestClient, db: Session, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from app.modules.clubmatch import display
+
+    monkeypatch.setattr(display, "today_kst", lambda now=None: date(2026, 11, 14))
+    us = [member(db, n) for n in ("가", "나", "다", "라")]
+    draft = create(admin, name="준비")
+    for u in us:
+        draft = join(admin, draft, mkey(u))
+    upcoming = create(admin, method="team", name="예정")
+    for u, t in zip(us, ("blue", "blue", "white", "white"), strict=True):
+        upcoming = assign(admin, upcoming, mkey(u), t)
+    add_game(db, upcoming["id"], 1, [mkey(u) for u in us])
+    set_status(db, upcoming["id"], "confirmed")
+    live = create(admin, method="team", name="진행")
+    for u, t in zip(us, ("blue", "blue", "white", "white"), strict=True):
+        live = assign(admin, live, mkey(u), t)
+    add_game(db, live["id"], 1, [mkey(u) for u in us], winner=1)
+    add_game(db, live["id"], 2, [mkey(u) for u in us])
+    set_status(db, live["id"], "confirmed")
+    ended = create(admin, method="team", name="종료")
+    for u, t in zip(us, ("blue", "blue", "white", "white"), strict=True):
+        ended = assign(admin, ended, mkey(u), t)
+    add_game(db, ended["id"], 1, [mkey(u) for u in us], winner=2)
+    set_status(db, ended["id"], "finished")
+
+    items = {x["name"]: x for x in admin.get(BASE).json()}
+    # 기존 필드 그대로(하위 호환): DB 상태·winnerText 형식 유지
+    assert items["준비"]["status"] == "draft" and items["예정"]["status"] == "confirmed"
+    assert items["종료"]["winnerText"] == "백팀 승리 (0 : 1)"
+    # 표시 상태(날짜 2026-11-15, 오늘 11-14)
+    assert [items[n]["displayStatus"] for n in ("준비", "예정", "진행", "종료")] == [
+        "pending",
+        "upcoming",
+        "live",
+        "ended",
+    ]
+    assert (items["준비"]["participants"], items["준비"]["games"]) == (4, 0)
+    assert (items["진행"]["games"], items["진행"]["unrecorded"]) == (2, 1)
+    assert items["준비"]["result"] is None and items["진행"]["result"] is None
+    assert items["종료"]["result"] == {
+        "method": "team",
+        "outcome": "white",
+        "final": {"blue": 0, "white": 1},
+        "text": "백팀 승리",
+        "tiedCount": None,
+    }
+    # 날짜 당일(KST)이 되면 진행 예정 → 진행 중
+    monkeypatch.setattr(display, "today_kst", lambda now=None: date(2026, 11, 15))
+    assert next(x for x in admin.get(BASE).json() if x["name"] == "예정")["displayStatus"] == "live"
+
+
+def test_scr111_admin_list_individual_tied_result(admin: TestClient, db: Session) -> None:
+    us = [member(db, n) for n in ("가", "나", "다", "라")]
+    view = create(admin, name="개인")
+    for u in us:
+        view = join(admin, view, mkey(u))
+    add_game(db, view["id"], 1, [mkey(u) for u in us], winner=1)
+    add_game(db, view["id"], 2, [mkey(us[2]), mkey(us[3]), mkey(us[0]), mkey(us[1])], winner=1)
+    set_status(db, view["id"], "finished")
+    item = next(x for x in admin.get(BASE).json() if x["id"] == view["id"])
+    assert item["result"]["text"] == "공동 1위 · 4명" and item["result"]["tiedCount"] == 4
+    assert item["result"]["outcome"] is None and item["result"]["final"] is None
+    assert item["winnerText"].startswith("1위 ")  # 기존 문구 형식 유지

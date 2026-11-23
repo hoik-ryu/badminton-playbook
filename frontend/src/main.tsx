@@ -7,6 +7,7 @@ import './styles/tokens.css'
 import './styles/tailwind.css'
 import './styles/base.css'
 import './styles/tutorial.css'
+import './styles/clubmatch.css' // 청백전 영역(.cm 범위) 전용 — 1단계 기반
 // 인트로 결정은 라우터가 '/'를 리다이렉트하기 전에 계산해야 하므로 라우터보다 먼저 import
 import './features/intro/initialEntry'
 import { router } from './routes/router'

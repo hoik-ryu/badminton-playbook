@@ -1,75 +1,94 @@
+import { Plus } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
+import { useRouteLoaderData } from 'react-router'
 
 import { Button } from '../components/Button'
 import { PageHeader } from '../components/PageHeader'
+import { useSheetRoute } from '../components/sheetHooks'
 import { StateView } from '../components/StateView'
-import { ClubMatchListItem } from '../features/clubmatch/ClubMatchListItem'
-import { listPublicClubMatches, type PublicClubMatchItem } from '../features/clubmatch/memberApi'
+import { listClubMatches } from '../features/clubmatch/api'
+import { listPublicClubMatches } from '../features/clubmatch/memberApi'
+import { ClubMatchScope } from '../features/clubmatch/ui/ClubMatchBadge'
+import { ClubMatchHero, ClubMatchSection, type ClubMatchEntry } from '../features/clubmatch/ui/ClubMatchList'
+import type { ShellData } from '../routes/guards'
+import { CreateSheet } from './ClubMatchesPage'
 
-// SCR-111 청백전 목록(회원, /club-matches). US-023, FLOW-008-S1·S1a, AC-069·087·089, UXD-044·046·047·075
-// - 확정·공개된 청백전만 최신순(미확정은 날짜·이름도 없음). CMP-043 audience=member
-// - 진행 중: 팀전 '청 x : 백 y', 개인전 '경기 n · 참가 m명', '미기록 n'(0이면 숨김) / 종료: 최종 결과
-// - ST3: 진행 중인 청백전이 없으면 "아직 공개된 청백전이 없습니다" + 아래에 '지난 청백전'(종료된 것, 있으면) — 임시 해석(b5-policy-open-items Q1)
-// - 새로고침: 실시간 갱신 없음. 화면을 다시 열거나 브라우저 새로고침(당겨서 새로고침 포함)으로 다시 불러옴(UXD-049)
-type Load = { kind: 'loading' } | { kind: 'error' } | { kind: 'ok'; items: PublicClubMatchItem[] }
+// SCR-111 청백전 목록(/club-matches, 회원·운영진 공통) — UX Spec r6(02 SCR-111, UXD-085–089), DD r8(VD-049–058), Preview r5
+// 순서: 제목 → 소개 배너(CMP-051) → (운영진·슈퍼 관리자) '새 청백전' → 진행 중(건수) → 예정된(진행 예정·준비 중) → 지난 → 하단 탭
+// - 회원: 회원 목록 API(/api/member/club-matches, 확정된 청백전만). 준비 중 데이터·'새 청백전'은 아예 없음(AC-069, UXD-086·089)
+// - 운영진: 운영 목록 API(/api/club-matches, 권한은 서버 AdminUser). 준비 중 카드 + '운영진에게만 보임', '새 청백전' → SCR-222 시트
+// - 표시 상태(진행 중·진행 예정·준비 중·종료)와 결과 문구는 서버가 계산한 값(UXD-087·088). DB 상태값과 다름
+// - 항목은 통합 상세 SCR-112(/club-matches/:id)로 엶. 운영진에게는 그 화면에 운영 기능 영역이 더해짐(3단계)
+// - 새로고침: 실시간 갱신 없음. 다시 열거나 브라우저 새로고침(당겨서 새로고침 포함)으로 다시 불러옴(UXD-049)
+type Load = { kind: 'loading' } | { kind: 'error' } | { kind: 'ok'; items: ClubMatchEntry[] }
 
-function summaryOf(m: PublicClubMatchItem) {
-  if (m.status === 'finished') return m.resultText ? <span className="text-body font-bold">{m.resultText}</span> : null
-  const main = m.method === 'team' && m.team ? `청 ${m.team.blue} : 백 ${m.team.white}` : `경기 ${m.games} · 참가 ${m.participants}명`
-  return (
-    <span className="text-body tabular-nums">
-      <span className="font-bold">{main}</span>
-      {m.unrecorded > 0 && <span className="text-ink-muted"> · 미기록 {m.unrecorded}</span>}
-    </span>
-  )
-}
-
-function MatchList({ items, label }: { items: PublicClubMatchItem[]; label: string }) {
-  return (
-    <ul aria-label={label} className="m-0 flex list-none flex-col gap-3 p-0">
-      {items.map((m) => (
-        <ClubMatchListItem key={m.id} to={`/club-matches/${m.id}`} id={m.id} name={m.name} date={m.date} method={m.method} status={m.status} summary={summaryOf(m)} />
-      ))}
-    </ul>
-  )
+async function loadEntries(admin: boolean): Promise<ClubMatchEntry[]> {
+  if (admin) {
+    const items = await listClubMatches()
+    return items.map((m) => ({ id: m.id, name: m.name, date: m.date, method: m.method, status: m.displayStatus, team: m.team, remaining: m.unrecorded, games: m.games, participants: m.participants, result: m.result, to: `/club-matches/${m.id}` }))
+  }
+  const items = await listPublicClubMatches()
+  return items.map((m) => ({ id: m.id, name: m.name, date: m.date, method: m.method, status: m.displayStatus, team: m.team, remaining: m.unrecorded, games: m.games, participants: m.participants, result: m.result, to: `/club-matches/${m.id}` }))
 }
 
 export function MemberClubMatchesPage() {
+  const shell = useRouteLoaderData('member') as ShellData | undefined
+  const admin = shell?.me.role === 'admin' || shell?.me.role === 'superAdmin'
+  const { sheet, open, close } = useSheetRoute()
   const [load, setLoad] = useState<Load>({ kind: 'loading' })
   const refresh = useCallback(async () => {
     setLoad({ kind: 'loading' })
     try {
-      setLoad({ kind: 'ok', items: await listPublicClubMatches() })
+      setLoad({ kind: 'ok', items: await loadEntries(admin) })
     } catch {
       setLoad({ kind: 'error' })
     }
-  }, [])
+  }, [admin])
   useEffect(() => {
     void refresh()
   }, [refresh])
 
-  const ongoing = load.kind === 'ok' ? load.items.filter((m) => m.status === 'confirmed') : []
-  const past = load.kind === 'ok' ? load.items.filter((m) => m.status === 'finished') : []
-  const st = load.kind === 'loading' ? 'SCR-111-ST2' : load.kind === 'error' ? 'SCR-111-ST4' : ongoing.length === 0 ? 'SCR-111-ST3' : 'SCR-111-ST1'
+  const items = load.kind === 'ok' ? load.items : []
+  const live = items.filter((m) => m.status === 'live')
+  const planned = items.filter((m) => m.status === 'upcoming' || (admin && m.status === 'pending'))
+  const past = items.filter((m) => m.status === 'ended')
+  const memberEmpty = !admin && load.kind === 'ok' && live.length === 0 && planned.length === 0
+  const adminEmpty = admin && load.kind === 'ok' && items.length === 0
+  const st = load.kind === 'loading' ? 'SCR-111-ST2' : load.kind === 'error' ? 'SCR-111-ST4' : adminEmpty ? 'SCR-111-ST7' : memberEmpty ? 'SCR-111-ST3' : 'SCR-111-ST1'
+
   return (
-    <section data-scr="SCR-111" data-st={st} className="flex w-full max-w-[600px] flex-1 flex-col">
+    <ClubMatchScope data-scr="SCR-111" data-st={st} data-role={admin ? 'admin' : 'member'} className="cm-page flex w-full max-w-[600px] flex-1 flex-col">
       <PageHeader title="청백전" />
-      <div className="flex flex-col gap-3 px-4 pb-6">
-        {load.kind === 'loading' && <StateView kind="loading" rows={3} label="청백전을 불러오는 중" />}
-        {load.kind === 'error' && <StateView kind="error" title="청백전을 불러오지 못했습니다" description="연결이 불안정합니다. 다시 시도해 주세요" action={<Button variant="secondary" fullWidth onClick={() => void refresh()}>다시 시도</Button>} />}
-        {load.kind === 'ok' && ongoing.length > 0 && <MatchList items={load.items} label="청백전" />}
-        {load.kind === 'ok' && ongoing.length === 0 && (
-          <>
-            <StateView kind="empty" title="아직 공개된 청백전이 없습니다" description="대진이 확정되면 여기에 나옵니다" />
-            {past.length > 0 && (
-              <>
-                <h2 className="m-0 mt-2 text-body font-bold text-ink">지난 청백전</h2>
-                <MatchList items={past} label="지난 청백전" />
-              </>
-            )}
-          </>
+      <div className="flex flex-col gap-6 pt-2">
+        <div className="flex flex-col gap-3 px-4">
+          <ClubMatchHero />
+          {admin && (
+            <button type="button" className="cm-create" data-cmp="CMP-001" data-variant="primary" data-testid="cm-create" onClick={() => open('create')}>
+              <Plus aria-hidden className="size-[18px]" />새 청백전
+            </button>
+          )}
+        </div>
+        {load.kind === 'loading' && <StateView kind="loading" rows={3} label="청백전을 불러오는 중" className="px-4 py-0" />}
+        {load.kind === 'error' && (
+          <div className="px-4">
+            <StateView kind="error" title="청백전 목록을 불러오지 못했습니다" description="연결이 불안정합니다. 다시 시도해 주세요" action={<Button variant="secondary" fullWidth onClick={() => void refresh()}>다시 시도</Button>} />
+          </div>
         )}
+        {adminEmpty && (
+          <div className="px-4">
+            <StateView kind="empty" title="아직 청백전이 없습니다" description="'새 청백전'으로 첫 청백전을 만들어 보세요" />
+          </div>
+        )}
+        {memberEmpty && (
+          <div className="px-4">
+            <StateView kind="empty" title="아직 공개된 청백전이 없습니다" description="대진이 확정되면 여기에 나옵니다" />
+          </div>
+        )}
+        {load.kind === 'ok' && !memberEmpty && live.length > 0 && <ClubMatchSection kind="live" title="진행 중인 청백전" count={live.length} items={live} />}
+        {load.kind === 'ok' && !memberEmpty && planned.length > 0 && <ClubMatchSection kind="planned" title="예정된 청백전" items={planned} />}
+        {load.kind === 'ok' && past.length > 0 && <ClubMatchSection kind="past" title="지난 청백전" items={past} />}
       </div>
-    </section>
+      {admin && sheet === 'create' && <CreateSheet onClose={close} detailPath={(id) => `/club-matches/${id}`} />}
+    </ClubMatchScope>
   )
 }

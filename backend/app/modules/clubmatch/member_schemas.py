@@ -13,6 +13,8 @@ from typing import Literal
 
 from pydantic import BaseModel
 
+from app.modules.clubmatch.display import ClubMatchResult
+
 Method = Literal["individual", "team"]
 PublicStatus = Literal["confirmed", "finished"]
 
@@ -65,6 +67,9 @@ class PublicClubMatch(BaseModel):
     team: TeamWins
     unrecorded: int
     participating: bool
+    # (SCR-112 r6, 하위 호환 추가) 머리글 상태 배지용 표시 상태(UXD-087, KST)
+    # 진행 예정(ST15)·진행 중·종료
+    displayStatus: Literal["upcoming", "live", "ended"]  # noqa: N815
 
 
 class PublicClubMatchItem(BaseModel):
@@ -78,6 +83,10 @@ class PublicClubMatchItem(BaseModel):
     participants: int
     unrecorded: int
     resultText: str | None  # noqa: N815
+    # (SCR-111 r6, 하위 호환 추가) 표시 상태(UXD-087, KST)와 구조화한 종료 결과(UXD-088).
+    # status(DB 상태)·resultText는 그대로
+    displayStatus: Literal["upcoming", "live", "ended"]  # noqa: N815
+    result: ClubMatchResult | None
 
 
 class MyRecord(BaseModel):

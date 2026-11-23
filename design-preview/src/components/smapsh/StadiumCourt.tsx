@@ -106,38 +106,76 @@ export function StadiumCourt({
     const p = project([c.cx, c.cy]), u = unitScale([c.cx, c.cy]), fs = NUM_UNITS * u.h
     return { no: c.no, x: p[0], y: p[1], fs, w: fs * 0.62, h: fs * NUM_SQUASH * 0.78 }
   })
-  // 칸 번호: 원·배경 없이 숫자만, 칸 중심, 원근 크기 + 바닥에 눕힌 세로 눌림.
-  // 결과·재생에선 바닥 층(선수 아래), 선택 대기에선 선수에 가리지 않도록 맨 위 층(누름 영역 바로 아래, 누름 대상 아님)
-  const numEls = nums.map((n) => (
-            <text key={n.no} className={`sc-num${choosing && selected === n.no ? ' sc-num-on' : ''}`} data-cell={n.no} x={n.x} y={n.y} fontSize={n.fs} dominantBaseline="central" textAnchor="middle"
-              transform={`translate(${n.x} ${n.y}) scale(1 ${NUM_SQUASH}) translate(${-n.x} ${-n.y})`}>{n.no}</text>
-          ))
+  // VD-027(DD r8): 흰 숫자 100% + 둥근 반투명 받침(color.text.primary 60%), 칸 정중앙·원근 크기·세로 눌림.
+  // 층은 모든 상태에서 선수·셔틀 위, 누름 영역 바로 아래(UX Spec r6 그리는 순서: … → 선수·셔틀콕 → 번호 → 누름 영역, DD r8 B안)
+  const numEls = nums.map((n) => {
+    const wide = n.no > 9
+    return (
+      <g key={n.no} className={`sc-numg${choosing && selected === n.no ? ' sc-num-on' : ''}`} transform={`translate(${n.x} ${n.y}) scale(1 ${NUM_SQUASH}) translate(${-n.x} ${-n.y})`}>
+        <rect className="sc-num-plate" x={n.x - n.fs * (wide ? 0.62 : 0.46)} y={n.y - n.fs * 0.6} width={n.fs * (wide ? 1.24 : 0.92)} height={n.fs * 1.2} rx={n.fs * 0.46} />
+        <text className="sc-num" data-cell={n.no} x={n.x} y={n.y} fontSize={n.fs} dominantBaseline="central" textAnchor="middle">{n.no}</text>
+      </g>
+    )
+  })
   // "이 영역으로 이동" 안내 위치: 선택 칸 주변을 촘촘히 훑어, 코트 상자(네트 아래 ~ 시트 위) 안이면서
   // ① 어떤 번호와도 겹치지 않고 ② 선수와 덜 겹치며 ③ 선택 칸 중심에 가까운 곳. 칸이 안내보다 좁으면 작은 안내(compact)
+  // "이 영역으로 이동" 안내 위치(VD-028: 고른 칸 주변, 번호와 겹치지 않고, 선수와 가장 덜 겹치는 자리)
+  // (Preview r5, B-07) 같은 규칙 안에서 계산만 보정: ① 선수 상자를 실제로 그리는 그림 상자(그림 너비 × 발 기준점)로,
+  // ② 번호 피하기 영역을 r8 받침 크기로, ③ 선수 겹침 가중치를 크게(겹침이 있으면 거리보다 우선), ④ 후보를 '주변' 규칙 전체에서 촘촘히,
+  // ⑤ 셔틀·발 그림자·흰 코트 라인 겹침에 작은 벌점. 칸이 안내보다 좁으면 작은 안내(compact)
   const goAt = (() => {
     if (!selected || !fit.s || !byNo[selected]) return null
     const c = byNo[selected], n = nums.find((x) => x.no === selected)!
     const cl = project([c.x0, c.cy])[0], cr = project([c.x1, c.cy])[0], ct = project([c.cx, c.y0])[1], cb = project([c.cx, c.y1])[1]
     const compact = (cr - cl) * fit.s < 112 || (cb - ct) * fit.s < 44
-    const lw = (compact ? 104 : 112) / fit.s, lh = (compact ? 21 : 26) / fit.s, gap = 3 / fit.s
+    const lw = (compact ? 108 : 112) / fit.s, lh = (compact ? 21 : 26) / fit.s, gap = 3 / fit.s
     const visTop = Math.max(-fit.top / fit.s, project([c.cx, 67])[1]) + gap, visBot = (fit.bh - fit.top) / fit.s - gap
-    const ovl = (x: number, y: number, r: { x0: number; x1: number; y0: number; y1: number }) =>
+    type Box = { x0: number; x1: number; y0: number; y1: number }
+    const ovl = (x: number, y: number, r: Box) =>
       Math.max(0, Math.min(x + lw / 2, r.x1) - Math.max(x - lw / 2, r.x0)) * Math.max(0, Math.min(y + lh / 2, r.y1) - Math.max(y - lh / 2, r.y0))
-    const numR = nums.map((m) => ({ x0: m.x - m.w / 2 - gap, x1: m.x + m.w / 2 + gap, y0: m.y - m.h / 2 - gap, y1: m.y + m.h / 2 + gap }))
-    const plR = [me, partner].map((a) => { const [fx, fy] = project(a), hh = PLAYER_UNITS * unitScale(a).h; return { x0: fx - hh * 0.4, x1: fx + hh * 0.4, y0: fy - hh, y1: fy } })
-    let best: { x: number; y: number; cost: number } | null = null
-    const cw = cr - cl, ch = cb - ct
-    for (let i = -8; i <= 8; i++) for (let j = -8; j <= 8; j++) {
-      const x = n.x + (i / 8) * cw * 0.9, y = n.y + (j / 8) * ch * 1.1
-      if (x - lw / 2 < 0 || x + lw / 2 > STADIUM.w || y - lh / 2 < visTop || y + lh / 2 > visBot) continue
-      if (numR.some((r) => ovl(x, y, r) > 0)) continue
-      // 선택 칸과 맞닿아 있어야 "주변"(칸 테두리에서 안내 높이 이상 떨어지면 제외)
-      if (y - lh / 2 > cb + gap || y + lh / 2 < ct - gap || x + lw / 2 < cl || x - lw / 2 > cr) continue
+    // 번호 받침(VD-027 r8: 너비 0.92em(두 자리 1.24em) × 높이 1.2em × 세로 눌림)
+    const ng = 1 / fit.s // 번호와는 1px만 띄움(맞닿아도 겹치지 않음)
+    const numR = nums.map((m) => { const hw = m.fs * (m.no > 9 ? 0.62 : 0.46), hh = m.fs * 0.6 * NUM_SQUASH; return { x0: m.x - hw - ng, x1: m.x + hw + ng, y0: m.y - hh - ng, y1: m.y + hh + ng } })
+    // 선수: 실제로 그리는 그림 상자(Player와 같은 계산). 발 그림자는 따로(작은 벌점)
+    const plR = ([['me', me], ['partner', partner]] as const).map(([id, a]) => {
+      const sp = SPRITES[id][facingFor(a[0])], [fx, fy] = project(a), hPx = PLAYER_UNITS * unitScale(a).h, wPx = hPx * sp.aspect
+      return { x0: fx - sp.footX * wPx, x1: fx + (1 - sp.footX) * wPx, y0: fy - hPx, y1: fy }
+    })
+    const sdR = [me, partner].map((a) => { const [fx, fy] = project(a), hPx = PLAYER_UNITS * unitScale(a).h; return { x0: fx - hPx * 0.31, x1: fx + hPx * 0.31, y0: fy - hPx * 0.08, y1: fy + hPx * 0.08 } })
+    // 셔틀(선택 대기에서 멈춘 위치)과 바닥 그림자
+    const shR: Box[] = shuttle ? (() => { const [gx, gy] = project(shuttle.at), u = unitScale(shuttle.at), sz = 4.2 * u.h, y = gy - shuttle.h * u.h * HEIGHT_K
+      return [{ x0: gx - sz / 2, x1: gx + sz / 2, y0: y - sz / 2, y1: y + sz / 2 }, { x0: gx - sz * 0.35, x1: gx + sz * 0.35, y0: gy - sz * 0.11, y1: gy + sz * 0.11 }] })() : []
+    // 흰 코트 라인(내 편): 복식·단식 사이드라인, 센터 라인, 숏 서비스·복식 롱 서비스·엔드라인 — 얇은 띠로 근사
+    const lineR: Box[] = [
+      ...[0, 4.6, 30.5, 56.4, 61].map((x) => { const a = project([x, x === 30.5 ? 86.8 : 67]), b = project([x, 134]), w = 0.25 * unitScale([x, 100]).h; return { x0: Math.min(a[0], b[0]) - w, x1: Math.max(a[0], b[0]) + w, y0: a[1], y1: b[1] } }),
+      ...[86.8, 126.4, 134].map((y) => { const a = project([0, y]), b = project([61, y]), w = 0.25 * unitScale([30.5, y]).v; return { x0: a[0], x1: b[0], y0: Math.min(a[1], b[1]) - w, y1: Math.max(a[1], b[1]) + w } }),
+    ]
+    // 후보: '주변' 규칙(선택 칸과 맞닿음)을 만족하는 모든 자리를 촘촘히 훑음. 번호와 겹치는 자리는 제외(VD-028),
+    // 그런 자리가 하나도 없을 때만 번호 겹침을 큰 벌점으로 바꿔 가장 덜 겹치는 자리를 고름(고정 기본 위치로 떨어지지 않게)
+    const cw = cr - cl, ch = cb - ct, A = lw * lh
+    const score = (x: number, y: number) => {
       const inCell = x - lw / 2 >= cl && x + lw / 2 <= cr && y - lh / 2 >= ct && y + lh / 2 <= cb
-      const cost = plR.reduce((sum, r) => sum + ovl(x, y, r), 0) / (lw * lh) * 12 + Math.hypot((x - n.x) / cw, (y - n.y) / ch) + (inCell ? 0 : 0.6)
-      if (!best || cost < best.cost) best = { x, y, cost }
+      const pl = plR.reduce((sum, r) => sum + ovl(x, y, r), 0) / A
+      const sh = shR.reduce((sum, r) => sum + ovl(x, y, r), 0) / A
+      const sd = sdR.reduce((sum, r) => sum + ovl(x, y, r), 0) / A
+      const ln = lineR.reduce((sum, r) => sum + (ovl(x, y, r) > 0 ? 1 : 0), 0)
+      return pl * 40 + (pl > 0 ? 1 : 0) + sh * 20 + sd * 3 + ln * 0.12 + Math.hypot((x - n.x) / cw, (y - n.y) / ch) + (inCell ? 0 : 0.6)
     }
-    return best ? { x: best.x, y: best.y, compact } : { x: n.x, y: Math.min(cb + gap + lh / 2, visBot - lh / 2), compact }
+    let best: { x: number; y: number; cost: number } | null = null
+    let fallback: { x: number; y: number; cost: number } | null = null
+    const X0 = cl - lw / 2 + 1, X1 = cr + lw / 2 - 1, Y0 = ct - lh / 2 - gap + 1, Y1 = cb + lh / 2 + gap - 1
+    // 격자 후보 + 번호·선수 상자 가장자리에 맞닿는 후보(좁은 빈자리를 놓치지 않게)
+    const xs = [...Array.from({ length: 41 }, (_, i) => X0 + ((X1 - X0) * i) / 40), ...plR.flatMap((r) => [r.x0 - lw / 2 - ng, r.x1 + lw / 2 + ng]), ...numR.flatMap((r) => [r.x0 - lw / 2, r.x1 + lw / 2])].filter((x) => x >= X0 && x <= X1)
+    const ys = [...Array.from({ length: 33 }, (_, j) => Y0 + ((Y1 - Y0) * j) / 32), ...plR.flatMap((r) => [r.y0 - lh / 2 - ng, r.y1 + lh / 2 + ng]), ...numR.flatMap((r) => [r.y0 - lh / 2, r.y1 + lh / 2])].filter((y) => y >= Y0 && y <= Y1)
+    for (const x of xs) for (const y of ys) {
+      if (x - lw / 2 < 0 || x + lw / 2 > STADIUM.w || y - lh / 2 < visTop || y + lh / 2 > visBot) continue
+      const nOv = numR.reduce((sum, r) => sum + ovl(x, y, r), 0) / A
+      const cost = score(x, y)
+      if (nOv === 0) { if (!best || cost < best.cost) best = { x, y, cost } }
+      else if (!fallback || cost + nOv * 60 < fallback.cost) fallback = { x, y, cost: cost + nOv * 60 }
+    }
+    const pick = best ?? fallback
+    return pick ? { x: pick.x, y: pick.y, compact } : { x: n.x, y: Math.min(cb + gap + lh / 2, visBot - lh / 2), compact }
   })()
 
   return (
@@ -155,10 +193,14 @@ export function StadiumCourt({
           {/* 선택 영역 바닥 면(선택 대기에서만 보이고, 이동이 시작되면 흐려지며 사라짐) */}
           {gridOn && (
             <g className="sc-tiles" data-testid="select-tiles" data-on={choosing ? 'true' : 'false'}>
-              {cs.map((c) => <polygon key={c.no} className={`sc-tile${selected === c.no ? ' sc-tile-on' : ''}`} data-cell={c.no} points={poly(c.x0 + 0.7, c.y0 + 0.7, c.x1 - 0.7, c.y1 - 0.7)} />)}
+              {cs.map((c) => <polygon key={c.no} className="sc-tile" data-cell={c.no} points={poly(c.x0 + 0.7, c.y0 + 0.7, c.x1 - 0.7, c.y1 - 0.7)} />)}
+              {/* VD-028(DD r8): 고른 칸은 이웃 칸 테두리 위에 바깥쪽 어두운 선 → 굵은 흰 테두리 순서로 그림 */}
+              {cs.filter((c) => c.no === selected).map((c) => [
+                <polygon key="o" className="sc-tile-out" points={poly(c.x0 + 0.7, c.y0 + 0.7, c.x1 - 0.7, c.y1 - 0.7)} />,
+                <polygon key="i" className="sc-tile sc-tile-on" data-cell={c.no} data-selected="true" points={poly(c.x0 + 0.7, c.y0 + 0.7, c.x1 - 0.7, c.y1 - 0.7)} />,
+              ])}
             </g>
           )}
-          {gridOn && !choosing && numEls}
           {marks.map((m) => {
             const c = byNo[m.cell]
             const Icon = m.kind === 'ok' ? Check : m.kind === 'allow' ? Waves : m.kind === 'bad' ? XIcon : null
@@ -166,7 +208,8 @@ export function StadiumCourt({
             const sz = 6.4 * u.h
             return (
               <g key={`${m.cell}-${m.kind}`} className={`sc-mk sc-mk-${m.kind}${m.mine ? ' sc-mine' : ''}`}>
-                <polygon points={poly(c.x0, c.y0, c.x1, c.y1)} />
+                {(m.kind === 'select' || m.kind === 'selectWait') && <polygon className="sc-mk-out" points={poly(c.x0, c.y0, c.x1, c.y1)} />}
+                <polygon className="sc-mk-poly" points={poly(c.x0, c.y0, c.x1, c.y1)} />
                 {Icon && <Icon x={tr[0] - sz} y={tr[1]} width={sz} height={sz} className="sc-mk-ic" />}
               </g>
             )
@@ -194,7 +237,7 @@ export function StadiumCourt({
         {/* 칸 누름 영역(맨 위, 칸 전체가 누름 대상) */}
         {gridOn && (
           <svg className="sc-svg sc-top" viewBox={`0 0 ${STADIUM.w} ${STADIUM.h}`}>
-            {choosing && numEls}
+            {numEls}
             {mode === 'choose' && interactive && cs.map((c) => (
               <polygon key={c.no} className="sc-hit" points={poly(c.x0, c.y0, c.x1, c.y1)} role="button" tabIndex={0} aria-label={c.label} aria-pressed={selected === c.no}
                 onClick={onCell ? () => onCell(c.no) : undefined} onKeyDown={(e) => key(e, c.no)} />
