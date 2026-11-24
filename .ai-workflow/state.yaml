@@ -30,7 +30,7 @@ stages:
 
   planning:
     status: approved   # locked | not_started | in_progress | awaiting_approval | approved | outdated
-    revision: 9
+    revision: 10
     based_on_discovery_revision: 4
     artifacts:
       - docs/planning/02-prd.md
@@ -43,13 +43,13 @@ stages:
       at: null
       hashes: {}
     approved:
-      revision: 9
-      at: "2026-11-24T05:32:50Z"
+      revision: 10
+      at: "2026-11-24T07:04:13Z"
       hashes:
-        docs/planning/02-prd.md: a305620a75dc85b3bf343a44af4c8b95a232424a8748e2ab91c0a42d480d93a2
-        docs/planning/03-user-stories.md: e3eddca6e54a8b1303a3487935a431b5298e6a473314f6acd146d82cd89eb6b0
-        docs/planning/04-user-flows.md: d114843b892bb600e71cc79c2639a5802299550993ee95ce5bc82cb6d6d1259d
-        docs/planning/05-acceptance-criteria.md: 6d44256b4209bcb97b2571e3413889c9b5d0647711e7a0ddebe16aa291bdc741
+        docs/planning/02-prd.md: 79ffd809f4bb63ffa767684c74932e63df1b719aede07845e111393ce2680c75
+        docs/planning/03-user-stories.md: 9dcd484cb179023d653b67344c8e0eb2699d43228af64708f1980f23ddd71f1c
+        docs/planning/04-user-flows.md: 9e3bd4d1dc0a590825c0621e17c16f8b7a57ff14b12e877889566e2032ac18be
+        docs/planning/05-acceptance-criteria.md: 1268c107014cc13508723d11123c8a5155162e53626e80026ae3f844547f694e
 
   design:
     status: not_started   # locked | not_started  (Milestone 2 이후. planning 승인으로만 잠금 해제)
@@ -93,4 +93,7 @@ history:
   - { at: "2026-11-24T05:30:32Z", stage: planning, event: changes_requested, revision: 8, note: "T3 수정 요청(r8 미승인 제출본): Planning r8 기획 변경 보고서를 검토했습니다. 팀전 5단계, 개인전 4단계의 독립적인 Step 기반 생성 흐름에 동의합니다. 다만 최종 Planning 승인 전에 Q-030의 정책을 다음과 같이 확정하고 세부 명세를 보완하세요. ## 1. 정책 결정 - CD-1: 현재 검색·필터 결과만 일괄 선택 및 해제 - CD-2: 점수 미설정 회원은 참가자 단계에서 점수를 입력할 수 있도록 하되, 아래 추가 확인 사항을 반영 - CD-3: 대진 생성 후 참가자 변경 시 사용자 확인 후 대진 폐기 - CD-4: 대진 생성 후 경기 수·규칙 변경 시 사용자 확인 후 대진 폐기 - CD-5: 추가 참가자는 미배정 상태로 추가하고 기존 유효한 팀 배정은 유지 - CD-6: 준비 중 청백전의 이름·날짜 수정 허용 - CD-7: 저장된 데이터와 유효성 조건을 기반으로 재진입 단계 계산 - CD-8: 참가자 일괄 저장 - CD-9: 준비 중 청백전 삭제 허용 - CD-10: 준비 중 청백전은 생성 페이지로 이동 - CD-11: 기존 팀 인원 및 대진 생성 제약을 유지하는 범위에서 인원 차이를 허용하고 2명 이상 차이 시 경고 - CD-12: 미배정 참가자가 0명일 때만 다음 단계 진행 ## 2. 참가자 선택 정책 보완 - 검색 및 필터 변경 시 기존 선택 상태 유지 - 현재 검색·필터 결과만 일괄 선택 및 해제 - 전체 선택 인원은 필터와 관계없이 표시 - 선택된 회원은 별도 영역에서 확인 및 해제 가능 - 선택 결과가 없는 경우 명확한 빈 상태 제공 - 회원 선택 과정에서는 로컬 입력 상태를 관리하고 단계 완료 시 일괄 저장 ## 3. 점수 입력 정책 확인 청백전 생성 중 입력한 점수가 다음 중 어느 범위에 저장되는지 확인하세요. - 회원 원장의 공통 점수 - 해당 청백전의 참가자 점수 - 두 값 모두 기존 데이터 모델 및 API 정책을 기준으로 판단하세요. 회원 원장 점수가 변경된다면 사용자에게 변경 범위를 명확히 안내하고 기존 권한 정책을 준수해야 합니다. 기존 정책과 충돌하거나 신규 정책 결정이 필요한 경우 별도로 보고하세요. ## 4. 단계 간 데이터 의존성 다음 원칙을 명세에 반영하세요. - 이름·날짜 변경은 기존 팀 구성 및 대진표 유지 - 참가자 변경 시 기존 유효한 팀 배정 유지 - 추가 참가자는 미배정 처리 - 팀 배정 변경 시 기존 대진표 폐기 확인 - 경기 수·규칙 변경 시 기존 대진표 폐기 확인 - 경기 방식 변경 시 호환되지 않는 팀 구성 및 대진 처리 - 단순 이전 단계 이동이나 실제 값이 바뀌지 않은 경우 기존 데이터 유지 대진 폐기 확인을 취소하면 원래 설정도 유지되어야 합니다. 참가자 변경, 팀 변경, 대진 폐기 등의 관련 데이터 변경은 부분 실패로 인해 불일치 상태가 발생하지 않도록 원자적 처리 방안을 검토하세요. ## 5. Draft 저장 및 복원 - Step 1 완료 시 기존 Draft 생성 방식 활용 - 각 단계의 다음 버튼 클릭 시 유효성 검증 및 저장 - 저장 성공 후 다음 단계 이동 - 저장 실패 시 입력값 유지 및 재시도 가능 - 이전 단계 이동 시 입력값 유지 - 저장하지 않은 변경이 있는 상태에서 페이지 이탈 시 안내 - 재진입 시 저장된 유효한 데이터 기반으로 단계 복원 - 최종 확정 전까지 Draft 상태 유지 단계별 저장 시점과 서버 데이터 및 클라이언트 입력 상태의 관계를 명확하게 정의하세요. ## 6. 팀 인원 차이 정책 확인 팀별 인원 차이를 허용하는 것이 기존 대진 생성 알고리즘 및 확정 조건과 충돌하지 않는지 확인하세요. 기존 알고리즘에서 허용하지 않는 팀 구성은 단순 경고만으로 다음 단계에 진행할 수 없어야 합니다. 알고리즘 자체는 이번 기획에서 임의로 변경하지 마세요. ## 7. 신규 API 명세 CD-3, CD-4, CD-6, CD-8, CD-9에 필요한 API 변경을 구체화하세요. - 변경 목적 - 기존 API 재사용 여부 - 요청 및 응답 데이터 - 권한 - 상태 제약 - 트랜잭션 처리 - 실패 및 재시도 정책 - 기존 기능과의 호환성 DB 변경이 필요하지 않다는 판단도 실제 데이터 모델을 기준으로 재확인하세요. ## 8. 최종 제출 확정된 정책을 제안 상태로 남겨 두지 말고 PRD, US, FLOW, AC에 정식으로 반영하세요. 추가 확인 사항에서 정책 충돌이 발견되면 임의로 결정하지 말고 별도로 보고하세요. 기존 추적성 검사를 다시 실행하고, 엔진의 정식 절차에 따라 수정된 Planning을 제출하세요. 최종 보고서는 다음 내용 중심으로 간결하게 작성하세요. - 정책 12개 확정 결과 - 추가 정책 및 데이터 의존성 - 신규 API 변경 범위 - 변경된 FR, US, FLOW, AC - 추적성 검증 결과 - 남은 사용자 결정 사항 - 최종 승인 대상 및 revision 이번 메시지는 정책 방향에 대한 동의이며 Planning 산출물의 최종 승인 문장이 아닙니다. 수정된 기획 문서를 제출한 뒤 최종 승인 단계에서 대기하세요. 아직 디자인, Preview, 제품 코드, API, DB를 수정하지 마세요. Git staging, commit, push도 하지 마세요. | 제출 해시 02=b21a6183… 03=4eae7c41… 04=5e9bb708… 05=cb5ff5ac…", src: engine }
   - { at: "2026-11-24T05:30:37Z", stage: planning, event: submitted, revision: 9, note: "청백전 생성 UX 재설계 r9: Q-030 정책 12개 확정(C-31–C-34), 참가자·팀 일괄 저장, 단계 저장·복원, 데이터 의존성·원자성, AC-122–134. FR 24·US 24·FLOW 8·AC 131, 추적성 누락 없음. 제출 해시 02=a305620a… 03=e3eddca6… 04=d114843b… 05=6d44256b…", src: engine }
   - { at: "2026-11-24T05:32:50Z", stage: planning, event: approved, revision: 9, note: "Planning r9 산출물과 최종 제출 보고서를 검토했으며, Planning r9를 최종 승인합니다.. 제출 스냅샷(r9, 2026-11-24T05:30:37Z)과 일치 확인", src: engine }
+  - { at: "2026-11-24T07:02:30Z", stage: planning, event: reopened, revision: 9, note: "T9 재개: K3 팀 구성 방식(자동 배정/직접 구성) 추가(Type E, Design Direction 시안 검토 중 사용자 결정). 사용자 선택: '방식 선택 추가', '지금 Type E로 진행 (권장)', '모두 미배정에서 시작 (권장)', '자동 배정 선택·배정안 채움 (권장)', '저장하지 않음(행동으로 취급) (권장)'. r9 승인(2026-11-24T05:32:50Z) 무효화, 이전 승인 해시 02=a305620a… 03=e3eddca6… 04=d114843b… 05=6d44256b…. design locked", src: engine }
+  - { at: "2026-11-24T07:03:00Z", stage: planning, event: submitted, revision: 10, note: "K3 팀 구성 방식(자동 배정·직접 구성) 추가: C-34·FR-014 보강, FLOW-005-S9b, AC-135. FR 24·US 24·FLOW 8·AC 132, 추적성 누락 없음. 제출 해시 02=79ffd809… 03=9dcd484c… 04=9e3bd4d1… 05=1268c107…", src: engine }
+  - { at: "2026-11-24T07:04:13Z", stage: planning, event: approved, revision: 10, note: "Planning r10의 변경 내용과 제출 결과를 검토했으며, Planning r10을 최종 승인합니다.. 제출 스냅샷(r10, 2026-11-24T07:03:00Z)과 일치 확인", src: engine }
   # - { at: "", stage: discovery, event: started | submitted | changes_requested | approved | reopened | outdated | generated, revision: 0, note: "" }
