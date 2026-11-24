@@ -20,7 +20,15 @@
     }
   },
   "validity": {
-    "status": "valid"
+    "status": "outdated",
+    "reason": "planning 승인 해시가 디자인 기준과 다릅니다",
+    "changed": [
+      "docs/planning/02-prd.md",
+      "docs/planning/03-user-stories.md",
+      "docs/planning/04-user-flows.md",
+      "docs/planning/05-acceptance-criteria.md"
+    ],
+    "detected_at": "2026-11-24T05:32:58Z"
   },
   "stages": {
     "ux_planning": {
@@ -3935,9 +3943,16 @@
       "event": "approved",
       "revision": 7,
       "note": "Preview r7을 승인합니다. 대상: r7, 06 SHA-256 36117884… / AST-082를 청백전 최종 배너로 확정합니다."
+    },
+    {
+      "at": "2026-11-24T05:32:58Z",
+      "stage": "design",
+      "event": "outdated",
+      "revision": null,
+      "note": "planning 변경 감지: docs/planning/02-prd.md, docs/planning/03-user-stories.md, docs/planning/04-user-flows.md, docs/planning/05-acceptance-criteria.md"
     }
   ],
-  "updated_at": "2026-11-24T01:37:29Z",
+  "updated_at": "2026-11-24T05:32:58Z",
   "config": {
     "workflow": "v2",
     "theme_file": "docs/design-profile/theme.json",
