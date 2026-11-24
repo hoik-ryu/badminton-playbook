@@ -72,9 +72,31 @@ Design Direction r8(VD-052 '제품 적용 시 표시 크기에 맞춘 WebP 사�
 
 | 제품 파일 | 원본(자산 ID, sha256 앞 16자) | 크기 | 설정 | 품질 확인 | sha256 |
 |---|---|---|---|---|---|
-| `frontend/public/clubmatch/banner-1200.webp` | AST-079 `design-profile/assets/AST-079.png`(2172×724, `20b509f6e838385e`) | 1200×400(3:1 그대로), 42.3KB | WebP quality 88, method 6 | 같은 크기 PNG 대비 PSNR 38.0dB, 눈으로 비교 차이 없음. 표시 최대 568px(데스크톱 2배)·358px(모바일 3배)를 덮음 | `833467fd158775c42d470cd11511a8d1e83e1ef2753cd31517e4637563212d5d` |
+| ~~`frontend/public/clubmatch/banner-1200.webp`~~ (2026-11-24 삭제, 아래 AST-080 파생본으로 교체) | AST-079 `design-profile/assets/AST-079.png`(2172×724, `20b509f6e838385e`) | 1200×400(3:1 그대로), 42.3KB | WebP quality 88, method 6 | 같은 크기 PNG 대비 PSNR 38.0dB, 눈으로 비교 차이 없음. 표시 최대 568px(데스크톱 2배)·358px(모바일 3배)를 덮음 | `833467fd158775c42d470cd11511a8d1e83e1ef2753cd31517e4637563212d5d` |
 | `frontend/public/clubmatch/laurel-160.webp` | AST-070 `design-profile/assets/AST-070.png`(508×868 RGBA, `cdbde68a34882055`) | 94×160(비율 0.585 → 0.588), 9.1KB | WebP quality 90, alpha_quality 100, method 6 | 알파 차이 0, 흰·surface·page·어두운 바탕 합성 PSNR 39.9dB. 표시 24×40의 4배 | `a6ff40a273272892f1fd20804d5d14605bc3c813b881d64e358fe728862447a9` |
 
 - 권리: 원본과 같음(AST-079·070 권리 확인 2026-11-20, 라이선스 기록 값 `OpenAI-Output (user-owned per OpenAI Terms of Use)`). 파생본은 크기·형식만 바꾼 사본입니다.
 - 제품 코드는 `frontend/src/features/clubmatch/ui/assets.ts`의 경로로만 참조합니다(장식, `aria-hidden`).
 
+## 제품 파생본 — AST-080 배너(2026-11-24, Soft Mint 제품 반영)
+
+Design Direction r9(VD-052 r9)·Preview r6 승인 뒤 AST-079 배너 파생본을 AST-080 파생본으로 바꿨습니다. 원본(자산 등록부 파일)은 바꾸지 않았고, AST-079 원본·등록은 이력으로 남습니다.
+
+| 제품 파일 | 원본(자산 ID, sha256 앞 16자) | 크기 | 설정 | sha256 |
+|---|---|---|---|---|
+| ~~`frontend/public/clubmatch/banner-ast080-1200.webp`~~ (2026-11-24 삭제, 아래 AST-082 파생본으로 교체) | AST-080 `design-profile/assets/AST-080.png`(1684×561, `7a0b6fa2759f240b`) | 1200×400(3:1, 원본 비율 3.002), 37.6KB | 같은 잘라내기(사용자 첨부 원본의 바깥 투명 여백만 제거)에서 Chrome canvas 고품질 축소, WebP quality 0.88. 필터·늘이기 없음 | `f8bbd77233470680e3b0b822e50c7a490bad3992c7aabb4ea004e7d742fff413` |
+
+- 권리: 원본과 같음(AST-080 권리 확인 2026-11-24, 라이선스 기록 값 `OpenAI-Output (user-owned per OpenAI Terms of Use)`). 파생본은 크기·형식만 바꾼 사본입니다.
+- 변환 스크립트는 저장소 밖 `~/smapsh-work/2026-11-24-ast080/process.mjs`(임시 산출물 정책).
+
+## 제품 파생본 — AST-082 배너(2026-11-24, DD r11·Preview r7)
+
+사용자 결정 "저는 기존 3:1 비율을 유지하는 것보다 제가 전달한 원본 이미지의 전체 구도를 유지하는 것을 원합니다."(DD r10)와 가장자리 마스크 수정(DD r11)에 따라 AST-080 파생본을 AST-082 파생본으로 바꿨습니다. 원본(자산 등록부 파일)은 바꾸지 않았고 AST-080·AST-081 원본·등록은 이력으로 남습니다.
+
+| 제품 파일 | 원본(자산 ID, sha256 앞 16자) | 크기 | 설정 | sha256 |
+|---|---|---|---|---|
+| `frontend/public/clubmatch/banner-ast082-1316.webp` | AST-082 `design-profile/assets/AST-082.png`(1692×693, `f2ad2b2e700dac73`) | 1316×539(1692×693의 7/9, 비율 오차 0), 50KB | Chrome canvas 고품질 축소, WebP quality 0.88(알파 포함 — 둥근 모서리 바깥 투명). PSNR 39.5dB. 필터·늘리기·크롭 없음 | `d74dd19a914bbf83c6e6c695b8cad4389880def8f057c57135567f199e2f8e23` |
+
+- 권리: 원본과 같음(AST-082 권리 확인 2026-11-24, 라이선스 기록 값 `OpenAI-Output (user-owned per OpenAI Terms of Use)`).
+- 표시: 장식 `img`(`alt=""`, `aria-hidden`, `object-fit: contain`, 실패 시 숨김) — `frontend/src/features/clubmatch/ui/ClubMatchList.tsx`.
+- 변환 스크립트는 저장소 밖 `~/smapsh-work/2026-11-24-banner-full/process-fix.mjs`.

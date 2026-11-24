@@ -14,7 +14,7 @@ import './LoginPage.css'
 
 // SCR-001 로그인(/login). 비로그인 사용자의 첫 화면(UX Spec 01 5장). FLOW-001-S1·S1b·S1c, AC-005, AC-060, UXD-019
 // - ST1 기본 / ST2 로딩(인증 확인 동안 버튼 진행 표시) / ST4 오류(위쪽 안내 상자 + '다시 시도', 같은 기기 2회 이상이면 다른 브라우저 안내)
-// - 브랜드: 위 심볼(v4 B안 Geo Shuttle, 사용자 확정 2026-11-11, 투명 SVG·배경 상자 없음) + 아래 'SMAPSH' HTML 글자(teal #006D68 = color.action.primary)
+// - 브랜드: 위 심볼(v4 B안 Geo Shuttle, 사용자 확정 2026-11-11, 투명 SVG·배경 상자 없음) + 아래 'SMAPSH' HTML 글자(color.text.accent, DD r9 Soft Mint)
 //   자산: experiments/brand-assets/v4/final. 인트로는 v3 로고 그대로(이번에 바꾸지 않음)
 // - 한 줄 소개: 02에 문구가 없어 넣지 않음(명세 공백)
 // - 카카오 인증: Mock 모드는 가짜 인증으로 분기, api 모드는 백엔드 OAuth(/api/auth/kakao/login)

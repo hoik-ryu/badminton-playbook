@@ -82,7 +82,7 @@ function Group<T extends string>({ label, options, value, onChange, onClear, bus
               className={cn(
                 'flex min-h-11 items-center justify-center gap-1 rounded-md border px-1 text-body transition-colors duration-150 disabled:opacity-60',
                 cell,
-                on ? 'border-action bg-action font-bold text-on-action' : error ? 'border-danger-fg bg-page text-ink' : 'border-line-strong bg-page text-ink',
+                on ? 'border-2 border-ink-accent bg-mint-subtle font-bold text-ink-accent' : error ? 'border-danger-fg bg-page text-ink' : 'border-line-strong bg-page text-ink',
               )}
             >
               {on && <Check aria-hidden className="size-4 shrink-0" />}

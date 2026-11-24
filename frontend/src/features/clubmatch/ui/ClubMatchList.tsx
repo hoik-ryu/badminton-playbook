@@ -1,12 +1,12 @@
 import { Activity, ChevronRight, Clock, ListChecks, Medal, Trophy } from 'lucide-react'
-import type { CSSProperties, ReactNode } from 'react'
+import { useState, type CSSProperties, type ReactNode } from 'react'
 import { Link } from 'react-router'
 
 import { formatMatchDate, type ClubMatchResult, type DisplayStatus } from '../display'
 import { CLUBMATCH_BANNER_URL, CLUBMATCH_LAUREL_URL } from './assets'
 import { ClubMatchBadge, OpsOnlyChip } from './ClubMatchBadge'
 
-// SCR-111 청백전 목록 화면 부품(UX Spec r6 02 SCR-111, DD r8 VD-049–058, Preview r5 design-preview/src/screens/SCR-111.tsx와 같은 구성).
+// SCR-111 청백전 목록 화면 부품(UX Spec r7 02 SCR-111, DD r11 VD-049–058, Preview r7 design-preview/src/screens/SCR-111.tsx와 같은 구성).
 // 스타일: src/styles/clubmatch.css(.cm 범위). 모두 ClubMatchScope 안에서 씁니다.
 
 /** 목록 한 항목(회원 목록·운영진 목록 응답을 같은 모양으로 맞춘 화면용 값) */
@@ -31,22 +31,27 @@ export type ClubMatchEntry = {
 
 const STATUS_LABEL: Record<DisplayStatus, string> = { live: '진행 중', upcoming: '진행 예정', pending: '준비 중', ended: '종료' }
 
-/** CMP-051 ClubMatchHero(VD-052) — 이미지는 장식(aria-hidden, CSS 배경), 제목·설명만 읽힘. 이미지 실패 시 hero.bg 바탕 + 글자 */
+/** CMP-051 ClubMatchHero(VD-052 r11) — 이미지는 장식 img(alt 빈 값·aria-hidden, object-fit: contain), 제목·설명만 읽힘. 이미지 실패 시 숨김 → hero.bg 바탕 + 글자 */
 export function ClubMatchHero() {
+  const [imgFailed, setImgFailed] = useState(false)
   return (
-    <div className="cm-hero" data-cmp="CMP-051" data-testid="cm-hero" style={{ '--cm-hero-img': `url(${CLUBMATCH_BANNER_URL})` } as CSSProperties}>
-      <div className="cm-hero-art" data-asset="AST-079" aria-hidden />
-      <div className="cm-hero-copy">
-        <span className="cm-hero-badge">SMAPSH 청백전</span>
-        <p className="cm-hero-title">
-          우리 동호회의
-          <br />
-          <span className="cm-hero-accent">청팀</span> vs 백팀 대결
-        </p>
-        <p className="cm-hero-desc">
-          팀을 나눠 실전처럼 경기하고
-          <br className="cm-hero-br" /> 기록과 랭킹을 함께 쌓아요.
-        </p>
+    <div className="cm-hero-wrap">
+      <div className="cm-hero" data-cmp="CMP-051" data-testid="cm-hero">
+        <div className="cm-hero-art">
+          {!imgFailed && <img className="cm-hero-img" src={CLUBMATCH_BANNER_URL} data-asset="AST-082" alt="" aria-hidden="true" onError={() => setImgFailed(true)} />}
+        </div>
+        <div className="cm-hero-copy">
+          <span className="cm-hero-badge">SMAPSH 청백전</span>
+          <p className="cm-hero-title">
+            우리 동호회의
+            <br />
+            <span className="cm-hero-accent">청팀</span> vs 백팀 대결
+          </p>
+          <p className="cm-hero-desc">
+            팀을 나눠 실전처럼 경기하고
+            <br className="cm-hero-br" /> 기록과 랭킹을 함께 쌓아요.
+          </p>
+        </div>
       </div>
     </div>
   )

@@ -73,7 +73,7 @@ export function TutorialHomePage() {
   const errorKind = courses.kind === 'error' ? 'courses' : progress.kind === 'error' ? 'progress' : undefined
 
   return (
-    <section data-scr="SCR-101" data-st={st} data-error={errorKind} className="tutorial-theme flex w-full max-w-[600px] flex-1 flex-col bg-page">
+    <section data-scr="SCR-101" data-st={st} data-error={errorKind} className="flex w-full max-w-[600px] flex-1 flex-col bg-page">
       <PageHeader title="튜토리얼" />
       <div className="flex flex-col px-3 pb-6">
         {courses.kind === 'loading' ? (
@@ -155,7 +155,7 @@ function Banner({ children }: { children: ReactNode }) {
 function ContinueCard({ course, stage, best }: { course: TutorialCourse; stage: TutorialCourseStage; best: number | null }) {
   return (
     <Link to={`/tutorial/stages/${stage.id}`} data-cmp="CMP-050" className="tu-soft-lg mt-3 flex items-center gap-3 rounded-md border border-line/70 bg-page px-3 py-2.5 text-ink no-underline">
-      <span aria-hidden className="grid size-10 shrink-0 place-items-center rounded-full border-2 border-action bg-page text-action">
+      <span aria-hidden className="grid size-10 shrink-0 place-items-center rounded-full border-2 border-ink-accent bg-page text-ink-accent">
         <Play className="size-5 fill-current" />
       </span>
       <span className="grid min-w-0 flex-1">

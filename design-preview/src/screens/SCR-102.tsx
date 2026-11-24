@@ -58,7 +58,7 @@ function Shell({ stateId, course, step, goal, index, score, retry, onExit, desc,
 // 상단 바(CMP-026 close): 경기장 위 어두운 띠 + 흰 글자. 상황 진행 n/5·점수, 재도전 표시
 function TopBar({ course, step, goal, index, score, retry, onExit }: { course: string; step: number; goal: string; index: number; score: number; retry?: boolean; onExit?: () => void }) {
   return (
-    <header data-cmp="CMP-026" data-variant="close" className="relative z-[1] flex items-center gap-1.5 pr-3 pl-1 text-on-action">
+    <header data-cmp="CMP-026" data-variant="close" className="relative z-[1] flex items-center gap-1.5 pr-3 pl-1 text-on-strong">
       <button type="button" onClick={onExit} className="flex h-11 shrink-0 items-center gap-0.5 rounded-md px-2 text-caption font-bold">
         <X aria-hidden className="size-5" />
         나가기
@@ -111,7 +111,7 @@ function Playback({ ms = 1100 }: { ms?: number }) {
   useEffect(() => { const t = window.setTimeout(() => setGo(true), 30); return () => window.clearTimeout(t) }, [])
   return (
     <div role="status" className="grid gap-2 pt-1">
-      <p className="flex items-center gap-2 text-body font-bold"><Play aria-hidden className="size-5 fill-current text-action" />상황 재생 중</p>
+      <p className="flex items-center gap-2 text-body font-bold"><Play aria-hidden className="size-5 fill-current text-ink-accent" />상황 재생 중</p>
       <span className="h-1.5 overflow-hidden rounded-full bg-surface"><i className="block h-full rounded-full bg-action transition-[width] ease-linear motion-reduce:transition-none" style={{ width: go ? '100%' : '0%', transitionDuration: `${ms}ms` }} /></span>
       <p className="text-caption text-ink-muted">코트를 누르면 건너뛸 수 있어요</p>
     </div>
@@ -169,7 +169,7 @@ function ExitDialog({ onCancel, onExit }: { onCancel: () => void; onExit: () => 
         <p className="mt-1.5 text-body text-ink-muted">지금 나가면 이번 진행은 저장되지 않습니다.</p>
         <div className="mt-4 flex gap-2">
           <button type="button" autoFocus onClick={onCancel} className="h-12 flex-1 rounded-md bg-surface text-body font-bold">취소</button>
-          <button type="button" onClick={onExit} className="h-12 flex-1 rounded-md bg-danger-fg text-body font-bold text-on-action">나가기</button>
+          <button type="button" onClick={onExit} className="h-12 flex-1 rounded-md bg-danger-fg text-body font-bold text-on-strong">나가기</button>
         </div>
       </div>
     </div>

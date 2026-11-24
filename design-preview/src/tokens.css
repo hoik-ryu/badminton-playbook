@@ -1,12 +1,13 @@
-/* 생성 기준: theme-check --print-css (04 승인 토큰 + docs/design-profile/theme.json). 값은 손으로 고치지 않고 테마 파일을 바꾼 뒤 다시 맞춥니다. */
 :root {
   --breakpoint-base: 0–767px;
   --breakpoint-desktop: ≥1024px;
   --breakpoint-tablet: 768–1023px;
-  --color-accent-mint: #8EE3CC;
-  --color-accent-subtle: #DDF8EF;
-  --color-action-onPrimary: #FFFFFF;
-  --color-action-primary: #0B9E8B;
+  --color-accent-mint: #62B5A3;
+  --color-accent-subtle: #C0F0E2;
+  --color-action-onPrimary: #1A1D23;
+  --color-action-onStrong: #FFFFFF;
+  --color-action-primary: #40CDAE;
+  --color-action-strong: #376F65;
   --color-award-gold: #B7791F;
   --color-bg-page: #FAFFFD;
   --color-bg-surface: #F4F5F7;
@@ -18,10 +19,10 @@
   --color-court-me: #1D5BD0;
   --color-court-opponent: #F2C14E;
   --color-court-surface: #2F7D4F;
-  --color-focus-ring: #087F73;
-  --color-hero-accent: #5FFFFF;
-  --color-hero-bg: #026C6D;
-  --color-hero-text: #FFFFFF;
+  --color-focus-ring: #376F65;
+  --color-hero-accent: #376F65;
+  --color-hero-bg: #C0F0E2;
+  --color-hero-text: #1A1D23;
   --color-method-individual-bg: #EEEAFB;
   --color-method-individual-fg: #5B3FA8;
   --color-status-danger-bg: #FDE7E5;
@@ -35,7 +36,7 @@
   --color-team-blue-fg: #1747A6;
   --color-team-white-bg: #FFFFFF;
   --color-team-white-fg: #1A1D23;
-  --color-text-accent: #10776C;
+  --color-text-accent: #376F65;
   --color-text-disabled: #6B7280;
   --color-text-primary: #1A1D23;
   --color-text-secondary: #545A65;

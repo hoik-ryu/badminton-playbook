@@ -102,8 +102,9 @@ describe('club match routes (4단계)', () => {
   })
 })
 
-// CMP-025 하단 탭: 회원 3탭·운영진 4탭 그대로. 현재 탭 글자 = color.text.accent(text-ink-accent), 아이콘·표시 막대 = color.action.primary, 비활성 = text-ink-muted
-describe('bottom tab active state (DD r8 color.text.accent)', () => {
+// CMP-025 하단 탭: 회원 3탭·운영진 4탭 그대로. (DD r9 VD-019 Soft Mint) 현재 탭 글자·아이콘 = color.text.accent(text-ink-accent, 5.74:1),
+// 표시 막대 = color.action.primary(장식), 비활성 = text-ink-muted. Main Mint 단독 아이콘(1.97:1)은 쓰지 않음
+describe('bottom tab active state (DD r9 color.text.accent)', () => {
   beforeEach(() => window.localStorage.clear())
 
   const tabs = async () => {
@@ -120,12 +121,14 @@ describe('bottom tab active state (DD r8 color.text.accent)', () => {
         expect(a).toHaveAttribute('aria-current', 'page')
         expect(a).toHaveClass('font-bold', 'text-ink-accent')
         expect(a).not.toHaveClass('text-action')
-        expect(icon).toHaveClass('text-action')
+        expect(icon).toHaveClass('text-ink-accent')
+        expect(icon).not.toHaveClass('text-action')
         expect(bar).toHaveClass('bg-action')
       } else {
         expect(a).not.toHaveAttribute('aria-current')
         expect(a).toHaveClass('text-ink-muted')
         expect(icon).not.toHaveClass('text-action')
+        expect(icon).not.toHaveClass('text-ink-accent')
         expect(bar).toBeNull()
       }
       expect(labelEl).toHaveClass('text-caption') // 글자 크기 그대로

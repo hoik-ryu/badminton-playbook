@@ -13,7 +13,7 @@ export function FilterChip({ label, count, pressed, onToggle }: { label: string;
       onClick={onToggle}
       className={cn(
         'relative inline-flex h-8 shrink-0 items-center gap-1 rounded-md border px-3 text-body whitespace-nowrap before:absolute before:-inset-y-1.5 before:inset-x-0 before:content-[""]',
-        pressed ? 'border-action bg-action font-bold text-on-action' : 'border-line-strong bg-page text-ink',
+        pressed ? 'border-ink-accent bg-mint-subtle font-bold text-ink-accent' : 'border-line-strong bg-page text-ink',
       )}
     >
       {pressed && <Check aria-hidden className="size-4" />}

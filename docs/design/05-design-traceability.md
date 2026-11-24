@@ -1,6 +1,6 @@
 ---
 doc: design-traceability
-revision: 6
+revision: 7
 language: ko
 based_on:
   planning_revision: 7
@@ -23,6 +23,8 @@ based_on:
 > **r5 개정(2026-11-19)**: UX 결정 r6(UXD-077 개정)을 기준으로 맞췄습니다. SCR-102·CMP-046의 재생 중 격자 표시 문구만 바뀌었고, 요구사항(AC·FR·FLOW)과 화면·컴포넌트의 추적 관계는 바뀌지 않았습니다.
 
 > **r6 개정(2026-11-20)**: UX Planning r7(UXD-085–089, UXD-047·075 대체)을 기준으로 맞췄습니다. 청백전 관리 목록·운영 상세(SCR-221·SCR-223)를 폐기하고 SCR-111·SCR-112로 통합해, 그 화면을 가리키던 US·AC 행을 SCR-111·SCR-112의 상태로 옮겼습니다(상태 번호 대응은 `03` r6 메모). AC 문장·기획 ID는 바꾸지 않았습니다.
+
+> **r7 개정(2026-11-23)**: Soft Mint 디자인 시스템 전환(사용자 결정 2026-11-23)에 따라 `04` 1.2에 색 토큰 2개(`color.action.strong`, `color.action.onStrong`)를 추가하고 `color.action.primary`·`color.text.accent`의 역할과 CMP-005 `live`·`upcoming` 색 규칙을 고쳤습니다. 요구사항(US·AC·FR·FLOW)과 화면·UX 결정 매핑, 커버리지 수치는 바뀌지 않았습니다.
 
 ## 1. User Story → 화면
 

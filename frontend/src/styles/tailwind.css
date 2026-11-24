@@ -22,6 +22,9 @@
   --color-line-strong: var(--color-border-strong);
   --color-action: var(--color-action-primary);
   --color-on-action: var(--color-action-onPrimary);
+  /* (2026-11-24, UX Spec r7·DD r9 Soft Mint) 진한 채움(스위치 켜짐·체크박스·진행 중 배지 등)과 그 위 글자 */
+  --color-strong: var(--color-action-strong);
+  --color-on-strong: var(--color-action-onStrong);
   --color-focus: var(--color-focus-ring);
   --color-info-bg: var(--color-status-info-bg);
   --color-warning-fg: var(--color-status-warning-fg);
@@ -36,7 +39,7 @@
   --color-white-team-bg: var(--color-team-white-bg);
   --color-kakao-bg: var(--color-brand-kakao-bg);
   --color-kakao-fg: var(--color-brand-kakao-fg);
-  /* (2026-11-24, 청백전 1단계) DD r8 VD-049 청백전 토큰 — SCR-111 배너·우승 아이콘·개인전 배지 */
+  /* 청백전 토큰(VD-049, DD r9 값) — SCR-111 배너·우승 아이콘·개인전 배지 */
   --color-hero: var(--color-hero-bg);
   --color-hero-ink: var(--color-hero-text);
   --color-hero-highlight: var(--color-hero-accent);

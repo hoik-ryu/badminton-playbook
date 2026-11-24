@@ -1,12 +1,6 @@
 /* 튜토리얼 영역 스타일 — design-preview/src/tutorial.css(Preview r3 승인)에서 제품 화면에 쓰는 것만 옮김. 색은 토큰 변수만 씁니다. */
 
-/* 튜토리얼 영역 테마(사용자 결정 2026-11-20): 제품 전체 tokens.css는 그대로 두고, 튜토리얼 화면(SCR-101·102·103)의 루트에만
-   승인된 DD r6 / Preview r3 테마 값(theme-check --print-css 출력값)을 덮어씀. 청백전·마이페이지·운영 화면에는 이 클래스가 없음 */
-.tutorial-theme {
-  --color-action-primary: #0B9E8B;
-  --color-bg-page: #FAFFFD;
-  --color-focus-ring: #087F73;
-}
+/* (2026-11-24, DD r9 Soft Mint) 튜토리얼 범위 테마 덮어쓰기(.tutorial-theme)는 없앴습니다 — 앱 전체 tokens.css 한 벌을 씁니다 */
 
 /* SCR-101 목록 장식(DD r6 VD-024 r4·VD-033·VD-046) */
 .tu-banner {

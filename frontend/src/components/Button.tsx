@@ -6,6 +6,8 @@ import type { ComponentProps } from 'react'
 
 // CMP-001 Button — 04: variant=primary|secondary|danger|text|kakao, size=md(44)|lg(48), fullWidth, 상태 기본·눌림·비활성·로딩
 // 반경 radius.md(10), 글자 body 16 굵게. 포커스 링은 base.css(color.focus.ring)
+// (DD r9 4.1 Soft Mint) primary lg = Main Mint + 어두운 글자(8.49:1), primary md(작은 주 버튼) = 흰 바탕 + text.accent 글자·테두리(5.74:1),
+// danger = 빨강 채움 + 흰 글자(onStrong), text = text.accent 글자. Main Mint 단독 글자는 쓰지 않음(1.97:1)
 const buttonVariants = cva(
   'inline-flex shrink-0 items-center justify-center gap-1.5 rounded-md px-4 text-body font-bold whitespace-nowrap select-none transition-[background-color,transform] duration-150 active:translate-y-px disabled:cursor-not-allowed aria-busy:cursor-progress [&_svg]:size-5 [&_svg]:shrink-0',
   {
@@ -13,13 +15,14 @@ const buttonVariants = cva(
       variant: {
         primary: 'bg-action text-on-action disabled:bg-surface disabled:text-ink-disabled',
         secondary: 'border border-line-strong bg-page text-ink disabled:border-line disabled:text-ink-disabled',
-        danger: 'bg-danger-fg text-on-action disabled:bg-surface disabled:text-ink-disabled',
-        text: 'bg-transparent px-2 text-action disabled:text-ink-disabled',
+        danger: 'bg-danger-fg text-on-strong disabled:bg-surface disabled:text-ink-disabled',
+        text: 'bg-transparent px-2 text-ink-accent disabled:text-ink-disabled',
         kakao: 'bg-kakao-bg text-kakao-fg disabled:opacity-60',
       },
       size: { md: 'h-11', lg: 'h-12' },
       fullWidth: { true: 'w-full' },
     },
+    compoundVariants: [{ variant: 'primary', size: 'md', class: 'border-[1.5px] border-ink-accent bg-page text-ink-accent disabled:border-line disabled:bg-page' }],
     defaultVariants: { variant: 'primary', size: 'lg' },
   },
 )

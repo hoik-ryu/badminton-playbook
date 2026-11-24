@@ -86,7 +86,7 @@ export function MyPage() {
                 </h2>
                 {load.record.rank ? (
                   <>
-                    <p className="m-0 text-display font-bold text-action" aria-label={`랭크 ${load.record.rank}`}>
+                    <p className="m-0 text-display font-bold text-ink-accent" aria-label={`랭크 ${load.record.rank}`}>
                       {load.record.rank}
                     </p>
                     <p className="m-0 text-body text-ink">승률 {percent(load.record.rate)}</p>
@@ -114,7 +114,7 @@ export function MyPage() {
                   <span className="font-bold">{load.record.games}경기</span> {load.record.wins}승 {load.record.losses}패 · 승률 {percent(load.record.rate)}
                 </p>
               )}
-              <Link to="/club-matches" className="flex h-11 items-center self-start text-body font-bold text-action no-underline">
+              <Link to="/club-matches" className="flex h-11 items-center self-start text-body font-bold text-ink-accent no-underline">
                 청백전 기록 보기 ›
               </Link>
             </section>

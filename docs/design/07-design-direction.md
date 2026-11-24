@@ -1,9 +1,9 @@
 ---
 doc: design-direction
-revision: 8
+revision: 11
 language: ko
 based_on:
-  ux_spec_revision: 6
+  ux_spec_revision: 7
 ---
 
 # 디자인 방향 (Design Direction): 배드민턴 플레이북 (badminton-playbook)
@@ -55,6 +55,26 @@ based_on:
 > - **대비 재계산**: 경기장 바닥(이미지 표본 15곳, 약 #0A9973–#3DC08F)은 토큰 `color.court.surface`(#2F7D4F)보다 밝아, 기존 VD의 코트 위 대비 값이 바뀌었습니다. 9장 기준 미달 항목을 4.2에 계산값 그대로 적었습니다(사용자 결정 필요).
 > - **바뀌지 않음**: UX Planning r6·UX Spec r5의 기능·판정·점수·재도전 규칙, 칸 번호 체계, UXD-078 확인 단계(44px), UXD-081 아래 영역 160px, 다른 VD와 테마
 
+> **r11 개정(2026-11-24)**: DD r10 승인(사용자 원문 "Design Direction r10을 승인합니다.") 뒤 Preview r7 검증에서 배너 가장자리에 배너 바탕이 1–2px 선으로 비치는 문제를 찾았습니다. 원인 ① AST-081 처리 오류(직선 가장자리 바깥 1px 줄이 알파 128로 저장 — r10에 적은 '경계 1px 안티앨리어스는 둥근 모서리'와 다름) ② CSS 배경으로 크게 줄여 그릴 때 브라우저가 가장자리 바깥 투명을 섞음(360·390). 사용자 선택(2026-11-24) "수정본+img로 정식 교체 (권장)"에 따라 `reopen`했습니다. r10 승인 사본은 저장소 밖 `~/smapsh-work/2026-11-24-banner-full/backup/07.r10.md`(sha256 `a46de78c…`).
+> - **범위**: VD-052만 — 이미지 AST-081 → **AST-082**(같은 원본·경계·비율, 가장자리 마스크만 수정), 표시 방식 CSS 배경 → **장식 `img`**(빈 대체 글자 `alt=""`, `aria-hidden`, `object-fit: contain`). 비율(1692/693)·모서리 처리·글자·색·간격·다른 VD·테마는 r10 그대로.
+> - **검증(시험 사본)**: 배너 바탕을 자홍으로 바꾼 비침 시험에서 '수정본 + img'만 360·390·1440 모두 비침 0(현재 AST-081 + CSS 배경은 390에서 2,345 기기 픽셀). 비교 `~/smapsh-work/2026-11-24-preview-r7/edge-compare.png`.
+
+> **r10 개정(2026-11-24)**: Preview r6 승인과 Soft Mint 제품 반영 뒤, 사용자 결정 "저는 기존 3:1 비율을 유지하는 것보다 제가 전달한 원본 이미지의 전체 구도를 유지하는 것을 원합니다." 에 따라 `reopen --stage design_direction`(r9 승인 해제, Preview 승인 무효화)으로 시작했습니다. 근거: `impact --design` R1·R2 ④(시각, 장식 이미지). r9 승인 사본은 저장소 밖 `~/smapsh-work/2026-11-24-banner-full/backup/07.r9.md`(sha256 `1efd70cf…42bc577`).
+> - **범위**: VD-052만 — 배너 이미지를 AST-080(3:1 크롭)에서 **AST-081(원본 전체 구도, 1692×693 ≈ 2.44:1)**로 바꾸고, 이미지 상자 비율을 3:1 고정에서 **이미지 실제 비율**로 바꿉니다. 글자·색·간격·글자 띠·그늘·접근성 규칙과 다른 VD, 공식 테마(0.4.0-soft-mint), UX Spec r7, 탐색 선택(EXP-V08-A)은 바꾸지 않습니다.
+> - **사용자 지시 원문(2026-11-24)**: "최초 전달한 1774×887 원본 이미지 사용" · "배너 외부의 투명 여백과 불필요한 노이즈만 제거" · "민트색 배경 및 상·하단 코트 영역 전체 보존" · "청팀 VS 백팀, 월계관, 셔틀콕 등 기존 구성 보존" · "3:1 비율에 맞추기 위한 강제 크롭 금지" · "이미지 왜곡 및 색상 변경 금지" · "원본 배너 영역의 실제 비율에 맞춰 컨테이너 높이 조정" · "원본 구도를 유지한 제품용 WebP 생성".
+> - **B-13 예외의 정식 반영**: Preview r6 승인 때 예외로 기록한 결정(EX-SM-01, 사용자 원문 "현재 배너 제목의 크기와 줄바꿈을 유지합니다." · "360px 및 390px에서 제목이 39.4% 기준선을 13–14px 넘더라도 실제 그래픽과 겹치지 않고 가독성이 확보되므로 현재 디자인을 선택합니다.")을 VD-052 겹침 규칙에 옮깁니다 — 기준은 '글자 줄 아래 대결 그래픽 픽셀 0'이고, 39.4% 선은 참고선입니다.
+> - AST-080은 등록부와 이력에 그대로 두고 쓰지 않습니다(r9 승인 근거 보존).
+
+> **r9 개정(2026-11-23–24)**: UX Spec r7 승인(사용자 원문 "UX Spec r7을 승인합니다. Soft Mint 공통 디자인 시스템의 신규 토큰, 버튼·배지·선택 상태·접근성 규칙 변경을 승인합니다.") 뒤 `begin`(ux_spec r7 기준)으로 시작했습니다. SMAPSH 전체를 Soft Mint 디자인 시스템으로 통일합니다. 근거: 사용자 원문(2026-11-23) "Soft Mint 최종 시안을 선택했습니다." · "SMAPSH 전체 디자인 시스템을 Soft Mint로 통일합니다.", 영향 분류 `impact --design` R1(③)·R2(②, UX Spec r7)·R3–R5(④).
+> - **사용자 결정 원문(2026-11-23, 팔레트)**: "Main Mint: `#40CDAE`" · "Deep Mute Mint: `#376F65`" · "Mute Mint: `#62B5A3`" · "Light Mint: `#C0F0E2`" · "Page Background: `#FAFFFD`" · "기본 텍스트: `#1A1D23`" · "기존 DD r8의 짙은 청록색은 새 디자인 체계로 교체합니다."
+> - **사용자 결정 원문(2026-11-23, 컴포넌트 규칙)**: "큰 CTA 및 '새 청백전': 메인 민트 배경 + 어두운 텍스트" · "일반 텍스트·링크·활성 탭·포커스: Deep Mute Mint" · "선택 상태 및 예정 배지: Light Mint + Deep Mute Mint" · "진행 중 배지: Deep Mute Mint 배경 + 흰색 텍스트" · "진행률 바: 밝은 Main Mint 유지, 수치 텍스트 병행" · "청팀·백팀, 개인전, 경고 등 의미 색상은 유지"
+> - **공식 테마(③)**: `docs/design-profile/theme.json` 0.4.0-soft-mint — `color.action.primary` #40CDAE, `color.action.onPrimary` #1A1D23, `color.action.strong` #376F65·`color.action.onStrong` #FFFFFF(UX Spec r7 새 토큰), `color.accent.subtle` #C0F0E2, `color.accent.mint` #62B5A3(장식 면 전용), `color.text.accent`·`color.focus.ring` #376F65, `color.hero.bg` #C0F0E2·`color.hero.text` #1A1D23·`color.hero.accent` #376F65. 그 밖의 값(페이지·글자·팀·상태·개인전·금색·코트·카카오)은 그대로입니다.
+> - **개정 VD**: VD-019(현재 탭 아이콘), VD-038(공식 팔레트), VD-049(청백전 채움색 폐지), VD-053(진행 중·진행 예정 배지), 4.1(큰 CTA 글자). VD-052(새 배너 AST-080 — 사용자 제공 ChatGPT 생성 이미지, 권리 확인 2026-11-24, 실제 픽셀 글자 대비 9.93:1 이상).
+> - **토큰 값만 바뀌는 다른 VD**: VD-024·026–030·040–058의 규칙(어떤 토큰을 쓰는지)은 그대로이고 렌더 색만 새 테마 값을 따릅니다. 경기장 칸 채움(`color.accent.mint` 24·50%)은 테두리를 `color.text.primary`로 그리므로 경계 대비는 그대로이고, 흰 번호 대 칸 면은 3.63→4.20(기본)·2.60→3.44(선택)로 좋아집니다(번호 받침 60%는 그대로, 4.2.1 값 유지).
+> - **바뀌지 않음**: UX Planning r7·UX Spec r7의 화면·정보·행동·권한·흐름, 컴포넌트 구성·치수·간격, 승인된 탐색 선택(EXP-V08-A).
+> - **대비 검증(계산)**: Deep Mute 글자 대 #FFFFFF 5.79·#FAFFFD 5.74·#F4F5F7 5.31·Light Mint 4.64, 흰 글자 대 Deep Mute 5.79, 어두운 글자 대 Main Mint 8.49·Light Mint 13.51, 포커스 대 페이지 5.74 — 모두 9장 기준 충족. 쓰지 않는 조합: Main Mint 단독 글자·아이콘(1.97), Deep Mute 글자·아이콘 대 Main Mint(2.91), Mute Mint 글자·아이콘(2.40), 흰 글자 대 Main Mint(1.99)·Light Mint(1.25). 진행 막대(Main Mint 대 트랙 1.82)는 수치 글자를 늘 함께 보여 주므로(04 CMP-049, UX Spec r7 1.2) 허용.
+> - r8 승인 기록은 `design.json`의 `last_approved`(r8)와 Git 이력에 있습니다.
+
 > **r8 개정(2026-11-23, 제출 — 사용자 승인 대기)**: r7 제출(2026-11-20T08:54:29Z, 07 sha256 4aa62877…17cb) 뒤 사용자 원문 "4.2 경기장 접근성 문제는 A안을 선택합니다." · "Design Direction r7을 승인하지 않고, 정식 reopen 절차를 통해 r8로 개정하겠습니다."로 `reopen --stage design_direction`(엔진 기록 `changes_requested` r7). r7 제출 기록 사본은 저장소 밖 `~/smapsh-work/2026-11-23-dd-r8/r7-submitted/`(제출 기록 JSON·07 r7 원문·상태 파일).
 > - **범위**: 경기장 접근성 VD-026(학습 격자)·VD-027(칸 번호)·VD-028(칸 경계·선택)·VD-029(판정 칸 경계)만 개정. 다른 VD, SCR-111·112 계약(VD-049–058), V08-A 선택·채택, AST-079·070 권리 확인, 공식 테마는 바꾸지 않음
 > - **사용자 지시(2026-11-23) 원문**: 칸 번호 "흰색 100% 숫자 사용" · "`color.text.primary` 55%의 둥근 반투명 받침 사용" · "선택 전·선택 중·판정 후 모든 상태에서 가독성 확보" / 학습 격자 "`color.text.primary` 85%의 어두운 점선 사용" · "실제 코트의 흰 라인과 명확하게 구분" / 기본 칸 경계 "`color.text.primary` 100%의 어두운 테두리 사용" / 선택한 칸 "굵은 흰색 테두리와 바깥쪽 얇은 어두운 선 사용" / 판정 칸 "정답·허용·오답의 기존 상태색 유지" · "경계는 어두운 선으로 표시" · "기존 실선·점선의 의미 차이 유지" / "기존 공식 테마 토큰만 사용하세요." · "UX Spec r6을 다시 열지 마세요."
@@ -97,6 +117,9 @@ based_on:
 | H. (r6) 경기장 디자인 반영 | VD-047·048(새), VD-026·027·028·029·030·044(개정), 4.2 대비 재계산 | - |
 | G. (r4) DD 해결 항목 | - | 4.1 작은 주 버튼·SegmentedControl 대비(결정 2026-11-19), CR-012 자산 권리 확인(2026-11-19: AST-028–037·046 확인 완료, AST-018 미확인 — VD-046에서 제외) |
 
+| K. (r9) Soft Mint 디자인 시스템 | 승인: VD-019·038·049·053 개정, 4.1 개정(사용자 결정 2026-11-23), VD-052 개정(새 배너 AST-080, 사용자 결정·권리 확인 2026-11-24) | - |
+| M. (r11) 배너 가장자리 비침 수정 | VD-052 개정: AST-082(AST-081 가장자리 마스크 수정본), 표시 = 장식 img(alt 빈 값·aria-hidden·object-fit contain) — 사용자 선택 2026-11-24 | - |
+| L. (r10) 배너 원본 전체 구도 | VD-052 개정: AST-081(원본 구도 2.44:1), 이미지 상자 = 이미지 실제 비율, 겹침 규칙 = 글자 아래 그래픽 픽셀 0(B-13 결정 반영) — 사용자 결정 2026-11-24 | - |
 | J. (r8 초안) 경기장 접근성 | VD-026·027·028·029 개정(어두운 격자·번호 받침·어두운 칸 경계·판정 칸 어두운 경계), 4.2 재검증 | - |
 | I. (r7) 청백전 목록 SCR-111(EXP-V08-A) | 승인: VD-049–058(VD-052·058은 AST-079·070 권리 확인 뒤 3차 결정), VD-019 개정(현재 탭 글자 `color.text.accent`) | CR-014·015(A안 반영) |
 
@@ -179,6 +202,7 @@ based_on:
 - **상태**: 승인 (r7 개정: 사용자 결정 2026-11-20 3차 "하단 탭의 현재 선택된 탭 글자 색상은 `color.text.accent`를 사용하도록 변경하는 방향을 승인합니다.")
 - **근거**: 사용자 결정(2026-11-11, CR-007을 시각 표현으로 반영). 04 CMP-025 상태 '현재 탭'(aria-current), 04 4장 '아이콘은 기능만 정의'. (r7) 사용자 결정 2026-11-20 3차, 9장 글자 대비 기준. 04 CMP-025는 현재 탭 색을 정하지 않으므로 ④ 시각 표현 변경(UX Spec 변경 없음)
 - **개정 영향(r7, 확인만 — 이번에 코드는 바꾸지 않음)**: 렌더 범위에서 VD-019를 쓰는 화면 SCR-101·111·112·121·201·202·211(하단 탭 공통 CMP-025 한 곳). Preview 부품(`design-preview/src/components/smapsh/AppNav.tsx`)은 이미 '아이콘·막대 primary + 글자 text.accent'로 그려져 있어 Preview r4에서 바뀌는 값은 없습니다. 제품 코드 `frontend/src/components/AppNav.tsx`는 현재 탭 링크 전체에 `text-action`을 써서 글자도 #0B9E8B(3.31:1)이므로, 구현 단계에서 글자만 `color.text.accent`로 바꿔야 합니다(아이콘·막대는 그대로).
+- **(r9 개정, Soft Mint)**: 현재 탭은 **글자와 아이콘 `color.text.accent`**(#376F65, 탭바 바탕 #FAFFFD 위 5.74:1), **위쪽 표시 막대 `color.action.primary`**(#40CDAE, 장식 — 현재 탭은 글자·아이콘 색과 굵은 글자, `aria-current`로도 구분), 선택 안 된 탭 `color.text.secondary`(6.87:1) 그대로. Main Mint 아이콘(1.97:1)은 쓰지 않습니다(UX Spec r7 1.2). 상태: 승인(r9, 사용자 결정 2026-11-23 원문 "일반 텍스트·링크·활성 탭·포커스: Deep Mute Mint").
 - **관련**: CMP-025, color.action.primary, color.text.accent, color.text.secondary, color.bg.page
 - **토큰 밖 값**: 없음
 
@@ -429,6 +453,7 @@ based_on:
 ### VD-038: 색·팔레트 — 채택 테마(V04-A·V05 공통)
 - **결정**: 채택 후보 테마의 색 토큰 값을 공식 테마 후보로 씁니다. color.accent.mint = #8EE3CC; color.accent.subtle = #DDF8EF; color.action.onPrimary = #FFFFFF; color.action.primary = #0B9E8B; color.bg.page = #FAFFFD; color.bg.surface = #F4F5F7; color.border.default = #D5D9E0; color.border.strong = #6B7280; color.brand.kakao.bg = #FEE500; color.brand.kakao.fg = #191919; color.court.line = #FFFFFF; color.court.me = #1D5BD0; color.court.opponent = #F2C14E; color.court.surface = #2F7D4F; color.focus.ring = #087F73; color.status.danger.bg = #FDE7E5; color.status.danger.fg = #B3261E; color.status.info.bg = #E3ECFC; color.status.success.bg = #E4F4E8; color.status.success.fg = #1B6E35; color.status.warning.bg = #FFF3D1; color.status.warning.fg = #7A4F00; color.team.blue.bg = #E3ECFC; color.team.blue.fg = #1747A6; color.team.white.bg = #FFFFFF; color.team.white.fg = #1A1D23; color.text.accent = #10776C; color.text.disabled = #6B7280; color.text.primary = #1A1D23; color.text.secondary = #545A65. 공식 테마 대비 바뀌는 값은 `color.action.primary` #006D68 → #0B9E8B, `color.focus.ring` #008F89 → #087F73(CR-011 결정 값)이고 나머지는 04 기본값을 테마 파일에 옮겨 적는 것입니다.
 - **상태**: 승인 (사용자 결정 2026-11-19: '권리 미확인 자산에 의존하지 않는 VD는 앞서 제안한 승인 방향으로 진행합니다.')
+- **(r9 개정, Soft Mint)**: 공식 팔레트를 Soft Mint로 바꿉니다 — color.action.primary = #40CDAE(Main Mint), color.action.onPrimary = #1A1D23, color.action.strong = #376F65(Deep Mute Mint), color.action.onStrong = #FFFFFF, color.accent.subtle = #C0F0E2(Light Mint), color.accent.mint = #62B5A3(Mute Mint, 장식 면 전용), color.text.accent = #376F65, color.focus.ring = #376F65. color.bg.page #FAFFFD·color.text.primary #1A1D23과 나머지 값은 그대로. 상태: 승인(r9, 사용자 원문(2026-11-23) "Soft Mint 최종 시안을 선택했습니다." · "SMAPSH 전체 디자인 시스템을 Soft Mint로 통일합니다.").
 - **근거**: 사용자 선택 EXP-V04-A, 사용자 선택 EXP-V05-MIX, CR-011 (엔진 채택 후보 V04 VD-038–043·V05 VD-038–043을 병합·재번호, 사용자 결정 2026-11-19 'VD 정리안 승인')
 - **관련**: SCR-101, SCR-102, SCR-103, color.accent.mint, color.accent.subtle, color.action.onPrimary, color.action.primary, color.bg.page, color.bg.surface, color.border.default, color.border.strong, color.brand.kakao.bg, color.brand.kakao.fg, color.court.line, color.court.me, color.court.opponent, color.court.surface, color.focus.ring, color.status.danger.bg, color.status.danger.fg, color.status.info.bg, color.status.success.bg, color.status.success.fg, color.status.warning.bg, color.status.warning.fg, color.team.blue.bg, color.team.blue.fg, color.team.white.bg, color.team.white.fg, color.text.accent, color.text.disabled, color.text.primary, color.text.secondary
 - **토큰 밖 값**: 없음
@@ -550,7 +575,8 @@ based_on:
 - **상태**: 승인 (사용자 결정(2026-11-20, 2차): "권리 확인을 제외한 나머지 시각 결정은 확정 방향으로 정리해 주세요.") · 결정 원문: "앱 전체 `color.action.primary`는 기존 공식 테마 값 `#0B9E8B`를 유지합니다." · "청백전에서 흰색 글자를 사용하는 채움 버튼과 진행 중 배지는 접근성 기준을 만족하는 `#087F73`을 사용합니다." · "`bg.page`, `bg.surface`, `border.default`, `team.blue` 관련 값은 모두 공식 테마를 유지합니다." · "`award.gold`, `method.individual`은 UX Spec r6의 04 초기값을 사용하세요."
 - **근거**: 사용자 선택 EXP-V08-A (REF-002: RX-002-15 · RX-002-23; REF-003: RX-003-07 · RX-003-08 · RX-003-10 · RX-003-11), 사용자 결정(2026-11-20, 2차)
 - **관련**: SCR-111, color.hero.bg, color.hero.text, color.hero.accent, color.award.gold, color.method.individual.fg, color.method.individual.bg, color.text.accent, color.accent.mint, color.accent.subtle, color.team.blue.fg, color.team.blue.bg, color.team.white.fg, color.bg.surface
-- **토큰 밖 값**: 있음 — 청백전 채움색 #087F73(SCR-111 전용, 위 설명)
+- **(r9 개정, Soft Mint)**: **청백전 채움색 #087F73(토큰 밖 값)을 폐지**합니다. 작은 흰 글자 채움('진행 중' 배지, 배너 'SMAPSH 청백전' 배지)은 UX Spec r7의 `color.action.strong`(#376F65) + `color.action.onStrong`(흰, 5.79:1), **'새 청백전'은 큰 CTA 규칙**(`color.action.primary` #40CDAE + `color.action.onPrimary` #1A1D23, 8.49:1, 4.1 r9). 배너 토큰 `color.hero.bg` #C0F0E2·`color.hero.text` #1A1D23(13.51:1)·`color.hero.accent` #376F65(4.64:1, 큰 글자). 진행 중 카드 테두리 `color.accent.mint`(#62B5A3, 장식 — 상태는 배지 글자로 전달). 역할 배분(강조 글자·아이콘 `color.text.accent`, 연한 면 `color.accent.subtle`, 청팀 파랑·백팀 흰색·중립, 초록 미사용)은 그대로. 상태: 승인(r9, 사용자 결정 2026-11-23 원문 "큰 CTA 및 '새 청백전': 메인 민트 배경 + 어두운 텍스트" · "진행 중 배지: Deep Mute Mint 배경 + 흰색 텍스트").
+- **토큰 밖 값**: ~~있음 — 청백전 채움색 #087F73(SCR-111 전용, 위 설명)~~ (r9) 없음
 - **공식 테마 반영**: ~~(제출 전 할 일)~~ (3차 완료, 2026-11-20) `color.hero.bg` #026C6D·`color.hero.text` #FFFFFF·`color.hero.accent` #5FFFFF·`color.award.gold` #B7791F·`color.method.individual.fg` #5B3FA8·`color.method.individual.bg` #EEEAFB를 `docs/design-profile/theme.json`에 더했습니다(전에는 테마 파일에 없던 토큰). 다른 토큰 값(앱 전체 색·팀 색)은 바뀌지 않았습니다. 청백전 채움색 #087F73은 테마 토큰이 아니며 SCR-111 범위에만 씁니다.
 
 ### VD-050: 아이콘 — SCR-111 *(r7)*
@@ -572,7 +598,27 @@ based_on:
 - **관련**: SCR-111, CMP-001, CMP-005, CMP-025, CMP-026, CMP-043, CMP-051, CMP-052, space.gutter.mobile, space.6, space.3, space.2
 - **토큰 밖 값**: 없음
 
-### VD-052: 청백전 소개 배너 — 통합 이미지 AST-079 + HTML 글자 *(r7, 권리 확인 대기)*
+### VD-052: 청백전 소개 배너 — 통합 이미지 ~~AST-079~~ ~~(r9) AST-080~~ ~~(r10) AST-081~~ (r11) AST-082 + HTML 글자 *(r7, r9·r10·r11 개정)*
+- **(r11 개정 — 가장자리 비침 수정)**: 사용자 선택 원문(2026-11-24) "수정본+img로 정식 교체 (권장)".
+  - **이미지 AST-082(확정, 2026-11-24)**: AST-081과 같은 원본(1774×887)·같은 경계(x41–1732, y115–807)·같은 크기(1692×693)에서 마스크를 픽셀 중심 기준으로 다시 계산 — 직선 가장자리는 완전 불투명, 둥근 모서리(반경 88.5px) 원호만 1px 안티앨리어스(경계 픽셀 520개, AST-081은 4,598개). 안쪽 RGB 원본과 같음(차이 0). 권리: 같은 원본에 대한 사용자 확인(`explore-asset confirm` AST-082). AST-081은 처리 오류가 있는 판으로 이력만 보존.
+  - **표시(r11)**: 이미지는 장식 **`img`**(`alt=""`, `aria-hidden="true"`)로 이미지 상자(비율 1692/693)를 채우고 `object-fit: contain`. 불러오기 실패 시 숨김(→ `color.hero.bg` 바탕 + 글자, r7 대체 규칙 그대로). CSS 배경은 쓰지 않습니다(크게 줄여 그릴 때 가장자리에 바탕이 섞임). 좁은 배너 위쪽 42% 이음(이미지 위 덧그림)은 r10 그대로.
+  - **모서리 처리(r11 명시)**: r10 승인 원문 "배너 모서리의 연한 민트색 영역은 컨테이너 배경 및 모서리 처리를 통해 자연스럽게 연결"에 따라, 이미지가 닿는 배너 모서리의 반경을 이미지 둥근 모서리와 같게(배너 폭의 5.2305% = 88.5/1692) 둡니다 — 넓은 배너는 네 모서리, 좁은 배너는 아래 두 모서리(위 두 모서리는 글자 띠라 `radius.md`). 이 반경을 배너 폭으로 계산하려고 배너를 감싸는 요소를 크기 기준(container)으로 둡니다. r10 본문의 '이미지 둥근 모서리 바깥에는 color.hero.bg가 보입니다'는 이 처리로 대체됩니다.
+  - **제품 WebP**: AST-082 기준 1316×539(sha256 `d74dd19a…`), PSNR 39.5dB.
+- **(r10 개정 — 원본 전체 구도, r11에서 이미지·표시 방식만 대체)**: 사용자 결정 원문(2026-11-24) "저는 기존 3:1 비율을 유지하는 것보다 제가 전달한 원본 이미지의 전체 구도를 유지하는 것을 원합니다." · "최초 전달한 1774×887 원본 이미지 사용" · "배너 외부의 투명 여백과 불필요한 노이즈만 제거" · "민트색 배경 및 상·하단 코트 영역 전체 보존" · "청팀 VS 백팀, 월계관, 셔틀콕 등 기존 구성 보존" · "3:1 비율에 맞추기 위한 강제 크롭 금지" · "이미지 왜곡 및 색상 변경 금지" · "원본 배너 영역의 실제 비율에 맞춰 컨테이너 높이 조정" · "원본 구도를 유지한 제품용 WebP 생성".
+  - **이미지 AST-081(확정, 2026-11-24)**: AST-080과 같은 사용자 제공 원본(1774×887 RGBA, sha256 `70237e58…`)에서 **배너 본체 경계(x41–1732, y115–807) 밖의 투명 여백·반투명 노이즈만 제거**한 **1692×693(약 2.44:1)**. 둥근 모서리(반경 88.5px) 바깥은 투명, 경계 1px 안티앨리어스. 안쪽 RGB는 원본과 같음(차이 0), 거의 불투명한 알파(251–254)만 255로 정리. 3:1 크롭·색 보정·필터·늘리기 없음. 위쪽 조명, 아래쪽 코트 선, 청팀 VS 백팀·월계관·셔틀콕·네트가 모두 남습니다. 원본 PNG의 C2PA 메타데이터 조각은 다시 저장하면서 빠졌습니다(픽셀과 무관). 권리: 같은 원본에 대한 사용자 확인(2026-11-24, `explore-asset confirm` AST-081, 라이선스 `OpenAI-Output (user-owned per OpenAI Terms of Use)`).
+  - **표시**: 이미지 상자 비율 = **이미지 실제 비율(1692 / 693)**, `background-size: contain`(상자와 이미지 비율이 같아 왜곡·잘림 없음). 3:1 고정·`cover`·잘라내기·늘리기 금지는 그대로. 그 밖의 배치(좌우 여백 16, 모서리 `radius.md`, 좁은 배너 글자 띠 19.2%·윗부분 42% 이음, 넓은 배너 그늘, 글자 크기·위치 cqw)는 r9 그대로. 이미지 둥근 모서리 바깥(투명)에는 배너 바탕 `color.hero.bg`가 보입니다.
+  - **크기(렌더 실측, 실제 제품 시험 사본)**: 360폭 배너 328×197(이미지 328×134), 390폭 358×215(이미지 358×147), 1440(600 열) 568×233. r9 대비 높이 +25·+27·+43px.
+  - **겹침 금지(r10, B-13 결정 반영)**: 글자 줄(글리프 상자) 아래에 대결 그래픽 픽셀(진한 파랑 배지·VS, 순백에 가까운 월계관·백팀 배지·셔틀)이 **0**이어야 합니다. 그래픽 시작선(이미지 가로 39.4%)은 참고선이며, 사용자 결정 "현재 배너 제목의 크기와 줄바꿈을 유지합니다." · "360px 및 390px에서 제목이 39.4% 기준선을 13–14px 넘더라도 실제 그래픽과 겹치지 않고 가독성이 확보되므로 현재 디자인을 선택합니다." 에 따라 모바일 제목 둘째 줄이 이 선을 넘는 현재 크기·줄바꿈을 유지합니다. 실측: 360·390·1440 모두 대결 그래픽 픽셀 0(390 제목 첫 줄 아래 밝은 픽셀 19개는 왼쪽 위 조명 빛줄기 x468–486, 그래픽 아님).
+  - **실제 픽셀 기준 글자 대비(렌더 위치 그대로, 글자 아래 이미지 픽셀)**: 제목·설명 `color.hero.text` 최저 **11.46:1**(1440)·12.01(360)·12.04(390), '청팀' `color.hero.accent` 최저 4.22–4.45:1(큰 글자 기준 3:1). 글자 띠 `color.hero.bg` 위 13.51:1 그대로.
+  - **제품 적용 시**: 같은 비율 WebP 1316×539(1692×693의 7/9, 비율 오차 0, 표시 최대 568px의 2.3배·모바일 358px의 3.7배), PSNR 39.6dB, 51KB. AST-080 파생본은 교체.
+- **(r9 개정 — 승인, r10에서 이미지·상자 비율만 대체)**: Soft Mint에서 배너를 **밝은 민트**로 바꾸고 **청팀 VS 백팀 구도를 유지**합니다. 기존 AST-079(짙은 청록)를 필터로 밝히지 않고 **새 이미지 AST-080**을 씁니다(사용자 원문 2026-11-23 "기존 AST-079를 필터로 밝히는 방식은 사용하지 마세요."). AST-079는 이력으로 보존합니다.
+  - **AST-080 요구사항**(사용자 원문 2026-11-23): "기존 청팀 VS 백팀 구도 유지" · "월계관, 셔틀콕, 배드민턴 코트 원근감 유지" · "밝은 민트 그라데이션 배경" · "좌측 약 45%는 텍스트를 위한 여백" · "배너 이미지 안에 제목·설명 텍스트 삽입 금지" · "청팀은 기존 파란색 계열 유지" · "백팀은 흰색과 외곽선으로 구분" · "3:1 비율" · "원본 PNG 2172×724" · "제품용 WebP 약 1200px 폭". 바탕 범위 #EEFCF7→#C0F0E2→#7FDCC6, 글자 영역 모든 픽셀이 `color.hero.text`(#1A1D23) 대비 4.5:1 이상.
+  - **글자·배치**: 배지 'SMAPSH 청백전' = `color.action.strong` + `color.action.onStrong`(5.79:1, #087F73 폐지), 제목·설명 `color.hero.text`, '청팀' `color.hero.accent`(빛번짐 없음). 좁은 배너의 글자 띠·그늘은 `color.hero.bg`(밝은 민트). 표시 규칙(3:1 `contain`, 그래픽 잘림·중복 금지, 390폭 358×188, 겹침 금지, 장식 이미지·대체)은 r7 그대로.
+  - **AST-080(확정, 2026-11-24)**: 사용자 결정 원문(2026-11-24) "배너 제작 방식은 1번(ChatGPT 이미지 생성)으로 결정했으며, 첨부한 이미지를 새로운 청백전 배너로 사용하겠습니다." · "첨부 이미지의 디자인을 승인하며, SMAPSH 서비스 내 사용 및 자산 등록에 동의합니다." 사용자 제공 OpenAI ChatGPT 생성 이미지(1774×887 RGBA, 둥근 모서리 배너 + 바깥 투명 여백)에서 바깥 투명 여백·둥근 모서리만 잘라낸 **1684×561(3:1)** 원본(x45–1728, y181–741). 사용자 지시 원문 "배너 외부의 투명 여백과 불필요한 픽셀만 제거" · "민트색 코트 배경은 제거하지 말 것" · "기존 이미지에 색상 필터를 적용하지 말 것" · "이미지 비율을 강제로 늘리거나 찌그러뜨리지 말 것"에 따라 색 보정·필터·늘리기·확대 없이, 거의 불투명한 알파(241–253)만 255로 정리했습니다. 잘라낸 부분은 위쪽 빛 일부와 아래쪽 코트 선 일부이고 월계관·VS 배지·셔틀콕(아래 끝 y732)·네트는 모두 남습니다.
+  - **요구사항과 다른 점(사용자 지시 "필요한 경우 자연스러운 크롭 및 리사이징 적용"에 따름)**: 원본 해상도가 가로 1774px라 2172×724로 확대하지 않고 1684×561(같은 3:1)로 둡니다(확대는 화질만 떨어뜨림). 제품 WebP는 1200×400. 대결 그래픽은 이미지 가로 **39.4%**에서 시작(r7 AST-079는 43.7%) — 글자 여백은 왼쪽 약 39%입니다.
+  - **실제 픽셀 기준 글자 대비(계산, 이미지 왼쪽 39% 전체)**: 제목·설명 `color.hero.text` #1A1D23 최저 **9.93:1**(1% 지점 11.14, 중앙 13.21), '청팀' `color.hero.accent` #376F65 최저 **3.41:1**(중앙 4.53, 큰 글자 기준 3:1). 글자 띠·그늘 `color.hero.bg` #C0F0E2 위 13.51:1. 배지는 `color.action.strong` + 흰 글자 5.79:1.
+  - **겹침 금지(r9 값)**: 글자 오른쪽 끝은 대결 그래픽 시작(이미지 가로 39.4%)보다 왼쪽. 표시 규칙(3:1 `contain`, 잘림·중복 금지, 390폭 358×188·360폭 328×172 띠 방식, 장식 이미지 `aria-hidden`, 실패 시 `color.hero.bg` + 글자)은 r7 그대로이며 Preview r6에서 이 값으로 렌더 확인합니다.
+  - **권리**: `explore-asset confirm` 2026-11-24 — 라이선스 `OpenAI-Output (user-owned per OpenAI Terms of Use)`, 사용자 문장 원문 "제작 도구: OpenAI ChatGPT 이미지 생성" · "사용 권리: OpenAI 이용약관에 따른 생성 결과물 사용 권리 및 사용자 사용 확인". 공식 자산(official_ok). AST-079는 자산 등록부에 그대로 두고 쓰지 않습니다(디자인 이력).
 - **결정(후보)**:
   - **이미지**: 통합 배너 AST-079(2172×724, 3:1) 한 장만 씁니다. 코트·조명·청팀 VS 백팀 대결 그래픽·월계수·셔틀콕이 이미지에 들어 있습니다. 유니폼 이미지(AST-068·069)·코트 배경(AST-067)·별도 셔틀콕(AST-062)을 조합하는 방식으로 되돌리지 않습니다.
   - **VS 그래픽 중복 금지**: 'VS' 표시, 청팀·백팀 띠, 월계수, 셔틀콕을 CSS·SVG·다른 이미지·글자로 다시 만들지 않습니다. 배너 안 팀 이름 글자도 따로 두지 않습니다(그래픽 속 글자는 장식, CR-014).
@@ -586,9 +632,9 @@ based_on:
   - **접근성·대체**: 이미지는 장식(`aria-hidden`, CSS 배경), 제목·설명만 읽힘. 이미지가 없거나 실패하면 `color.hero.bg` 바탕 위 글자만 보임(04 CMP-051 상태·접근성 그대로).
   - **제품 적용 시**: 표시 크기에 맞춘 WebP 사본(같은 비율)을 쓰고 원본은 바꾸지 않음.
 - **권리**: AST-079 — 사용자 설명(2026-11-20) "OpenAI ChatGPT 이미지 생성 도구로 신규 제작했습니다. 외부 웹사이트에서 가져오거나 기존 상업용 이미지를 복사한 것이 아닙니다." ~~라이선스 값은 아직 정하지 않았습니다(`explore-asset confirm` 전, 공식 채택 불가).~~ (3차) **권리 확인 완료**(`explore-asset confirm` 2026-11-20, 사용자 문장은 문서 머리말 r7 '사용자 결정(3차) — 자산 권리 확인' 참고). 라이선스 기록 값 `OpenAI-Output (user-owned per OpenAI Terms of Use)` — 프로젝트 내부의 생성 이미지 출처·이용 권한 분류이며 독점 저작권이나 제3자 권리 비침해에 대한 법적 보증이 아닙니다(사용자 원문).
-- **상태**: 승인 (사용자 결정 2026-11-20 3차: "두 자산의 권리 확인이 정상 완료되면 VD-052와 VD-058을 승인 상태로 변경하세요." · "통합 배너와 월계수의 사용 규칙은 현재 Design Direction r7 초안을 유지합니다." — 위 결정 내용은 초안 그대로)
+- **상태**: 승인 (r11 개정: 사용자 선택 원문(2026-11-24) "수정본+img로 정식 교체 (권장)") · r10: 승인 (r10 개정: 사용자 결정 원문(2026-11-24) "저는 기존 3:1 비율을 유지하는 것보다 제가 전달한 원본 이미지의 전체 구도를 유지하는 것을 원합니다.") · r9: 승인 (r9 개정: 사용자 결정 원문(2026-11-24) "배너 제작 방식은 1번(ChatGPT 이미지 생성)으로 결정했으며, 첨부한 이미지를 새로운 청백전 배너로 사용하겠습니다." · "첨부 이미지의 디자인을 승인하며, SMAPSH 서비스 내 사용 및 자산 등록에 동의합니다.") · r8까지: (사용자 결정 2026-11-20 3차: "두 자산의 권리 확인이 정상 완료되면 VD-052와 VD-058을 승인 상태로 변경하세요." · "통합 배너와 월계수의 사용 규칙은 현재 Design Direction r7 초안을 유지합니다." — 위 결정 내용은 초안 그대로))
 - **근거**: 사용자 선택 EXP-V08-A, REF-003(RX-003-01–12, 참고 의도 INT-003), 사용자 결정(2026-11-20) "V08-A의 통합 배너 AST-079를 유지합니다." · "HTML/CSS 텍스트 오버레이 방식을 유지합니다." · "글자 가독성과 오른쪽 청팀 VS 백팀 그래픽이 잘리지 않는 조건을 유지합니다." · "배너 오른쪽의 청팀 VS 백팀 그래픽은 이미지에 이미 포함되어 있으므로 CSS나 다른 이미지로 중복 생성하지 마세요.", CR-014(반영)
-- **관련**: SCR-111, CMP-051, AST-079, color.hero.bg, color.hero.text, color.hero.accent, color.accent.mint, radius.md
+- **관련**: SCR-111, CMP-051, ~~AST-079~~ ~~AST-080~~ ~~AST-081~~ AST-082, color.hero.bg, color.hero.text, color.hero.accent, color.action.strong, color.action.onStrong, color.accent.mint, radius.md
 - **토큰 밖 값**: 있음 — 이미지 자체 색, 청백전 채움색 #087F73(VD-049), 글자 띠 비율 19.2%, 그늘 불투명도 74–92%, 빛번짐 50%, 배너 폭 기준 글자 비율
 
 ### VD-053: 청백전 상태·방식 배지(CMP-005) *(r7)*
@@ -603,11 +649,12 @@ based_on:
   | 팀전(`teamBlue`) | `color.team.blue.bg` + `color.team.blue.fg` | 7.10:1 |
   | 개인전(`individual`) | `color.method.individual.bg` + `color.method.individual.fg`(04 초기값) | 6.54:1 |
 
+  - **(r9 개정, Soft Mint)**: 진행 중(`live`) = `color.action.strong` #376F65 + `color.action.onStrong` 흰 글자 **5.79:1**(#087F73 폐지). 진행 예정(`upcoming`) = `color.accent.subtle` #C0F0E2 + `color.text.accent` #376F65 **4.64:1**. 두 배지는 진한 채움+흰 글자 대 연한 면+진한 글자로 바탕 명도 대비 4.64:1(r8 4.37)이라 색 없이도 구분되고 글자도 다릅니다. 진행 예정(#C0F0E2 민트) 대 팀전(#E3ECFC 파랑)은 색 계열·글자색(#376F65 대 #1747A6)·글자로 구분(CR-015 유지). 준비 중·종료·팀전·개인전은 그대로. 상태: 승인(r9, 사용자 결정 2026-11-23 원문 "선택 상태 및 예정 배지: Light Mint + Deep Mute Mint" · "진행 중 배지: Deep Mute Mint 배경 + 흰색 텍스트").
   - **진행 예정 ↔ 팀전 구분(CR-015)**: 바탕이 민트(#DDF8EF) 대 파랑(#E3ECFC), 글자가 틸(#10776C) 대 남색(#1747A6), 배지 글자가 다릅니다. 두 바탕의 밝기 차이는 작으므로(1.06:1) 색 계열과 글자로 구분합니다(9장 '색만으로 구분하지 않음').
 - **상태**: 승인 (사용자 결정(2026-11-20, 2차): "권리 확인을 제외한 나머지 시각 결정은 확정 방향으로 정리해 주세요.") · 결정 원문(CR-015): "진행 예정 배지는 민트 계열로 표현하고, 팀전 파란 배지와 명확히 구분하세요. 텍스트 대비는 4.5:1 이상 유지하세요."
 - **근거**: 사용자 선택 EXP-V08-A, 04 CMP-005(r6), UXD-087, REF-002 RX-002-19, CR-015(반영)
 - **관련**: SCR-111, CMP-005, color.action.onPrimary, color.accent.subtle, color.text.accent, color.text.secondary, color.border.strong, color.bg.surface, color.bg.page, color.team.blue.bg, color.team.blue.fg, color.method.individual.bg, color.method.individual.fg, space.1
-- **토큰 밖 값**: 있음 — 청백전 채움색 #087F73(VD-049), 배지 높이 22·좌우 10(컴포넌트 치수)
+- **토큰 밖 값**: 있음 — ~~청백전 채움색 #087F73(VD-049),~~ 배지 높이 22·좌우 10(컴포넌트 치수)
 
 ### VD-054: 청백전 목록 카드(CMP-043)와 팀전 점수판(CMP-052) *(r7)*
 - **결정**:
@@ -693,6 +740,14 @@ UX Spec r4(04 CMP-001·1.2)에 따라 큰 CTA(`variant=primary`·`size=lg`)는 2
 - 렌더 검증: `design-explore/review/V04/dd41-contrast.png`(V04 토큰, 페이지·surface·연민트 바탕).
 - 남은 확인(Preview에서): 작은 주 버튼이 `variant=secondary`와 구분되도록 secondary는 `color.border.strong` 테두리 + `color.text.primary` 글자로 둡니다. 눌림·비활성 상태 대비는 Preview 측정에서 확인합니다.
 - V04-A(SCR-101)에는 해당 컴포넌트가 없어 시안 변경은 없습니다.
+
+**(r9 개정, Soft Mint — 사용자 결정 2026-11-23)**: 원문 "큰 CTA 및 '새 청백전': 메인 민트 배경 + 어두운 텍스트" · "선택 상태 및 예정 배지: Light Mint + Deep Mute Mint" · "WCAG 대비 검증 결과를 준수하고, 대비가 부족한 색상 조합은 사용하지 마세요."
+- 큰 CTA(`variant=primary`·`size=lg`): `color.action.primary` #40CDAE 배경 + `color.action.onPrimary` #1A1D23 22px 굵게 — 8.49:1(일반 글자 기준도 충족, UX Spec r7 CMP-001). '새 청백전'도 이 규칙.
+- 작은 주 버튼: r4 결정 그대로 흰(페이지) 바탕 + `color.text.accent` 글자·테두리 — #376F65 대 #FFFFFF 5.79·#FAFFFD 5.74.
+- SegmentedControl·ChoiceGrid 선택: r4 결정 그대로 `color.accent.subtle` + `color.text.accent` + 체크 — 4.64:1.
+- 진행 막대: `color.action.primary` 채움 + 수치 글자 병행(04 CMP-049). 막대만으로 정보를 전달하지 않으므로 막대 대 트랙 1.82:1을 허용(UX Spec r7 1.2).
+- 포커스 링: `color.focus.ring` #376F65 2px + 2px 간격(페이지 위 5.74:1). 민트 채움 바로 위(2.91:1)에 붙여 그리지 않습니다.
+- 쓰지 않는 조합: 흰 글자 대 Main Mint(1.99)·Light Mint(1.25), Main Mint 단독 글자·아이콘(1.97), Deep Mute 글자·아이콘 대 Main Mint(2.91), Mute Mint 글자·아이콘(2.40).
 
 ### 4.2 (r6) 경기장 바닥 기준 대비 재계산(사용자 결정 필요)
 

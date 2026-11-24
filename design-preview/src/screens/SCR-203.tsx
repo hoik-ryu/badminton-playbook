@@ -15,7 +15,7 @@ function CheckRow({ r }: { r: Row }) {
   return (
     <li>
       <label data-cmp="CMP-024" className="flex h-14 items-center gap-3 border-b border-line text-body">
-        <span data-cmp="CMP-008" aria-hidden className={`flex size-6 shrink-0 items-center justify-center rounded-sm border-2 ${r.checked ? 'border-action bg-action text-on-action' : 'border-line-strong bg-page'}`}>
+        <span data-cmp="CMP-008" aria-hidden className={`flex size-6 shrink-0 items-center justify-center rounded-sm border-2 ${r.checked ? 'border-strong bg-strong text-on-strong' : 'border-line-strong bg-page'}`}>
           {r.checked && <Check className="size-4" />}
         </span>
         <input type="checkbox" className="sr-only" defaultChecked={r.checked} />

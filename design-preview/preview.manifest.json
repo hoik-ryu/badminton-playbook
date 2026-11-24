@@ -1,21 +1,21 @@
 {
-  "ux_spec_revision": 6,
-  "design_direction_revision": 8,
+  "ux_spec_revision": 7,
+  "design_direction_revision": 11,
   "screens": {
     "SCR-001": {
-      "skip": "Design Direction r8 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
+      "skip": "Design Direction r11 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
     },
     "SCR-002": {
-      "skip": "Design Direction r8 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
+      "skip": "Design Direction r11 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
     },
     "SCR-003": {
-      "skip": "Design Direction r8 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
+      "skip": "Design Direction r11 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
     },
     "SCR-004": {
-      "skip": "Design Direction r8 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
+      "skip": "Design Direction r11 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
     },
     "SCR-005": {
-      "skip": "Design Direction r8 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
+      "skip": "Design Direction r11 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
     },
     "SCR-101": {
       "file": "src/screens/SCR-101.tsx",
@@ -284,10 +284,10 @@
       "note": "SCR-202 위 하단 시트(70%), 인원 요약 고정. 중첩은 SCR-213-ST1에서 확인"
     },
     "SCR-204": {
-      "skip": "Design Direction r8 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
+      "skip": "Design Direction r11 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
     },
     "SCR-205": {
-      "skip": "Design Direction r8 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
+      "skip": "Design Direction r11 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
     },
     "SCR-211": {
       "file": "src/screens/SCR-211.tsx",
@@ -347,25 +347,25 @@
       "note": "ST1 게스트 추가 = SCR-203 참석 시트 위 두 번째 시트(중첩, 딤 한 겹). ST7 회원 직접 추가 = SCR-211 위 시트"
     },
     "SCR-214": {
-      "skip": "Design Direction r8 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
+      "skip": "Design Direction r11 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
     },
     "SCR-222": {
-      "skip": "Design Direction r8 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
+      "skip": "Design Direction r11 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
     },
     "SCR-224": {
-      "skip": "Design Direction r8 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
+      "skip": "Design Direction r11 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
     },
     "SCR-225": {
-      "skip": "Design Direction r8 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
+      "skip": "Design Direction r11 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
     },
     "SCR-226": {
-      "skip": "Design Direction r8 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
+      "skip": "Design Direction r11 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
     },
     "SCR-231": {
-      "skip": "Design Direction r8 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
+      "skip": "Design Direction r11 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
     },
     "SCR-232": {
-      "skip": "Design Direction r8 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
+      "skip": "Design Direction r11 렌더 범위 밖(이번 Preview는 07 6장의 13개 화면)"
     }
   }
 }

@@ -1,6 +1,6 @@
 ---
 doc: screen-flows
-revision: 6
+revision: 7
 language: ko
 based_on:
   planning_revision: 7

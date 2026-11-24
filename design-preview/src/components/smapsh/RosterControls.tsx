@@ -28,7 +28,7 @@ export function RosterControls({ unset, tutorial }: { unset: number; tutorial: n
       </div>
       <label htmlFor={id} data-cmp="CMP-007" className="flex h-11 items-center justify-between text-body text-ink">
         비활성 포함
-        <Switch id={id} size="lg" checked={inactive} onCheckedChange={setInactive} className="data-[state=checked]:bg-action data-[state=unchecked]:bg-line-strong" />
+        <Switch id={id} size="lg" checked={inactive} onCheckedChange={setInactive} className="data-[state=checked]:bg-strong data-[state=unchecked]:bg-line-strong" />
       </label>
     </>
   )

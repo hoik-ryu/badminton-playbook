@@ -19,6 +19,9 @@
   --color-line-strong: var(--color-border-strong);
   --color-action: var(--color-action-primary);
   --color-on-action: var(--color-action-onPrimary);
+  /* (r6, UX Spec r7·DD r9 Soft Mint) 작은 흰 글자를 올리는 진한 채움(진행 중 배지·배너 배지)과 그 위 글자 */
+  --color-strong: var(--color-action-strong);
+  --color-on-strong: var(--color-action-onStrong);
   --color-focus: var(--color-focus-ring);
   --color-warning-fg: var(--color-status-warning-fg);
   --color-warning-bg: var(--color-status-warning-bg);

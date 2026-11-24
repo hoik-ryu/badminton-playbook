@@ -70,7 +70,7 @@ function Boot({ stageId }: { stageId: string }) {
   if (boot.kind === 'ready') return <Game key={boot.runId} stage={boot.stage} runId={boot.runId} onRestart={() => void load()} />
   if (boot.kind === 'error' && boot.recovery === 'notFound') return <NotAvailable />
   return (
-    <section data-scr="SCR-102" data-st={boot.kind === 'loading' ? 'SCR-102-ST2' : 'SCR-102-ST4'} className="tutorial-theme flex flex-1 flex-col bg-page">
+    <section data-scr="SCR-102" data-st={boot.kind === 'loading' ? 'SCR-102-ST2' : 'SCR-102-ST4'} className="flex flex-1 flex-col bg-page">
       <PageHeader title="튜토리얼" leading="back" backTo="/tutorial" />
       {boot.kind === 'loading' ? (
         <StateView kind="loading" rows={4} label={slowStart ? '준비 중입니다…' : '스테이지를 준비하는 중'} />
@@ -103,7 +103,7 @@ function Boot({ stageId }: { stageId: string }) {
 
 function NotAvailable() {
   return (
-    <section data-scr="SCR-102" data-st="SCR-102-ST5" className="tutorial-theme flex flex-1 flex-col bg-page">
+    <section data-scr="SCR-102" data-st="SCR-102-ST5" className="flex flex-1 flex-col bg-page">
       <PageHeader title="튜토리얼" leading="back" backTo="/tutorial" />
       <StateView
         kind="notFound"
@@ -372,7 +372,7 @@ function Game({ stage, runId, onRestart }: { stage: TutorialStage; runId: string
       data-phase={phase}
       data-confirm-mode={confirmMode ? 'true' : 'false'}
       aria-label={`${stage.courseName} ${stage.no}단계 플레이`}
-      className="tutorial-theme relative grid h-dvh w-full grid-rows-[56px_auto_auto_minmax(0,1fr)_160px] overflow-hidden bg-surface"
+      className="relative grid h-dvh w-full grid-rows-[56px_auto_auto_minmax(0,1fr)_160px] overflow-hidden bg-surface"
     >
       <div aria-hidden className="pl-atmo" />
       <TopBar course={stage.courseName} step={stage.no} goal={stage.title} index={i + 1} total={total} score={score} retry={retry} onExit={() => setAskExit(true)} />

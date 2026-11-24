@@ -119,7 +119,7 @@ function Result({ stageId, runId }: { stageId: string; runId: string }) {
   const bestNew = saved && prevBest !== null && save.value.run.score > prevBest
 
   return (
-    <section data-scr="SCR-103" data-st={st} data-save={save.kind} className="tutorial-theme flex min-h-dvh w-full flex-col bg-page">
+    <section data-scr="SCR-103" data-st={st} data-save={save.kind} className="flex min-h-dvh w-full flex-col bg-page">
       <header data-cmp="CMP-026" data-variant="none" className="flex h-14 shrink-0 items-center justify-between px-4">
         <h1 className="m-0 text-body font-bold">스테이지 결과</h1>
         {save.kind === 'saving' && (

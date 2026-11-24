@@ -6,7 +6,7 @@ import { useEffect, useState, type ReactNode } from 'react'
 // 상단 바(CMP-026 close): 경기장 위 어두운 띠 + 흰 글자. 상황 진행 n/5·점수, 재도전 표시
 export function TopBar({ course, step, goal, index, total = 5, score, retry, onExit }: { course: string; step: number; goal: string; index: number; total?: number; score: number; retry?: boolean; onExit?: () => void }) {
   return (
-    <header data-cmp="CMP-026" data-variant="close" className="relative z-[1] flex items-center gap-1.5 pr-3 pl-1 text-on-action">
+    <header data-cmp="CMP-026" data-variant="close" className="relative z-[1] flex items-center gap-1.5 pr-3 pl-1 text-on-strong">
       <button type="button" onClick={onExit} className="flex h-11 shrink-0 items-center gap-0.5 rounded-md px-2 text-caption font-bold">
         <X aria-hidden className="size-5" />
         나가기
@@ -59,7 +59,7 @@ export function Playback({ ms = 1100 }: { ms?: number }) {
   useEffect(() => { const t = window.setTimeout(() => setGo(true), 30); return () => window.clearTimeout(t) }, [])
   return (
     <div role="status" className="grid gap-2 pt-1">
-      <p className="flex items-center gap-2 text-body font-bold"><Play aria-hidden className="size-5 fill-current text-action" />상황 재생 중</p>
+      <p className="flex items-center gap-2 text-body font-bold"><Play aria-hidden className="size-5 fill-current text-ink-accent" />상황 재생 중</p>
       <span className="h-1.5 overflow-hidden rounded-full bg-surface"><i className="block h-full rounded-full bg-action transition-[width] ease-linear motion-reduce:transition-none" style={{ width: go ? '100%' : '0%', transitionDuration: `${ms}ms` }} /></span>
       <p className="text-caption text-ink-muted">코트를 누르면 건너뛸 수 있어요</p>
     </div>

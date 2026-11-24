@@ -22,7 +22,7 @@ export function Switch({ label, description, checked, onCheckedChange, disabled 
         disabled={disabled}
         onCheckedChange={onCheckedChange}
         aria-describedby={description ? `${id}-d` : undefined}
-        className="relative h-7 w-12 shrink-0 cursor-pointer rounded-full bg-line-strong transition-colors duration-150 before:absolute before:-inset-2 before:content-[''] data-[state=checked]:bg-action disabled:cursor-not-allowed"
+        className="relative h-7 w-12 shrink-0 cursor-pointer rounded-full bg-line-strong transition-colors duration-150 before:absolute before:-inset-2 before:content-[''] data-[state=checked]:bg-strong disabled:cursor-not-allowed"
       >
         <SwitchPrimitive.Thumb className="block size-5 translate-x-1 rounded-full bg-page shadow-card transition-transform duration-150 data-[state=checked]:translate-x-6" />
       </SwitchPrimitive.Root>

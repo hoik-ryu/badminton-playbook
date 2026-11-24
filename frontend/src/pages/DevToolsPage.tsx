@@ -130,7 +130,7 @@ export function DevToolsPage() {
           </Button>
         </div>
         {scorePeople && <ScoreEntrySheet people={scorePeople} onClose={() => setScorePeople(null)} onAllDone={() => { setScorePeople(null); toast('모두 점수를 매겼습니다', 'neutral') }} />}
-        <Link to="/dev/health" className="text-body text-action">
+        <Link to="/dev/health" className="text-body text-ink-accent">
           백엔드 상태 확인(/dev/health)
         </Link>
       </div>

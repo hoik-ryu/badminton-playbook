@@ -31,9 +31,12 @@ export function ScoreEntrySheet({ people, onClose, onAllDone, save: saveScore = 
   }, [remaining, people.length, onAllDone])
 
   const save = async (p: RosterPerson, value: string) => {
+    // 이 시트에서 이미 저장한 점수가 있으면 그것이 서버의 현재 점수(다음 저장의 '이전 점수').
+    // 처음 받은 p.score(미설정)를 계속 보내면 같은 사람의 점수를 다시 고를 때 409 conflict가 남
+    const current = rows[p.id]?.done ?? p.score
     setRows((r) => ({ ...r, [p.id]: { ...r[p.id], saving: value, error: undefined } }))
     try {
-      await saveScore(p, Number(value))
+      await saveScore({ ...p, score: current }, Number(value))
       setRows((r) => ({ ...r, [p.id]: { done: Number(value), saving: null } }))
     } catch (e) {
       const message = isApiError(e) && e.code === INVALID_SCORE ? '점수는 1–10 중에서 골라 주세요' : isApiError(e) && e.code === ROSTER_CONFLICT ? '다른 사람이 먼저 점수를 바꿨습니다. 명단에서 확인해 주세요' : '저장하지 못했습니다'

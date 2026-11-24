@@ -1,22 +1,30 @@
 /* 청백전 목록 SCR-111 (Design Direction r8: VD-049–055·058, 채택 EXP-V08-A). 색은 토큰 변수만 씁니다.
-   예외 1개 — 청백전 채움색 #087F73(VD-049 '토큰 밖 값', SCR-111 전용): 흰 글자를 올리는 채움('새 청백전', '진행 중' 배지, 배너 'SMAPSH 청백전' 배지).
-   공식 color.focus.ring과 같은 값이지만 의미가 달라 그 토큰 이름을 빌리지 않습니다(VD-049). 다른 화면에서 쓰지 않습니다. */
-.cm { --cm-fill: #087F73; }
+   (r6, DD r9) 청백전 채움색 예외(#087F73)는 폐지했습니다. 흰 글자 채움('진행 중' 배지, 배너 배지)은 color.action.strong + onStrong, '새 청백전'은 큰 CTA 규칙(action.primary + onPrimary).
+   (r5 이전 기록: AST-079·#087F73 사용 — r6에서 교체) */
+/* (r6, DD r9) 청백전 채움색 #087F73(토큰 밖 값)은 폐지 — 작은 흰 글자 채움은 color.action.strong + onStrong(VD-049·053 r9) */
 
-/* CMP-051 소개 배너(VD-052): 통합 이미지 AST-079(3:1) 한 장 + HTML 글자. 이미지는 contain(상자도 3:1) — 왜곡·잘림 없음.
+/* CMP-051 소개 배너(VD-052 r10): 통합 이미지 AST-082(원본 전체 구도 1692×693 ≈ 2.44:1, 밝은 민트) 한 장 + HTML 글자. 이미지는 contain(상자도 같은 비율) — 왜곡·잘림 없음.
+   (r6까지: AST-080 3:1 크롭 / r7 작업 중 AST-081은 가장자리 마스크 오류로 AST-082로 교체, DD r11)
    대결 그래픽(VS·팀 띠·월계수·셔틀)은 이미지에 있으므로 다시 만들지 않음. 글자 크기는 배너 폭 기준(cqw). 이미지가 없으면 hero.bg 바탕 + 글자만 */
-.cm-hero { position: relative; border-radius: var(--radius-md); overflow: hidden; background: var(--color-hero-bg); color: var(--color-hero-text); container-type: inline-size; }
-.cm-hero-art { position: relative; width: 100%; aspect-ratio: 3 / 1; margin-top: 19.2cqw; background: var(--cm-hero-img) center / contain no-repeat; }
-.cm-hero-art::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 42%; background: linear-gradient(180deg, var(--color-hero-bg), transparent); }
+/* (r7, VD-052 r10) 배너 모서리: 이미지(AST-082)의 둥근 모서리(반경 = 이미지 폭의 5.2305%, 88.5/1692)와 같게 해 투명 모서리 바깥 바탕이 비치지 않음.
+   반경을 배너 자신의 폭으로 쓰려고 바깥 감싸개를 크기 기준(container)으로 둠. 좁은 배너는 위쪽이 글자 띠라 radius.md, 이미지가 닿는 아래쪽만 이미지 반경 */
+.cm-hero-wrap { container-type: inline-size; }
+.cm-hero { position: relative; border-radius: var(--radius-md) var(--radius-md) 5.2305cqw 5.2305cqw; overflow: hidden; background: var(--color-hero-bg); color: var(--color-hero-text); container-type: inline-size; }
+.cm-hero-art { position: relative; width: 100%; aspect-ratio: 1692 / 693; margin-top: 19.2cqw; isolation: isolate; } /* (r7) 위쪽 이음(::before)은 상자 안에서만 img 위 — 글자(.cm-hero-copy)는 그 위 */
+/* (r7, VD-052 r11) 장식 img가 이미지 상자를 채움(object-fit: contain — 상자와 이미지 비율이 같아 왜곡·잘림 없음). CSS 배경은 축소 시 가장자리에 바탕이 섞여 쓰지 않음 */
+.cm-hero-img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; }
+.cm-hero-img[hidden] { display: none; }
+.cm-hero-art::before { content: ""; position: absolute; z-index: 1; left: 0; right: 0; top: -1px; height: 42%; background: linear-gradient(180deg, var(--color-hero-bg), transparent); }
 .cm-hero-copy { position: absolute; left: 4.4cqw; top: 3.85cqw; right: 0; }
 .cm-hero-badge { display: inline-block; height: 6.05cqw; line-height: 6.05cqw; padding: 0 2.75cqw; border-radius: 9999px; font-size: 3.16cqw; font-weight: var(--font-weight-bold); letter-spacing: 0.01em;
-  background: var(--cm-fill); color: var(--color-action-onPrimary); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent-mint) 55%, transparent); }
+  background: var(--color-action-strong); color: var(--color-action-onStrong); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent-mint) 55%, transparent); }
 .cm-hero-title { margin: 2.2cqw 0 0; font-size: 5.77cqw; line-height: 1.22; font-weight: var(--font-weight-bold); letter-spacing: -0.02em; }
-.cm-hero-accent { color: var(--color-hero-accent); text-shadow: 0 0 0.45em color-mix(in srgb, var(--color-hero-accent) 50%, transparent); }
+.cm-hero-accent { color: var(--color-hero-accent); } /* (r6, VD-052 r9) 빛번짐 없음 */
 .cm-hero-desc { margin: 1.65cqw 0 0; max-width: 37.5cqw; font-size: 3.71cqw; line-height: 1.42; font-weight: var(--font-weight-regular); word-break: keep-all; letter-spacing: -0.01em; }
 .cm-hero-br { display: none; }
 @container (min-width: 560px) {
-  /* 넓은 배너: 배너 = 이미지(3:1), 그래픽이 없는 왼쪽 아래(배너 폭 44% 안)에만 hero.bg 타원 그늘 */
+  /* 넓은 배너: 배너 = 이미지(r7: 1692/693), 그래픽이 없는 왼쪽 아래(배너 폭 44% 안)에만 hero.bg 타원 그늘 */
+  .cm-hero { border-radius: 5.2305cqw; } /* (r7) 넓은 배너 = 이미지 전체 → 네 모서리 모두 이미지 반경 */
   .cm-hero-art { margin-top: 0; }
   .cm-hero-art::before { top: auto; bottom: 0; height: 70%; width: 44%;
     background: radial-gradient(ellipse 70% 100% at 30% 72%, color-mix(in srgb, var(--color-hero-bg) 92%, transparent) 0%, color-mix(in srgb, var(--color-hero-bg) 74%, transparent) 60%, transparent 100%); }
@@ -29,11 +37,11 @@
 
 /* '새 청백전'(CMP-001 primary, 4.3 청백전 화면 예외): 청백전 채움색 + 흰 15px 굵게, radius.md, 열 안쪽 전체, 높이 44, 왼쪽 plus */
 .cm-create { display: flex; width: 100%; height: 44px; align-items: center; justify-content: center; gap: 6px; border: 0; border-radius: var(--radius-md);
-  background: var(--cm-fill); color: var(--color-action-onPrimary); font: inherit; font-size: 15px; font-weight: var(--font-weight-bold); }
+  background: var(--color-action-primary); color: var(--color-action-onPrimary); font: inherit; font-size: 15px; font-weight: var(--font-weight-bold); }
 
 /* CMP-005 상태·방식 배지(VD-053): 알약, 높이 22, 12px 굵게, 좌우 10 */
 .cm-badge { display: inline-flex; align-items: center; height: 22px; padding: 0 10px; border-radius: 9999px; font-size: 12px; font-weight: var(--font-weight-bold); white-space: nowrap; line-height: 1; }
-.cm-badge[data-tone='live'] { background: var(--cm-fill); color: var(--color-action-onPrimary); }
+.cm-badge[data-tone='live'] { background: var(--color-action-strong); color: var(--color-action-onStrong); }
 .cm-badge[data-tone='upcoming'] { background: var(--color-accent-subtle); color: var(--color-text-accent); }
 .cm-badge[data-tone='pending'] { background: var(--color-bg-page); color: var(--color-text-secondary); border: 1px dashed var(--color-border-strong); }
 .cm-badge[data-tone='ended'] { background: var(--color-bg-surface); color: var(--color-text-primary); }

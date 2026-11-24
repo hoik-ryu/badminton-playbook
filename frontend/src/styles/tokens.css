@@ -1,18 +1,18 @@
-/* 디자인 토큰(생성): 승인 04 토큰 + docs/design-profile/theme.json(C안 테마 값). 원본: /product-design theme-check --print-css. 손으로 값을 바꾸지 않습니다.
-   (2026-11-20, 튜토리얼 4단계) UX Spec r4에서 승인된 새 토큰 3개(accent.mint·accent.subtle·text.accent)만 theme-check 출력값 그대로 추가했습니다.
-   나머지 테마 값(action.primary·bg.page·focus.ring)의 DD r6 테마 반영은 앱 전체에 영향이 있어 별도 결정 대기입니다.
-   (2026-11-24, 청백전 1단계) Design Direction r8 VD-049로 승인된 새 토큰 6개(award.gold·hero.bg·hero.text·hero.accent·method.individual.fg/bg)만 theme-check 출력값 그대로 추가했습니다.
-   action.primary·bg.page·focus.ring은 계속 바꾸지 않습니다(사용자 결정 2026-11-24: 앱 전체 토큰 동기화는 별도 기술 부채). */
+/* 디자인 토큰(생성): 승인 04 토큰(UX Spec r7) + docs/design-profile/theme.json(0.4.0-soft-mint, Design Direction r9). 원본: /product-design theme-check --print-css 의 expected_css.
+   손으로 값을 바꾸지 않습니다. 테마를 바꾼 뒤 다시 생성하고, tokens.test.ts가 theme.json·04와 일치하는지 검사합니다.
+   (2026-11-24, Preview r6 승인 뒤) 앱 전체를 Soft Mint 한 벌로 통일 — 튜토리얼(.tutorial-theme)·청백전(.cm) 범위 덮어쓰기는 없앴습니다. */
 :root {
   --breakpoint-base: 0–767px;
   --breakpoint-desktop: ≥1024px;
   --breakpoint-tablet: 768–1023px;
-  --color-accent-mint: #8EE3CC;
-  --color-accent-subtle: #DDF8EF;
-  --color-action-onPrimary: #FFFFFF;
-  --color-action-primary: #006D68;
+  --color-accent-mint: #62B5A3;
+  --color-accent-subtle: #C0F0E2;
+  --color-action-onPrimary: #1A1D23;
+  --color-action-onStrong: #FFFFFF;
+  --color-action-primary: #40CDAE;
+  --color-action-strong: #376F65;
   --color-award-gold: #B7791F;
-  --color-bg-page: #FFFFFF;
+  --color-bg-page: #FAFFFD;
   --color-bg-surface: #F4F5F7;
   --color-border-default: #D5D9E0;
   --color-border-strong: #6B7280;
@@ -22,10 +22,10 @@
   --color-court-me: #1D5BD0;
   --color-court-opponent: #F2C14E;
   --color-court-surface: #2F7D4F;
-  --color-focus-ring: #008F89;
-  --color-hero-accent: #5FFFFF;
-  --color-hero-bg: #026C6D;
-  --color-hero-text: #FFFFFF;
+  --color-focus-ring: #376F65;
+  --color-hero-accent: #376F65;
+  --color-hero-bg: #C0F0E2;
+  --color-hero-text: #1A1D23;
   --color-method-individual-bg: #EEEAFB;
   --color-method-individual-fg: #5B3FA8;
   --color-status-danger-bg: #FDE7E5;
@@ -39,7 +39,7 @@
   --color-team-blue-fg: #1747A6;
   --color-team-white-bg: #FFFFFF;
   --color-team-white-fg: #1A1D23;
-  --color-text-accent: #10776C;
+  --color-text-accent: #376F65;
   --color-text-disabled: #6B7280;
   --color-text-primary: #1A1D23;
   --color-text-secondary: #545A65;

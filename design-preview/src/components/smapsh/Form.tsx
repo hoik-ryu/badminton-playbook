@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 
 // 입력 부품(시트 안은 Flat, 04 3.1). 누름 영역 44 이상(size.touch.min), 글자 16(font.size.body)
 
-// CMP-001 Button lg(48). (r3, UX Spec r4 CMP-001·DD 4.1) primary는 흰 글자를 22px 굵게(큰 글자 3:1 기준) — color.action.primary #0B9E8B 위 흰 글자 3.35:1
+// CMP-001 Button lg(48). (r6, DD r9 4.1) primary는 color.action.primary(#40CDAE) + color.action.onPrimary(#1A1D23) 22px 굵게 — 8.49:1
 export function ActionButton({ children, variant = 'primary', disabled, grow = true, testId }: { children: ReactNode; variant?: 'primary' | 'secondary' | 'danger-text'; disabled?: boolean; grow?: boolean; testId?: string }) {
   const base = 'flex h-12 items-center justify-center gap-1.5 rounded-md px-4 text-body font-bold'
   const cls =

@@ -31,9 +31,9 @@ export function Checkbox({ checked, onChange, label, ariaLabel, indeterminate = 
           disabled={disabled}
           aria-label={ariaLabel}
           onChange={(e) => onChange(e.target.checked)}
-          className="peer absolute inset-0 m-0 size-6 cursor-[inherit] appearance-none rounded-sm border-2 border-line-strong bg-page checked:border-action checked:bg-action indeterminate:border-action indeterminate:bg-action focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+          className="peer absolute inset-0 m-0 size-6 cursor-[inherit] appearance-none rounded-sm border-2 border-line-strong bg-page checked:border-strong checked:bg-strong indeterminate:border-strong indeterminate:bg-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
         />
-        {indeterminate ? <Minus aria-hidden className="pointer-events-none relative size-4 text-on-action" /> : checked && <Check aria-hidden className="pointer-events-none relative size-4 text-on-action" />}
+        {indeterminate ? <Minus aria-hidden className="pointer-events-none relative size-4 text-on-strong" /> : checked && <Check aria-hidden className="pointer-events-none relative size-4 text-on-strong" />}
       </span>
       <span className="min-w-0 flex-1 text-body text-ink">{label}</span>
     </label>

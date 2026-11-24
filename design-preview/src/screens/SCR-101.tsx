@@ -57,7 +57,7 @@ export function Scr101({ stateId }: { stateId: string }) {
         {/* VD-035 이어서 하기(ST4 오류·ST7 전체 완료에서는 숨김, UXD-084·ASM-038) */}
         {!error && !done && cs !== undefined && (
           <a href={flowHref(next.key)} data-cmp="CMP-050" className="tu-soft-lg mt-3 flex items-center gap-3 rounded-md border border-line/70 bg-page px-3 py-2.5 text-ink no-underline">
-            <span aria-hidden className="grid size-10 shrink-0 place-items-center rounded-full border-2 border-action bg-page text-action">
+            <span aria-hidden className="grid size-10 shrink-0 place-items-center rounded-full border-2 border-ink-accent bg-page text-ink-accent">
               <Play className="size-5 fill-current" />
             </span>
             <span className="grid min-w-0 flex-1">

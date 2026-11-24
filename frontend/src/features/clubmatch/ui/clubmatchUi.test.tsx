@@ -1,13 +1,14 @@
 import fs from 'node:fs'
 import path from 'node:path'
 
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 
 import { CLUBMATCH_BANNER_URL, CLUBMATCH_LAUREL_URL } from './assets'
 import { ClubMatchBadge, ClubMatchScope, OpsOnlyChip, type ClubMatchBadgeTone } from './ClubMatchBadge'
+import { ClubMatchHero } from './ClubMatchList'
 
-// 청백전 1단계(자산·토큰·배지 기반) — Preview r5(DD r8 VD-049·052·053·058)와 값이 같은지 확인
+// 청백전 자산·토큰·배지 기반 — Preview r6(DD r9 VD-049·052·053·058)의 승인 규칙과 같은지 확인
 const root = path.resolve(__dirname, '../../../../..')
 const read = (rel: string) => fs.readFileSync(path.join(root, rel), 'utf8')
 const cssVars = (css: string) => Object.fromEntries([...css.matchAll(/(--[\w-]+):\s*([^;]+);/g)].map((m) => [m[1], (m[2] ?? '').trim()]))
@@ -20,29 +21,26 @@ describe('청백전 토큰(VD-049)', () => {
     for (const n of names) expect(product[`--${n.replaceAll('.', '-')}`], n).toBe(theme[n])
   })
 
-  it('승인된 Preview r5의 tokens.css와 6개 값이 같다', () => {
-    const preview = cssVars(read('design-preview/src/tokens.css'))
-    const product = cssVars(read('frontend/src/styles/tokens.css'))
-    for (const k of ['--color-hero-bg', '--color-hero-text', '--color-hero-accent', '--color-award-gold', '--color-method-individual-fg', '--color-method-individual-bg']) expect(product[k], k).toBe(preview[k])
+  // (Preview r6) 제품 코드는 design-preview를 참조하지 않습니다(preview-check 규칙). 같은 6개 값은 위 테스트가 공식 테마(theme.json)와 대조합니다.
+
+  // (DD r9 Soft Mint) 청백전 범위 테마 덮어쓰기와 토큰 밖 채움색 #087F73(--cm-fill)은 폐지 — 앱 전체 tokens.css 한 벌.
+  // 앱 전체 토큰 값과 승인 테마의 일치는 src/styles/tokens.test.ts(승인 해시 대조)가 검사합니다.
+  it('청백전 스타일은 .cm 범위 안 규칙만 두고, 토큰 변수를 다시 정의하지 않는다', () => {
+    const css = read('frontend/src/styles/clubmatch.css').replace(/\/\*[\s\S]*?\*\//g, '')
+    const selectors = [...css.matchAll(/(^|\})\s*([^{}@]+)\{/g)].map((m) => (m[2] ?? '').trim())
+    expect(selectors.length).toBeGreaterThan(10)
+    for (const s of selectors) expect(s.startsWith('.cm'), s).toBe(true)
+    expect(Object.keys(cssVars(css)).filter((v) => v.startsWith('--color-') || v === '--cm-fill')).toEqual([])
+    expect(read('frontend/src/styles/tokens.css')).not.toContain('--cm-')
   })
 
-  it('청백전 채움색과 범위 테마는 .cm 안에서만 정의된다(앱 전체 토큰은 그대로)', () => {
+  it('작은 흰 글자 채움(진행 중 배지·배너 배지)은 action.strong + onStrong, \'새 청백전\'은 큰 CTA 규칙(VD-049·053 r9)', () => {
     const css = read('frontend/src/styles/clubmatch.css').replace(/\/\*[\s\S]*?\*\//g, '')
-    const cm = css.match(/(?:^|\})\s*\.cm\s*\{([^}]*)\}/)?.[1] ?? ''
-    const vars = cssVars(cm)
-    expect(vars['--cm-fill']).toBe('#087F73')
-    // (2단계) 청백전 화면 범위에서만 승인 테마 값(DD r8 VD-038·049)
-    expect(vars['--color-action-primary']).toBe('#0B9E8B')
-    expect(vars['--color-focus-ring']).toBe('#087F73')
-    expect(vars['--color-bg-page']).toBe('var(--cm-theme-bg-page)')
-    expect(cssVars(css.match(/:root\s*\{([^}]*)\}/)?.[1] ?? '')).toEqual({ '--cm-theme-bg-page': '#FAFFFD' })
-    // 범위 밖 규칙은 :root의 새 변수 1개와 청백전 화면을 담은 열의 바탕 1개뿐. 나머지는 모두 .cm으로 시작(@container 안 포함)
-    const selectors = [...css.matchAll(/(^|\})\s*([^{}@]+)\{/g)].map((m) => (m[2] ?? '').trim())
-    for (const s of selectors) expect(s.startsWith('.cm') || s === ':root' || s === '.app-column:has(.cm-page)', s).toBe(true)
-    // 앱 전체 tokens.css의 세 값은 바뀌지 않음(사용자 결정 2026-11-24)
-    const product = cssVars(read('frontend/src/styles/tokens.css'))
-    expect([product['--color-action-primary'], product['--color-bg-page'], product['--color-focus-ring']]).toEqual(['#006D68', '#FFFFFF', '#008F89'])
-    expect(read('frontend/src/styles/tokens.css')).not.toContain('--cm-')
+    const decl = (sel: string) => css.match(new RegExp(`${sel.replace(/[.[\]'=]/g, (c) => `\\${c}`)}\\s*\\{([^}]*)\\}`))?.[1] ?? ''
+    expect(decl(".cm .cm-badge[data-tone='live']")).toMatch(/background: var\(--color-action-strong\); color: var\(--color-action-onStrong\)/)
+    expect(decl('.cm .cm-hero-badge')).toMatch(/background: var\(--color-action-strong\); color: var\(--color-action-onStrong\)/)
+    expect(decl('.cm .cm-create')).toMatch(/background: var\(--color-action-primary\); color: var\(--color-action-onPrimary\)/)
+    expect(decl(".cm .cm-badge[data-tone='upcoming']")).toMatch(/background: var\(--color-accent-subtle\); color: var\(--color-text-accent\)/)
   })
 })
 
@@ -72,7 +70,7 @@ describe('청백전 배지(CMP-005, VD-053)', () => {
   })
 })
 
-describe('청백전 자산 파생본(VD-052·058)', () => {
+describe('청백전 자산 파생본(VD-052 r9·058)', () => {
   const webp = (rel: string) => {
     const b = fs.readFileSync(path.join(root, rel))
     expect(b.subarray(0, 4).toString('ascii')).toBe('RIFF')
@@ -80,9 +78,50 @@ describe('청백전 자산 파생본(VD-052·058)', () => {
     return b
   }
   it('배너·월계수 WebP가 있고 경로가 자산 모듈과 같다', () => {
-    expect(CLUBMATCH_BANNER_URL.endsWith('clubmatch/banner-1200.webp')).toBe(true)
+    // AST-082(원본 전체 구도) 파생본 1316×539(1692×693과 같은 비율). 이전 AST-079·AST-080 파생본은 제거
     expect(CLUBMATCH_LAUREL_URL.endsWith('clubmatch/laurel-160.webp')).toBe(true)
-    expect(webp('frontend/public/clubmatch/banner-1200.webp').length).toBeLessThan(120 * 1024)
+    expect(CLUBMATCH_BANNER_URL.endsWith('clubmatch/banner-ast082-1316.webp')).toBe(true)
+    const banner = webp('frontend/public/clubmatch/banner-ast082-1316.webp')
+    expect(banner.length).toBeLessThan(120 * 1024)
+    // VP8X 헤더의 캔버스 크기(24비트 리틀엔디언, 값+1): 1316×539 — 원본 1692×693과 비율 같음(1316·693 = 539·1692)
+    const size = [banner.readUIntLE(24, 3) + 1, banner.readUIntLE(27, 3) + 1]
+    expect(size).toEqual([1316, 539])
+    expect(size[0]! * 693).toBe(size[1]! * 1692)
+    for (const old of ['banner-1200.webp', 'banner-ast080-1200.webp']) expect(fs.existsSync(path.join(root, `frontend/public/clubmatch/${old}`)), old).toBe(false)
     expect(webp('frontend/public/clubmatch/laurel-160.webp').length).toBeLessThan(30 * 1024)
+  })
+})
+
+describe('청백전 배너(CMP-051, VD-052 r11)', () => {
+  it('이미지는 장식 img(alt 빈 값·aria-hidden)이고 제목·설명만 읽힌다', () => {
+    render(<ClubMatchScope><ClubMatchHero /></ClubMatchScope>)
+    const hero = screen.getByTestId('cm-hero')
+    const img = hero.querySelector('img.cm-hero-img')!
+    expect(img).toHaveAttribute('src', CLUBMATCH_BANNER_URL)
+    expect(img).toHaveAttribute('alt', '')
+    expect(img).toHaveAttribute('aria-hidden', 'true')
+    expect(img).toHaveAttribute('data-asset', 'AST-082')
+    expect(screen.queryByRole('img')).toBeNull() // 접근성 트리에 이미지 없음
+    expect(hero).toHaveTextContent('우리 동호회의청팀 vs 백팀 대결')
+    expect(hero.parentElement).toHaveClass('cm-hero-wrap') // 모서리 반경 계산용 크기 기준 감싸개
+  })
+
+  it('이미지를 불러오지 못하면 img를 숨기고 바탕·글자만 남긴다', () => {
+    render(<ClubMatchScope><ClubMatchHero /></ClubMatchScope>)
+    const hero = screen.getByTestId('cm-hero')
+    fireEvent.error(hero.querySelector('img.cm-hero-img')!)
+    expect(hero.querySelector('img')).toBeNull()
+    expect(hero.querySelector('.cm-hero-art')).not.toBeNull()
+    expect(hero).toHaveTextContent('기록과 랭킹을 함께 쌓아요.')
+  })
+
+  it('이미지 상자 비율은 원본(1692/693), 이음 그라데이션은 상자 안에서만 img 위(글자를 덮지 않음)', () => {
+    const css = read('frontend/src/styles/clubmatch.css').replace(/\/\*[\s\S]*?\*\//g, '')
+    const art = css.match(/\.cm \.cm-hero-art \{([^}]*)\}/)?.[1] ?? ''
+    expect(art).toMatch(/aspect-ratio: 1692 \/ 693/)
+    expect(art).toMatch(/isolation: isolate/)
+    expect(art).not.toMatch(/background/)
+    expect(css).toMatch(/\.cm \.cm-hero-img \{[^}]*object-fit: contain/)
+    expect(css).toMatch(/\.cm \.cm-hero-wrap \{ container-type: inline-size; \}/)
   })
 })

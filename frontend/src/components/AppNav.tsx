@@ -36,7 +36,7 @@ export function AppNav({ role, opsBadge, className }: { role: Role; opsBadge?: n
               <NavLink to={to} aria-current={on ? 'page' : undefined} aria-label={badge ? `${label}, 승인 대기 ${badge}건` : undefined}
                 className={cn('flex h-full flex-col items-center justify-center gap-0.5 no-underline', on ? 'font-bold text-ink-accent' : 'text-ink-muted')}>
                 <span className="relative">
-                  <Icon aria-hidden className={on ? 'size-6 text-action' : 'size-6'} />
+                  <Icon aria-hidden className={on ? 'size-6 text-ink-accent' : 'size-6'} />
                   {badge > 0 && <span aria-hidden data-cmp="CMP-005" className="absolute top-0 left-4 flex h-5 min-w-5 items-center justify-center rounded-sm bg-warning-bg px-1 text-caption leading-none font-bold tabular-nums text-warning-fg">{badge}</span>}
                 </span>
                 <span className="text-caption">{label}</span>

@@ -23,7 +23,7 @@ export function Scr111({ stateId }: { stateId: string }) {
   const past = items.filter((m) => m.status === 'ended')
   return (
     <Screen scr="SCR-111" st={stateId} platform="mobile">
-      <div className="cm" style={{ '--cm-hero-img': `url(${BASE}assets/AST-079.png)`, '--cm-laurel-img': `url(${BASE}assets/AST-070.png)` } as CSSProperties}>
+      <div className="cm" style={{ '--cm-laurel-img': `url(${BASE}assets/AST-070.png)` } as CSSProperties}>
         <PageHeader title="청백전" leading="none" trailing="none" />
         <main className="flex flex-col gap-6 pt-2" data-testid="cm-list">
           <div className="flex flex-col gap-3 px-4">
@@ -61,15 +61,20 @@ export function Scr111({ stateId }: { stateId: string }) {
   )
 }
 
-// CMP-051 ClubMatchHero(VD-052) — 이미지는 장식(aria-hidden, CSS 배경), 제목·설명만 읽힘
+// CMP-051 ClubMatchHero(VD-052 r11) — 이미지는 장식 img(alt 빈 값, aria-hidden), 제목·설명만 읽힘
 function Hero() {
   return (
-    <div className="cm-hero" data-cmp="CMP-051" data-testid="cm-hero">
-      <div className="cm-hero-art" data-asset="AST-079" aria-hidden />
-      <div className="cm-hero-copy">
-        <span className="cm-hero-badge">SMAPSH 청백전</span>
-        <p className="cm-hero-title">우리 동호회의<br /><span className="cm-hero-accent">청팀</span> vs 백팀 대결</p>
-        <p className="cm-hero-desc">팀을 나눠 실전처럼 경기하고<br className="cm-hero-br" /> 기록과 랭킹을 함께 쌓아요.</p>
+    <div className="cm-hero-wrap">
+      <div className="cm-hero" data-cmp="CMP-051" data-testid="cm-hero">
+        {/* (r7, VD-052 r11) 장식 img(빈 대체 글자·aria-hidden), object-fit: contain, 불러오기 실패 시 숨김 → hero.bg 바탕 + 글자 */}
+        <div className="cm-hero-art">
+          <img className="cm-hero-img" src={`${BASE}assets/AST-082.png`} data-asset="AST-082" alt="" aria-hidden="true" onError={(e) => { e.currentTarget.hidden = true }} />
+        </div>
+        <div className="cm-hero-copy">
+          <span className="cm-hero-badge">SMAPSH 청백전</span>
+          <p className="cm-hero-title">우리 동호회의<br /><span className="cm-hero-accent">청팀</span> vs 백팀 대결</p>
+          <p className="cm-hero-desc">팀을 나눠 실전처럼 경기하고<br className="cm-hero-br" /> 기록과 랭킹을 함께 쌓아요.</p>
+        </div>
       </div>
     </div>
   )

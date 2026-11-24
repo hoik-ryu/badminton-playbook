@@ -61,7 +61,7 @@ export function AppNav({
                 className={`flex h-full flex-col items-center justify-center gap-0.5 ${on ? "font-bold text-ink-accent" : "text-ink-muted"}`}
               >
                 <span className="relative">
-                  <Icon aria-hidden className={`size-6 ${on ? "text-action" : ""}`} />
+                  <Icon aria-hidden className={`size-6 ${on ? "text-ink-accent" : ""}`} />
                   {count > 0 && (
                     <span
                       aria-hidden

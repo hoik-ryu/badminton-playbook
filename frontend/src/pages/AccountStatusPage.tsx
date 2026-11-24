@@ -63,7 +63,7 @@ export function AccountStatusPage() {
         </NoticeBox>
       )}
       <div className="flex flex-1 flex-col items-center justify-center gap-3 text-center">
-        <view.Icon aria-hidden className="size-12 text-action" />
+        <view.Icon aria-hidden className="size-12 text-ink-accent" />
         <h1 className="m-0 text-heading font-bold text-ink">{view.title}</h1>
         {view.body && <p className="m-0 text-body text-ink-muted">{view.body}</p>}
       </div>

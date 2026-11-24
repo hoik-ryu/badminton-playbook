@@ -1,6 +1,6 @@
 ---
 doc: ui-system
-revision: 6
+revision: 7
 language: ko
 based_on:
   planning_revision: 7
@@ -11,6 +11,13 @@ based_on:
 
 `02-screens.md`에서 **실제로 반복해 쓰인 것만** 컴포넌트로 정의합니다. 특정 디자인 시스템이나 도구에 묶이지 않으며(CLAUDE.md), 이름은 `01` 6장의 명명 규칙을 따라 Figma Variables·컴포넌트와 CSS 변수에 그대로 옮길 수 있게 둡니다.
 값은 시각 디자인 단계(UI Preview)에서 바뀔 수 있는 초기값입니다. 토큰 값 변경은 UX 설계 변경으로 처리합니다(`reference/preview.md`).
+
+> **r7 개정(2026-11-23)**: SMAPSH 전체 디자인 시스템을 Soft Mint로 통일하는 사용자 결정(2026-11-23)에 따라 색 토큰 의미·역할을 고쳤습니다. 근거: `impact --design` R2(②)·R3·R4(④).
+> - 새 의미 토큰 2개(1.2): `color.action.strong`(작은 흰 글자를 올리는 진한 채움: 청백전 '진행 중' 배지·배너 배지), `color.action.onStrong`(그 위 글자). 진한 채움에 글자색 토큰(`color.text.accent`)을 빌려 쓰지 않도록 역할을 분리합니다.
+> - `color.action.primary`: 밝은 채움 전용으로 좁혔습니다(큰 CTA 배경, 진행 막대, 선택 탭 표시선 등). 밝은 값에서는 단독 아이콘·글자가 대비 기준에 못 미칠 수 있으므로, 강조 아이콘(선택 탭 아이콘·재생 아이콘)은 `color.text.accent`, 선택 상태 면은 `color.accent.subtle`을 씁니다.
+> - 대비 규칙(1.2): 주 버튼 글자(`color.action.onPrimary`)는 일반 글자 기준 4.5:1을 기본으로 합니다(밝은 채움 + 어두운 글자). 큰 CTA 22px 굵게는 그대로입니다.
+> - CMP-005 Badge: `live` '진행 중' = `color.action.strong` 채움 + `color.action.onStrong` 글자, `upcoming` '진행 예정' = `color.accent.subtle` + `color.text.accent`(r6의 info에서 변경).
+> - 테마 값(Soft Mint 색상값)은 Design Direction r9 테마(③)에서 정합니다. 이 문서의 표 값은 초기값입니다. 화면·정보·행동·권한·컴포넌트 ID는 바꾸지 않았습니다.
 
 > **r6 개정(2026-11-20)**: UX 결정 r7(UXD-085–089)에 따라 청백전 화면을 회원·운영진 공통으로 통합했습니다.
 > - 새 의미 토큰(1.2): `color.award.gold`(우승 트로피·메달 아이콘), `color.method.individual.fg/bg`(개인전 배지), `color.hero.bg`·`color.hero.text`·`color.hero.accent`(청백전 소개 배너). 값은 초기값이며 Design Direction 테마에서 바뀔 수 있습니다.
@@ -68,8 +75,10 @@ based_on:
 | color.text.disabled | #6B7280 | 비활성 글자·사유 | 4.43:1(surface) · 비활성 요소라 기준 예외지만 사유 글자는 page 배경(4.83:1)에 둠 |
 | color.border.default | #D5D9E0 | 장식 구분선(카드 경계 보조) | 1.42:1 · 장식용만 |
 | color.border.strong | #6B7280 | 입력칸·체크박스·보조 버튼 테두리, 백팀 표식 | 4.83:1 |
-| color.action.primary | #1D5BD0 | 주 버튼 배경, ~~링크,~~ 선택 상태, (r4) 진행 막대·재생 아이콘·선택 탭 아이콘 등 **채움·아이콘**. (r4) 글자색으로 쓰지 않습니다(링크·강조 글자는 color.text.accent) | 6.07:1 |
-| color.action.onPrimary | #FFFFFF | 주 버튼 글자 | 6.07:1 |
+| color.action.primary | #1D5BD0 | 주 버튼 배경, ~~링크,~~ ~~선택 상태,~~ (r4) 진행 막대·~~재생 아이콘·선택 탭 아이콘~~ 등 **채움**. (r7) 밝은 채움 전용: 큰 CTA 배경, 진행 막대(수치 글자 병행, CMP-049), 선택 탭 표시선. 글자색·단독 아이콘으로 쓰지 않습니다(강조 글자·아이콘은 color.text.accent, 선택 상태 면은 color.accent.subtle) | 6.07:1 |
+| color.action.onPrimary | #FFFFFF | 주 버튼 글자. (r7) 대 color.action.primary 일반 글자 기준 4.5:1 이상 | 6.07:1 |
+| color.action.strong | #376F65 | (r7) 작은 흰 글자를 올리는 진한 채움: 청백전 '진행 중' 배지(CMP-005 `live`), 청백전 배너 배지(CMP-051). 넓은 면·큰 CTA에는 쓰지 않습니다 | 5.79:1(onStrong) |
+| color.action.onStrong | #FFFFFF | (r7) color.action.strong 위 글자 | 5.79:1 |
 | color.focus.ring | #1D5BD0 | 키보드 포커스 링(2px + 2px 간격) | 6.07:1 |
 | color.status.danger.fg | #B3261E | 오류 글자, 위험 버튼 | 6.54:1(page), 5.52:1(danger.bg) |
 | color.status.danger.bg | #FDE7E5 | 오류 안내 상자 배경 | - |
@@ -80,7 +89,7 @@ based_on:
 | color.status.info.bg | #E3ECFC | 정보 안내 상자 배경 | - |
 | color.accent.subtle | #DDF8EF | (r4) 강조 보조 면: 상태·시간 배지(CMP-005) 배경, 스테이지 썸네일 바탕(CMP-047), 과정 진행 배지(CMP-048), 이어서 하기 카드(CMP-050) 강조 면, 소개 배너(SCR-101) 그라데이션. 정보 안내 상자(color.status.info.bg)와 의미가 다릅니다 | text.primary 15.07:1, text.secondary 6.19:1, text.accent 4.84:1 |
 | color.accent.mint | #8EE3CC | (r4) 장식 면 전용: 소개 배너 그라데이션의 진한 끝. 글자·아이콘의 바탕으로 쓰지 않습니다 | 장식용만(text.primary 11.26:1) |
-| color.text.accent | #10776C | (r4) 강조 글자: 링크, 배너·카드 머리글, 선택된 하단 탭 글자, 통과·시간 배지 글자 등 작은 글자를 포함한 강조색 글자 | 5.42:1(#FFFFFF), 5.36:1(#FAFFFD), 4.84:1(accent.subtle) |
+| color.text.accent | #10776C | (r4) 강조 글자: 링크, 배너·카드 머리글, 선택된 하단 탭 글자, 통과·시간 배지 글자 등 작은 글자를 포함한 강조색 글자. (r7) 강조 아이콘(선택 탭 아이콘·재생 아이콘)과 '진행 예정' 배지 글자, 작은 주 버튼 글자·테두리 | 5.42:1(#FFFFFF), 5.36:1(#FAFFFD), 4.84:1(accent.subtle) |
 | color.team.blue.fg | #1747A6 | 청팀 글자 | 7.10:1(team.blue.bg) |
 | color.team.blue.bg | #E3ECFC | 청팀 띠·배지 배경 | - |
 | color.team.white.fg | #1A1D23 | 백팀 글자 | 16.88:1 |
@@ -98,6 +107,7 @@ based_on:
 | color.hero.text | #FFFFFF | (r6) 배너 제목·설명 글자 | 12.31:1(hero.bg) |
 | color.hero.accent | #9CCBFF | (r6) 배너 제목의 강조 단어('청팀') | 7.27:1(hero.bg) |
 
+- (r7) **Soft Mint 역할과 대비 유지**: 밝은 채움(`color.action.primary`) 위 글자는 `color.action.onPrimary`로 일반 글자 4.5:1 이상, 진한 채움(`color.action.strong`) 위 글자는 `color.action.onStrong`으로 4.5:1 이상, `color.text.accent`는 페이지·`color.bg.surface`·`color.accent.subtle` 모두에서 4.5:1 이상, `color.focus.ring`은 페이지 대비 3:1 이상을 유지합니다. `color.action.primary`가 페이지 대비 3:1 미만이면 정보를 전달하는 단독 아이콘·경계에 쓰지 않고, 같은 정보를 글자로 함께 보여 줄 때(진행 막대의 수치 등)만 막대·표시선으로 씁니다.
 - (r4) **역할 분리와 대비 유지(CR-011)**: 강조색은 쓰임새별로 토큰을 나눕니다 — 채움·아이콘 `color.action.primary`, 강조 글자 `color.text.accent`, 키보드 포커스 `color.focus.ring`(서로 같은 값일 필요 없음). 테마 값이 바뀌어도 다음을 유지합니다: `color.text.accent` 대 페이지·`color.accent.subtle` 4.5:1 이상, `color.action.onPrimary` 대 `color.action.primary`는 일반 글자 4.5:1 이상, 큰 글자(굵게 18.66px(14pt) 이상 또는 24px 이상) 3:1 이상(주 버튼 글자, WCAG 1.4.3), `color.action.primary`로 그린 아이콘·막대·선택 표시 대 인접 배경 3:1 이상, `color.focus.ring` 대 페이지 3:1 이상. 정보는 색만으로 전달하지 않습니다(진행률은 숫자 글자 병기).
 - 개인전의 '1팀 / 2팀'은 팀 색을 쓰지 않고 글자 레이블만 씁니다(청·백 팀전과 혼동 방지, C-24).
 - 카카오 버튼 색·문구는 카카오 로그인 버튼 가이드를 따르며 위 값은 가이드 확인 후 확정합니다.
@@ -157,6 +167,7 @@ based_on:
 - **상태**: 기본, 눌림, 비활성(사유 문구를 근처에 표시), 로딩(진행 표시·중복 제출 막기)
 - **사용 화면**: SCR-001, SCR-002, SCR-003, SCR-004, SCR-005, SCR-102, SCR-103, SCR-111, SCR-112, SCR-121, SCR-122, SCR-202, SCR-203, SCR-211, SCR-212, SCR-213, SCR-222, SCR-226, SCR-231, SCR-232
 - **접근성**: 버튼 글자가 곧 레이블, 비활성 사유는 `aria-describedby`, 포커스 링 color.focus.ring
+- (r7) **주 버튼 글자(Soft Mint)**: 주 버튼은 밝은 채움 + 어두운 글자(`color.action.onPrimary`)로 크기와 관계없이 일반 글자 기준 4.5:1을 충족해야 합니다. 아래 r4의 '별도 검토 대상'은 이 기준으로 확인합니다. 큰 CTA의 22px 굵게는 유지합니다.
 - (r4) **큰 CTA 버튼 글자(CR-011, 사용자 결정 2026-11-19)**: `variant=primary`·`size=lg`(48px) 버튼은 글자를 `font.size.heading`(22px)·`font.weight.bold`로 씁니다. 이때 `color.action.onPrimary` 대 `color.action.primary`는 큰 글자 기준 3:1 이상이면 됩니다(1.2 대비 규칙).
 - (r4) **별도 검토 대상(아직 기준 충족을 확인하지 않음)**: 22px를 적용하기 어려운 아래 경우는 큰 글자 예외를 쓸 수 없으므로 일반 글자 기준 4.5:1을 따로 확인해야 합니다. 테마 값에서 흰 글자 대 `color.action.primary`가 4.5:1 미만이면 **미달**이며, Design Direction에서 해결 방법(글자 크기·배경 값 등)을 정하기 전에는 통과로 기록하지 않습니다.
   - `variant=primary`·`size=md`(44px) 버튼과 목록 행·시트 안의 작은 주 버튼(저장·확정·승인 등)
@@ -187,7 +198,7 @@ based_on:
 ### CMP-005: Badge
 - **용도**: 짧은 상태·구분 표시(방식, 청백전 상태, 팀, 미설정, 게스트, 비활성, 변경됨, 귀가, 출전, 규칙 완화, 역할, 대기 건수). (r2, X8) '결과 수정됨'(종료 후 결과가 바뀐 경기, SCR-112-ST14·SCR-112-ST8, AC-110), '같은 대진 반복'(청백전 완화, 사유를 붙여 '같은 대진 반복 · {사유}', AC-108, UXD-007)
 - **변형**: `tone=neutral|info|warning|danger|success|teamBlue|teamWhite|live|upcoming|pending|individual`, `shape=label|count`
-- (r6) 청백전 상태(UXD-087): `live` '진행 중'(color.action.primary 채움 + onPrimary 글자), `upcoming` '진행 예정'(info), `pending` '준비 중'(neutral + 점선 테두리, 운영진에게만 쓰임), 종료는 `neutral` '종료'. 방식: '팀전'은 `teamBlue`, '개인전'은 `individual`
+- (r6) 청백전 상태(UXD-087): `live` '진행 중'(~~color.action.primary 채움 + onPrimary 글자~~ (r7) color.action.strong 채움 + color.action.onStrong 글자), `upcoming` '진행 예정'(~~info~~ (r7) color.accent.subtle + color.text.accent), `pending` '준비 중'(neutral + 점선 테두리, 운영진에게만 쓰임), 종료는 `neutral` '종료'. 방식: '팀전'은 `teamBlue`, '개인전'은 `individual`
 - **상태**: 기본(정적)
 - **사용 화면**: SCR-111, SCR-112, SCR-201, SCR-202, SCR-205, SCR-211, SCR-212, SCR-224, SCR-225, SCR-232
 - **접근성**: 항상 글자 포함(색만으로 구분하지 않음, WCAG 1.4.1). 누를 수 있는 배지(규칙 완화)는 버튼 역할

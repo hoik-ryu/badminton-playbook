@@ -3,7 +3,7 @@ import type { ComponentProps, ReactNode } from 'react'
 // 청백전 영역 전용 UI 기반(1단계) — 공통 components/Badge(CMP-005 일반 톤, 사각 24px)는 바꾸지 않고, 청백전 화면에서만 쓰는 표현을 따로 둡니다.
 // 스타일: src/styles/clubmatch.css(.cm 범위 안에서만 적용)
 
-/** 청백전 화면 루트. 이 안에서만 청백전 채움색(--cm-fill)과 청백전 배지 스타일이 적용됩니다(VD-049·053) */
+/** 청백전 화면 루트. 이 안에서만 청백전 배지·카드·배너 스타일이 적용됩니다(VD-049·053, 색은 앱 전체 토큰) */
 export function ClubMatchScope({ className, ...props }: ComponentProps<'div'>) {
   return <div className={className ? `cm ${className}` : 'cm'} {...props} />
 }
