@@ -1,8 +1,8 @@
 {
-  "at": "2026-11-25T01:27:59Z",
+  "at": "2026-11-25T05:36:46Z",
   "ok": true,
-  "brief_digest": "98981a4e4bb243ba85601c938ce1173da9509cad73eca1e275088ce7be90e5cc",
-  "plan_sha256": "d3802e675e0c1bb61e067ee31fea71c1c4586ef8f3c2571458cdf9d34f95494e",
+  "brief_digest": "d275b8b47a1be45f57a5ed72e24457f657ffa9ac3f46681cfdcd7fcb29137836",
+  "plan_sha256": "77b8716c82faf689b6823fe02bf13eb9507ac4d20d8e6e28f4ce10723b34feef",
   "errors": [],
   "warnings": [
     "[touched_plan_legacy] (touched_missing) SCR-101: 이 배치가 바꾸는 화면(touches)의 계획이 없습니다. touched.SCR-101에 changes·via와 대표 상태(states)·위임(covered_by)·예외(exempt) 중 하나를 적으세요 — 이미 시작된 배치의 이전 UI Plan이라 경고만 합니다(다시 계획하면 적용)",

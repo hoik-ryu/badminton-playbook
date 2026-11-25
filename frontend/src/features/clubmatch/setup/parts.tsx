@@ -2,7 +2,8 @@ import { CalendarDays, Check, ChevronDown, TriangleAlert } from 'lucide-react'
 import type { ReactNode } from 'react'
 
 import symbolUrl from '../../../assets/brand/smapsh-symbol.svg'
-import { Badge } from '../../../components/Badge'
+import { Avatar } from '../../../components/Avatar'
+import { PersonMeta } from '../../../components/PersonMeta'
 import type { ParticipantRow } from '../api'
 import { dateLabel, personLabel } from './format'
 
@@ -43,34 +44,8 @@ export function SectionTitle({ icon, children, req, aside, id }: { icon: ReactNo
   )
 }
 
-/** 이니셜 아바타(VD-064·070, 사진 없음) */
-export function Avatar({ name }: { name: string }) {
-  return (
-    <span className="su-avatar" aria-hidden>
-      {name.slice(0, 1)}
-    </span>
-  )
-}
-
-/** 사람 메타 한 줄 '남 · A조 · 8점' + 점수 미설정·게스트 배지(CMP-005 재사용) */
-export function PersonMeta({ p }: { p: Pick<ParticipantRow, 'gender' | 'grade' | 'score' | 'kind'> }) {
-  const parts = [p.gender, p.grade, p.score === null ? null : `${p.score}점`].filter(Boolean)
-  return (
-    <span className="su-meta">
-      {parts.join(' · ')}
-      {p.score === null && (
-        <Badge tone="warning" className="su-badge" data-tone="warning">
-          점수 미설정
-        </Badge>
-      )}
-      {p.kind === 'guest' && (
-        <Badge tone="neutral" className="su-badge" data-tone="neutral">
-          게스트
-        </Badge>
-      )}
-    </span>
-  )
-}
+/** (r13) 이니셜 아바타·메타 줄은 공통 컴포넌트 CMP-057·058(components/)로 옮겼습니다 — 모습은 그대로(VD-076) */
+export { Avatar, PersonMeta }
 
 /** 선택 타일(CMP-002 표현, VD-062): 같은 폭 2칸, 아이콘 + 글자. 키보드 방향키로 이동(라디오 그룹) */
 export function MethodTiles<T extends string>({ label, value, options, onChange, error }: { label: string; value: T | null; options: { value: T; label: string; icon: ReactNode }[]; onChange: (v: T) => void; error?: string }) {

@@ -3,6 +3,7 @@ import { useCallback, useMemo, useRef, useState } from 'react'
 import { isApiError } from '../../../lib/api'
 import { kstDate } from '../../session/api'
 import { CLUB_ERRORS, settleSaveFailure, type ClubMatchView, type ClubMethod, type Team } from '../api'
+import type { Lineup } from './pick'
 import { participantsOf, sameSet } from './steps'
 
 // 생성 페이지 상태(C-32·C-33): 단계 입력은 화면에 두었다가 '다음'에서 바뀐 값만 저장합니다. 이전 단계로 가도 입력은 유지(UXD-099).
@@ -13,6 +14,11 @@ export type BasicDraft = { method: ClubMethod | null; name: string; date: string
 export type GamesDraft = { totalGames: string; balance: boolean; gender: boolean; keepUneven: boolean }
 export type TeamMove = { key: string; from: Team | null; to: Team }
 export type TeamUi = { method: 'auto' | 'manual' | null; note: string | null; lastMove: TeamMove | null; seeded: boolean }
+/** (r13, UXD-100·101·103) 대진 편집 화면 상태 — 저장하지 않음(C-35). 페이지 안 단계 이동·충돌 뒤에도 유지(UXD-099)
+ * mode: 마지막으로 실행·선택한 대진 구성 방식(다시 들어오면 null) · base: 마지막 자동 생성 기준값('기준 n경기에서 편집됨')
+ * edited: 이 페이지에서 편집을 저장함(다시 생성 확인) · partials: 화면에만 있는 미완성 경기 */
+export type GamesUi = { mode: 'auto' | 'manual' | null; base: number | null; edited: boolean; partials: Lineup[] }
+const emptyGamesUi = (): GamesUi => ({ mode: null, base: null, edited: false, partials: [] })
 
 export type Drafts = {
   basic: BasicDraft
@@ -20,6 +26,7 @@ export type Drafts = {
   teams: Record<string, Team | null>
   teamUi: TeamUi
   games: GamesDraft
+  gamesUi: GamesUi
   /** 대진이 있을 때 참가자·팀 변경에 대한 폐기 확인을 받았는지(ST10·ST11, '다음' 저장 때 함께 보냄) */
   discard: { participants: boolean; teams: boolean }
 }
@@ -36,6 +43,7 @@ export function emptyDrafts(): Drafts {
     teams: {},
     teamUi: { method: null, note: null, lastMove: null, seeded: false },
     games: { totalGames: '8', balance: true, gender: true, keepUneven: false },
+    gamesUi: emptyGamesUi(),
     discard: { participants: false, teams: false },
   }
 }
@@ -47,8 +55,16 @@ export function draftsFrom(v: ClubMatchView, prev?: Drafts): Drafts {
     teams: savedTeams(v),
     teamUi: { method: null, note: null, lastMove: null, seeded: prev?.teamUi.seeded ?? false },
     games: savedGames(v),
+    gamesUi: prev ? keepPartials(prev.gamesUi, v) : emptyGamesUi(),
     discard: { participants: false, teams: false },
   }
+}
+
+/** (UXD-103) 최신 상태로 다시 그릴 때 미완성 경기는 유지하되, 더 이상 참가자가 아닌(제외·비활성 포함) 사람의 자리는 비움 */
+export function keepPartials(ui: GamesUi, v: ClubMatchView): GamesUi {
+  const ok = new Set(v.rows.filter((r) => r.participating && !r.left && r.available).map((r) => r.key))
+  const clean = (k: string | null) => (k && ok.has(k) ? k : null)
+  return { ...ui, partials: ui.partials.map((l) => ({ ...l, t1: [clean(l.t1[0]), clean(l.t1[1])], t2: [clean(l.t2[0]), clean(l.t2[1])] })) }
 }
 
 export const sameTeams = (a: Record<string, Team | null>, b: Record<string, Team | null>) => sameSet(Object.keys(a), Object.keys(b)) && Object.keys(a).every((k) => a[k] === b[k])
@@ -56,13 +72,15 @@ export const sameGames = (a: GamesDraft, b: GamesDraft) => Number(a.totalGames) 
 
 /** 단계별 저장하지 않은 변경(이탈 확인·ST9) */
 export function dirtyOf(v: ClubMatchView | null, d: Drafts) {
-  if (!v) return { basic: d.basic.method !== null || d.basic.name !== '' || d.basic.date !== kstDate(), participants: false, teams: false, games: false }
+  if (!v) return { basic: d.basic.method !== null || d.basic.name !== '' || d.basic.date !== kstDate(), participants: false, teams: false, games: false, partials: false }
   const b = savedBasic(v)
   return {
     basic: d.basic.method !== b.method || d.basic.name.trim() !== b.name || d.basic.date !== b.date,
     participants: !sameSet(d.participants, savedParticipants(v)),
     teams: v.method === 'team' && !sameTeams(d.teams, savedTeams(v)),
     games: !sameGames(d.games, savedGames(v)),
+    /** (r13) 화면에만 있는 미완성 경기(이탈 확인 ST17) */
+    partials: d.gamesUi.partials.length > 0,
   }
 }
 
@@ -90,6 +108,7 @@ export function useSetup(initial?: ClubMatchView) {
         teams: v.method === 'team' ? teams : {},
         teamUi: reset.teams ? { ...d.teamUi, lastMove: null } : d.teamUi,
         games: reset.games ? savedGames(v) : d.games,
+        gamesUi: d.gamesUi,
         discard: { participants: reset.participants ? false : d.discard.participants, teams: reset.teams ? false : d.discard.teams },
       }
     })

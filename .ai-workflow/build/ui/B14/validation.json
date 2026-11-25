@@ -1,0 +1,20 @@
+{
+  "at": "2026-11-25T05:31:58Z",
+  "ok": true,
+  "brief_digest": "a8661de9f3d896bdb4c147bde1bd60ac00d1d76e0fe419d93992ec7dcb44653d",
+  "plan_sha256": "4bc32e180ab7ed9da70fdd4fc438fb8f80929b83ef7a91b389b3af3f9bffe088",
+  "errors": [],
+  "warnings": [],
+  "counts": {
+    "screens": 0,
+    "states": 0,
+    "cmps_used": 0,
+    "touched": {
+      "screens": 6,
+      "representative": 6,
+      "covered": 0,
+      "exempt": 0
+    }
+  },
+  "rules": "touched-v1"
+}

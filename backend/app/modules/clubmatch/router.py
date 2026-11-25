@@ -33,6 +33,8 @@ from app.modules.clubmatch.schemas import (
     ClubMatchListItem,
     ClubMatchView,
     Created,
+    GameCreate,
+    GameExchange,
     GameView,
     GenerateRequest,
     LeaveRequest,
@@ -893,6 +895,20 @@ def generate_games(
                 "white": white if m.method == "team" else None,
             },
         )
+    # (B13, C-33·C-35) 운영진이 편집한 경기가 있으면 확인(discard) 후에만 다시 생성
+    edited = db.scalar(
+        select(func.count())
+        .select_from(ClubMatchGame)
+        .where(ClubMatchGame.match_id == m.id, ClubMatchGame.manual.is_(True))
+    )
+    if edited and not body.discard:
+        raise _fail(
+            db,
+            CONFIRM_REQUIRED,
+            "편집한 대진이 사라집니다. 확인 후 다시 요청해 주세요",
+            409,
+            {"games": _game_count(db, m), "edited": int(edited)},
+        )
     _discard_games(db, m)
     db.flush()
     seed = secrets.randbelow(2**31)  # Mock과 같은 범위
@@ -990,6 +1006,12 @@ def confirm(match_id: uuid.UUID, body: Versioned, _: AdminUser, db: DbSession) -
             422,
             {"keys": unassigned},
         )
+    # (B13, C-19 r11·C-35) 모든 경기를 항상 막는 규칙으로 다시 검사
+    parts_by_key = {_participant_key(p): p for p in parts}
+    available = _available_keys(db, parts)
+    by_participant = {p.id: _participant_key(p) for p in parts}
+    for g, t1, t2 in _games(db, m.id, by_participant):
+        _check_lineup(db, m, parts_by_key, available, list(t1), list(t2), game_no=g.no)
     m.status = "confirmed"
     m.confirmed_at = _now()
     return _finish(db, m)
@@ -1144,7 +1166,9 @@ def swap(
     db.flush()
     keys = _matchup_keys(db, m)
     twins = [o for o, k in keys.items() if o != no and k == keys[no]]
-    if twins:
+    # (B13, AC-043 r11·AC-140) 같은 대진 거부는 확정 후 교체에만.
+    # 확정 전은 허용하고 '운영진 수동 변경' 표시
+    if twins and m.status != "draft":
         raise _fail(
             db,
             SAME_MATCHUP,
@@ -1155,6 +1179,7 @@ def swap(
     if m.status == "confirmed":
         m.modified_at = _now()
     _refresh_flags(db, m)
+    _mark_draft_repeats(db, m)
     return _finish(db, m)
 
 
@@ -1182,6 +1207,195 @@ def _available_keys(db: Session, parts: Iterable[ClubMatchParticipant]) -> set[s
         for p in active
         if (p.user_id in ok_users) or (p.guest_id is not None and p.guest_id in ok_guests)
     }
+
+
+# ── (B13) 확정 전 공통 편집: 경기 추가·삭제·맞교환·대진 폐기(C-35, AC-136–143) ──
+
+DUPLICATE_PLAYER = "duplicate_player"
+TEAM_VIOLATION = "team_violation"
+NOT_TWO_VS_TWO = "not_two_vs_two"
+MAX_GAMES = "max_games"
+EXCHANGE_NOT_ALLOWED = "exchange_not_allowed"
+MAX_TOTAL_GAMES = 200  # club_matches.total_games 제약(1–200)과 같음
+
+
+def _check_lineup(
+    db: Session,
+    m: ClubMatch,
+    parts_by_key: dict[str, ClubMatchParticipant],
+    available: set[str],
+    t1: list[str],
+    t2: list[str],
+    game_no: int | None = None,
+) -> None:
+    """항상 막는 규칙(C-19 r11): 2 대 2, 같은 경기 같은 선수, 참가 자격, 팀전 팀 소속.
+
+    자동 생성 결과는 엔진이 같은 규칙을 지키고, 확정 전 편집·확정 재검사가 이 함수를 씀.
+    허용 규칙(같은 대진 반복·경기 수 불균형·실력차·성별)은 여기서 거부하지 않음.
+    """
+    where = {"games": [game_no]} if game_no is not None else None
+    if len(t1) != 2 or len(t2) != 2:
+        raise _fail(db, NOT_TWO_VS_TWO, "경기는 2 대 2여야 합니다", 422, where)
+    keys = [*t1, *t2]
+    if len(set(keys)) != 4:
+        raise _fail(
+            db, DUPLICATE_PLAYER, "같은 경기에 같은 선수가 두 번 들어갈 수 없습니다", 422, where
+        )
+    bad = [
+        k for k in keys if k not in parts_by_key or parts_by_key[k].left_at or k not in available
+    ]
+    if bad:
+        raise _fail(
+            db,
+            NOT_ELIGIBLE,
+            "이 청백전에서 뛸 수 있는 선수가 아닙니다",
+            422,
+            {"keys": bad, **(where or {})},
+        )
+    if m.method == "team" and (
+        any(parts_by_key[k].team != "blue" for k in t1)
+        or any(parts_by_key[k].team != "white" for k in t2)
+    ):
+        raise _fail(db, TEAM_VIOLATION, "팀전은 청팀 2명 대 백팀 2명이어야 합니다", 422, where)
+
+
+def _mark_draft_repeats(db: Session, m: ClubMatch) -> None:
+    """(AC-140) 확정 전 편집으로 생긴 같은 대진은 해당 경기 모두에 '운영진 수동 변경'으로 표시.
+
+    schedule.refresh_after_swap(골든과 같은 규칙)은 뒤 경기만 반복으로 보므로, 확정 전에는
+    같은 대진 묶음에 운영진 편집 경기가 있으면 앞 경기도 표시를 더함. 확정 후에는 바꾸지 않음.
+    """
+    if m.status != "draft":
+        return
+    db.flush()
+    by_participant = {p.id: _participant_key(p) for p in _participants(db, m.id)}
+    rows = _games(db, m.id, by_participant)
+    groups: dict[str, list[ClubMatchGame]] = {}
+    for g, t1, t2 in rows:
+        groups.setdefault(schedule.matchup_key(t1, t2), []).append(g)
+    for games in groups.values():
+        if len(games) < 2 or not any(g.manual for g in games):
+            continue
+        for g in games:
+            g.repeated_matchup = True
+            if not any(x["rule"] == "matchup" for x in g.relaxations or []):
+                g.relaxations = [*(g.relaxations or []), {"rule": "matchup", "reason": "manual"}]
+
+
+def _renumber(db: Session, m: ClubMatch) -> int:
+    """경기 번호를 1..n으로 다시 매김. n을 돌려줌.
+
+    고유 제약 (match_id, no)을 피하려고 두 단계로 갱신.
+    """
+    db.flush()
+    games = list(
+        db.scalars(
+            select(ClubMatchGame).where(ClubMatchGame.match_id == m.id).order_by(ClubMatchGame.no)
+        ).all()
+    )
+    for g in games:
+        g.no = g.no + 1000
+    db.flush()
+    for i, g in enumerate(games, start=1):
+        g.no = i
+    db.flush()
+    return len(games)
+
+
+def _sync_total(m: ClubMatch, count: int) -> None:
+    """(C-14 r11) 대진이 있으면 실제 경기 수를 총 경기 수로 저장.
+
+    0경기면 기준값 유지(제약 1–200).
+    """
+    if count > 0:
+        m.total_games = count
+
+
+@router.post("/{match_id}/games/manual")
+def add_game(match_id: uuid.UUID, body: GameCreate, _: AdminUser, db: DbSession) -> ClubMatchView:
+    """완성 경기 추가(AC-137, C-35): 확정 전만, 목록 끝 번호.
+
+    미완성 경기는 화면 상태라 서버에 없음.
+    """
+    m = _begin(db, match_id, body)
+    parts = _participants(db, m.id)
+    parts_by_key = {_participant_key(p): p for p in parts}
+    _check_lineup(db, m, parts_by_key, _available_keys(db, parts), body.team1, body.team2)
+    count = _game_count(db, m)
+    if count >= MAX_TOTAL_GAMES:
+        raise _fail(db, MAX_GAMES, f"경기는 {MAX_TOTAL_GAMES}개까지 만들 수 있습니다", 422)
+    game = ClubMatchGame(match_id=m.id, no=count + 1, manual=True, relaxations=[])
+    db.add(game)
+    db.flush()
+    for side, team in ((1, body.team1), (2, body.team2)):
+        for slot, key in ((1, team[0]), (2, team[1])):
+            db.add(
+                ClubMatchGamePlayer(
+                    game_id=game.id, side=side, slot=slot, participant_id=parts_by_key[key].id
+                )
+            )
+    _sync_total(m, count + 1)
+    _refresh_flags(db, m)
+    _mark_draft_repeats(db, m)
+    return _finish(db, m)
+
+
+@router.delete("/{match_id}/games/{no}")
+def delete_game(
+    match_id: uuid.UUID, no: int, version: int, _: AdminUser, db: DbSession
+) -> ClubMatchView:
+    """경기 삭제(AC-138, C-35): 확정 전만.
+
+    번호 재정렬, 총 경기 수 = 실제 경기 수(0경기면 기준값 유지).
+    """
+    m = _begin(db, match_id, Versioned(version=version))
+    g = _game(db, m, no)
+    db.execute(delete(ClubMatchGamePlayer).where(ClubMatchGamePlayer.game_id == g.id))
+    db.execute(delete(ClubMatchGame).where(ClubMatchGame.id == g.id))
+    _sync_total(m, _renumber(db, m))
+    _refresh_flags(db, m)
+    _mark_draft_repeats(db, m)
+    return _finish(db, m)
+
+
+@router.delete("/{match_id}/games")
+def discard_games(match_id: uuid.UUID, version: int, _: AdminUser, db: DbSession) -> ClubMatchView:
+    """대진 전체 폐기(AC-136, '직접 구성' 전환): 확정 전만. 총 경기 수(기준값)는 그대로."""
+    m = _begin(db, match_id, Versioned(version=version))
+    _discard_games(db, m)
+    return _finish(db, m)
+
+
+@router.post("/{match_id}/games/{no}/exchange")
+def exchange_players(
+    match_id: uuid.UUID, no: int, body: GameExchange, _: AdminUser, db: DbSession
+) -> ClubMatchView:
+    """개인전 같은 경기 맞교환(AC-139, C-35): 확정 전만, 대상과 상대 조 선수의 자리를 바꿈."""
+    m = _begin(db, match_id, body)
+    if m.method != "individual":
+        raise _fail(db, EXCHANGE_NOT_ALLOWED, "팀전은 같은 경기 맞교환을 할 수 없습니다", 422)
+    g = _game(db, m, no)
+    parts_by_key = {_participant_key(p): p for p in _participants(db, m.id)}
+    a, b = parts_by_key.get(body.out), parts_by_key.get(body.in_)
+    seats = list(db.scalars(select(ClubMatchGamePlayer).where(ClubMatchGamePlayer.game_id == g.id)))
+    sa = next((s for s in seats if a and s.participant_id == a.id), None)
+    sb = next((s for s in seats if b and s.participant_id == b.id), None)
+    if sa is None or sb is None or sa.side == sb.side:
+        raise _fail(db, CONFLICT, "대진이 바뀌었습니다", 409, {"version": m.version})
+    pos = {(sa.side, sa.slot): sb.participant_id, (sb.side, sb.slot): sa.participant_id}
+    db.execute(
+        delete(ClubMatchGamePlayer).where(
+            ClubMatchGamePlayer.game_id == g.id,
+            ClubMatchGamePlayer.participant_id.in_([sa.participant_id, sb.participant_id]),
+        )
+    )
+    db.flush()
+    for (side, slot), pid in pos.items():
+        db.add(ClubMatchGamePlayer(game_id=g.id, side=side, slot=slot, participant_id=pid))
+    g.manual = True
+    _refresh_flags(db, m)
+    _mark_draft_repeats(db, m)
+    return _finish(db, m)
 
 
 @router.post("/{match_id}/participants/{key}/leave")

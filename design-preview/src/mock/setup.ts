@@ -35,7 +35,24 @@ export const SETUP_PEOPLE: SetupPerson[] = [
 const byName = (a: SetupPerson, b: SetupPerson) => a.name.localeCompare(b.name, 'ko')
 /** 명단 순서: 회원 이름순 → 게스트 이름순(UXD-074) */
 export const ROSTER = [...SETUP_PEOPLE.filter((p) => !p.guest).sort(byName), ...SETUP_PEOPLE.filter((p) => p.guest).sort(byName)]
-export const person = (id: string) => SETUP_PEOPLE.find((p) => p.id === id)!
+/** (r13) 확정 후 선수 교체(SCR-225-ST7) 재현용 — SCR-112 '가을 청백전'(mock/data.ts)의 가상 인물. 참가자 설정 명단(ROSTER)에는 넣지 않음 */
+export const CONFIRMED_PEOPLE: SetupPerson[] = [
+  { id: 'c01', name: '김가람', gender: '남', grade: 'B조', score: 7 },
+  { id: 'c02', name: '오아라', gender: '여', grade: 'C조', score: 5 },
+  { id: 'c03', name: '박다온', gender: '남', grade: 'A조', score: 9 },
+  { id: 'c04', name: '신자람', gender: '여', grade: '왕초심', score: 2 },
+  { id: 'c05', name: '윤새벽', gender: '남', grade: '초심', score: 3 },
+  { id: 'c06', name: '남보람', gender: '남', grade: 'B조', score: 7 },
+  { id: 'c07', name: '이하람', gender: '여', grade: 'B조', score: 6 },
+  { id: 'c11', name: '한바다', gender: '남', grade: 'C조', score: 6 },
+  { id: 'c12', name: '권초록', gender: '여', grade: 'C조', score: 5 },
+  { id: 'c13', name: '정마루', gender: '남', grade: 'A조', score: 8 },
+  { id: 'c14', name: '문솔빛', gender: '여', grade: '초심', score: 3, guest: true },
+  { id: 'c15', name: '서이든', gender: '남', grade: 'D조', score: 4 },
+  { id: 'c16', name: '최라온', gender: '여', grade: 'D조', score: 4 },
+  { id: 'c17', name: '하늘솔', gender: '남', grade: 'C조', score: 5 },
+]
+export const person = (id: string) => (SETUP_PEOPLE.find((p) => p.id === id) ?? CONFIRMED_PEOPLE.find((p) => p.id === id))!
 
 /** 16명 선택(남 8 · 여 8, 모두 점수 있음) */
 export const SELECTED_16 = ['p01', 'p02', 'p03', 'p04', 'p05', 'p06', 'p07', 'p09', 'p11', 'p13', 'p14', 'p15', 'p16', 'p17', 'p19', 'g01']

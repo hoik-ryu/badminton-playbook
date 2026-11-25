@@ -144,7 +144,7 @@ for (const vp of [{ n: 'm360', w: 360, h: 640, m: true }, { n: 'm390', w: 390, h
   // ── 교체(SCR-225) ──
   await page.locator('[data-cmp=CMP-041][data-recorded=false] button[aria-label$=교체]').first().click(); await page.waitForSelector('[data-testid=club-swap-sheet]')
   await shot(page, `${vp.n}-3-swap.png`)
-  await page.locator('[data-testid=club-swap-sheet] [data-cmp=CMP-044] button:not([aria-disabled])').first().click(); await page.waitForTimeout(400)
+  await page.locator('[data-testid=club-swap-sheet] button[data-cmp=CMP-044]:not([aria-disabled])').first().click(); await page.waitForTimeout(400)
   if (await page.locator('[role=alertdialog]').count()) await page.locator('[role=alertdialog] button', { hasText: '바꾸기' }).click()
   await page.waitForSelector('[data-testid=club-swap-sheet]', { state: 'detached', timeout: 5000 }).catch(() => {})
   check(r, 'swap-sheet-closed', (await page.locator('[data-testid=club-swap-sheet]').count()) === 0)

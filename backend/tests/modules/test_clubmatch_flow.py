@@ -303,12 +303,17 @@ def test_p4_swap_into_same_matchup_rejected(admin: TestClient, db: Session) -> N
     assert after["games"][1]["repeatedMatchup"] is False and after["games"][1]["relaxations"] == []
 
 
-def test_p4_draft_swap_also_rejected(admin: TestClient, db: Session) -> None:
+def test_p4_draft_swap_same_matchup_allowed_with_warning(admin: TestClient, db: Session) -> None:
+    """(r11, 사용자 승인 2026-11-25) 확정 전 교체의 같은 대진은 경고로 표시(C-19·C-35).
+
+    확정 후 거부는 test_p4_swap_into_same_matchup_rejected가 그대로 검증합니다.
+    """
     view, k = crafted(admin, db, ["남"] * 5, [[0, 1, 2, 3], [0, 1, 2, 4]], status="draft")
-    assert err(post(admin, view, "games/2/swap", **{"from": k[4], "to": k[3]})) == (
-        409,
-        "same_matchup",
-    )
+    after = ok(post(admin, view, "games/2/swap", **{"from": k[4], "to": k[3]}))
+    assert after["version"] == view["version"] + 1
+    for g in after["games"]:
+        assert g["repeatedMatchup"] is True
+        assert {"rule": "matchup", "reason": "manual"} in g["relaxations"]
 
 
 def test_swap_recomputes_gender_relaxation(admin: TestClient, db: Session) -> None:

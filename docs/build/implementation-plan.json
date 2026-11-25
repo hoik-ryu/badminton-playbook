@@ -1995,6 +1995,460 @@
           "kind": "e2e"
         }
       ]
+    },
+    {
+      "id": "B13",
+      "kind": "non_ui",
+      "title": "대진 직접 구성·확정 전 공통 편집 — 서버 API·규칙(BE + FE API 어댑터)",
+      "goal": "(r7) 기획 r11 C-35(C-14·C-15·C-19·C-32·C-33 보강)의 서버 규칙만 구현한다. 기존 생성·교체·확정·충돌(version, 행 잠금 U9) 코드를 재사용하고 DB 스키마는 바꾸지 않는다(기존 컬럼 manual·repeated_matchup·relaxations·total_games 사용). 확정 전 편집: 완성 경기 추가, 경기 삭제(번호 재정렬), 선수 교체(기존 swap 확장), 개인전 같은 경기 맞교환, 대진 전체 폐기(직접 구성 전환). 편집 후 다시 생성은 confirm_required. total_games는 대진이 있으면 실제 경기 수, 0경기면 기준값 유지(DB 제약 total_games 1–200을 지키기 위함, C-14 '대진이 있으면'). 확정 후 정책(교체만, 같은 대진 거부, 중도 귀가 대체)은 그대로.",
+      "screens": [],
+      "stories": [
+        "US-015",
+        "US-022"
+      ],
+      "acs": [
+        "AC-140",
+        "AC-143"
+      ],
+      "components": {
+        "reuse": [],
+        "new": []
+      },
+      "depends_on": [
+        "B10"
+      ],
+      "tasks": [
+        {
+          "id": "B13-T1",
+          "layer": "api",
+          "title": "요청·응답 스키마와 오류 코드 추가(응답은 기존 ClubMatchView): GameCreate{t1:[k,k],t2:[k,k],version}, GameExchange{out,in,version}, 대진 폐기 DELETE …/games?version, 경기 삭제 DELETE …/games/{no}?version, POST …/games에 discard(편집 후 다시 생성). 새 오류: not_draft(확정 후 편집 409), team_violation·duplicate_player·not_eligible·not_two_vs_two(422), confirm_required(409, 기존 형식)",
+          "refs": [
+            "AC-140",
+            "AC-143",
+            "AC-137",
+            "AC-141"
+          ]
+        },
+        {
+          "id": "B13-T2",
+          "layer": "be",
+          "title": "항상 막는 규칙 공통 검사 함수(C-19 r11): 한 경기 같은 선수 두 번, 팀전 팀 소속(청 2·백 2), 참가 자격(제외·비활성 회원·삭제된 게스트·참가자 아님), 2 대 2. 자동 생성·확정 전 편집·확정 후 교체·대체·확정 재검사가 같은 함수를 씀. 허용 규칙(같은 대진 반복·경기 수 불균형·실력차·성별)은 거부하지 않고 표시만",
+          "refs": [
+            "AC-140",
+            "AC-043"
+          ],
+          "depends_on": [
+            "B13-T1"
+          ]
+        },
+        {
+          "id": "B13-T3",
+          "layer": "be",
+          "title": "POST …/games/manual(완성 경기 추가, 끝 번호) · DELETE …/games/{no}(삭제 후 번호 1..n 재정렬: 고유 제약을 피하는 두 단계 갱신) · total_games=실제 경기 수 갱신(0경기면 유지) · 편집 경기 manual=true, 같은 대진이면 해당 경기 모두 repeated_matchup=true·사유 '운영진 수동 변경'. 행 잠금+version, 한 트랜잭션, 같은 요청 재시도는 version으로 충돌 판정",
+          "refs": [
+            "AC-137",
+            "AC-138",
+            "AC-140",
+            "AC-141"
+          ],
+          "depends_on": [
+            "B13-T2"
+          ]
+        },
+        {
+          "id": "B13-T4",
+          "layer": "be",
+          "title": "기존 POST …/games/{no}/swap 확장: 확정 전에는 같은 대진 반복을 허용·표시(manual), 확정 후에는 기존 409 same_matchup 유지(AC-043 r11 범위). POST …/games/{no}/exchange(개인전·확정 전만, 같은 경기 상대 조와 맞교환, 팀전·확정 후 422/409). DELETE …/games(확정 전 대진 전체 폐기, 직접 구성 전환)",
+          "refs": [
+            "AC-139",
+            "AC-140",
+            "AC-143",
+            "AC-043",
+            "AC-077"
+          ],
+          "depends_on": [
+            "B13-T2"
+          ]
+        },
+        {
+          "id": "B13-T5",
+          "layer": "be",
+          "title": "POST …/games(다시 생성): 운영진 편집(manual) 경기가 있고 discard가 없으면 409 confirm_required, 있으면 기준값으로 생성. 편집이 없으면 기존처럼 확인 없이 새 시드(AC-076). 생성 알고리즘·시드·골든 결과는 변경 없음. POST …/confirm: 모든 경기를 B13-T2 함수로 재검사. 확정 후 추가·삭제·맞교환·대진 폐기는 409 not_draft",
+          "refs": [
+            "AC-142",
+            "AC-076",
+            "AC-143",
+            "AC-130"
+          ],
+          "depends_on": [
+            "B13-T3",
+            "B13-T4"
+          ]
+        },
+        {
+          "id": "B13-T6",
+          "layer": "fe",
+          "title": "features/clubmatch/api.ts: addGame·deleteGame·exchangeGame·discardGames 함수와 generate(discard)·swap 확장. Mock 어댑터를 서버와 같은 규칙·오류 코드로(같은 대진 허용·표시, 항상 막는 규칙 거부, 확정 후 거부, 번호 재정렬, total_games). 재시도·충돌 정책은 B10과 같음",
+          "refs": [
+            "AC-140",
+            "AC-141",
+            "AC-143"
+          ],
+          "depends_on": [
+            "B13-T5"
+          ]
+        },
+        {
+          "id": "B13-T7",
+          "layer": "test",
+          "title": "BE 테스트([AC-xxx] 태그): 추가·삭제·교체·맞교환·폐기·다시 생성 confirm_required, 항상 막는 규칙 4종 거부, 확정 전 같은 대진 허용·두 경기 표시, 확정 후 같은 대진·추가·삭제·맞교환 거부, total_games 갱신·0경기 유지, 번호 재정렬, version 충돌, 실패 주입 원자성, 회원 403. DB 테스트는 @pytest.mark.db로 임시 PostgreSQL(TEST_DATABASE_URL, scripts/test-db-temp.sh)만. 기존 P-4(확정 전 교체 같은 대진 거부) 테스트는 r11 정책으로 기대값이 바뀌므로 batch-submit에서 사용자 확인(약화 아님, 확정 후 거부 테스트는 그대로)",
+          "refs": [
+            "AC-140",
+            "AC-143",
+            "AC-137",
+            "AC-138",
+            "AC-139",
+            "AC-141",
+            "AC-142",
+            "AC-043",
+            "AC-076",
+            "AC-077"
+          ],
+          "depends_on": [
+            "B13-T5"
+          ]
+        },
+        {
+          "id": "B13-T8",
+          "layer": "test",
+          "title": "FE 계약 테스트: api·mock 어댑터가 같은 입력에 같은 결과·오류 코드(api.contract.test.ts 확장), 골든(schedule·policy) 생성 결과 불변 확인",
+          "refs": [
+            "AC-140",
+            "AC-143"
+          ],
+          "depends_on": [
+            "B13-T6"
+          ]
+        }
+      ],
+      "risk_tags": [
+        "data_loss",
+        "external_contract",
+        "permission"
+      ],
+      "approval": "user",
+      "paths": {
+        "allow": [
+          "backend/app/modules/clubmatch/**",
+          "backend/tests/modules/test_clubmatch*.py",
+          "backend/tests/golden/**",
+          "frontend/src/features/clubmatch/api.ts",
+          "frontend/src/features/clubmatch/api.*.test.ts",
+          "frontend/src/features/clubmatch/schedule.ts",
+          "frontend/src/features/clubmatch/policy.test.tsx",
+          "frontend/src/features/clubmatch/*.golden.test.ts"
+        ],
+        "shared": [
+          "backend/tests/conftest.py"
+        ]
+      },
+      "done_criteria": [
+        "DB 마이그레이션 없음(기존 컬럼만 사용, total_games 1–200 제약 유지)",
+        "항상 막는 규칙 4종은 확정 전후 모두 서버가 거부, 같은 대진은 확정 전만 허용·표시",
+        "확정 후 정책(교체만·같은 대진 거부·중도 귀가 대체·결과·종료) 기존 테스트 그대로 통과",
+        "원자성·version 충돌·멱등 테스트 통과, 위험 AC(AC-140·143)는 E3(실패→통과 증거)",
+        "test-be·test-fe·test-db(임시 PostgreSQL)·lint·typecheck·build 통과, 로컬 개발 DB·Neon 접근 없음",
+        "골든 생성 결과 불변"
+      ],
+      "test_plan": [
+        {
+          "ac": "AC-140",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-143",
+          "kind": "integration"
+        }
+      ]
+    },
+    {
+      "id": "B14",
+      "kind": "ui",
+      "title": "공통 대진 편집기·선수 선택 시트·확정 요약(SCR-244·225·245) + 실제 API E2E·영향 배치 재검증",
+      "goal": "(r7) UX Spec r10·DD r13(VD-071–076)·Preview r9를 제품 코드로 옮긴다. 기존 생성 페이지(B11)·확정 후 교체 시트(B6)를 재사용·확장하고 새 화면·라우트는 만들지 않는다. SCR-244: 대진 구성 방식(팀 구성 방식 타일 재사용), 자동 생성·직접 구성 공통 편집기(경기 추가·삭제·빈 자리·교체·개인전 맞교환), 미완성 경기(화면 상태), 0경기, 저장 중·실패·다시 시도·충돌, 확인 창(다시 생성·직접 구성 전환·삭제·이탈). SCR-225: ClubSwapSheet를 선택·교체·맞교환 공통 시트로 확장(확정 후는 교체 구역만, 기능·권한·정책 그대로). SCR-245: 실제 경기 수·수동 변경 요약. Avatar·PersonMeta를 공통 컴포넌트로 올림(CMP-057·058). 이탈 확인은 머리글 나가기·라우트 이동(useBlocker)·브라우저 뒤로 가기·새로고침/창 닫기(beforeunload) 모두(B-23). 360px 이하 카드 간격·아바타 보정(B-24). 마지막에 실제 API(APP_ENV=e2e)와 임시 PostgreSQL(scripts/test-db-temp.sh·smapsh_e2e, e2e-guard)로 편집 흐름 전체와 기존 청백전 회귀를 확인하고, 코드가 바뀐 기존 배치(B6·B10·B11·B12)만 재검증·재승인한다. 로컬 개발 DB·Neon은 쓰지 않는다. SCR-112 200% 확대 문제(B-25)는 후속 백로그로 범위 밖.",
+      "screens": [],
+      "touches": [
+        "SCR-244",
+        "SCR-225",
+        "SCR-245",
+        "SCR-242",
+        "SCR-243",
+        "SCR-246"
+      ],
+      "stories": [
+        "US-015",
+        "US-022"
+      ],
+      "acs": [
+        "AC-136",
+        "AC-137",
+        "AC-138",
+        "AC-139",
+        "AC-141",
+        "AC-142"
+      ],
+      "components": {
+        "reuse": [
+          "CMP-001",
+          "CMP-002",
+          "CMP-005",
+          "CMP-021",
+          "CMP-022",
+          "CMP-023",
+          "CMP-027"
+        ],
+        "new": [
+          "CMP-057",
+          "CMP-058"
+        ]
+      },
+      "depends_on": [
+        "B13"
+      ],
+      "tasks": [
+        {
+          "id": "B14-T1",
+          "layer": "fe",
+          "title": "공통 컴포넌트: frontend/src/components/Avatar.tsx(CMP-057, sm 24·기본 32·md 40)·PersonMeta.tsx(CMP-058, 운영진 전용). setup/parts.tsx·TeamsStep·SelectedSheet가 공통 부품을 쓰도록 바꾸고 모습은 그대로(SCR-242·243·246 시각 회귀 0). ui-map register --source built",
+          "refs": [
+            "SCR-242",
+            "SCR-243",
+            "SCR-246"
+          ],
+          "depends_on": []
+        },
+        {
+          "id": "B14-T2",
+          "layer": "fe",
+          "title": "SCR-225 공통 시트(ClubSwapSheet 확장, CMP-044 clubMatchPick): 고정 머리글('n경기 출전 · 팀', 빈 자리 'n경기 빈 자리'), 구역 '같은 경기 맞교환'·'다른 참가자와 교체'/'선수 선택', 오른쪽 정렬 경기 수·변경 후 실력차(4명 전 '계산 불가'), 선택 가능·경고 배지(같은 대진 반복·경기 수 차이 2)·선택 불가(사유, 포커스 가능)·저장 중·실패(시트 유지 + 다시 시도). 확정 후(SCR-112) 모드는 교체 구역만, 같은 대진 선택 불가, 기존 권한·결과 있는 경기 제외 그대로",
+          "refs": [
+            "SCR-225",
+            "AC-137",
+            "AC-139",
+            "AC-141",
+            "AC-043",
+            "AC-077",
+            "AC-079"
+          ],
+          "depends_on": [
+            "B14-T1"
+          ]
+        },
+        {
+          "id": "B14-T3",
+          "layer": "fe",
+          "title": "SCR-244 GamesStep 개편: 방식 타일(저장 안 함, 대진 없으면 '자동 생성', 재진입 시 선택 없음), '자동 생성'일 때만 설정, 요약(실제 경기 수·1인 분포·규칙 완화·수동 변경·'기준 n경기에서 편집됨'), 사람별 경기 수, 편집 카드(CMP-041 phase=edit: 머리 줄 번호·배지·실력차·삭제, 빈 자리 점선, '빈 자리 n'), '경기 추가'(빈 자리 4개 + 첫 빈 자리 시트 자동), 0경기 빈 상태, 다음 불가 사유(대진 없음·n경기에 빈 자리)",
+          "refs": [
+            "SCR-244",
+            "AC-136",
+            "AC-137",
+            "AC-138",
+            "AC-142",
+            "AC-129"
+          ],
+          "depends_on": [
+            "B14-T2"
+          ]
+        },
+        {
+          "id": "B14-T4",
+          "layer": "fe",
+          "title": "useSetup 편집 상태: 미완성 경기는 화면 상태(저장 안 함), 완성 동작마다 B13 API 호출·저장 중 카드 잠금·실패 시 동작 전 상태 + 안내 상자 '다시 시도', 409 conflict → 기존 충돌 확인 창 후 최신 대진 + 미완성 경기 유지(참가자 아닌 자리 비움), confirm_required → 확인 창(ST14·ST15) 후 discard 재요청, 취소 시 그대로",
+          "refs": [
+            "AC-141",
+            "AC-142",
+            "AC-136",
+            "AC-133"
+          ],
+          "depends_on": [
+            "B14-T3"
+          ]
+        },
+        {
+          "id": "B14-T5",
+          "layer": "fe",
+          "title": "이탈 확인(B-23): 미완성 경기가 있으면 머리글 나가기·라우트 이동·브라우저 뒤로 가기(useBlocker)·새로고침/창 닫기(beforeunload) 모두 확인 창 '완성하지 않은 경기가 있습니다'. 생성 페이지 안 단계 이동은 유지. SCR-245 대진 요약(실제 경기 수·'수동 변경 n경기', 0이면 생략)",
+          "refs": [
+            "SCR-244",
+            "SCR-245",
+            "AC-141",
+            "AC-130"
+          ],
+          "depends_on": [
+            "B14-T4"
+          ]
+        },
+        {
+          "id": "B14-T6",
+          "layer": "fe",
+          "title": "스타일: 기존 토큰만(clubmatch-setup.css r13 구역), 360px 이하 카드 간격·아바타 20px 보정으로 카드 높이 유지(B-24), 누름 영역 44px",
+          "refs": [
+            "SCR-244",
+            "SCR-225"
+          ],
+          "depends_on": [
+            "B14-T3"
+          ]
+        },
+        {
+          "id": "B14-T7",
+          "layer": "test",
+          "title": "FE 테스트([AC-xxx]·[SCR-xxx-STn] 태그): 방식 선택·직접 구성·추가·빈 자리 선택·삭제·0경기·맞교환·경고/선택 불가·실패/다시 시도·충돌·확인 창 취소/확인·이탈 확인(뒤로 가기 포함)·SCR-245 요약·확정 후 시트(교체만). SCR-244 ST1–ST17, SCR-225 ST1·ST3·ST4·ST7–ST12 상태 증거(E2). 기존 games.test·flow.test의 '확정 전 같은 대진 거부' 등 r11로 바뀐 기대값은 batch-submit에서 사용자 확인",
+          "refs": [
+            "AC-136",
+            "AC-137",
+            "AC-138",
+            "AC-139",
+            "AC-141",
+            "AC-142"
+          ],
+          "depends_on": [
+            "B14-T5",
+            "B14-T6"
+          ]
+        },
+        {
+          "id": "B14-T8",
+          "layer": "test",
+          "title": "UI 검증: ui-brief → UI Plan(touched: SCR-244·225·245 변경, SCR-242·243·246은 공통 부품 교체·시각 동일) → ui-plan-validate, ui-map check·token-check·token-audit. Mock 모드 브라우저 확인(390·360·1440·200% 확대, 가로 넘침 0, 카드 높이 Preview r9와 같음)",
+          "refs": [
+            "SCR-244",
+            "SCR-225",
+            "SCR-245"
+          ],
+          "depends_on": [
+            "B14-T7"
+          ]
+        },
+        {
+          "id": "B14-T9",
+          "layer": "test",
+          "title": "API 모드 E2E(experiments/frontend-layout/check-clubmatch-api.mjs 확장, e2e-guard로 APP_ENV=e2e 서버·임시 DB만): 자동 생성 → 추가·삭제·교체 → 편집 후 다시 생성 확인·취소, 직접 구성 → 빈 자리 선택 → 저장, 개인전 맞교환, 팀전 팀 소속·참가 자격 거부, 확정 전 같은 대진 경고·허용과 두 경기 표시, 0경기·미완성 다음 불가·이탈 확인(뒤로 가기·새로고침), 저장 실패(네트워크 차단)·다시 시도, 두 브라우저 동시 편집 version 충돌, 참가자·팀 변경 시 대진 폐기 확인·취소, 확정 → 확정 후 교체만·같은 대진 거부·중도 귀가 대체 기존대로, 실제 경기 수·사람별 경기 수·실력차·규칙 완화 재계산, 회원 권한(403·존재 숨김)",
+          "refs": [
+            "AC-136",
+            "AC-137",
+            "AC-138",
+            "AC-139",
+            "AC-140",
+            "AC-141",
+            "AC-142",
+            "AC-143"
+          ],
+          "depends_on": [
+            "B14-T8"
+          ]
+        },
+        {
+          "id": "B14-T10",
+          "layer": "test",
+          "title": "Mock 모드 E2E(check-clubmatch-mock.mjs) 같은 시나리오 축약판, 360·390·1440·200% 캡처(저장소 밖 temp-dir), 기존 청백전 목록·상세·결과·종료·마이페이지 전적 회귀",
+          "refs": [
+            "AC-136",
+            "AC-141"
+          ],
+          "depends_on": [
+            "B14-T9"
+          ]
+        },
+        {
+          "id": "B14-T11",
+          "layer": "test",
+          "title": "영향 배치 재검증: stale이 된 B6·B10·B11·B12만 verify 재실행(코드 변경 없음), UI 배치(B11)는 ui-review 묶음으로 사용자 재승인. 영향 없는 배치(B0–B5·B7·B8)는 건드리지 않음. 기존 승인·검증 이력 보존",
+          "refs": [
+            "AC-043",
+            "AC-076",
+            "AC-077",
+            "AC-129",
+            "AC-130"
+          ],
+          "depends_on": [
+            "B14-T9"
+          ]
+        },
+        {
+          "id": "B14-T12",
+          "layer": "docs",
+          "title": "README.md·CLAUDE.md의 clubmatch 모듈 설명에 편집 API(추가·삭제·맞교환·폐기)와 공통 Avatar·PersonMeta 반영",
+          "refs": [
+            "US-015"
+          ],
+          "depends_on": [
+            "B14-T11"
+          ]
+        }
+      ],
+      "risk_tags": [],
+      "approval": "user",
+      "paths": {
+        "allow": [
+          "frontend/src/features/clubmatch/setup/**",
+          "frontend/src/features/clubmatch/ClubSwapSheet.tsx",
+          "frontend/src/features/clubmatch/ClubMatchOps.tsx",
+          "frontend/src/features/clubmatch/clubmatch.test.tsx",
+          "frontend/src/features/clubmatch/detail.test.tsx",
+          "frontend/src/features/clubmatch/fix5b1.test.tsx",
+          "frontend/src/pages/ClubMatchSetupPage.tsx",
+          "frontend/src/pages/*.test.tsx",
+          "frontend/src/components/Avatar.tsx",
+          "frontend/src/components/PersonMeta.tsx",
+          "frontend/src/components/*.test.tsx",
+          "frontend/src/styles/clubmatch-setup.css",
+          "experiments/frontend-layout/check-clubmatch-*.mjs",
+          "README.md",
+          "CLAUDE.md"
+        ],
+        "shared": [
+          "frontend/src/lib/**"
+        ]
+      },
+      "done_criteria": [
+        "SCR-244·225·245가 Preview r9와 같은 모습·동작(390·360·1440), 카드 높이 Preview와 같음",
+        "확정 후 교체 시트의 기능·권한·정책 기존 테스트 그대로 통과",
+        "SCR-242·243·246 시각 회귀 0(공통 Avatar·PersonMeta 교체 후)",
+        "이탈 확인이 뒤로 가기·새로고침 포함 동작",
+        "토큰 밖 색 0, ui-map check·token-check 통과",
+        "test-fe·lint·typecheck·build 통과",
+        "API 모드 E2E·Mock E2E 전 시나리오 통과(실패 0, 콘솔 오류 0), 임시 DB만 사용(e2e-guard 통과)",
+        "B6·B10·B11·B12 재검증 verified, UI 배치 재승인",
+        "영향 없는 배치 상태·승인 이력 변화 없음",
+        "make check·test-db 통과"
+      ],
+      "test_plan": [
+        {
+          "ac": "AC-136",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-137",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-138",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-139",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-141",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-142",
+          "kind": "integration"
+        }
+      ]
     }
   ],
   "deferred": [

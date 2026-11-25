@@ -89,6 +89,7 @@ export function SetupScreen({
   after,
   bar,
   overlay,
+  onExit,
 }: {
   scr: string
   st: string
@@ -103,14 +104,22 @@ export function SetupScreen({
   after?: ReactNode
   bar: ReactNode
   overlay?: ReactNode
+  /** (r13) 나가기를 가로채 이탈 확인을 띄울 때(SCR-244 미완성 경기, UXD-103). 없으면 목록 링크 */
+  onExit?: () => void
 }) {
   return (
     <Screen scr={scr} st={st} platform="responsive">
       <div className="su" data-method={method ?? 'none'}>
         <header className="su-head" data-cmp="CMP-026">
-          <a className="su-icon-btn" href="#SCR-111/SCR-111-ST1-OPS/mobile" aria-label="나가기(청백전 목록)">
-            <ChevronLeft aria-hidden className="size-6" />
-          </a>
+          {onExit ? (
+            <button type="button" className="su-icon-btn" aria-label="나가기(청백전 목록)" onClick={onExit}>
+              <ChevronLeft aria-hidden className="size-6" />
+            </button>
+          ) : (
+            <a className="su-icon-btn" href="#SCR-111/SCR-111-ST1-OPS/mobile" aria-label="나가기(청백전 목록)">
+              <ChevronLeft aria-hidden className="size-6" />
+            </a>
+          )}
           <div className="su-logo" aria-label="SMAPSH">
             <img src={`${BASE}brand/smapsh-symbol.svg`} alt="" aria-hidden />
             <span aria-hidden>SMAPSH</span>
@@ -210,9 +219,10 @@ export function ShuttleIcon() {
   return <img src={`${BASE}brand/smapsh-symbol.svg`} alt="" aria-hidden />
 }
 
-export function Avatar({ name }: { name: string }) {
+/** CMP-057 Avatar(VD-076): 이니셜. size sm 24(경기 카드 자리) · 기본 32(목록 행) · md 40(시트 머리글) */
+export function Avatar({ name, size }: { name: string; size?: 'sm' | 'md' }) {
   return (
-    <span className="su-avatar" aria-hidden>
+    <span className="su-avatar" data-size={size} aria-hidden>
       {initial(name)}
     </span>
   )
@@ -237,17 +247,19 @@ export function PersonMeta({ p }: { p: SetupPerson }) {
 }
 
 /** CMP-022 확인 창(VD-068) */
-export function Dialog({ title, desc, cancel = '취소', ok, tone = 'primary', onCancel, onOk }: { title: string; desc?: string; cancel?: string; ok: string; tone?: 'primary' | 'danger'; onCancel?: () => void; onOk?: () => void }) {
+export function Dialog({ title, desc, cancel = '취소', ok, tone = 'primary', single = false, onCancel, onOk }: { title: string; desc?: string; cancel?: string; ok: string; tone?: 'primary' | 'danger'; /** (r13) 충돌 알림처럼 '확인' 하나만 */ single?: boolean; onCancel?: () => void; onOk?: () => void }) {
   return (
     <div className="su-dim">
       <div role="alertdialog" aria-modal="true" aria-labelledby="su-dlg-t" data-cmp="CMP-022" className="su-dialog">
         <h2 id="su-dlg-t">{title}</h2>
         {desc && <p>{desc}</p>}
         <div>
-          <button type="button" autoFocus onClick={onCancel}>
-            {cancel}
-          </button>
-          <button type="button" data-kind={tone} onClick={onOk}>
+          {!single && (
+            <button type="button" autoFocus onClick={onCancel}>
+              {cancel}
+            </button>
+          )}
+          <button type="button" data-kind={tone} autoFocus={single} onClick={onOk}>
             {ok}
           </button>
         </div>

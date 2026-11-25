@@ -147,6 +147,20 @@
       "registered_at": "2026-11-25T00:32:26Z",
       "path": "frontend/src/components/SetupSummary.tsx",
       "built_by": "B11"
+    },
+    "CMP-057": {
+      "source": "built",
+      "export": "Avatar",
+      "registered_at": "2026-11-25T05:19:01Z",
+      "path": "frontend/src/components/Avatar.tsx",
+      "built_by": "B14"
+    },
+    "CMP-058": {
+      "source": "built",
+      "export": "PersonMeta",
+      "registered_at": "2026-11-25T05:19:01Z",
+      "path": "frontend/src/components/PersonMeta.tsx",
+      "built_by": "B14"
     }
   },
   "tokens": {
@@ -268,6 +282,16 @@
     {
       "at": "2026-11-25T00:32:26Z",
       "event": "register CMP-056 (built)",
+      "note": ""
+    },
+    {
+      "at": "2026-11-25T05:19:01Z",
+      "event": "register CMP-057 (built)",
+      "note": ""
+    },
+    {
+      "at": "2026-11-25T05:19:01Z",
+      "event": "register CMP-058 (built)",
       "note": ""
     }
   ]

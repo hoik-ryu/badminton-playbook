@@ -18,6 +18,7 @@ export function Sheet({
   footer,
   children,
   testId,
+  onClose,
 }: {
   title: string
   titleBadge?: ReactNode
@@ -27,10 +28,12 @@ export function Sheet({
   footer?: ReactNode
   children: ReactNode
   testId?: string
+  /** (r13) 닫기(✕·딤·Esc). 없으면 정적 렌더 */
+  onClose?: () => void
 }) {
   return (
     <>
-      {dim && <div aria-hidden data-testid="sheet-dim" className={`fixed inset-0 ${stacked ? 'z-40' : 'z-30'} bg-ink/40`} />}
+      {dim && <div aria-hidden data-testid="sheet-dim" onClick={onClose} className={`fixed inset-0 ${stacked ? 'z-40' : 'z-30'} bg-ink/40`} />}
       <div className={`pointer-events-none fixed inset-x-0 bottom-0 ${stacked ? 'z-50' : 'z-40'} flex h-full items-end`}>
         <section
           role="dialog"
@@ -41,6 +44,7 @@ export function Sheet({
           data-stacked={stacked ? 'true' : undefined}
           data-testid={testId ?? 'sheet'}
           className={`${COLUMN} pointer-events-auto flex ${HEIGHT[height]} flex-col rounded-t-(--radius-sheet) bg-page shadow-sheet`}
+          onKeyDown={onClose ? (e) => e.key === 'Escape' && onClose() : undefined}
         >
           <span aria-hidden className="mx-auto mt-2 h-1 w-8 shrink-0 rounded-full bg-line" />
           <header className="flex items-center gap-2 py-1 pr-1 pl-4">
@@ -48,7 +52,7 @@ export function Sheet({
               {title}
               {titleBadge}
             </h2>
-            <button type="button" aria-label="닫기" className="flex size-11 items-center justify-center rounded-md text-ink">
+            <button type="button" aria-label="닫기" onClick={onClose} className="flex size-11 items-center justify-center rounded-md text-ink">
               <X aria-hidden className="size-6" />
             </button>
           </header>

@@ -28,7 +28,8 @@ describe('SCR-244 games step', () => {
     await waitSt('SCR-244-ST1')
     expect(screen.getByText(/모두/)).toHaveTextContent('모두 4경기씩 합니다')
     expect(screen.getByTestId('su-next')).toBeDisabled()
-    expect(screen.getByText('대진을 먼저 만들어 주세요')).toBeInTheDocument()
+    // (r10, UX Spec r10 SCR-244 다음 단계 조건) 대진이 없을 때 사유 문구
+    expect(screen.getByText('대진이 없습니다. 경기를 추가하거나 자동 생성해 주세요')).toBeInTheDocument()
     fireEvent.change(count(), { target: { value: '6' } })
     fireEvent.click(screen.getByRole('switch', { name: /밸런스 맞추기/ }))
     fireEvent.click(screen.getByTestId('su-generate'))
@@ -64,6 +65,9 @@ describe('SCR-244 games step', () => {
     const id = await seedDraft({ method: 'individual', keys: SCORED.slice(0, 8), games: 4 })
     renderAt(`/club-matches/${id}/setup/games`)
     await waitSt('SCR-244-ST7')
+    // (r10, UXD-100) 대진이 있는 채로 다시 들어오면 방식 선택 없음 → 설정은 '자동 생성'을 고를 때만 보임
+    expect(screen.queryByRole('switch', { name: /성별 조합 맞추기/ })).toBeNull()
+    fireEvent.click(screen.getByRole('radio', { name: '자동 생성' }))
     fireEvent.click(screen.getByRole('switch', { name: /성별 조합 맞추기/ }))
     let dlg = await screen.findByRole('alertdialog', { name: '대진이 초기화됩니다' })
     expect(st()).toBe('SCR-244-ST8')

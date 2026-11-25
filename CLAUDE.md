@@ -35,6 +35,7 @@ backend/
     modules/roster/    # 명단(I1): member_ratings(운영진 평가 점수, 프로필과 분리)·guests(소프트 삭제 + 이름·급수·성별·점수 비식별화, U5·C안), 내용 기반 version으로 동시 수정 감지
     modules/clubmatch/ # 청백전(I3-a 확정 전·I3-b 대진 생성·I3-c 확정 이후 운영 API·I3-d 정책 P-1~P-10, I3-d4부터 api 모드 화면 연결): 4개 테이블, 모든 변경은 행 잠금 + version(U9). 계산 schedule.py는 FE schedule.ts와 골든 JSON(backend/tests/golden)으로 일치 확인
                        #   단계형 생성(SCR-241–246, B10): PUT /{id}/basic·participants·teams(일괄), DELETE /{id}?version=(준비 중만), 대진이 있으면 409 confirm_required → discard:true로 재요청
+                       #   (B13) 확정 전 공통 편집(C-35): POST /{id}/games/manual · DELETE /{id}/games/{no}?version= · POST /{id}/games/{no}/exchange(개인전) · DELETE /{id}/games?version=, 항상 막는 규칙 _check_lineup(확정 때도), 확정 전 같은 대진은 허용·표시(_mark_draft_repeats), 0경기면 total_games 기준값 유지
                        #   member.py·member_schemas.py: 회원 조회·/api/me/record(운영진 스키마와 분리된 허용 목록, 키는 청백전 범위 p:<참가자 id>). record.py: 전적·랭크 계산
     modules/tutorial/  # 튜토리얼 진행(I2): tutorial_progress, 스테이지 레지스트리(stage_registry.json: 과정 intro·starter·basic·mid·high + 스테이지 `<과정>-<순번>-v<버전>`, ASM-033 — 프런트 Mock 사본 features/tutorial/mockRegistry.ts와 일치 필수), 원자적 upsert, 서버 콘텐츠 content/<stage_id>.json + content.py(검사, AC-117 — 판정 데이터는 공개 API에 넣지 않음), GET /courses·/stages/{id}, 서버 판정 회차 tutorial_runs(첫 판정만 임시 보관, 0010 — 로컬 Compose DB만 적용)·POST /stages/{id}/runs·/runs/{id}/judge·PUT /stages/{id} {runId}·GET /runs/{id}(완료된 본인 회차). 계획은 docs/workflow-proposals/tutorial-mvp-implementation-plan.md
     models.py          # Alembic autogenerate용 모델 import 모음
@@ -49,6 +50,7 @@ frontend/
     features/auth/     # 계정·역할 타입, getMe, 개발용 역할 전환(devPersona)
     features/intro/    # 시네마틱 인트로(최초 방문 1회 정책)
     features/clubmatch/setup/ # 청백전 단계형 생성 페이지(SCR-241–246): 단계 규칙 steps.ts, 저장 훅 useSetup.ts, 단계 화면 *Step.tsx. 페이지 pages/ClubMatchSetupPage.tsx, 라우트 /club-matches/new·/club-matches/:id/setup/:step
+                              #   (B14) 대진 설정 = 공통 편집기(GamesStep, 미완성 경기는 useSetup gamesUi), 후보 판정 pick.ts, 시트 ../ClubSwapSheet.tsx(PickSheet, 확정 후 교체와 공용). 공통 Avatar·PersonMeta는 components/
     features/tutorial/ # 게임형 튜토리얼: court/(경기장 StadiumCourt·원근 변환·칸), play/(SCR-102 부품·진행 규칙), progress.ts(저장 규칙), mock/(Mock 판정 서버·서버 콘텐츠 사본, mock 빌드 전용), api.ts
     pages/             # 라우트에 연결되는 페이지 컴포넌트
     routes/router.tsx  # 라우트 정의 (확장 지점)

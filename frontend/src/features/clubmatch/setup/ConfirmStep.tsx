@@ -36,6 +36,8 @@ export function ConfirmStep({ c, frame, go }: StepProps) {
   const minN = nums.length ? Math.min(...nums) : 0
   const maxN = nums.length ? Math.max(...nums) : 0
   const relaxed = v.games.filter((g) => g.genderRelaxed || g.repeatedMatchup || g.relaxations.length > 0).length
+  // (r13, VD-075·AC-130 r11) 실제 경기 수와 운영진 수동 변경(같은 대진 반복 포함) 경기 수. 0이면 생략
+  const manualN = v.games.filter((g) => g.relaxations.some((x) => x.reason === 'manual')).length
 
   const checks: ValidationItem[] = [
     { key: 'count', ok: parts.length >= MIN_PARTICIPANTS, text: parts.length >= MIN_PARTICIPANTS ? `참가자 4명 이상(${parts.length}명)` : `참가자가 4명 미만입니다(${parts.length}명)`, onFix: () => go('participants') },
@@ -104,7 +106,7 @@ export function ConfirmStep({ c, frame, go }: StepProps) {
             icon: <ListOrdered aria-hidden />,
             label: '대진',
             value: v.games.length ? `${v.games.length}경기` : '없음',
-            sub: v.games.length ? [`1인 ${minN === maxN ? minN : `${minN}–${maxN}`}경기 · 밸런스 ${v.rules.balance ? '켬' : '끔'}·성별 조합 ${v.rules.gender ? '켬' : '끔'} · 규칙 완화 ${relaxed}경기`] : [],
+            sub: v.games.length ? [`1인 ${minN === maxN ? minN : `${minN}–${maxN}`}경기 · 밸런스 ${v.rules.balance ? '켬' : '끔'}·성별 조합 ${v.rules.gender ? '켬' : '끔'} · 규칙 완화 ${relaxed}경기${manualN ? ` · 수동 변경 ${manualN}경기` : ''}`] : [],
           },
         ]}
       />

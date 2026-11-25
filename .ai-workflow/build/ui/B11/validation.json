@@ -1,8 +1,8 @@
 {
-  "at": "2026-11-25T00:47:34Z",
+  "at": "2026-11-25T05:33:55Z",
   "ok": true,
-  "brief_digest": "2986f6d64d782c37873f3d5b8fa6423caa841f11c2416d21168f66696aaa9427",
-  "plan_sha256": "4d033d3309500275d99e77c2576b55ef002dda652ca072624a050f00bf17e29e",
+  "brief_digest": "a6bf0c3d6de67246494a72e98b6db3df62ca9d5ed40018f2251653a937b70f46",
+  "plan_sha256": "e66f6b8d0259771ab5cc3d5e5a80ee47d75780a3639573bdd71fe92932116b70",
   "errors": [],
   "warnings": [
     "[screen_cmp_excluded] SCR-241: 02가 지정한 CMP-002를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
@@ -13,6 +13,7 @@
     "[screen_cmp_excluded] SCR-243: 02가 지정한 CMP-002를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
     "[screen_cmp_excluded] SCR-243: 02가 지정한 CMP-024를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
     "[screen_cmp_excluded] SCR-243: 02가 지정한 CMP-026를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
+    "[screen_cmp_excluded] SCR-244: 02가 지정한 CMP-002를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
     "[screen_cmp_excluded] SCR-244: 02가 지정한 CMP-026를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
     "[screen_cmp_excluded] SCR-244: 02가 지정한 CMP-041를 원장 POL-002의 결정에 따라 트리에서 뺐습니다",
     "[screen_cmp_excluded] SCR-245: 02가 지정한 CMP-026를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
@@ -21,8 +22,8 @@
   ],
   "counts": {
     "screens": 6,
-    "states": 49,
-    "cmps_used": 13,
+    "states": 57,
+    "cmps_used": 15,
     "touched": {
       "screens": 4,
       "representative": 4,

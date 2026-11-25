@@ -1,10 +1,10 @@
 ---
 doc: information-architecture
-revision: 9
+revision: 10
 language: ko
 based_on:
-  planning_revision: 10
-  ux_planning_revision: 9
+  planning_revision: 11
+  ux_planning_revision: 10
 ---
 
 # 정보 구조 (Information Architecture): 배드민턴 플레이북 (badminton-playbook)
@@ -43,6 +43,8 @@ based_on:
 > - **바뀌지 않은 것**: 다른 화면의 ID·경로·셸·접근 역할, 청백전 목록·확정 이후 상세·결과, 하단 탭 구성
 
 > **r9 개정(2026-11-24)**: 기획 r10·UX 결정 r9(UXD-095·099 r9 정합성, 팀 구성 방식)을 기준으로 맞췄습니다. 화면 ID·경로·셸·접근 역할·사이트맵·내비게이션 규칙은 바뀌지 않았습니다.
+
+> **r10 개정(2026-11-25)**: 기획 r11(C-35 대진 구성 방식·확정 전 공통 편집, AC-136–AC-143)과 UX 결정 r10(UXD-100–104)을 기준으로 맞췄습니다. SCR-244의 대진 편집과 SCR-225 시트(같은 경로 위)는 화면 안 동작만 바뀌었고, 화면 ID·경로·셸·접근 역할·사이트맵·내비게이션 규칙은 바뀌지 않았습니다.
 
 ## 1. 역할과 레이아웃 셸
 

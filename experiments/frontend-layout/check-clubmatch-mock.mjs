@@ -78,7 +78,7 @@ for (const vp of [{ n: 'm360', w: 360, h: 640, m: true }, { n: 'm390', w: 390, h
   // 6. 교체(SCR-225, 확정 전)
   const before = JSON.stringify(newest(await db(page)).games)
   await page.getByRole('button', { name: /^1경기 .* 교체$/ }).first().click(); await page.waitForSelector('[data-testid=club-swap-sheet]')
-  const cand = page.locator('[data-testid=club-swap-sheet] [data-cmp=CMP-044] button:not([aria-disabled])').first()
+  const cand = page.locator('[data-testid=club-swap-sheet] button[data-cmp=CMP-044]:not([aria-disabled])').first()
   if (await cand.count()) { await cand.click(); await page.waitForTimeout(400); if (await page.locator('[role=alertdialog]').count()) await page.locator('[role=alertdialog] button', { hasText: '바꾸기' }).click(); await page.waitForTimeout(600) }
   else await page.locator('[data-testid=club-swap-sheet] button[aria-label=닫기]').click()
   await page.waitForSelector('[data-testid=club-swap-sheet]', { state: 'detached', timeout: 4000 }).catch(() => {})
@@ -103,7 +103,7 @@ for (const vp of [{ n: 'm360', w: 360, h: 640, m: true }, { n: 'm390', w: 390, h
   check('hscroll-ST13', !(await hScroll(page))); await shot('3-ST13')
   // 9. 확정 후 교체(결과 없는 경기만) → '변경됨'
   await page.locator('[data-testid=ops-area] [data-cmp=CMP-041][data-recorded=false] button[aria-label$=교체]').first().click(); await page.waitForSelector('[data-testid=club-swap-sheet]')
-  const c2 = page.locator('[data-testid=club-swap-sheet] [data-cmp=CMP-044] button:not([aria-disabled])').first()
+  const c2 = page.locator('[data-testid=club-swap-sheet] button[data-cmp=CMP-044]:not([aria-disabled])').first()
   if (await c2.count()) { await c2.click(); await page.waitForTimeout(400); if (await page.locator('[role=alertdialog]').count()) await page.locator('[role=alertdialog] button', { hasText: '바꾸기' }).click(); await page.waitForTimeout(600) }
   else await page.locator('[data-testid=club-swap-sheet] button[aria-label=닫기]').click()
   await page.waitForSelector('[data-testid=club-swap-sheet]', { state: 'detached', timeout: 4000 }).catch(() => {})

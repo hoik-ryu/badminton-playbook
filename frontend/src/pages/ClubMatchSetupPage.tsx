@@ -88,8 +88,19 @@ function SetupScreen({ matchId, stepParam }: { matchId: string | null; stepParam
     document.querySelector<HTMLElement>('.su-title')?.focus({ preventScroll: true })
   }, [step])
 
-  // 이탈 확인: 저장하지 않은 변경이 있는 채로 생성 페이지 밖으로
+  // 이탈 확인: 저장하지 않은 변경이 있는 채로 생성 페이지 밖으로(머리글 나가기·라우트 이동·브라우저 뒤로 가기 = useBlocker)
+  // (r13, UXD-103·B-23) 미완성 경기가 있으면 문구 '완성하지 않은 경기가 있습니다', 새로고침·창 닫기는 브라우저 기본 확인(beforeunload)
   const anyDirty = Object.values(c.dirty).some(Boolean)
+  const partialsLeft = c.dirty.partials
+  useEffect(() => {
+    if (!anyDirty) return
+    const warn = (e: BeforeUnloadEvent) => {
+      e.preventDefault()
+      e.returnValue = ''
+    }
+    window.addEventListener('beforeunload', warn)
+    return () => window.removeEventListener('beforeunload', warn)
+  }, [anyDirty])
   const blocker = useBlocker(({ nextLocation }) => {
     if (leaving.current || !anyDirty) return false
     const inside = matchId ? nextLocation.pathname.startsWith(setupPath(matchId)) : nextLocation.pathname === '/club-matches/new'
@@ -172,8 +183,8 @@ function SetupScreen({ matchId, stepParam }: { matchId: string | null; stepParam
         open={blocker.state === 'blocked'}
         onOpenChange={(o) => !o && blocker.state === 'blocked' && blocker.reset()}
         tone="danger"
-        title={v ? '저장하지 않은 변경이 있습니다' : '입력한 내용을 버릴까요?'}
-        description={v ? '나가면 이 단계에서 바꾼 내용이 사라집니다' : undefined}
+        title={partialsLeft ? '완성하지 않은 경기가 있습니다' : v ? '저장하지 않은 변경이 있습니다' : '입력한 내용을 버릴까요?'}
+        description={partialsLeft ? '나가면 사라집니다' : v ? '나가면 이 단계에서 바꾼 내용이 사라집니다' : undefined}
         cancelLabel={v ? '계속 편집' : '계속 입력'}
         confirmLabel={v ? '나가기' : '버리기'}
         onConfirm={() => {

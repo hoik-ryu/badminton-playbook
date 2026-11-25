@@ -34,6 +34,14 @@ export const CLUB_ERRORS = {
   unassigned: 'unassigned',
   /** (B10) 참가자가 아닌 사람에게 팀 지정. details = { keys } */
   notParticipant: 'not_participant',
+  /** (B13, C-19 r11 항상 막는 규칙) 같은 경기 같은 선수 · 팀전 팀 소속 위반 · 2 대 2 아님 */
+  duplicatePlayer: 'duplicate_player',
+  teamViolation: 'team_violation',
+  notTwoVsTwo: 'not_two_vs_two',
+  /** (B13) 경기는 200개까지(총 경기 수 제약과 같음) */
+  maxGames: 'max_games',
+  /** (B13) 팀전은 같은 경기 맞교환 없음 */
+  exchangeNotAllowed: 'exchange_not_allowed',
 } as const
 export const METHOD_LABEL: Record<ClubMethod, string> = { individual: '개인전', team: '팀전' }
 export const STATUS_LABEL: Record<ClubStatus, string> = { draft: '대진 미확정', confirmed: '진행 중', finished: '종료' }
@@ -469,8 +477,8 @@ export async function applyTeamProposal(id: string, version: number): Promise<Cl
  * 대진 생성·다시 생성(AC-071·073·075·076): 점수 미설정 → (B10) 팀전 미배정 → 인원 부족 순서로 검사(U8).
  * (B10) settings를 함께 보내면 같은 요청에서 저장한 뒤 생성(C-32). 실패하면 설정도 저장되지 않음
  */
-export async function generateClub(id: string, version: number, settings?: { totalGames: number; rules: ClubRules }): Promise<ClubMatchView> {
-  if (dataSource === 'api') return api.post<ClubMatchView>(`${base(id)}/games`, { version, ...settings })
+export async function generateClub(id: string, version: number, settings?: { totalGames: number; rules: ClubRules }, discard = false): Promise<ClubMatchView> {
+  if (dataSource === 'api') return api.post<ClubMatchView>(`${base(id)}/games`, { version, ...settings, ...confirmed(discard) })
   return mutate(id, version, (m, db) => {
     draftOnly(m)
     const before = { totalGames: m.totalGames, rules: m.rules }
@@ -493,6 +501,9 @@ export async function generateClub(id: string, version: number, settings?: { tot
     const white = list.filter((x) => x.team === 'white').length
     if (list.length < 4 || (m.method === 'team' && (blue < 2 || white < 2)))
       throw fail(err(422, CLUB_ERRORS.minPlayers, m.method === 'individual' ? '참가자가 4명 이상이어야 대진을 만들 수 있습니다' : '청·백 팀마다 2명 이상이어야 대진을 만들 수 있습니다', { minTotal: 4, minPerTeam: m.method === 'team' ? 2 : null, count: list.length, blue: m.method === 'team' ? blue : null, white: m.method === 'team' ? white : null }))
+    // (B13, C-33·C-35) 운영진이 편집한 경기가 있으면 확인(discard) 후에만 다시 생성
+    const edited = m.games.filter((g) => g.manual).length
+    if (edited && !discard) throw fail(err(409, CLUB_ERRORS.confirmRequired, '편집한 대진이 사라집니다. 확인 후 다시 요청해 주세요', { games: m.games.length, edited }))
     m.seed = Math.floor(Math.random() * 2 ** 31)
     m.games = markGeneratedRepeats(generateClubGames({ players: list.map((x) => ({ key: x.p.key, gender: x.p.gender ?? '남', score: x.p.score!, team: x.team })), totalGames: m.totalGames, method: m.method, rules: m.rules, seed: m.seed }))
   }, 600)
@@ -510,6 +521,8 @@ export async function confirmClub(id: string, version: number): Promise<ClubMatc
     if (unscored.length) throw err(422, CLUB_ERRORS.unscored, '점수 미설정 참가자가 있습니다', { keys: unscored })
     const unassigned = m.method === 'team' ? entries.filter(([, v]) => !v.team).map(([k]) => k) : []
     if (unassigned.length) throw err(422, CLUB_ERRORS.unassigned, `미배정 ${unassigned.length}명의 팀을 골라 주세요`, { keys: unassigned })
+    // (B13, C-19 r11) 모든 경기를 항상 막는 규칙으로 다시 검사
+    for (const g of m.games) checkLineup(db, m, [...g.team1], [...g.team2], g.no)
     m.status = 'confirmed'
   })
 }
@@ -630,7 +643,7 @@ function refreshFlags(db: MockDb, m: MockClubMatch, forced: Set<string> = new Se
   m.games.forEach((g, i) => Object.assign(g, { genderRelaxed: states[i]!.genderRelaxed, repeatedMatchup: states[i]!.repeatedMatchup, relaxations: states[i]!.relaxations }))
 }
 
-/** 선수 교체(AC-064·077·079): 확정 전 전체, 확정 후 결과 없는 경기만. 다른 경기와 같은 4명·같은 팀이면 409 same_matchup(P-4) */
+/** 선수 교체(AC-064·077·079): 확정 전 전체, 확정 후 결과 없는 경기만. 확정 후 다른 경기와 같은 4명·같은 팀이면 409 same_matchup(P-4, r11: 확정 전은 허용·표시) */
 export async function swapClub(id: string, version: number, gameNo: number, from: string, to: string): Promise<ClubMatchView> {
   if (dataSource === 'api') return api.post<ClubMatchView>(`${base(id)}/games/${gameNo}/swap`, { from, to, version })
   return mutate(id, version, (m, db) => {
@@ -639,10 +652,104 @@ export async function swapClub(id: string, version: number, gameNo: number, from
     replaceIn(db, m, gameNo, from, to)
     const g = m.games.find((x) => x.no === gameNo)!
     const twins = m.games.filter((x) => x.no !== gameNo && keyOfGame(x) === keyOfGame(g)).map((x) => x.no)
-    if (twins.length) throw err(409, CLUB_ERRORS.sameMatchup, '같은 4명·같은 팀 구성의 경기가 이미 있습니다', { games: [gameNo], with: twins })
+    // (B13, AC-043 r11·AC-140) 같은 대진 거부는 확정 후 교체만. 확정 전은 허용하고 '운영진 수동 변경' 표시
+    if (twins.length && m.status !== 'draft') throw err(409, CLUB_ERRORS.sameMatchup, '같은 4명·같은 팀 구성의 경기가 이미 있습니다', { games: [gameNo], with: twins })
     if (m.status === 'confirmed') m.modifiedAt = new Date().toISOString()
     refreshFlags(db, m)
+    markDraftRepeats(m)
   })
+}
+
+// ── (B13) 확정 전 공통 편집: 경기 추가·삭제·맞교환·대진 폐기(C-35) — 서버 router.py와 같은 규칙·오류 코드 ──
+export const MAX_CLUB_GAMES = 200
+
+/** 항상 막는 규칙(C-19 r11): 2 대 2 → 같은 경기 같은 선수 → 참가 자격 → 팀전 팀 소속(서버 _check_lineup과 같은 순서) */
+function checkLineup(db: MockDb, m: MockClubMatch, t1: string[], t2: string[], gameNo?: number) {
+  const where = gameNo === undefined ? undefined : { games: [gameNo] }
+  if (t1.length !== 2 || t2.length !== 2) throw err(422, CLUB_ERRORS.notTwoVsTwo, '경기는 2 대 2여야 합니다', where)
+  const keys = [...t1, ...t2]
+  if (new Set(keys).size !== 4) throw err(422, CLUB_ERRORS.duplicatePlayer, '같은 경기에 같은 선수가 두 번 들어갈 수 없습니다', where)
+  const bad = keys.filter((k) => !m.participants[k] || m.participants[k]!.left || !isAvailable(db, k))
+  if (bad.length) throw err(422, CLUB_ERRORS.notEligible, '이 청백전에서 뛸 수 있는 선수가 아닙니다', { keys: bad, ...where })
+  if (m.method === 'team' && (t1.some((k) => m.participants[k]!.team !== 'blue') || t2.some((k) => m.participants[k]!.team !== 'white')))
+    throw err(422, CLUB_ERRORS.teamViolation, '팀전은 청팀 2명 대 백팀 2명이어야 합니다', where)
+}
+
+/** (AC-140) 확정 전 같은 대진 묶음에 운영진 편집 경기가 있으면 해당 경기 모두 '운영진 수동 변경'(서버 _mark_draft_repeats와 같음) */
+function markDraftRepeats(m: MockClubMatch) {
+  if (m.status !== 'draft') return
+  const groups = new Map<string, MockClubGame[]>()
+  for (const g of m.games) groups.set(keyOfGame(g), [...(groups.get(keyOfGame(g)) ?? []), g])
+  for (const games of groups.values()) {
+    if (games.length < 2 || !games.some((g) => g.manual)) continue
+    for (const g of games) {
+      g.repeatedMatchup = true
+      if (!(g.relaxations ?? []).some((x) => x.rule === 'matchup')) g.relaxations = [...(g.relaxations ?? []), { rule: 'matchup', reason: 'manual' }]
+    }
+  }
+}
+
+/** (C-14 r11) 대진이 있으면 실제 경기 수를 총 경기 수로. 0경기면 기준값 유지 */
+const syncTotal = (m: MockClubMatch) => {
+  m.games.forEach((g, i) => (g.no = i + 1))
+  if (m.games.length) m.totalGames = m.games.length
+}
+
+/** 완성 경기 추가(AC-137): 확정 전만, 목록 끝. 미완성 경기는 화면 상태라 저장하지 않음 */
+export async function addClubGame(id: string, version: number, team1: [string, string], team2: [string, string]): Promise<ClubMatchView> {
+  if (dataSource === 'api') return api.post<ClubMatchView>(`${base(id)}/games/manual`, { team1, team2, version })
+  return mutate(id, version, (m, db) => {
+    draftOnly(m)
+    checkLineup(db, m, team1, team2)
+    if (m.games.length >= MAX_CLUB_GAMES) throw err(422, CLUB_ERRORS.maxGames, `경기는 ${MAX_CLUB_GAMES}개까지 만들 수 있습니다`)
+    m.games.push({ no: m.games.length + 1, team1: [...team1], team2: [...team2], winner: null, genderRelaxed: false, manual: true, relaxations: [] })
+    syncTotal(m)
+    refreshFlags(db, m)
+    markDraftRepeats(m)
+  }, 200)
+}
+
+/** 경기 삭제(AC-138): 확정 전만. 번호 재정렬, 총 경기 수 = 실제 경기 수(0경기면 기준값 유지) */
+export async function deleteClubGame(id: string, version: number, gameNo: number): Promise<ClubMatchView> {
+  if (dataSource === 'api') return api.delete<ClubMatchView>(`${base(id)}/games/${gameNo}?version=${version}`)
+  return mutate(id, version, (m, db) => {
+    draftOnly(m)
+    if (!m.games.some((g) => g.no === gameNo)) throw err(404, 'not_found', '경기를 찾을 수 없습니다')
+    m.games = m.games.filter((g) => g.no !== gameNo)
+    syncTotal(m)
+    refreshFlags(db, m)
+    markDraftRepeats(m)
+  }, 200)
+}
+
+/** 대진 전체 폐기(AC-136, '직접 구성' 전환): 확정 전만. 총 경기 수(기준값)는 그대로 */
+export async function discardClubGames(id: string, version: number): Promise<ClubMatchView> {
+  if (dataSource === 'api') return api.delete<ClubMatchView>(`${base(id)}/games?version=${version}`)
+  return mutate(id, version, (m) => {
+    draftOnly(m)
+    dropGames(m)
+  }, 150)
+}
+
+/** 개인전 같은 경기 맞교환(AC-139): 확정 전만, 대상(out)과 상대 조(in)의 자리를 바꿈 */
+export async function exchangeClubGame(id: string, version: number, gameNo: number, out: string, into: string): Promise<ClubMatchView> {
+  if (dataSource === 'api') return api.post<ClubMatchView>(`${base(id)}/games/${gameNo}/exchange`, { out, in: into, version })
+  return mutate(id, version, (m, db) => {
+    draftOnly(m)
+    if (m.method !== 'individual') throw err(422, CLUB_ERRORS.exchangeNotAllowed, '팀전은 같은 경기 맞교환을 할 수 없습니다')
+    const g = m.games.find((x) => x.no === gameNo)
+    if (!g) throw err(404, 'not_found', '경기를 찾을 수 없습니다')
+    const sideOf = (k: string) => (g.team1.includes(k) ? 1 : g.team2.includes(k) ? 2 : 0)
+    const a = sideOf(out)
+    const b = sideOf(into)
+    if (!a || !b || a === b) throw err(409, CLUB_ERRORS.conflict, '대진이 바뀌었습니다', { version: m.version })
+    const swapIn = (t: [string, string]) => t.map((k) => (k === out ? into : k === into ? out : k)) as [string, string]
+    g.team1 = swapIn(g.team1)
+    g.team2 = swapIn(g.team2)
+    g.manual = true
+    refreshFlags(db, m)
+    markDraftRepeats(m)
+  }, 200)
 }
 
 /** 중도 귀가(AC-078): '이후 대진에서 제외'와 남은 경기 대체를 한 번에(P-7 원자적). P-4-b 불가피한 중복만 예외 허용 */

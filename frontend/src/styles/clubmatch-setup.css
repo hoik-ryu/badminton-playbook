@@ -323,3 +323,90 @@
 .su-namefield input { background: color-mix(in srgb, var(--color-bg-surface) 70%, var(--color-bg-page)); border-color: var(--color-border-default); }
 .su-namefield input[aria-invalid='true'] { border-color: var(--color-status-danger-fg); }
 .su-hero-text .su-title:focus { outline: none; }
+
+/* ===== (r13) 대진 구성 방식·공통 대진 편집기(SCR-244)·선수 선택 시트(SCR-225) — DD r13 VD-071–076, Preview r9 setup.css r13 구역 그대로(기존 토큰만) ===== */
+/* VD-076 Avatar 크기: sm 24(경기 카드 자리) · 기본 32 · md 40(시트 머리글) */
+.su-avatar[data-size='sm'] { width: 24px; height: 24px; border-width: 1px; font-size: 11px; }
+.su-avatar[data-size='md'] { width: 40px; height: 40px; font-size: var(--font-size-body); }
+
+/* VD-072 편집 경기 카드: 기존 카드 + 머리 줄(번호·배지·실력차·삭제). 배지가 길면 머리 줄 안에서 줄바꿈 */
+.su-game[data-phase='edit'] { gap: 4px; padding: 6px 8px 6px 12px; }
+.su-game[data-phase='edit'] header { flex-wrap: wrap; justify-content: flex-start; gap: 4px 6px; min-height: 36px; }
+.su-game[data-phase='edit'] .su-ggap { margin-left: auto; font-size: var(--font-size-caption); font-weight: 400; color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }
+.su-gdel, .su-gbusy { display: grid; place-items: center; width: 36px; height: 36px; margin: -4px -4px -4px 0; border-radius: var(--radius-sm); color: var(--color-text-secondary); position: relative; }
+.su-gdel::after { content: ''; position: absolute; inset: -4px; } /* 누름 영역 44 */
+.su-gdel svg, .su-gbusy svg { width: 18px; height: 18px; }
+.su-gdel:disabled { opacity: 0.4; }
+.su-game[aria-busy='true'] .su-tl { opacity: 0.55; }
+.su-spin { animation: su-spin 0.9s linear infinite; }
+@keyframes su-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .su-spin { animation: none; } }
+.su-tl .su-players .su-slot { gap: 4px; }
+.su-tl .su-players .su-slot .su-avatar { margin-right: 1px; }
+/* 빈 자리: 점선 테두리 + Plus + '빈 자리'(채워진 자리와 모양·아이콘·글자로 구분) */
+.su-tl .su-players .su-slot-empty { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; margin: 0; padding: 0 10px; border-radius: var(--radius-sm);
+  border: 1px dashed var(--color-border-strong); background: var(--color-bg-surface); color: var(--color-text-secondary); font-size: var(--font-size-caption); font-weight: 700; }
+.su-tl .su-players .su-slot-empty svg { width: 14px; height: 14px; color: var(--color-text-secondary); }
+.su-game[data-incomplete='true'] { border-style: dashed; border-color: var(--color-border-strong); }
+/* VD-073 '경기 추가': 카드와 같은 폭, 점선 */
+.su-add { display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; height: 48px; border-radius: var(--radius-md);
+  border: 1px dashed var(--color-border-strong); background: var(--color-bg-page); color: var(--color-text-accent); font-size: var(--font-size-body); font-weight: 700; }
+.su-add svg { width: 18px; height: 18px; }
+.su-add:disabled { opacity: 0.5; }
+.su-empty .su-add { width: auto; padding: 0 18px; margin-top: 4px; border: 1px dashed var(--color-border-strong); color: var(--color-text-accent); }
+.su-tile:disabled, .su-regen:disabled { opacity: 0.5; }
+
+/* VD-074 선수 선택·교체 시트 */
+.su-pickhead { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: var(--radius-md); background: var(--color-bg-surface);
+  box-shadow: 0 -8px 0 var(--color-bg-page); }
+.su-pickname { font-size: var(--font-size-title); font-weight: 700; }
+.su-pickpos { display: inline-flex; align-items: center; gap: 6px; margin-top: 2px; font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.su-slotdot { border: 1px dashed var(--color-border-strong); }
+.su-slotdot svg { width: 18px; height: 18px; }
+.su-teamtag { display: inline-flex; align-items: center; height: 20px; padding: 0 6px; border-radius: var(--radius-sm); font-size: var(--font-size-caption); font-weight: 700;
+  border: 1px solid var(--color-border-strong); color: var(--color-text-primary); background: var(--color-bg-page); }
+.su-teamtag[data-team='blue'] { border-color: transparent; background: var(--color-team-blue-bg); color: var(--color-team-blue-fg); }
+.su-teamtag[data-team='white'] { background: var(--color-team-white-bg); }
+.su-picksec { display: flex; flex-direction: column; gap: 6px; margin-top: 16px; }
+.su-picksec + .su-picksec { padding-top: 14px; border-top: 1px solid var(--color-border-default); }
+.su-pickh { display: flex; align-items: center; gap: 6px; margin: 0; font-size: var(--font-size-body); font-weight: 700; }
+.su-pickh svg { width: 16px; height: 16px; color: var(--color-text-accent); }
+.su-pick { min-height: 52px; }
+.su-pick:active:not([aria-disabled='true']) { background: var(--color-accent-subtle); }
+.su-pick .su-meta-line { flex-wrap: nowrap; min-width: 0; }
+.su-pick .su-meta-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.su-pick .su-badge { flex-shrink: 0; }
+.su-num { display: flex; flex-direction: column; align-items: flex-end; flex-shrink: 0; min-width: 64px; font-variant-numeric: tabular-nums; text-align: right; }
+.su-num b { font-size: var(--font-size-body); }
+.su-num small { font-size: var(--font-size-caption); color: var(--color-text-secondary); white-space: nowrap; }
+.su-num svg { width: 18px; height: 18px; color: var(--color-text-accent); }
+.su-pick[data-state='off'] { cursor: default; }
+.su-pick[data-state='off'] .su-name { color: var(--color-text-disabled); font-weight: 400; }
+.su-pick[data-state='off'] .su-avatar { opacity: 0.5; }
+.su-off-reason svg { width: 12px; height: 12px; }
+.su-pick[data-busy='true'] ~ * { opacity: 0.5; }
+/* (r13) 좁은 폭(360 등): 편집 카드의 두 선수가 한 줄에 들어가도록 간격·아바타만 줄임(카드 높이 유지, VD-069·072) */
+@media (max-width: 380px) {
+  .su-game[data-phase='edit'] .su-tl { gap: 6px; padding: 0 6px; }
+  .su-game[data-phase='edit'] .su-tl > b { width: 26px; }
+  .su-game[data-phase='edit'] .su-tl .su-players { gap: 2px 6px; }
+  .su-game[data-phase='edit'] .su-tl .su-players .su-slot { gap: 2px; }
+  .su-game[data-phase='edit'] .su-avatar[data-size='sm'] { width: 20px; height: 20px; font-size: 10px; }
+  .su-game[data-phase='edit'] .su-tl .su-players .su-slot-empty { padding: 0 8px; }
+}
+
+/* 제품 차이: 시트는 공통 Sheet(포털, .su 밖)라 시트 안 클래스도 전역 .su-*로 둡니다. 저장 실패 안내는 시트 안 안내 줄 */
+.su-pickwrap { display: flex; flex-direction: column; }
+.su-sheetnote { display: flex; align-items: flex-start; gap: 8px; margin-top: 12px; padding: 12px 14px; border-radius: var(--radius-md); background: var(--color-status-danger-bg); color: var(--color-status-danger-fg); font-weight: 700; }
+.su-sheetnote svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px; }
+.su-sheetnote .su-link { margin-left: auto; align-self: center; white-space: nowrap; font-weight: 700; color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.su-gno { font-weight: 700; }
+.su-slot:focus-visible, .su-slot-empty:focus-visible, .su-gdel:focus-visible, .su-add:focus-visible, .su-pick:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+/* (r13) 200% 확대(가로 300px 이하): 시트 행의 메타 줄·경고 배지가 줄바꿈되어 오른쪽 숫자 열과 겹치거나 넘치지 않게(WCAG 1.4.10) */
+@media (max-width: 300px) {
+  .su-pick .su-meta-line { flex-wrap: wrap; }
+  .su-pick .su-meta-text { white-space: normal; }
+  .su-pick .su-badge { height: auto; min-height: 20px; white-space: normal; }
+  .su-num { min-width: 0; }
+  .su-pickhead { padding: 10px; gap: 8px; }
+}

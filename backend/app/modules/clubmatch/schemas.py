@@ -234,6 +234,8 @@ class GenerateRequest(Versioned):
 
     totalGames: int | None = Field(default=None, ge=1, le=200)  # noqa: N815
     rules: Rules | None = None
+    # (B13, C-33·C-35) 운영진이 편집한 경기가 있으면 확인 후 다시 생성(아니면 409 confirm_required)
+    discard: bool = False
 
 
 class TeamUpdate(Versioned):
@@ -244,6 +246,20 @@ class ResultUpdate(Versioned):
     """결과 기록·수정·되돌리기(AC-044·081·085, U2): 이긴 쪽 1·2, 되돌리기는 null."""
 
     winner: Literal[1, 2] | None
+
+
+class GameCreate(Versioned):
+    """(B13, C-35) 확정 전 완성 경기 추가: 1팀(팀전 청팀) 2명 · 2팀(팀전 백팀) 2명(사람 키)."""
+
+    team1: list[str]
+    team2: list[str]
+
+
+class GameExchange(Versioned):
+    """(B13, C-35) 개인전 확정 전 같은 경기 맞교환: out(대상) ↔ in(같은 경기 상대 조)."""
+
+    out: str
+    in_: str = Field(alias="in")
 
 
 class SwapRequest(Versioned):

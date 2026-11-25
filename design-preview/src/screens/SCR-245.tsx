@@ -6,7 +6,7 @@ import { person, proposeTeams, SELECTED_16, sum } from '../mock/setup'
 // SCR-245 청백전 생성 · 확정 — UX Spec r9 02 SCR-245, UXD-097 / DD r12 VD-067, REF-005(확인 화면)
 // 요약 묶음(기본정보·참가자·팀 구성·대진)마다 '수정', 검증 목록, 공개 안내, '확정' → 확인 창(ST8).
 // 시안 문구 "생성 후에도 일부 설정은 수정할 수 있어요"는 승인 정책(확정 후 방식·재생성 불가)과 달라 쓰지 않습니다.
-// 보기: ST1(모두 통과) · ST7(검증 실패) · ST8(확정 확인) — 개인전은 끝에 -IND
+// 보기: ST1(모두 통과) · ST1-EDIT((r13) 편집한 대진: 실제 9경기 · 수동 변경 1, VD-075) · ST7(검증 실패) · ST8(확정 확인) — 개인전은 끝에 -IND
 const IDS = SELECTED_16
 const TEAMS = proposeTeams(IDS)
 
@@ -16,6 +16,8 @@ export function Scr245({ stateId }: { stateId: string }) {
   const method = ind ? 'individual' : 'team'
   const [dialog, setDialog] = useState(st === 'SCR-245-ST8')
   const fail = st === 'SCR-245-ST7'
+  const edit = st === 'SCR-245-ST1-EDIT'
+  const games = edit ? 9 : 8
   const male = IDS.filter((id) => person(id).gender === '남').length
   const guests = IDS.filter((id) => person(id).guest).length
   const blue = IDS.filter((id) => TEAMS[id] === 'blue')
@@ -25,7 +27,7 @@ export function Scr245({ stateId }: { stateId: string }) {
     { ok: true, text: `참가자 4명 이상(${IDS.length}명)` },
     fail ? { ok: false, text: '점수 미설정 1명(조민재)', fix: stepHref('SCR-242', method, 'SCR-242-ST7') } : { ok: true, text: '점수 미설정 0명' },
     ...(ind ? [] : [{ ok: true, text: '미배정 0명 · 팀당 2명 이상' }]),
-    fail ? { ok: false, text: '대진 없음 — 대진을 다시 만들어 주세요', fix: stepHref('SCR-244', method) } : { ok: true, text: `대진 있음(8경기)` },
+    fail ? { ok: false, text: '대진 없음 — 대진을 다시 만들어 주세요', fix: stepHref('SCR-244', method) } : { ok: true, text: `대진 있음(${games}경기)` },
   ]
   const allOk = checks.every((c) => c.ok)
   const group = (title: string, href: string, rows: ReactNode) => (
@@ -70,7 +72,7 @@ export function Scr245({ stateId }: { stateId: string }) {
               <small>청 {g(blue)} · 점수 합 {sum(blue)}</small>
               <small>백 {g(white)} · 점수 합 {sum(white)}</small>
             </>))}
-          {group('대진', stepHref('SCR-244', method, 'SCR-244-ST7'), kv(<ListOrdered aria-hidden />, '대진', fail ? <>없음<small>경기 수를 바꿔 대진이 초기화됨</small></> : <>8경기<small>1인 2경기 · 밸런스·성별 조합 켬 · 규칙 완화 1경기</small></>))}
+          {group('대진', stepHref('SCR-244', method, 'SCR-244-ST7'), kv(<ListOrdered aria-hidden />, '대진', fail ? <>없음<small>경기 수를 바꿔 대진이 초기화됨</small></> : <>{games}경기<small>{edit ? '1인 2–3경기 · 밸런스·성별 조합 켬 · 규칙 완화 2경기 · 수동 변경 1경기' : '1인 2경기 · 밸런스·성별 조합 켬 · 규칙 완화 1경기'}</small></>))}
           <section className="su-sec" aria-label="확정 전 확인" data-cmp="CMP-055">
             <h3 className="su-dist" style={{ margin: '4px 0 0', fontWeight: 700 }}>확정 전 확인</h3>
             <ul className="su-checks">
