@@ -20,7 +20,16 @@
     }
   },
   "validity": {
-    "status": "valid"
+    "status": "outdated",
+    "reason": "planning 승인 해시가 디자인 기준과 다릅니다",
+    "changed": [
+      "docs/planning/01-discovery.md",
+      "docs/planning/02-prd.md",
+      "docs/planning/03-user-stories.md",
+      "docs/planning/04-user-flows.md",
+      "docs/planning/05-acceptance-criteria.md"
+    ],
+    "detected_at": "2026-11-25T07:01:24Z"
   },
   "stages": {
     "ux_planning": {
@@ -4433,9 +4442,16 @@
       "event": "approved",
       "revision": 9,
       "note": "Preview r9를 승인합니다. 보고된 Design Direction 대비 세부 조정 3가지도 모두 수용합니다. 기존 화면 회귀 비교의 미세한 색상 차이는 승인 차단 사유로 보지 않습니다."
+    },
+    {
+      "at": "2026-11-25T07:01:24Z",
+      "stage": "design",
+      "event": "outdated",
+      "revision": null,
+      "note": "planning 변경 감지: docs/planning/01-discovery.md, docs/planning/02-prd.md, docs/planning/03-user-stories.md, docs/planning/04-user-flows.md, docs/planning/05-acceptance-criteria.md"
     }
   ],
-  "updated_at": "2026-11-25T04:38:47Z",
+  "updated_at": "2026-11-25T07:01:24Z",
   "config": {
     "workflow": "v2",
     "theme_file": "docs/design-profile/theme.json",
