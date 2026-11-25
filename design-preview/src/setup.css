@@ -1,0 +1,307 @@
+/* 청백전 생성 페이지(SCR-241–246) — Design Direction r12 VD-059–070, 사용자 시안 REF-004·005
+   색은 04 토큰(var)만 쓰고, 반투명·옅은 면은 color-mix로 토큰을 섞습니다(새 색 값 없음).
+   치수: 390px 기준. 시안의 진행 표시·카드·타일 비율을 따르되 누름 영역 44 이상, 본문 글자 16/캡션 13 토큰을 지킵니다. */
+
+.su {
+  --su-card-x: 12px;
+  --su-bar-h: calc(64px + var(--safe-bottom));
+  position: relative;
+  min-height: 100%;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--color-hero-bg) 42%, var(--color-bg-page)) 0px, color-mix(in srgb, var(--color-hero-bg) 14%, var(--color-bg-page)) 260px, color-mix(in srgb, var(--color-hero-bg) 10%, var(--color-bg-page)) 100%);
+  color: var(--color-text-primary);
+}
+
+/* ── 머리글: 뒤로 · 가운데 로고 · 오른쪽 자리(VD-059) ── */
+.su-head { position: relative; z-index: 2; display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; height: 52px; padding: 0 6px; }
+.su-icon-btn { display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--radius-md); color: var(--color-text-primary); }
+.su-icon-btn:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+.su-logo { display: flex; align-items: center; justify-content: center; gap: 4px; }
+.su-logo img { width: 26px; height: 26px; }
+.su-logo span { font-size: var(--font-size-title); font-weight: 900; font-style: italic; letter-spacing: 0.01em; color: var(--color-text-primary); }
+
+/* ── 히어로: 라벨·제목·설명 + 셔틀콕 AST-046 + CSS 코트 빛(VD-059) ── */
+.su-hero { position: relative; z-index: 1; min-height: 150px; padding: 10px 16px 22px; overflow: hidden; }
+.su-hero[data-compact='true'] { min-height: 96px; padding: 2px 16px 12px; }
+.su-hero-court { position: absolute; inset: -30px -40px 0 38%; pointer-events: none;
+  background:
+    radial-gradient(120% 70% at 72% 88%, color-mix(in srgb, var(--color-hero-bg) 92%, transparent) 0%, color-mix(in srgb, var(--color-hero-bg) 40%, transparent) 46%, transparent 72%),
+    radial-gradient(60% 40% at 90% 20%, color-mix(in srgb, var(--color-bg-page) 80%, transparent) 0%, transparent 70%);
+}
+.su-hero-court::before, .su-hero-court::after { content: ''; position: absolute; height: 3px; border-radius: 3px; background: color-mix(in srgb, var(--color-bg-page) 75%, transparent); transform-origin: left center; }
+.su-hero-court::before { left: 4%; right: -10%; bottom: 30%; transform: rotate(-14deg); }
+.su-hero-court::after { left: 32%; right: -20%; bottom: 14%; transform: rotate(-9deg); opacity: 0.7; }
+.su-shuttle { position: absolute; right: 6px; top: 2px; width: 150px; height: auto; pointer-events: none;
+  filter: drop-shadow(0 10px 10px color-mix(in srgb, var(--color-hero-accent) 22%, transparent)); transform: rotate(-4deg); }
+.su-hero[data-compact='true'] .su-shuttle { width: 96px; top: -6px; right: 10px; }
+.su-hero-text { position: relative; max-width: 62%; display: flex; flex-direction: column; gap: 4px; }
+.su-eyebrow { font-size: var(--font-size-caption); font-weight: 700; color: var(--color-text-accent); }
+.su-title { margin: 0; font-size: var(--font-size-display); line-height: 1.2; font-weight: 800; letter-spacing: -0.02em; color: var(--color-hero-accent); }
+.su-hero[data-compact='true'] .su-title { font-size: var(--font-size-heading); }
+.su-desc { margin: 2px 0 0; font-size: var(--font-size-caption); line-height: 1.45; color: var(--color-text-secondary); }
+
+/* ── 카드(VD-061) ── */
+.su-card { position: relative; z-index: 1; margin: 0 var(--su-card-x); padding: 14px 16px 18px; border-radius: var(--radius-sheet);
+  background: var(--color-bg-page); border: 1px solid color-mix(in srgb, var(--color-border-default) 60%, transparent);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--color-hero-accent) 7%, transparent), var(--elevation-card); }
+.su-card + .su-card { margin-top: 12px; }
+.su-body { display: flex; flex-direction: column; gap: 22px; padding-top: 18px; }
+.su-sec { display: flex; flex-direction: column; gap: 10px; }
+.su-sec-h { display: flex; align-items: center; gap: 8px; margin: 0; font-size: var(--font-size-title); font-weight: 700; }
+.su-sec-h svg, .su-sec-h img { width: 20px; height: 20px; color: var(--color-text-accent); flex-shrink: 0; }
+.su-req { color: var(--color-status-danger-fg); margin-left: -4px; }
+.su-sec-h .su-aside { margin-left: auto; font-size: var(--font-size-caption); font-weight: 400; color: var(--color-text-secondary); }
+
+/* ── 진행 표시(CMP-053, VD-060): 번호 원 + 선, 글자는 현재 단계만 ── */
+.su-steps { display: flex; flex-direction: column; align-items: stretch; gap: 6px; }
+.su-steps ol { display: flex; align-items: center; margin: 0; padding: 0 2px; list-style: none; }
+.su-steps li { display: contents; }
+.su-step { position: relative; display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; }
+.su-step > span { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 999px; font-size: var(--font-size-caption); font-weight: 700;
+  border: 1.5px solid var(--color-border-default); color: var(--color-text-secondary); background: var(--color-bg-page); }
+.su-step[data-s='done'] > span { border-color: color-mix(in srgb, var(--color-accent-mint) 70%, var(--color-border-default)); background: var(--color-accent-subtle); color: var(--color-text-accent); }
+.su-step[data-s='current'] > span { width: 32px; height: 32px; border: 0; background: var(--color-action-strong); color: var(--color-action-onStrong);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent-subtle) 90%, transparent); }
+.su-step-line { flex: 1; height: 1.5px; margin: 0 -6px; background: var(--color-border-default); }
+.su-step-line[data-done='true'] { background: color-mix(in srgb, var(--color-accent-mint) 70%, var(--color-border-default)); }
+.su-step-label { display: block; width: max-content; max-width: 100%; font-size: var(--font-size-caption); font-weight: 700; color: var(--color-text-accent); }
+
+/* ── 입력칸·글자 수(VD-062) ── */
+.su-input { display: flex; align-items: center; gap: 10px; height: 48px; padding: 0 14px; border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-bg-surface) 70%, var(--color-bg-page)); border: 1px solid var(--color-border-default);
+  font-size: var(--font-size-body); color: var(--color-text-primary); }
+.su-input input { flex: 1; min-width: 0; background: transparent; border: 0; outline: 0; font: inherit; color: inherit; }
+.su-input:focus-within { border-color: var(--color-action-strong); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent-subtle) 90%, transparent); }
+.su-input[data-error='true'] { border-color: var(--color-status-danger-fg); }
+.su-input svg { width: 20px; height: 20px; color: var(--color-text-secondary); flex-shrink: 0; }
+.su-count { align-self: flex-end; margin-top: -4px; font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.su-field-err { margin: -4px 0 0; font-size: var(--font-size-caption); font-weight: 700; color: var(--color-status-danger-fg); }
+
+/* ── 선택 타일(CMP-002 표현, VD-062): 같은 폭 2칸, 아이콘 + 글자 ── */
+.su-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.su-tile { display: flex; align-items: center; justify-content: center; gap: 8px; height: 52px; border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-default); background: var(--color-bg-page); font-size: var(--font-size-body); color: var(--color-text-primary); }
+.su-tile svg { width: 22px; height: 22px; color: var(--color-text-secondary); }
+.su-tile[aria-checked='true'] { border: 1.5px solid var(--color-action-strong); background: var(--color-accent-subtle); color: var(--color-text-accent); font-weight: 700; }
+.su-tile[aria-checked='true'] svg { color: var(--color-text-accent); }
+
+/* ── 안내 상자(옅은 면 + 아이콘) ── */
+.su-note { display: flex; align-items: flex-start; gap: 8px; padding: 12px 14px; border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-bg-surface) 85%, var(--color-bg-page)); font-size: var(--font-size-caption); line-height: 1.5; color: var(--color-text-secondary); }
+.su-note svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px; color: var(--color-text-accent); }
+.su-note[data-tone='mint'] { background: color-mix(in srgb, var(--color-accent-subtle) 60%, var(--color-bg-page)); border: 1px solid color-mix(in srgb, var(--color-accent-mint) 45%, transparent); color: var(--color-text-primary); }
+.su-note[data-tone='danger'] { background: var(--color-status-danger-bg); color: var(--color-status-danger-fg); font-weight: 700; }
+.su-note[data-tone='danger'] svg { color: var(--color-status-danger-fg); }
+.su-note[data-tone='warning'] { background: var(--color-status-warning-bg); color: var(--color-status-warning-fg); font-weight: 700; }
+.su-note[data-tone='warning'] svg { color: var(--color-status-warning-fg); }
+.su-note .su-link { margin-left: auto; align-self: center; white-space: nowrap; font-weight: 700; color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── 하단 행동 바(CMP-054, VD-063): 탭바 숨김 → 안전 영역 위 ── */
+.su-bar { padding: 10px 12px calc(10px + var(--safe-bottom)); background: linear-gradient(180deg, color-mix(in srgb, var(--color-bg-page) 0%, transparent), var(--color-bg-page) 32%); }
+.su-bar-row { display: flex; gap: 10px; }
+.su-reason { display: flex; align-items: center; justify-content: center; gap: 4px; margin: 0 0 8px; font-size: var(--font-size-caption); color: var(--color-text-secondary); text-align: center; }
+.su-reason svg { width: 14px; height: 14px; }
+.su-next { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; height: 52px; border-radius: var(--radius-md);
+  background: var(--color-action-primary); color: var(--color-action-onPrimary); font-size: var(--font-size-heading); font-weight: 700;
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--color-action-primary) 35%, transparent); }
+.su-next svg { width: 22px; height: 22px; }
+.su-next:disabled { background: var(--color-bg-surface); color: var(--color-text-disabled); font-size: var(--font-size-body); box-shadow: none; }
+.su-prev { display: flex; align-items: center; justify-content: center; gap: 2px; width: 30%; height: 52px; border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-strong); background: var(--color-bg-page); font-size: var(--font-size-body); font-weight: 700; color: var(--color-text-primary); }
+.su-spacer { height: calc(var(--su-bar-live, var(--su-bar-h)) + 16px); }
+
+/* ── 참가자 목록(VD-064) ── */
+.su-sticky { position: sticky; top: 0; z-index: 3; display: flex; flex-direction: column; gap: 8px; margin: 0 calc(-1 * 16px); padding: 10px 16px 8px; background: var(--color-bg-page); }
+.su-sticky[data-stuck='true'] { box-shadow: 0 6px 10px -8px color-mix(in srgb, var(--color-text-primary) 30%, transparent); }
+.su-chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 16px; }
+.su-chips::-webkit-scrollbar { display: none; }
+.su-chip { display: inline-flex; align-items: center; gap: 4px; height: 36px; padding: 0 12px; flex-shrink: 0; border-radius: 999px;
+  border: 1px solid var(--color-border-default); background: var(--color-bg-page); font-size: var(--font-size-caption); font-weight: 700; color: var(--color-text-primary); }
+.su-chip[aria-pressed='true'] { border-color: var(--color-action-strong); background: var(--color-accent-subtle); color: var(--color-text-accent); }
+.su-chip svg { width: 14px; height: 14px; }
+.su-chip-sep { width: 1px; flex-shrink: 0; margin: 8px 2px; background: var(--color-border-default); }
+.su-listhead { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 36px; }
+.su-listhead b { font-size: var(--font-size-body); }
+.su-listhead b span { font-weight: 400; color: var(--color-text-secondary); }
+.su-check-all { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.su-list { margin: 0; padding: 0 12px; list-style: none; border: 1px solid color-mix(in srgb, var(--color-border-default) 70%, transparent); border-radius: var(--radius-md); background: var(--color-bg-page); }
+.su-list > li + li { border-top: 1px solid color-mix(in srgb, var(--color-border-default) 75%, transparent); }
+.su-group { margin: 10px 2px 6px; font-size: var(--font-size-caption); font-weight: 700; color: var(--color-text-secondary); }
+.su-row { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 52px; padding: 6px 0; text-align: left; }
+.su-avatar { display: grid; place-items: center; width: 32px; height: 32px; flex-shrink: 0; border-radius: 999px;
+  background: var(--color-bg-surface); color: var(--color-text-secondary); font-size: var(--font-size-caption); font-weight: 800;
+  border: 2px solid var(--color-bg-page); }
+.su-who { display: flex; flex: 1; min-width: 0; flex-direction: column; gap: 1px; }
+.su-name { font-size: var(--font-size-body); line-height: 1.3; overflow-wrap: anywhere; }
+.su-row[aria-checked='true'] .su-name, .su-name[data-bold='true'] { font-weight: 700; }
+.su-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.su-badge { display: inline-flex; align-items: center; height: 20px; padding: 0 6px; border-radius: var(--radius-sm); font-size: var(--font-size-caption); font-weight: 700; }
+.su-badge[data-tone='warning'] { background: var(--color-status-warning-bg); color: var(--color-status-warning-fg); }
+.su-badge[data-tone='neutral'] { border: 1px solid var(--color-border-strong); color: var(--color-text-primary); }
+.su-cb { display: grid; place-items: center; width: 24px; height: 24px; flex-shrink: 0; border-radius: 6px; border: 1.5px solid var(--color-border-strong); background: var(--color-bg-page); }
+.su-cb[data-on='true'] { border-color: var(--color-action-strong); background: var(--color-action-strong); color: var(--color-action-onStrong); }
+.su-cb svg { width: 16px; height: 16px; }
+
+/* 선택 요약 줄(CMP-028 selection): 목록 아래·행동 바 위 고정 */
+.su-summary { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 48px; padding: 0 14px; border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-accent-subtle) 70%, var(--color-bg-page)); border: 1px solid color-mix(in srgb, var(--color-accent-mint) 40%, transparent);
+  font-size: var(--font-size-body); font-weight: 700; color: var(--color-text-primary); text-align: left; }
+.su-summary svg { width: 20px; height: 20px; color: var(--color-text-accent); }
+.su-summary em { font-style: normal; font-weight: 400; color: var(--color-text-secondary); }
+.su-summary .su-more { margin-left: auto; display: inline-flex; align-items: center; font-size: var(--font-size-caption); color: var(--color-text-accent); }
+.su-warnline { display: flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 12px; margin-bottom: 8px; border-radius: var(--radius-md);
+  background: var(--color-status-warning-bg); color: var(--color-status-warning-fg); font-size: var(--font-size-caption); font-weight: 700; }
+.su-warnline svg { width: 16px; height: 16px; }
+.su-warnline b { margin-left: auto; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── 팀 구성(VD-065) ── */
+.su-teams { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.su-team { display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: var(--radius-sheet); min-width: 0; }
+.su-team[data-team='blue'] { background: var(--color-team-blue-bg); color: var(--color-team-blue-fg); }
+.su-team[data-team='white'] { background: var(--color-team-white-bg); border: 1.5px solid var(--color-border-strong); color: var(--color-text-primary); }
+.su-team h4 { display: flex; align-items: center; gap: 6px; margin: 0; font-size: var(--font-size-title); font-weight: 800; }
+.su-team h4 svg { width: 20px; height: 20px; }
+.su-team h4 small { font-size: var(--font-size-caption); font-weight: 700; opacity: 0.85; }
+.su-stack { display: flex; align-items: center; }
+.su-stack .su-avatar { width: 28px; height: 28px; margin-left: -7px; font-size: var(--font-size-caption); }
+.su-stack .su-avatar:first-child { margin-left: 0; }
+.su-team[data-team='blue'] .su-avatar { background: color-mix(in srgb, var(--color-team-blue-fg) 14%, var(--color-bg-page)); color: var(--color-team-blue-fg); border-color: var(--color-team-blue-bg); }
+.su-team[data-team='white'] .su-avatar { background: var(--color-bg-surface); color: var(--color-text-primary); border-color: var(--color-team-white-bg); }
+.su-plus { display: grid; place-items: center; height: 28px; min-width: 28px; margin-left: -7px; padding: 0 6px; border-radius: 999px; font-size: var(--font-size-caption); font-weight: 700;
+  background: var(--color-bg-page); border: 1px solid var(--color-border-default); color: var(--color-text-secondary); }
+.su-team-meta { font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.su-team[data-team='blue'] .su-team-meta { color: var(--color-team-blue-fg); }
+.su-balance { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px; font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.su-balance b { color: var(--color-text-primary); }
+.su-moved { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 6px 0 12px; border-radius: var(--radius-md);
+  background: var(--color-text-primary); color: var(--color-bg-page); font-size: var(--font-size-caption); font-weight: 700; }
+.su-moved button { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; height: 36px; padding: 0 10px; border-radius: var(--radius-sm); color: var(--color-accent-subtle); }
+.su-moved svg { width: 16px; height: 16px; }
+.su-teamrow-to { display: inline-flex; align-items: center; gap: 3px; flex-shrink: 0; font-size: var(--font-size-caption); font-weight: 700; color: var(--color-text-secondary); }
+.su-teamrow-to svg { width: 16px; height: 16px; }
+.su-band { width: 4px; align-self: stretch; margin: 6px 0; border-radius: 4px; flex-shrink: 0; }
+.su-band[data-team='blue'] { background: var(--color-team-blue-fg); }
+.su-band[data-team='white'] { background: var(--color-border-strong); }
+.su-pick2 { display: flex; gap: 6px; flex-shrink: 0; }
+.su-pick2 button { height: 36px; min-width: 52px; padding: 0 10px; border-radius: var(--radius-sm); font-size: var(--font-size-caption); font-weight: 700; }
+.su-pick2 button[data-team='blue'] { background: var(--color-team-blue-bg); color: var(--color-team-blue-fg); border: 1px solid color-mix(in srgb, var(--color-team-blue-fg) 35%, transparent); }
+.su-pick2 button[data-team='white'] { background: var(--color-team-white-bg); color: var(--color-text-primary); border: 1px solid var(--color-border-strong); }
+.su-pick2 button::before { content: ''; display: block; }
+
+/* ── 대진 설정(VD-066) ── */
+.su-dist { font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.su-dist b { color: var(--color-text-primary); }
+.su-optrow { display: flex; flex-wrap: wrap; gap: 6px; }
+.su-switch-row { display: flex; align-items: center; justify-content: space-between; min-height: 52px; font-size: var(--font-size-body); }
+.su-switch-row + .su-switch-row { border-top: 1px solid color-mix(in srgb, var(--color-border-default) 75%, transparent); }
+.su-switch-row small { display: block; font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.su-switch { position: relative; width: 48px; height: 28px; border-radius: 999px; background: var(--color-border-strong); flex-shrink: 0; }
+.su-switch::after { content: ''; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 999px; background: var(--color-bg-page); transition: transform var(--motion-duration-fast); }
+.su-switch[aria-checked='true'] { background: var(--color-action-strong); }
+.su-switch[aria-checked='true']::after { transform: translateX(20px); }
+.su-gen { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; height: 52px; border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-action-strong); background: var(--color-bg-page); color: var(--color-text-accent); font-size: var(--font-size-body); font-weight: 700; }
+.su-gen svg { width: 20px; height: 20px; }
+.su-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.su-stat { display: flex; flex-direction: column; gap: 2px; padding: 10px; border-radius: var(--radius-md); background: color-mix(in srgb, var(--color-bg-surface) 80%, var(--color-bg-page)); }
+.su-stat b { font-size: var(--font-size-title); }
+.su-stat span { font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.su-counts { display: flex; flex-wrap: wrap; gap: 6px; }
+.su-cnt { display: inline-flex; align-items: center; gap: 4px; height: 28px; padding: 0 8px; border-radius: 999px; font-size: var(--font-size-caption); background: color-mix(in srgb, var(--color-bg-surface) 80%, var(--color-bg-page)); }
+.su-cnt[data-odd='true'] { background: var(--color-status-warning-bg); color: var(--color-status-warning-fg); font-weight: 700; }
+.su-game { display: flex; flex-direction: column; gap: 6px; padding: 10px 12px; border-radius: var(--radius-md); border: 1px solid color-mix(in srgb, var(--color-border-default) 80%, transparent); background: var(--color-bg-page); }
+.su-game header { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: var(--font-size-body); font-weight: 700; }
+.su-game header small { font-size: var(--font-size-caption); font-weight: 400; color: var(--color-text-secondary); }
+.su-tl { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 8px; border-radius: var(--radius-sm); font-size: var(--font-size-body); }
+.su-tl[data-team='blue'] { background: var(--color-team-blue-bg); border-left: 4px solid var(--color-team-blue-fg); }
+.su-tl[data-team='white'] { background: var(--color-team-white-bg); border-left: 4px solid var(--color-border-strong); }
+.su-tl > b { width: 34px; flex-shrink: 0; font-size: var(--font-size-caption); }
+.su-tl[data-team='blue'] > b { color: var(--color-team-blue-fg); }
+.su-tl .su-players { display: flex; flex-wrap: wrap; flex: 1; min-width: 0; gap: 2px 10px; }
+.su-tl .su-players button { display: inline-flex; align-items: center; gap: 3px; min-height: 44px; text-align: left; }
+.su-tl .su-players button small { color: var(--color-text-secondary); }
+.su-tl .su-players button svg { width: 12px; height: 12px; color: var(--color-text-secondary); }
+.su-tl .su-sum { flex-shrink: 0; font-weight: 700; }
+.su-relax { align-self: flex-start; }
+.su-regen { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; font-size: var(--font-size-body); font-weight: 700; color: var(--color-text-accent); }
+.su-regen svg { width: 18px; height: 18px; }
+
+/* ── 확정(VD-067) ── */
+.su-sum-group { display: flex; flex-direction: column; }
+.su-sum-head { display: flex; align-items: center; justify-content: space-between; min-height: 36px; }
+.su-sum-head h3 { margin: 0; font-size: var(--font-size-caption); font-weight: 700; color: var(--color-text-secondary); }
+.su-edit { display: inline-flex; align-items: center; gap: 3px; min-height: 44px; font-size: var(--font-size-caption); font-weight: 700; color: var(--color-text-accent); }
+.su-edit svg { width: 14px; height: 14px; }
+.su-kv { display: flex; align-items: flex-start; gap: 10px; min-height: 44px; padding: 10px 0; border-top: 1px solid color-mix(in srgb, var(--color-border-default) 75%, transparent); font-size: var(--font-size-body); }
+.su-kv svg { width: 20px; height: 20px; flex-shrink: 0; color: var(--color-text-accent); }
+.su-kv span { flex-shrink: 0; font-weight: 700; }
+.su-kv b { margin-left: auto; font-weight: 400; text-align: right; }
+.su-kv b small { display: block; font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.su-checks { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.su-checks li { display: flex; align-items: center; gap: 8px; min-height: 32px; font-size: var(--font-size-body); }
+.su-checks svg { width: 20px; height: 20px; flex-shrink: 0; }
+.su-checks li[data-ok='true'] svg { color: var(--color-status-success-fg); }
+.su-checks li[data-ok='false'] { color: var(--color-status-danger-fg); font-weight: 700; }
+.su-checks li[data-ok='false'] a { margin-left: auto; font-size: var(--font-size-caption); color: var(--color-text-accent); }
+
+/* ── 확인 창(CMP-022)·빈 상태·스켈레톤(VD-068) ── */
+.su-dim { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 24px; background: color-mix(in srgb, var(--color-text-primary) 40%, transparent); }
+.su-dialog { width: 100%; max-width: 340px; padding: 20px 20px 16px; border-radius: var(--radius-sheet); background: var(--color-bg-page); box-shadow: var(--elevation-sheet); }
+.su-dialog h2 { margin: 0; font-size: var(--font-size-title); font-weight: 700; }
+.su-dialog p { margin: 6px 0 0; font-size: var(--font-size-body); color: var(--color-text-secondary); }
+.su-dialog div { display: flex; gap: 8px; margin-top: 16px; }
+.su-dialog button { flex: 1; height: 48px; border-radius: var(--radius-md); font-size: var(--font-size-body); font-weight: 700; background: var(--color-bg-surface); }
+.su-dialog button[data-kind='primary'] { background: var(--color-action-primary); color: var(--color-action-onPrimary); }
+.su-dialog button[data-kind='danger'] { background: var(--color-status-danger-fg); color: var(--color-action-onStrong); }
+.su-empty { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 28px 12px; text-align: center; font-size: var(--font-size-body); }
+.su-empty svg { width: 32px; height: 32px; color: var(--color-text-secondary); }
+.su-empty button { display: inline-flex; align-items: center; gap: 4px; height: 44px; padding: 0 14px; border-radius: var(--radius-md); border: 1.5px solid var(--color-action-strong); font-weight: 700; color: var(--color-text-accent); }
+.su-skel { border-radius: var(--radius-md); background: linear-gradient(90deg, var(--color-bg-surface), color-mix(in srgb, var(--color-bg-surface) 40%, var(--color-bg-page)), var(--color-bg-surface)); }
+@media (prefers-reduced-motion: no-preference) { .su-skel { background-size: 200% 100%; animation: su-shimmer 1.4s linear infinite; } }
+@keyframes su-shimmer { to { background-position: -200% 0; } }
+.su-fade { opacity: 0.45; pointer-events: none; }
+
+/* 360px: 히어로·셔틀콕 축소(VD-069) */
+@media (max-width: 370px) {
+  .su-title { font-size: var(--font-size-heading); }
+  .su-shuttle { width: 118px; }
+  .su-hero-text { max-width: 66%; }
+}
+
+/* 한글 낱말 단위 줄바꿈 */
+.su-title, .su-desc, .su-note span, .su-reason, .su-dialog h2, .su-dialog p { word-break: keep-all; }
+
+/* 보조 링크·섹션 오른쪽 글·팀 행 */
+.su-link { margin-left: auto; flex-shrink: 0; font-weight: 700; color: var(--color-text-accent); text-decoration: underline; text-underline-offset: 3px; }
+.su-aside { margin-left: auto; font-size: var(--font-size-caption); font-weight: 400; color: var(--color-text-secondary); }
+.su-teamlist { display: flex; flex-direction: column; gap: 10px; }
+.su-teamlist h3 { display: flex; align-items: center; gap: 6px; margin: 4px 2px 0; font-size: var(--font-size-caption); font-weight: 700; color: var(--color-text-secondary); }
+.su-row[data-selected='true'] { background: var(--color-accent-subtle); margin: 0 -12px; padding: 6px 12px; width: calc(100% + 24px); }
+.su-unassigned { border: 1.5px dashed var(--color-status-warning-fg); border-radius: var(--radius-md); padding: 0 12px; background: color-mix(in srgb, var(--color-status-warning-bg) 45%, var(--color-bg-page)); }
+
+/* 200% 확대(390 → 가로 195·세로 422 CSS px)·아주 좁은 폭: 가로 넘침 없이 한 열로 다시 흐르게(WCAG 1.4.10) */
+@media (max-width: 300px) {
+  .su-card { margin: 0 4px; padding: 12px 10px 14px; }
+  .su-step { width: 30px; height: 30px; }
+  .su-step > span { width: 24px; height: 24px; }
+  .su-step[data-s='current'] > span { width: 26px; height: 26px; box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent-subtle) 90%, transparent); }
+  .su-step-line { margin: 0 -2px; }
+  .su-teams, .su-stats, .su-tiles { grid-template-columns: 1fr; }
+  .su-shuttle { display: none; }
+  .su-hero-text { max-width: 100%; }
+  .su-prev { width: auto; padding: 0 12px; }
+  .su-row { flex-wrap: wrap; }
+  .su-teamrow-to { margin-left: auto; }
+  .su-sum-head, .su-kv { flex-wrap: wrap; }
+  .su-kv b { margin-left: 0; text-align: left; }
+}
+/* 세로가 낮을 때(200% 확대 등): 위 고정 영역과 하단 바를 흐름 안으로 — 고정 영역이 화면을 덮지 않게 */
+@media (max-height: 500px) {
+  .su-sticky { position: static; }
+  [data-testid='action-bar']:has(.su-bar) { position: static; }
+  .su-spacer { height: 0; }
+}
+@media (max-width: 370px) {
+  .su-stack .su-avatar { width: 26px; height: 26px; margin-left: -9px; }
+  .su-plus { margin-left: -9px; }
+}

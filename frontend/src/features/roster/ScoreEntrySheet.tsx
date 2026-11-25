@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 
 import { Badge } from '../../components/Badge'
 import { Button } from '../../components/Button'
@@ -19,7 +19,8 @@ type RowState = { saving?: string | null; done?: number; error?: { message: stri
 type SaveScore = (p: RosterPerson, score: number) => Promise<void>
 const saveToRoster: SaveScore = (p, score) => setScore(p.kind, p.id, score, p.score)
 
-export function ScoreEntrySheet({ people, onClose, onAllDone, save: saveScore = saveToRoster }: { people: RosterPerson[]; onClose: () => void; onAllDone: () => void; save?: SaveScore }) {
+/** notice: 점수를 매기기 전에 보여 줄 안내(청백전 생성 SCR-242에서 열 때 저장 범위 안내, UXD-094·AC-126). 없으면 기존과 같음 */
+export function ScoreEntrySheet({ people, onClose, onAllDone, save: saveScore = saveToRoster, notice }: { people: RosterPerson[]; onClose: () => void; onAllDone: () => void; save?: SaveScore; notice?: ReactNode }) {
   const [rows, setRows] = useState<Record<string, RowState>>({})
   const remaining = people.filter((p) => rows[p.id]?.done === undefined).length
 
@@ -46,6 +47,7 @@ export function ScoreEntrySheet({ people, onClose, onAllDone, save: saveScore = 
 
   return (
     <Sheet open title={`점수 미설정 ${remaining}명`} onRequestClose={onClose} testId="score-sheet" height="70%">
+      {notice && <div className="mb-3">{notice}</div>}
       <ul data-scr="SCR-214" data-st={Object.values(rows).some((r) => r.error) ? 'SCR-214-ST4' : Object.values(rows).some((r) => r.saving) ? 'SCR-214-ST2' : 'SCR-214-ST1'} className="m-0 flex list-none flex-col gap-4 p-0">
         {people.map((p) => {
           const st = rows[p.id] ?? {}

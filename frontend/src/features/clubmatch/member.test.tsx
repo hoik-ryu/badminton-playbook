@@ -82,10 +82,10 @@ describe('B5 member club matches (SCR-111·112)', () => {
     expect(pending).toHaveTextContent(/개인전.*준비 중/)
     expect(pending).toHaveTextContent('운영진에게만 보임')
     expect(pending).toHaveTextContent(/참가 \d+명 · 대진 미확정/)
-    expect(pending).toHaveAttribute('href', '/club-matches/cm-2') // 통합 상세 SCR-112(3단계)
+    expect(pending).toHaveAttribute('href', '/club-matches/cm-2/setup') // (B11) 준비 중은 생성 페이지(계산된 단계, AC-131)
     expect(document.querySelector('[data-scr="SCR-111"]')).toHaveAttribute('data-role', 'admin')
     fireEvent.click(screen.getByRole('button', { name: '새 청백전' }))
-    expect(await screen.findByTestId('create-sheet')).toBeInTheDocument() // SCR-222
+    expect(await screen.findByRole('heading', { name: '새 청백전' })).toBeInTheDocument() // (B11) 생성 페이지 SCR-241(이전 SCR-222 시트)
   })
 
   it('SCR-112-ST5 / AC-069: unconfirmed and missing matches look the same', async () => {

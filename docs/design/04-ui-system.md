@@ -1,10 +1,10 @@
 ---
 doc: ui-system
-revision: 8
+revision: 9
 language: ko
 based_on:
-  planning_revision: 9
-  ux_planning_revision: 8
+  planning_revision: 10
+  ux_planning_revision: 9
 ---
 
 # UI 컴포넌트와 디자인 토큰 (UI System): 배드민턴 플레이북 (badminton-playbook)
@@ -55,6 +55,8 @@ based_on:
 > - **변형 추가**: CMP-024 PersonRow `mode=select|teamMove|unassigned`, CMP-028 StickySummary `kind=selection|teamBalance`, CMP-004 FilterChip(성별·급수·점수 미설정 필터), CMP-026 PageHeader(생성 페이지: 나가기·삭제)
 > - **공통 패턴**: 3.3 생성 페이지 단계 패턴(저장·이탈·폐기 확인·실패·PC)
 > - **바꾸지 않은 것**: 토큰은 추가하거나 바꾸지 않았습니다. 새 컴포넌트의 시각 표현(모양·간격·카드 여부)은 사용자 디자인 레퍼런스를 받은 뒤 Design Direction에서 정합니다. SCR-222 폐기로 '사용 화면'에서 SCR-222를 뺐습니다.
+
+> **r9 개정(2026-11-24)**: CMP-002 SegmentedControl을 SCR-243 팀 구성 방식(행동형)에도 씁니다. 새 컴포넌트·토큰은 없습니다.
 
 ## 1. 디자인 토큰
 
@@ -184,8 +186,9 @@ based_on:
 - **용도**: 2–3개 중 하나 고르기(남·여, 개인전·팀전, 레벨별·무작위, 청·백·불참)
 - **변형**: `options=2|3`, `size=md|sm`(목록 행 안은 sm, 최소 44px 유지)
 - **상태**: 기본, 선택됨(색 + 굵은 글자 + 체크), 비활성(잠금 사유 표시)
-- **사용 화면**: SCR-002, SCR-112, SCR-122, SCR-204, SCR-212, SCR-213, SCR-224, SCR-241
+- **사용 화면**: SCR-002, SCR-112, SCR-122, SCR-204, SCR-212, SCR-213, SCR-224, SCR-241, SCR-243
 - **접근성**: `role="radiogroup"`, 방향키 이동
+- (r9) **행동형(SCR-243 팀 구성 방식)**: '자동 배정'·'직접 구성'. 누르면 그 방식을 실행(필요하면 확인 창)하고, 마지막으로 실행한 방식을 선택 상태로 보여 줌. 선택은 저장하지 않음(C-34)
 
 ### CMP-003: ChoiceGrid
 - **용도**: 여러 값 중 하나를 버튼 격자로 고르기(급수 8개 4×2, 점수 1–10 5×2)

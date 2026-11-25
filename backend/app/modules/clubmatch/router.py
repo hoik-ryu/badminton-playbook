@@ -14,7 +14,7 @@ from collections.abc import Iterable
 from datetime import UTC, datetime
 from typing import Literal
 
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, Response, status
 from sqlalchemy import delete, func, select
 from sqlalchemy.orm import Session
 
@@ -28,14 +28,17 @@ from app.modules.clubmatch.models import (
     ClubMatchParticipant,
 )
 from app.modules.clubmatch.schemas import (
+    BasicUpdate,
     ClubMatchCreate,
     ClubMatchListItem,
     ClubMatchView,
     Created,
     GameView,
+    GenerateRequest,
     LeaveRequest,
     MethodUpdate,
     ParticipantRow,
+    ParticipantsReplace,
     ParticipationUpdate,
     Person,
     Relaxation,
@@ -46,6 +49,7 @@ from app.modules.clubmatch.schemas import (
     Summary,
     SwapRequest,
     TeamCount,
+    TeamsReplace,
     TeamUpdate,
     Versioned,
 )
@@ -63,6 +67,10 @@ IN_GAMES = "in_games"
 NOT_FOUND = "not_found"
 NOT_ELIGIBLE = "not_eligible"
 DELETED_GUEST = "삭제된 게스트"
+# (B10) 단계형 생성: 대진·팀 폐기 확인 필요, 미배정, 참가자 아님
+CONFIRM_REQUIRED = "confirm_required"
+UNASSIGNED = "unassigned"
+NOT_PARTICIPANT = "not_participant"
 
 
 # ── 사람(회원·게스트) ──
@@ -389,6 +397,8 @@ def create_club_match(body: ClubMatchCreate, actor: AdminUser, db: DbSession) ->
 
 
 # ── 확정 전 변경(잠금 + version + draft) ──
+# (B10) 단계형 생성 페이지(SCR-241–245, C-31–C-34)의 일괄 저장 API는
+# 아래 '단계형 생성' 절에 있습니다.
 
 
 def _fail(
@@ -431,6 +441,41 @@ def _discard_games(db: Session, m: ClubMatch) -> None:
     m.seed = None
 
 
+def _game_count(db: Session, m: ClubMatch) -> int:
+    return int(
+        db.scalar(
+            select(func.count()).select_from(ClubMatchGame).where(ClubMatchGame.match_id == m.id)
+        )
+        or 0
+    )
+
+
+def _unchanged(db: Session, m: ClubMatch) -> ClubMatchView:
+    """(B10, C-33·U9) 실제로 바뀐 값이 없으면 저장하지 않음.
+
+    대진·version 그대로(같은 요청 반복도 같은 결과).
+    """
+    db.rollback()
+    return build_view(db, m)
+
+
+def _confirm_or_fail(db: Session, discard: bool, *, games: int, teams: bool = False) -> None:
+    """(B10, C-33) 버려질 대진·팀 배정이 있으면 폐기 확인(discard=true)이 있어야 함.
+
+    없으면 409 confirm_required.
+
+    details: 무엇이 버려지는지(games: 대진 경기 수, teams: 팀 배정 초기화 여부).
+    """
+    if (games or teams) and not discard:
+        raise _fail(
+            db,
+            CONFIRM_REQUIRED,
+            "만든 대진이나 팀 배정이 바뀝니다. 확인 후 다시 요청해 주세요",
+            409,
+            {"games": games, "teams": teams},
+        )
+
+
 @router.put("/{match_id}/method")
 def set_method(
     match_id: uuid.UUID, body: MethodUpdate, _: AdminUser, db: DbSession
@@ -449,10 +494,21 @@ def set_method(
 def set_settings(
     match_id: uuid.UUID, body: SettingsUpdate, _: AdminUser, db: DbSession
 ) -> ClubMatchView:
-    """총 경기 수·규칙(밸런스·성별). 만든 대진은 다시 생성하면 반영(화면 안내)."""
+    """총 경기 수·규칙(밸런스·성별).
+
+    (B10, C-33·AC-132) 값이 실제로 바뀌고 대진이 있으면 폐기 확인(discard) 후
+    설정 저장과 대진 폐기를 함께.
+    같은 값이면 저장하지 않음(대진·version 유지).
+    """
     m = _begin(db, match_id, body)
-    m.total_games = body.totalGames
-    m.rule_balance, m.rule_gender = body.rules.balance, body.rules.gender
+    new = (body.totalGames, body.rules.balance, body.rules.gender)
+    if new == (m.total_games, m.rule_balance, m.rule_gender):
+        return _unchanged(db, m)
+    games = _game_count(db, m)
+    _confirm_or_fail(db, body.discard, games=games)
+    if games:
+        _discard_games(db, m)
+    m.total_games, m.rule_balance, m.rule_gender = new
     return _finish(db, m)
 
 
@@ -517,10 +573,22 @@ def _in_games(db: Session, part: ClubMatchParticipant) -> bool:
 def set_participating(
     match_id: uuid.UUID, key: str, body: ParticipationUpdate, _: AdminUser, db: DbSession
 ) -> ClubMatchView:
-    """개인전 참가 체크(UXD-038·039). 이미 대진에 들어간 사람은 해제 불가(in_games)."""
+    """개인전 참가 체크(UXD-038·039). 이미 대진에 들어간 사람은 해제 불가(in_games).
+
+    (B10) 대진이 있으면 폐기 확인(discard)이 있어야 바꿈(남은 대진은 항상 현재 참가자와 맞음, C-33).
+    """
     m = _begin(db, match_id, body)
     kind, pid = parse_key(key)
     part = _find_participant(db, m, kind, pid)
+    if body.participating == (part is not None):
+        return _unchanged(db, m)
+    if body.participating:
+        _eligible(db, kind, pid)  # 자격 오류(422)가 폐기 확인(409)보다 먼저 — 일괄 저장과 같은 순서
+    games = _game_count(db, m)
+    _confirm_or_fail(db, body.discard, games=games)
+    if games:
+        _discard_games(db, m)
+        db.flush()
     if body.participating and part is None:
         _add_participant(db, m, kind, pid, None)
     elif not body.participating and part is not None:
@@ -574,6 +642,193 @@ def propose_teams(
     return _finish(db, m)
 
 
+# ── 단계형 생성(B10, C-31–C-34): 단계마다 한 번에 저장, 값이 같으면 무변경, 한 트랜잭션 ──
+
+
+@router.put("/{match_id}/basic")
+def save_basic(
+    match_id: uuid.UUID, body: BasicUpdate, _: AdminUser, db: DbSession
+) -> ClubMatchView:
+    """기본정보(AC-123·070·132): 이름·날짜만 바뀌면 팀·대진 유지.
+
+    방식이 바뀌면 대진 폐기 + 팀 초기화(C-13, 참가자 유지) — 팀 배정·대진이 있으면 폐기 확인 필요.
+    """
+    m = _begin(db, match_id, body)
+    if (body.name, body.date, body.method) == (m.name, m.match_date, m.method):
+        return _unchanged(db, m)
+    if body.method != m.method:
+        parts = _participants(db, m.id)
+        _confirm_or_fail(
+            db, body.discard, games=_game_count(db, m), teams=any(p.team for p in parts)
+        )
+        _discard_games(db, m)
+        m.team_proposed = False
+        for p in parts:
+            p.team = None
+        m.method = body.method
+    m.name, m.match_date = body.name, body.date
+    return _finish(db, m)
+
+
+def _parse_keys(db: Session, keys: Iterable[str]) -> list[tuple[str, str, uuid.UUID]]:
+    """사람 키 목록(중복은 처음 것만) → (키, 종류, id). 형식이 틀리면 404 not_found."""
+    out: list[tuple[str, str, uuid.UUID]] = []
+    seen: set[str] = set()
+    for key in keys:
+        if key in seen:
+            continue
+        seen.add(key)
+        try:
+            kind, pid = parse_key(key)
+        except AppError:
+            db.rollback()
+            raise
+        out.append((key, kind, pid))
+    return out
+
+
+def _ineligible(db: Session, wanted: list[tuple[str, str, uuid.UUID]]) -> list[str]:
+    """새로 넣을 사람 중 자격이 없는 키(승인 회원·삭제 안 된 게스트만, U6).
+
+    게스트는 FOR SHARE로 잠금.
+    """
+    members = {pid for _, kind, pid in wanted if kind == "member"}
+    guests = {pid for _, kind, pid in wanted if kind == "guest"}
+    ok_members = set(
+        db.scalars(select(User.id).where(User.id.in_(members), User.status == "approved")).all()
+        if members
+        else []
+    )
+    ok_guests = set(
+        db.scalars(
+            select(Guest.id)
+            .where(Guest.id.in_(guests), Guest.deleted_at.is_(None))
+            .with_for_update(read=True)
+        ).all()
+        if guests
+        else []
+    )
+    return [
+        key
+        for key, kind, pid in wanted
+        if pid not in (ok_members if kind == "member" else ok_guests)
+    ]
+
+
+@router.put("/{match_id}/participants")
+def save_participants(
+    match_id: uuid.UUID, body: ParticipantsReplace, _: AdminUser, db: DbSession
+) -> ClubMatchView:
+    """참가자 일괄 저장(AC-125·128·132·133, C-33·C-34): 최종 목록으로 교체.
+
+    남는 사람은 팀 유지, 추가는 미배정(목록 순서대로 position), 빠진 사람은 삭제(팀에서도 빠짐).
+    목록이 바뀌고 대진이 있으면 폐기 확인 필요. 같은 목록이면 무변경.
+    """
+    m = _begin(db, match_id, body)
+    wanted = _parse_keys(db, body.keys)
+    parts = _participants(db, m.id)
+    current = {_participant_key(p): p for p in parts}
+    want_keys = [k for k, _, _ in wanted]
+    if set(want_keys) == set(current):
+        return _unchanged(db, m)
+    added = [w for w in wanted if w[0] not in current]
+    bad = _ineligible(db, added)
+    if bad:
+        raise _fail(db, NOT_ELIGIBLE, "참가할 수 없는 사람이 있습니다", 422, {"keys": bad})
+    games = _game_count(db, m)
+    _confirm_or_fail(db, body.discard, games=games)
+    if games:
+        _discard_games(db, m)
+        db.flush()  # 경기 선수 → 참가자 FK(RESTRICT)보다 먼저 지움
+    keep = set(want_keys)
+    for key, p in current.items():
+        if key not in keep:
+            db.delete(p)
+    position = max((p.position for p in parts), default=0)
+    for _key, kind, pid in added:
+        position += 1
+        db.add(
+            ClubMatchParticipant(
+                match_id=m.id,
+                user_id=pid if kind == "member" else None,
+                guest_id=pid if kind == "guest" else None,
+                team=None,
+                position=position,
+            )
+        )
+    return _finish(db, m)
+
+
+@router.put("/{match_id}/teams")
+def save_teams(
+    match_id: uuid.UUID, body: TeamsReplace, _: AdminUser, db: DbSession
+) -> ClubMatchView:
+    """팀 배정 일괄 저장(AC-127·128·135, C-34): 모든 참가자를 청·백에(미배정 0명, 팀마다 2명 이상).
+
+    배정이 바뀌고 대진이 있으면 폐기 확인 필요(대진은 다시 만들지 않음). 같으면 무변경.
+    """
+    m = _begin(db, match_id, body)
+    if m.method != "team":
+        raise _fail(db, LOCKED, "팀전에서만 팀을 정할 수 있습니다", 409)
+    parts = _participants(db, m.id)
+    current = {_participant_key(p): p for p in parts}
+    strangers = [k for k in body.assignments if k not in current]
+    if strangers:
+        raise _fail(db, NOT_PARTICIPANT, "참가자가 아닌 사람이 있습니다", 422, {"keys": strangers})
+    missing = [k for k in current if k not in body.assignments]
+    if missing:
+        raise _fail(
+            db, UNASSIGNED, f"미배정 {len(missing)}명의 팀을 골라 주세요", 422, {"keys": missing}
+        )
+    blue = sum(1 for t in body.assignments.values() if t == "blue")
+    white = len(body.assignments) - blue
+    if blue < MIN_PER_TEAM or white < MIN_PER_TEAM:
+        raise _fail(
+            db,
+            MIN_PLAYERS,
+            "청팀이 2명 이상이어야 합니다"
+            if blue < MIN_PER_TEAM
+            else "백팀이 2명 이상이어야 합니다",
+            422,
+            {
+                "minTotal": MIN_TOTAL,
+                "minPerTeam": MIN_PER_TEAM,
+                "count": len(body.assignments),
+                "blue": blue,
+                "white": white,
+            },
+        )
+    if all(current[k].team == t for k, t in body.assignments.items()):
+        return _unchanged(db, m)
+    games = _game_count(db, m)
+    _confirm_or_fail(db, body.discard, games=games)
+    if games:
+        _discard_games(db, m)
+    for k, t in body.assignments.items():
+        current[k].team = t
+    m.team_proposed = True
+    return _finish(db, m)
+
+
+@router.delete("/{match_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_club_match(match_id: uuid.UUID, version: int, _: AdminUser, db: DbSession) -> Response:
+    """준비 중 청백전 삭제(AC-134, C-32): 물리 삭제(참가자·대진 함께). 확정한 청백전은 409 locked.
+
+    경기 선수 → 경기 → 참가자 → 청백전 순서(경기 선수 → 참가자 FK가 RESTRICT).
+    재시도 때의 404는 화면이 '이미 삭제됨'으로 처리.
+    준비 중 청백전은 전적·랭크에 쓰이지 않음(record.py는 draft 제외).
+    """
+    m = _lock(db, match_id, Versioned(version=version))
+    if m.status != "draft":
+        raise _fail(db, LOCKED, "확정한 청백전은 삭제할 수 없습니다", 409)
+    _discard_games(db, m)
+    db.flush()
+    db.execute(delete(ClubMatchParticipant).where(ClubMatchParticipant.match_id == m.id))
+    db.delete(m)
+    db.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
 # ── 대진 생성(I3-b, AC-043·071·073–076, U7·U8) ──
 
 UNSCORED = "unscored_players"
@@ -584,14 +839,21 @@ MIN_PER_TEAM = 2
 
 @router.post("/{match_id}/games")
 def generate_games(
-    match_id: uuid.UUID, body: Versioned, _: AdminUser, db: DbSession
+    match_id: uuid.UUID, body: GenerateRequest, _: AdminUser, db: DbSession
 ) -> ClubMatchView:
     """대진 생성·다시 생성: 서버 엔진(FE generateClubGames와 같은 결과), 새 시드.
 
     오류(FE CLUB_ERRORS, Mock과 같은 순서): 점수 미설정 422 `unscored_players` →
     인원 부족 422 `min_players`(최소 4명, 팀전 팀당 2명, U8).
+    (B10) 총 경기 수·규칙을 함께 보내면 같은 트랜잭션에서 저장한 뒤 생성(C-32).
+    팀전 미배정 참가자가 있으면
+    422 `unassigned`(조용히 제외하지 않음, 점수 미설정 다음 순서).
     """
     m = _begin(db, match_id, body)
+    if body.totalGames is not None:
+        m.total_games = body.totalGames
+    if body.rules is not None:
+        m.rule_balance, m.rule_gender = body.rules.balance, body.rules.gender
     parts = _participants(db, m.id)
     people = _people(db, parts)
     in_play = [
@@ -601,6 +863,15 @@ def generate_games(
     if unscored:
         db.rollback()
         raise AppError(UNSCORED, "점수 미설정 참가자가 있습니다", 422, {"keys": unscored})
+    unassigned = _unassigned(m, parts, people)
+    if unassigned:
+        raise _fail(
+            db,
+            UNASSIGNED,
+            _unassigned_message(unassigned),
+            422,
+            {"keys": unassigned},
+        )
     blue = sum(1 for p in in_play if p.team == "blue")
     white = sum(1 for p in in_play if p.team == "white")
     short = len(in_play) < MIN_TOTAL or (
@@ -658,6 +929,22 @@ def generate_games(
     return _finish(db, m)
 
 
+def _unassigned_message(keys: list[str]) -> str:
+    return f"미배정 {len(keys)}명의 팀을 골라 주세요"
+
+
+def _unassigned(
+    m: ClubMatch, parts: list[ClubMatchParticipant], people: dict[str, Person]
+) -> list[str]:
+    """팀전에서 팀이 없는 참가자 키.
+
+    삭제된 게스트처럼 사람 정보가 없는 행은 제외(기존 in_play 규칙).
+    """
+    if m.method != "team":
+        return []
+    return [_participant_key(p) for p in parts if _participant_key(p) in people and not p.team]
+
+
 # ── 확정 이후(I3-c) ──
 
 NO_GAMES = "no_games"
@@ -682,6 +969,27 @@ def confirm(match_id: uuid.UUID, body: Versioned, _: AdminUser, db: DbSession) -
     )
     if not has_games:
         raise _fail(db, NO_GAMES, "대진을 먼저 만들어 주세요", 409)
+    # (B10, AC-130) 화면 검증을 서버에서 한 번 더: 점수 미설정·팀전 미배정이 있으면 확정하지 않음
+    parts = _participants(db, m.id)
+    people = _people(db, parts)
+    unscored = [
+        _participant_key(p)
+        for p in parts
+        if _participant_key(p) in people
+        and (m.method == "individual" or p.team)
+        and people[_participant_key(p)].score is None
+    ]
+    if unscored:
+        raise _fail(db, UNSCORED, "점수 미설정 참가자가 있습니다", 422, {"keys": unscored})
+    unassigned = _unassigned(m, parts, people)
+    if unassigned:
+        raise _fail(
+            db,
+            UNASSIGNED,
+            _unassigned_message(unassigned),
+            422,
+            {"keys": unassigned},
+        )
     m.status = "confirmed"
     m.confirmed_at = _now()
     return _finish(db, m)

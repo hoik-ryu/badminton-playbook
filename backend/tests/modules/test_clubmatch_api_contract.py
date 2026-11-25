@@ -35,6 +35,16 @@ from tests.modules.test_clubmatch_flow import (
 
 Factory = Callable[[], TestClient]
 GOLDEN = Path(__file__).parents[1] / "golden" / "clubmatch_api_shapes.json"
+
+
+def _put(c: TestClient, view: Any, path: str, **body: object) -> Any:
+    return c.put(f"{BASE}/{view['id']}/{path}", json={**body, "version": view["version"]})
+
+
+def _halves(keys: list[str]) -> dict[str, str]:
+    return {k: "blue" if i % 2 == 0 else "white" for i, k in enumerate(keys)}
+
+
 Shape = Any
 
 
@@ -132,7 +142,8 @@ def test_api_shapes_match_golden(make_client: Factory, db: Session) -> None:
         f"{BASE}/{view['id']}/participants/{in_game}",
         json={"participating": False, "version": view["version"]},
     )
-    c.error(off, "in_games")
+    # (B10 계약 변경) 대진이 있을 때 참가자 변경은 폐기 확인 필요(이전 in_games)
+    c.error(off, "confirm_required")
     c.error(admin.post(f"{BASE}/{view['id']}/confirm", json={"version": 0}), "conflict")
     c.error(result(admin, view, 1, 1), "locked")
     outsider = f"member:{make_user(db, name='비활성', status='inactive').id}"
@@ -143,6 +154,38 @@ def test_api_shapes_match_golden(make_client: Factory, db: Session) -> None:
         ),
         "not_eligible",
     )
+
+    # ── (B10) 단계형 생성 API: 기본정보·참가자 일괄·팀 일괄·삭제 ──
+    sv = new_match(admin, method="team", name="단계")
+    sv = c.response("ClubMatchView", ok(_put(admin, sv, "participants", keys=keys)))
+    c.error(_put(admin, sv, "participants", keys=[*keys, outsider]), "not_eligible")
+    c.error(_put(admin, sv, "teams", assignments={keys[0]: "blue"}), "unassigned")
+    c.error(
+        _put(admin, sv, "teams", assignments={**_halves(keys), outsider: "blue"}),
+        "not_participant",
+    )
+    c.error(
+        _put(admin, sv, "teams", assignments={k: "blue" for k in keys[:-1]} | {keys[-1]: "white"}),
+        "min_players",
+    )
+    sv = c.response("ClubMatchView", ok(_put(admin, sv, "teams", assignments=_halves(keys))))
+    sv = ok(post(admin, sv, "games", totalGames=2, rules={"balance": True, "gender": True}))
+    c.error(
+        _put(admin, sv, "basic", name="단계", date="2026-11-15", method="individual"),
+        "confirm_required",
+    )
+    sv = c.response(
+        "ClubMatchView",
+        ok(_put(admin, sv, "basic", name="단계2", date="2026-11-16", method="team")),
+    )
+    c.error(admin.delete(f"{BASE}/{view['id']}", params={"version": 0}), "conflict")
+    deleted = admin.delete(f"{BASE}/{sv['id']}", params={"version": sv["version"]})
+    assert deleted.status_code == 204
+    uv = new_match(admin, method="team", name="미배정")
+    uv = ok(_put(admin, uv, "participants", keys=keys))
+    uv = ok(_put(admin, uv, "teams", assignments=_halves(keys)))
+    uv = ok(_put(admin, uv, "participants", keys=[*keys, f"member:{unscored.id}"]))
+    c.error(post(admin, uv, "games"), "unassigned")
 
     # ── 확정 이후: 결과·되돌리기·종료·종료 후 수정 ──
     view = c.response("ClubMatchView", ok(post(admin, view, "confirm")))

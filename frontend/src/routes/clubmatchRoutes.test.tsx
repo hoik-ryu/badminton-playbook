@@ -39,10 +39,11 @@ describe('club match routes (4단계)', () => {
     expect(scr()).toHaveAttribute('data-scr', 'SCR-112')
   })
 
-  it('운영진: 준비 중 청백전의 이전 주소도 통합 상세로(운영 영역만)', async () => {
+  // (B11) 준비 중은 통합 상세 대신 생성 페이지(계산된 단계)로(UX Spec r9 UXD-085 r8)
+  it('운영진: 준비 중 청백전의 이전 주소도 통합 주소를 거쳐 생성 페이지로', async () => {
     const router = renderAt('/ops/club-matches/cm-2', 'admin')
-    await landsOn(router, '/club-matches/cm-2')
-    expect(await screen.findByTestId('ops-area')).toHaveAttribute('data-st', 'SCR-112-ST10')
+    await landsOn(router, '/club-matches/cm-2/setup/games')
+    expect(screen.queryByTestId('ops-area')).toBeNull()
   })
 
   it.each([['/ops/club-matches'], ['/ops/club-matches/cm-1'], ['/ops/club-matches/cm-2?x=1']])('회원: 이전 운영 주소 %s 는 지금처럼 /forbidden(SCR-004)', async (path) => {

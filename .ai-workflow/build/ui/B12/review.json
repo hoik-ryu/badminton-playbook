@@ -1,0 +1,45 @@
+{
+  "format": "pb-ui-review/v1",
+  "batch": "B12",
+  "status": "verified",
+  "run_id": "20261125-102527-3b239e",
+  "verified_at": "2026-11-25T01:26:18Z",
+  "code": null,
+  "scope_tree": "56e53176d5758bb6ca796c3b5a1347344e4a2f770957b5961f14023d19ec10e4",
+  "evidence_digest": null,
+  "screens": {},
+  "browser": {
+    "status": null,
+    "steps": null,
+    "blocking": null,
+    "warnings": null,
+    "coverage": null
+  },
+  "tokens": {
+    "at_verify": null,
+    "now": {
+      "ok": true,
+      "counts": {
+        "approved": 74,
+        "matched": 74,
+        "missing": 0,
+        "mismatch": 0,
+        "excepted": 0
+      },
+      "missing": [],
+      "mismatch": [],
+      "excepted": []
+    },
+    "audit": null
+  },
+  "components": {},
+  "manual": [],
+  "feedback": [],
+  "warnings": [],
+  "blockers": [
+    "UI 증거가 있는 최종 검증이 없습니다(verify --batch)"
+  ],
+  "review_id": "f440d08ae9b28f4a",
+  "ready": false,
+  "at": "2026-11-25T01:29:06Z"
+}

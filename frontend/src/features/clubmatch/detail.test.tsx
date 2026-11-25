@@ -6,6 +6,7 @@ import { readDb, updateDb } from '../../lib/mock/db'
 import { routes } from '../../routes/router'
 import { setPersona, type PersonaKey } from '../auth/devPersona'
 import { read } from './api'
+import { clickNext } from './setup/testkit'
 
 // SCR-112 통합 상세(/club-matches/:matchId, UX Spec r6 UXD-085·087) — Mock
 // 같은 머리글·공개 영역 + 운영진에게만 운영 기능 영역(ST9–ST14). 기존 운영 기능 8종(참가자·대진 설정·생성·다시 생성·교체·확정·결과·되돌리기·종료)을 같은 화면에서
@@ -52,15 +53,13 @@ describe('SCR-112 unified club match detail', () => {
     expect(page()).toHaveAttribute('data-st', 'SCR-112-ST15')
   })
 
-  it('admin, pending (ST10): ops area only, not public', async () => {
-    renderAt('/club-matches/cm-2', 'admin')
-    const ops = await screen.findByTestId('ops-area')
-    expect(page()).toHaveAttribute('data-st', 'SCR-112-ST10')
-    expect(screen.getByTestId('ops-visibility')).toHaveTextContent('회원에게 공개 안 됨')
-    expect(screen.getByTestId('detail-badges')).toHaveTextContent('개인전준비 중')
+  // (B11 대체) 운영진이 준비 중 청백전을 열면 상세 대신 생성 페이지(UX Spec r9 UXD-085 r8·099, AC-131). 회원은 그대로 ST5
+  it('admin, pending: the detail address opens the setup page at the computed step, not the ops area', async () => {
+    const router = renderAt('/club-matches/cm-2', 'admin')
+    await waitFor(() => expect(router.state.location.pathname).toBe('/club-matches/cm-2/setup/games'))
+    expect(screen.queryByTestId('ops-area')).toBeNull()
     expect(screen.queryByTestId('public-area')).toBeNull()
-    expect(within(ops).getByRole('radiogroup', { name: '방식' })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: '대진 생성' })).toBeInTheDocument()
+    expect(await screen.findByRole('heading', { name: '대진 설정' })).toBeInTheDocument()
   })
 
   it('admin, confirmed (ST13): public area above ops area, standings shown once, member detail API not needed', async () => {
@@ -76,42 +75,39 @@ describe('SCR-112 unified club match detail', () => {
     expect(pub).not.toHaveTextContent('실력차') // 공개 영역에는 운영 정보 없음
   })
 
-  it('admin: 8 ops functions on the unified screen — participants, settings, generate, regenerate, swap, confirm, result, revert, finish', async () => {
+  // (B11 대체) ①–⑤(참가자·설정·생성·다시 생성·교체)는 생성 페이지(SCR-242·244)에서, ⑥ 확정은 SCR-245에서. ⑦–⑨는 통합 상세 그대로
+  it('admin: setup page for participants, settings, generate, regenerate, swap, confirm; unified screen for result, revert, finish', async () => {
     const router = renderAt('/club-matches', 'admin')
     fireEvent.click(await screen.findByRole('button', { name: '새 청백전' }))
-    const sheet = await screen.findByTestId('create-sheet')
-    fireEvent.click(within(sheet).getByRole('radio', { name: '개인전' }))
-    fireEvent.change(within(sheet).getByLabelText('이름'), { target: { value: '통합 상세 청백전' } })
-    fireEvent.click(within(sheet).getByRole('button', { name: '만들기' }))
-    await waitFor(() => expect(router.state.location.pathname).toMatch(/^\/club-matches\/cm-/)) // 새 청백전 → 통합 상세
-    const id = router.state.location.pathname.split('/').pop()!
-    // ① 참가자 관리(ST9 → 참가자 시트 자동 열림, SCR-224)
-    const panel = await screen.findByTestId('participants-sheet')
-    expect(page()).toHaveAttribute('data-st', 'SCR-112-ST9')
-    for (const n of ['김가람', '박다온', '정마루', '권초록']) fireEvent.click(within(panel).getByRole('checkbox', { name: new RegExp(`^${n},`) }))
+    await waitFor(() => expect(router.state.location.pathname).toBe('/club-matches/new'))
+    fireEvent.click(await screen.findByRole('radio', { name: '개인전' }))
+    fireEvent.change(screen.getByRole('textbox', { name: '청백전 이름' }), { target: { value: '통합 상세 청백전' } })
+    await clickNext()
+    await waitFor(() => expect(router.state.location.pathname).toMatch(/\/setup\/participants$/))
+    const id = router.state.location.pathname.split('/')[2]!
+    // ① 참가자
+    for (const n of ['김가람', '박다온', '정마루', '권초록']) fireEvent.click(await screen.findByRole('checkbox', { name: new RegExp(`^${n},`) }))
+    await clickNext()
     await waitFor(() => expect(Object.keys(match(id).participants)).toHaveLength(4))
-    fireEvent.click(within(panel).getByRole('button', { name: '닫기' }))
-    await waitFor(() => expect(screen.queryByTestId('participants-sheet')).toBeNull())
-    // ② 대진 설정
-    fireEvent.change(await screen.findByLabelText('총 경기 수'), { target: { value: '3' } })
-    await waitFor(() => expect(match(id).totalGames).toBe(3))
-    // ③ 대진 생성(ST10 → ST12) ④ 다시 생성
-    fireEvent.click(screen.getByRole('button', { name: '대진 생성' }))
+    // ② 대진 설정 ③ 대진 생성 ④ 다시 생성
+    fireEvent.change(await screen.findByRole('textbox', { name: '총 경기 수' }), { target: { value: '3' } })
+    fireEvent.click(screen.getByTestId('su-generate'))
     await waitFor(() => expect(match(id).games).toHaveLength(3))
-    await waitFor(() => expect(page()).toHaveAttribute('data-st', 'SCR-112-ST12'))
+    expect(match(id).totalGames).toBe(3)
     const seed = match(id).seed
-    fireEvent.click(screen.getByRole('button', { name: '다시 생성' }))
+    fireEvent.click(await screen.findByRole('button', { name: '다시 생성' }))
     await waitFor(() => expect(match(id).seed).not.toBe(seed))
-    // ⑤ 선수 교체(SCR-225): 시트가 열리고 바꿀 수 있는 후보가 있으면 반영
-    const card = await screen.findByRole('article', { name: '1경기' })
-    fireEvent.click(within(card).getAllByRole('button', { name: /1경기 .* 교체/ })[0]!)
+    // ⑤ 선수 교체(SCR-225): 시트가 열림
+    fireEvent.click((await screen.findAllByRole('button', { name: /^1경기 .* 교체$/ }))[0]!)
     const swap = await screen.findByTestId('club-swap-sheet')
     fireEvent.click(within(swap).getByRole('button', { name: '닫기' }))
     await waitFor(() => expect(screen.queryByTestId('club-swap-sheet')).toBeNull())
-    // ⑥ 확정 → 회원 공개(공개 영역이 운영 영역 위에 나타남)
-    fireEvent.click(screen.getByRole('button', { name: '확정' }))
+    // ⑥ 확정(SCR-245) → 통합 상세, 회원 공개(공개 영역이 운영 영역 위에 나타남)
+    await clickNext()
+    await clickNext()
     fireEvent.click(within(await screen.findByRole('alertdialog', { name: '대진을 확정하고 회원에게 공개할까요?' })).getByRole('button', { name: '확정' }))
     await waitFor(() => expect(match(id).status).toBe('confirmed'))
+    await waitFor(() => expect(router.state.location.pathname).toBe(`/club-matches/${id}`))
     expect(await screen.findByTestId('public-area')).toBeInTheDocument()
     expect(screen.getByTestId('ops-visibility')).toHaveTextContent('회원 공개됨')
     // ⑦ 결과 입력

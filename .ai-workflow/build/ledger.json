@@ -1,0 +1,120 @@
+{
+  "schema": "pb-ledger/v1",
+  "items": [
+    {
+      "id": "POL-001",
+      "type": "policy",
+      "title": "청백전 생성 페이지 전용 표현 부품(CMP-002·004·008·024·026)",
+      "description": "Design Direction r12 VD-061–065(Preview r8 승인)의 생성 페이지 표현(아이콘 방식 타일, 인원 수 없는 필터 칩, 오른쪽 체크박스, 이니셜 아바타·두 줄 사람 행, 로고 머리글)은 대응표의 공통 부품(SegmentedControl·FilterChip·Checkbox·PersonRow·PageHeader)으로 재현되지 않습니다. 공통 부품 계약은 바꾸지 않고, features/clubmatch/setup 안에 이 페이지 전용 부품으로 구현합니다. 나머지 대응표 부품(Button·ConfirmDialog·Switch·Badge·NoticeBox·StateView·Sheet)은 재사용합니다.",
+      "created_at": "2026-11-25T00:06:35Z",
+      "source": {
+        "kind": "manual"
+      },
+      "status": "decided",
+      "blocking": false,
+      "category": null,
+      "provisional": null,
+      "related": {
+        "batches": [
+          "B11"
+        ],
+        "acs": [],
+        "docs": []
+      },
+      "rationale": "사용자 지시: Preview r8 디자인을 최대한 동일하게, 공통 컴포넌트 계약 변경 금지. 엔진은 대응표 부품 재생성을 원장 결정 없이 허용하지 않음",
+      "classified_by": "claude",
+      "decisions": [
+        {
+          "seq": 1,
+          "decision": "생성 페이지 전용 부품으로 구현(공통 부품 계약 변경 없음, 나머지 대응표 부품은 재사용)",
+          "statement": "생성 페이지 전용 부품 (권장)",
+          "decided_by": "user",
+          "at": "2026-11-25T00:06:42Z",
+          "effects": {
+            "stale": [],
+            "proposals": []
+          }
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-11-25T00:06:42Z",
+          "event": "decided",
+          "seq": 1
+        }
+      ],
+      "digest": "3157a1447aaabd549b8e4c3db6de1a282c1505055c59bed2de3c73bcd7df9554"
+    },
+    {
+      "id": "POL-002",
+      "type": "policy",
+      "title": "청백전 생성 페이지 전용 표현 부품 추가(CMP-041 대진 미리보기 카드)",
+      "description": "POL-001과 같은 방식: SCR-244 대진 미리보기 경기 카드(CMP-041)는 대응표·신규 목록에 없어, Preview r8(VD-066) 표현 그대로 이 페이지 전용 카드로 구현합니다. 기존 SCR-112 경기 카드는 그대로 둡니다.",
+      "created_at": "2026-11-25T00:09:38Z",
+      "source": {
+        "kind": "manual"
+      },
+      "status": "decided",
+      "blocking": false,
+      "category": null,
+      "provisional": null,
+      "related": {
+        "batches": [
+          "B11"
+        ],
+        "acs": [],
+        "docs": []
+      },
+      "rationale": "사용자 지시: Preview r8 디자인을 최대한 동일하게, 공통 컴포넌트 계약 변경 금지",
+      "classified_by": "claude",
+      "decisions": [
+        {
+          "seq": 1,
+          "decision": "CMP-041 대진 미리보기 카드도 생성 페이지 전용 부품으로 구현",
+          "statement": "전용 부품 정책에 포함 (권장)",
+          "decided_by": "user",
+          "at": "2026-11-25T00:09:38Z",
+          "effects": {
+            "stale": [],
+            "proposals": []
+          }
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-11-25T00:09:38Z",
+          "event": "decided",
+          "seq": 1
+        }
+      ],
+      "digest": "de31f1e0c794a2c7ebb4f43d36e7b52b1c42a05ca546d50878b8a92d3a776e6c"
+    }
+  ],
+  "proposals": [],
+  "history": [
+    {
+      "at": "2026-11-25T00:06:35Z",
+      "event": "added",
+      "id": "POL-001",
+      "note": "청백전 생성 페이지 전용 표현 부품(CMP-002·004·008·024·026)"
+    },
+    {
+      "at": "2026-11-25T00:06:42Z",
+      "event": "decided",
+      "id": "POL-001",
+      "note": "생성 페이지 전용 부품으로 구현(공통 부품 계약 변경 없음, 나머지 대응표 부품은 재사용)"
+    },
+    {
+      "at": "2026-11-25T00:09:38Z",
+      "event": "added",
+      "id": "POL-002",
+      "note": "청백전 생성 페이지 전용 표현 부품 추가(CMP-041 대진 미리보기 카드)"
+    },
+    {
+      "at": "2026-11-25T00:09:38Z",
+      "event": "decided",
+      "id": "POL-002",
+      "note": "CMP-041 대진 미리보기 카드도 생성 페이지 전용 부품으로 구현"
+    }
+  ]
+}

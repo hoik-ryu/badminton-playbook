@@ -438,3 +438,144 @@ def test_db_i3d_result_edit_after_finish_and_member_views(admin: TestClient, pg:
     assert member["resultModifiedAt"] is not None
     assert "score" not in str(member) and "version" not in member
     assert admin.get("/api/me/record").status_code == 200
+
+
+# ── (B10) 단계형 생성 API — 실제 PostgreSQL: FK 순서(RESTRICT)·원자성·동시 저장 ──
+
+
+def _setup_ac(*ids: str) -> pytest.MarkDecorator:
+    tag = ", ".join(ids)
+    return pytest.mark.parametrize("ac_tag", [tag], ids=[tag])
+
+
+def _team_with_games(admin: TestClient, pg: Session, label: str) -> tuple[dict, list[str]]:  # type: ignore[type-arg]
+    keys = []
+    for i in range(8):
+        u = new_member(pg, f"{label}{i}")
+        pg.add(MemberRating(user_id=u.id, score=3 + i % 5))
+        pg.commit()
+        keys.append(f"member:{u.id}")
+    res = admin.post(BASE, json={"method": "team", "date": "2026-12-13", "name": f"{TAG}{label}"})
+    view = admin.get(f"{BASE}/{res.json()['id']}").json()
+    view = admin.put(
+        f"{BASE}/{view['id']}/participants", json={"keys": keys, "version": view["version"]}
+    ).json()
+    assign = {k: "blue" if i % 2 == 0 else "white" for i, k in enumerate(keys)}
+    view = admin.put(
+        f"{BASE}/{view['id']}/teams", json={"assignments": assign, "version": view["version"]}
+    ).json()
+    view = admin.post(
+        f"{BASE}/{view['id']}/games",
+        json={"version": view["version"], "totalGames": 4, "rules": RULES},
+    ).json()
+    assert len(view["games"]) == 4, view
+    return view, keys
+
+
+def _rows(pg: Session, match_id: str) -> tuple[int, int, int]:
+    pg.expire_all()
+    mid = uuid.UUID(match_id)
+    games = pg.scalars(select(ClubMatchGame.id).where(ClubMatchGame.match_id == mid)).all()
+    seats = (
+        pg.scalars(select(ClubMatchGamePlayer).where(ClubMatchGamePlayer.game_id.in_(games))).all()
+        if games
+        else []
+    )
+    parts = pg.scalars(
+        select(ClubMatchParticipant).where(ClubMatchParticipant.match_id == mid)
+    ).all()
+    return len(parts), len(games), len(seats)
+
+
+@_setup_ac("AC-134")
+def test_db_delete_draft_respects_fk_order(ac_tag: str, admin: TestClient, pg: Session) -> None:
+    view, _ = _team_with_games(admin, pg, "삭제")
+    assert _rows(pg, view["id"]) == (8, 4, 16)
+    res = admin.delete(f"{BASE}/{view['id']}", params={"version": view["version"]})
+    assert res.status_code == 204, res.text
+    assert _rows(pg, view["id"]) == (0, 0, 0)
+    pg.expire_all()
+    assert pg.get(ClubMatch, uuid.UUID(view["id"])) is None
+
+
+@_setup_ac("AC-132", "AC-133")
+def test_db_participants_replace_with_discard_removes_in_game_players(
+    ac_tag: str, admin: TestClient, pg: Session
+) -> None:
+    view, keys = _team_with_games(admin, pg, "교체")
+    res = admin.put(
+        f"{BASE}/{view['id']}/participants",
+        json={"keys": keys[2:], "version": view["version"]},
+    )
+    assert res.json()["error"]["code"] == "confirm_required"
+    assert _rows(pg, view["id"]) == (8, 4, 16)  # 아무것도 안 바뀜
+    res = admin.put(
+        f"{BASE}/{view['id']}/participants",
+        json={"keys": keys[2:], "version": view["version"], "discard": True},
+    )
+    assert res.status_code == 200, res.text
+    assert _rows(pg, view["id"]) == (6, 0, 0)
+
+
+@_setup_ac("AC-133")
+def test_db_failure_mid_save_rolls_back_everything(
+    ac_tag: str, admin: TestClient, pg: Session, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from app.modules.clubmatch import router as club_router
+
+    view, keys = _team_with_games(admin, pg, "원자")
+
+    def boom(*_: object) -> None:
+        raise RuntimeError("저장 직전 실패(주입)")
+
+    monkeypatch.setattr(club_router, "_finish", boom)
+    with pytest.raises(RuntimeError):
+        admin.put(
+            f"{BASE}/{view['id']}/participants",
+            json={"keys": keys[2:], "version": view["version"], "discard": True},
+        )
+    with pytest.raises(RuntimeError):
+        admin.put(
+            f"{BASE}/{view['id']}/basic",
+            json={
+                "name": view["name"],
+                "date": "2026-12-13",
+                "method": "individual",
+                "version": view["version"],
+                "discard": True,
+            },
+        )
+    monkeypatch.undo()
+    assert _rows(pg, view["id"]) == (8, 4, 16)
+    after = admin.get(f"{BASE}/{view['id']}").json()
+    assert (after["method"], after["version"]) == ("team", view["version"])
+    assert sorted(r["team"] or "" for r in after["rows"] if r["participating"]) == sorted(
+        ["blue", "white"] * 4
+    )
+
+
+@_setup_ac("AC-133")
+def test_db_concurrent_batch_saves_only_one_wins(
+    ac_tag: str, admin: TestClient, pg: Session
+) -> None:
+    view, keys = _team_with_games(admin, pg, "동시저장")
+    assign = {k: "white" if i % 2 == 0 else "blue" for i, k in enumerate(keys)}
+
+    def save(i: int) -> int:
+        if i % 2:
+            res = admin.put(
+                f"{BASE}/{view['id']}/teams",
+                json={"assignments": assign, "version": view["version"], "discard": True},
+            )
+        else:
+            res = admin.put(
+                f"{BASE}/{view['id']}/participants",
+                json={"keys": keys[: 4 + i % 4], "version": view["version"], "discard": True},
+            )
+        return int(res.status_code)
+
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        statuses = list(pool.map(save, range(6)))
+    assert sorted(statuses) == [200] + [409] * 5
+    after = admin.get(f"{BASE}/{view['id']}").json()
+    assert after["version"] == view["version"] + 1 and after["games"] == []

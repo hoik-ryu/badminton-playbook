@@ -1,0 +1,25 @@
+{
+  "format": "design-reference/v1",
+  "image_format": "png",
+  "id": "REF-004",
+  "path": "design-explore/references/REF-004/original.png",
+  "sha256": "527d31a8dff9514c0f991bb8c43a8ff079812780c54b4557d8f3d537fccd2d1a",
+  "bytes": 1294650,
+  "width": 1024,
+  "height": 1536,
+  "source": {
+    "kind": "user_file"
+  },
+  "rights": {
+    "basis": "own",
+    "statement": "사용자가 외부 이미지 생성 도구(ChatGPT)로 직접 제작한 청백전 생성 페이지 UI 시안(2026-11-24). 사용자 확인: '개인정보 없음 확인'. 이미지 속 문구·예시 데이터·알림·직접 추가 탭은 요구사항이 아님"
+  },
+  "privacy": {
+    "model": null,
+    "user": null
+  },
+  "tracked": false,
+  "added_at": "2026-11-24T07:14:39Z",
+  "withdrawn": null,
+  "extraction": null
+}

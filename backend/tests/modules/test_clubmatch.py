@@ -240,7 +240,11 @@ def test_u6_inactive_member_excluded_but_record_kept(admin: TestClient, db: Sess
     assert (top["wins"], top["rank"]) == (1, 1)
 
 
-def test_in_games_participant_cannot_be_removed(admin: TestClient, db: Session) -> None:
+def test_in_games_participant_change_needs_discard_confirm(admin: TestClient, db: Session) -> None:
+    """(B10 계약 변경, C-33) 대진에 든 사람을 빼려면 폐기 확인이 필요(이전: 409 in_games로 거부).
+
+    확인 없이는 아무것도 바뀌지 않고, 확인(discard)하면 대진을 버리고 참가자에서 뺌.
+    """
     us = [member(db, n) for n in ("가", "나", "다", "라")]
     view = create(admin)
     for u in us:
@@ -251,8 +255,13 @@ def test_in_games_participant_cannot_be_removed(admin: TestClient, db: Session) 
         f"{BASE}/{view['id']}/participants/{mkey(us[0])}",
         json={"participating": False, "version": view["version"]},
     )
-    assert (res.status_code, res.json()["error"]["code"]) == (409, "in_games")
+    assert (res.status_code, res.json()["error"]["code"]) == (409, "confirm_required")
     assert admin.get(f"{BASE}/{view['id']}").json()["version"] == view["version"]  # 그대로
+    after = admin.put(
+        f"{BASE}/{view['id']}/participants/{mkey(us[0])}",
+        json={"participating": False, "version": view["version"], "discard": True},
+    ).json()
+    assert after["games"] == [] and after["summary"]["count"] == 3
 
 
 # ── 방식·팀(AC-070·072) ──

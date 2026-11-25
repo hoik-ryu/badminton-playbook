@@ -3,6 +3,7 @@ import { createBrowserRouter, type RouteObject } from 'react-router'
 import { DevHealthPage } from '../pages/DevHealthPage'
 import { AccountStatusPage } from '../pages/AccountStatusPage'
 import { ClubMatchDetailPage } from '../pages/ClubMatchDetailPage'
+import { ClubMatchSetupPage } from '../pages/ClubMatchSetupPage'
 import { ApprovalsPage } from '../pages/ApprovalsPage'
 import { DevToolsPage } from '../pages/DevToolsPage'
 import { ForbiddenPage } from '../pages/ForbiddenPage'
@@ -66,6 +67,9 @@ export const routes: RouteObject[] = [
           { path: 'tutorial/stages/:stageId/result', handle: hideNav, element: <StageResultPage /> },
           { path: 'club-matches', element: <MemberClubMatchesPage /> },
           { path: 'club-matches/:matchId', element: <ClubMatchDetailPage /> }, // SCR-112 통합 상세(회원·운영진, UXD-085)
+          // (UX Spec r9) 청백전 생성 페이지 SCR-241–245(+ 시트 SCR-246): 운영진 전용, 탭바 숨김. 회원은 페이지가 SCR-004·SCR-112-ST5로 처리
+          { path: 'club-matches/new', handle: hideNav, element: <ClubMatchSetupPage /> },
+          { path: 'club-matches/:matchId/setup/:step?', handle: hideNav, element: <ClubMatchSetupPage /> },
           { path: 'me', element: <MyPage /> },
         ],
       },

@@ -90,3 +90,50 @@ describe('auth errors reach the screens as ApiError (api mode)', () => {
     }
   })
 })
+
+// (B10) 단계형 생성 API: 경로·메서드·본문(version, 확인했을 때만 discard)
+describe('club match setup API contract (api mode, B10)', () => {
+  it('[AC-123, AC-125, AC-127, AC-132, AC-134] basic·participants·teams·settings·games·delete requests', async () => {
+    const a = await import('./api')
+    await a.saveBasic('m1', 3, { name: '12월 청백전', date: '2026-12-13', method: 'team' })
+    await a.saveBasic('m1', 3, { name: '12월 청백전', date: '2026-12-13', method: 'individual' }, true)
+    await a.saveParticipants('m1', 3, ['member:u1', 'guest:g1'])
+    await a.saveParticipants('m1', 3, ['member:u1'], true)
+    await a.saveTeams('m1', 3, { 'member:u1': 'blue', 'guest:g1': 'white' })
+    await a.setSettings('m1', 3, { totalGames: 6, rules: { balance: true, gender: true } }, true)
+    await a.generateClub('m1', 3, { totalGames: 8, rules: { balance: false, gender: true } })
+    await a.setParticipating('m1', 3, 'member:u2', false, true)
+    await a.deleteClubMatch('m1', 3)
+    expect(calls.map((c) => `${c.method} ${c.path}`)).toEqual([
+      'PUT /api/club-matches/m1/basic',
+      'PUT /api/club-matches/m1/basic',
+      'PUT /api/club-matches/m1/participants',
+      'PUT /api/club-matches/m1/participants',
+      'PUT /api/club-matches/m1/teams',
+      'PUT /api/club-matches/m1/settings',
+      'POST /api/club-matches/m1/games',
+      'PUT /api/club-matches/m1/participants/member%3Au2',
+      'DELETE /api/club-matches/m1?version=3',
+    ])
+    expect(calls.map((c) => c.body)).toEqual([
+      { name: '12월 청백전', date: '2026-12-13', method: 'team', version: 3 },
+      { name: '12월 청백전', date: '2026-12-13', method: 'individual', version: 3, discard: true },
+      { keys: ['member:u1', 'guest:g1'], version: 3 },
+      { keys: ['member:u1'], version: 3, discard: true },
+      { assignments: { 'member:u1': 'blue', 'guest:g1': 'white' }, version: 3 },
+      { totalGames: 6, rules: { balance: true, gender: true }, version: 3, discard: true },
+      { version: 3, totalGames: 8, rules: { balance: false, gender: true } },
+      { participating: false, version: 3, discard: true },
+      undefined,
+    ])
+  })
+
+  it('[AC-123] server name rule error is read as the name field message', async () => {
+    const a = await import('./api')
+    vi.stubGlobal('fetch', vi.fn(async () => new Response(JSON.stringify({ error: { code: 'validation_error', message: 'Request validation failed', details: [{ type: 'value_error', loc: ['body', 'name'], msg: 'Value error, 이름은 30자 이내로 입력해 주세요' }] } }), { status: 422, headers: { 'Content-Type': 'application/json' } })))
+    const e = await a.saveBasic('m1', 3, { name: '가'.repeat(31), date: '2026-12-13', method: 'team' }).catch((x: unknown) => x)
+    expect(a.nameErrorOf(e)).toBe('이름은 30자 이내로 입력해 주세요')
+    expect(a.nameProblem('  ')).toBe('이름을 입력해 주세요')
+    expect(a.nameProblem(` ${'가'.repeat(30)} `)).toBeNull()
+  })
+})

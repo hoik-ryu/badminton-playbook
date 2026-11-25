@@ -1,0 +1,173 @@
+{
+ "format": "design-reference-extract/v1",
+ "ref": "REF-005",
+ "sha256": "d8b9a7fb64e730c59dc693b1127e0fd990fe345cf8111c5aa325e3547cef4d0a",
+ "extracted_by": {
+  "model": "claude-opus-5-5",
+  "at": "2026-11-24",
+  "method": "이미지를 직접 보고 작성. 색은 로컬에서 3×3 픽셀 평균을 측정(외부 서비스로 보내지 않음). 위치는 원본 픽셀 좌표"
+ },
+ "scope_note": "청백전 생성 페이지 참가자 설정·팀 구성 방식·팀 구성 미리보기·확인(SCR-242·243·245) 시안 4화면 묶음",
+ "items": [
+  {
+   "id": "RX-005-01",
+   "axis": "layout",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "4화면 모두 같은 틀(머리글·히어로·진행 표시·내용·하단 주 버튼)을 쓰고, 2단계부터 히어로 제목이 짧은 단계 이름이다",
+   "evidence": "각 화면 위쪽 y≈60–300(원본 1240×1269 묶음)"
+  },
+  {
+   "id": "RX-005-02",
+   "axis": "navigation",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "완료한 단계는 옅은 테두리 원 안 체크로, 현재 단계는 채운 원 + 숫자로 표시한다",
+   "evidence": "참가자 설정 화면 진행 표시"
+  },
+  {
+   "id": "RX-005-03",
+   "axis": "components",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "참가자 목록은 흰 카드 안 행 + 구분선이고, 행은 원형 아바타·이름·오른쪽 체크박스다. 목록 위에 검색칸과 '전체 회원 (n)'·'전체 선택'이 있다",
+   "evidence": "참가자 설정 화면 y≈370–730"
+  },
+  {
+   "id": "RX-005-04",
+   "axis": "palette",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "체크된 체크박스는 청록 채움 + 흰 체크다",
+   "evidence": "(280,478) 측정",
+   "value": "#2CB29E"
+  },
+  {
+   "id": "RX-005-05",
+   "axis": "components",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "선택 인원 요약 줄('선택된 참가자 n명' + '수정')이 목록 아래, 주 버튼 위에 있다",
+   "evidence": "참가자 설정 화면 y≈745–787"
+  },
+  {
+   "id": "RX-005-06",
+   "axis": "components",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "팀 구성 방식은 아이콘이 있는 선택 버튼 2개(자동 배정·직접 구성)이고, 아래 옅은 회색 안내 상자(반짝임 아이콘)가 있다",
+   "evidence": "두 번째 화면 y≈330–470, 안내 면 (600,460) #EFF4F6",
+   "value": "#EFF4F6"
+  },
+  {
+   "id": "RX-005-07",
+   "axis": "components",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "팀 구성 미리보기는 팀마다 둥근 카드(팀 이름 + 인원 + 아바타 겹침 줄 + '+n')다. 청팀 카드는 옅은 파랑 면",
+   "evidence": "청팀 카드 면 (900,400)",
+   "value": "#ECF5FD"
+  },
+  {
+   "id": "RX-005-08",
+   "axis": "palette",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "백팀 카드는 옅은 보라 면이다",
+   "evidence": "백팀 카드 면 (900,520)",
+   "value": "#F7F1FD"
+  },
+  {
+   "id": "RX-005-09",
+   "axis": "components",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "확인 화면은 흰 카드 안 행 목록(왼쪽 아이콘 + 항목 이름, 오른쪽 값)이고, 그 아래 옅은 민트 안내 상자 + 체크 원 아이콘, 마지막 버튼은 체크 아이콘 + 글자다",
+   "evidence": "네 번째 화면 y≈315–725"
+  },
+  {
+   "id": "RX-005-10",
+   "axis": "palette",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "이 묶음의 주 버튼은 기본정보 시안보다 진한 청록이다",
+   "evidence": "(1000,836) 측정",
+   "value": "#10A292"
+  }
+ ],
+ "excluded": [
+  {
+   "kind": "text",
+   "note": "이미지 속 문구('다음 단계로', '확인', '청백전 생성하기', '일시(날짜)', '토너먼트(3전 2선승)', '생성 후에도 일부 설정은 수정할 수 있어요' 등)는 요구사항이 아님. 승인된 02의 문구를 씀"
+  },
+  {
+   "kind": "feature",
+   "note": "머리글 종(알림) 아이콘과 '직접 추가' 탭은 기획에 없는 기능이라 옮기지 않음"
+  },
+  {
+   "kind": "logo",
+   "note": "이미지 속 SMAPSH 로고는 쓰지 않고 기존 브랜드 심볼·워드마크 자산을 씀"
+  },
+  {
+   "kind": "photo",
+   "note": "셔틀콕 그림은 이미지에서 잘라 쓰지 않고 기존 자산 AST-046을 씀"
+  },
+  {
+   "kind": "person",
+   "note": "얼굴 사진 아바타는 가상 인물이며 옮기지 않음. 제품은 이름 첫 글자 아바타"
+  },
+  {
+   "kind": "data",
+   "note": "이름·인원·날짜는 예시 데이터"
+  }
+ ],
+ "system_candidates": {
+  "tokens": [
+   {
+    "role": "color.team.blue.bg",
+    "value": "#ECF5FD",
+    "from": [
+     "RX-005-07"
+    ],
+    "status": "candidate"
+   }
+  ],
+  "components": [
+   {
+    "pattern": "참가자 행(CMP-024)",
+    "rule": "원형 아바타 + 이름 + 오른쪽 체크박스, 흰 카드 안 구분선",
+    "from": [
+     "RX-005-03",
+     "RX-005-04"
+    ],
+    "status": "candidate"
+   },
+   {
+    "pattern": "팀 현황(CMP-028 teamBalance)",
+    "rule": "팀마다 둥근 카드에 팀 이름·인원·아바타 겹침",
+    "from": [
+     "RX-005-07"
+    ],
+    "status": "candidate"
+   },
+   {
+    "pattern": "확정 요약(CMP-056)",
+    "rule": "흰 카드 안 아이콘 + 항목 이름 + 오른쪽 값 행",
+    "from": [
+     "RX-005-09"
+    ],
+    "status": "candidate"
+   }
+  ],
+  "layout_principles": [
+   {
+    "screen_type": "list",
+    "principle": "선택 요약 줄을 목록 아래·주 버튼 위에 둠",
+    "from": [
+     "RX-005-05"
+    ],
+    "status": "candidate"
+   }
+  ]
+ }
+}

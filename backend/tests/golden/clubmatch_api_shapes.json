@@ -4,6 +4,13 @@
    "details": true,
    "status": 404
   },
+  "confirm_required": {
+   "details": {
+    "games": true,
+    "teams": true
+   },
+   "status": 409
+  },
   "conflict": {
    "details": {
     "games": [
@@ -20,10 +27,6 @@
   "forbidden": {
    "details": true,
    "status": 403
-  },
-  "in_games": {
-   "details": true,
-   "status": 409
   },
   "locked": {
    "details": true,
@@ -58,12 +61,24 @@
    "status": 409
   },
   "not_eligible": {
-   "details": true,
+   "details": {
+    "keys": [
+     true
+    ]
+   },
    "status": 422
   },
   "not_found": {
    "details": true,
    "status": 404
+  },
+  "not_participant": {
+   "details": {
+    "keys": [
+     true
+    ]
+   },
+   "status": 422
   },
   "same_matchup": {
    "details": {
@@ -75,6 +90,14 @@
     ]
    },
    "status": 409
+  },
+  "unassigned": {
+   "details": {
+    "keys": [
+     true
+    ]
+   },
+   "status": 422
   },
   "unauthenticated": {
    "details": true,

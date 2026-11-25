@@ -1,4 +1,5 @@
-// I3-d4 청백전 실제 API 모드 E2E(SCR-111·112 통합 목록·상세 + 운영 시트 SCR-222·224–226, SCR-121 마이페이지, 명단 게스트 추가·삭제)
+// I3-d4 청백전 실제 API 모드 E2E(SCR-111·112 통합 목록·상세 + 운영 시트 SCR-224–226, SCR-121 마이페이지, 명단 게스트 추가·삭제)
+// (B12) 만들기~확정은 생성 페이지(SCR-241 기본정보 → 242 참가자 → 244 대진 → 245 확정, 개인전)로. 이전 만들기 시트(SCR-222)·상세 확정 전 영역(ST9–ST12)은 제거됨
 // (청백전 4단계) 주소를 /club-matches…로 옮김. 이전 /ops/club-matches… 리다이렉트도 확인(legacy-redirect, page-redirects-to-login)
 // 준비: API 모드 Vite(BASE, 기본 http://localhost:5174, API_PROXY_TARGET=별도 백엔드) + 백엔드(개발용 운영진 로그인 켬) + 마이그레이션된 임시 DB
 // (5-B1) 실제 회원 세션(권한·공개 데이터), 360·390·1440, D-1 긴 이름·두 자리 점수 겹침, D-2 잘못된 주소 식별자(ST5)
@@ -83,31 +84,37 @@ for (const vp of [{ n: 'm360', w: 360, h: 640, m: true }, { n: 'm390', w: 390, h
   const g2 = (await A.send('POST', '/api/roster/guests', { name: `E${RUN}${vp.n}미참가`, gender: '남', grade: '초심', score: 5 })).body
   check(r, 'guest-add', !!g1?.id && !!g2?.id)
 
-  // ── 만들기(SCR-222) → 참가자(SCR-224) → 점수(SCR-214) → 대진 생성 → 확정 ──
+  // ── 생성 페이지(B12): 기본정보(SCR-241) → 참가자(SCR-242) + 점수(SCR-214) → 대진(SCR-244) → 확정(SCR-245) ──
+  const waitSt = (id) => page.waitForSelector(`.su[data-st="${id}"]`, { timeout: 8000 })
+  const next = async () => { await page.waitForSelector('[data-testid=su-next]:not([disabled])', { timeout: 8000 }); await page.locator('[data-testid=su-next]').click() }
   await page.goto(BASE + '/club-matches'); await page.waitForSelector('[data-scr=SCR-111]:not([data-st=SCR-111-ST2])')
-  await page.locator('[data-testid=cm-create]').click(); await page.waitForSelector('[data-testid=create-sheet]')
-  await page.locator('[data-testid=create-sheet] input[name=name]').fill(`E2E ${RUN}`); await page.locator('[data-testid=create-sheet] [role=radio]', { hasText: '개인전' }).click()
-  await page.locator('[data-testid=create-sheet] button', { hasText: /^만들기$/ }).click(); await page.waitForURL(/\/club-matches\/[0-9a-f-]{36}$/)
-  const id = page.url().split('/').pop(); r.info.matchId = id
-  await page.waitForSelector(panel)
-  for (const n of [me.name, ...names, unscored, g1.name]) { await page.locator(`${panel} [role=checkbox]`, { hasText: n }).or(page.getByRole('checkbox', { name: new RegExp(`^${n},`) })).first().click(); await page.waitForTimeout(250) }
-  await page.waitForTimeout(500)
+  await page.locator('[data-testid=cm-create]').click(); await page.waitForURL(BASE + '/club-matches/new')
+  await page.getByRole('radio', { name: '개인전' }).click()
+  await page.getByRole('textbox', { name: '청백전 이름' }).fill(`E2E ${RUN}`)
+  await next(); await page.waitForURL(/\/setup\/participants$/)
+  const id = page.url().split('/')[4]; r.info.matchId = id
+  check(r, 'created-draft', (await A.get(`/api/club-matches/${id}`)).status === 'draft')
+  await waitSt('SCR-242-ST1')
+  for (const n of [me.name, ...names, unscored, g1.name]) await page.getByRole('checkbox', { name: new RegExp(`^${n},`) }).click()
+  await waitSt('SCR-242-ST7') // 점수 미설정 포함 → 다음 비활성
+  check(r, 'next-blocked-unscored', await page.locator('[data-testid=su-next]').isDisabled())
+  await shot(page, `${vp.n}-1-participants.png`)
+  await page.getByRole('button', { name: /점수 미설정 1명, 점수 매기기/ }).click(); await page.waitForSelector('[data-testid=score-sheet]')
+  await page.locator('[data-testid=score-sheet] [role=radio]', { hasText: /^5$/ }).first().click()
+  await page.waitForSelector('[data-testid=score-sheet]', { state: 'detached', timeout: 8000 })
+  check(r, 'score-entry-api', (await A.get('/api/roster')).members.find((x) => x.name === unscored)?.score === 5)
+  await next(); await page.waitForURL(/\/setup\/games$/)
   let v = await A.get(`/api/club-matches/${id}`)
-  check(r, 'participants', v.summary.count === 8, { count: v.summary.count })
-  await shot(page, `${vp.n}-1-panel.png`)
-  await page.locator(`${panel} button`, { hasText: '점수 미설정' }).click(); await page.waitForSelector('[data-testid=score-sheet]')
-  await page.locator('[data-testid=score-sheet] [role=radiogroup]').first().locator('[role=radio]', { hasText: /^5$/ }).click()
-  await page.waitForSelector('[data-testid=score-sheet]', { state: 'detached', timeout: 5000 }).catch(() => {})
-  v = await A.get(`/api/club-matches/${id}`)
-  check(r, 'score-entry-api', v.summary.unscored.length === 0 && (await A.get('/api/roster')).members.find((x) => x.name === unscored)?.score === 5)
-  await page.locator(`${panel} button[aria-label=닫기]`).click(); await page.waitForTimeout(400)
-  await vis(page, 'input[type=number]').fill('6'); await page.waitForTimeout(700)
-  await vis(page, 'button', { hasText: '대진 생성' }).click(); await page.waitForSelector('[data-cmp=CMP-041]'); await page.waitForTimeout(500)
+  check(r, 'participants', v.summary.count === 8 && v.summary.unscored.length === 0, { count: v.summary.count })
+  await page.getByRole('textbox', { name: '총 경기 수' }).fill('6')
+  await page.locator('[data-testid=su-generate]').click(); await waitSt('SCR-244-ST7')
   v = await A.get(`/api/club-matches/${id}`)
   check(r, 'generated', v.games.length === 6 && v.totalGames === 6, { games: v.games.length })
-  check(r, 'long-names-no-overlap-ST12', (await nameOverlaps(page)).length === 0, await nameOverlaps(page))
-  check(r, 'no-lonely-separator-ST12', (await lonelySeparators(page)).length === 0, await lonelySeparators(page))
-  await vis(page, 'button', { hasText: /^확정$/ }).click(); await page.locator('[role=alertdialog] button', { hasText: '확정' }).click(); await page.waitForTimeout(800)
+  check(r, 'hscroll-SCR-244', !(await hScroll(page)))
+  await shot(page, `${vp.n}-1-games.png`)
+  await next(); await page.waitForURL(/\/setup\/confirm$/); await waitSt('SCR-245-ST1')
+  await next(); await page.locator('[role=alertdialog] button', { hasText: '확정' }).click()
+  await page.waitForURL((u) => u.pathname === `/club-matches/${id}`); await page.waitForSelector('[data-testid=ops-area] [data-cmp=CMP-041]'); await page.waitForTimeout(400)
   v = await A.get(`/api/club-matches/${id}`)
   check(r, 'confirmed', v.status === 'confirmed'); check(r, 'hscroll-confirmed', !(await hScroll(page)))
   // D-1(ST13): 결과 버튼이 붙은 팀 줄에서도 긴 이름·두 자리 점수가 팀 합·결과 버튼을 침범하지 않음
@@ -240,6 +247,14 @@ for (const vp of [{ n: 'm360', w: 360, h: 640, m: true }, { n: 'm390', w: 390, h
   check(r, 'member-pending-not-found', (await mp.locator('[data-scr=SCR-112]').getAttribute('data-st')) === 'SCR-112-ST5')
   for (const p of ['/ops/club-matches', `/ops/club-matches/${id}`]) { await mp.goto(BASE + p); await mp.waitForURL((u) => u.pathname === '/forbidden', { timeout: 5000 }).catch(() => {}); check(r, `member-legacy-forbidden${p.endsWith('matches') ? '' : '-detail'}`, new URL(mp.url()).pathname === '/forbidden', mp.url()) }
   await mctx.close()
+  // (B12) 준비 중 청백전 재진입 → 계산된 단계(참가자 0명 → 참가자 설정) → 더보기 삭제(SCR-241-ST10)
+  await page.goto(BASE + '/club-matches'); await page.locator(`a[data-match="${pendingId}"]`).click(); await page.waitForURL((u) => u.pathname === `/club-matches/${pendingId}/setup/participants`, { timeout: 8000 }).catch(() => {})
+  check(r, 'resume-participants', new URL(page.url()).pathname === `/club-matches/${pendingId}/setup/participants`, page.url())
+  await page.goto(BASE + `/club-matches/${pendingId}/setup/basic`); await page.getByRole('button', { name: '더보기: 청백전 삭제' }).click()
+  await page.locator('[role=alertdialog] button', { hasText: '삭제' }).click(); await page.waitForURL(BASE + '/club-matches')
+  check(r, 'delete-draft', (await page.request.get(BASE + `/api/club-matches/${pendingId}`)).status() === 404)
+  const delConfirmed = await A.send('DELETE', `/api/club-matches/${id}?version=${(await A.get(`/api/club-matches/${id}`)).version}`)
+  check(r, 'delete-confirmed-blocked', delConfirmed.status === 409 && delConfirmed.body.error.code === 'locked', delConfirmed)
   const aTabs = await page.evaluate(() => [...document.querySelectorAll('nav[aria-label="주 메뉴"] a')].length)
   check(r, 'admin-tabs-4', aTabs === 4, aTabs)
 

@@ -16,13 +16,11 @@
   line-height: 1;
   white-space: nowrap;
 }
-.cm .cm-badge[data-tone="live"] {
-  background: var(--color-action-strong);
-  color: var(--color-action-onStrong);
+.cm .cm-badge[data-tone='live'] {
+  background: var(--color-action-strong); color: var(--color-action-onStrong);
 } /* 5.79:1 */
-.cm .cm-badge[data-tone="upcoming"] {
-  background: var(--color-accent-subtle);
-  color: var(--color-text-accent);
+.cm .cm-badge[data-tone='upcoming'] {
+  background: var(--color-accent-subtle); color: var(--color-text-accent);
 } /* 4.64:1 */
 .cm .cm-badge[data-tone="pending"] {
   background: var(--color-bg-page);
@@ -62,9 +60,7 @@
    대결 그래픽(VS·팀 띠·월계수·셔틀)은 이미지에 있으므로 다시 만들지 않음. 글자 크기는 배너 폭 기준(cqw). 이미지가 없으면 hero.bg 바탕 + 글자만 */
 /* (VD-052 r11, Preview r7) 배너 모서리: 이미지(AST-082)의 둥근 모서리(반경 = 이미지 폭의 5.2305%, 88.5/1692)와 같게 해 투명 모서리 바깥 바탕이 비치지 않음.
    반경을 배너 자신의 폭으로 쓰려고 바깥 감싸개를 크기 기준(container)으로 둠. 좁은 배너는 위쪽이 글자 띠라 radius.md, 이미지가 닿는 아래쪽만 이미지 반경 */
-.cm .cm-hero-wrap {
-  container-type: inline-size;
-}
+.cm .cm-hero-wrap { container-type: inline-size; }
 .cm .cm-hero {
   position: relative;
   border-radius: var(--radius-md) var(--radius-md) 5.2305cqw 5.2305cqw;
@@ -114,8 +110,7 @@
   font-size: 3.16cqw;
   font-weight: var(--font-weight-bold);
   letter-spacing: 0.01em;
-  background: var(--color-action-strong);
-  color: var(--color-action-onStrong);
+  background: var(--color-action-strong); color: var(--color-action-onStrong);
   box-shadow: inset 0 0 0 1px
     color-mix(in srgb, var(--color-accent-mint) 55%, transparent);
 }
@@ -199,8 +194,7 @@
   gap: 6px;
   border: 0;
   border-radius: var(--radius-md);
-  background: var(--color-action-primary);
-  color: var(--color-action-onPrimary);
+  background: var(--color-action-primary); color: var(--color-action-onPrimary);
   font: inherit;
   font-size: 15px;
   font-weight: var(--font-weight-bold);

@@ -73,12 +73,15 @@ report = { format = "junit-xml", file = "fe.xml" }
 # 출처: Makefile test-fe — Frontend 단위 테스트(vitest run)
 
 [[verify.steps]]
-name = "make-test-db"
+name = "test-db"
 stage = "db"
-run = "make test-db"
+run = "sh scripts/test-db-temp.sh"
 cwd = "."
-requires = ["docker"]
-# 출처: Makefile — 실제 PostgreSQL 연동 테스트 (Docker 필요). compose 내부 DB(db)만 TEST_DATABASE_URL로 허용
+requires = ["test-pg"]
+report = { format = "junit-xml", file = "db.xml" }
+# (사용자 결정 2026-11-25 "임시 PostgreSQL로 변경 (권장)", 계획 r5) 이전 단계 make-test-db(make test-db = Docker compose db 대상)를 교체.
+# 격리 임시 PostgreSQL(기본 127.0.0.1:55433/smapsh_test, 저장소 밖 데이터 폴더)에 매번 테스트 DB를 새로 만들고 alembic head → pytest -m db.
+# 개발 DB(5432·compose db)·smapsh·Neon은 dbguard가 연결 전에 거부. 서버가 떠 있을 때만 verify --available test-pg로 실행(없으면 not_run)
 
 [[verify.steps]]
 name = "make-lint"

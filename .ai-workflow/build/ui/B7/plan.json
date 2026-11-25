@@ -1,7 +1,7 @@
 {
   "format": "pb-ui-plan/v1",
   "batch": "B7",
-  "brief_digest": "304805ef2557f97b4397cd7f8e68b181da326503ec0e61d12fa1b694cd174e39",
+  "brief_digest": "98981a4e4bb243ba85601c938ce1173da9509cad73eca1e275088ce7be90e5cc",
   "screens": {},
   "components": {
     "CMP-021": {
@@ -29,6 +29,7 @@
     "B7은 화면을 소유하지 않아(touches 12) Brief screens가 비어 있고, 소유 화면·CMP에 묶인 VD-021·024·025가 Brief에 포함되지 않음. 구현 기준은 승인된 07 r2 원문(VD-021 600px 열·좌우 16, VD-024 카드 테두리·그림자 없음, VD-025 하단 시트·딤 임시값)과 04 r2 CMP-021·025·026·030, 04 3.1.",
     "AC-050(SCR-101-ST1, SCR-121-ST1)은 B2 소유 화면의 상태라 이 Plan의 states로 연결할 수 없음. [AC-050] 태그 테스트로만 증거를 만든다.",
     "새 CMP·토큰 없음. 승인된 프리뷰는 시각 참고만(코드 import·복사 안 함).",
-    "(2026-11-17) Design Direction r3 VD-021 변경 반영: 열 바깥 color.bg.surface, 열 color.bg.page + 그림자 elevation.card(shells.css --app-outer-bg·--app-column-shadow)."
+    "(2026-11-17) Design Direction r3 VD-021 변경 반영: 열 바깥 color.bg.surface, 열 color.bg.page + 그림자 elevation.card(shells.css --app-outer-bg·--app-column-shadow).",
+    "(2026-11-25, B12 회귀 재검증) Brief를 계획 r6·DD r12·UX Spec r9 기준으로 다시 만듦. 이 Plan은 화면 없이 CMP-021·025·026·030 재사용만 가리키며 해당 파일이 그대로라 내용 변경 없음(digest만 갱신). SCR-223 참조는 계획 r6에서 SCR-112로 바뀜."
   ]
 }

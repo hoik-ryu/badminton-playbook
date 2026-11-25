@@ -1,7 +1,7 @@
 // 청백전 Mock 브라우저 회귀(현재 통합 화면 SCR-111 목록·SCR-112 상세, UX Spec r6) — 5-B2
 // 이전 check-b4.mjs(B4 당시 SCR-221·223 화면 기록)는 그대로 두고, 현재 화면은 이 스크립트로 확인합니다. 실제 API 검증은 check-clubmatch-api.mjs.
-// 흐름(운영진): 목록 → '새 청백전'(SCR-222, 빈 이름 오류) → 통합 상세 ST9(참가자 시트 자동) → 팀 구성·점수(SCR-214) → 총 경기 수·균등안 → 대진 생성(ST12)
-//   → 다시 생성 → 교체(SCR-225) → 확정(ST13, 종료 비활성 + 'n경기 남음') → 결과 입력 → 되돌리기 → 확정 후 교체('변경됨') → 종료(ST14, 최종 결과)
+// 흐름(운영진, B12 생성 페이지): 목록 → '새 청백전'(SCR-241, 빈 이름 → 다음 비활성) → 팀전 → 참가자(SCR-242)·점수(SCR-214) → 팀 구성(SCR-243)
+//   → 대진(SCR-244) 생성 → 다시 생성 → 교체(SCR-225) → 나가기 → 목록 재진입(계산된 단계 = 확정) → 확정(SCR-245 → SCR-112 ST13, 종료 비활성 + 'n경기 남음') → 결과 입력 → 되돌리기 → 확정 후 교체('변경됨') → 종료(ST14, 최종 결과)
 //   → cm-1 중도 귀가(SCR-226) / 권한·주소: 구 주소 리다이렉트(쿼리 유지), 회원·비로그인 차단, 회원 준비 중 404, 잘못된 주소 ST5 / 하단 탭 3·4
 // 사용: Mock 개발 서버(VITE_DATA_SOURCE=mock)를 띄운 뒤 BASE=http://localhost:5173 OUT=<결과 폴더> node experiments/frontend-layout/check-clubmatch-mock.mjs
 //   (Mock 저장소는 브라우저 localStorage만 씀. 서버·DB에 쓰지 않음)
@@ -38,47 +38,57 @@ for (const vp of [{ n: 'm360', w: 360, h: 640, m: true }, { n: 'm390', w: 390, h
   check('list-SCR-111', (await st(page)).scr === 'SCR-111' && (await page.locator('a[data-match=cm-2]').count()) === 1)
   check('admin-tabs-4', (await tabs(page)).length === 4 && (await tabs(page))[1][1] === 'page', await tabs(page))
   check('hscroll-list', !(await hScroll(page))); await shot('1-list')
-  // 2. 만들기(SCR-222): 빈 이름 오류 → 팀전 → 통합 상세 ST9 + 참가자 시트 자동
-  await page.locator('[data-testid=cm-create]').click(); await page.waitForSelector('[data-testid=create-sheet]')
-  await page.locator('[data-testid=create-sheet] button', { hasText: /^만들기$/ }).click(); await page.waitForTimeout(300)
-  check('create-name-error', (await page.locator('[data-testid=create-sheet]', { hasText: '이름을 입력해 주세요' }).count()) === 1)
-  await page.locator('[data-testid=create-sheet] input[name=name]').fill('브라우저 청백전'); await page.locator('[data-testid=create-sheet] [role=radio]', { hasText: '팀전' }).click()
-  await page.locator('[data-testid=create-sheet] button', { hasText: /^만들기$/ }).click(); await page.waitForSelector(panel, { timeout: 5000 }); await page.waitForTimeout(400)
-  check('created-ST9-panel', /^\/club-matches\/cm-/.test(new URL(page.url()).pathname) && (await st(page)).st === 'SCR-112-ST9', await st(page))
-  // 3. 참가자·팀 구성 + 점수 미설정(SCR-214)
-  const groups = page.locator(`${panel} ul[aria-label=회원] [role=radiogroup]`)
-  for (let i = 0; i < 8; i++) { await groups.nth(i).locator('[role=radio]', { hasText: i % 2 ? '백' : '청' }).click(); await page.waitForTimeout(120) }
-  await page.locator(`${panel} ul[aria-label=게스트] [role=radiogroup]`).first().locator('[role=radio]', { hasText: '청' }).click(); await page.waitForTimeout(300)
-  if (await page.locator(`${panel} button`, { hasText: '점수 미설정' }).count()) {
-    await page.locator(`${panel} button`, { hasText: '점수 미설정' }).click(); await page.waitForSelector('[data-testid=score-sheet]')
+  // 2. 생성 페이지(SCR-241): 이름이 비면 다음 비활성 → 팀전 → 만들기 → 참가자(SCR-242)
+  const waitSt = (id) => page.waitForSelector(`.su[data-st="${id}"]`, { timeout: 8000 }).catch(() => {})
+  const next = async () => { await page.waitForSelector('[data-testid=su-next]:not([disabled])', { timeout: 8000 }); await page.locator('[data-testid=su-next]').click() }
+  await page.locator('[data-testid=cm-create]').click(); await page.waitForURL((u) => u.pathname === '/club-matches/new')
+  await page.getByRole('radio', { name: '팀전' }).click()
+  await page.locator('[data-testid=su-next]').click(); await page.waitForTimeout(300)
+  check('create-name-required', new URL(page.url()).pathname === '/club-matches/new' && (await page.locator('.su', { hasText: '이름을 입력해 주세요' }).count()) === 1 && newest(await db(page)) === undefined)
+  await page.getByRole('textbox', { name: '청백전 이름' }).fill('브라우저 청백전')
+  await next(); await page.waitForURL(/\/setup\/participants$/)
+  const cid = page.url().split('/')[4]
+  check('created-setup-242', /^cm-/.test(cid) && newest(await db(page))?.status === 'draft', cid)
+  check('setup-no-tabbar', (await page.locator('nav[aria-label="주 메뉴"]').count()) === 0)
+  // 3. 참가자 9명 + 점수 미설정(SCR-214)
+  await waitSt('SCR-242-ST1')
+  const boxes = page.getByRole('checkbox', { name: /, (\d+점|점수 미설정)$/ }) // '표시된 n명 모두 선택' 제외, 사람 행만
+  for (let i = 0; i < 9; i++) { await boxes.nth(i).click(); await page.waitForTimeout(60) }
+  for (let k = 0; k < 9 && (await page.getByRole('button', { name: /점수 미설정 \d+명, 점수 매기기/ }).count()); k++) {
+    await page.getByRole('button', { name: /점수 미설정 \d+명, 점수 매기기/ }).click(); await page.waitForSelector('[data-testid=score-sheet]')
     const rg = await page.locator('[data-testid=score-sheet] [role=radiogroup]').count()
     for (let i = 0; i < rg; i++) { await page.locator('[data-testid=score-sheet] [role=radiogroup]').nth(i).locator('[role=radio]', { hasText: /^5$/ }).click(); await page.waitForTimeout(400) }
     await page.waitForSelector('[data-testid=score-sheet]', { state: 'detached', timeout: 4000 }).catch(() => {})
   }
+  check('hscroll-242', !(await hScroll(page))); await shot('2-242')
+  await next(); await page.waitForURL(/\/setup\/teams$/); await waitSt('SCR-243-ST7')
+  // 4. 팀 구성(SCR-243) → 대진(SCR-244)
+  check('hscroll-243', !(await hScroll(page))); await shot('2-243')
+  await next(); await page.waitForURL(/\/setup\/games$/)
   const parts = Object.values(newest(await db(page)).participants)
-  check('participants-teams', parts.length >= 9 && parts.every((p) => p.team), { n: parts.length })
-  await page.locator(`${panel} button[aria-label=닫기]`).click(); await page.waitForTimeout(400)
-  // 4. 대진 설정(총 경기 수 → 균등안) → 대진 생성(ST12)
-  await vis(page, 'input[type=number]').fill('7'); await page.waitForTimeout(500)
-  const prop = page.locator('button', { hasText: /경기 · 모두/ }).first(); if (await prop.count()) { await prop.click(); await page.waitForTimeout(400) }
-  await page.getByRole('button', { name: '대진 생성' }).click()
-  await page.waitForFunction(() => document.querySelector('[data-testid=ops-area]')?.dataset.st === 'SCR-112-ST12', null, { timeout: 8000 }).catch(() => {})
+  check('participants-teams', parts.length === 9 && parts.every((p) => p.team), { n: parts.length })
+  await page.getByRole('textbox', { name: '총 경기 수' }).fill('7')
+  await page.locator('[data-testid=su-generate]').click(); await waitSt('SCR-244-ST7')
   const g1 = newest(await db(page))
-  check('generated-ST12', (await st(page)).ops === 'SCR-112-ST12' && g1.games.length === g1.totalGames && g1.games.length > 0, { st: await st(page), games: g1.games.length })
-  check('hscroll-ST12', !(await hScroll(page))); await shot('2-ST12')
+  check('generated-244', g1.games.length === 7 && g1.totalGames === 7, { games: g1.games.length })
+  check('hscroll-244', !(await hScroll(page))); await shot('2-244')
   // 5. 다시 생성(새 시드)
-  await page.getByRole('button', { name: '다시 생성' }).click(); await page.waitForTimeout(1200)
+  await page.getByRole('button', { name: /다시 생성/ }).click(); await page.waitForTimeout(1000)
   check('regenerated', newest(await db(page)).seed !== g1.seed)
   // 6. 교체(SCR-225, 확정 전)
   const before = JSON.stringify(newest(await db(page)).games)
-  await page.locator('[data-testid=ops-area] [data-cmp=CMP-041] button[aria-label$=교체]').first().click(); await page.waitForSelector('[data-testid=club-swap-sheet]')
+  await page.getByRole('button', { name: /^1경기 .* 교체$/ }).first().click(); await page.waitForSelector('[data-testid=club-swap-sheet]')
   const cand = page.locator('[data-testid=club-swap-sheet] [data-cmp=CMP-044] button:not([aria-disabled])').first()
   if (await cand.count()) { await cand.click(); await page.waitForTimeout(400); if (await page.locator('[role=alertdialog]').count()) await page.locator('[role=alertdialog] button', { hasText: '바꾸기' }).click(); await page.waitForTimeout(600) }
   else await page.locator('[data-testid=club-swap-sheet] button[aria-label=닫기]').click()
   await page.waitForSelector('[data-testid=club-swap-sheet]', { state: 'detached', timeout: 4000 }).catch(() => {})
   check('swap-before-confirm', JSON.stringify(newest(await db(page)).games) !== before && (await page.locator('[data-testid=club-swap-sheet]').count()) === 0)
-  // 7. 확정 → ST13, 종료 비활성 + 'n경기 남음'
-  await page.getByRole('button', { name: '확정' }).click(); await page.locator('[role=alertdialog] button', { hasText: '확정' }).click(); await page.waitForTimeout(800)
+  // 7. 나가기 → 목록 재진입(계산된 단계 = 확정, AC-131) → 확정 → SCR-112 ST13, 종료 비활성 + 'n경기 남음'
+  await page.getByRole('button', { name: '나가기(청백전 목록)' }).click(); await page.waitForURL((u) => u.pathname === '/club-matches')
+  await page.locator(`a[data-match="${cid}"]`).click(); await page.waitForURL(/\/setup\/confirm$/, { timeout: 8000 }).catch(() => {})
+  check('resume-confirm', page.url().endsWith(`/${cid}/setup/confirm`), page.url())
+  await next(); await page.locator('[role=alertdialog] button', { hasText: '확정' }).click()
+  await page.waitForURL((u) => u.pathname === `/club-matches/${cid}`); await page.waitForSelector('[data-testid=ops-area]'); await page.waitForTimeout(600)
   check('confirmed-ST13', newest(await db(page)).status === 'confirmed' && (await st(page)).ops === 'SCR-112-ST13' && (await page.locator('[data-testid=public-area]').count()) === 1)
   check('finish-disabled-left', (await page.getByRole('button', { name: '청백전 종료' }).isDisabled()) && (await page.getByRole('button', { name: /경기 남음$/ }).count()) === 1)
   // 8. 결과 입력(마지막 경기 남김) → 되돌리기 → 다시 기록
@@ -126,6 +136,13 @@ for (const vp of [{ n: 'm360', w: 360, h: 640, m: true }, { n: 'm390', w: 390, h
   for (const p of ['/ops/club-matches', '/ops/club-matches/cm-1']) { await page.goto(BASE + p); await page.waitForURL((u) => u.pathname === '/forbidden', { timeout: 5000 }).catch(() => {}); check(`member-legacy-forbidden ${p}`, new URL(page.url()).pathname === '/forbidden') }
   await page.goto(BASE + '/ops/club-matches/cm-1?as=guest'); await page.waitForURL((u) => u.pathname === '/login', { timeout: 5000 }).catch(() => {})
   check('guest-legacy-login', new URL(page.url()).pathname === '/login')
+  // 11-1. 준비 중 cm-2: 상세 주소 → 생성 페이지로, 기본정보 더보기 → 삭제(SCR-241-ST10, AC-134)
+  await page.goto(BASE + '/club-matches?as=admin'); await ready(page)
+  await page.goto(BASE + '/club-matches/cm-2'); await page.waitForURL(/\/club-matches\/cm-2\/setup\/\w+$/, { timeout: 8000 }).catch(() => {})
+  check('draft-detail-to-setup', /\/club-matches\/cm-2\/setup\/\w+$/.test(new URL(page.url()).pathname), page.url())
+  await page.goto(BASE + '/club-matches/cm-2/setup/basic'); await page.getByRole('button', { name: '더보기: 청백전 삭제' }).click()
+  await page.locator('[role=alertdialog] button', { hasText: '삭제' }).click(); await page.waitForURL((u) => u.pathname === '/club-matches')
+  check('delete-draft', !(await db(page)).clubMatches.some((m) => m.id === 'cm-2'))
   check('no-console-errors', errors.length === 0, errors)
   await ctx.close()
 }

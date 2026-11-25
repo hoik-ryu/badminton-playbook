@@ -258,7 +258,7 @@ describe('I3-d4-a spec alignment', () => {
     v = await getClubMatchView(id)
     expect(v.rows.find((r) => r.key === G('g-2'))).toMatchObject({ name: '삭제된 게스트', available: false, participating: true })
     const excluded: string[] = []
-    await renderInRouter(() => <ParticipantsPanel view={v} run={(w) => w(v.version)} onChanged={() => {}} onConflict={() => {}} onScores={() => {}} onExclude={(k) => excluded.push(k)} />)
+    await renderInRouter(() => <ParticipantsPanel view={v} onExclude={(k) => excluded.push(k)} />)
     expect(screen.queryByText('삭제된 게스트')).toBeNull() // 참가자 명단에서 빠짐(AC-107)
     const inactive = document.querySelector(`[data-participant="${M('u-inactive')}"]`) as HTMLElement
     expect(within(inactive).getAllByText('비활성')).toHaveLength(2) // 샘플 이름 '비활성' + 배지

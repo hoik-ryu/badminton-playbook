@@ -112,6 +112,41 @@
       "registered_at": "2026-11-13T06:15:42Z",
       "path": "frontend/src/components/RecordSummary.tsx",
       "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 비교: audience self|ops, 랭크 있음·없음·기록 없음 — 04 계약과 같음"
+    },
+    "CMP-028": {
+      "source": "built",
+      "export": "StickySummary",
+      "registered_at": "2026-11-25T00:32:26Z",
+      "path": "frontend/src/components/StickySummary.tsx",
+      "built_by": "B11"
+    },
+    "CMP-053": {
+      "source": "built",
+      "export": "StepProgress",
+      "registered_at": "2026-11-25T00:32:26Z",
+      "path": "frontend/src/components/StepProgress.tsx",
+      "built_by": "B11"
+    },
+    "CMP-054": {
+      "source": "built",
+      "export": "StepActionBar",
+      "registered_at": "2026-11-25T00:32:26Z",
+      "path": "frontend/src/components/StepActionBar.tsx",
+      "built_by": "B11"
+    },
+    "CMP-055": {
+      "source": "built",
+      "export": "ValidationList",
+      "registered_at": "2026-11-25T00:32:26Z",
+      "path": "frontend/src/components/ValidationList.tsx",
+      "built_by": "B11"
+    },
+    "CMP-056": {
+      "source": "built",
+      "export": "SetupSummary",
+      "registered_at": "2026-11-25T00:32:26Z",
+      "path": "frontend/src/components/SetupSummary.tsx",
+      "built_by": "B11"
     }
   },
   "tokens": {
@@ -209,6 +244,31 @@
       "at": "2026-11-13T06:15:42Z",
       "event": "tokens css-vars",
       "note": "사용자 지시(2026-11-13): '실제 코드의 역할, props, 사용처와 UX Spec 04의 CMP 계약을 비교하세요. 동일성이 확인된 부품만 공식 ui-map 절차로 등록하세요.' 토큰 출력 파일: frontend/src/styles/tokens.css(04 + theme.json 생성 파일)"
+    },
+    {
+      "at": "2026-11-25T00:32:26Z",
+      "event": "register CMP-028 (built)",
+      "note": ""
+    },
+    {
+      "at": "2026-11-25T00:32:26Z",
+      "event": "register CMP-053 (built)",
+      "note": ""
+    },
+    {
+      "at": "2026-11-25T00:32:26Z",
+      "event": "register CMP-054 (built)",
+      "note": ""
+    },
+    {
+      "at": "2026-11-25T00:32:26Z",
+      "event": "register CMP-055 (built)",
+      "note": ""
+    },
+    {
+      "at": "2026-11-25T00:32:26Z",
+      "event": "register CMP-056 (built)",
+      "note": ""
     }
   ]
 }

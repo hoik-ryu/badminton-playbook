@@ -11,9 +11,9 @@
     "SCR-111": "A"
   },
   "axes": null,
-  "statement": "UX Spec r7 기준으로 V08-A를 다시 선택합니다. 기존 화면 구성, 레이아웃, 사용자 흐름은 유지하고 Soft Mint 디자인 시스템과 신규 배너 AST-080을 적용하는 방향입니다.",
+  "statement": "V08-A 다시 선택 (권장) — UX Spec r9·planning r10 기준으로 V08-A(청백전 목록 현재 디자인)를 다시 선택합니다. 목록 디자인은 바뀌지 않습니다.",
   "feedback": [],
-  "at": "2026-11-23T23:39:31Z",
+  "at": "2026-11-24T07:29:09Z",
   "measurement": "passed",
   "measurement_detail": {
     "status": "passed",
@@ -260,9 +260,9 @@
     }
   },
   "basis": {
-    "planning_revision": "7",
-    "planning_hashes_sha256": "04693e9424174b2bd1e3cf147c7832d12a126a6111ea45968733f417384d6c72",
-    "ux_spec_revision": 7,
+    "planning_revision": "10",
+    "planning_hashes_sha256": "38e0d6fa5a7c9cbe99557dafdb76d0bf6a826ec00ad2990148748cbba9588131",
+    "ux_spec_revision": 9,
     "fingerprints": {
       "SCR-111": {
         "screen": "SCR-111",
@@ -306,7 +306,8 @@
           "UXD-086",
           "UXD-087",
           "UXD-088",
-          "UXD-089"
+          "UXD-090",
+          "UXD-099"
         ],
         "hash": "e2220c0abd2188b5a5f75a9a351d2922f4b4466af1c204ed690064bfffe7823e"
       }

@@ -1,9 +1,9 @@
 ---
 doc: design-direction
-revision: 11
+revision: 12
 language: ko
 based_on:
-  ux_spec_revision: 7
+  ux_spec_revision: 9
 ---
 
 # 디자인 방향 (Design Direction): 배드민턴 플레이북 (badminton-playbook)
@@ -54,6 +54,16 @@ based_on:
 > - **렌더 범위**: SCR-102에 VD-047·048, SCR-103 틀린 상황 다시 보기 코트도 같은 경기장(VD-047·048, 사용자 원문 "결과 화면에서 코트를 재사용할 때는 새 경기장 컴포넌트를 사용하세요.")
 > - **대비 재계산**: 경기장 바닥(이미지 표본 15곳, 약 #0A9973–#3DC08F)은 토큰 `color.court.surface`(#2F7D4F)보다 밝아, 기존 VD의 코트 위 대비 값이 바뀌었습니다. 9장 기준 미달 항목을 4.2에 계산값 그대로 적었습니다(사용자 결정 필요).
 > - **바뀌지 않음**: UX Planning r6·UX Spec r5의 기능·판정·점수·재도전 규칙, 칸 번호 체계, UXD-078 확인 단계(44px), UXD-081 아래 영역 160px, 다른 VD와 테마
+
+> **r12 개정(2026-11-24)**: UX Spec r9(청백전 단계형 생성 페이지 SCR-241–246) 승인 뒤, 사용자 시안 REF-004(기본정보)·REF-005(참가자 설정·팀 구성 방식·팀 구성 미리보기·확인)를 정식 참고 이미지로 등록했습니다.
+> - 개인정보 점검: 모델·사용자 모두 '없음'. 분석: RX-004-01–12, RX-005-01–10, 모두 관찰값이고 색은 픽셀 측정. 참고 의도: INT-004(사용자 문장)
+> - 새 시각 결정은 VD-059–VD-070입니다.
+> - 사용자 결정을 반영했습니다:
+>   - K1: 진행 표시는 시안 모양 + 현재 단계 이름만(UXD-091 범위)
+>   - K2: 기존 민트 주 버튼 + 어두운 글자 유지
+>   - K3: 팀 구성 방식 — Planning r10·UX Spec r9로 반영됨
+> - 이미지에만 있는 기능(알림·'직접 추가' 탭), 사진 아바타, 백팀 보라색은 옮기지 않았습니다.
+> - 새 이미지 에셋과 토큰 변경은 없습니다. 기존 화면의 VD는 바뀌지 않았습니다.
 
 > **r11 개정(2026-11-24)**: DD r10 승인(사용자 원문 "Design Direction r10을 승인합니다.") 뒤 Preview r7 검증에서 배너 가장자리에 배너 바탕이 1–2px 선으로 비치는 문제를 찾았습니다. 원인 ① AST-081 처리 오류(직선 가장자리 바깥 1px 줄이 알파 128로 저장 — r10에 적은 '경계 1px 안티앨리어스는 둥근 모서리'와 다름) ② CSS 배경으로 크게 줄여 그릴 때 브라우저가 가장자리 바깥 투명을 섞음(360·390). 사용자 선택(2026-11-24) "수정본+img로 정식 교체 (권장)"에 따라 `reopen`했습니다. r10 승인 사본은 저장소 밖 `~/smapsh-work/2026-11-24-banner-full/backup/07.r10.md`(sha256 `a46de78c…`).
 > - **범위**: VD-052만 — 이미지 AST-081 → **AST-082**(같은 원본·경계·비율, 가장자리 마스크만 수정), 표시 방식 CSS 배경 → **장식 `img`**(빈 대체 글자 `alt=""`, `aria-hidden`, `object-fit: contain`). 비율(1692/693)·모서리 처리·글자·색·간격·다른 VD·테마는 r10 그대로.
@@ -121,14 +131,16 @@ based_on:
 | M. (r11) 배너 가장자리 비침 수정 | VD-052 개정: AST-082(AST-081 가장자리 마스크 수정본), 표시 = 장식 img(alt 빈 값·aria-hidden·object-fit contain) — 사용자 선택 2026-11-24 | - |
 | L. (r10) 배너 원본 전체 구도 | VD-052 개정: AST-081(원본 구도 2.44:1), 이미지 상자 = 이미지 실제 비율, 겹침 규칙 = 글자 아래 그래픽 픽셀 0(B-13 결정 반영) — 사용자 결정 2026-11-24 | - |
 | J. (r8 초안) 경기장 접근성 | VD-026·027·028·029 개정(어두운 격자·번호 받침·어두운 칸 경계·판정 칸 어두운 경계), 4.2 재검증 | - |
+| N. (r12) 청백전 생성 페이지 SCR-241–246(REF-004·005, INT-004) | VD-059–VD-070 | - |
 | I. (r7) 청백전 목록 SCR-111(EXP-V08-A) | 승인: VD-049–058(VD-052·058은 AST-079·070 권리 확인 뒤 3차 결정), VD-019 개정(현재 탭 글자 `color.text.accent`) | CR-014·015(A안 반영) |
 
 ~~미결정·후보 VD와 미결 CR은 없습니다.~~ (r4) 위 E행(후보 VD)과 G행(해결 항목)이 결정될 때까지 제출할 수 없습니다.
 
 ## 1. 입력
 
-- **UX 설계 기준**: ~~ux_spec r2(승인됨, 2026-11-13), UX 결정 r4~~ ~~(r4) ux_spec r3(승인됨, 2026-11-18), UX 결정 r5~~ ~~(r4 재개 2) ux_spec r5(승인됨, 2026-11-19), UX 결정 r6~~ (r7) ux_spec r6(승인됨, 2026-11-20), UX 결정 r7
+- **UX 설계 기준**: ~~ux_spec r2(승인됨, 2026-11-13), UX 결정 r4~~ ~~(r4) ux_spec r3(승인됨, 2026-11-18), UX 결정 r5~~ ~~(r4 재개 2) ux_spec r5(승인됨, 2026-11-19), UX 결정 r6~~ ~~(r7) ux_spec r6(승인됨, 2026-11-20), UX 결정 r7~~ (r12) ux_spec r9(승인됨, 2026-11-24), UX 결정 r9
 - **(r4) 참고 이미지**: REF-001(`design-explore/references/REF-001/`, 원본은 Git 제외, 권리 미상 → 참고 전용). 분석 `extraction.json`(RX-001-01–19, 추정 7건은 사용자 확인 대기). 참고 의도 INT-001(사용자 문장 2026-11-18). 이미지의 문구·스테이지 개수·메뉴 구성·범위 밖 기능(맞춤 추천, 알림, 활동 리포트 등)은 요구사항이 아닙니다.
+- **(r12) 참고 이미지(청백전 생성)**: REF-004(`design-explore/references/REF-004/`, 1024×1536, 기본정보), REF-005(1240×1269, 4화면 묶음). 원본은 Git 제외, 권리: 사용자 직접 제작(own). 분석 RX-004-01–12·RX-005-01–10(관찰값). 참고 의도 INT-004. 작업 분석: 작업 폴더 `mock-analysis.md`(K1–K11)
 - **디자인 프로필**: `docs/design-profile/`(stack.md, visual-decisions.md, token-mapping.md, component-mapping.md, figma.md)
 - **브랜드·시각 방향**: C안 Mint Hybrid의 테마 값(청록 주 행동 색·포커스 링, Pretendard)만 적용하고, 화면 구조는 승인된 UX 설계 그대로. 테마 값은 `docs/design-profile/theme.json`(개발자 설정)
 - **컴포넌트·토큰 매핑**: `docs/design-profile/component-mapping.md`(CMP ↔ shadcn/ui + Radix), `docs/design-profile/token-mapping.md`(04 토큰 → CSS 변수)
@@ -138,6 +150,7 @@ based_on:
 
 - 체육관 현장에서 한 손으로 빨리 읽고 누르는 업무 화면: 정보 밀도는 높게, 그라데이션·장식은 쓰지 않음
 - (r4, 후보) **튜토리얼 목록(SCR-101) 예외**: 학습 화면은 업무 화면과 달리 동기 부여가 목적이라, 참고 이미지(REF-001)처럼 밝은 흰 바탕에 민트 한 계열 면, 소개 배너의 부드러운 그라데이션 한 곳, 장식 그림을 허용합니다. 운영 화면과 다른 회원 화면에는 적용하지 않습니다(마이페이지 개편은 범위 밖).
+- (r12) **청백전 생성 페이지(SCR-241–245) 예외**: 사용자 시안(REF-004·005) 기준으로 위쪽 히어로에 민트 그라데이션 한 곳과 셔틀콕 장식(AST-046)을 둡니다. 내용은 둥근 흰 카드에 넣고 여백을 넓게 둡니다. 단 참가자 설정·팀 구성은 목록 밀도 목표(고정 영역 35% 이하, 8행 이상)를 우선해 2단계부터 히어로를 줄입니다.
 - (r2) 카드는 일괄 금지가 아니라 04 3.1 '카드와 Flat 구분' 기준에 해당하는 정보 묶음(경기·코트, 결과·순위, 청백전 목록 항목, 랭크·전적, 스테이지, 내 다음 경기)에만 씀. 반복 목록·입력·설정은 Flat(사용자 결정 D4, VD-024)
 - (r2) 모든 화면은 PC·모바일 같은 배치: 가운데 정렬한 최대 600px 한 열(`size.content.member`), 하단 탭, 하단 시트. PC 전용 다단·옆 메뉴·옆 패널·가운데 대화상자 없음(D1·D2, VD-021·025)
 - 브랜드 색(청록)은 04의 `color.action.primary`·`color.focus.ring` 의미 그대로(주 버튼, 링크, 선택 상태, 포커스)에만 씀. 상태 색과 팀·코트 색은 04 값 그대로
@@ -706,6 +719,144 @@ based_on:
 - **관련**: SCR-111, CMP-052, AST-070
 - **토큰 밖 값**: 있음 — 이미지 자체 색, 불투명도 28%
 
+### VD-059: 생성 페이지 머리글·히어로(SCR-241–245) *(r12)*
+- **결정**: 머리글은 뒤로(Lucide `ChevronLeft`) · 가운데 SMAPSH 로고(기존 브랜드 심볼 `smapsh-symbol.svg` + 'SMAPSH' 워드마크) · 오른쪽 자리(SCR-241 저장 뒤 더보기 `MoreVertical` → '청백전 삭제', 그 밖에는 비움. 시안의 알림 종은 넣지 않음).
+  - 히어로: 왼쪽에 라벨 '청백전 생성'(`font.size.caption` 굵게 `color.text.accent`) → 제목 = 단계 이름(SCR-241은 '새 청백전', `font.size.display` 굵게 `color.hero.accent`) → 설명 한 줄(`font.size.body` `color.text.secondary`)
+  - 오른쪽: 셔틀콕 AST-046(장식, `aria-hidden`)과 민트 코트 바닥 빛. CSS 그라데이션 `color.hero.bg` → `color.bg.page` + 사선 코트 선 2개(흰색 반투명 CSS)
+  - 2단계부터는 줄인 히어로: 제목 `font.size.heading`, 셔틀콕 작게, 높이 약 60% — 참가자 목록 밀도 목표
+- **상태**: 승인 (사용자 결정 2026-11-24, 질문 도구 응답: "VD-059–063 승인")
+- **근거**: REF-004(RX-004-01·06·09·11), REF-005(RX-005-01), mock-analysis K9
+- **관련**: SCR-241, SCR-242, SCR-243, SCR-244, SCR-245, CMP-026, color.hero.bg, color.hero.accent, color.text.accent, color.text.secondary, color.bg.page
+- **토큰 밖 값**: 있음 — 코트 선 흰색 반투명, 셔틀콕 이미지 자체 색
+
+### VD-060: 진행 표시(CMP-053) — 번호 원 + 현재 단계 이름만(K1) *(r12)*
+- **결정**: 원(지름 28, 누름 영역 44)을 가는 선(`color.border.default` 1px)으로 잇습니다.
+  - 현재 단계: `color.action.strong` 채움 + `color.action.onStrong` 숫자
+  - 완료 단계: `color.accent.subtle` 면 + `color.text.accent` 체크(Lucide `Check`)
+  - 남은 단계: `color.border.default` 테두리 + `color.text.secondary` 숫자
+  - 글자는 현재 단계 아래에만 이름(`font.size.caption` 굵게 `color.text.accent`). 다른 단계 이름은 화면 읽기 레이블로
+  - 팀전 5개, 개인전 4개. 시안처럼 흰 카드 맨 위에 둡니다.
+- **상태**: 승인 (사용자 결정 2026-11-24, 질문 도구 응답: "VD-059–063 승인")
+- **근거**: REF-004(RX-004-02·03), REF-005(RX-005-02), 사용자 결정 K1 "시안 모양 + 현재 이름만 (권장)", UXD-091
+- **관련**: SCR-241, SCR-242, SCR-243, SCR-244, SCR-245, CMP-053, color.action.strong, color.action.onStrong, color.accent.subtle, color.border.default
+
+### VD-061: 내용 카드와 섹션 제목 *(r12)*
+- **결정**: 단계 내용은 흰 카드(`color.bg.page`, 테두리 `color.border.default`, `elevation.card`, 모서리 `radius.sheet`)에 넣습니다. 카드 안쪽 여백은 `space.5`, 섹션 사이 `space.6`.
+  - 섹션 제목: Lucide 선 아이콘 20(`color.text.accent`) + `font.size.title` 굵게 + 필수 `*`(`color.status.danger.fg`)
+  - 아이콘: 경기 방식 = 브랜드 심볼 단색, 이름 = `PenLine`, 날짜 = `CalendarDays`, 참가자 = `Users`, 팀 구성 방식 = `Shuffle`, 총 경기 수 = `ListOrdered`, 규칙 = `SlidersHorizontal`
+  - 카드 안에 카드를 두지 않는다는 원칙(04 3.1)에 맞춰, 시안의 '카드 안 입력 카드'는 한 카드 + 섹션 구분으로 정리합니다.
+- **상태**: 승인 (사용자 결정 2026-11-24, 질문 도구 응답: "VD-059–063 승인")
+- **근거**: REF-004(RX-004-05·09·10·12), mock-analysis K10
+- **관련**: SCR-241, SCR-242, SCR-243, SCR-244, SCR-245, color.bg.page, color.border.default, elevation.card, radius.sheet, color.status.danger.fg
+
+### VD-062: 입력칸·선택 타일(CMP-006·CMP-002) *(r12)*
+- **결정**: 입력칸은 `color.bg.surface` 면 + `color.border.default` 테두리 + `radius.md`, 높이 48. 이름 아래 오른쪽에 'n / 30'(`font.size.caption` `color.text.secondary`).
+  - 날짜 칸: 왼쪽 `CalendarDays` + 'YYYY. MM. DD (요일)' + 오른쪽 `ChevronDown`(기기 날짜 선택기를 엶)
+  - 선택 타일(방식 '개인전 | 팀전', 팀 구성 방식 '자동 배정 | 직접 구성'): 같은 폭 2칸, 높이 52, 아이콘(`User`·`Users`, `Shuffle`·`UserRoundPen`) + 글자
+  - 선택 시 기존 CMP-002 선택 표현(`color.accent.subtle` 면 + `color.action.strong` 1.5px 테두리 + 굵은 `color.text.accent` 글자). 색만으로 구분하지 않도록 굵기와 테두리를 함께 씁니다.
+- **상태**: 승인 (사용자 결정 2026-11-24, 질문 도구 응답: "VD-059–063 승인")
+- **근거**: REF-004(RX-004-07·08), REF-005(RX-005-06)
+- **관련**: SCR-241, SCR-243, SCR-244, CMP-006, CMP-002, color.bg.surface, color.accent.subtle, color.action.strong
+
+### VD-063: 하단 이전·다음 바(CMP-054) — 기존 주 버튼 유지(K2) *(r12)*
+- **결정**: '다음'은 열 폭 주 버튼(CMP-001 `primary`·`lg`: `color.action.primary` 채움 + `color.action.onPrimary` 글자 22px 굵게)에 오른쪽 `ArrowRight`. 시안의 흰 글자는 대비 미달이라 쓰지 않습니다.
+  - 2단계부터 왼쪽에 '이전'(CMP-001 `secondary`, 폭 약 30%, `ChevronLeft`)
+  - 확정 단계는 `Check` + '확정'
+  - 다음 불가: 버튼 비활성(`color.bg.surface` + `color.text.disabled`)과 버튼 위 사유 한 줄(`font.size.caption` `color.status.danger.fg`가 아닌 `color.text.secondary` + `Info`)
+  - 열 안 아래쪽에 고정(04 3.1 안전 영역)
+- **상태**: 승인 (사용자 결정 2026-11-24, 질문 도구 응답: "VD-059–063 승인")
+- **근거**: REF-004(RX-004-04), 사용자 결정 K2 "기존 주 버튼 유지 (권장)"
+- **관련**: SCR-241, SCR-242, SCR-243, SCR-244, SCR-245, CMP-054, CMP-001, color.action.primary, color.action.onPrimary
+
+### VD-064: 참가자 목록·선택 요약(SCR-242·246, CMP-024·028·004) *(r12)*
+- **결정**: 고정 영역은 검색칸(`Search`, 입력칸 표현) → 필터 칩 한 줄(CMP-004, 가로 스크롤: 성별·급수·점수 미설정)입니다. 시안의 '회원 선택 / 직접 추가' 탭은 넣지 않습니다.
+  - 목록 머리: '전체 회원 (n)' + 오른쪽 체크박스 '표시된 n명 모두 선택'(시안의 '전체 선택' 자리)
+  - 흰 카드 안 행(높이 52, 구분선): 이니셜 아바타 32(`color.bg.surface` 원 + `color.text.secondary` 굵은 첫 글자) · 이름(선택 시 굵게) · 메타 한 줄 '남 · A조 · 8점'(caption)
+  - 점수 미설정은 경고 배지(CMP-005 `warning`), 게스트는 배지 `neutral`
+  - 오른쪽 체크박스(CMP-008, 켜짐 `color.action.strong` + 흰 체크)
+  - 선택 요약 줄(CMP-028 `selection`): 시안처럼 목록 아래·행동 바 위에 고정. `Users` + '선택 14명 · 남 8 여 6' + 오른쪽 '확인'(`ChevronRight`) → SCR-246. 면은 `color.accent.subtle`
+  - 점수 미설정이 있으면 그 위에 경고 줄 '점수 미설정 2명 · 점수 매기기'
+- **상태**: 승인 (사용자 결정 2026-11-24, 질문 도구 응답: "VD-064 승인")
+- **근거**: REF-005(RX-005-03·04·05), mock-analysis K6·K7, UX Spec r9 SCR-242 목표(고정 영역 35% 이하·8행 이상)
+- **관련**: SCR-242, SCR-246, CMP-024, CMP-028, CMP-004, CMP-008, CMP-005, color.bg.surface, color.accent.subtle, color.action.strong
+
+### VD-065: 팀 구성(SCR-243) — 방식 타일·팀 카드·팀원 목록 *(r12)*
+- **결정**: 위에서부터 다음 순서입니다.
+  1. '팀 구성 방식' 섹션: VD-062 타일 '자동 배정'(`Shuffle`)·'직접 구성'(`UserRoundPen`)
+  2. 안내 상자(`color.bg.surface` 면 + `Sparkles`): "알고리즘 배정안을 채웠습니다" 등
+  3. 팀 현황(CMP-028 `teamBalance`): 팀마다 둥근 카드 2개
+     - 청팀: `color.team.blue.bg` 면 + `color.team.blue.fg` 글자 + `Users`
+     - 백팀: `color.team.white.bg` 면 + `color.border.strong` 테두리 + `color.text.primary` 글자. 시안의 보라색은 개인전 색과 겹쳐 쓰지 않음
+     - 카드 안: 팀 이름·인원, 이니셜 아바타 겹침 6개 + '+n', '남 a · 여 b · 점수 합 n'
+     - 두 카드 아래 '점수 합 차이 · 인원 차이' 줄
+  4. 팀원 목록: 미배정(있을 때) → 청팀 → 백팀 묶음
+     - 행: VD-064 행 표현 + 오른쪽 '백팀으로'처럼 갈 팀 글자와 `ArrowLeftRight`
+     - 미배정 행: '청팀'·'백팀' 작은 버튼 2개
+  5. 이동 직후 알림 줄 '김민수 → 백팀' + '되돌리기'(`Undo2`)
+  6. 시안의 '다음 단계에서 대진을 설정할 수 있어요' 안내는 `Info` 안내 줄로 유지
+- **상태**: 승인 (사용자 결정 2026-11-24, 질문 도구 응답: "VD-065 승인")
+- **근거**: REF-005(RX-005-06·07·08), mock-analysis K3·K4·K5, UXD-095 r9
+- **관련**: SCR-243, CMP-002, CMP-028, CMP-024, color.team.blue.bg, color.team.blue.fg, color.team.white.bg, color.border.strong
+
+### VD-066: 대진 설정(SCR-244) — 시안 없음, 같은 언어로 확장 *(r12)*
+- **결정**: 흰 카드 안에 세 섹션을 둡니다.
+  - '총 경기 수': 입력칸 + 분포 문장 + 균등안 칩(CMP-004 표현) + '입력값 유지'
+  - '규칙': 스위치 2개(CMP-007), 행 높이 52
+  - '대진 생성': 카드 안 보조 버튼, `Shuffle`
+  - 생성 후:
+    - 요약 칩 3개(총 경기 수 · 1인 경기 수 · 규칙 완화 n, `color.bg.surface` 면)
+    - 사람별 경기 수 칩 줄(경기 수가 다른 사람은 `color.status.warning.bg`)
+    - '대진 미리보기' 섹션: 기존 경기 카드(CMP-041) 표현에 모서리 `radius.md`. 선수 누름 영역에 교체 단서 `ArrowLeftRight` 12
+    - '다시 생성'(텍스트 버튼, `RotateCcw`)
+- **상태**: 승인 (사용자 결정 2026-11-24, 질문 도구 응답: "VD-066–070 승인")
+- **근거**: REF-004·005 디자인 언어 확장(RX-004-07·10·12, RX-005-06), 사용자 지시 "대진 설정 화면은 별도 시안 없이 … 디자인 언어를 확장"
+- **관련**: SCR-244, CMP-006, CMP-004, CMP-007, CMP-041, color.bg.surface, color.status.warning.bg
+
+### VD-067: 확정(SCR-245) — 요약 행·검증 목록 *(r12)*
+- **결정**: 흰 카드 안 요약 행(CMP-056)입니다.
+  - 행 구성: 왼쪽 Lucide 아이콘 + 항목 이름 + 오른쪽 값. 아이콘: 경기 방식 `FileText`, 이름 `PenLine`, 날짜 `CalendarDays`, 참가 인원 `Users`, 팀 구성 `Shuffle`, 대진 `ListOrdered`
+  - 묶음마다 '수정'(`Pencil` + 글자, 텍스트 버튼)
+  - 검증 목록(CMP-055): 통과 `CircleCheck`(`color.status.success.fg`) / 실패 `CircleAlert`(`color.status.danger.fg`) + 글자
+  - 공개 안내: `color.accent.subtle` 면 + `CircleCheck` + "확정하면 회원에게 공개됩니다". 시안 문구 "생성 후에도 일부 설정은 수정할 수 있어요"는 승인 정책과 달라 쓰지 않음
+  - 버튼: `Check` + '확정'
+- **상태**: 승인 (사용자 결정 2026-11-24, 질문 도구 응답: "VD-066–070 승인")
+- **근거**: REF-005(RX-005-09), mock-analysis K8
+- **관련**: SCR-245, CMP-056, CMP-055, color.status.success.fg, color.status.danger.fg, color.accent.subtle
+
+### VD-068: 시트·확인 창·상태 표현 *(r12)*
+- **결정**:
+  - SCR-246 시트: 기존 CMP-021, 행 = VD-064, '선택 해제' = `X` 아이콘 버튼 44
+  - 확인 창: 기존 CMP-022, 위험 행동 빨강
+  - 로딩: 카드 안 스켈레톤(`color.bg.surface`)
+  - 오류: 카드 위 안내 상자(CMP-023 danger) + '다시 시도'
+  - 빈 상태: 카드 안 가운데 Lucide `SearchX`·`UserX` 32(`color.text.secondary`) + 문구 + 행동
+  - 이모지는 쓰지 않습니다.
+- **상태**: 승인 (사용자 결정 2026-11-24, 질문 도구 응답: "VD-066–070 승인")
+- **근거**: REF-004·005 디자인 언어 확장, UX Spec r9 상태 표
+- **관련**: SCR-241, SCR-242, SCR-243, SCR-244, SCR-245, SCR-246, CMP-021, CMP-022, CMP-023, CMP-027
+
+### VD-069: 반응형(390 기준, 360·1440) *(r12)*
+- **결정**:
+  - 390: 위 VD 그대로
+  - 360: 히어로 제목 `font.size.heading`, 셔틀콕을 더 작게, 필터 칩은 가로 스크롤
+  - 1440: 가운데 600px 한 열. 히어로 그라데이션은 열 안에서만, 열 바깥은 `color.bg.page`. 행동 바는 열 안
+  - 참가자 설정의 고정 영역 35% 이하·8행 이상과 200% 확대 시 고정 영역은 Preview 검증 항목으로 둡니다.
+- **상태**: 승인 (사용자 결정 2026-11-24, 질문 도구 응답: "VD-066–070 승인")
+- **근거**: UX Spec r9(04 3.3, SCR-242 목표), 사용자 지시
+- **관련**: SCR-241, SCR-242, SCR-243, SCR-244, SCR-245, color.bg.page
+
+### VD-070: 자산·아이콘 사용(생성 페이지) *(r12)*
+- **결정**: 새 이미지 에셋을 만들지 않습니다.
+  - 셔틀콕: AST-046(사용자 제공, 권리 확인됨)
+  - 로고: 기존 브랜드 심볼·워드마크
+  - 코트 빛·선: CSS
+  - 아바타: 이니셜(CSS)
+  - 아이콘: 프로젝트의 Lucide(v1.70.0)만 사용. 셔틀콕 선 아이콘은 Lucide에 없어 브랜드 심볼 단색으로 대신하며, react-icons는 추가하지 않습니다.
+  - 시안 원본·잘라 낸 조각은 쓰지 않습니다.
+- **상태**: 승인 (사용자 결정 2026-11-24, 질문 도구 응답: "VD-066–070 승인")
+- **근거**: 사용자 지시(재사용 우선순위), REF-004·005 excluded(logo·photo·person)
+- **관련**: SCR-241, SCR-242, SCR-243, SCR-244, SCR-245, SCR-246
+
 ## 4. 정책 값
 
 프로젝트가 정한 값입니다. 엔진 기본값은 없습니다. 아래 density는 승인 명세 구조(안내 줄 포함, 흰 헤더, 탭 56)로 **계산한 기준값**이며, 첫 렌더의 측정값과 차이가 나면 원인을 분석해 기록합니다(구조를 바꿔 맞추지 않음).
@@ -841,6 +992,12 @@ UX Spec r4(04 CMP-001·1.2)에 따라 큰 CTA(`variant=primary`·`size=lg`)는 2
 | SCR-112 | SCR-112-ST1, SCR-112-ST3, SCR-112-ST7, SCR-112-ST8, SCR-112-ST12, SCR-112-ST13 | VD-001, VD-002, VD-003, VD-004, VD-019, VD-020, VD-021, VD-022, VD-023, VD-024, VD-038, VD-039, VD-040, VD-041, VD-042 |
 | SCR-121 | SCR-121-ST1, SCR-121-ST3, SCR-121-ST7 | VD-001, VD-002, VD-003, VD-004, VD-019, VD-020, VD-021, VD-022, VD-023, VD-024, VD-038, VD-039, VD-040, VD-041, VD-042, VD-056 |
 | SCR-122 | SCR-122-ST1, SCR-122-ST4 | VD-001, VD-002, VD-003, VD-020, VD-021, VD-025, VD-038, VD-039, VD-040, VD-041, VD-042 |
+| SCR-241 | SCR-241-ST1, SCR-241-ST4, SCR-241-ST7, SCR-241-ST8, SCR-241-ST9, SCR-241-ST10 | VD-001, VD-002, VD-003, VD-004, VD-020, VD-021, VD-022, VD-023, VD-038, VD-039, VD-040, VD-041, VD-042, VD-059, VD-060, VD-061, VD-062, VD-063, VD-068, VD-069, VD-070 |
+| SCR-242 | SCR-242-ST1, SCR-242-ST2, SCR-242-ST3, SCR-242-ST4, SCR-242-ST7, SCR-242-ST8, SCR-242-ST10 | VD-001, VD-002, VD-003, VD-004, VD-020, VD-021, VD-022, VD-023, VD-038, VD-039, VD-040, VD-041, VD-042, VD-059, VD-060, VD-061, VD-062, VD-063, VD-068, VD-069, VD-070, VD-064 |
+| SCR-243 | SCR-243-ST1, SCR-243-ST7, SCR-243-ST8, SCR-243-ST9, SCR-243-ST10, SCR-243-ST11, SCR-243-ST12, SCR-243-ST13, SCR-243-ST14 | VD-001, VD-002, VD-003, VD-004, VD-020, VD-021, VD-022, VD-023, VD-038, VD-039, VD-040, VD-041, VD-042, VD-059, VD-060, VD-061, VD-062, VD-063, VD-068, VD-069, VD-070, VD-064, VD-065 |
+| SCR-244 | SCR-244-ST1, SCR-244-ST2, SCR-244-ST4, SCR-244-ST7, SCR-244-ST8, SCR-244-ST9 | VD-001, VD-002, VD-003, VD-004, VD-020, VD-021, VD-022, VD-023, VD-038, VD-039, VD-040, VD-041, VD-042, VD-059, VD-060, VD-061, VD-062, VD-063, VD-068, VD-069, VD-070, VD-066 |
+| SCR-245 | SCR-245-ST1, SCR-245-ST7, SCR-245-ST8 | VD-001, VD-002, VD-003, VD-004, VD-020, VD-021, VD-022, VD-023, VD-038, VD-039, VD-040, VD-041, VD-042, VD-059, VD-060, VD-061, VD-062, VD-063, VD-068, VD-069, VD-070, VD-067 |
+| SCR-246 | SCR-246-ST1, SCR-246-ST3 | VD-001, VD-002, VD-003, VD-020, VD-021, VD-025, VD-038, VD-039, VD-040, VD-041, VD-042, VD-064, VD-068, VD-070 |
 
 - (r5, 사용자 결정 2026-11-19) SCR-101·102·103의 적용 VD를 승인된 VD로 갱신했습니다(r4 승인 VD-024·026–046). SCR-102-ST1은 6칸과 9칸을 각각 렌더합니다. 튜토리얼 화면은 390×844와 360×640(코드 기준 계산에서 칸이 가장 작은 일반 화면)에서 렌더합니다. 15칸은 렌더 범위가 아닙니다(시험 데이터만, AC-116).
   - SCR-102는 상황 재생(`mode=playing`, ST2 → ST1 사이, 상태 ID 없음) 화면도 함께 렌더해 학습용 격자·번호가 숨겨지는지 확인합니다(UXD-077 r6, CMP-046 r5).
@@ -850,6 +1007,7 @@ UX Spec r4(04 CMP-001·1.2)에 따라 큰 CTA(`variant=primary`·`size=lg`)는 2
   - 카드: 튜토리얼 목록(CMP-048·050)은 VD-024 r4 개정안(옅은 그림자), 청백전·마이페이지 카드(CMP-041·042·043·045)는 VD-024 r3 표현(그림자 없음)입니다. 탭 사이 카드 표현 차이는 Preview에서 확인합니다.
 - (r6) SCR-102는 경기장(VD-047·048)으로 390×844·360×640·360×560에서 렌더합니다. SCR-103의 틀린 상황 다시 보기 코트도 같은 경기장 컴포넌트를 씁니다(사용자 결정 2026-11-19). 그 밖의 화면 행은 r5와 같습니다.
 - (r8) SCR-103 행에 VD-026·027을 더했습니다. 틀린 상황 다시 보기 코트(같은 `StadiumCourt`)가 학습 격자와 칸 번호를 그리는데 r7까지 행에 빠져 있었습니다(r8 렌더 검증에서 확인). VD-028(선택 대기 표시)은 다시 보기에 나오지 않아 넣지 않았습니다.
+- (r12) 청백전 생성 페이지 SCR-241–246을 추가했습니다(사용자 시안 REF-004·005, VD-059–070). 탭바를 숨기므로 VD-019는 쓰지 않습니다. 카드 표현은 VD-024 대신 VD-061입니다. 팀전(5단계)·개인전(4단계) 진행 표시를 각각 렌더하고, 390·360·1440 폭과 SCR-242의 고정 영역 35% 이하·8행 이상, 200% 확대 고정 영역을 Preview에서 확인합니다.
 - SCR-203 위에 SCR-213(두 번째 시트)을 연 상태를 함께 렌더해 중첩 시트(VD-025, 04 3.2)를 확인합니다.
 - SCR-202-ST7·~~SCR-223-ST7·ST8~~ (r7) SCR-112-ST12·ST13은 카드(VD-024)와 하단 고정 행동 바(VD-020)를, ~~SCR-223-ST8~~ (r7) SCR-112-ST13은 완화 사유·'미기록으로 되돌리기'(04 CMP-041 r2 상태)를 확인합니다.
 

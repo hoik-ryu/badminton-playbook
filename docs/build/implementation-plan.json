@@ -308,7 +308,10 @@
         "AC-093",
         "AC-094",
         "AC-098",
-        "AC-110"
+        "AC-110",
+        "AC-118",
+        "AC-120",
+        "AC-121"
       ],
       "stories": [
         "US-005",
@@ -369,7 +372,10 @@
             "AC-093",
             "AC-094",
             "AC-098",
-            "AC-110"
+            "AC-110",
+            "AC-118",
+            "AC-120",
+            "AC-121"
           ]
         },
         {
@@ -410,7 +416,8 @@
       "done_criteria": [
         "현재(adopt, 검증 아님) E1 15개·E0 8개 / E2 0개 → 목표 E2(위험 AC는 E3, 프로필 evidence)",
         "test-fe·test-be·lint·typecheck·build 통과(test-db는 Docker 없으면 not_run, 통과로 세지 않음)",
-        "배치 AC 전부 목표 증거 수준 충족(adopt-register로 imported 등록 후 verify)"
+        "배치 AC 전부 목표 증거 수준 충족(adopt-register로 imported 등록 후 verify)",
+        "(r4) 튜토리얼 r7 AC-118·120·121(기존 구현, tutorial MVP)을 같은 방식으로 E2 확인"
       ],
       "test_plan": [
         {
@@ -504,6 +511,18 @@
         {
           "ac": "AC-110",
           "kind": "integration"
+        },
+        {
+          "ac": "AC-118",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-120",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-121",
+          "kind": "integration"
         }
       ]
     },
@@ -521,7 +540,15 @@
         "AC-091",
         "AC-092",
         "AC-095",
-        "AC-096"
+        "AC-096",
+        "AC-111",
+        "AC-112",
+        "AC-113",
+        "AC-114",
+        "AC-115",
+        "AC-116",
+        "AC-117",
+        "AC-119"
       ],
       "stories": [
         "US-024"
@@ -550,7 +577,15 @@
             "AC-091",
             "AC-092",
             "AC-095",
-            "AC-096"
+            "AC-096",
+            "AC-111",
+            "AC-112",
+            "AC-113",
+            "AC-114",
+            "AC-115",
+            "AC-116",
+            "AC-117",
+            "AC-119"
           ]
         },
         {
@@ -577,7 +612,8 @@
       "done_criteria": [
         "현재(adopt, 검증 아님) E1 4개·E0 1개 / E2 0개 → 목표 E2(위험 AC는 E3, 프로필 evidence)",
         "test-fe·test-be·lint·typecheck·build 통과(test-db는 Docker 없으면 not_run, 통과로 세지 않음)",
-        "배치 AC 전부 목표 증거 수준 충족(adopt-register로 imported 등록 후 verify)"
+        "배치 AC 전부 목표 증거 수준 충족(adopt-register로 imported 등록 후 verify)",
+        "(r4) 튜토리얼 r7 AC-111–117·119(기존 구현, 서버 판정 포함)를 같은 방식으로 E2 확인"
       ],
       "test_plan": [
         {
@@ -598,6 +634,38 @@
         },
         {
           "ac": "AC-096",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-111",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-112",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-113",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-114",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-115",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-116",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-117",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-119",
           "kind": "integration"
         }
       ]
@@ -820,34 +888,21 @@
     },
     {
       "id": "B6",
-      "title": "청백전 운영 — 기존 구현 확인",
+      "title": "청백전 확정 이후 운영(참가자 확인·선수 교체·대체) — 기존 구현 확인",
       "kind": "ui",
-      "goal": "SCR-221–226의 기존 구현과 AC 증거를 E2로 올린다(코드 변경은 테스트만)",
+      "goal": "(r4) SCR-224·225·226(확정 이후 운영 시트)의 기존 구현과 AC 증거를 E2로 올린다(코드 변경은 테스트만). SCR-221–223은 UX Spec r9에서 폐기·통합되어 뺐고, 생성 관련 AC는 B10·B11로 옮겼다",
       "screens": [
-        "SCR-221",
-        "SCR-222",
-        "SCR-223",
         "SCR-224",
         "SCR-225",
         "SCR-226"
       ],
       "acs": [
-        "AC-042",
         "AC-043",
         "AC-044",
-        "AC-065",
-        "AC-070",
-        "AC-071",
-        "AC-072",
-        "AC-073",
-        "AC-074",
-        "AC-075",
-        "AC-076",
         "AC-077",
         "AC-078",
         "AC-079",
         "AC-080",
-        "AC-081",
         "AC-085",
         "AC-108",
         "AC-109"
@@ -884,22 +939,12 @@
           "layer": "test",
           "title": "기존 AC 테스트를 [AC-xxx] 태그로 연결하고 JUnit 리포트(test-fe·test-be)로 E2 판정(E1 언급만으로 완료 처리 안 함)",
           "refs": [
-            "AC-042",
             "AC-043",
             "AC-044",
-            "AC-065",
-            "AC-070",
-            "AC-071",
-            "AC-072",
-            "AC-073",
-            "AC-074",
-            "AC-075",
-            "AC-076",
             "AC-077",
             "AC-078",
             "AC-079",
             "AC-080",
-            "AC-081",
             "AC-085",
             "AC-108",
             "AC-109"
@@ -910,7 +955,6 @@
           "layer": "test",
           "title": "E0 AC(테스트 언급 없음)의 테스트 보강과 화면 상태 태그([SCR-xxx-STn]) 테스트",
           "refs": [
-            "AC-065",
             "AC-079",
             "AC-108",
             "AC-109"
@@ -943,47 +987,11 @@
       ],
       "test_plan": [
         {
-          "ac": "AC-042",
-          "kind": "integration"
-        },
-        {
           "ac": "AC-043",
           "kind": "integration"
         },
         {
           "ac": "AC-044",
-          "kind": "integration"
-        },
-        {
-          "ac": "AC-065",
-          "kind": "integration"
-        },
-        {
-          "ac": "AC-070",
-          "kind": "integration"
-        },
-        {
-          "ac": "AC-071",
-          "kind": "integration"
-        },
-        {
-          "ac": "AC-072",
-          "kind": "integration"
-        },
-        {
-          "ac": "AC-073",
-          "kind": "integration"
-        },
-        {
-          "ac": "AC-074",
-          "kind": "integration"
-        },
-        {
-          "ac": "AC-075",
-          "kind": "integration"
-        },
-        {
-          "ac": "AC-076",
           "kind": "integration"
         },
         {
@@ -1000,10 +1008,6 @@
         },
         {
           "ac": "AC-080",
-          "kind": "integration"
-        },
-        {
-          "ac": "AC-081",
           "kind": "integration"
         },
         {
@@ -1036,7 +1040,6 @@
         "SCR-205",
         "SCR-211",
         "SCR-212",
-        "SCR-223",
         "SCR-224",
         "SCR-225"
       ],
@@ -1078,7 +1081,7 @@
           "refs": [
             "SCR-202",
             "SCR-211",
-            "SCR-223"
+            "SCR-112"
           ],
           "depends_on": [
             "B7-T1"
@@ -1107,7 +1110,6 @@
           "title": "카드 표현 VD-024: CourtCard·ClubGameCard·MemberGameCard·StandingsCard·StageCard 그림자 제거(테두리 1px·radius.md 유지)",
           "refs": [
             "SCR-202",
-            "SCR-223",
             "SCR-112",
             "SCR-101"
           ]
@@ -1300,6 +1302,699 @@
         "사용성 문제가 명세 변경이면 /product-design으로 이관"
       ],
       "test_plan": []
+    },
+    {
+      "id": "B10",
+      "title": "청백전 단계형 생성 — 서버 API·규칙(BE + FE API 어댑터)",
+      "kind": "non_ui",
+      "goal": "(r4) 승인된 API 계약(기획 r9·r10 C-31–C-34, Q-030 결정, 2026-11-24 확정 3건)만 구현한다. 새 API: PUT …/basic, PUT …/participants(일괄), PUT …/teams(일괄), DELETE …/{id}(준비 중 물리 삭제). 확장: PUT …/settings(discard, 값이 같으면 무변경·version 유지), POST …/games(설정 동시 저장, 팀전 미배정 422), POST …/confirm(점수 미설정·미배정 422), 1명 단위 PUT …/participants/{key}(대진 있으면 confirm_required). 모든 변경은 기존 행 잠금 + version(U9), 한 트랜잭션. DB 스키마 변경 없음(기존 컬럼으로 충분, report-r9 'DB 변경 재확인').",
+      "screens": [],
+      "stories": [
+        "US-014",
+        "US-015"
+      ],
+      "acs": [
+        "AC-071",
+        "AC-075",
+        "AC-076",
+        "AC-081"
+      ],
+      "components": {
+        "reuse": [],
+        "new": []
+      },
+      "depends_on": [
+        "B0"
+      ],
+      "tasks": [
+        {
+          "id": "B10-T1",
+          "layer": "api",
+          "title": "요청·응답 스키마와 오류 코드: BasicUpdate{name,date,method,discard,version}·ParticipantsReplace{keys,discard,version}·TeamsReplace{assignments,discard,version}, settings·games의 discard·선택 설정, 새 오류 confirm_required(409, details에 버려질 대상)·unassigned·not_participant·not_eligible(422). 응답은 기존 ClubMatchView",
+          "refs": [
+            "AC-133",
+            "AC-132"
+          ]
+        },
+        {
+          "id": "B10-T2",
+          "layer": "be",
+          "title": "PUT …/basic: 이름 공백 제외 1–30자(422 validation_error, 필드 오류), 날짜, 방식. 이름·날짜만 바뀌면 팀·대진 유지. 방식이 바뀌고 팀·대진이 있으면 discard=true일 때만 대진 폐기+팀 초기화(C-13), 아니면 409 confirm_required. 값이 같으면 저장·version 증가 없음",
+          "refs": [
+            "AC-123",
+            "AC-070",
+            "AC-132"
+          ],
+          "depends_on": [
+            "B10-T1"
+          ]
+        },
+        {
+          "id": "B10-T3",
+          "layer": "be",
+          "title": "PUT …/participants(최종 목록 교체): 추가 대상 자격(승인 회원·삭제 안 된 게스트, 422 not_eligible+키), 남는 사람 팀 유지·추가는 미배정·빠진 사람 삭제, 추가 순서=요청 순서(생성 결정성), 목록이 바뀌고 대진이 있으면 discard 필요. 같은 목록이면 무변경",
+          "refs": [
+            "AC-125",
+            "AC-128",
+            "AC-132",
+            "AC-133"
+          ],
+          "depends_on": [
+            "B10-T1"
+          ]
+        },
+        {
+          "id": "B10-T4",
+          "layer": "be",
+          "title": "PUT …/teams(배정 전체 교체): 모든 참가자 포함(422 unassigned), 참가자 아님 422 not_participant, 팀마다 2명 이상(422 min_players), 바뀌고 대진이 있으면 discard 필요, 같으면 무변경. 배정 알고리즘(propose_teams)은 변경 없음",
+          "refs": [
+            "AC-127",
+            "AC-128",
+            "AC-135",
+            "AC-132"
+          ],
+          "depends_on": [
+            "B10-T1"
+          ]
+        },
+        {
+          "id": "B10-T5",
+          "layer": "be",
+          "title": "PUT …/settings 동작 변경(값이 실제로 바뀌고 대진이 있으면 discard 필요, 같은 값이면 대진·version 유지), POST …/games에 선택 설정(totalGames·rules) 동시 저장 + 팀전 미배정 422 unassigned(조용히 제외하던 동작 보강), POST …/confirm 서버 재검증(점수 미설정·미배정 422). 생성 규칙·시드·결정성은 변경 없음",
+          "refs": [
+            "AC-071",
+            "AC-075",
+            "AC-076",
+            "AC-081",
+            "AC-129",
+            "AC-130",
+            "AC-132"
+          ],
+          "depends_on": [
+            "B10-T1"
+          ]
+        },
+        {
+          "id": "B10-T6",
+          "layer": "be",
+          "title": "DELETE …/{id}?version=N: 준비 중만(아니면 409 locked), 같은 트랜잭션에서 경기 선수→경기→참가자→청백전 순서 물리 삭제(FK RESTRICT 고려), 204, 재시도 시 404는 이미 삭제로 처리. 1명 단위 PUT …/participants/{key}는 대진이 있으면 409 confirm_required(불변식 유지). 권한: admin_user + verify_origin(회원 403)",
+          "refs": [
+            "AC-134",
+            "AC-133"
+          ],
+          "depends_on": [
+            "B10-T1"
+          ]
+        },
+        {
+          "id": "B10-T7",
+          "layer": "fe",
+          "title": "features/clubmatch/api.ts: 새 API 함수(saveBasic·saveParticipants·saveTeams·deleteClubMatch, setSettings·generate 확장)와 Mock 어댑터를 서버와 같은 규칙(confirm_required·무변경·원자성)으로. 재시도 정책: 네트워크 실패는 같은 version으로 재요청, 409 conflict면 상세를 다시 받아 보내려던 결과와 같으면 성공 처리(응답 유실), 다르면 충돌",
+          "refs": [
+            "AC-133",
+            "AC-132"
+          ],
+          "depends_on": [
+            "B10-T2",
+            "B10-T3",
+            "B10-T4",
+            "B10-T5",
+            "B10-T6"
+          ]
+        },
+        {
+          "id": "B10-T8",
+          "layer": "test",
+          "title": "BE 테스트: 새 API 단위·통합([AC-xxx] 태그), 실패 주입으로 원자성(중간 예외 시 참가자·팀·대진 모두 그대로), version 충돌, 같은 요청 반복(멱등·중복 반영 없음), 회원 403, 준비 중 삭제 후 전적·랭크 불변, 확정 청백전 삭제 거부. DB 테스트(@pytest.mark.db, TEST_DATABASE_URL 임시 DB만). 골든(schedule·policy) 결과 불변 확인",
+          "refs": [
+            "AC-071",
+            "AC-075",
+            "AC-076",
+            "AC-081",
+            "AC-133",
+            "AC-134"
+          ],
+          "depends_on": [
+            "B10-T2",
+            "B10-T3",
+            "B10-T4",
+            "B10-T5",
+            "B10-T6"
+          ]
+        },
+        {
+          "id": "B10-T9",
+          "layer": "test",
+          "title": "FE 계약 테스트: api.ts의 api/mock 두 어댑터가 같은 입력에 같은 결과·같은 오류 코드(api.contract.test.ts 확장). 기존 계약 테스트의 settings 기대값 변경은 새 정책(AC-132) 시나리오로 대체하며 약화하지 않음(변경 시 사용자 확인)",
+          "refs": [
+            "AC-132",
+            "AC-133"
+          ],
+          "depends_on": [
+            "B10-T7"
+          ]
+        }
+      ],
+      "risk_tags": [
+        "data_loss",
+        "external_contract",
+        "permission"
+      ],
+      "approval": "user",
+      "paths": {
+        "allow": [
+          "backend/app/modules/clubmatch/**",
+          "backend/tests/modules/test_clubmatch*.py",
+          "backend/tests/golden/**",
+          "frontend/src/features/clubmatch/api.ts",
+          "frontend/src/features/clubmatch/api.*.test.ts",
+          "frontend/src/features/clubmatch/schedule.ts"
+        ],
+        "shared": [
+          "backend/tests/conftest.py"
+        ]
+      },
+      "done_criteria": [
+        "새 API 4개·확장 4개가 승인 계약표(report-r9 3장 + 확정 3건)와 일치, DB 마이그레이션 없음",
+        "값이 같은 저장은 대진·version 유지(테스트로 확인)",
+        "원자성·충돌·멱등 테스트 통과, 위험 AC는 E3(실패→통과 증거)",
+        "test-be·test-fe·lint·typecheck·build 통과, make-test-db 실행(Docker·임시 DB, 원본 DB·Neon 접근 없음)",
+        "골든 테스트(FE schedule.ts ↔ BE schedule.py) 결과 불변"
+      ],
+      "test_plan": [
+        {
+          "ac": "AC-071",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-075",
+          "kind": "unit"
+        },
+        {
+          "ac": "AC-076",
+          "kind": "unit"
+        },
+        {
+          "ac": "AC-081",
+          "kind": "integration"
+        }
+      ]
+    },
+    {
+      "id": "B11",
+      "title": "청백전 단계형 생성 페이지(SCR-241–246) — Preview r8 그대로",
+      "kind": "ui",
+      "goal": "(r4) Preview r8(승인 2026-11-25, design-preview 트리 fc451408…)의 레이아웃·색·카드·아이콘·이미지·여백·타이포·상호작용을 제품에 그대로 구현한다(재해석 금지, design-preview는 시각 참고만·import·복사 금지). 팀전 5단계·개인전 4단계, 단계별 저장·복원·재진입, 이탈 확인, 대진 폐기 확인, 충돌·재시도, 준비 중 삭제, 확정 후 SCR-112 연결. Preview 보류 결정 B-18(360 현행 유지)·B-21(아바타 5개+n) 적용, B-19·B-22는 이 배치에서 구현·검증 (r6) 범위는 이 배치가 바꾸는 파일 중심(기존 청백전 공용 표현 파일 ClubMatchDetailParts·ui/·clubmatch.css 제외)",
+      "screens": [
+        "SCR-241",
+        "SCR-242",
+        "SCR-243",
+        "SCR-244",
+        "SCR-245",
+        "SCR-246"
+      ],
+      "touches": [
+        "SCR-111",
+        "SCR-112",
+        "SCR-214",
+        "SCR-225"
+      ],
+      "stories": [
+        "US-014",
+        "US-015"
+      ],
+      "acs": [
+        "AC-065",
+        "AC-070",
+        "AC-072",
+        "AC-073",
+        "AC-074",
+        "AC-122",
+        "AC-123",
+        "AC-124",
+        "AC-125",
+        "AC-126",
+        "AC-127",
+        "AC-128",
+        "AC-129",
+        "AC-130",
+        "AC-131",
+        "AC-132",
+        "AC-133",
+        "AC-134",
+        "AC-135"
+      ],
+      "components": {
+        "reuse": [
+          "CMP-001",
+          "CMP-002",
+          "CMP-004",
+          "CMP-005",
+          "CMP-006",
+          "CMP-007",
+          "CMP-008",
+          "CMP-021",
+          "CMP-022",
+          "CMP-023",
+          "CMP-024",
+          "CMP-026",
+          "CMP-027",
+          "CMP-041"
+        ],
+        "new": [
+          "CMP-028",
+          "CMP-053",
+          "CMP-054",
+          "CMP-055",
+          "CMP-056"
+        ]
+      },
+      "depends_on": [
+        "B10"
+      ],
+      "tasks": [
+        {
+          "id": "B11-T1",
+          "layer": "fe",
+          "title": "라우트: /club-matches/new(SCR-241 만들기 전), /club-matches/:matchId/setup/(basic|participants|teams|games|confirm) — 운영진 셸·탭바 숨김, 회원은 /new는 SCR-004·setup 주소는 SCR-112-ST5(존재 숨김, AC-069). 진행할 수 없는 단계 주소·개인전 teams는 진행 가능한 단계로 바꿔 보냄(01 IA)",
+          "refs": [
+            "SCR-241",
+            "AC-131",
+            "AC-122"
+          ]
+        },
+        {
+          "id": "B11-T2",
+          "layer": "fe",
+          "title": "공통 틀(VD-059–063·068–070): 머리글(뒤로·브랜드 심볼+워드마크·더보기), 히어로(CSS 코트 빛 + 기존 AST-046 frontend/public/assets 재사용), 카드, CMP-053 StepProgress(번호 원+현재 이름), CMP-054 StepActionBar(민트+어두운 글자, 이전, 사유 줄, 바 높이만큼 끝 여백), 200% 확대·낮은 높이에서 고정 해제(B-19). 색은 tokens.css만(전역 토큰 변경 없음)",
+          "refs": [
+            "CMP-053",
+            "CMP-054",
+            "SCR-241",
+            "SCR-242"
+          ],
+          "depends_on": [
+            "B11-T1"
+          ]
+        },
+        {
+          "id": "B11-T3",
+          "layer": "fe",
+          "title": "페이지 상태 관리: 단계 입력을 페이지 안에 유지(이전으로 가도 유지), '다음'에서 검증→변경분만 저장→성공 시 이동(같으면 저장 없이 이동), 저장 실패 안내+다시 시도(입력 유지), 충돌 확인 창→최신 상태로 다시 그리고 단계 완료 재판정, 대진 폐기 확인(confirm_required→확인 시 discard=true), 이탈 확인 창(react-router blocker), 재진입 시 저장 데이터로 첫 미충족 단계 계산",
+          "refs": [
+            "AC-131",
+            "AC-132",
+            "AC-133",
+            "SCR-241"
+          ],
+          "depends_on": [
+            "B11-T1"
+          ]
+        },
+        {
+          "id": "B11-T4",
+          "layer": "fe",
+          "title": "SCR-241 기본정보: 방식 타일(단계 수 즉시 5↔4), 이름 글자 수 n/30·31자 필드 오류, 날짜 선택기(기본 오늘, B-22), 첫 '다음'에 준비 중 생성(POST) 후 setup 주소로, 이후 PUT basic, 방식 변경 확인(ST9), 더보기→삭제 확인(ST10, AC-134)",
+          "refs": [
+            "SCR-241",
+            "AC-070",
+            "AC-122",
+            "AC-123",
+            "AC-134"
+          ],
+          "depends_on": [
+            "B11-T2",
+            "B11-T3"
+          ]
+        },
+        {
+          "id": "B11-T5",
+          "layer": "fe",
+          "title": "SCR-242·SCR-246: 검색·성별·급수·점수 미설정 필터(선택 유지), '표시된 n명 모두 선택/해제'(현재 결과만), 회원→게스트 순 목록·배지, 고정 검색·필터 + 선택 요약 줄(CMP-028)·점수 미설정 경고 줄, SCR-246 시트(해제, 빈 상태, 닫으면 요약 줄로 포커스), 점수 매기기 → 기존 SCR-214 ScoreEntrySheet(명단 점수 범위 안내, 기존 점수 입력 버그 수정 보존)",
+          "refs": [
+            "SCR-242",
+            "SCR-246",
+            "SCR-214",
+            "AC-124",
+            "AC-125",
+            "AC-126"
+          ],
+          "depends_on": [
+            "B11-T2",
+            "B11-T3"
+          ]
+        },
+        {
+          "id": "B11-T6",
+          "layer": "fe",
+          "title": "SCR-243 팀 구성: 방식 타일 자동 배정·직접 구성(저장 안 함, 확인 창 ST12·ST13), 첫 진입+저장 배정 없음일 때만 schedule.ts proposeTeams로 배정안 채움(ST7), 저장 배정 복원(ST1), 행 누르면 반대 팀·되돌리기·aria-live, 미배정 '청팀'·'백팀', 저장된 배정으로 되돌리기, 고정 팀 현황(아바타 5+n, B-21)·차이·경고, 대진 폐기 확인(ST11)",
+          "refs": [
+            "SCR-243",
+            "AC-072",
+            "AC-127",
+            "AC-128",
+            "AC-135"
+          ],
+          "depends_on": [
+            "B11-T2",
+            "B11-T3"
+          ]
+        },
+        {
+          "id": "B11-T7",
+          "layer": "fe",
+          "title": "SCR-244 대진 설정: 총 경기 수·분포 문장·균등안·'입력값 유지', 규칙 스위치, '대진 생성'(설정+생성 한 번에)·스켈레톤·'다시 생성', 요약·사람별 경기 수·미리보기(CMP-041 경기 카드, 실력차·완화), 선수 누르면 기존 SCR-225 교체 시트(B-22), 값 변경 시 폐기 확인(ST8)",
+          "refs": [
+            "SCR-244",
+            "SCR-225",
+            "AC-065",
+            "AC-073",
+            "AC-074",
+            "AC-129",
+            "AC-132"
+          ],
+          "depends_on": [
+            "B11-T2",
+            "B11-T3"
+          ]
+        },
+        {
+          "id": "B11-T8",
+          "layer": "fe",
+          "title": "SCR-245 확정: 요약 묶음(CMP-056)·'수정' 링크, 검증 목록(CMP-055, 글자로 사유), 공개 안내, 확정 확인 창(ST8) → POST confirm → SCR-112(확정 이후 화면, 기존 경기 진행·결과 입력 유지)",
+          "refs": [
+            "SCR-245",
+            "CMP-055",
+            "CMP-056",
+            "AC-130"
+          ],
+          "depends_on": [
+            "B11-T2",
+            "B11-T3"
+          ]
+        },
+        {
+          "id": "B11-T9",
+          "layer": "fe",
+          "title": "진입·연결: SCR-111 운영진 '새 청백전' → /club-matches/new, 준비 중 카드 → 생성 페이지(계산된 단계), SCR-112 준비 중을 운영진이 열면 생성 페이지로 리다이렉트(회원은 ST5 유지), 확정 후 SCR-112",
+          "refs": [
+            "SCR-111",
+            "SCR-112",
+            "AC-131"
+          ],
+          "depends_on": [
+            "B11-T4"
+          ]
+        },
+        {
+          "id": "B11-T10",
+          "layer": "test",
+          "title": "FE 컴포넌트·흐름 테스트: [AC-xxx]·[SCR-24x-STn] 태그(02 상태 31개 E2), 팀전 5단계·개인전 4단계 전체, 재진입 단계 계산, 저장 실패·재시도·충돌·폐기 확인·취소, 이탈 확인, 삭제. 위험 AC는 E3(테스트 먼저 실패 기록)",
+          "refs": [
+            "AC-065",
+            "AC-070",
+            "AC-072",
+            "AC-073",
+            "AC-074",
+            "AC-122",
+            "AC-123",
+            "AC-124",
+            "AC-125",
+            "AC-126",
+            "AC-127",
+            "AC-128",
+            "AC-129",
+            "AC-130",
+            "AC-131",
+            "AC-132",
+            "AC-133",
+            "AC-134",
+            "AC-135"
+          ],
+          "depends_on": [
+            "B11-T4",
+            "B11-T5",
+            "B11-T6",
+            "B11-T7",
+            "B11-T8",
+            "B11-T9"
+          ]
+        },
+        {
+          "id": "B11-T11",
+          "layer": "test",
+          "title": "브라우저 검증(temp-dir, 저장소 밖): Preview r8 대 제품 화면별 시각 비교(360·390·1440), SCR-242 고정 영역·8행, 200% 확대, 가로 넘침·하단 바 겹침, 대비·콘솔 오류, 실제 API + E2E 임시 DB(APP_ENV=e2e, 55433 smapsh_e2e) 팀전·개인전·재진입·실패·충돌·폐기 시나리오. 실기기 검증은 수행 불가 시 브라우저 검증과 구분해 보고",
+          "refs": [
+            "SCR-241",
+            "SCR-242",
+            "SCR-243",
+            "SCR-244",
+            "SCR-245",
+            "SCR-246"
+          ],
+          "depends_on": [
+            "B11-T10"
+          ]
+        }
+      ],
+      "risk_tags": [
+        "permission",
+        "data_loss"
+      ],
+      "approval": "user",
+      "paths": {
+        "allow": [
+          "frontend/src/features/clubmatch/setup/**",
+          "frontend/src/features/clubmatch/api.ts",
+          "frontend/src/features/clubmatch/api.*.test.ts",
+          "frontend/src/features/clubmatch/ClubMatchOps.tsx",
+          "frontend/src/features/clubmatch/clubmatch.test.tsx",
+          "frontend/src/features/clubmatch/detail.test.tsx",
+          "frontend/src/features/clubmatch/member.test.tsx",
+          "frontend/src/pages/ClubMatchSetupPage.tsx",
+          "frontend/src/pages/MemberClubMatchesPage.tsx",
+          "frontend/src/pages/ClubMatchDetailPage.tsx",
+          "frontend/src/pages/*.test.tsx",
+          "frontend/src/routes/router.tsx",
+          "frontend/src/routes/guards.ts",
+          "frontend/src/routes/*.test.tsx",
+          "frontend/src/components/StepProgress.tsx",
+          "frontend/src/components/StepActionBar.tsx",
+          "frontend/src/components/ValidationList.tsx",
+          "frontend/src/components/SetupSummary.tsx",
+          "frontend/src/components/StickySummary.tsx",
+          "frontend/src/components/*.test.tsx",
+          "frontend/src/styles/clubmatch-setup.css",
+          "frontend/src/main.tsx",
+          "frontend/src/features/roster/ScoreEntrySheet.tsx"
+        ],
+        "shared": [
+          "frontend/src/lib/**"
+        ]
+      },
+      "done_criteria": [
+        "02 SCR-241–246 상태 31개 E2, 위험 AC E3",
+        "Preview r8과 화면별 시각 비교 결과 보고(차이는 사유와 함께, 승인 디자인 재해석 없음)",
+        "360·390·1440 가로 넘침 0·하단 바 겹침 0, SCR-242 390에서 고정 영역 35% 이하·8행 이상, 200% 확대 고정 해제, 대비 4.5:1(비활성 예외 기록)·콘솔 오류 0",
+        "실제 API·E2E 임시 DB로 팀전·개인전·재진입·실패·충돌·폐기 시나리오 통과(개발 DB 데이터 무변경)",
+        "ScoreEntrySheet 기존 점수 입력 버그 수정·테스트 보존",
+        "test-fe·test-be·lint·typecheck·build·make-test-db, token-check·token-audit·ui-map check·ui-guard 통과"
+      ],
+      "test_plan": [
+        {
+          "ac": "AC-065",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-070",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-072",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-073",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-074",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-122",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-123",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-124",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-125",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-126",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-127",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-128",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-129",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-130",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-131",
+          "kind": "e2e"
+        },
+        {
+          "ac": "AC-132",
+          "kind": "e2e"
+        },
+        {
+          "ac": "AC-133",
+          "kind": "e2e"
+        },
+        {
+          "ac": "AC-134",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-135",
+          "kind": "integration"
+        }
+      ]
+    },
+    {
+      "id": "B12",
+      "title": "레거시 생성 코드 정리·E2E 갱신·전체 회귀",
+      "kind": "non_ui",
+      "goal": "(r4) 생성 페이지로 대체되어 제품에서 더 이상 쓰지 않는 코드를 의존성을 확인한 뒤 정리한다: SCR-222 만들기 시트(ClubMatchesPage), SCR-112 운영진 준비 중 영역(ClubMatchOps의 방식·참가자·설정·생성·확정 전 부분, ST9–ST12 이력), ParticipantsPanel의 확정 전 팀 배정 사용처, 쓰지 않는 API 함수·Mock·테스트. 승인 산출물·이력 문서는 지우지 않는다. 확정 이후 운영(SCR-224 확인·SCR-225 교체·SCR-226 대체·결과)은 그대로 둔다. E2E(check-clubmatch-api/mock)를 생성 페이지 기준으로 다시 쓰고 전체 회귀를 실행한다 AC-042(만들기는 생성 페이지에서만 시작)는 레거시 만들기 시트를 없앤 뒤 E2E로 확인한다",
+      "screens": [],
+      "stories": [
+        "US-014",
+        "US-015"
+      ],
+      "acs": [
+        "AC-042"
+      ],
+      "components": {
+        "reuse": [],
+        "new": []
+      },
+      "depends_on": [
+        "B11"
+      ],
+      "tasks": [
+        {
+          "id": "B12-T1",
+          "layer": "fe",
+          "title": "의존성 조사 후 제거: ClubMatchesPage의 SCR-222 시트·createClubMatch 호출처 이동 확인, ClubMatchOps 확정 전 영역·관련 확인 창, ParticipantsPanel 확정 전 모드, 미사용 export(api.ts의 setTeam·applyTeamProposal 등 화면 사용처가 0일 때만). 서버의 기존 1명 단위 API는 계약상 유지",
+          "refs": [
+            "SCR-111",
+            "SCR-112",
+            "SCR-224"
+          ]
+        },
+        {
+          "id": "B12-T2",
+          "layer": "test",
+          "title": "제거한 코드만 검증하던 테스트 정리(삭제·변경 목록과 대체 테스트를 사용자에게 보여 확인 후, 약화 금지). 확정 이후 운영·결과·점수 입력 테스트는 유지",
+          "refs": [
+            "AC-077",
+            "AC-078",
+            "AC-085"
+          ],
+          "depends_on": [
+            "B12-T1"
+          ]
+        },
+        {
+          "id": "B12-T3",
+          "layer": "infra",
+          "title": "E2E 스크립트 갱신: experiments/frontend-layout/check-clubmatch-api.mjs·check-clubmatch-mock.mjs를 생성 페이지 흐름(팀전·개인전·재진입·삭제)으로, e2e-guard로 APP_ENV=e2e 서버·임시 DB만",
+          "refs": [
+            "AC-122",
+            "AC-131",
+            "AC-134",
+            "AC-042"
+          ],
+          "depends_on": [
+            "B12-T1"
+          ]
+        },
+        {
+          "id": "B12-T4",
+          "layer": "test",
+          "title": "전체 회귀: make check, make test-db, E2E(auth·roster·tutorial·clubmatch, 기존 경기 진행·점수 입력 포함), 브라우저 콘솔 오류 0. 결과를 실행 로그와 함께 보고(실행 못 한 단계는 not_run)",
+          "refs": [
+            "AC-044",
+            "AC-077",
+            "AC-085"
+          ],
+          "depends_on": [
+            "B12-T2",
+            "B12-T3"
+          ]
+        },
+        {
+          "id": "B12-T5",
+          "layer": "docs",
+          "title": "README.md·CLAUDE.md의 청백전 모듈·라우트·API 설명 갱신(새 명령·환경변수 없음 확인)",
+          "refs": [
+            "SCR-241"
+          ],
+          "depends_on": [
+            "B12-T4"
+          ]
+        }
+      ],
+      "risk_tags": [],
+      "approval": "user",
+      "paths": {
+        "allow": [
+          "frontend/src/features/clubmatch/ClubMatchOps.tsx",
+          "frontend/src/features/clubmatch/ParticipantsPanel.tsx",
+          "frontend/src/features/clubmatch/api.ts",
+          "frontend/src/features/clubmatch/api.*.test.ts",
+          "frontend/src/features/clubmatch/*.test.tsx",
+          "frontend/src/pages/ClubMatchesPage.tsx",
+          "frontend/src/pages/MemberClubMatchesPage.tsx",
+          "frontend/src/pages/*.test.tsx",
+          "frontend/src/routes/**",
+          "experiments/frontend-layout/check-clubmatch-*.mjs",
+          "experiments/frontend-layout/e2e-guard.mjs",
+          "README.md",
+          "CLAUDE.md"
+        ],
+        "shared": []
+      },
+      "done_criteria": [
+        "제거 대상마다 사용처 0 확인 기록",
+        "테스트 삭제·변경은 사용자 확인 후, 대체 검증 명시",
+        "E2E 생성 흐름 통과(임시 DB), make check·make test-db 통과",
+        "확정 이후 경기 진행·결과·점수 입력 회귀 통과"
+      ],
+      "test_plan": [
+        {
+          "ac": "AC-042",
+          "kind": "e2e"
+        }
+      ]
     }
   ],
   "deferred": [

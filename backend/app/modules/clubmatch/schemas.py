@@ -144,18 +144,29 @@ class Created(BaseModel):
     id: str
 
 
+NAME_MAX = 30
+
+
+def _clean_name(value: str) -> str:
+    """이름: 앞뒤 공백 제외 1–30자(AC-123). 넘으면 필드 오류(일반 저장 실패가 아님)."""
+    value = value.strip()
+    if not value:
+        raise ValueError("이름을 입력해 주세요")
+    if len(value) > NAME_MAX:
+        raise ValueError("이름은 30자 이내로 입력해 주세요")
+    return value
+
+
 class ClubMatchCreate(BaseModel):
     method: Method
     date: dt.date
-    name: str = Field(max_length=30)
+    # (B10) 앞뒤 공백 제외 1–30자. 넘으면 "이름은 30자 이내로 입력해 주세요"(AC-123 필드 오류)
+    name: str = Field(max_length=200)
 
     @field_validator("name")
     @classmethod
     def name_not_blank(cls, value: str) -> str:
-        value = value.strip()
-        if not value:
-            raise ValueError("이름을 입력해 주세요")
-        return value
+        return _clean_name(value)
 
 
 class Versioned(BaseModel):
@@ -171,10 +182,58 @@ class MethodUpdate(Versioned):
 class SettingsUpdate(Versioned):
     totalGames: int = Field(ge=1, le=200)  # noqa: N815
     rules: Rules
+    # (B10, C-33) 값이 바뀌고 대진이 있으면 폐기 확인이 필요(없으면 409 confirm_required)
+    discard: bool = False
 
 
 class ParticipationUpdate(Versioned):
     participating: bool
+    # (B10) 대진이 있을 때 참가자를 바꾸려면 폐기 확인이 필요(불변식: 남은 대진은 현재 입력과 맞음)
+    discard: bool = False
+
+
+class BasicUpdate(Versioned):
+    """(B10) 생성 페이지 기본정보 저장(C-32·C-33, AC-123): 이름·날짜·방식.
+
+    이름·날짜만 바뀌면 팀·대진 유지. 방식이 바뀌고 팀 배정·대진이 있으면 discard=true여야 함(C-13).
+    """
+
+    name: str
+    date: dt.date
+    method: Method
+    discard: bool = False
+
+    @field_validator("name")
+    @classmethod
+    def name_rule(cls, value: str) -> str:
+        return _clean_name(value)
+
+
+class ParticipantsReplace(Versioned):
+    """(B10) 참가자 일괄 저장(C-32·C-34, AC-125).
+
+    최종 참가자 전체 목록(사람 키), 추가 순서 = 목록 순서.
+    """
+
+    keys: list[str] = Field(max_length=500)
+    discard: bool = False
+
+
+class TeamsReplace(Versioned):
+    """(B10) 팀 배정 일괄 저장(C-34, AC-127·128·135): 모든 참가자의 청·백."""
+
+    assignments: dict[str, Team]
+    discard: bool = False
+
+
+class GenerateRequest(Versioned):
+    """대진 생성·다시 생성.
+
+    (B10) 대진 설정 단계는 총 경기 수·규칙을 함께 보내 한 번에 저장(C-32).
+    """
+
+    totalGames: int | None = Field(default=None, ge=1, le=200)  # noqa: N815
+    rules: Rules | None = None
 
 
 class TeamUpdate(Versioned):

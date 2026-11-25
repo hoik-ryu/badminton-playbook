@@ -347,7 +347,9 @@ def test_api_generated_games_lock_participant_removal(admin: TestClient, db: Ses
         f"{BASE}/{view['id']}/participants/{key}",
         json={"participating": False, "version": view["version"]},
     )
-    assert res.json()["error"]["code"] == "in_games"
+    # (B10 계약 변경, C-33) 대진이 있으면 참가자 변경은 폐기 확인 필요(이전: 409 in_games)
+    assert res.json()["error"]["code"] == "confirm_required"
+    assert admin.get(f"{BASE}/{view['id']}").json()["games"] == view["games"]  # 그대로
     after = admin.put(
         f"{BASE}/{view['id']}/method", json={"method": "team", "version": view["version"]}
     ).json()

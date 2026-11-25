@@ -1,0 +1,198 @@
+{
+ "format": "design-reference-extract/v1",
+ "ref": "REF-004",
+ "sha256": "527d31a8dff9514c0f991bb8c43a8ff079812780c54b4557d8f3d537fccd2d1a",
+ "extracted_by": {
+  "model": "claude-opus-5-5",
+  "at": "2026-11-24",
+  "method": "이미지를 직접 보고 작성. 색은 로컬에서 3×3 픽셀 평균을 측정(외부 서비스로 보내지 않음). 위치는 원본 픽셀 좌표"
+ },
+ "scope_note": "청백전 생성 페이지 기본정보(SCR-241) 시안. 사용자 지시: 시안의 레이아웃·카드·여백·타이포·버튼·아이콘을 최대한 충실히 재현, 기능은 승인된 UX Spec r9 기준",
+ "items": [
+  {
+   "id": "RX-004-01",
+   "axis": "layout",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "위에서부터 머리글(뒤로·가운데 로고·오른쪽 아이콘) → 히어로(작은 라벨·큰 제목·설명, 오른쪽 셔틀콕 그림) → 흰 카드(진행 표시 + 안쪽 입력 카드) → 화면 폭 큰 주 버튼 순서다",
+   "evidence": "원본 1024×1536: 머리글 y≈80–150, 히어로 y≈190–440, 카드 y≈445–1335, 버튼 y≈1383–1493"
+  },
+  {
+   "id": "RX-004-02",
+   "axis": "navigation",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "진행 표시는 번호 원 5개를 가는 선으로 잇고 원 아래 단계 이름을 둔다. 현재 단계 원은 채움 + 흰 숫자, 이름은 굵은 강조색. 남은 단계는 옅은 테두리 원",
+   "evidence": "카드 위쪽 y≈478–575"
+  },
+  {
+   "id": "RX-004-03",
+   "axis": "palette",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "현재 단계 원 채움색은 진한 청록이다",
+   "evidence": "(140,520) 측정",
+   "value": "#03A08A"
+  },
+  {
+   "id": "RX-004-04",
+   "axis": "palette",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "주 버튼 채움색은 밝은 민트 청록이고 글자는 흰색이다",
+   "evidence": "버튼 (150,1440) 측정",
+   "value": "#36C8AC"
+  },
+  {
+   "id": "RX-004-05",
+   "axis": "palette",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "화면 배경은 아주 옅은 민트, 카드는 거의 흰색이다",
+   "evidence": "배경 (60,1520) #F4FDFC, 카드 (500,650) #FEFEFE",
+   "value": "#F4FDFC/#FEFEFE"
+  },
+  {
+   "id": "RX-004-06",
+   "axis": "palette",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "히어로 오른쪽은 민트 그라데이션(코트 바닥 빛)으로 위로 갈수록 옅어진다",
+   "evidence": "히어로 오른쪽 (700,420) #C0F4EC, 위쪽 (500,150) #EDFCFA",
+   "value": "#C0F4EC→#EDFCFA"
+  },
+  {
+   "id": "RX-004-07",
+   "axis": "components",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "선택 버튼 2개(아이콘 + 글자)가 나란히 있고, 선택된 쪽은 옅은 민트 면 + 민트 테두리 + 굵은 청록 글자다",
+   "evidence": "타일 y≈714–802, 선택 면 (600,790) #E3FAF5",
+   "value": "#E3FAF5"
+  },
+  {
+   "id": "RX-004-08",
+   "axis": "components",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "입력칸은 아주 옅은 회색 면에 옅은 테두리, 모서리가 둥글고 글자 수 '12 / 30'이 오른쪽 아래에 있다",
+   "evidence": "입력 y≈910–992, 면 (700,955) #F9FBFD"
+  },
+  {
+   "id": "RX-004-09",
+   "axis": "typography",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "제목은 매우 굵고 크며(라벨·설명의 약 2.5배) 진한 청록이다. 섹션 제목은 굵은 본문 크기 + 왼쪽 선 아이콘 + 빨간 필수 표시",
+   "evidence": "제목 y≈255–325, 섹션 제목 y≈650–690"
+  },
+  {
+   "id": "RX-004-10",
+   "axis": "spacing_density",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "여백이 넓다. 카드 안쪽 여백이 크고 섹션 사이 간격이 커서 한 화면에 입력 3개만 보인다",
+   "evidence": "카드 안쪽 여백 ≈40px(원본), 섹션 간격 ≈90px"
+  },
+  {
+   "id": "RX-004-11",
+   "axis": "emphasis_mood",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "밝은 민트 그라데이션·셔틀콕 사진 그림·둥근 카드로 밝고 산뜻한 스포츠 서비스 분위기다",
+   "evidence": "히어로 오른쪽 셔틀콕(초록 띠)"
+  },
+  {
+   "id": "RX-004-12",
+   "axis": "components",
+   "basis": "observed",
+   "confidence": "high",
+   "statement": "카드 모서리가 크게 둥글고(버튼·입력보다 큼) 그림자가 아주 옅다",
+   "evidence": "카드 모서리 반경 ≈24px(원본 기준)"
+  }
+ ],
+ "excluded": [
+  {
+   "kind": "text",
+   "note": "이미지 속 문구('다음 단계로', '확인', '청백전 생성하기', '일시(날짜)', '토너먼트(3전 2선승)', '생성 후에도 일부 설정은 수정할 수 있어요' 등)는 요구사항이 아님. 승인된 02의 문구를 씀"
+  },
+  {
+   "kind": "feature",
+   "note": "머리글 종(알림) 아이콘과 '직접 추가' 탭은 기획에 없는 기능이라 옮기지 않음"
+  },
+  {
+   "kind": "logo",
+   "note": "이미지 속 SMAPSH 로고는 쓰지 않고 기존 브랜드 심볼·워드마크 자산을 씀"
+  },
+  {
+   "kind": "photo",
+   "note": "셔틀콕 그림은 이미지에서 잘라 쓰지 않고 기존 자산 AST-046을 씀"
+  }
+ ],
+ "system_candidates": {
+  "tokens": [
+   {
+    "role": "color.action.strong",
+    "value": "#03A08A",
+    "from": [
+     "RX-004-03"
+    ],
+    "status": "candidate"
+   },
+   {
+    "role": "color.action.primary",
+    "value": "#36C8AC",
+    "from": [
+     "RX-004-04"
+    ],
+    "status": "candidate"
+   },
+   {
+    "role": "color.hero.bg",
+    "value": "#C0F4EC",
+    "from": [
+     "RX-004-06"
+    ],
+    "status": "candidate"
+   },
+   {
+    "role": "color.accent.subtle",
+    "value": "#E3FAF5",
+    "from": [
+     "RX-004-07"
+    ],
+    "status": "candidate"
+   }
+  ],
+  "components": [
+   {
+    "pattern": "생성 페이지 진행 표시(CMP-053)",
+    "rule": "번호 원을 선으로 잇고 현재 단계만 채운 원 + 숫자",
+    "from": [
+     "RX-004-02",
+     "RX-004-03"
+    ],
+    "status": "candidate"
+   },
+   {
+    "pattern": "선택 버튼(CMP-002)",
+    "rule": "아이콘 + 글자 타일 2개, 선택 시 옅은 민트 면·테두리·굵은 글자",
+    "from": [
+     "RX-004-07"
+    ],
+    "status": "candidate"
+   }
+  ],
+  "layout_principles": [
+   {
+    "screen_type": "form",
+    "principle": "머리글 → 히어로 → 흰 카드(진행 표시 + 입력) → 화면 폭 주 버튼",
+    "from": [
+     "RX-004-01",
+     "RX-004-10"
+    ],
+    "status": "candidate"
+   }
+  ]
+ }
+}

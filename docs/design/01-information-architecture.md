@@ -1,10 +1,10 @@
 ---
 doc: information-architecture
-revision: 8
+revision: 9
 language: ko
 based_on:
-  planning_revision: 9
-  ux_planning_revision: 8
+  planning_revision: 10
+  ux_planning_revision: 9
 ---
 
 # 정보 구조 (Information Architecture): 배드민턴 플레이북 (badminton-playbook)
@@ -41,6 +41,8 @@ based_on:
 >   - SCR-111 '새 청백전' → SCR-241
 >   - 준비 중 청백전(목록 카드·상세 주소, 운영진) → 생성 페이지의 진행 가능한 단계(5장)
 > - **바뀌지 않은 것**: 다른 화면의 ID·경로·셸·접근 역할, 청백전 목록·확정 이후 상세·결과, 하단 탭 구성
+
+> **r9 개정(2026-11-24)**: 기획 r10·UX 결정 r9(UXD-095·099 r9 정합성, 팀 구성 방식)을 기준으로 맞췄습니다. 화면 ID·경로·셸·접근 역할·사이트맵·내비게이션 규칙은 바뀌지 않았습니다.
 
 ## 1. 역할과 레이아웃 셸
 
