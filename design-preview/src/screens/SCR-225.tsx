@@ -16,7 +16,7 @@ export function Scr225({ stateId }: { stateId: string }) {
   const st = stateId
   if (st === 'SCR-225-ST7') return <ConfirmedView />
   const view: { parent: string; sheet: string } =
-    st === 'SCR-225-ST1-TEAM' || st === 'SCR-225-ST10' || st === 'SCR-225-ST8'
+    st === 'SCR-225-ST1-TEAM' || st === 'SCR-225-ST10' || st === 'SCR-225-ST8' || st === 'SCR-225-ST13'
       ? { parent: 'SCR-244-ST7', sheet: st === 'SCR-225-ST8' ? 'count' : 'team' }
       : st === 'SCR-225-ST3'
         ? { parent: 'SCR-244-ST7-TEAM2', sheet: 'player' }

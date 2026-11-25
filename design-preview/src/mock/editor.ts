@@ -10,11 +10,16 @@ export type EGame = {
   t2: [Slot, Slot]
   /** 규칙 완화 사유(자동 생성 '성별 조합', 확정 전 편집 '운영진 수동 변경') */
   relax?: 'gender' | 'manual'
+  /** (r14) 라운드 번호(1부터). 코트·경기 번호는 서버처럼 라운드 → 코트 순서로 다시 매김(C-36) */
+  round?: number
+  /** (r14) 확정 후: 결과(0 = t1 승, 1 = t2 승), 취소(중도 귀가), 화면에서만 쓰는 귀가자 */
+  result?: 0 | 1 | null
+  cancelled?: boolean
 }
 export type Target = { key: number; side: 0 | 1; idx: 0 | 1 }
 export type Kind = 'team' | 'individual'
 
-export type Dataset = { kind: Kind; ids: string[]; teams: Record<string, Team> | null; games: EGame[]; base: number }
+export type Dataset = { kind: Kind; ids: string[]; teams: Record<string, Team> | null; games: EGame[]; base: number; /** (r14) 코트 수(라운드 기반) */ courts?: number }
 
 const pick = (ids: string[], idx: number[]): [string, string, string, string] => idx.map((i) => ids[i]) as [string, string, string, string]
 
@@ -62,10 +67,10 @@ export function dataset(name: 'team16' | 'ind16' | 'ind4' | 'team4' | 'confirmed
   }
   if (name === 'team16') return { kind: 'team', ids: SELECTED_16, teams: proposeTeams(SELECTED_16), games: teamGames16(), base: 8 }
   if (name === 'ind16') return { kind: 'individual', ids: SELECTED_16, teams: null, games: individualGames16(), base: 9 }
-  if (name === 'ind4') return { kind: 'individual', ids: IND4, teams: null, games: [{ key: 1, t1: ['p02', 'p04'], t2: ['p06', 'p12'] }], base: 1 }
+  if (name === 'ind4') return { kind: 'individual', ids: IND4, teams: null, games: [{ key: 1, round: 1, t1: ['p02', 'p04'], t2: ['p06', 'p12'] }], base: 1, courts: 4 }
   // 팀당 2명(최소 인원) 팀전 — 같은 팀 교체 후보가 없는 경우
   const ids = ['p01', 'p03', 'p02', 'p04']
-  return { kind: 'team', ids, teams: { p01: 'blue', p03: 'blue', p02: 'white', p04: 'white' }, games: [{ key: 1, t1: ['p01', 'p03'], t2: ['p02', 'p04'] }], base: 1 }
+  return { kind: 'team', ids, teams: { p01: 'blue', p03: 'blue', p02: 'white', p04: 'white' }, games: [{ key: 1, round: 1, t1: ['p01', 'p03'], t2: ['p02', 'p04'] }], base: 1, courts: 4 }
 }
 
 export const filled = (g: EGame) => [...g.t1, ...g.t2].filter((x): x is string => !!x)
@@ -149,6 +154,12 @@ export function candidates(ds: Dataset, games: EGame[], t: Target, confirmed = f
       out.push({ id, section: 'replace', state: 'off', games: cnt[id] ?? 0, gap: null, warns: [], reason: '같은 경기에 이미 있습니다', next: g })
       continue
     }
+    // (r14) 같은 라운드의 다른 경기에 출전(취소된 경기는 출전으로 세지 않음, C-36·C-37)
+    const busy = g.round ? games.find((o) => o.key !== g.key && o.round === g.round && !o.cancelled && filled(o).includes(id)) : undefined
+    if (busy) {
+      out.push({ id, section: 'replace', state: 'off', games: cnt[id] ?? 0, gap: null, warns: [], reason: `이 라운드에 이미 출전 · ${noOf(games, busy)}경기 코트 ${courtOf(games, busy)}`, next: g })
+      continue
+    }
     out.push(judge(id, 'replace', put(g, t, id)))
   }
   // 정렬: 구역마다 경기 수 적은 순 → 이름순(UXD-040), 선택 불가는 맨 아래
@@ -163,4 +174,83 @@ export function regenerate(ds: Dataset, seed: number, count: number): EGame[] {
     const a = src[(i + seed) % src.length]
     return { ...a, key: i + 1, relax: a.relax === 'gender' ? 'gender' : undefined }
   })
+}
+
+
+// ===== (r14) 라운드·코트(C-36) — 프리뷰 재현용. 실제 생성·검증은 서버(schedule.py)가 함 =====
+export const byRound = (games: EGame[]) => [...games].sort((a, b) => (a.round ?? 0) - (b.round ?? 0))
+/** 경기 번호: 라운드 → 코트 순 전체 일련번호(D10) */
+export const noOf = (games: EGame[], g: EGame) => byRound(games).findIndex((x) => x.key === g.key) + 1
+/** 코트 번호: 라운드 안 순서(D3, 서버가 매김) */
+export const courtOf = (games: EGame[], g: EGame) => games.filter((x) => x.round === g.round).findIndex((x) => x.key === g.key) + 1
+export function roundsOf(games: EGame[]) {
+  const out = new Map<number, EGame[]>()
+  for (const g of byRound(games)) out.set(g.round ?? 1, [...(out.get(g.round ?? 1) ?? []), g])
+  return [...out.entries()].map(([round, gs]) => ({ round, games: gs }))
+}
+/** 라운드 출전·휴식(저장된 = 완성되고 취소되지 않은 경기만) */
+export function roundPlay(ds: Dataset, games: EGame[], round: number) {
+  const playing = new Set(games.filter((g) => g.round === round && complete(g) && !g.cancelled).flatMap(filled))
+  const rest = ds.ids.filter((id) => !playing.has(id))
+  const team = (t: Team, xs: string[]) => (ds.teams ? xs.filter((id) => ds.teams![id] === t).length : 0)
+  return { playing: [...playing], rest, blueIn: team('blue', [...playing]), whiteIn: team('white', [...playing]), blueRest: team('blue', rest), whiteRest: team('white', rest) }
+}
+/** 라운드당 최대 경기 수 k = min(코트, ⌊인원÷4⌋, 팀전 ⌊청÷2⌋·⌊백÷2⌋) */
+export function perRound(ds: Dataset, courts: number) {
+  const n = Math.floor(ds.ids.length / 4)
+  if (!ds.teams) return Math.min(courts, n)
+  const b = ds.ids.filter((id) => ds.teams![id] === 'blue').length
+  const w = ds.ids.length - b
+  return Math.min(courts, n, Math.floor(b / 2), Math.floor(w / 2))
+}
+/** 기본 라운드 수(C-36 r13): 개인전 ⌈N÷k⌉, 팀전 ⌈2·큰 팀÷k⌉, 상한 ⌊200÷k⌋ */
+export function defaultRounds(ds: Dataset, k: number) {
+  if (k <= 0) return 0
+  const big = ds.teams ? Math.max(...(['blue', 'white'] as Team[]).map((t) => ds.ids.filter((id) => ds.teams![id] === t).length)) : 0
+  const want = ds.teams ? Math.ceil((2 * big) / k) : Math.ceil(ds.ids.length / k)
+  return Math.min(want, Math.floor(200 / k))
+}
+const h = (s: string) => [...s].reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 7)
+
+/** 라운드 기반 자동 생성 재현: 라운드마다 출전자(경기 수 적은 → 직전 휴식 → 시드)를 먼저 고르고 조를 짬 */
+export function genRounds(ds: Dataset, courts: number, rounds: number, seed = 0): EGame[] {
+  const k = perRound(ds, courts)
+  const cnt: Record<string, number> = Object.fromEntries(ds.ids.map((id) => [id, 0]))
+  let rested = new Set<string>()
+  const out: EGame[] = []
+  let key = 1
+  const choose = (pool: string[], n: number, r: number) =>
+    [...pool].sort((a, b) => cnt[a] - cnt[b] || Number(rested.has(b)) - Number(rested.has(a)) || h(a + r + seed) - h(b + r + seed)).slice(0, n)
+  for (let r = 1; r <= rounds && k > 0; r++) {
+    if (ds.teams) {
+      const bl = choose(ds.ids.filter((id) => ds.teams![id] === 'blue'), 2 * k, r).sort((a, b) => h(a + 'b' + r + seed) - h(b + 'b' + r + seed))
+      const wh = choose(ds.ids.filter((id) => ds.teams![id] === 'white'), 2 * k, r).sort((a, b) => h(a + 'w' + r + seed) - h(b + 'w' + r + seed))
+      for (let i = 0; i < k; i++) out.push({ key: key++, round: r, t1: [bl[2 * i], bl[2 * i + 1]], t2: [wh[2 * i], wh[2 * i + 1]] })
+      const ins = new Set([...bl, ...wh])
+      ;[...bl, ...wh].forEach((id) => cnt[id]++)
+      rested = new Set(ds.ids.filter((id) => !ins.has(id)))
+    } else {
+      const sel = choose(ds.ids, 4 * k, r).sort((a, b) => h(a + r + seed) - h(b + r + seed))
+      for (let i = 0; i < k; i++) out.push({ key: key++, round: r, t1: [sel[4 * i], sel[4 * i + 2]], t2: [sel[4 * i + 1], sel[4 * i + 3]] })
+      sel.forEach((id) => cnt[id]++)
+      const ins = new Set(sel)
+      rested = new Set(ds.ids.filter((id) => !ins.has(id)))
+    }
+  }
+  // 성별 조합 완화 한 경기(표시 재현)
+  if (out[5]) out[5] = { ...out[5], relax: 'gender' }
+  return out
+}
+
+/** (r14) 라운드 기반 데이터: 개인전 20명·코트 4(5라운드 20경기), 팀전 18명 청 9·백 9·코트 4(5라운드 20경기) */
+export const IND20 = ['p01', 'p02', 'p03', 'p04', 'p05', 'p06', 'p07', 'p08', 'p09', 'p10', 'p11', 'p12', 'p13', 'p14', 'p15', 'p16', 'p17', 'p19', 'p20', 'g01']
+export const TEAM18 = ['p01', 'p02', 'p03', 'p04', 'p05', 'p06', 'p07', 'p08', 'p09', 'p10', 'p11', 'p12', 'p13', 'p14', 'p15', 'p16', 'p17', 'g01']
+export function roundDataset(kind: Kind, courts = 4): Dataset {
+  const ids = kind === 'team' ? TEAM18 : IND20
+  const teams = kind === 'team' ? proposeTeams(ids) : null
+  const ds: Dataset = { kind, ids, teams, games: [], base: 0, courts }
+  const k = perRound(ds, courts)
+  ds.base = defaultRounds(ds, k)
+  ds.games = genRounds(ds, courts, ds.base)
+  return ds
 }

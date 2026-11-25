@@ -376,3 +376,94 @@
   .su-game[data-phase='edit'] .su-avatar[data-size='sm'] { width: 20px; height: 20px; font-size: 10px; }
   .su-game[data-phase='edit'] .su-tl .su-players .su-slot-empty { padding: 0 8px; }
 }
+
+/* ===== (r14) 라운드·코트(SCR-241·244·245·112·225·226) — DD r14 VD-077–086, 기존 토큰만 ===== */
+/* VD-077 숫자 스테퍼: 입력칸 틀 + 양 끝 −/＋(44) */
+.su-stepper { display: flex; align-items: center; gap: 4px; width: 200px; max-width: 100%; height: 52px; padding: 0 4px; border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-default); background: var(--color-bg-page); }
+.su-stepper:focus-within { border-color: var(--color-action-strong); }
+.su-stepper button { display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; border-radius: var(--radius-sm); color: var(--color-text-accent); }
+.su-stepper button svg { width: 18px; height: 18px; }
+.su-stepper button:disabled { color: var(--color-text-disabled); }
+.su-stepper input { width: 0; flex: 1; min-width: 32px; text-align: right; border: 0; outline: 0; background: transparent; font: inherit; font-size: var(--font-size-title); font-weight: 700; font-variant-numeric: tabular-nums; color: var(--color-text-primary); }
+.su-stepper .su-unit { flex-shrink: 0; padding-right: 2px; font-size: var(--font-size-body); color: var(--color-text-secondary); }
+.su-stepper[data-error='true'] { border-color: var(--color-status-danger-fg); }
+.su-help { margin: 0; font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+/* VD-078 미리보기 세 줄 */
+.su-plan { display: flex; flex-direction: column; gap: 4px; margin: 0; padding: 0; list-style: none; font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.su-plan li { display: flex; align-items: flex-start; gap: 6px; }
+.su-plan svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 2px; }
+.su-plan b { color: var(--color-text-primary); }
+.su-tdot { display: inline-block; width: 6px; height: 6px; margin: 0 3px 1px 0; border-radius: 999px; background: var(--color-team-blue-fg); vertical-align: middle; }
+.su-tdot[data-team='white'] { background: var(--color-bg-page); border: 1px solid var(--color-border-strong); }
+/* VD-079 라운드 구역: 카드 없이 높이 40 머리글 */
+.su-rounds { display: flex; flex-direction: column; gap: 8px; }
+.su-round { display: flex; flex-direction: column; gap: 8px; }
+.su-round + .su-round { padding-top: 4px; border-top: 1px solid var(--color-border-default); }
+.su-rhead { display: flex; align-items: center; gap: 6px 8px; min-height: 40px; flex-wrap: wrap; }
+.su-rhead[data-current='true'] { padding-left: 8px; border-left: 3px solid var(--color-action-primary); }
+.su-rtitle { display: inline-flex; align-items: center; gap: 6px; margin: 0; font-size: var(--font-size-body); font-weight: 700; }
+.su-rcap { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0 4px; flex: 1; min-width: 0; font-size: var(--font-size-caption); color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }
+.su-rest { display: inline-flex; align-items: center; gap: 2px; min-height: 32px; white-space: nowrap; font-weight: 700; color: var(--color-text-accent); position: relative; }
+.su-rest::after { content: ''; position: absolute; inset: -6px -4px; } /* 누름 영역 44 */
+.su-rest svg { width: 12px; height: 12px; transition: transform var(--motion-duration-fast); }
+.su-rest svg[data-open='true'] { transform: rotate(180deg); }
+.su-rfold { display: grid; place-items: center; width: 44px; height: 44px; margin: -2px -8px -2px auto; color: var(--color-text-secondary); }
+.su-rfold svg { width: 18px; height: 18px; }
+.su-restnames { display: flex; flex-wrap: wrap; gap: 6px; margin-top: -4px; }
+.su-round-list { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.su-badge[data-tone='pending'] { background: var(--color-bg-page); color: var(--color-text-secondary); border: 1px dashed var(--color-border-strong); }
+.su-badge[data-tone='live'] { background: var(--color-action-strong); color: var(--color-action-onStrong); }
+/* VD-080 카드 머리 줄 '코트 m · n경기', 구역 끝 '코트 m에 경기 추가'(높이 44) */
+.su-gno small { font-size: var(--font-size-caption); font-weight: 400; color: var(--color-text-secondary); }
+.su-add[data-size='sm'] { height: 44px; font-size: var(--font-size-caption); }
+/* CMP-029 토스트 */
+.su-toast { position: fixed; left: 50%; bottom: calc(var(--su-bar-live, 96px) + 12px); z-index: 70; transform: translateX(-50%); width: calc(100% - 32px); max-width: 560px;
+  padding: 12px 14px; border-radius: var(--radius-md); background: var(--color-text-primary); color: var(--color-bg-page); font-size: var(--font-size-body); box-shadow: var(--elevation-sheet); word-break: keep-all; }
+/* VD-083 진행 라운드 카드 */
+.su-rprog { display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--color-border-default); background: var(--color-bg-page); }
+.su-rprog-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 40px; }
+.su-rprog-top h2 { margin: 0; font-size: var(--font-size-title); font-weight: 700; }
+.su-rprog-count { display: inline-flex; align-items: center; min-height: 44px; margin: -2px 0; font-size: var(--font-size-caption); color: var(--color-text-secondary); font-variant-numeric: tabular-nums; white-space: nowrap; }
+button.su-rprog-count { text-decoration: underline; text-underline-offset: 3px; }
+.su-rprog-next small { font-size: var(--font-size-caption); font-weight: 400; }
+.su-rprog-bar { height: 4px; border-radius: 999px; background: var(--color-bg-surface); overflow: hidden; }
+.su-rprog-bar i { display: block; height: 100%; background: var(--color-action-primary); }
+.su-rprog-next { display: flex; align-items: center; justify-content: center; gap: 6px; height: 44px; border-radius: var(--radius-md); background: var(--color-action-primary); color: var(--color-action-onPrimary); font-size: var(--font-size-body); font-weight: 700; }
+.su-rprog-next svg { width: 18px; height: 18px; }
+.su-rprog-next:disabled { background: var(--color-bg-surface); color: var(--color-text-disabled); }
+.su-rprog-last { display: flex; align-items: center; gap: 6px; margin: 0; font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.su-rprog-last svg { width: 14px; height: 14px; flex-shrink: 0; }
+.su-rprog-undo { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; margin: -2px 0; font-size: var(--font-size-caption); color: var(--color-text-secondary); white-space: nowrap; }
+.su-rprog-undo svg { width: 14px; height: 14px; }
+/* VD-080·084 진행 카드: 시작 전(결과 자리 '시작 전'), 취소(흐림·결과 줄 없음·'복원') */
+.su-locked { display: flex; align-items: center; justify-content: center; gap: 4px; min-height: 44px; font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.su-locked svg { width: 14px; height: 14px; }
+.su-game[data-cancelled='true'] { background: var(--color-bg-surface); }
+.su-game[data-cancelled='true'] .su-tl { color: var(--color-text-secondary); background: transparent; }
+.su-game[data-cancelled='true'] .su-avatar { opacity: 0.5; }
+.su-restore { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; min-width: 44px; padding: 0 4px; margin: -6px 0; font-size: var(--font-size-caption); font-weight: 700; color: var(--color-text-accent); }
+.su-restore svg { width: 14px; height: 14px; }
+.su-res { display: flex; gap: 6px; flex-shrink: 0; }
+.su-res button { height: 36px; min-width: 52px; padding: 0 10px; border-radius: var(--radius-sm); border: 1px solid var(--color-border-strong); font-size: var(--font-size-caption); font-weight: 700; position: relative; }
+.su-res button::after { content: ''; position: absolute; inset: -4px 0; }
+.su-res button[aria-pressed='true'] { border: 2px solid var(--color-text-accent); background: var(--color-accent-subtle); color: var(--color-text-accent); }
+.su-undo { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; margin: -4px 0; align-self: flex-start; font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.su-undo svg { width: 14px; height: 14px; }
+/* VD-085 대체 불가·취소 체크·복원 자리 */
+.su-nosub { display: flex; align-items: flex-start; gap: 6px; font-size: var(--font-size-caption); font-weight: 700; color: var(--color-status-warning-fg); }
+.su-nosub svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 2px; }
+.su-cancelchk { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 10px; border-radius: var(--radius-sm); font-size: var(--font-size-body); font-weight: 700; }
+.su-cancelchk[data-on='true'] { background: var(--color-status-warning-bg); }
+.su-cancelchk input { width: 20px; height: 20px; accent-color: var(--color-action-strong); }
+.su-leaverow { display: flex; flex-direction: column; gap: 6px; padding: 10px 0; border-top: 1px solid var(--color-border-default); }
+.su-leaverow:first-child { border-top: 0; }
+.su-leaverow header { display: flex; align-items: baseline; gap: 6px; font-weight: 700; }
+.su-leaverow header small { font-weight: 400; font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.su-subpick { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 48px; padding: 0 12px; border-radius: var(--radius-md); border: 1px solid var(--color-border-strong); font-size: var(--font-size-body); text-align: left; }
+.su-subpick[data-empty='true'] { border-style: dashed; color: var(--color-text-accent); font-weight: 700; justify-content: center; }
+.su-subpick svg { width: 16px; height: 16px; }
+@media (max-width: 300px) {
+  .su-stepper { width: 100%; }
+  .su-rprog-top { flex-wrap: wrap; }
+}

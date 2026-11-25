@@ -1,7 +1,7 @@
 import { AlertTriangle, ArrowLeftRight, Ban, LoaderCircle, Plus, UserX } from 'lucide-react'
 import { Sheet } from './Sheet'
 import { Avatar, PersonMeta } from './Setup'
-import { at, candidates, type Cand, type Dataset, type EGame, type Target } from '../../mock/editor'
+import { at, candidates, courtOf, noOf, type Cand, type Dataset, type EGame, type Target } from '../../mock/editor'
 import { person } from '../../mock/setup'
 
 // (r13) SCR-225 선수 선택·교체 시트 — UX Spec r10 02 SCR-225, UXD-102·040·103 / DD r13 VD-074·076(+ VD-025·064·068)
@@ -43,7 +43,9 @@ export function PickSheet({
   onClose?: () => void
 }) {
   const g = games.find((x) => x.key === target.key)!
-  const no = games.indexOf(g) + 1
+  const no = noOf(games, g)
+  // (r14) 라운드 기반: 머리글에 'n라운드 코트 m'(VD-081)
+  const where = g.round ? `${g.round}라운드 코트 ${courtOf(games, g)} · ` : ''
   const me = at(g, target)
   const list = candidates(ds, games, target, confirmed)
   const swaps = list.filter((c) => c.section === 'swap')
@@ -115,7 +117,7 @@ export function PickSheet({
               <span className="su-name su-pickname">{person(me).name}</span>
               <PersonMeta p={person(me)} />
               <span className="su-pickpos">
-                {no}경기 출전 · <TeamTag ds={ds} side={target.side} />
+                {where ? `${where}${no}경기` : `${no}경기 출전`} · <TeamTag ds={ds} side={target.side} />
               </span>
             </span>
           </>
@@ -126,6 +128,7 @@ export function PickSheet({
             </span>
             <span className="su-who">
               <span className="su-name su-pickname">{no}경기 빈 자리</span>
+              {where && <span className="su-pickpos">{where.replace(/ · $/, '')}</span>}
               <span className="su-pickpos">
                 <TeamTag ds={ds} side={target.side} /> 자리에 들어갈 사람을 고릅니다
               </span>

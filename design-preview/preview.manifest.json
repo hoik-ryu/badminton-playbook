@@ -1,21 +1,21 @@
 {
-  "ux_spec_revision": 10,
-  "design_direction_revision": 13,
+  "ux_spec_revision": 11,
+  "design_direction_revision": 14,
   "screens": {
     "SCR-001": {
-      "skip": "Design Direction r13 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
+      "skip": "Design Direction r14 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
     },
     "SCR-002": {
-      "skip": "Design Direction r13 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
+      "skip": "Design Direction r14 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
     },
     "SCR-003": {
-      "skip": "Design Direction r13 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
+      "skip": "Design Direction r14 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
     },
     "SCR-004": {
-      "skip": "Design Direction r13 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
+      "skip": "Design Direction r14 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
     },
     "SCR-005": {
-      "skip": "Design Direction r13 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
+      "skip": "Design Direction r14 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
     },
     "SCR-101": {
       "file": "src/screens/SCR-101.tsx",
@@ -161,7 +161,16 @@
         "SCR-112-ST7",
         "SCR-112-ST8",
         "SCR-112-ST12",
-        "SCR-112-ST13"
+        "SCR-112-ST13",
+        "SCR-112-ST16",
+        "SCR-112-ST17",
+        "SCR-112-ST18",
+        "SCR-112-ST19",
+        "SCR-112-ST20",
+        "SCR-112-ST21",
+        "SCR-112-ST22",
+        "SCR-112-ST23",
+        "SCR-112-ST24"
       ],
       "vd": [
         "VD-001",
@@ -178,7 +187,13 @@
         "VD-039",
         "VD-040",
         "VD-041",
-        "VD-042"
+        "VD-042",
+        "VD-079",
+        "VD-080",
+        "VD-083",
+        "VD-084",
+        "VD-086",
+        "VD-068"
       ]
     },
     "SCR-121": {
@@ -284,10 +299,10 @@
       "note": "SCR-202 위 하단 시트(70%), 인원 요약 고정. 중첩은 SCR-213-ST1에서 확인"
     },
     "SCR-204": {
-      "skip": "Design Direction r13 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
+      "skip": "Design Direction r14 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
     },
     "SCR-205": {
-      "skip": "Design Direction r13 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
+      "skip": "Design Direction r14 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
     },
     "SCR-211": {
       "file": "src/screens/SCR-211.tsx",
@@ -347,10 +362,10 @@
       "note": "ST1 게스트 추가 = SCR-203 참석 시트 위 두 번째 시트(중첩, 딤 한 겹). ST7 회원 직접 추가 = SCR-211 위 시트"
     },
     "SCR-214": {
-      "skip": "Design Direction r13 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
+      "skip": "Design Direction r14 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
     },
     "SCR-224": {
-      "skip": "Design Direction r13 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
+      "skip": "Design Direction r14 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
     },
     "SCR-225": {
       "file": "src/screens/SCR-225.tsx",
@@ -363,7 +378,8 @@
         "SCR-225-ST9",
         "SCR-225-ST10",
         "SCR-225-ST11",
-        "SCR-225-ST12"
+        "SCR-225-ST12",
+        "SCR-225-ST13"
       ],
       "vd": [
         "VD-001",
@@ -381,17 +397,43 @@
         "VD-068",
         "VD-070",
         "VD-074",
-        "VD-076"
+        "VD-076",
+        "VD-081"
       ]
     },
     "SCR-226": {
-      "skip": "Design Direction r13 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
+      "file": "src/screens/SCR-226.tsx",
+      "states": [
+        "SCR-226-ST1",
+        "SCR-226-ST8",
+        "SCR-226-ST9",
+        "SCR-226-ST10"
+      ],
+      "vd": [
+        "VD-001",
+        "VD-002",
+        "VD-003",
+        "VD-020",
+        "VD-021",
+        "VD-025",
+        "VD-038",
+        "VD-039",
+        "VD-040",
+        "VD-041",
+        "VD-042",
+        "VD-064",
+        "VD-068",
+        "VD-072",
+        "VD-074",
+        "VD-076",
+        "VD-085"
+      ]
     },
     "SCR-231": {
-      "skip": "Design Direction r13 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
+      "skip": "Design Direction r14 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
     },
     "SCR-232": {
-      "skip": "Design Direction r13 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
+      "skip": "Design Direction r14 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
     },
     "SCR-241": {
       "file": "src/screens/SCR-241.tsx",
@@ -401,7 +443,9 @@
         "SCR-241-ST7",
         "SCR-241-ST8",
         "SCR-241-ST9",
-        "SCR-241-ST10"
+        "SCR-241-ST10",
+        "SCR-241-ST11",
+        "SCR-241-ST12"
       ],
       "vd": [
         "VD-001",
@@ -424,7 +468,8 @@
         "VD-063",
         "VD-068",
         "VD-069",
-        "VD-070"
+        "VD-070",
+        "VD-077"
       ]
     },
     "SCR-242": {
@@ -521,7 +566,14 @@
         "SCR-244-ST14",
         "SCR-244-ST15",
         "SCR-244-ST16",
-        "SCR-244-ST17"
+        "SCR-244-ST17",
+        "SCR-244-ST18",
+        "SCR-244-ST19",
+        "SCR-244-ST20",
+        "SCR-244-ST21",
+        "SCR-244-ST22",
+        "SCR-244-ST23",
+        "SCR-244-ST24"
       ],
       "vd": [
         "VD-001",
@@ -549,7 +601,13 @@
         "VD-071",
         "VD-072",
         "VD-073",
-        "VD-076"
+        "VD-076",
+        "VD-077",
+        "VD-078",
+        "VD-079",
+        "VD-080",
+        "VD-081",
+        "VD-086"
       ]
     },
     "SCR-245": {
@@ -557,7 +615,8 @@
       "states": [
         "SCR-245-ST1",
         "SCR-245-ST7",
-        "SCR-245-ST8"
+        "SCR-245-ST8",
+        "SCR-245-ST9"
       ],
       "vd": [
         "VD-001",
@@ -582,7 +641,10 @@
         "VD-069",
         "VD-070",
         "VD-067",
-        "VD-075"
+        "VD-075",
+        "VD-079",
+        "VD-080",
+        "VD-082"
       ]
     },
     "SCR-246": {

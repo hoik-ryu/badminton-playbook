@@ -5,61 +5,61 @@
     "engine_ref": "0edcd4c"
   },
   "created_at": "2026-11-13T06:10:58Z",
-  "updated_at": "2026-11-25T06:01:51Z",
+  "updated_at": "2026-11-25T23:55:46Z",
   "plan": {
     "status": "approved",
-    "revision": 9,
+    "revision": 10,
     "submitted": {
-      "revision": 9,
-      "at": "2026-11-25T05:31:40Z",
+      "revision": 10,
+      "at": "2026-11-25T23:53:15Z",
       "hashes": {
-        "docs/build/implementation-plan.json": "b734bb03f10cf46d83bbd91798325bdc5e99425d57100a2ceac63194c3f6c8fc",
-        "docs/build/00-implementation-plan.md": "cb93ad7f998d84f8bcbd387b1e7b9bf54dd97597447b940e09f6dcac443eeb3b",
+        "docs/build/implementation-plan.json": "351a60ac50a481a7293f260b9438628d40ae593a60313843c956be260535d7c6",
+        "docs/build/00-implementation-plan.md": "48d2b3dd2686eeba6388d06365430f473d556607dd5986d69bbf2b0ce85d29fe",
         "docs/build/build-profile.toml": "dfc8a07b52acbf22a7363d948d567abc41924e4145b594bf605fd5f5cf3a2463"
       },
       "inputs": {
         "planning": {
-          "discovery_revision": "5",
-          "planning_revision": "11",
+          "discovery_revision": "6",
+          "planning_revision": "13",
           "hashes": {
-            "docs/planning/01-discovery.md": "d82dba705573e6b447c9bc9f97e2f040a6a51cd06b40a1455405ce2d91bd9750",
-            "docs/planning/02-prd.md": "c185d6f57e3d433e6dc104a8e56e9247e316fc1b08f223cb1c366413e582ac74",
-            "docs/planning/03-user-stories.md": "1e6ca602e977e8657113329188f8570d654f0b26852c7327060310854c213d0f",
-            "docs/planning/04-user-flows.md": "e1c38653b95eca41a26ca05162ca9e8e219570a74d57890419bbfb4585381521",
-            "docs/planning/05-acceptance-criteria.md": "96234c48abf641fe9a5436384ee9389f2f349154b8b6a7a133142276f2c8da99"
+            "docs/planning/01-discovery.md": "053c0870768a99a90bb555c1b0b9eb8ceed3c8b71b60a639e072f4dc6a6f0afb",
+            "docs/planning/02-prd.md": "2c18d74ad2fd731b03da4cb44277a4904347c029e9d4b627bbea639347c79341",
+            "docs/planning/03-user-stories.md": "8fc91a2dfdb68f05fd1bb8a5ca6d171ee914346fee69a0ec5c32acbd0926d34d",
+            "docs/planning/04-user-flows.md": "0e8656858bb2b701ebe5c332b3a773a94694831351468c87360c6209196e7973",
+            "docs/planning/05-acceptance-criteria.md": "00be41465b4da0ffec71140bab8c8e01adf9fcbab6fcb42060cb99947ad22836"
           }
         },
         "design": {
           "level": "L3",
           "workflow": "v2",
           "basis": {
-            "ux_spec_revision": 10,
-            "design_direction_revision": 13,
-            "preview_revision": 9
+            "ux_spec_revision": 11,
+            "design_direction_revision": 14,
+            "preview_revision": 10
           },
           "approved_digests": {
-            "ux_planning": "fa88d848be684fc531603ec0c419674b27eef160379c678644b863fdcb4e0e2a",
-            "ux_spec": "a455ed4e028106365c158e73187c4c73e0d689fabdf1d1da8483152df8f2704a",
-            "design_direction": "d1bd0bb284ef6f618628a3c394fdfff0cd64d0c6b9df4fcb4ebcaac7a61bc874",
-            "preview": "47f8820c7cb9ca18245a493bc6e4ca012d34bf68e91e513d454d8185c0d3f7c9"
+            "ux_planning": "a08071e8b823bbd7e75d7ba1610c3fffe5fb25d60782486f08ca06119a558cf4",
+            "ux_spec": "6f0f73e8fcba0144f75e22d58af05437f0a22c4e0d23fb0bcde94562776c71c7",
+            "design_direction": "912450c6f1668eec96302a6c1436e8fce9da5abcdaacb3a41861cd68a8bbd56b",
+            "preview": "6bbf4633e8de323c42c0b6d52d1044ac65b95a6208301365d48b9323e03ac695"
           }
         },
         "design_files": {
-          "docs/design/00-ux-decisions.md": "2875d51878d7bfb26f3eea75db76db4d51068ad6316fcda573814d7b6490da1f",
-          "docs/design/01-information-architecture.md": "d340cbca5d55475b3a5786cf45b2debc5bc05eb5a202fae2e7bf2fecaccf853e",
-          "docs/design/02-screens.md": "32050843aaa9cc8be33b6a1f8e5d8ba0da57989ea76334bd41e4c9658eecd0d7",
-          "docs/design/03-screen-flows.md": "16b43770ac3ec4c427b75557f8b1f05c370ba3a9769360955c50c2041c8cad97",
-          "docs/design/04-ui-system.md": "4d8b3158e6dfe46fbe10098f6ed658c0075b156cc99bb37fc228c1f19109ee79",
-          "docs/design/05-design-traceability.md": "a2ace1707fe939c4a10427c6350844253b4b1cae2a93683e12bc30c6d56645a1",
-          "docs/design/07-design-direction.md": "a3ddb6b876ca12476c3da346f63e7db7ea780087f323f99e1904c6a0aa69c2a2"
+          "docs/design/00-ux-decisions.md": "72397d52aa96e485c2b5b7fd3cf8d7da3a0346d7260dc3944187c20afd2dd3f7",
+          "docs/design/01-information-architecture.md": "b19657b43c36f436ab9a14849e13250c4316a10a30949b552bc4b8372a8735ea",
+          "docs/design/02-screens.md": "5db677e3d9ef53a0dce4f3939e4b07a314ed80e0aeb96c6bb6a6b452bc259167",
+          "docs/design/03-screen-flows.md": "a8cb4378c5d6ed31b1d8273e574a0a4066068723c8e7b7f6b280e67d7d91c293",
+          "docs/design/04-ui-system.md": "10f37526697af1dd84ceff5df54c2e5fc2f0506a97acaf9cd5d3ca931abedb15",
+          "docs/design/05-design-traceability.md": "5c9e78edaa66cfdd131c17f130b4684a12499ec38916459ff344ad6ebf221d02",
+          "docs/design/07-design-direction.md": "97f77cbc94a3a1d11edd5a44d58194b38aa3630fca647b5b650ea66872d7c5b8"
         }
       },
       "summary": {
-        "batches": 14,
+        "batches": 17,
         "auto": 3,
-        "user": 11,
-        "ac_assigned": 106,
-        "ac_active": 106,
+        "user": 14,
+        "ac_assigned": 128,
+        "ac_active": 128,
         "ac_deferred": 30,
         "screens_owned": 32,
         "screens_required": 28
@@ -77,10 +77,73 @@
         "AC-109(B6): 이 AC의 화면(SCR-112)이 B6에 없습니다(소유: B2)",
         "AC-140(B13): 이 AC의 화면(SCR-225, SCR-244, SCR-245)이 B13에 없습니다(소유: B11, B6)",
         "AC-143(B13): 이 AC의 화면(SCR-112, SCR-225)이 B13에 없습니다(소유: B2, B6)",
+        "AC-146(B15): 이 AC의 화면(SCR-244)이 B15에 없습니다(소유: B11)",
+        "AC-147(B15): 이 AC의 화면(SCR-244)이 B15에 없습니다(소유: B11)",
+        "AC-160(B15): 이 AC의 화면(SCR-112, SCR-121)이 B15에 없습니다(소유: B2)",
+        "AC-161(B15): 이 AC의 화면(SCR-112)이 B15에 없습니다(소유: B2)",
+        "AC-163(B15): 이 AC의 화면(SCR-112, SCR-241)이 B15에 없습니다(소유: B11, B2)",
+        "AC-165(B15): 이 AC의 화면(SCR-112, SCR-225, SCR-244)이 B15에 없습니다(소유: B11, B2, B6)",
         "B3: approval=auto 요청은 적용하지 않습니다(risk:permission) — 위험 배치는 자동 승인으로 낮출 수 없습니다"
       ]
     },
     "approved": {
+      "revision": 10,
+      "at": "2026-11-25T23:55:46Z",
+      "hashes": {
+        "docs/build/implementation-plan.json": "351a60ac50a481a7293f260b9438628d40ae593a60313843c956be260535d7c6",
+        "docs/build/00-implementation-plan.md": "48d2b3dd2686eeba6388d06365430f473d556607dd5986d69bbf2b0ce85d29fe",
+        "docs/build/build-profile.toml": "dfc8a07b52acbf22a7363d948d567abc41924e4145b594bf605fd5f5cf3a2463"
+      },
+      "inputs": {
+        "planning": {
+          "discovery_revision": "6",
+          "planning_revision": "13",
+          "hashes": {
+            "docs/planning/01-discovery.md": "053c0870768a99a90bb555c1b0b9eb8ceed3c8b71b60a639e072f4dc6a6f0afb",
+            "docs/planning/02-prd.md": "2c18d74ad2fd731b03da4cb44277a4904347c029e9d4b627bbea639347c79341",
+            "docs/planning/03-user-stories.md": "8fc91a2dfdb68f05fd1bb8a5ca6d171ee914346fee69a0ec5c32acbd0926d34d",
+            "docs/planning/04-user-flows.md": "0e8656858bb2b701ebe5c332b3a773a94694831351468c87360c6209196e7973",
+            "docs/planning/05-acceptance-criteria.md": "00be41465b4da0ffec71140bab8c8e01adf9fcbab6fcb42060cb99947ad22836"
+          }
+        },
+        "design": {
+          "level": "L3",
+          "workflow": "v2",
+          "basis": {
+            "ux_spec_revision": 11,
+            "design_direction_revision": 14,
+            "preview_revision": 10
+          },
+          "approved_digests": {
+            "ux_planning": "a08071e8b823bbd7e75d7ba1610c3fffe5fb25d60782486f08ca06119a558cf4",
+            "ux_spec": "6f0f73e8fcba0144f75e22d58af05437f0a22c4e0d23fb0bcde94562776c71c7",
+            "design_direction": "912450c6f1668eec96302a6c1436e8fce9da5abcdaacb3a41861cd68a8bbd56b",
+            "preview": "6bbf4633e8de323c42c0b6d52d1044ac65b95a6208301365d48b9323e03ac695"
+          }
+        },
+        "design_files": {
+          "docs/design/00-ux-decisions.md": "72397d52aa96e485c2b5b7fd3cf8d7da3a0346d7260dc3944187c20afd2dd3f7",
+          "docs/design/01-information-architecture.md": "b19657b43c36f436ab9a14849e13250c4316a10a30949b552bc4b8372a8735ea",
+          "docs/design/02-screens.md": "5db677e3d9ef53a0dce4f3939e4b07a314ed80e0aeb96c6bb6a6b452bc259167",
+          "docs/design/03-screen-flows.md": "a8cb4378c5d6ed31b1d8273e574a0a4066068723c8e7b7f6b280e67d7d91c293",
+          "docs/design/04-ui-system.md": "10f37526697af1dd84ceff5df54c2e5fc2f0506a97acaf9cd5d3ca931abedb15",
+          "docs/design/05-design-traceability.md": "5c9e78edaa66cfdd131c17f130b4684a12499ec38916459ff344ad6ebf221d02",
+          "docs/design/07-design-direction.md": "97f77cbc94a3a1d11edd5a44d58194b38aa3630fca647b5b650ea66872d7c5b8"
+        }
+      },
+      "statement": "구현 계획 승인. Build Plan r10 및 B15 → B16 → B17 배치 구성을 승인합니다.",
+      "summary": {
+        "batches": 17,
+        "auto": 3,
+        "user": 14,
+        "ac_assigned": 128,
+        "ac_active": 128,
+        "ac_deferred": 30,
+        "screens_owned": 32,
+        "screens_required": 28
+      }
+    },
+    "last_approved": {
       "revision": 9,
       "at": "2026-11-25T05:31:40Z",
       "hashes": {
@@ -137,63 +200,6 @@
         "screens_required": 28
       }
     },
-    "last_approved": {
-      "revision": 8,
-      "at": "2026-11-25T04:54:10Z",
-      "hashes": {
-        "docs/build/implementation-plan.json": "405cedd53172e81f64a5764e9837692483f7b0c4fbec7cdc326aed3f6d0f88d7",
-        "docs/build/00-implementation-plan.md": "57853e573a7858ba451b2964eb957d9bb440138609fed80332a8b6f697ca16fe",
-        "docs/build/build-profile.toml": "dfc8a07b52acbf22a7363d948d567abc41924e4145b594bf605fd5f5cf3a2463"
-      },
-      "inputs": {
-        "planning": {
-          "discovery_revision": "5",
-          "planning_revision": "11",
-          "hashes": {
-            "docs/planning/01-discovery.md": "d82dba705573e6b447c9bc9f97e2f040a6a51cd06b40a1455405ce2d91bd9750",
-            "docs/planning/02-prd.md": "c185d6f57e3d433e6dc104a8e56e9247e316fc1b08f223cb1c366413e582ac74",
-            "docs/planning/03-user-stories.md": "1e6ca602e977e8657113329188f8570d654f0b26852c7327060310854c213d0f",
-            "docs/planning/04-user-flows.md": "e1c38653b95eca41a26ca05162ca9e8e219570a74d57890419bbfb4585381521",
-            "docs/planning/05-acceptance-criteria.md": "96234c48abf641fe9a5436384ee9389f2f349154b8b6a7a133142276f2c8da99"
-          }
-        },
-        "design": {
-          "level": "L3",
-          "workflow": "v2",
-          "basis": {
-            "ux_spec_revision": 10,
-            "design_direction_revision": 13,
-            "preview_revision": 9
-          },
-          "approved_digests": {
-            "ux_planning": "fa88d848be684fc531603ec0c419674b27eef160379c678644b863fdcb4e0e2a",
-            "ux_spec": "a455ed4e028106365c158e73187c4c73e0d689fabdf1d1da8483152df8f2704a",
-            "design_direction": "d1bd0bb284ef6f618628a3c394fdfff0cd64d0c6b9df4fcb4ebcaac7a61bc874",
-            "preview": "47f8820c7cb9ca18245a493bc6e4ca012d34bf68e91e513d454d8185c0d3f7c9"
-          }
-        },
-        "design_files": {
-          "docs/design/00-ux-decisions.md": "2875d51878d7bfb26f3eea75db76db4d51068ad6316fcda573814d7b6490da1f",
-          "docs/design/01-information-architecture.md": "d340cbca5d55475b3a5786cf45b2debc5bc05eb5a202fae2e7bf2fecaccf853e",
-          "docs/design/02-screens.md": "32050843aaa9cc8be33b6a1f8e5d8ba0da57989ea76334bd41e4c9658eecd0d7",
-          "docs/design/03-screen-flows.md": "16b43770ac3ec4c427b75557f8b1f05c370ba3a9769360955c50c2041c8cad97",
-          "docs/design/04-ui-system.md": "4d8b3158e6dfe46fbe10098f6ed658c0075b156cc99bb37fc228c1f19109ee79",
-          "docs/design/05-design-traceability.md": "a2ace1707fe939c4a10427c6350844253b4b1cae2a93683e12bc30c6d56645a1",
-          "docs/design/07-design-direction.md": "a3ddb6b876ca12476c3da346f63e7db7ea780087f323f99e1904c6a0aa69c2a2"
-        }
-      },
-      "statement": "①·② 포함 r8 승인 (권장) — ① B13 선행 배치 B12→B10, ② B14 재사용 목록에서 CMP-053·054·056 제외. 구현 범위·AC·검증 계획은 r7과 같음",
-      "summary": {
-        "batches": 14,
-        "auto": 3,
-        "user": 11,
-        "ac_assigned": 106,
-        "ac_active": 106,
-        "ac_deferred": 30,
-        "screens_owned": 32,
-        "screens_required": 28
-      }
-    },
     "validity": {
       "status": "valid"
     }
@@ -208,7 +214,7 @@
       "waiver": null,
       "depends_on": [],
       "ac_targets": {},
-      "plan_revision": 9,
+      "plan_revision": 10,
       "run": {
         "batch": "B0",
         "started_at": "2026-11-13T06:43:06Z",
@@ -438,7 +444,7 @@
         "AC-060": "E3",
         "AC-099": "E3"
       },
-      "plan_revision": 9
+      "plan_revision": 10
     },
     "B2": {
       "status": "planned",
@@ -481,7 +487,7 @@
         "AC-120": "E2",
         "AC-121": "E3"
       },
-      "plan_revision": 9,
+      "plan_revision": 10,
       "target_history": [
         {
           "at": "2026-11-24T23:43:52Z",
@@ -541,7 +547,7 @@
         "AC-117": "E2",
         "AC-119": "E3"
       },
-      "plan_revision": 9,
+      "plan_revision": 10,
       "target_history": [
         {
           "at": "2026-11-24T23:43:52Z",
@@ -567,7 +573,7 @@
         "B0"
       ],
       "ac_targets": {},
-      "plan_revision": 9
+      "plan_revision": 10
     },
     "B5": {
       "status": "planned",
@@ -596,7 +602,7 @@
         "AC-106": "E3",
         "AC-107": "E3"
       },
-      "plan_revision": 9
+      "plan_revision": 10
     },
     "B6": {
       "status": "planned",
@@ -622,7 +628,7 @@
         "AC-108": "E2",
         "AC-109": "E3"
       },
-      "plan_revision": 9,
+      "plan_revision": 10,
       "target_history": [
         {
           "at": "2026-11-24T23:43:52Z",
@@ -664,7 +670,7 @@
       "ac_targets": {
         "AC-050": "E2"
       },
-      "plan_revision": 9,
+      "plan_revision": 10,
       "run": {
         "batch": "B7",
         "started_at": "2026-11-13T07:03:04Z",
@@ -1250,7 +1256,7 @@
         "B7"
       ],
       "ac_targets": {},
-      "plan_revision": 9
+      "plan_revision": 10
     },
     "B10": {
       "status": "approved",
@@ -1271,7 +1277,7 @@
         "AC-076": "E2",
         "AC-081": "E2"
       },
-      "plan_revision": 9,
+      "plan_revision": 10,
       "run": {
         "batch": "B10",
         "started_at": "2026-11-24T23:53:18Z",
@@ -1773,7 +1779,7 @@
         "AC-134": "E3",
         "AC-135": "E2"
       },
-      "plan_revision": 9,
+      "plan_revision": 10,
       "run": {
         "batch": "B11",
         "started_at": "2026-11-25T00:10:41Z",
@@ -5168,7 +5174,7 @@
       "ac_targets": {
         "AC-042": "E2"
       },
-      "plan_revision": 9,
+      "plan_revision": 10,
       "run": {
         "batch": "B12",
         "started_at": "2026-11-25T00:56:04Z",
@@ -5576,7 +5582,7 @@
         "AC-140": "E2",
         "AC-143": "E3"
       },
-      "plan_revision": 9,
+      "plan_revision": 10,
       "run": {
         "batch": "B13",
         "started_at": "2026-11-25T04:54:16Z",
@@ -6005,7 +6011,7 @@
         "AC-141": "E3",
         "AC-142": "E2"
       },
-      "plan_revision": 9,
+      "plan_revision": 10,
       "run": {
         "batch": "B14",
         "started_at": "2026-11-25T05:18:39Z",
@@ -7602,6 +7608,80 @@
           }
         }
       ]
+    },
+    "B15": {
+      "status": "planned",
+      "approval": "user",
+      "approval_reasons": [
+        "risk:data_loss,external_contract,permission,schema_migration",
+        "계획에서 사용자 승인 지정"
+      ],
+      "requires_design": true,
+      "design_path": "preview_approved",
+      "waiver": null,
+      "depends_on": [
+        "B14"
+      ],
+      "ac_targets": {
+        "AC-146": "E2",
+        "AC-147": "E2",
+        "AC-160": "E2",
+        "AC-161": "E2",
+        "AC-163": "E2",
+        "AC-165": "E3"
+      },
+      "plan_revision": 10
+    },
+    "B16": {
+      "status": "planned",
+      "approval": "user",
+      "approval_reasons": [
+        "risk:data_loss",
+        "계획에서 사용자 승인 지정"
+      ],
+      "requires_design": true,
+      "design_path": "preview_approved",
+      "waiver": null,
+      "depends_on": [
+        "B11",
+        "B15"
+      ],
+      "ac_targets": {
+        "AC-144": "E2",
+        "AC-145": "E2",
+        "AC-148": "E3",
+        "AC-149": "E2",
+        "AC-150": "E2",
+        "AC-151": "E3",
+        "AC-152": "E2",
+        "AC-153": "E2"
+      },
+      "plan_revision": 10
+    },
+    "B17": {
+      "status": "planned",
+      "approval": "user",
+      "approval_reasons": [
+        "risk:data_loss",
+        "계획에서 사용자 승인 지정"
+      ],
+      "requires_design": true,
+      "design_path": "preview_approved",
+      "waiver": null,
+      "depends_on": [
+        "B16"
+      ],
+      "ac_targets": {
+        "AC-154": "E2",
+        "AC-155": "E2",
+        "AC-156": "E2",
+        "AC-157": "E2",
+        "AC-158": "E2",
+        "AC-159": "E2",
+        "AC-162": "E2",
+        "AC-164": "E2"
+      },
+      "plan_revision": 10
     }
   },
   "waivers": [],
@@ -8655,6 +8735,34 @@
       "event": "approved",
       "revision": null,
       "note": "B12: B12를 재승인합니다. 보고된 검증 결과와 기존 테스트 변경, 세부 구현 차이 및 제한 사항을 수용합니다."
+    },
+    {
+      "at": "2026-11-25T23:50:07Z",
+      "target": "plan",
+      "event": "outdated",
+      "revision": 9,
+      "note": "planning.discovery_revision: 5 → 6; planning.planning_revision: 11 → 13; docs/planning/01-discovery.md: 승인 해시 변경; docs/planning/02-prd.md: 승인 해시 변경; docs/planning/03-user-stories.md: 승인 해시 변경; docs/planning/04-user-flows.md: 승인 해시 변경; docs/planning/05-acceptance-criteria.md: 승인 해시 변경; design.ux_planning: 승인 기록 변경; design.ux_spec: 승인 기록 변경; design.design_direction: 승인 기록 변경; design.preview: 계획 기준이었던 프리뷰 승인 기록 변경; docs/design/00-ux-decisions.md: 내용 변경; docs/design/01-information-architecture.md: 내"
+    },
+    {
+      "at": "2026-11-25T23:50:12Z",
+      "target": "plan",
+      "event": "reopened",
+      "revision": 9,
+      "note": "outdated → drafting: 청백전 라운드·코트 운영(Planning r13·UX Spec r11·DD r14·Preview r10 승인) 반영을 위한 Build Plan r10 개정(사용자 지시 2026-11-26)"
+    },
+    {
+      "at": "2026-11-25T23:53:15Z",
+      "target": "plan",
+      "event": "submitted",
+      "revision": 10,
+      "note": "배치 17개(자동 3, 사용자 14)"
+    },
+    {
+      "at": "2026-11-25T23:55:46Z",
+      "target": "plan",
+      "event": "approved",
+      "revision": 10,
+      "note": "구현 계획 승인. Build Plan r10 및 B15 → B16 → B17 배치 구성을 승인합니다."
     }
   ],
   "case_history": {
