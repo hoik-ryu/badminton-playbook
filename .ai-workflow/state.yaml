@@ -14,7 +14,7 @@ current_stage: design   # discovery | planning | design
 stages:
   discovery:
     status: approved   # in_progress | awaiting_approval | approved
-    revision: 4
+    revision: 5
     interview_round: 3
     artifacts:
       - docs/planning/01-discovery.md
@@ -23,15 +23,15 @@ stages:
       at: null
       hashes: {}
     approved:
-      revision: 4
-      at: "2026-11-18T06:15:03Z"
+      revision: 5
+      at: "2026-11-25T02:04:32Z"
       hashes:
-        docs/planning/01-discovery.md: 5424a9030cd836ef7b88ea7f4a75e880daca5445eb146bc3f6c78106860df7d4
+        docs/planning/01-discovery.md: d82dba705573e6b447c9bc9f97e2f040a6a51cd06b40a1455405ce2d91bd9750
 
   planning:
     status: approved   # locked | not_started | in_progress | awaiting_approval | approved | outdated
-    revision: 10
-    based_on_discovery_revision: 4
+    revision: 11
+    based_on_discovery_revision: 5
     artifacts:
       - docs/planning/02-prd.md
       - docs/planning/03-user-stories.md
@@ -43,13 +43,13 @@ stages:
       at: null
       hashes: {}
     approved:
-      revision: 10
-      at: "2026-11-24T07:04:13Z"
+      revision: 11
+      at: "2026-11-25T02:13:28Z"
       hashes:
-        docs/planning/02-prd.md: 79ffd809f4bb63ffa767684c74932e63df1b719aede07845e111393ce2680c75
-        docs/planning/03-user-stories.md: 9dcd484cb179023d653b67344c8e0eb2699d43228af64708f1980f23ddd71f1c
-        docs/planning/04-user-flows.md: 9e3bd4d1dc0a590825c0621e17c16f8b7a57ff14b12e877889566e2032ac18be
-        docs/planning/05-acceptance-criteria.md: 1268c107014cc13508723d11123c8a5155162e53626e80026ae3f844547f694e
+        docs/planning/02-prd.md: c185d6f57e3d433e6dc104a8e56e9247e316fc1b08f223cb1c366413e582ac74
+        docs/planning/03-user-stories.md: 1e6ca602e977e8657113329188f8570d654f0b26852c7327060310854c213d0f
+        docs/planning/04-user-flows.md: e1c38653b95eca41a26ca05162ca9e8e219570a74d57890419bbfb4585381521
+        docs/planning/05-acceptance-criteria.md: 96234c48abf641fe9a5436384ee9389f2f349154b8b6a7a133142276f2c8da99
 
   design:
     status: not_started   # locked | not_started  (Milestone 2 이후. planning 승인으로만 잠금 해제)
@@ -96,4 +96,11 @@ history:
   - { at: "2026-11-24T07:02:30Z", stage: planning, event: reopened, revision: 9, note: "T9 재개: K3 팀 구성 방식(자동 배정/직접 구성) 추가(Type E, Design Direction 시안 검토 중 사용자 결정). 사용자 선택: '방식 선택 추가', '지금 Type E로 진행 (권장)', '모두 미배정에서 시작 (권장)', '자동 배정 선택·배정안 채움 (권장)', '저장하지 않음(행동으로 취급) (권장)'. r9 승인(2026-11-24T05:32:50Z) 무효화, 이전 승인 해시 02=a305620a… 03=e3eddca6… 04=d114843b… 05=6d44256b…. design locked", src: engine }
   - { at: "2026-11-24T07:03:00Z", stage: planning, event: submitted, revision: 10, note: "K3 팀 구성 방식(자동 배정·직접 구성) 추가: C-34·FR-014 보강, FLOW-005-S9b, AC-135. FR 24·US 24·FLOW 8·AC 132, 추적성 누락 없음. 제출 해시 02=79ffd809… 03=9dcd484c… 04=9e3bd4d1… 05=1268c107…", src: engine }
   - { at: "2026-11-24T07:04:13Z", stage: planning, event: approved, revision: 10, note: "Planning r10의 변경 내용과 제출 결과를 검토했으며, Planning r10을 최종 승인합니다.. 제출 스냅샷(r10, 2026-11-24T07:03:00Z)과 일치 확인", src: engine }
+  - { at: "2026-11-25T02:03:22Z", stage: discovery, event: reopened, revision: 4, note: "T7: 청백전 대진 직접 구성·공통 편집(Type E)과 확정 전 반복 대진 허용 반영을 위한 Discovery r5 소폭 개정(청백전 대진 생성·확정 문단만). 사용자 선택: 'Discovery r5 소폭 개정 후 Planning r11 (권장)'. r4 승인(2026-11-18T06:15:03Z) 무효화, 이전 승인 해시 01=5424a9030cd836ef7b88ea7f4a75e880daca5445eb146bc3f6c78106860df7d4", src: engine }
+  - { at: "2026-11-25T02:03:22Z", stage: planning, event: outdated, revision: 10, note: "T7로 planning r10 승인(2026-11-24T07:04:13Z) 초기화, design locked. r10 승인 해시 02=79ffd809f4bb63ffa767684c74932e63df1b719aede07845e111393ce2680c75 03=9dcd484cb179023d653b67344c8e0eb2699d43228af64708f1980f23ddd71f1c 04=9e3bd4d1dc0a590825c0621e17c16f8b7a57ff14b12e877889566e2032ac18be 05=1268c107014cc13508723d11123c8a5155162e53626e80026ae3f844547f694e", src: engine }
+  - { at: "2026-11-25T02:04:03Z", stage: discovery, event: submitted, revision: 5, note: "Discovery r5 제출: 청백전 대진 구성 방식(자동 생성·직접 구성)과 확정 전 공통 편집(경기 추가·삭제, 선수 선택·교체, 개인전 맞교환), 확정 전 편집의 같은 대진 반복은 경고로 허용, 대진이 있으면 실제 경기 수 = 총 경기 수. 확정 후 정책 불변. 청백전 대진 생성·확정 문단만 변경. 제출 해시 01=d82dba70…", src: engine }
+  - { at: "2026-11-25T02:04:32Z", stage: discovery, event: approved, revision: 5, note: "사용자 명시적 승인(AskUserQuestion '승인', 2026-11-25). 청백전 대진 직접 구성·확정 전 공통 편집 반영. planning은 T7로 outdated 유지(Planning r11은 이어서 작성). 제출 스냅샷(r5, 2026-11-25T02:04:03Z)과 일치 확인", src: engine }
+  - { at: "2026-11-25T02:04:32Z", stage: planning, event: generated, revision: 10, note: "T5: Discovery r5(d82dba70…) 기준으로 02–05를 r11로 개정 시작(사용자 지시 '정식 엔진 절차에 따라 Planning r10을 재검토하고 Planning r11을 작성하세요', 2026-11-25). 청백전 대진 직접 구성·공통 편집, 기존 ID·추적 보존", src: engine }
+  - { at: "2026-11-25T02:08:49Z", stage: planning, event: submitted, revision: 11, note: "Planning r11 제출: Discovery r5 기준 청백전 대진 직접 구성·확정 전 공통 편집(Type E). C-35·Q-031 신규, FR-015·FR-022·NFR-003·C-14·C-15·C-19·C-24·C-31·C-32·C-33 보강, 범위 제외 1건 해제, FLOW-005-S3g–S3l, AC-136–143 신규, AC-043·076·077·129·130 보강. 확정 전/후 같은 대진 정책 구분. FR 24·US 24·FLOW 8·AC 140, 추적성 누락 없음. 제출 해시 02=c185d6f5… 03=1e6ca602… 04=e1c38653… 05=96234c48…", src: engine }
+  - { at: "2026-11-25T02:13:28Z", stage: planning, event: approved, revision: 11, note: "Planning r11을 승인합니다. 제출된 요구사항, C-35 신규 정책, 기존 정책 변경 및 AC-136~143을 모두 수용합니다.. 제출 스냅샷(r11, 2026-11-25T02:08:49Z)과 일치 확인", src: engine }
   # - { at: "", stage: discovery, event: started | submitted | changes_requested | approved | reopened | outdated | generated, revision: 0, note: "" }

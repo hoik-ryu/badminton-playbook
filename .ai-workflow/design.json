@@ -20,7 +20,16 @@
     }
   },
   "validity": {
-    "status": "valid"
+    "status": "outdated",
+    "reason": "planning 승인 해시가 디자인 기준과 다릅니다",
+    "changed": [
+      "docs/planning/01-discovery.md",
+      "docs/planning/02-prd.md",
+      "docs/planning/03-user-stories.md",
+      "docs/planning/04-user-flows.md",
+      "docs/planning/05-acceptance-criteria.md"
+    ],
+    "detected_at": "2026-11-25T02:13:32Z"
   },
   "stages": {
     "ux_planning": {
@@ -4254,9 +4263,16 @@
       "event": "approved",
       "revision": 8,
       "note": "Preview r8의 실제 화면과 디자인을 확인했으며, Preview r8을 최종 승인합니다."
+    },
+    {
+      "at": "2026-11-25T02:13:32Z",
+      "stage": "design",
+      "event": "outdated",
+      "revision": null,
+      "note": "planning 변경 감지: docs/planning/01-discovery.md, docs/planning/02-prd.md, docs/planning/03-user-stories.md, docs/planning/04-user-flows.md, docs/planning/05-acceptance-criteria.md"
     }
   ],
-  "updated_at": "2026-11-24T23:35:22Z",
+  "updated_at": "2026-11-25T02:13:32Z",
   "config": {
     "workflow": "v2",
     "theme_file": "docs/design-profile/theme.json",
