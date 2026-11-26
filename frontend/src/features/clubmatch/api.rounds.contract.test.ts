@@ -20,7 +20,7 @@ beforeEach(() => {
 afterEach(() => vi.unstubAllGlobals())
 
 describe('club match rounds API contract (api mode, B15)', () => {
-  it('[AC-144, AC-149, AC-152, AC-155, AC-156, AC-159, AC-164] round requests use the server paths and bodies', async () => {
+  it('[AC-144, AC-149, AC-152, AC-155, AC-156, AC-159] round requests use the server paths and bodies', async () => {
     const a = await import('./api')
     const rules = { balance: true, gender: false }
     expect(await a.createClubMatch({ method: 'team', date: '2026-12-20', name: '라운드', courtCount: 3 })).toBe('new')
@@ -34,7 +34,6 @@ describe('club match rounds API contract (api mode, B15)', () => {
     await a.undoRound('m1', 3)
     await a.excludeWithSubstitutes('m1', 3, 'member:a', [{ gameNo: 4, to: 'member:e' }], [2])
     await a.excludeWithSubstitutes('m1', 3, 'member:a', [{ gameNo: 4, to: 'member:e' }])
-    await a.restoreClubGame('m1', 3, 2, { 'member:a': 'member:f' })
     expect(calls.map((c) => `${c.method} ${c.path}`)).toEqual([
       'POST /api/club-matches',
       'PUT /api/club-matches/m1/basic',
@@ -47,7 +46,6 @@ describe('club match rounds API contract (api mode, B15)', () => {
       'POST /api/club-matches/m1/rounds/undo',
       'POST /api/club-matches/m1/participants/member%3Aa/leave',
       'POST /api/club-matches/m1/participants/member%3Aa/leave',
-      'POST /api/club-matches/m1/games/2/restore',
     ])
     expect(calls.map((c) => c.body)).toEqual([
       { method: 'team', date: '2026-12-20', name: '라운드', courtCount: 3 },
@@ -61,7 +59,6 @@ describe('club match rounds API contract (api mode, B15)', () => {
       { version: 3 },
       { assignments: [{ gameNo: 4, to: 'member:e' }], version: 3, cancel: [2] },
       { assignments: [{ gameNo: 4, to: 'member:e' }], version: 3 }, // 취소 없으면 기존 본문 그대로
-      { replacements: { 'member:a': 'member:f' }, version: 3 },
     ])
   })
 })

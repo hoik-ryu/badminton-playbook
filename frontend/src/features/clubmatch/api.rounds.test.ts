@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { readDb, updateDb, type MockClubGame } from '../../lib/mock/db'
-import { addClubGame, CLUB_ERRORS, confirmClub, createClubMatch, deleteClubGame, excludeWithSubstitutes, finishClub, generateClub, getClubMatchView, moveClubGame, nextRound, recordResult, restoreClubGame, saveBasic, saveParticipants, setSettings, swapClub, undoRound, type ClubMatchView } from './api'
+import { addClubGame, CLUB_ERRORS, confirmClub, createClubMatch, deleteClubGame, excludeWithSubstitutes, finishClub, generateClub, getClubMatchView, moveClubGame, nextRound, recordResult, saveBasic, saveParticipants, setSettings, swapClub, undoRound, type ClubMatchView } from './api'
+import * as clubApi from './api'
 import { getPublicClubMatch } from './memberApi'
 
 // (B15, C-36–C-38) 라운드·코트 운영: Mock 어댑터가 서버(backend tests/modules/test_clubmatch_rounds.py)와
@@ -159,31 +160,10 @@ describe('club match rounds mock adapter (B15)', () => {
     expect(await code(excludeWithSubstitutes(id, 1, P[0]!, [{ gameNo: 1, to: P[7]! }, { gameNo: 2, to: P[7]! }]))).toBe(CLUB_ERRORS.roundConflict)
   })
 
-  it('[AC-164] restore needs a substitute for every left seat, checks round rules, and keeps history', async () => {
-    const id = crafted([[1, 1, [0, 1, 2, 3]], [1, 2, [4, 5, 6, 7]], [2, 1, [0, 1, 2, 4]]])
-    let v = await excludeWithSubstitutes(id, 1, P[0]!, [{ gameNo: 3, to: P[3]! }], [1])
-    expect(await code(restoreClubGame(id, v.version, 2, {}))).toBe(CLUB_ERRORS.restoreNotAllowed)
-    expect(await failure(restoreClubGame(id, v.version, 1, {}))).toMatchObject({ code: CLUB_ERRORS.restoreBlocked, details: { keys: [P[0]], candidates: { [P[0]!]: 0 } } })
-    // 복원 가능한 상태: 1라운드에 나오지 않는 참가자를 더함(A3 정책상 API만으로는 만들 수 없는 상태 — 서버 테스트와 같음)
-    updateDb((db) => {
-      db.clubMatches!.find((m) => m.id === id)!.participants[P[9]!] = { team: null, left: false }
-    })
-    expect(await failure(restoreClubGame(id, v.version, 1, {}))).toMatchObject({ code: CLUB_ERRORS.restoreBlocked, details: { candidates: { [P[0]!]: 1 } } })
-    expect(await code(restoreClubGame(id, v.version, 1, { [P[0]!]: P[4]! }))).toBe(CLUB_ERRORS.roundConflict)
-    expect(await code(restoreClubGame(id, v.version, 1, { [P[1]!]: P[9]! }))).toBe(CLUB_ERRORS.conflict)
-    v = await restoreClubGame(id, v.version, 1, { [P[0]!]: P[9]! })
-    expect(v.games[0]!.cancelled).toBeNull()
-    expect(v.games[0]!.winner).toBeNull()
-    expect(keysOf(v.games[0]!)).toEqual([P[9], P[1], P[2], P[3]])
-    expect(v.rows.find((r) => r.key === P[0])!.left).toBe(true)
-    expect(readDb().clubMatches!.find((m) => m.id === id)!.events!.map((e) => e.action)).toEqual(['cancel', 'restore'])
-    // 지난 라운드 경기는 복원 불가
-    const past = crafted([[1, 1, [0, 1, 2, 3]], [2, 1, [4, 5, 6, 7]]], { currentRound: 2 })
-    updateDb((db) => {
-      const m = db.clubMatches!.find((x) => x.id === past)!
-      m.games[0]!.cancelled = { at: '2026-12-20T01:00:00.000Z', reason: 'left' }
-    })
-    expect(await code(restoreClubGame(past, 1, 1, {}))).toBe(CLUB_ERRORS.roundLocked)
+  it('[AC-160] cancelled games cannot be restored: no restore API or restore error codes (B18)', () => {
+    expect('restoreClubGame' in clubApi).toBe(false)
+    expect(Object.values(CLUB_ERRORS)).not.toContain('restore_not_allowed')
+    expect(Object.values(CLUB_ERRORS)).not.toContain('restore_blocked')
   })
 
   it('[AC-162] member view shows round, court and cancelled only, and skips cancelled games in counts', async () => {

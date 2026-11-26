@@ -1,4 +1,4 @@
-import { AlertTriangle, ChevronRight, Lock, RotateCcw, Undo2 } from 'lucide-react'
+import { AlertTriangle, ChevronRight, Lock, Undo2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { AppNav } from './AppNav'
 import { Badge } from './GameCard'
@@ -8,14 +8,14 @@ import { RoundHead, RoundProgressCard, Toast } from './Rounds'
 import { Avatar, Dialog } from './Setup'
 import { complete, courtOf, filled, gap, noOf, roundDataset, roundPlay, roundsOf, type Dataset, type EGame } from '../../mock/editor'
 import { person } from '../../mock/setup'
-import { LeaveSheet, RestoreSheet } from '../../screens/SCR-226'
+import { LeaveSheet } from '../../screens/SCR-226'
 
 // (r14) SCR-112 라운드 진행(운영진) — UX Spec r11 02 SCR-112 ST16–ST23, UXD-110–112 / DD r14 VD-079·080·083·084·086
 // 운영 표시 줄 → 진행 라운드 카드(CMP-060) → 결과 요약 → 라운드 구역(CMP-059 phase=live). 지난 라운드는 접힘, 진행 중·시작 전은 펼침, 열면 진행 중 구역으로 스크롤
 // 이 보기는 운영진이 선수로 참가하지 않은 경우(공개 영역 '다음 경기·내 경기'가 없음)를 그려 진행 화면 밀도(VD-086)를 잽니다
 // 보기: ST16(2라운드 진행 중, 처리 3/4) · ST16-NEW(확정 직후 1라운드, 토스트) · ST17(모두 처리 → 시작 가능) · ST18(처리 2/4 → 시작 불가)
 //   ST19(3라운드 시작 직후 '라운드 시작 취소' 확인) · ST20(시작 전 라운드 결과 요청 거부 안내) · ST21(지난 라운드 펼침 · 미기록 되돌리기 거부 안내)
-//   ST22(중도 귀가로 취소된 경기 · 복원) · ST23(마지막 라운드 · 종료 조건) — 끝 '-IND'는 개인전
+//   ST22(중도 귀가로 취소된 경기, r15 복원 없음) · ST23(마지막 라운드 · 종료 조건) — 끝 '-IND'는 개인전
 
 type Live = { games: EGame[]; current: number; left: string[] }
 
@@ -32,7 +32,7 @@ function liveData(ds: Dataset, current: number, doneNow: number): Live {
   return { games, current, left: [] }
 }
 
-/** 중도 귀가 재현(ST22): 청팀(개인전은 아무나) 한 명 F가 귀가, 3라운드·4라운드 경기 취소. 4라운드 휴식자들도 앞서 귀가해 4라운드는 복원 불가 */
+/** 중도 귀가 재현(ST22): 청팀(개인전은 아무나) 한 명 F가 귀가, 3라운드·4라운드 경기 취소. 4라운드 휴식자들도 앞서 귀가(SCR-226-ST8 재현에 씀) */
 export function leaveScenario(ds: Dataset) {
   const base = liveData(ds, 2, 4)
   const r4 = base.games.filter((g) => g.round === 4)
@@ -73,7 +73,6 @@ export function RoundLive({ stateId }: { stateId: string }) {
   const [notice, setNotice] = useState<string | null>(
     st === 'SCR-112-ST20' ? '아직 시작하지 않은 라운드입니다. 결과는 라운드를 시작한 뒤 기록할 수 있습니다' : st === 'SCR-112-ST21' ? "지난 라운드의 결과는 미기록으로 되돌릴 수 없습니다. 승패 바꾸기는 할 수 있습니다" : null,
   )
-  const [restore, setRestore] = useState<number | null>(null)
   const [leave, setLeave] = useState(false)
   const [busy, setBusy] = useState(false)
   useEffect(() => {
@@ -125,9 +124,7 @@ export function RoundLive({ stateId }: { stateId: string }) {
     const no = noOf(games, g)
     const court = courtOf(games, g)
     const future = r > current
-    const past = r < current
     const gp = gap(g)
-    const restorable = g.cancelled && !past
     const line = (side: 0 | 1) => {
       const ids = (side === 0 ? g.t1 : g.t2) as string[]
       const won = g.result === side
@@ -171,12 +168,6 @@ export function RoundLive({ stateId }: { stateId: string }) {
           {g.relax && !g.cancelled && <span className="su-badge" data-tone="warning">규칙 완화: 성별 조합</span>}
           {g.cancelled ? (
             <span style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-              {restorable && (
-                <button type="button" className="su-restore" onClick={() => setRestore(g.key)} data-testid="restore-btn">
-                  <RotateCcw aria-hidden />
-                  복원
-                </button>
-              )}
               <span className="su-badge" data-tone="neutral" data-cmp="CMP-005">취소 · 중도 귀가</span>
             </span>
           ) : (
@@ -248,20 +239,6 @@ export function RoundLive({ stateId }: { stateId: string }) {
       <AppNav active="match" role="admin" />
       {toast && <Toast text={toast} />}
       {ask === 'undo' && <Dialog title={`${current}라운드 시작을 취소하고 ${current - 1}라운드로 돌아갈까요?`} desc={`${current - 1}라운드 경기를 다시 고치거나 미기록으로 되돌릴 수 있습니다`} ok="시작 취소" onCancel={() => setAsk(null)} onOk={undoStart} />}
-      {restore !== null && (
-        <RestoreSheet
-          ds={ds}
-          games={games}
-          gameKey={restore}
-          left={live.left}
-          onClose={() => setRestore(null)}
-          onDone={(next) => {
-            setLive((l) => ({ ...l, games: l.games.map((g) => (g.key === next.key ? next : g)) }))
-            setRestore(null)
-            setToast(`${noOf(games, next)}경기를 복원했습니다`)
-          }}
-        />
-      )}
       {leave && <LeaveSheet ds={ds} games={games} current={current} leaver={games.filter((g) => g.round === current && !g.cancelled).flatMap(filled)[4]} left={live.left} onClose={() => setLeave(false)} />}
     </Screen>
   )

@@ -156,7 +156,8 @@ class ClubMatchGame(Base):
     # (B15, C-36) 라운드·코트(서버가 매김). 기존 청백전은 NULL
     round_no: Mapped[int | None] = mapped_column(SmallInteger)
     court_no: Mapped[int | None] = mapped_column(SmallInteger)
-    # (B15, C-37) 중도 귀가로 취소된 경기(현재 상태, 복원하면 비움). 이력은 club_match_game_events
+    # (B15, C-37) 중도 귀가로 취소된 경기(현재 상태, 되돌리지 않음 — 기획 r14).
+    # 이력은 club_match_game_events
     cancelled_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     cancelled_by_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("users.id", ondelete="SET NULL")
@@ -165,11 +166,14 @@ class ClubMatchGame(Base):
 
 
 class ClubMatchGameEvent(Base):
-    """(B15, C-37·C-38) 경기 취소·복원 이력. 추가만 하고 고치거나 지우지 않음."""
+    """(B15, C-37·C-38) 경기 취소 이력. 추가만 하고 고치거나 지우지 않음.
+
+    (B18, 기획 r14) 동작은 'cancel'만.
+    """
 
     __tablename__ = "club_match_game_events"
     __table_args__ = (
-        CheckConstraint("action IN ('cancel', 'restore')", name="ck_club_match_game_events_action"),
+        CheckConstraint("action IN ('cancel')", name="ck_club_match_game_events_action"),
     )
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
@@ -183,7 +187,7 @@ class ClubMatchGameEvent(Base):
     actor_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"))
     at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     reason: Mapped[str | None] = mapped_column(String(20))
-    # 복원 때 귀가 선수 자리 → 대체 선수(사람 키) {"member:…": "guest:…"}
+    # 취소 이력의 추가 정보(JSON). 지금은 비워 둠
     detail: Mapped[dict[str, str]] = mapped_column(JSON, default=dict, server_default="{}")
 
 

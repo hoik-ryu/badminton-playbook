@@ -47,7 +47,6 @@ from app.modules.clubmatch.schemas import (
     ParticipationUpdate,
     Person,
     Relaxation,
-    RestoreRequest,
     ResultUpdate,
     Rules,
     SettingsUpdate,
@@ -169,8 +168,6 @@ ROUND_LOCKED = "round_locked"
 ROUND_HAS_RESULTS = "round_has_results"
 GAME_CANCELLED = "game_cancelled"
 CANCEL_NOT_ALLOWED = "cancel_not_allowed"
-RESTORE_NOT_ALLOWED = "restore_not_allowed"
-RESTORE_BLOCKED = "restore_blocked"
 LEFT = "left"
 
 
@@ -2006,120 +2003,4 @@ def leave(
     if body.assignments or body.cancel:
         m.modified_at = now
         _refresh_flags(db, m, frozenset(forced))
-    return _finish(db, m)
-
-
-@router.post("/{match_id}/games/{no}/restore")
-def restore_game(
-    match_id: uuid.UUID, no: int, body: RestoreRequest, actor: AdminUser, db: DbSession
-) -> ClubMatchView:
-    """(B15, C-37 r13·AC-164) 취소 경기 복원: 진행 중·시작 전 라운드, 종료 전에만.
-
-    귀가한 선수 자리마다 대체 선수를 함께 지정(귀가 상태는 해제하지 않음). 항상 막는 규칙·
-    라운드 규칙·확정 후 같은 대진 거부를 모두 다시 검사. 복원된 경기는 미기록, 이력을 남김.
-    """
-    m = _lock(db, match_id, body)
-    if m.status != "confirmed" or not _is_round(m):
-        raise _fail(
-            db,
-            RESTORE_NOT_ALLOWED,
-            "종료된 청백전은 복원할 수 없습니다"
-            if m.status == "finished"
-            else "진행 중인 라운드 기반 청백전에서만 복원할 수 있습니다",
-            409,
-        )
-    g = _game(db, m, no)
-    if g.cancelled_at is None:
-        raise _fail(db, RESTORE_NOT_ALLOWED, "취소된 경기가 아닙니다", 409)
-    current = m.current_round or 1
-    if (g.round_no or 0) < current:
-        raise _fail(
-            db,
-            ROUND_LOCKED,
-            "지난 라운드의 경기는 복원할 수 없습니다",
-            409,
-            {"round": g.round_no, "currentRound": current},
-        )
-    parts = _participants(db, m.id)
-    parts_by_key = {_participant_key(p): p for p in parts}
-    by_participant = {p.id: _participant_key(p) for p in parts}
-    rows = _games(db, m.id, by_participant)
-    mine = next(r for r in rows if r[0].id == g.id)
-    seat_keys = [*mine[1], *mine[2]]
-    gone = [k for k in seat_keys if parts_by_key[k].left_at is not None]
-    unknown = [k for k in body.replacements if k not in gone]
-    if unknown:
-        raise _fail(
-            db, CONFLICT, "대진이 바뀌었습니다", 409, {"version": m.version, "keys": unknown}
-        )
-    busy = _round_busy(rows, g.round_no, skip=g.id)
-    playable = _playable_keys(db, parts)
-
-    def options(out: str) -> list[str]:
-        return [
-            c
-            for c in playable
-            if c not in seat_keys
-            and c not in busy
-            and (m.method == "individual" or parts_by_key[c].team == parts_by_key[out].team)
-        ]
-
-    missing = [k for k in gone if k not in body.replacements]
-    if missing:
-        raise _fail(
-            db,
-            RESTORE_BLOCKED,
-            "귀가한 선수 자리에 대체 선수가 필요합니다"
-            if all(options(k) for k in missing)
-            else "대체할 사람이 없어 복원할 수 없습니다",
-            422,
-            {"keys": missing, "candidates": {k: len(options(k)) for k in missing}},
-        )
-    picked = list(body.replacements.values())
-    if len(set(picked)) != len(picked):
-        raise _fail(db, DUPLICATE_PLAYER, "같은 경기에 같은 선수가 두 번 들어갈 수 없습니다", 422)
-    for out, to_key in body.replacements.items():
-        if to_key in busy:
-            raise _fail(
-                db,
-                ROUND_CONFLICT,
-                "같은 라운드에 이미 출전하는 사람입니다",
-                422,
-                {"keys": [to_key], "round": g.round_no},
-            )
-        to = _active_participant(db, m, to_key, parts_by_key)
-        _replace(db, m, g, parts_by_key[out], to)
-    db.flush()
-    final = [body.replacements.get(k, k) for k in seat_keys]
-    _check_lineup(
-        db, m, parts_by_key, _available_keys(db, parts), final[:2], final[2:], game_no=g.no
-    )
-    keys = _matchup_keys(db, m)
-    mine_key = schedule.matchup_key(final[:2], final[2:])
-    twins = [o for o, k in keys.items() if o != no and k == mine_key]
-    if twins:
-        raise _fail(
-            db,
-            SAME_MATCHUP,
-            "같은 4명·같은 팀 구성의 경기가 이미 있습니다",
-            409,
-            {"games": [no], "with": twins},
-        )
-    now = _now()
-    g.cancelled_at = None
-    g.cancelled_by_id = None
-    g.cancel_reason = None
-    g.changed = True
-    m.modified_at = now
-    db.add(
-        ClubMatchGameEvent(
-            match_id=m.id,
-            game_id=g.id,
-            action="restore",
-            actor_id=actor.id,
-            at=now,
-            detail=dict(body.replacements),
-        )
-    )
-    _refresh_flags(db, m)
     return _finish(db, m)

@@ -11,9 +11,9 @@
     "SCR-111": "A"
   },
   "axes": null,
-  "statement": "V08-A 다시 선택 (권장) — 청백전 목록 디자인은 바꾸지 않고 V08-A를 현재 기준(기획 r13·UX Spec r11)으로 다시 선택합니다.",
+  "statement": "V08-A 다시 선택 (권장)",
   "feedback": [],
-  "at": "2026-11-25T07:29:35Z",
+  "at": "2026-11-26T01:43:24Z",
   "measurement": "passed",
   "measurement_detail": {
     "status": "passed",
@@ -260,9 +260,9 @@
     }
   },
   "basis": {
-    "planning_revision": "13",
-    "planning_hashes_sha256": "ef2001feeed7a9bcaf432555d8dffa657d4e6dd24e4027d6a42fa1d32aeb1f03",
-    "ux_spec_revision": 11,
+    "planning_revision": "14",
+    "planning_hashes_sha256": "da7d84949e1b6e19da92ec3b7f7a80547e6acc58db67b867b997dff2a44fd0b0",
+    "ux_spec_revision": 12,
     "fingerprints": {
       "SCR-111": {
         "screen": "SCR-111",

@@ -4,7 +4,7 @@
 - 라운드 기반 생성(schedule.generate_round_games): 라운드마다 k경기, 같은 라운드 중복 출전 0, 결정적
 - 편집: 라운드별 경기 추가·라운드 추가·삭제 정리·이동(move)·같은 라운드 후보 제한
 - 진행: 확정 시 1라운드, 다음 라운드 시작·시작 취소, 결과 입력 규칙, 종료 조건
-- 중도 귀가 취소(cancel)·복원(restore)·이력, 취소 경기 집계 제외
+- 중도 귀가 취소(cancel)·이력, 취소 경기 집계 제외. (B18) 취소한 경기는 되돌리지 않음(복원 API 없음)
 - 라운드 정보 없는 기존 청백전은 기존 테스트(test_clubmatch_*.py)가 그대로 지킴(AC-163)
 
 AC 태그: 테스트 이름의 `[AC-xxx]`(parametrize id).
@@ -562,98 +562,25 @@ def test_finish_requires_last_round_and_processed(
     assert ok(post(admin, view, "finish"))["status"] == "finished"
 
 
-def _cancel_directly(db: Session, match_id: str, no: int) -> None:
-    """AC-164 전제(두 경기가 취소된 상태)를 저장소에 직접 만듦: 현재 규칙(A3)에서는 대체 후보가
-    생기면 다음 취소가 막혀 API만으로는 '두 경기 모두 취소'에 이를 수 없음(보고 대상)."""
-    g = db.scalars(
-        select(ClubMatchGame).where(
-            ClubMatchGame.match_id == uuid.UUID(match_id), ClubMatchGame.no == no
-        )
-    ).one()
-    from datetime import UTC, datetime
+@ac("AC-160")
+def test_cancelled_game_cannot_be_restored(admin: TestClient, db: Session, ac_tag: str) -> None:
+    """(B18, 기획 r14 Q-032 A4) 취소한 경기는 되돌리지 않음.
 
-    g.cancelled_at = datetime.now(UTC)
-    g.cancel_reason = "left"
-    db.commit()
-
-
-@ac("AC-164")
-def test_restore_blocked_cases(admin: TestClient, db: Session, ac_tag: str) -> None:
-    # 8명·코트 2·3라운드: 2라운드 진행 중 F 귀가 → 2·3라운드 경기 취소(휴식자 없음)
-    view, keys = ready(admin, db, 8, courts=2, rounds=3)
+    복원 API가 없고 취소 상태·version 그대로.
+    """
+    view, _ = ready(admin, db, 8, courts=2, rounds=2)
     view = confirm(admin, view)
-    view = record_round(admin, view, 1)
-    view = ok(post(admin, view, "rounds/next"))
-    f = players(by_round(view)[2][0])[0]
+    f = players(by_round(view)[1][0])[0]
     view = ok(_leave(admin, view, f, {}, [g["no"] for g in _remaining(view, f)]))
-    x2 = next(g for g in view["games"] if g["cancelled"] and g["round"] == 2)
-    x3 = next(g for g in view["games"] if g["cancelled"] and g["round"] == 3)
-    # 대체 없이 → restore_blocked(후보 없음), 귀가 상태는 그대로
-    res = post(admin, view, f"games/{x3['no']}/restore", replacements={})
-    assert err(res) == (422, "restore_blocked")
-    assert res.json()["error"]["details"]["keys"] == [f]
-    # 같은 라운드의 살아 있는 경기 출전자로는 round_conflict
-    busy = players(next(g for g in by_round(view)[3] if not g["cancelled"]))[0]
-    res = post(admin, view, f"games/{x3['no']}/restore", replacements={f: busy})
-    assert err(res) == (422, "round_conflict")
-    # 취소되지 않은 경기·귀가 선수가 아닌 자리 → restore_not_allowed / conflict
-    live = next(g for g in view["games"] if not g["cancelled"] and g["round"] == 3)
-    assert err(post(admin, view, f"games/{live['no']}/restore")) == (409, "restore_not_allowed")
-    # 진행 라운드가 지나면 round_locked
-    view = record_round(admin, view, 2)
-    view = ok(post(admin, view, "rounds/next"))
-    res = post(admin, view, f"games/{x2['no']}/restore", replacements={f: keys[0]})
-    assert err(res) == (409, "round_locked")
-    assert next(r for r in view["rows"] if r["key"] == f)["left"]
-
-
-@ac("AC-164", "AC-088")
-def test_restore_success_records_event_and_unrecorded(
-    admin: TestClient, db: Session, ac_tag: str
-) -> None:
-    # AC-164 전제: 3라운드 진행 중, G의 경기 Y는 중도 귀가로 취소(대체 후보 없음),
-    # F의 경기 X도 취소된 상태 → X를 Y의 선수 H로 F 자리를 채워 복원
-    view, keys = ready(admin, db, 8, courts=2, rounds=3)
-    view = confirm(admin, view)
-    for rd in (1, 2):
-        view = record_round(admin, view, rd)
-        view = ok(post(admin, view, "rounds/next"))
-    x, y = by_round(view)[3]
-    g_ = players(y)[0]
-    view = ok(_leave(admin, view, g_, {}, [y["no"]]))
-    f = players(x)[0]
-    team_f = next(r for r in view["rows"] if r["key"] == f)
-    _cancel_directly(db, view["id"], x["no"])
-    from app.modules.clubmatch.models import ClubMatchParticipant
-
-    part = db.scalars(
-        select(ClubMatchParticipant).where(ClubMatchParticipant.match_id == uuid.UUID(view["id"]))
-    ).all()
-    from datetime import UTC, datetime
-
-    for p in part:
-        if f == f"member:{p.user_id}":
-            p.left_at = datetime.now(UTC)
-    db.commit()
-    view = ok(admin.get(f"{BASE}/{view['id']}"))
-    assert team_f["left"] is False and next(r for r in view["rows"] if r["key"] == f)["left"]
-    h = players(y)[1]  # Y가 취소되어 3라운드 출전으로 세지 않음
-    view = ok(post(admin, view, f"games/{x['no']}/restore", replacements={f: h}))
-    back = next(g for g in view["games"] if g["no"] == x["no"])
-    assert back["cancelled"] is None and back["winner"] is None and back["changed"]
-    assert h in players(back) and f not in players(back)
-    assert view["modifiedAt"] is not None
-    assert next(r for r in view["rows"] if r["key"] == f)["left"]  # 귀가 상태 그대로
-    events = list(db.scalars(select(ClubMatchGameEvent)))
-    restore = [e for e in events if e.action == "restore"]
-    assert len(restore) == 1 and restore[0].detail == {f: h}
-    assert_round_rules(view)
-    # 복원된 경기는 미기록이라 3라운드가 다시 처리 전 → 종료 불가
-    assert err(post(admin, view, "finish")) == (409, "not_all_recorded")
-    view = record_round(admin, view, 3)
-    view = ok(post(admin, view, "finish"))
-    code = err(post(admin, view, f"games/{y['no']}/restore", replacements={}))
-    assert code == (409, "restore_not_allowed")
+    gone = next(g for g in view["games"] if g["cancelled"])
+    res = admin.post(
+        f"{BASE}/{view['id']}/games/{gone['no']}/restore",
+        json={"version": view["version"], "replacements": {}},
+    )
+    assert res.status_code in (404, 405)
+    after = ok(admin.get(f"{BASE}/{view['id']}"))
+    assert after["version"] == view["version"]
+    assert next(g for g in after["games"] if g["no"] == gone["no"])["cancelled"]
 
 
 # ── 기존 청백전 호환·권한(AC-163) ──
@@ -693,7 +620,7 @@ def test_round_endpoints_need_admin(make_client: Any, db: Session) -> None:
     make_user(db, name="회원", kakao_id="9401")
     kakao_login(c, "9401")
     mid = uuid.uuid4()
-    for path in ("rounds/next", "rounds/undo", "games/1/move", "games/1/restore"):
+    for path in ("rounds/next", "rounds/undo", "games/1/move"):
         assert c.post(f"{BASE}/{mid}/{path}", json={"version": 1, "round": 1}).status_code == 403
 
 

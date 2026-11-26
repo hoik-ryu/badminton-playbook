@@ -95,8 +95,8 @@ export type MockClubMatch = {
   plannedRounds?: number | null
   /** (B15, C-37) 진행 중인 라운드(확정 후) */
   currentRound?: number | null
-  /** (B15, C-37) 취소·복원 이력(추가만) */
-  events?: { gameNo: number; action: 'cancel' | 'restore'; at: string; reason: string | null; detail: Record<string, string> }[]
+  /** (B15, C-37) 취소 이력(추가만). (B18, 기획 r14) 복원 없음 */
+  events?: { gameNo: number; action: 'cancel'; at: string; reason: string | null; detail: Record<string, string> }[]
 }
 
 /** 청백전 경기(서버 club_match_games와 같은 의미). 선택 필드는 이전 Mock 저장본 호환용 */

@@ -53,7 +53,7 @@ export const CLUB_ERRORS = {
   roundNotStarted: 'round_not_started',
   /** 진행 라운드에 처리되지 않은 경기가 있어 다음 라운드를 시작할 수 없음. details = { games, currentRound } */
   roundIncomplete: 'round_incomplete',
-  /** 지난 라운드 결과를 미기록으로 되돌리기·지난 라운드 경기 복원. details = { round, currentRound } */
+  /** 지난 라운드 결과를 미기록으로 되돌리기. details = { round, currentRound } */
   roundLocked: 'round_locked',
   /** 진행 라운드에 결과·취소가 있어 시작 취소 불가 */
   roundHasResults: 'round_has_results',
@@ -61,10 +61,6 @@ export const CLUB_ERRORS = {
   gameCancelled: 'game_cancelled',
   /** 대체할 수 있는 선수가 있는 경기의 취소(또는 라운드 정보 없는 청백전). details = { games } */
   cancelNotAllowed: 'cancel_not_allowed',
-  /** 종료됐거나 취소되지 않은 경기의 복원 */
-  restoreNotAllowed: 'restore_not_allowed',
-  /** 귀가한 선수 자리에 대체 선수가 없음. details = { keys, candidates: 자리마다 후보 수 } */
-  restoreBlocked: 'restore_blocked',
 } as const
 export const METHOD_LABEL: Record<ClubMethod, string> = { individual: '개인전', team: '팀전' }
 export const STATUS_LABEL: Record<ClubStatus, string> = { draft: '대진 미확정', confirmed: '진행 중', finished: '종료' }
@@ -1080,47 +1076,6 @@ export async function excludeWithSubstitutes(id: string, version: number, leaver
 
 /** 취소 사유: 중도 귀가(서버 LEFT) */
 export const CANCEL_LEFT = 'left'
-
-/**
- * (B15, C-37 r13·AC-164) 취소 경기 복원: 진행 중·시작 전 라운드, 종료 전에만. 귀가한 선수 자리마다 대체 선수를 함께 지정
- * (귀가 상태는 그대로). 항상 막는 규칙·라운드 규칙·같은 대진 거부를 다시 검사. 복원된 경기는 미기록, 이력을 남김
- */
-export async function restoreClubGame(id: string, version: number, gameNo: number, replacements: Record<string, string>): Promise<ClubMatchView> {
-  if (dataSource === 'api') return api.post<ClubMatchView>(`${base(id)}/games/${gameNo}/restore`, { replacements, version })
-  return mutate(id, version, (m, db) => {
-    if (m.status !== 'confirmed' || !isRound(m)) throw err(409, CLUB_ERRORS.restoreNotAllowed, m.status === 'finished' ? '종료된 청백전은 복원할 수 없습니다' : '진행 중인 라운드 기반 청백전에서만 복원할 수 있습니다')
-    const g = m.games.find((x) => x.no === gameNo)
-    if (!g) throw err(404, 'not_found', '경기를 찾을 수 없습니다')
-    if (!g.cancelled) throw err(409, CLUB_ERRORS.restoreNotAllowed, '취소된 경기가 아닙니다')
-    const current = m.currentRound ?? 1
-    if ((g.round ?? 0) < current) throw err(409, CLUB_ERRORS.roundLocked, '지난 라운드의 경기는 복원할 수 없습니다', { round: g.round ?? null, currentRound: current })
-    const seatKeys = playersOf(g)
-    const gone = seatKeys.filter((k) => m.participants[k]?.left)
-    const unknown = Object.keys(replacements).filter((k) => !gone.includes(k))
-    if (unknown.length) throw err(409, CLUB_ERRORS.conflict, '대진이 바뀌었습니다', { version: m.version, keys: unknown })
-    const busy = roundBusy(m, g.round, g.no)
-    const options = (out: string) => Object.keys(m.participants).filter((c) => !m.participants[c]!.left && isAvailable(db, c) && !seatKeys.includes(c) && !busy.has(c) && (m.method === 'individual' || m.participants[c]!.team === m.participants[out]!.team))
-    const missing = gone.filter((k) => !(k in replacements))
-    if (missing.length)
-      throw err(422, CLUB_ERRORS.restoreBlocked, missing.every((k) => options(k).length) ? '귀가한 선수 자리에 대체 선수가 필요합니다' : '대체할 사람이 없어 복원할 수 없습니다', { keys: missing, candidates: Object.fromEntries(missing.map((k) => [k, options(k).length])) })
-    const picked = Object.values(replacements)
-    if (new Set(picked).size !== picked.length) throw err(422, CLUB_ERRORS.duplicatePlayer, '같은 경기에 같은 선수가 두 번 들어갈 수 없습니다')
-    for (const [out, to] of Object.entries(replacements)) {
-      if (busy.has(to)) throw err(422, CLUB_ERRORS.roundConflict, '같은 라운드에 이미 출전하는 사람입니다', { keys: [to], round: g.round ?? null })
-      activeOrFail(db, m, to)
-      replaceIn(db, m, gameNo, out, to)
-    }
-    checkLineup(db, m, [...g.team1], [...g.team2], gameNo)
-    const twins = liveGames(m).filter((x) => x.no !== gameNo && keyOfGame(x) === keyOfGame(g)).map((x) => x.no)
-    if (twins.length) throw err(409, CLUB_ERRORS.sameMatchup, '같은 4명·같은 팀 구성의 경기가 이미 있습니다', { games: [gameNo], with: twins })
-    const now = new Date().toISOString()
-    g.cancelled = null
-    g.changed = true
-    m.modifiedAt = now
-    m.events = [...(m.events ?? []), { gameNo, action: 'restore', at: now, reason: null, detail: { ...replacements } }]
-    refreshFlags(db, m)
-  })
-}
 
 // ── 다른 기능과의 연결 ──
 

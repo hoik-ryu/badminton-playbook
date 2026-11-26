@@ -1,6 +1,6 @@
 {
-  "ux_spec_revision": 11,
-  "design_direction_revision": 14,
+  "ux_spec_revision": 12,
+  "design_direction_revision": 15,
   "screens": {
     "SCR-001": {
       "skip": "Design Direction r14 렌더 범위 밖(이번 Preview는 07 6장의 20개 화면)"
@@ -405,9 +405,7 @@
       "file": "src/screens/SCR-226.tsx",
       "states": [
         "SCR-226-ST1",
-        "SCR-226-ST8",
-        "SCR-226-ST9",
-        "SCR-226-ST10"
+        "SCR-226-ST8"
       ],
       "vd": [
         "VD-001",

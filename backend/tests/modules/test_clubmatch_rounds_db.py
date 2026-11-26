@@ -32,7 +32,7 @@ from app.core.config import get_settings
 from app.core.db import get_engine, get_sessionmaker
 from app.main import create_app
 from app.modules.auth.kakao import get_kakao_client
-from app.modules.clubmatch.models import ClubMatch, ClubMatchGame
+from app.modules.clubmatch.models import ClubMatch, ClubMatchGame, ClubMatchGameEvent
 from app.modules.roster.models import MemberRating
 from app.modules.user.models import User, UserIdentity
 from tests.modules.authkit import ORIGIN, FakeKakao, auth_settings, kakao_login, new_kakao_id
@@ -333,6 +333,23 @@ def test_db_unique_round_court_constraint(admin: TestClient, pg: Session, ac_tag
     g.winner = 1
     g.cancelled_at = datetime.now(UTC)
     with pytest.raises(IntegrityError):  # 결과와 취소 동시 금지
+        pg.commit()
+    pg.rollback()
+
+
+@ac("AC-163")
+def test_db_game_event_action_allows_only_cancel(
+    admin: TestClient, pg: Session, ac_tag: str
+) -> None:
+    """(B18, 기획 r14) 이력은 취소만 남김: 마이그레이션 0011의 action 제약은 'cancel'만 허용."""
+    view, _ = round_match(admin, pg, 8, 2, 2)
+    mid = uuid.UUID(view["id"])
+    g = pg.scalars(select(ClubMatchGame).where(ClubMatchGame.match_id == mid)).first()
+    assert g is not None
+    pg.add(ClubMatchGameEvent(match_id=mid, game_id=g.id, action="cancel", reason="left"))
+    pg.commit()
+    pg.add(ClubMatchGameEvent(match_id=mid, game_id=g.id, action="restore"))
+    with pytest.raises(IntegrityError):
         pg.commit()
     pg.rollback()
 

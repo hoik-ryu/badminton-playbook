@@ -287,12 +287,6 @@ class GameMove(Versioned):
     round: int
 
 
-class RestoreRequest(Versioned):
-    """(B15, C-37 r13) 취소 경기 복원: 귀가 선수 자리(사람 키) → 대체 선수(사람 키)."""
-
-    replacements: dict[str, str] = Field(default_factory=dict)
-
-
 class GameExchange(Versioned):
     """(B13, C-35) 개인전 확정 전 같은 경기 맞교환: out(대상) ↔ in(같은 경기 상대 조)."""
 

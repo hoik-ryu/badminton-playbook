@@ -1,22 +1,39 @@
 ---
 doc: preview-review
-revision: 10
+revision: 11
 language: ko
 based_on:
-  ux_spec_revision: 11
+  ux_spec_revision: 12
 ---
 
 # UI 프리뷰 검토 (Preview Review): 배드민턴 플레이북 (badminton-playbook)
 
 - 프리뷰 위치: `design-preview/` (정적 프리뷰, 제품 코드 아님. 실제 API·DB·인증 없음, 가짜 데이터 `src/mock/`)
-- 실행: `pnpm --dir design-preview install && pnpm --dir design-preview dev` → http://localhost:55180/ (예: (r10) 라운드 대진 편집 `#SCR-244/SCR-244-ST7/mobile`·운영진 라운드 진행 `#SCR-112/SCR-112-ST16/mobile`·취소·복원 `#SCR-112/SCR-112-ST22/mobile`, (r8) 청백전 생성 팀전 `#SCR-241/SCR-241-ST1/mobile`·개인전 `#SCR-241/SCR-241-ST1-IND/mobile`, `#SCR-111/SCR-111-ST1/mobile`, 운영진 보기 `#SCR-111/SCR-111-ST1-OPS/mobile`, 튜토리얼 흐름 `#SCR-102/SCR-102-FLOW-starter-1/mobile`, 측정용 `?bare=1`)
+- 실행: `pnpm --dir design-preview install && pnpm --dir design-preview dev` → http://localhost:55180/ (예: (r10) 라운드 대진 편집 `#SCR-244/SCR-244-ST7/mobile`·운영진 라운드 진행 `#SCR-112/SCR-112-ST16/mobile`·취소 경기 `#SCR-112/SCR-112-ST22/mobile`·(r11) 중도 귀가 취소 확인 `#SCR-226/SCR-226-ST8/mobile`, (r8) 청백전 생성 팀전 `#SCR-241/SCR-241-ST1/mobile`·개인전 `#SCR-241/SCR-241-ST1-IND/mobile`, `#SCR-111/SCR-111-ST1/mobile`, 운영진 보기 `#SCR-111/SCR-111-ST1-OPS/mobile`, 튜토리얼 흐름 `#SCR-102/SCR-102-FLOW-starter-1/mobile`, 측정용 `?bare=1`)
 - 기준: (r8) UX Planning **r9**, UX Spec **r9**(승인 2026-11-24), Design Direction **r12**(승인 2026-11-24, 07 sha256 `a58978bd…e1f43c6b`), 사용자 시안 REF-004(`527d31a8…fccd2d1a`)·REF-005(`d8b9a7fb…7cef4d0a`, 둘 다 원본 Git 제외)
+- (r11) 기준: UX Planning **r12**, UX Spec **r12**(승인 2026-11-26), Design Direction **r15**(승인 2026-11-26). 테마·토큰·자산은 r10과 같음
 - (r10) 기준: UX Planning **r11**, UX Spec **r11**(승인 2026-11-25), Design Direction **r14**(승인 2026-11-25, 07 sha256 `97f77cbc…66872d7c5b8`). 테마·토큰·자산은 r9와 같음
 - (r9) 기준: UX Planning **r10**, UX Spec **r10**(승인 2026-11-25), Design Direction **r13**(승인 2026-11-25, 07 sha256 `a3ddb6b8…aa69c2a2`). 테마·토큰·자산은 r8과 같음
 - (r8 기준이었던 값은 위 줄, r7 기준이었던 값: UX Planning r7, UX Spec r7, Design Direction r11 07 `d076086f…bfe21`)
 - 테마·배너(r7과 같음): 테마 `docs/design-profile/theme.json` `0.4.0-soft-mint`(sha256 `8aee575f…36941`, r6와 같음), 배너 AST-082(sha256 `f2ad2b2e…a6328a`)
 - (r6 기준이었던 값: Design Direction r9 07 `1efd70cf…42bc577`, 배너 AST-080 `7a0b6fa2…279d7`)
 - 실행 환경: Node 20.19.5, pnpm, Vite 7 + React 19 + Tailwind v4. `src/tokens.css`는 `theme-check --print-css` 생성값
+
+> **이번 판(r11, 2026-11-26)**: 취소 경기 복원 제거(기획 r14, UX Spec r12 SCR-112·SCR-226, DD r15 VD-084·085)만 반영했습니다. DD r15 승인 문장은 "디자인 방향 승인. Design Direction r15를 승인합니다. V08-A 재선택도 승인합니다."입니다.
+> - **바꾼 파일**: `src/screens/SCR-226.tsx`(복원 시트 `RestoreSheet`와 ST9·ST10 보기 삭제), `src/components/smapsh/RoundLive.tsx`(취소 카드 '복원' 버튼·복원 상태·복원 시트·복원 토스트 삭제), `src/registry.tsx`(SCR-226-ST9·ST10 등록 삭제), `src/setup.css`(`.su-restore` 삭제), `preview.manifest.json`(기준 revision, SCR-226 상태)
+> - **바꾸지 않은 것**: 중도 귀가 취소 확인(SCR-226-ST8), 취소 경기 카드(흐림·'취소 · 중도 귀가' 배지·귀가한 선수 '귀가' 표시·결과 버튼 없음), 회원 화면 '취소' 표시(SCR-112-ST22-MEMBER), 그 밖의 화면·레이아웃·디자인·인터랙션
+
+### (r11) 검증 결과(헤드리스 Chrome, `?bare`, 현재본 빌드 · 승인본 r10 빌드(HEAD 5876c04))
+
+| 항목 | 결과 |
+|---|---|
+| 회귀(등록 상태 전체, 390×844 전체 화면 픽셀) | 승인본 132개 상태 중 폐기 2개(SCR-226-ST9·ST10)를 뺀 130개 비교: 117개 즉시 동일. 복원 버튼이 있던 4개(SCR-112-ST22, SCR-226-ST1·ST1-IND·ST8의 부모 화면)만 차이, 화면 글자는 '복원'만 빠짐. 나머지 9개(SCR-102·103·242·244·225의 진행 표시·애니메이션 상태)는 승인본끼리도 흔들리는 상태로, 애니메이션을 멈추면 3회 모두 동일 |
+| 바뀐 화면 렌더(SCR-112 전체·SCR-226 상태 × 390·360·1440, 200%는 ST22·SCR-226) | 66건 모두 가로 넘침 0, 콘솔 오류 0 |
+| 취소 카드(운영진, 팀전·개인전) | 복원 버튼 0, '복원' 글자 0, 취소 카드 2개·'취소 · 중도 귀가' 배지 2개·결과 버튼 0 |
+| 회원 화면 취소 표시 | '취소' 배지 1개, '복원' 글자 0 |
+| 중도 귀가 취소 확인(SCR-226-ST8) | 취소 체크 1개, 체크 전 '반영' 비활성 → 체크 후 활성 |
+| 폐기한 주소(`#SCR-226/SCR-226-ST9`) | 복원 시트 없음, 콘솔 오류 0 |
+| 누름 영역·대비 | 새 요소 없음(요소 삭제만) |
 
 > **이번 판(r10, 2026-11-25)**: 청백전 라운드·코트 운영(기획 r13 C-36–C-38, UX Spec r11 SCR-241·244·245·225·112·226, DD r14 VD-077–086)을 반영했습니다. DD r14 승인 문장은 "디자인 방향 승인. Design Direction r14를 승인합니다."입니다. Preview r9를 바탕으로 바뀐 화면·상태만 고쳤고, 다른 화면의 코드·토큰·자산은 그대로입니다.
 > - **바꾼 파일**: `src/screens/SCR-244.tsx`(라운드 수 스테퍼·미리보기·라운드 구역·코트 추가·라운드 추가·이동), `SCR-241.tsx`(코트 수 스테퍼·ST11·ST12), `SCR-245.tsx`(코트·라운드 요약·라운드별 대진 보기·라운드 검증·ST9), `SCR-112.tsx`(ST16–ST24 연결, 회원 취소 표시), 새 `SCR-226.tsx`(중도 귀가 대체·취소 확인·복원), 새 부품 `components/smapsh/Rounds.tsx`(라운드 머리글·이동 시트·토스트·진행 라운드 카드)·`RoundLive.tsx`(운영진 라운드 진행), `PickSheet.tsx`(머리글 'n라운드 코트 m'), `mock/editor.ts`(라운드 데이터·같은 라운드 후보 제한·라운드 생성 재현), `setup.css`(r14 구역), `registry.tsx`, `preview.manifest.json`(UX Spec r11·DD r14, 21개 화면)
@@ -311,6 +328,7 @@ based_on:
 | FB-019 | SCR-111 배너 | (2026-11-24) "저는 기존 3:1 비율을 유지하는 것보다 제가 전달한 원본 이미지의 전체 구도를 유지하는 것을 원합니다." · DD r10 승인 · "수정본+img로 정식 교체 (권장)" · DD r11 승인 | 위 (r7) 항목 | 반영 |
 | FB-020 | SCR-241–246 | (2026-11-24) "Design Direction r12의 제출 결과를 검토했으며, 디자인 방향 승인 및 Design Direction r12 최종 승인을 합니다." · 시안(REF-004·005)과 VD-059–070을 충실히 재현, 팀전 5단계·개인전 4단계, 주요 상호작용 동작 | 위 (r8) 항목 | 반영(승인 대기) |
 
+| FB-023 | SCR-112·226 | (2026-11-26) "디자인 방향 승인. Design Direction r15를 승인합니다. V08-A 재선택도 승인합니다." · SCR-112 취소 경기 카드의 복원 버튼 제거, SCR-226 복원 시트 및 복원 불가 상태(ST9·ST10) 제거, 관련 상태 등록·이벤트·피드백·CSS 정리, 중도 귀가 취소 확인·취소 경기 카드·회원 화면 취소 표시 유지 | 이번 판(r11) 반영 | 검수 대기 |
 | FB-022 | SCR-241·244·245·225·112·226 | (2026-11-25) "디자인 방향 승인. Design Direction r14를 승인합니다." · 기존 Preview r9 기반, 바뀐 화면·상태만, VD-077–086·UX Spec r11 준수, 생성·편집·확정·진행·취소·복원 인터랙션, 360·390·1440·확대 기준, VD-086 밀도 실측, 회귀 · "정보 밀도 기준을 맞추기 위해 기존 접근성이나 터치 영역을 훼손하지 마세요" | 이번 판(r10) 반영. 밀도 기준 충족을 위한 세부 조정 3건은 위 'DD 대비 세부 조정' | 검수 대기 |
 | FB-021 | SCR-244·225·245 | (2026-11-25) "Design Direction r13을 승인합니다." · 검수 대상(방식 선택, 공통 편집기, 추가·삭제·빈 자리 선택, 개인전 맞교환, 시트 상태, 0경기·미완성·실패·충돌, 확인 창, SCR-245 요약)과 "가능한 상호작용은 Preview에서도 직접 조작" | 위 (r9) 항목 | 반영(승인 대기) |
 
