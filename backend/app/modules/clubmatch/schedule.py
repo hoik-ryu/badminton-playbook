@@ -525,3 +525,280 @@ def substitute_decision(
         else:
             forced.add(keys[no])
     return avoidable, forced
+
+
+# ── (B15) 라운드·코트 기반 생성(C-36, AC-145–147) — FE schedule.ts와 같은 결과(골든 JSON) ──
+#
+# 라운드마다 ① 출전자를 먼저 고르고(경기 수 적은 사람 → 직전 라운드 휴식자 → 연속 휴식이 긴 사람 →
+# 시드로 섞은 순서) ② 그 사람들로만 조를 짭니다(기존 비용 순서: 같은 대진 금지 → 파트너 반복 →
+# 성별 조합 → 밸런스). 전체 대진을 코트 수만큼 잘라 라운드를 붙이는 방식이 아닙니다.
+# 난수 호출 순서(TS와 같음): 라운드마다 (팀전) 청 섞기 → 백 섞기 / (개인전) 전체 섞기,
+# 그다음 코트마다
+# 시도(최대 60)마다 (팀전) 남은 청 섞기 → 남은 백 섞기 / (개인전) 남은 사람 섞기.
+
+MAX_COURTS = 8
+MAX_GAMES = 200
+TARGET_GAMES_EACH = 4  # 기본 라운드 수의 목표: 1인 평균 4경기 이상(C-36 r13)
+
+
+def per_round(method: Method, sizes: Mapping[str, int], courts: int) -> int:
+    """라운드당 최대 경기 수 k = min(코트, ⌊N÷4⌋, 팀전 ⌊청÷2⌋·⌊백÷2⌋)."""
+    k = min(courts, sizes["all"] // 4)
+    if method == "team":
+        k = min(k, sizes["blue"] // 2, sizes["white"] // 2)
+    return max(0, k)
+
+
+def max_rounds(k: int) -> int:
+    """라운드 수 상한 ⌊200÷k⌋(라운드 수 × k ≤ 200)."""
+    return MAX_GAMES // k if k > 0 else 0
+
+
+def default_rounds(method: Method, sizes: Mapping[str, int], k: int) -> int:
+    """기본 라운드 수(C-36 r13): 개인전 ⌈N÷k⌉, 팀전 ⌈2×큰 팀÷k⌉, 상한 ⌊200÷k⌋. k = 0이면 0."""
+    if k <= 0:
+        return 0
+    if method == "team":
+        want = -(-2 * max(sizes["blue"], sizes["white"]) // k)
+    else:
+        want = -(-sizes["all"] // k)
+    return max(1, min(want, max_rounds(k)))
+
+
+def round_preview(
+    method: Method, sizes: Mapping[str, int], courts: int, rounds: int
+) -> dict[str, object]:
+    """생성 전 미리보기(UXD-106, AC-145).
+
+    k·예상 경기 수·1인 경기 수(팀전 팀별)·라운드별 출전·휴식·균등안.
+    """
+    k = per_round(method, sizes, courts)
+    out: dict[str, object] = {
+        "perRound": k,
+        "maxRounds": max_rounds(k),
+        "defaultRounds": default_rounds(method, sizes, k),
+        "games": rounds * k,
+    }
+
+    def each(n: int, per: int) -> dict[str, int]:
+        if n <= 0:
+            return {"min": 0, "max": 0}
+        return {"min": rounds * per // n, "max": -(-rounds * per // n)}
+
+    if method == "team":
+        out["each"] = {"blue": each(sizes["blue"], 2 * k), "white": each(sizes["white"], 2 * k)}
+        out["playing"] = {"blue": 2 * k, "white": 2 * k}
+        out["resting"] = {
+            "blue": max(0, sizes["blue"] - 2 * k),
+            "white": max(0, sizes["white"] - 2 * k),
+        }
+    else:
+        out["each"] = {"all": each(sizes["all"], 4 * k)}
+        out["playing"] = {"all": 4 * k}
+        out["resting"] = {"all": max(0, sizes["all"] - 4 * k)}
+    # 평균 4경기 미달(200경기 상한 때문)
+    avg_ok = k > 0 and rounds * (4 * k) >= TARGET_GAMES_EACH * sizes["all"]
+    out["belowTarget"] = bool(k > 0 and rounds == max_rounds(k) and not avg_ok)
+    out["proposals"] = even_round_proposals(method, sizes, k, rounds)
+    return out
+
+
+def even_round_proposals(
+    method: Method, sizes: Mapping[str, int], k: int, rounds: int
+) -> list[dict[str, int]]:
+    """균등안(C-14 r12): 모두 같은 경기 수가 되는 가까운 라운드 수(아래·위, 범위 안)."""
+    if k <= 0:
+        return []
+
+    def even(r: int) -> bool:
+        if method == "team":
+            return (r * 2 * k) % sizes["blue"] == 0 and (r * 2 * k) % sizes["white"] == 0
+        return (r * 4 * k) % sizes["all"] == 0
+
+    if even(rounds):
+        return []
+    top = max_rounds(k)
+    lower = next((r for r in range(rounds - 1, 0, -1) if even(r)), None)
+    upper = next((r for r in range(rounds + 1, top + 1) if even(r)), None)
+    out = []
+    for r in (lower, upper):
+        if r is None:
+            continue
+        if method == "team":
+            out.append(
+                {
+                    "rounds": r,
+                    "blue": r * 2 * k // sizes["blue"],
+                    "white": r * 2 * k // sizes["white"],
+                }
+            )
+        else:
+            out.append({"rounds": r, "all": r * 4 * k // sizes["all"]})
+    return out
+
+
+@dataclass
+class RoundGame:
+    no: int
+    round: int
+    court: int
+    team1: tuple[str, str]
+    team2: tuple[str, str]
+    gender_relaxed: bool
+    repeated_matchup: bool = False
+    relaxations: list[Relaxation] | None = None
+
+
+def _round_candidates(
+    method: Method,
+    rem: Sequence[ClubPlayer],
+    rem_b: Sequence[ClubPlayer],
+    rem_w: Sequence[ClubPlayer],
+) -> list[tuple[list[ClubPlayer], list[ClubPlayer]]]:
+    """이 코트에 남은 출전자로 만들 수 있는 모든 조(고정 순서, 난수 없음)."""
+    if method == "team":
+        return [(list(b), list(w)) for b in combinations(rem_b, 2) for w in combinations(rem_w, 2)]
+    out = []
+    for f in combinations(rem, 4):
+        out += [
+            ([f[0], f[1]], [f[2], f[3]]),
+            ([f[0], f[2]], [f[1], f[3]]),
+            ([f[0], f[3]], [f[1], f[2]]),
+        ]
+    return out
+
+
+def generate_round_games(
+    players: Sequence[ClubPlayer],
+    rounds: int,
+    courts: int,
+    method: Method,
+    balance: bool,
+    gender: bool,
+    seed: int,
+) -> list[RoundGame]:
+    """라운드 기반 전체 대진(C-36, AC-146·147). 라운드마다 k경기, 같은 라운드 중복 출전 없음."""
+    blues = [p for p in players if p.team == "blue"]
+    whites = [p for p in players if p.team == "white"]
+    sizes = {"all": len(players), "blue": len(blues), "white": len(whites)}
+    k = per_round(method, sizes, courts)
+    r = rng(seed)
+    h = _History({}, {}, set())
+    rested: set[str] = set()
+    streak: dict[str, int] = {}
+    games: list[RoundGame] = []
+    no = 0
+
+    def choose(pool: Sequence[ClubPlayer], n: int) -> list[ClubPlayer]:
+        order = _shuffle(list(pool), r)
+        order.sort(
+            key=lambda p: (
+                h.counts.get(p.key, 0),
+                0 if p.key in rested else 1,
+                -streak.get(p.key, 0),
+            )
+        )
+        return order[:n]
+
+    for rd in range(1, rounds + 1):
+        if k <= 0:
+            break
+        if method == "team":
+            rem_b, rem_w = choose(blues, 2 * k), choose(whites, 2 * k)
+            rem: list[ClubPlayer] = []
+        else:
+            rem = choose(players, 4 * k)
+            rem_b, rem_w = [], []
+        playing = {p.key for p in (*rem, *rem_b, *rem_w)}
+        for court in range(1, k + 1):
+            best: tuple[list[ClubPlayer], list[ClubPlayer], int, bool, bool] | None = None
+            for _ in range(MAX_ATTEMPTS):
+                if method == "team":
+                    b = _shuffle(rem_b, r)[:2]
+                    w = _shuffle(rem_w, r)[:2]
+                    splits = [(b, w)]
+                else:
+                    f = _shuffle(rem, r)[:4]
+                    splits = [
+                        ([f[0], f[1]], [f[2], f[3]]),
+                        ([f[0], f[2]], [f[1], f[3]]),
+                        ([f[0], f[3]], [f[1], f[2]]),
+                    ]
+                for t1, t2 in splits:
+                    cost, same, bad = _cost(t1, t2, h, balance, gender)
+                    if best is None or cost < best[2]:
+                        best = (t1, t2, cost, bad, same)
+                if best is not None and best[2] == 0:
+                    break
+            assert best is not None
+            cands: list[tuple[list[ClubPlayer], list[ClubPlayer]]] | None = None
+            if best[4] or (gender and best[3]):
+                # 같은 대진·성별 위반이면 이 코트의 모든 후보를 고정 순서로 훑어
+                # 더 나은 조로(난수 없음)
+                cands = _round_candidates(method, rem, rem_b, rem_w)
+                for c1, c2 in cands:
+                    cost, same, bad = _cost(c1, c2, h, balance, gender)
+                    if cost < best[2]:
+                        best = (c1, c2, cost, bad, same)
+            t1, t2, _, bad, same = best
+            reasons: list[Relaxation] = []
+            if same or (gender and bad):
+                assert cands is not None
+                if same:
+                    fresh = any(not _same(a, b, h) for a, b in cands)
+                    reasons.append(
+                        {"rule": "matchup", "reason": "search_limit" if fresh else "exhausted"}
+                    )
+                if gender and bad:
+                    chosen = (int(same), _partner_repeats(t1, t2, h))
+                    ok = [(a, b) for a, b in cands if not gender_bad(a, b)]
+                    if not ok:
+                        reason = "exhausted"
+                    elif any(
+                        (int(_same(a, b, h)), _partner_repeats(a, b, h)) <= chosen for a, b in ok
+                    ):
+                        reason = "search_limit"
+                    else:
+                        reason = "higher_priority"
+                    reasons.append({"rule": "gender", "reason": reason})
+            _record(h, t1, t2)
+            used = {p.key for p in (*t1, *t2)}
+            rem = [p for p in rem if p.key not in used]
+            rem_b = [p for p in rem_b if p.key not in used]
+            rem_w = [p for p in rem_w if p.key not in used]
+            no += 1
+            games.append(
+                RoundGame(
+                    no=no,
+                    round=rd,
+                    court=court,
+                    team1=(t1[0].key, t1[1].key),
+                    team2=(t2[0].key, t2[1].key),
+                    gender_relaxed=gender and bad,
+                    repeated_matchup=same,
+                    relaxations=reasons,
+                )
+            )
+        everyone = [p.key for p in players]
+        rested = {key for key in everyone if key not in playing}
+        streak = {key: (streak.get(key, 0) + 1 if key in rested else 0) for key in everyone}
+    return games
+
+
+def round_duplicates(rows: Iterable[tuple[int | None, Sequence[str]]]) -> dict[int, list[str]]:
+    """공통 라운드 검사용: 라운드 → 같은 라운드에 두 번 이상 나오는 사람 키.
+
+    취소 경기는 호출 쪽에서 뺌.
+    """
+    seen: dict[int, dict[str, int]] = {}
+    for rd, keys in rows:
+        if rd is None:
+            continue
+        bucket = seen.setdefault(rd, {})
+        for k in keys:
+            bucket[k] = bucket.get(k, 0) + 1
+    return {
+        rd: sorted(k for k, n in b.items() if n > 1)
+        for rd, b in seen.items()
+        if any(n > 1 for n in b.values())
+    }

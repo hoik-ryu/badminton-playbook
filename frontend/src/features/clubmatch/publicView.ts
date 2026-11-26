@@ -21,6 +21,10 @@ export function publicFromOps(view: ClubMatchView, meId: string | null): PublicC
     changed: g.changed,
     resultChanged: g.resultChanged,
     mySide: g.team1.some(isMe) ? 1 : g.team2.some(isMe) ? 2 : null,
+    // (B15, C-37·AC-162) 라운드·코트·취소 여부만(취소 사유·처리자는 옮기지 않음)
+    round: g.round,
+    court: g.court,
+    cancelled: g.cancelled !== null,
   }))
   const meKey = meId ? `member:${meId}` : null
   const shown = displayStatusOfView(view)
@@ -39,6 +43,7 @@ export function publicFromOps(view: ClubMatchView, meId: string | null): PublicC
     unrecorded: view.unrecorded,
     participating: games.some((g) => g.mySide !== null),
     displayStatus: shown === 'pending' ? 'live' : shown,
+    currentRound: view.currentRound,
   }
 }
 

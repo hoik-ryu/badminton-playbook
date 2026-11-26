@@ -36,6 +36,11 @@ class MemberGame(BaseModel):
     # 종료 후 결과 수정(U10·P-10)
     resultChanged: bool  # noqa: N815
     mySide: Literal[1, 2] | None  # noqa: N815
+    # (B15, C-37·C-38·AC-162) 라운드·코트·취소 여부
+    # (운영 전용 값 없음, 라운드 정보 없으면 None·False)
+    round: int | None = None
+    court: int | None = None
+    cancelled: bool = False
 
 
 class MemberStanding(BaseModel):
@@ -70,6 +75,8 @@ class PublicClubMatch(BaseModel):
     # (SCR-112 r6, 하위 호환 추가) 머리글 상태 배지용 표시 상태(UXD-087, KST)
     # 진행 예정(ST15)·진행 중·종료
     displayStatus: Literal["upcoming", "live", "ended"]  # noqa: N815
+    # (B15, C-38) 진행 중인 라운드(라운드 기반이 아니면 None)
+    currentRound: int | None = None  # noqa: N815
 
 
 class PublicClubMatchItem(BaseModel):

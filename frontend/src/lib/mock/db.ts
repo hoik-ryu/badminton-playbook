@@ -89,6 +89,14 @@ export type MockClubMatch = {
   /** 종료 후 결과 수정 시각(U10·P-10, 대진 수정과 따로 안내) */
   resultModifiedAt?: string | null
   version: number
+  /** (B15, C-36) 코트 수 1–8. 없으면 라운드 정보 없는 기존 청백전(D11) */
+  courtCount?: number | null
+  /** (B15) 자동 생성 기준 라운드 수 */
+  plannedRounds?: number | null
+  /** (B15, C-37) 진행 중인 라운드(확정 후) */
+  currentRound?: number | null
+  /** (B15, C-37) 취소·복원 이력(추가만) */
+  events?: { gameNo: number; action: 'cancel' | 'restore'; at: string; reason: string | null; detail: Record<string, string> }[]
 }
 
 /** 청백전 경기(서버 club_match_games와 같은 의미). 선택 필드는 이전 Mock 저장본 호환용 */
@@ -108,6 +116,11 @@ export type MockClubGame = {
   manual?: boolean
   /** 종료 후 결과 수정(U10·P-10) */
   resultChanged?: boolean
+  /** (B15, C-36) 라운드·코트(라운드 정보 없는 청백전은 없음) */
+  round?: number | null
+  court?: number | null
+  /** (B15, C-37) 취소(중도 귀가로 대체 불가). 결과와 함께 있을 수 없음 */
+  cancelled?: { at: string; reason: string } | null
 }
 
 export type MockDb = {

@@ -73,6 +73,11 @@ DETAIL_KEYS = {
     "changed",
     "resultChanged",
     "mySide",
+    # (B15, AC-162) 라운드·코트·취소 여부와 진행 라운드(운영 전용 값 아님)
+    "round",
+    "court",
+    "cancelled",
+    "currentRound",
     # MemberPlayer·MemberStanding
     "key",
     "guest",
@@ -113,6 +118,13 @@ FORBIDDEN = {
     "recordedBy",
     "recorded_by_id",
     "rating",
+    # (B15, AC-162) 취소한 운영진·이력·코트 수 등 운영 정보
+    "cancelledBy",
+    "cancelled_by_id",
+    "cancelReason",
+    "events",
+    "courtCount",
+    "plannedRounds",
 }
 
 
@@ -233,7 +245,19 @@ def test_ac_068_no_scores_even_as_values(setup: dict[str, Any]) -> None:
     c: TestClient = setup["member"]
     detail = c.get(f"{MEMBER}/{setup['confirmed']['id']}").json()
     for g in detail["games"]:
-        assert set(g) == {"no", "team1", "team2", "winner", "changed", "resultChanged", "mySide"}
+        assert set(g) == {
+            "no",
+            "team1",
+            "team2",
+            "winner",
+            "changed",
+            "resultChanged",
+            "mySide",
+            # (B15, AC-162)
+            "round",
+            "court",
+            "cancelled",
+        }
         for p in g["team1"] + g["team2"]:
             assert set(p) == {"key", "name", "guest", "me"}
 

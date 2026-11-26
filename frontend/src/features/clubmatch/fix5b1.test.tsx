@@ -25,7 +25,7 @@ const game: GameView = {
   no: 1,
   team1: [person(1, LONG[0]!, 10), person(2, LONG[1]!, 9)],
   team2: [person(3, LONG[2]!, 10), person(4, LONG[3]!, 7, 'guest')],
-  winner: 1, gap: 2, genderRelaxed: false, repeatedMatchup: false, relaxations: [], manual: false, changed: false, resultChanged: false,
+  winner: 1, gap: 2, genderRelaxed: false, repeatedMatchup: false, relaxations: [], manual: false, changed: false, resultChanged: false, round: null, court: null, cancelled: null,
 }
 const pathErr = new ApiError(422, { code: 'validation_error', message: 'Request validation failed', details: [{ loc: ['path', 'match_id'], msg: 'Input should be a valid UUID', type: 'uuid_parsing' }] })
 const bodyErr = new ApiError(422, { code: 'validation_error', message: 'Request validation failed', details: [{ loc: ['body', 'totalGames'], msg: 'too large', type: 'less_than_equal' }] })
@@ -64,7 +64,7 @@ describe('5-B1 D-1: long names wrap inside the name column', () => {
     render(
       <CmMemberGameCard
         method="individual"
-        game={{ no: 2, winner: null, changed: false, resultChanged: false, mySide: 1, team1: [{ key: 'a', name: LONG[0]!, guest: false, me: true }, { key: 'b', name: LONG[3]!, guest: true, me: false }], team2: [{ key: 'c', name: '짧은이', guest: false, me: false }, { key: 'd', name: LONG[1]!, guest: false, me: false }] }}
+        game={{ no: 2, winner: null, changed: false, resultChanged: false, mySide: 1, round: null, court: null, cancelled: false, team1: [{ key: 'a', name: LONG[0]!, guest: false, me: true }, { key: 'b', name: LONG[3]!, guest: true, me: false }], team2: [{ key: 'c', name: '짧은이', guest: false, me: false }, { key: 'd', name: LONG[1]!, guest: false, me: false }] }}
       />,
     )
     const meName = screen.getByText(LONG[0]!)

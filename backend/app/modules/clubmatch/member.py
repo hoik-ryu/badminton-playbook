@@ -89,7 +89,9 @@ class _Match:
                 self.names[k] = guest_names.get(gid, DELETED_GUEST) if gid else DELETED_GUEST
                 self.guest[k] = True
         self.games = _games(db, m.id, {p.id: public_key(p) for p in parts})
-        self.results = [schedule.GameResult(t1, t2, g.winner) for g, t1, t2 in self.games]
+        # (B15, C-37) 취소된 경기는 순위·승수·경기 수·미기록에서 뺌(목록에는 '취소'로 남음)
+        self.live = [(g, t1, t2) for g, t1, t2 in self.games if g.cancelled_at is None]
+        self.results = [schedule.GameResult(t1, t2, g.winner) for g, t1, t2 in self.live]
 
     def player(self, k: str) -> MemberPlayer:
         return MemberPlayer(
@@ -101,7 +103,7 @@ class _Match:
 
     def standings(self) -> list[MemberStanding]:
         counts: dict[str, int] = {}
-        for _, t1, t2 in self.games:
+        for _, t1, t2 in self.live:
             for k in (*t1, *t2):
                 counts[k] = counts.get(k, 0) + 1
         keys = [public_key(p) for p in self.parts if counts.get(public_key(p)) or not p.left_at]
@@ -123,7 +125,7 @@ class _Match:
         return TeamWins(**schedule.team_score(self.results))
 
     def unrecorded(self) -> int:
-        return sum(1 for g, _, _ in self.games if g.winner is None)
+        return sum(1 for g, _, _ in self.live if g.winner is None)
 
     def result(self) -> display.ClubMatchResult | None:
         """종료 결과 구조(UXD-088 정보 5): 팀전 최종 승수, 개인전 '1위 이름'·'공동 1위 · n명'."""
@@ -181,7 +183,7 @@ def list_public_club_matches(user: ApprovedUser, db: DbSession) -> list[PublicCl
         x = _Match(db, m, user.id)
         players = {k for _, t1, t2 in x.games for k in (*t1, *t2)}
         unrecorded = x.unrecorded()
-        shown = display.display_status(m.status, m.match_date, len(x.games) - unrecorded, today)
+        shown = display.display_status(m.status, m.match_date, len(x.live) - unrecorded, today)
         items.append(
             PublicClubMatchItem(
                 id=str(m.id),
@@ -218,6 +220,9 @@ def get_public_club_match(match_id: str, user: ApprovedUser, db: DbSession) -> P
                 changed=g.changed,
                 resultChanged=result_changed(m, g),
                 mySide=side,
+                round=g.round_no,
+                court=g.court_no,
+                cancelled=g.cancelled_at is not None,
             )
         )
     edits = [_aware(g.recorded_at) for g, _, _ in x.games if g.recorded_at and result_changed(m, g)]
@@ -236,9 +241,10 @@ def get_public_club_match(match_id: str, user: ApprovedUser, db: DbSession) -> P
         participating=any(g.mySide is not None for g in games),
         displayStatus=_public_status(
             display.display_status(
-                m.status, m.match_date, len(x.games) - x.unrecorded(), display.today_kst()
+                m.status, m.match_date, len(x.live) - x.unrecorded(), display.today_kst()
             )
         ),
+        currentRound=m.current_round,
     )
 
 

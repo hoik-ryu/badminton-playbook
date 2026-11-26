@@ -1,7 +1,7 @@
 {
   "format": "pb-ui-plan/v1",
   "batch": "B14",
-  "brief_digest": "a8661de9f3d896bdb4c147bde1bd60ac00d1d76e0fe419d93992ec7dcb44653d",
+  "brief_digest": "459108fb6b6d7bac19f6c904163fde968980a496394fff498f4852081e92e2ea",
   "screens": {},
   "components": {
     "CMP-001": {
@@ -52,7 +52,8 @@
   },
   "notes": [
     "화면 소유는 그대로(SCR-244·245 = B11, SCR-225 = B6). 이 배치는 touches로 바꾸고, 바뀐 코드 때문에 B6·B11의 검증이 stale이 되면 계획대로 재검증·재승인합니다.",
-    "스타일은 승인된 DD r13 VD-071–076 값과 승인 Preview r9 시각에 맞춰 기존 토큰으로 styles/clubmatch-setup.css r13 구역에 작성(B11과 같은 방식)"
+    "스타일은 승인된 DD r13 VD-071–076 값과 승인 Preview r9 시각에 맞춰 기존 토큰으로 styles/clubmatch-setup.css r13 구역에 작성(B11과 같은 방식)",
+    "(2026-11-26 재검증) 디자인 r11·DD r14·Preview r10 개정으로 Brief를 다시 받음. B14 범위(r10 편집기·시트·요약)의 구현·상태는 그대로이며 라운드·코트 확장은 Build Plan r10의 B16·B17이 맡음"
   ],
   "touched": {
     "SCR-244": {

@@ -139,10 +139,14 @@
    }
   ],
   "ClubMatchView": {
+   "courtCount": true,
+   "currentRound": true,
    "date": true,
    "games": [
     {
+     "cancelled": true,
      "changed": true,
+     "court": true,
      "gap": true,
      "genderRelaxed": true,
      "manual": true,
@@ -155,6 +159,7 @@
      ],
      "repeatedMatchup": true,
      "resultChanged": true,
+     "round": true,
      "team1": [
       {
        "gender": true,
@@ -184,6 +189,7 @@
    "method": true,
    "modifiedAt": true,
    "name": true,
+   "plannedRounds": true,
    "preview": {
     "even": true,
     "groups": [
@@ -203,6 +209,7 @@
     ]
    },
    "resultModifiedAt": true,
+   "roundCount": true,
    "rows": [
     {
      "available": true,
@@ -297,14 +304,18 @@
    "wins": true
   },
   "PublicClubMatch": {
+   "currentRound": true,
    "date": true,
    "displayStatus": true,
    "games": [
     {
+     "cancelled": true,
      "changed": true,
+     "court": true,
      "mySide": true,
      "no": true,
      "resultChanged": true,
+     "round": true,
      "team1": [
       {
        "guest": true,

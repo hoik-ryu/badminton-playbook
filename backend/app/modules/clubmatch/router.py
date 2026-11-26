@@ -24,17 +24,20 @@ from app.modules.clubmatch import display, schedule
 from app.modules.clubmatch.models import (
     ClubMatch,
     ClubMatchGame,
+    ClubMatchGameEvent,
     ClubMatchGamePlayer,
     ClubMatchParticipant,
 )
 from app.modules.clubmatch.schemas import (
     BasicUpdate,
+    CancelInfo,
     ClubMatchCreate,
     ClubMatchListItem,
     ClubMatchView,
     Created,
     GameCreate,
     GameExchange,
+    GameMove,
     GameView,
     GenerateRequest,
     LeaveRequest,
@@ -44,6 +47,7 @@ from app.modules.clubmatch.schemas import (
     ParticipationUpdate,
     Person,
     Relaxation,
+    RestoreRequest,
     ResultUpdate,
     Rules,
     SettingsUpdate,
@@ -150,6 +154,119 @@ def _participant_key(p: ClubMatchParticipant) -> str:
     return member_key(p.user_id) if p.user_id else guest_key(p.guest_id)  # type: ignore[arg-type]
 
 
+# ── (B15) 라운드·코트(C-36–C-38) ──
+# 라운드 기반 청백전(court_count가 있음)의 모든 변경은 _finish 직전에 공통 라운드 검사를 거칩니다.
+# 순서: 행 잠금(_lock) → version 확인 → 적용 → 최종 상태 검사(_check_rounds) → version + 1 → 커밋.
+# 실패하면 _fail이 트랜잭션 전체를 되돌립니다(부분 변경 없음).
+# 같은 라운드·코트는 DB 고유 제약도 막습니다.
+
+ROUND_CONFLICT = "round_conflict"
+COURT_FULL = "court_full"
+INVALID_ROUND = "invalid_round"
+ROUND_NOT_STARTED = "round_not_started"
+ROUND_INCOMPLETE = "round_incomplete"
+ROUND_LOCKED = "round_locked"
+ROUND_HAS_RESULTS = "round_has_results"
+GAME_CANCELLED = "game_cancelled"
+CANCEL_NOT_ALLOWED = "cancel_not_allowed"
+RESTORE_NOT_ALLOWED = "restore_not_allowed"
+RESTORE_BLOCKED = "restore_blocked"
+LEFT = "left"
+
+
+def _is_round(m: ClubMatch) -> bool:
+    """라운드 기반 청백전인가(코트 수가 있음). 없으면 라운드 정보 없는 기존 청백전(D11)."""
+    return m.court_count is not None
+
+
+def _round_busy(
+    rows: Iterable[tuple[ClubMatchGame, tuple[str, str], tuple[str, str]]],
+    rd: int | None,
+    skip: uuid.UUID | None = None,
+) -> set[str]:
+    """그 라운드의 취소되지 않은 경기에 나오는 사람(skip 경기는 빼고)."""
+    if rd is None:
+        return set()
+    return {
+        k
+        for g, t1, t2 in rows
+        if g.round_no == rd and g.cancelled_at is None and g.id != skip
+        for k in (*t1, *t2)
+    }
+
+
+def _check_rounds(db: Session, m: ClubMatch) -> None:
+    """공통 라운드 검사(C-38 r13): 모든 변경 경로의 최종 상태를 같은 규칙으로 봄.
+
+    - 모든 경기에 라운드·코트가 있음, 라운드 1..R 빈틈없음
+    - 라운드마다 경기 수 ≤ 코트 수, 코트 1..n 빈틈없음
+    - 같은 라운드에 한 사람은 한 경기(취소된 경기는 출전으로 세지 않음, C-37)
+    - 경기 번호 = 라운드 → 코트 순 일련번호(D10)
+    """
+    if not _is_round(m):
+        return
+    db.flush()
+    by_participant = {p.id: _participant_key(p) for p in _participants(db, m.id)}
+    rows = _games(db, m.id, by_participant)
+    if any(g.round_no is None or g.court_no is None for g, _, _ in rows):
+        raise _fail(db, INVALID_ROUND, "라운드 정보가 없는 경기가 있습니다", 422)
+    rounds = sorted({g.round_no for g, _, _ in rows if g.round_no is not None})
+    if rounds != list(range(1, len(rounds) + 1)):
+        raise _fail(db, INVALID_ROUND, "라운드 번호가 맞지 않습니다", 422, {"rounds": rounds})
+    for rd in rounds:
+        courts = sorted(g.court_no or 0 for g, _, _ in rows if g.round_no == rd)
+        if len(courts) > (m.court_count or 0):
+            raise _fail(db, COURT_FULL, f"{rd}라운드에 빈 코트가 없습니다", 422, {"round": rd})
+        if courts != list(range(1, len(courts) + 1)):
+            raise _fail(db, INVALID_ROUND, "코트 번호가 맞지 않습니다", 422, {"round": rd})
+    dups = schedule.round_duplicates(
+        (g.round_no, (*t1, *t2)) for g, t1, t2 in rows if g.cancelled_at is None
+    )
+    if dups:
+        raise _fail(
+            db,
+            ROUND_CONFLICT,
+            "같은 라운드에 이미 출전하는 사람이 있습니다",
+            422,
+            {"rounds": {str(rd): keys for rd, keys in dups.items()}},
+        )
+    ordered = sorted(rows, key=lambda r: (r[0].round_no or 0, r[0].court_no or 0))
+    if [g.no for g, _, _ in ordered] != list(range(1, len(ordered) + 1)):
+        raise _fail(db, INVALID_ROUND, "경기 번호가 맞지 않습니다", 422)
+
+
+def _normalize_rounds(db: Session, m: ClubMatch) -> int:
+    """빈 라운드를 지우고 뒤 라운드를 당김(D5), 라운드 안 코트를 1..n으로 당김(D3),
+    경기 번호를 라운드 → 코트 순으로 다시 매김(D10). 경기 수를 돌려줌.
+
+    고유 제약((match, no)·(match, round, court))을 피하려고 임시 번호(+1000)를 거쳐
+    한 트랜잭션에서 바꿈.
+    """
+    db.flush()
+    games = list(
+        db.scalars(
+            select(ClubMatchGame)
+            .where(ClubMatchGame.match_id == m.id)
+            .order_by(ClubMatchGame.round_no, ClubMatchGame.court_no, ClubMatchGame.no)
+        ).all()
+    )
+    for g in games:
+        g.no = g.no + 1000
+        g.round_no = (g.round_no or 1) + 1000
+    db.flush()
+    round_map: dict[int, int] = {}
+    court_next: dict[int, int] = {}
+    for i, g in enumerate(games, start=1):
+        old = g.round_no or 0
+        rd = round_map.setdefault(old, len(round_map) + 1)
+        court_next[rd] = court_next.get(rd, 0) + 1
+        g.round_no = rd
+        g.court_no = court_next[rd]
+        g.no = i
+    db.flush()
+    return len(games)
+
+
 # ── 상세(ClubMatchView) ──
 
 
@@ -223,11 +340,13 @@ def build_view(db: Session, m: ClubMatch) -> ClubMatchView:
     by_participant = {p.id: _participant_key(p) for p in parts}
     part_by_key = {_participant_key(p): p for p in parts}
     games = _games(db, m.id, by_participant)
-    results = [schedule.GameResult(t1, t2, g.winner) for g, t1, t2 in games]
+    # (B15, C-37) 취소된 경기는 순위·승수·사람별 경기 수·미기록에서 뺌
+    live = [(g, t1, t2) for g, t1, t2 in games if g.cancelled_at is None]
+    results = [schedule.GameResult(t1, t2, g.winner) for g, t1, t2 in live]
 
     counts: dict[str, int] = {}
     unrec: dict[str, int] = {}
-    for g, t1, t2 in games:
+    for g, t1, t2 in live:
         for k in (*t1, *t2):
             counts[k] = counts.get(k, 0) + 1
             if g.winner is None:
@@ -257,6 +376,20 @@ def build_view(db: Session, m: ClubMatch) -> ClubMatchView:
     sizes = {"all": len(in_play), "blue": len(blue), "white": len(white)}
     preview = schedule.distribution(m.method, sizes, total)  # type: ignore[arg-type]
     preview["proposals"] = schedule.even_proposals(m.method, sizes, total)  # type: ignore[arg-type]
+    if _is_round(m):
+        # (B15, C-36·AC-145) 라운드 미리보기: k·예상 경기 수·1인 경기 수(팀별)·출전·휴식·균등안
+        per = schedule.per_round(m.method, sizes, m.court_count or 0)  # type: ignore[arg-type]
+        planned = m.planned_rounds or schedule.default_rounds(
+            m.method,  # type: ignore[arg-type]
+            sizes,
+            per,
+        )
+        preview["rounds"] = schedule.round_preview(
+            m.method,  # type: ignore[arg-type]
+            sizes,
+            m.court_count or 0,
+            planned,
+        )
 
     def person(k: str) -> Person:
         return people.get(k) or Person(
@@ -268,6 +401,7 @@ def build_view(db: Session, m: ClubMatch) -> ClubMatchView:
         _aware(g.recorded_at) for g, _, _ in games if g.recorded_at and result_changed(m, g)
     ]
     standing_keys = [k for k, p in part_by_key.items() if counts.get(k) or not p.left_at]
+    round_count = len({g.round_no for g, _, _ in games if g.round_no is not None})
     return ClubMatchView(
         id=str(m.id),
         name=m.name,
@@ -297,6 +431,11 @@ def build_view(db: Session, m: ClubMatch) -> ClubMatchView:
         games=[
             GameView(
                 no=g.no,
+                round=g.round_no,
+                court=g.court_no,
+                cancelled=CancelInfo(at=_aware(g.cancelled_at), reason=g.cancel_reason)
+                if g.cancelled_at
+                else None,
                 team1=[person(k) for k in t1],
                 team2=[person(k) for k in t2],
                 winner=g.winner,
@@ -319,7 +458,11 @@ def build_view(db: Session, m: ClubMatch) -> ClubMatchView:
             for row in schedule.standings(results, standing_keys, names)
         ],
         team=schedule.team_score(results),
-        unrecorded=sum(1 for g, _, _ in games if g.winner is None),
+        unrecorded=sum(1 for g, _, _ in live if g.winner is None),
+        courtCount=m.court_count,
+        plannedRounds=m.planned_rounds,
+        currentRound=m.current_round,
+        roundCount=round_count,
     )
 
 
@@ -392,7 +535,13 @@ def get_club_match(match_id: uuid.UUID, _: AdminUser, db: DbSession) -> ClubMatc
 @router.post("", status_code=status.HTTP_201_CREATED)
 def create_club_match(body: ClubMatchCreate, actor: AdminUser, db: DbSession) -> Created:
     """만들기(SCR-222, AC-042): 대진 미확정, 참가자 없음."""
-    m = ClubMatch(name=body.name, match_date=body.date, method=body.method, created_by_id=actor.id)
+    m = ClubMatch(
+        name=body.name,
+        match_date=body.date,
+        method=body.method,
+        created_by_id=actor.id,
+        court_count=body.courtCount,
+    )
     db.add(m)
     db.commit()
     return Created(id=str(m.id))
@@ -429,6 +578,7 @@ def _begin(db: Session, match_id: uuid.UUID, body: Versioned) -> ClubMatch:
 
 
 def _finish(db: Session, m: ClubMatch) -> ClubMatchView:
+    _check_rounds(db, m)  # (B15) 라운드 기반이면 최종 상태 공통 검사(실패 시 전체 되돌림)
     m.version += 1
     db.commit()
     db.refresh(m)
@@ -503,6 +653,28 @@ def set_settings(
     같은 값이면 저장하지 않음(대진·version 유지).
     """
     m = _begin(db, match_id, body)
+    if _is_round(m):
+        # (B15, C-33·C-36) 라운드 기반: 자동 생성 기준 라운드 수·규칙.
+        # 바뀌고 대진이 있으면 폐기 확인
+        rounds = body.rounds if body.rounds is not None else m.planned_rounds
+        if (rounds, body.rules.balance, body.rules.gender) == (
+            m.planned_rounds,
+            m.rule_balance,
+            m.rule_gender,
+        ):
+            return _unchanged(db, m)
+        games = _game_count(db, m)
+        _confirm_or_fail(db, body.discard, games=games)
+        if games:
+            _discard_games(db, m)
+        m.planned_rounds, m.rule_balance, m.rule_gender = (
+            rounds,
+            body.rules.balance,
+            body.rules.gender,
+        )
+        return _finish(db, m)
+    if body.totalGames is None:
+        raise _fail(db, "validation_error", "총 경기 수를 입력해 주세요", 422)
     new = (body.totalGames, body.rules.balance, body.rules.gender)
     if new == (m.total_games, m.rule_balance, m.rule_gender):
         return _unchanged(db, m)
@@ -656,8 +828,22 @@ def save_basic(
     방식이 바뀌면 대진 폐기 + 팀 초기화(C-13, 참가자 유지) — 팀 배정·대진이 있으면 폐기 확인 필요.
     """
     m = _begin(db, match_id, body)
-    if (body.name, body.date, body.method) == (m.name, m.match_date, m.method):
+    court = body.courtCount if body.courtCount is not None else m.court_count
+    if (body.name, body.date, body.method, court) == (
+        m.name,
+        m.match_date,
+        m.method,
+        m.court_count,
+    ):
         return _unchanged(db, m)
+    if court != m.court_count and body.method == m.method:
+        # (B15, C-33·C-36·AC-144) 코트 수 변경: 대진이 있으면 확인 후 폐기.
+        # 라운드 정보 없는 준비 중 청백전(AC-163)도 같은 방식으로 라운드 기반이 됨
+        games = _game_count(db, m)
+        _confirm_or_fail(db, body.discard, games=games)
+        if games:
+            _discard_games(db, m)
+        m.planned_rounds = None
     if body.method != m.method:
         parts = _participants(db, m.id)
         _confirm_or_fail(
@@ -668,7 +854,9 @@ def save_basic(
         for p in parts:
             p.team = None
         m.method = body.method
+        m.planned_rounds = None
     m.name, m.match_date = body.name, body.date
+    m.court_count = court
     return _finish(db, m)
 
 
@@ -852,8 +1040,10 @@ def generate_games(
     422 `unassigned`(조용히 제외하지 않음, 점수 미설정 다음 순서).
     """
     m = _begin(db, match_id, body)
-    if body.totalGames is not None:
+    if body.totalGames is not None and not _is_round(m):
         m.total_games = body.totalGames
+    if body.rounds is not None and _is_round(m):
+        m.planned_rounds = body.rounds
     if body.rules is not None:
         m.rule_balance, m.rule_gender = body.rules.balance, body.rules.gender
     parts = _participants(db, m.id)
@@ -909,6 +1099,8 @@ def generate_games(
             409,
             {"games": _game_count(db, m), "edited": int(edited)},
         )
+    if _is_round(m):
+        return _generate_rounds(db, m, in_play, people, blue, white)
     _discard_games(db, m)
     db.flush()
     seed = secrets.randbelow(2**31)  # Mock과 같은 범위
@@ -942,6 +1134,74 @@ def generate_games(
                     )
                 )
     m.seed = seed
+    return _finish(db, m)
+
+
+def _generate_rounds(
+    db: Session,
+    m: ClubMatch,
+    in_play: list[ClubMatchParticipant],
+    people: dict[str, Person],
+    blue: int,
+    white: int,
+) -> ClubMatchView:
+    """(B15, C-36·AC-146·147) 라운드 기반 생성: 라운드마다 코트를 채움(D2), 결정적(시드)."""
+    sizes = {"all": len(in_play), "blue": blue, "white": white}
+    k = schedule.per_round(m.method, sizes, m.court_count or 0)  # type: ignore[arg-type]
+    if k <= 0:
+        raise _fail(
+            db,
+            INVALID_ROUND,
+            "팀마다 2명 이상, 전체 4명 이상이어야 경기를 만들 수 있습니다",
+            422,
+            {"perRound": 0},
+        )
+    rounds = m.planned_rounds or schedule.default_rounds(m.method, sizes, k)  # type: ignore[arg-type]
+    top = schedule.max_rounds(k)
+    if not 1 <= rounds <= top:
+        raise _fail(
+            db,
+            INVALID_ROUND,
+            f"라운드 수는 1–{top} 사이로 입력해 주세요",
+            422,
+            {"maxRounds": top, "perRound": k},
+        )
+    _discard_games(db, m)
+    db.flush()
+    seed = secrets.randbelow(2**31)
+    players = _engine_players(m, in_play, people)
+    id_by_key = {_participant_key(p): p.id for p in in_play}
+    generated = schedule.generate_round_games(
+        players,
+        rounds,
+        m.court_count or 0,
+        m.method,  # type: ignore[arg-type]
+        m.rule_balance,
+        m.rule_gender,
+        seed,
+    )
+    for g in generated:
+        game = ClubMatchGame(
+            match_id=m.id,
+            no=g.no,
+            round_no=g.round,
+            court_no=g.court,
+            gender_relaxed=g.gender_relaxed,
+            repeated_matchup=g.repeated_matchup,
+            relaxations=g.relaxations or [],
+        )
+        db.add(game)
+        db.flush()
+        for side, team in ((1, g.team1), (2, g.team2)):
+            for slot, key in ((1, team[0]), (2, team[1])):
+                db.add(
+                    ClubMatchGamePlayer(
+                        game_id=game.id, side=side, slot=slot, participant_id=id_by_key[key]
+                    )
+                )
+    m.seed = seed
+    m.planned_rounds = rounds
+    m.total_games = max(1, len(generated))
     return _finish(db, m)
 
 
@@ -1014,6 +1274,8 @@ def confirm(match_id: uuid.UUID, body: Versioned, _: AdminUser, db: DbSession) -
         _check_lineup(db, m, parts_by_key, available, list(t1), list(t2), game_no=g.no)
     m.status = "confirmed"
     m.confirmed_at = _now()
+    if _is_round(m):
+        m.current_round = 1  # (B15, C-37 Q-032 A1) 확정하면 1라운드가 진행 중
     return _finish(db, m)
 
 
@@ -1043,8 +1305,28 @@ def record_result(
     if m.status == "draft":
         raise _fail(db, LOCKED, "확정 후에 결과를 기록할 수 있습니다", 409)
     g = _game(db, m, no)
+    if g.cancelled_at is not None:
+        raise _fail(db, GAME_CANCELLED, "취소된 경기는 결과를 기록할 수 없습니다", 409)
     if body.winner is None and m.status == "finished":
         raise _fail(db, LOCKED, "종료된 청백전은 결과를 미기록으로 되돌릴 수 없습니다", 409)
+    if _is_round(m) and g.round_no is not None:
+        current = m.current_round or 1
+        if g.round_no > current:
+            raise _fail(
+                db,
+                ROUND_NOT_STARTED,
+                "아직 시작하지 않은 라운드입니다",
+                409,
+                {"round": g.round_no, "currentRound": current},
+            )
+        if body.winner is None and g.round_no < current and g.winner is not None:
+            raise _fail(
+                db,
+                ROUND_LOCKED,
+                "지난 라운드의 결과는 미기록으로 되돌릴 수 없습니다",
+                409,
+                {"round": g.round_no, "currentRound": current},
+            )
     if g.winner == body.winner:
         db.rollback()
         return build_view(db, m)
@@ -1063,8 +1345,27 @@ def finish(match_id: uuid.UUID, body: Versioned, _: AdminUser, db: DbSession) ->
     remaining = db.scalar(
         select(func.count())
         .select_from(ClubMatchGame)
-        .where(ClubMatchGame.match_id == m.id, ClubMatchGame.winner.is_(None))
+        .where(
+            ClubMatchGame.match_id == m.id,
+            ClubMatchGame.winner.is_(None),
+            ClubMatchGame.cancelled_at.is_(None),  # (B15, C-37) 취소된 경기는 처리된 경기
+        )
     )
+    if _is_round(m):
+        last = int(
+            db.scalar(
+                select(func.max(ClubMatchGame.round_no)).where(ClubMatchGame.match_id == m.id)
+            )
+            or 1
+        )
+        if (m.current_round or 1) < last:
+            raise _fail(
+                db,
+                NOT_ALL_RECORDED,
+                "마지막 라운드를 시작해야 종료할 수 있습니다",
+                409,
+                {"remaining": remaining, "currentRound": m.current_round, "lastRound": last},
+            )
     if remaining:
         raise _fail(
             db,
@@ -1129,7 +1430,7 @@ def _refresh_flags(db: Session, m: ClubMatch, forced: frozenset[str] = frozenset
     parts = _participants(db, m.id)
     people = _people(db, parts)
     by_participant = {p.id: _participant_key(p) for p in parts}
-    rows = _games(db, m.id, by_participant)
+    rows = [r for r in _games(db, m.id, by_participant) if r[0].cancelled_at is None]
     states = [
         schedule.GameState(
             g.no, t1, t2, g.manual, g.gender_relaxed, g.repeated_matchup, list(g.relaxations or [])
@@ -1157,11 +1458,25 @@ def swap(
     if m.status == "finished":
         raise _fail(db, LOCKED, "종료된 청백전은 선수를 바꿀 수 없습니다", 409)
     g = _game(db, m, no)
-    parts_by_key = {_participant_key(p): p for p in _participants(db, m.id)}
+    if g.cancelled_at is not None:
+        raise _fail(db, GAME_CANCELLED, "취소된 경기는 선수를 바꿀 수 없습니다", 409)
+    parts = _participants(db, m.id)
+    parts_by_key = {_participant_key(p): p for p in parts}
     leaver = parts_by_key.get(body.from_)
     if leaver is None:
         raise _fail(db, CONFLICT, "대진이 바뀌었습니다", 409, {"version": m.version})
     to = _active_participant(db, m, body.to, parts_by_key)
+    if _is_round(m):
+        # (B15, C-36·AC-150·158) 같은 라운드의 다른 경기에 나오는 사람으로는 바꿀 수 없음
+        rows = _games(db, m.id, {p.id: _participant_key(p) for p in parts})
+        if body.to in _round_busy(rows, g.round_no, skip=g.id):
+            raise _fail(
+                db,
+                ROUND_CONFLICT,
+                "같은 라운드에 이미 출전하는 사람입니다",
+                422,
+                {"keys": [body.to], "round": g.round_no},
+            )
     _replace(db, m, g, leaver, to)
     db.flush()
     keys = _matchup_keys(db, m)
@@ -1185,7 +1500,11 @@ def swap(
 
 def _matchup_keys(db: Session, m: ClubMatch) -> dict[int, str]:
     by_participant = {p.id: _participant_key(p) for p in _participants(db, m.id)}
-    return {g.no: schedule.matchup_key(t1, t2) for g, t1, t2 in _games(db, m.id, by_participant)}
+    return {
+        g.no: schedule.matchup_key(t1, t2)
+        for g, t1, t2 in _games(db, m.id, by_participant)
+        if g.cancelled_at is None
+    }
 
 
 def _playable_keys(db: Session, parts: Iterable[ClubMatchParticipant]) -> set[str]:
@@ -1324,7 +1643,34 @@ def add_game(match_id: uuid.UUID, body: GameCreate, _: AdminUser, db: DbSession)
     count = _game_count(db, m)
     if count >= MAX_TOTAL_GAMES:
         raise _fail(db, MAX_GAMES, f"경기는 {MAX_TOTAL_GAMES}개까지 만들 수 있습니다", 422)
-    game = ClubMatchGame(match_id=m.id, no=count + 1, manual=True, relaxations=[])
+    round_no = court_no = None
+    if _is_round(m):
+        # (B15, C-36 D4) 기존 라운드(빈 코트가 있을 때) 또는 마지막 + 1(라운드 추가)
+        rows = _games(db, m.id, {p.id: _participant_key(p) for p in parts})
+        last = max((g.round_no or 0 for g, _, _ in rows), default=0)
+        if body.round is None or not 1 <= body.round <= last + 1:
+            raise _fail(db, INVALID_ROUND, "없는 라운드입니다", 422, {"lastRound": last})
+        in_round = [g for g, _, _ in rows if g.round_no == body.round]
+        if len(in_round) >= (m.court_count or 0):
+            raise _fail(db, COURT_FULL, f"{body.round}라운드에 빈 코트가 없습니다", 422)
+        busy = _round_busy(rows, body.round) & {*body.team1, *body.team2}
+        if busy:
+            raise _fail(
+                db,
+                ROUND_CONFLICT,
+                "같은 라운드에 이미 출전하는 사람이 있습니다",
+                422,
+                {"keys": sorted(busy), "round": body.round},
+            )
+        round_no, court_no = body.round, len(in_round) + 1
+    game = ClubMatchGame(
+        match_id=m.id,
+        no=count + 1,
+        manual=True,
+        relaxations=[],
+        round_no=round_no,
+        court_no=court_no,
+    )
     db.add(game)
     db.flush()
     for side, team in ((1, body.team1), (2, body.team2)):
@@ -1334,6 +1680,8 @@ def add_game(match_id: uuid.UUID, body: GameCreate, _: AdminUser, db: DbSession)
                     game_id=game.id, side=side, slot=slot, participant_id=parts_by_key[key].id
                 )
             )
+    if _is_round(m):
+        _normalize_rounds(db, m)
     _sync_total(m, count + 1)
     _refresh_flags(db, m)
     _mark_draft_repeats(db, m)
@@ -1352,7 +1700,8 @@ def delete_game(
     g = _game(db, m, no)
     db.execute(delete(ClubMatchGamePlayer).where(ClubMatchGamePlayer.game_id == g.id))
     db.execute(delete(ClubMatchGame).where(ClubMatchGame.id == g.id))
-    _sync_total(m, _renumber(db, m))
+    # (B15, C-36 D3·D5) 라운드 기반: 코트를 당기고 빈 라운드를 지우고 번호 정리
+    _sync_total(m, _normalize_rounds(db, m) if _is_round(m) else _renumber(db, m))
     _refresh_flags(db, m)
     _mark_draft_repeats(db, m)
     return _finish(db, m)
@@ -1363,6 +1712,120 @@ def discard_games(match_id: uuid.UUID, version: int, _: AdminUser, db: DbSession
     """대진 전체 폐기(AC-136, '직접 구성' 전환): 확정 전만. 총 경기 수(기준값)는 그대로."""
     m = _begin(db, match_id, Versioned(version=version))
     _discard_games(db, m)
+    return _finish(db, m)
+
+
+@router.post("/{match_id}/games/{no}/move")
+def move_game(
+    match_id: uuid.UUID, no: int, body: GameMove, _: AdminUser, db: DbSession
+) -> ClubMatchView:
+    """(B15, C-36 D6·AC-152) 확정 전 완성 경기를 다른 기존 라운드로 옮김.
+
+    대상 라운드에 빈 코트가 있어야 하고(court_full), 네 명이 대상 라운드에 이미 나오면 안 됨
+    (round_conflict). 원래 라운드는 코트를 당기고, 비면 라운드를 지우고 번호를 정리.
+    """
+    m = _begin(db, match_id, body)
+    if not _is_round(m):
+        raise _fail(db, INVALID_ROUND, "라운드 정보가 없는 청백전입니다", 422)
+    g = _game(db, m, no)
+    rows = _games(db, m.id, {p.id: _participant_key(p) for p in _participants(db, m.id)})
+    rounds = {r[0].round_no for r in rows}
+    if body.round == g.round_no or body.round not in rounds:
+        raise _fail(db, INVALID_ROUND, "옮길 수 없는 라운드입니다", 422, {"round": body.round})
+    target = [r for r in rows if r[0].round_no == body.round]
+    if len(target) >= (m.court_count or 0):
+        raise _fail(db, COURT_FULL, f"{body.round}라운드에 빈 코트가 없습니다", 422)
+    mine = next(r for r in rows if r[0].id == g.id)
+    busy = _round_busy(rows, body.round) & {*mine[1], *mine[2]}
+    if busy:
+        raise _fail(
+            db,
+            ROUND_CONFLICT,
+            "옮길 라운드에 이미 출전하는 사람이 있습니다",
+            422,
+            {"keys": sorted(busy), "round": body.round},
+        )
+    g.round_no = body.round
+    g.court_no = len(target) + 1
+    g.manual = True
+    _normalize_rounds(db, m)
+    _refresh_flags(db, m)
+    _mark_draft_repeats(db, m)
+    return _finish(db, m)
+
+
+def _processed(g: ClubMatchGame) -> bool:
+    """(C-37) 결과 기록 또는 취소 = 처리된 경기."""
+    return g.winner is not None or g.cancelled_at is not None
+
+
+def _round_games(db: Session, m: ClubMatch, rd: int) -> list[ClubMatchGame]:
+    return list(
+        db.scalars(
+            select(ClubMatchGame).where(
+                ClubMatchGame.match_id == m.id, ClubMatchGame.round_no == rd
+            )
+        ).all()
+    )
+
+
+def _begin_live(db: Session, match_id: uuid.UUID, body: Versioned) -> ClubMatch:
+    m = _lock(db, match_id, body)
+    if m.status != "confirmed":
+        raise _fail(db, LOCKED, "진행 중인 청백전에서만 할 수 있습니다", 409)
+    if not _is_round(m):
+        raise _fail(db, INVALID_ROUND, "라운드 정보가 없는 청백전입니다", 422)
+    return m
+
+
+@router.post("/{match_id}/rounds/next")
+def next_round(match_id: uuid.UUID, body: Versioned, _: AdminUser, db: DbSession) -> ClubMatchView:
+    """(B15, C-37 D12·AC-155) 다음 라운드 시작.
+
+    진행 라운드의 모든 경기가 결과 기록 또는 취소일 때만.
+
+    결과를 모두 넣어도 자동으로 넘어가지 않음. 마지막 라운드에서는 invalid_round.
+    """
+    m = _begin_live(db, match_id, body)
+    current = m.current_round or 1
+    last = int(
+        db.scalar(select(func.max(ClubMatchGame.round_no)).where(ClubMatchGame.match_id == m.id))
+        or 1
+    )
+    if current >= last:
+        raise _fail(db, INVALID_ROUND, "마지막 라운드입니다", 422, {"currentRound": current})
+    left = sorted(g.no for g in _round_games(db, m, current) if not _processed(g))
+    if left:
+        raise _fail(
+            db,
+            ROUND_INCOMPLETE,
+            f"처리되지 않은 경기 {len(left)}개가 있습니다",
+            409,
+            {"games": left, "currentRound": current},
+        )
+    m.current_round = current + 1
+    return _finish(db, m)
+
+
+@router.post("/{match_id}/rounds/undo")
+def undo_round(match_id: uuid.UUID, body: Versioned, _: AdminUser, db: DbSession) -> ClubMatchView:
+    """(B15, C-37 Q-032 A2·AC-156) 라운드 시작 취소.
+
+    진행 라운드에 결과·취소가 없을 때만 이전 라운드로.
+    """
+    m = _begin_live(db, match_id, body)
+    current = m.current_round or 1
+    if current <= 1:
+        raise _fail(db, INVALID_ROUND, "1라운드는 시작을 취소할 수 없습니다", 422)
+    if any(_processed(g) for g in _round_games(db, m, current)):
+        raise _fail(
+            db,
+            ROUND_HAS_RESULTS,
+            "이 라운드에 결과나 취소가 있어 시작을 취소할 수 없습니다",
+            409,
+            {"currentRound": current},
+        )
+    m.current_round = current - 1
     return _finish(db, m)
 
 
@@ -1400,16 +1863,20 @@ def exchange_players(
 
 @router.post("/{match_id}/participants/{key}/leave")
 def leave(
-    match_id: uuid.UUID, key: str, body: LeaveRequest, _: AdminUser, db: DbSession
+    match_id: uuid.UUID, key: str, body: LeaveRequest, actor: AdminUser, db: DbSession
 ) -> ClubMatchView:
     """중도 귀가(AC-078): 이후 대진에서 제외 + 남은 미기록 경기 대체를 한 번에(원자적, P-7).
 
-    - 남은 경기와 assignments가 정확히 맞아야 함(아니면 409 conflict — 그사이 대진이 바뀜)
+    - 남은 경기와 assignments(+ cancel)가 정확히 맞아야 함(아니면 409 conflict — 그사이 대진이 바뀜)
     - 대체할 사람이 아무도 없는 경기가 있으면 422 `no_substitute`(`details.games`) — 처리 불가
     - 같은 4명·같은 팀 구성(P-4-b): 그 경기에 중복을 만들지 않는 대체 후보가 있으면
       409 `same_matchup`(`details.games`). 다른 후보가 모두 중복이면(서버가 확인) 예외로 허용하고
       사유 `substitute_exhausted`로 표시. 판정은 같은 요청의 다른 대체를 모두 반영한 최종 대진 기준
     - 기존 경기·결과는 그대로, 순위·기록 유지(제외된 사람도 뛴 경기가 있으면 순위표에 남음)
+    - (B15, C-37·AC-159) 라운드 기반: 후보는 그 경기 라운드에 출전하지 않는 사람. 후보가 없는 경기는
+      `cancel`로 운영진이 취소를 확인해야 함(없으면 `no_substitute`). 후보가 있는 경기의 취소는
+      `cancel_not_allowed`. 같은 요청에서 같은 라운드에 같은 사람을 두 번 넣으면 `round_conflict`.
+      라운드 정보 없는 기존 청백전은 기존 규칙 그대로(취소 없음)
     """
     m = _lock(db, match_id, body)
     if m.status != "confirmed":
@@ -1421,12 +1888,39 @@ def leave(
         raise _fail(db, GAME_NOT_FOUND, "참가자를 찾을 수 없습니다", 404)
     if leaver.left_at is not None:
         raise _fail(db, CONFLICT, "이미 제외된 선수입니다", 409, {"version": m.version})
+    rounds = _is_round(m)
+    if body.cancel and not rounds:
+        raise _fail(db, CANCEL_NOT_ALLOWED, "이 청백전은 경기를 취소할 수 없습니다", 422)
     by_participant = {p.id: _participant_key(p) for p in parts}
-    rows = _games(db, m.id, by_participant)
+    rows = [r for r in _games(db, m.id, by_participant) if r[0].cancelled_at is None]
+    game_by_no = {g.no: g for g, _, _ in rows}
     seats = {g.no: (t1, t2) for g, t1, t2 in rows}
     remaining = sorted(g.no for g, t1, t2 in rows if g.winner is None and key in (*t1, *t2))
-    asked = [a.gameNo for a in body.assignments]
-    if sorted(asked) != remaining:
+    asked = [a.gameNo for a in body.assignments] + list(body.cancel)
+    playable = _playable_keys(db, parts) - {key}
+
+    def candidates(no: int) -> list[str]:
+        t1, t2 = seats[no]
+        busy = (
+            _round_busy(rows, game_by_no[no].round_no, skip=game_by_no[no].id) if rounds else set()
+        )
+        return [
+            c
+            for c in playable
+            if c not in (*t1, *t2)
+            and c not in busy
+            and (m.method == "individual" or parts_by_key[c].team == leaver.team)
+        ]
+
+    stuck = [no for no in remaining if not candidates(no)]
+    # (B15, AC-159) 라운드 기반: 대체 불가 경기를 빼고 보낸 요청은
+    # conflict가 아니라 no_substitute(취소 확인 필요)
+    unasked = set(remaining) - set(asked)
+    if (
+        len(asked) != len(set(asked))
+        or not set(asked) <= set(remaining)
+        or (unasked and not (rounds and unasked <= set(stuck)))
+    ):
         raise _fail(
             db,
             CONFLICT,
@@ -1434,35 +1928,59 @@ def leave(
             409,
             {"version": m.version, "games": remaining},
         )
-    playable = _playable_keys(db, parts) - {key}
-
-    def candidates(no: int) -> list[str]:
-        t1, t2 = seats[no]
-        return [
-            c
-            for c in playable
-            if c not in (*t1, *t2)
-            and (m.method == "individual" or parts_by_key[c].team == leaver.team)
-        ]
-
-    stuck = [no for no in remaining if not candidates(no)]
+    if rounds:
+        wrong = [no for no in body.cancel if candidates(no)]
+        if wrong:
+            raise _fail(
+                db,
+                CANCEL_NOT_ALLOWED,
+                "대체할 수 있는 선수가 있는 경기는 취소할 수 없습니다",
+                422,
+                {"games": wrong},
+            )
+        stuck = [no for no in stuck if no not in body.cancel]
     if stuck:
         raise _fail(
             db,
             NO_SUBSTITUTE,
-            "대체할 수 있는 선수가 없는 경기가 있어 중도 귀가를 처리할 수 없습니다",
+            "대체할 수 있는 선수가 없는 경기가 있어 중도 귀가를 처리할 수 없습니다"
+            if not rounds
+            else "대체할 사람이 없는 경기의 취소를 확인해 주세요",
             422,
             {"games": stuck},
         )
+    if rounds:
+        per_round: dict[tuple[int | None, str], int] = {}
+        for a in body.assignments:
+            rk = (game_by_no[a.gameNo].round_no, a.to)
+            per_round[rk] = per_round.get(rk, 0) + 1
+        twice = sorted({to for (_, to), n in per_round.items() if n > 1})
+        if twice:
+            raise _fail(
+                db,
+                ROUND_CONFLICT,
+                "같은 라운드에 같은 사람을 두 번 넣을 수 없습니다",
+                422,
+                {"keys": twice},
+            )
     for a in body.assignments:
         if a.to == key:
             raise _fail(db, NOT_ELIGIBLE, "제외할 선수로는 대체할 수 없습니다", 422)
         to = _active_participant(db, m, a.to, parts_by_key)
+        if rounds and a.to not in candidates(a.gameNo):
+            raise _fail(
+                db,
+                ROUND_CONFLICT,
+                "같은 라운드에 이미 출전하는 사람입니다",
+                422,
+                {"keys": [a.to], "games": [a.gameNo]},
+            )
         _replace(db, m, _game(db, m, a.gameNo), leaver, to)
 
-    # 최종 대진(모든 대체 반영)에서 같은 대진 판정(FE substituteDecision과 같음)
+    # 최종 대진(모든 대체 반영)에서 같은 대진 판정(FE substituteDecision과 같음). 취소할 경기는 뺌
+    live_seats = {no: st for no, st in seats.items() if no not in body.cancel}
     avoidable, forced = schedule.substitute_decision(
-        seats, key, {a.gameNo: a.to for a in body.assignments}, candidates
+        live_seats, key, {a.gameNo: a.to for a in body.assignments}, candidates
     )
     if avoidable:
         raise _fail(
@@ -1472,8 +1990,136 @@ def leave(
             409,
             {"games": sorted(avoidable)},
         )
-    leaver.left_at = _now()
-    if body.assignments:
-        m.modified_at = _now()
+    now = _now()
+    for no in body.cancel:
+        g = game_by_no[no]
+        g.cancelled_at = now
+        g.cancelled_by_id = actor.id
+        g.cancel_reason = LEFT
+        g.changed = True  # 회원 화면 대진 수정 표시(C-37)
+        db.add(
+            ClubMatchGameEvent(
+                match_id=m.id, game_id=g.id, action="cancel", actor_id=actor.id, at=now, reason=LEFT
+            )
+        )
+    leaver.left_at = now
+    if body.assignments or body.cancel:
+        m.modified_at = now
         _refresh_flags(db, m, frozenset(forced))
+    return _finish(db, m)
+
+
+@router.post("/{match_id}/games/{no}/restore")
+def restore_game(
+    match_id: uuid.UUID, no: int, body: RestoreRequest, actor: AdminUser, db: DbSession
+) -> ClubMatchView:
+    """(B15, C-37 r13·AC-164) 취소 경기 복원: 진행 중·시작 전 라운드, 종료 전에만.
+
+    귀가한 선수 자리마다 대체 선수를 함께 지정(귀가 상태는 해제하지 않음). 항상 막는 규칙·
+    라운드 규칙·확정 후 같은 대진 거부를 모두 다시 검사. 복원된 경기는 미기록, 이력을 남김.
+    """
+    m = _lock(db, match_id, body)
+    if m.status != "confirmed" or not _is_round(m):
+        raise _fail(
+            db,
+            RESTORE_NOT_ALLOWED,
+            "종료된 청백전은 복원할 수 없습니다"
+            if m.status == "finished"
+            else "진행 중인 라운드 기반 청백전에서만 복원할 수 있습니다",
+            409,
+        )
+    g = _game(db, m, no)
+    if g.cancelled_at is None:
+        raise _fail(db, RESTORE_NOT_ALLOWED, "취소된 경기가 아닙니다", 409)
+    current = m.current_round or 1
+    if (g.round_no or 0) < current:
+        raise _fail(
+            db,
+            ROUND_LOCKED,
+            "지난 라운드의 경기는 복원할 수 없습니다",
+            409,
+            {"round": g.round_no, "currentRound": current},
+        )
+    parts = _participants(db, m.id)
+    parts_by_key = {_participant_key(p): p for p in parts}
+    by_participant = {p.id: _participant_key(p) for p in parts}
+    rows = _games(db, m.id, by_participant)
+    mine = next(r for r in rows if r[0].id == g.id)
+    seat_keys = [*mine[1], *mine[2]]
+    gone = [k for k in seat_keys if parts_by_key[k].left_at is not None]
+    unknown = [k for k in body.replacements if k not in gone]
+    if unknown:
+        raise _fail(
+            db, CONFLICT, "대진이 바뀌었습니다", 409, {"version": m.version, "keys": unknown}
+        )
+    busy = _round_busy(rows, g.round_no, skip=g.id)
+    playable = _playable_keys(db, parts)
+
+    def options(out: str) -> list[str]:
+        return [
+            c
+            for c in playable
+            if c not in seat_keys
+            and c not in busy
+            and (m.method == "individual" or parts_by_key[c].team == parts_by_key[out].team)
+        ]
+
+    missing = [k for k in gone if k not in body.replacements]
+    if missing:
+        raise _fail(
+            db,
+            RESTORE_BLOCKED,
+            "귀가한 선수 자리에 대체 선수가 필요합니다"
+            if all(options(k) for k in missing)
+            else "대체할 사람이 없어 복원할 수 없습니다",
+            422,
+            {"keys": missing, "candidates": {k: len(options(k)) for k in missing}},
+        )
+    picked = list(body.replacements.values())
+    if len(set(picked)) != len(picked):
+        raise _fail(db, DUPLICATE_PLAYER, "같은 경기에 같은 선수가 두 번 들어갈 수 없습니다", 422)
+    for out, to_key in body.replacements.items():
+        if to_key in busy:
+            raise _fail(
+                db,
+                ROUND_CONFLICT,
+                "같은 라운드에 이미 출전하는 사람입니다",
+                422,
+                {"keys": [to_key], "round": g.round_no},
+            )
+        to = _active_participant(db, m, to_key, parts_by_key)
+        _replace(db, m, g, parts_by_key[out], to)
+    db.flush()
+    final = [body.replacements.get(k, k) for k in seat_keys]
+    _check_lineup(
+        db, m, parts_by_key, _available_keys(db, parts), final[:2], final[2:], game_no=g.no
+    )
+    keys = _matchup_keys(db, m)
+    mine_key = schedule.matchup_key(final[:2], final[2:])
+    twins = [o for o, k in keys.items() if o != no and k == mine_key]
+    if twins:
+        raise _fail(
+            db,
+            SAME_MATCHUP,
+            "같은 4명·같은 팀 구성의 경기가 이미 있습니다",
+            409,
+            {"games": [no], "with": twins},
+        )
+    now = _now()
+    g.cancelled_at = None
+    g.cancelled_by_id = None
+    g.cancel_reason = None
+    g.changed = True
+    m.modified_at = now
+    db.add(
+        ClubMatchGameEvent(
+            match_id=m.id,
+            game_id=g.id,
+            action="restore",
+            actor_id=actor.id,
+            at=now,
+            detail=dict(body.replacements),
+        )
+    )
+    _refresh_flags(db, m)
     return _finish(db, m)

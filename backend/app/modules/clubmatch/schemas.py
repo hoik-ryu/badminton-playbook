@@ -73,8 +73,19 @@ class Relaxation(BaseModel):
     ]
 
 
+class CancelInfo(BaseModel):
+    """(B15, C-37) 취소된 경기: 시각·사유(중도 귀가 'left')."""
+
+    at: dt.datetime
+    reason: str | None
+
+
 class GameView(BaseModel):
     no: int
+    # (B15, C-36) 라운드·코트(라운드 정보 없는 기존 청백전은 None)
+    round: int | None = None
+    court: int | None = None
+    cancelled: CancelInfo | None = None
     team1: list[Person]
     team2: list[Person]
     winner: Literal[1, 2] | None
@@ -121,6 +132,11 @@ class ClubMatchView(BaseModel):
     standings: list[Standing]
     team: dict[str, int]
     unrecorded: int
+    # (B15, C-36·C-37) 라운드 기반이면 코트 수·자동 생성 기준 라운드 수·진행 라운드·실제 라운드 수
+    courtCount: int | None = None  # noqa: N815
+    plannedRounds: int | None = None  # noqa: N815
+    currentRound: int | None = None  # noqa: N815
+    roundCount: int = 0  # noqa: N815
 
 
 class ClubMatchListItem(BaseModel):
@@ -162,6 +178,8 @@ class ClubMatchCreate(BaseModel):
     date: dt.date
     # (B10) 앞뒤 공백 제외 1–30자. 넘으면 "이름은 30자 이내로 입력해 주세요"(AC-123 필드 오류)
     name: str = Field(max_length=200)
+    # (B15, C-36) 사용 코트 수 1–8. 없으면 라운드 정보 없는 기존 방식(D11 호환)
+    courtCount: int | None = Field(default=None, ge=1, le=8)  # noqa: N815
 
     @field_validator("name")
     @classmethod
@@ -180,7 +198,9 @@ class MethodUpdate(Versioned):
 
 
 class SettingsUpdate(Versioned):
-    totalGames: int = Field(ge=1, le=200)  # noqa: N815
+    # 라운드 정보 없는 기존 청백전은 totalGames, 라운드 기반은 rounds(C-14 r12)
+    totalGames: int | None = Field(default=None, ge=1, le=200)  # noqa: N815
+    rounds: int | None = Field(default=None, ge=1, le=200)
     rules: Rules
     # (B10, C-33) 값이 바뀌고 대진이 있으면 폐기 확인이 필요(없으면 409 confirm_required)
     discard: bool = False
@@ -202,6 +222,8 @@ class BasicUpdate(Versioned):
     date: dt.date
     method: Method
     discard: bool = False
+    # (B15, C-36) 사용 코트 수(없으면 그대로)
+    courtCount: int | None = Field(default=None, ge=1, le=8)  # noqa: N815
 
     @field_validator("name")
     @classmethod
@@ -233,6 +255,8 @@ class GenerateRequest(Versioned):
     """
 
     totalGames: int | None = Field(default=None, ge=1, le=200)  # noqa: N815
+    # (B15) 라운드 기반: 자동 생성 기준 라운드 수(범위는 서버가 k로 판정, invalid_round)
+    rounds: int | None = Field(default=None, ge=1, le=200)
     rules: Rules | None = None
     # (B13, C-33·C-35) 운영진이 편집한 경기가 있으면 확인 후 다시 생성(아니면 409 confirm_required)
     discard: bool = False
@@ -253,6 +277,20 @@ class GameCreate(Versioned):
 
     team1: list[str]
     team2: list[str]
+    # (B15) 라운드 기반: 넣을 라운드(기존 라운드 또는 마지막 + 1)
+    round: int | None = None
+
+
+class GameMove(Versioned):
+    """(B15, C-36 D6) 확정 전 완성 경기를 다른 기존 라운드로 옮김."""
+
+    round: int
+
+
+class RestoreRequest(Versioned):
+    """(B15, C-37 r13) 취소 경기 복원: 귀가 선수 자리(사람 키) → 대체 선수(사람 키)."""
+
+    replacements: dict[str, str] = Field(default_factory=dict)
 
 
 class GameExchange(Versioned):
@@ -278,3 +316,5 @@ class LeaveRequest(Versioned):
     """중도 귀가(AC-078): 남은 미기록 경기마다 대체 선수, 제외와 한 번에."""
 
     assignments: list[LeaveAssignment]
+    # (B15, C-37) 대체할 사람이 없어 운영진이 취소를 확인한 경기 번호
+    cancel: list[int] = Field(default_factory=list)

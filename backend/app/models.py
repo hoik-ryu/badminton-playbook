@@ -5,6 +5,7 @@ from app.modules.auth.models import AuthSession
 from app.modules.clubmatch.models import (
     ClubMatch,
     ClubMatchGame,
+    ClubMatchGameEvent,
     ClubMatchGamePlayer,
     ClubMatchParticipant,
 )
@@ -17,6 +18,7 @@ __all__ = [
     "Base",
     "ClubMatch",
     "ClubMatchGame",
+    "ClubMatchGameEvent",
     "ClubMatchGamePlayer",
     "ClubMatchParticipant",
     "Guest",

@@ -280,3 +280,169 @@ export function substituteDecision(seats: Map<number, Seats>, leaver: string, pi
   }
   return { avoidable, forced }
 }
+
+// ===== (B15) 라운드·코트 기반 생성(C-36, AC-145–147) — 백엔드 schedule.py generate_round_games와 같은 결과(골든) =====
+// 라운드마다 ① 출전자를 먼저 고르고(경기 수 적은 → 직전 라운드 휴식 → 연속 휴식이 긴 → 시드로 섞은 순서)
+// ② 그 사람들로만 조를 짭니다(같은 대진 금지 → 파트너 반복 → 성별 조합 → 밸런스). 난수 호출 순서도 서버와 같음.
+export const MAX_COURTS = 8
+export const MAX_GAMES = 200
+export type RoundSizes = { all: number; blue: number; white: number }
+export type RoundGame = { no: number; round: number; court: number; team1: [string, string]; team2: [string, string]; genderRelaxed: boolean; repeatedMatchup: boolean; relaxations: Relaxation[] }
+
+/** 라운드당 최대 경기 수 k = min(코트, ⌊N÷4⌋, 팀전 ⌊청÷2⌋·⌊백÷2⌋) */
+export function perRound(method: ClubMethod, sizes: RoundSizes, courts: number) {
+  let k = Math.min(courts, Math.floor(sizes.all / 4))
+  if (method === 'team') k = Math.min(k, Math.floor(sizes.blue / 2), Math.floor(sizes.white / 2))
+  return Math.max(0, k)
+}
+export const maxRounds = (k: number) => (k > 0 ? Math.floor(MAX_GAMES / k) : 0)
+/** 기본 라운드 수(C-36 r13): 개인전 ⌈N÷k⌉, 팀전 ⌈2×큰 팀÷k⌉, 상한 ⌊200÷k⌋ */
+export function defaultRounds(method: ClubMethod, sizes: RoundSizes, k: number) {
+  if (k <= 0) return 0
+  const want = method === 'team' ? Math.ceil((2 * Math.max(sizes.blue, sizes.white)) / k) : Math.ceil(sizes.all / k)
+  return Math.max(1, Math.min(want, maxRounds(k)))
+}
+type Range = { min: number; max: number }
+export type RoundPreview = {
+  perRound: number
+  maxRounds: number
+  defaultRounds: number
+  games: number
+  each: { all?: Range; blue?: Range; white?: Range }
+  playing: { all?: number; blue?: number; white?: number }
+  resting: { all?: number; blue?: number; white?: number }
+  belowTarget: boolean
+  proposals: { rounds: number; all?: number; blue?: number; white?: number }[]
+}
+/** 생성 전 미리보기(UXD-106, AC-145) — 서버 round_preview와 같은 값 */
+export function roundPreview(method: ClubMethod, sizes: RoundSizes, courts: number, rounds: number): RoundPreview {
+  const k = perRound(method, sizes, courts)
+  const each = (n: number, per: number): Range => (n <= 0 ? { min: 0, max: 0 } : { min: Math.floor((rounds * per) / n), max: Math.ceil((rounds * per) / n) })
+  const team = method === 'team'
+  const avgOk = k > 0 && rounds * 4 * k >= 4 * sizes.all
+  return {
+    perRound: k,
+    maxRounds: maxRounds(k),
+    defaultRounds: defaultRounds(method, sizes, k),
+    games: rounds * k,
+    each: team ? { blue: each(sizes.blue, 2 * k), white: each(sizes.white, 2 * k) } : { all: each(sizes.all, 4 * k) },
+    playing: team ? { blue: 2 * k, white: 2 * k } : { all: 4 * k },
+    resting: team ? { blue: Math.max(0, sizes.blue - 2 * k), white: Math.max(0, sizes.white - 2 * k) } : { all: Math.max(0, sizes.all - 4 * k) },
+    belowTarget: k > 0 && rounds === maxRounds(k) && !avgOk,
+    proposals: evenRoundProposals(method, sizes, k, rounds),
+  }
+}
+/** 균등안(C-14 r12): 모두 같은 경기 수가 되는 가까운 라운드 수(아래·위, 범위 안) */
+export function evenRoundProposals(method: ClubMethod, sizes: RoundSizes, k: number, rounds: number) {
+  if (k <= 0) return []
+  const even = (r: number) => (method === 'team' ? (r * 2 * k) % sizes.blue === 0 && (r * 2 * k) % sizes.white === 0 : (r * 4 * k) % sizes.all === 0)
+  if (even(rounds)) return []
+  const top = maxRounds(k)
+  let lower: number | null = null
+  for (let r = rounds - 1; r > 0; r--) if (even(r)) { lower = r; break }
+  let upper: number | null = null
+  for (let r = rounds + 1; r <= top; r++) if (even(r)) { upper = r; break }
+  return [lower, upper]
+    .filter((r): r is number => r !== null)
+    .map((r) => (method === 'team' ? { rounds: r, blue: (r * 2 * k) / sizes.blue, white: (r * 2 * k) / sizes.white } : { rounds: r, all: (r * 4 * k) / sizes.all }))
+}
+
+const combos = <T,>(list: T[], n: number): T[][] => {
+  const out: T[][] = []
+  const go = (start: number, acc: T[]) => {
+    if (acc.length === n) return void out.push([...acc])
+    for (let i = start; i <= list.length - (n - acc.length); i++) go(i + 1, [...acc, list[i]!])
+  }
+  go(0, [])
+  return out
+}
+
+/** 라운드 기반 전체 대진(C-36, AC-146·147). 라운드마다 k경기, 같은 라운드 중복 출전 없음 */
+export function generateRoundGames(input: { players: ClubPlayer[]; rounds: number; courts: number; method: ClubMethod; rules: ClubRules; seed: number }): RoundGame[] {
+  const { players, rounds, courts, method, rules, seed } = input
+  const blues = players.filter((p) => p.team === 'blue')
+  const whites = players.filter((p) => p.team === 'white')
+  const k = perRound(method, { all: players.length, blue: blues.length, white: whites.length }, courts)
+  const r = rng(seed)
+  const counts = new Map<string, number>()
+  const partners = new Map<string, number>()
+  const matchups = new Set<string>()
+  let rested = new Set<string>()
+  let streak = new Map<string, number>()
+  const games: RoundGame[] = []
+  let no = 0
+  const same = (t1: ClubPlayer[], t2: ClubPlayer[]) => matchups.has(matchupKey(t1.map((p) => p.key), t2.map((p) => p.key)))
+  const rep = (t1: ClubPlayer[], t2: ClubPlayer[]) => (partners.get(pairKey(t1[0]!.key, t1[1]!.key)) ?? 0) + (partners.get(pairKey(t2[0]!.key, t2[1]!.key)) ?? 0)
+  const costOf = (t1: ClubPlayer[], t2: ClubPlayer[]) => {
+    const s = same(t1, t2)
+    const bad = genderBad(t1, t2)
+    const diff = Math.abs(t1[0]!.score + t1[1]!.score - t2[0]!.score - t2[1]!.score)
+    return { cost: (s ? 1e12 : 0) + rep(t1, t2) * 1e9 + (rules.gender && bad ? 1e6 : 0) + (rules.balance ? diff * 1e3 : 0), bad, same: s }
+  }
+  const choose = (pool: ClubPlayer[], n: number) => {
+    const order = shuffle(pool, r)
+    order.sort((a, b) => (counts.get(a.key) ?? 0) - (counts.get(b.key) ?? 0) || (rested.has(a.key) ? 0 : 1) - (rested.has(b.key) ? 0 : 1) || (streak.get(b.key) ?? 0) - (streak.get(a.key) ?? 0))
+    return order.slice(0, n)
+  }
+  const splitsOf = (f: ClubPlayer[]): [ClubPlayer[], ClubPlayer[]][] => [
+    [[f[0]!, f[1]!], [f[2]!, f[3]!]],
+    [[f[0]!, f[2]!], [f[1]!, f[3]!]],
+    [[f[0]!, f[3]!], [f[1]!, f[2]!]],
+  ]
+  for (let rd = 1; rd <= rounds && k > 0; rd++) {
+    let rem: ClubPlayer[] = []
+    let remB: ClubPlayer[] = []
+    let remW: ClubPlayer[] = []
+    if (method === 'team') {
+      remB = choose(blues, 2 * k)
+      remW = choose(whites, 2 * k)
+    } else rem = choose(players, 4 * k)
+    const playing = new Set([...rem, ...remB, ...remW].map((p) => p.key))
+    for (let court = 1; court <= k; court++) {
+      let best: { t1: ClubPlayer[]; t2: ClubPlayer[]; cost: number; bad: boolean; same: boolean } | null = null
+      for (let attempt = 0; attempt < 60; attempt++) {
+        const splits: [ClubPlayer[], ClubPlayer[]][] = method === 'team' ? [[shuffle(remB, r).slice(0, 2), shuffle(remW, r).slice(0, 2)]] : splitsOf(shuffle(rem, r).slice(0, 4))
+        for (const [t1, t2] of splits) {
+          const c = costOf(t1, t2)
+          if (!best || c.cost < best.cost) best = { t1, t2, ...c }
+        }
+        if (best && best.cost === 0) break
+      }
+      let cands: [ClubPlayer[], ClubPlayer[]][] | null = null
+      if (best!.same || (rules.gender && best!.bad)) {
+        cands = method === 'team' ? combos(remB, 2).flatMap((b) => combos(remW, 2).map((w) => [b, w] as [ClubPlayer[], ClubPlayer[]])) : combos(rem, 4).flatMap(splitsOf)
+        for (const [t1, t2] of cands) {
+          const c = costOf(t1, t2)
+          if (c.cost < best!.cost) best = { t1, t2, ...c }
+        }
+      }
+      const { t1, t2, bad } = best!
+      const isSame = best!.same
+      const relaxations: Relaxation[] = []
+      if (isSame || (rules.gender && bad)) {
+        if (isSame) relaxations.push({ rule: 'matchup', reason: cands!.some(([a, b]) => !same(a, b)) ? 'search_limit' : 'exhausted' })
+        if (rules.gender && bad) {
+          const chosen: [number, number] = [isSame ? 1 : 0, rep(t1, t2)]
+          const ok = cands!.filter(([a, b]) => !genderBad(a, b))
+          const le = (a: [number, number], b: [number, number]) => a[0] < b[0] || (a[0] === b[0] && a[1] <= b[1])
+          const reason: RelaxationReason = !ok.length ? 'exhausted' : ok.some(([a, b]) => le([same(a, b) ? 1 : 0, rep(a, b)], chosen)) ? 'search_limit' : 'higher_priority'
+          relaxations.push({ rule: 'gender', reason })
+        }
+      }
+      for (const p of [...t1, ...t2]) counts.set(p.key, (counts.get(p.key) ?? 0) + 1)
+      partners.set(pairKey(t1[0]!.key, t1[1]!.key), (partners.get(pairKey(t1[0]!.key, t1[1]!.key)) ?? 0) + 1)
+      partners.set(pairKey(t2[0]!.key, t2[1]!.key), (partners.get(pairKey(t2[0]!.key, t2[1]!.key)) ?? 0) + 1)
+      matchups.add(matchupKey(t1.map((p) => p.key), t2.map((p) => p.key)))
+      const used = new Set([...t1, ...t2].map((p) => p.key))
+      rem = rem.filter((p) => !used.has(p.key))
+      remB = remB.filter((p) => !used.has(p.key))
+      remW = remW.filter((p) => !used.has(p.key))
+      no++
+      games.push({ no, round: rd, court, team1: [t1[0]!.key, t1[1]!.key], team2: [t2[0]!.key, t2[1]!.key], genderRelaxed: rules.gender && bad, repeatedMatchup: isSame, relaxations })
+    }
+    const everyone = players.map((p) => p.key)
+    rested = new Set(everyone.filter((key) => !playing.has(key)))
+    streak = new Map(everyone.map((key) => [key, rested.has(key) ? (streak.get(key) ?? 0) + 1 : 0]))
+  }
+  return games
+}

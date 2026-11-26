@@ -38,6 +38,17 @@ class ClubMatch(Base):
         ),
         CheckConstraint("total_games BETWEEN 1 AND 200", name="ck_club_matches_total_games"),
         CheckConstraint("version >= 1", name="ck_club_matches_version"),
+        # (B15, C-36·C-38) 라운드 기반 청백전: 코트 수 1–8. 기존 청백전은 NULL(기존 방식, D11)
+        CheckConstraint(
+            "court_count IS NULL OR court_count BETWEEN 1 AND 8", name="ck_club_matches_court_count"
+        ),
+        CheckConstraint(
+            "planned_rounds IS NULL OR planned_rounds BETWEEN 1 AND 200",
+            name="ck_club_matches_planned_rounds",
+        ),
+        CheckConstraint(
+            "current_round IS NULL OR current_round >= 1", name="ck_club_matches_current_round"
+        ),
     )
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
@@ -56,6 +67,12 @@ class ClubMatch(Base):
     modified_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     # 동시 조작 감지(C-19·U9): 모든 변경에서 1씩 증가
     version: Mapped[int] = mapped_column(Integer, default=1, server_default="1")
+    # (B15, C-36) 사용 코트 수. NULL이면 라운드 정보 없는 기존 청백전
+    court_count: Mapped[int | None] = mapped_column(SmallInteger)
+    # (B15, C-36) 자동 생성 기준 라운드 수(기준값). 실제 라운드 수는 경기에서 셈
+    planned_rounds: Mapped[int | None] = mapped_column(SmallInteger)
+    # (B15, C-37) 진행 중인 라운드(확정 전 NULL, 확정하면 1)
+    current_round: Mapped[int | None] = mapped_column(SmallInteger)
     created_by_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("users.id", ondelete="SET NULL")
     )
@@ -103,6 +120,17 @@ class ClubMatchGame(Base):
         CheckConstraint("no >= 1", name="ck_club_match_games_no"),
         CheckConstraint("winner IS NULL OR winner IN (1, 2)", name="ck_club_match_games_winner"),
         UniqueConstraint("match_id", "no", name="uq_club_match_games_no"),
+        # (B15, C-36·C-38) 같은 청백전·라운드·코트는 하나(공통 검사의 마지막 방어선)
+        UniqueConstraint("match_id", "round_no", "court_no", name="uq_club_match_games_court"),
+        CheckConstraint(
+            "(round_no IS NULL AND court_no IS NULL)"
+            " OR (round_no >= 1 AND court_no BETWEEN 1 AND 8)",
+            name="ck_club_match_games_round_court",
+        ),
+        # (B15, C-37) 결과와 취소는 동시에 있을 수 없음
+        CheckConstraint(
+            "winner IS NULL OR cancelled_at IS NULL", name="ck_club_match_games_cancelled"
+        ),
     )
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
@@ -125,6 +153,38 @@ class ClubMatchGame(Base):
     recorded_by_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("users.id", ondelete="SET NULL")
     )
+    # (B15, C-36) 라운드·코트(서버가 매김). 기존 청백전은 NULL
+    round_no: Mapped[int | None] = mapped_column(SmallInteger)
+    court_no: Mapped[int | None] = mapped_column(SmallInteger)
+    # (B15, C-37) 중도 귀가로 취소된 경기(현재 상태, 복원하면 비움). 이력은 club_match_game_events
+    cancelled_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    cancelled_by_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("users.id", ondelete="SET NULL")
+    )
+    cancel_reason: Mapped[str | None] = mapped_column(String(20))
+
+
+class ClubMatchGameEvent(Base):
+    """(B15, C-37·C-38) 경기 취소·복원 이력. 추가만 하고 고치거나 지우지 않음."""
+
+    __tablename__ = "club_match_game_events"
+    __table_args__ = (
+        CheckConstraint("action IN ('cancel', 'restore')", name="ck_club_match_game_events_action"),
+    )
+
+    id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
+    match_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("club_matches.id", ondelete="CASCADE"), index=True
+    )
+    game_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("club_match_games.id", ondelete="CASCADE"), index=True
+    )
+    action: Mapped[str] = mapped_column(String(10))
+    actor_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"))
+    at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    reason: Mapped[str | None] = mapped_column(String(20))
+    # 복원 때 귀가 선수 자리 → 대체 선수(사람 키) {"member:…": "guest:…"}
+    detail: Mapped[dict[str, str]] = mapped_column(JSON, default=dict, server_default="{}")
 
 
 class ClubMatchGamePlayer(Base):

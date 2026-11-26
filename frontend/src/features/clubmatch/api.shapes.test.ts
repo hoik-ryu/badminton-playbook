@@ -24,7 +24,7 @@ const list = (s: Spec) => [s] as const
 
 const person = spec<Person>({ key: true, id: true, kind: true, name: true, gender: true, grade: true, score: true })
 const relaxation = spec<Relaxation>({ rule: true, reason: true })
-const game = spec<GameView>({ no: true, team1: list(person), team2: list(person), winner: true, gap: true, genderRelaxed: true, repeatedMatchup: true, relaxations: list(relaxation), manual: true, changed: true, resultChanged: true })
+const game = spec<GameView>({ no: true, team1: list(person), team2: list(person), winner: true, gap: true, genderRelaxed: true, repeatedMatchup: true, relaxations: list(relaxation), manual: true, changed: true, resultChanged: true, round: true, court: true, cancelled: true })
 const row = spec<ParticipantRow>({ ...person, participating: true, team: true, games: true, left: true, inUnrecorded: true, available: true })
 const teamWins = { blue: true, white: true } as const
 const view = spec<ClubMatchView>({
@@ -41,19 +41,24 @@ const view = spec<ClubMatchView>({
   resultModifiedAt: true,
   rows: list(row),
   summary: spec<ClubMatchView['summary']>({ count: true, male: true, female: true, blue: { n: true, male: true }, white: { n: true, male: true }, unscored: list(person) }),
-  preview: spec<ClubMatchView['preview']>({ groups: list({ games: true, people: true }), even: true, proposals: list({ totalGames: true, each: teamWins }) }),
+  // (B15) preview.rounds는 라운드 기반 청백전에만 있음(골든 시나리오는 라운드 정보 없는 청백전) → 키 비교에서 뺌
+  preview: spec<Omit<ClubMatchView['preview'], 'rounds'>>({ groups: list({ games: true, people: true }), even: true, proposals: list({ totalGames: true, each: teamWins }) }),
   games: list(game),
   standings: list(spec<ClubMatchView['standings'][number]>({ key: true, name: true, guest: true, wins: true, games: true, rank: true, tied: true })),
   team: teamWins,
   unrecorded: true,
+  courtCount: true,
+  plannedRounds: true,
+  currentRound: true,
+  roundCount: true,
 })
 // (SCR-111 r6) 표시 상태·결과 구조(하위 호환 추가)
 const clubResult = spec<ClubMatchResult>({ method: true, outcome: true, final: true, text: true, tiedCount: true }) // 골든 시나리오의 종료 청백전은 개인전이라 final은 값/null로만 기록됨
 const listItem = spec<ClubMatchListItem>({ id: true, name: true, date: true, method: true, status: true, unrecorded: true, team: teamWins, winnerText: true, participants: true, games: true, displayStatus: true, result: clubResult })
 const memberPlayer = spec<MemberPlayer>({ key: true, name: true, guest: true, me: true })
-const memberGame = spec<MemberGame>({ no: true, team1: list(memberPlayer), team2: list(memberPlayer), winner: true, changed: true, resultChanged: true, mySide: true })
+const memberGame = spec<MemberGame>({ no: true, team1: list(memberPlayer), team2: list(memberPlayer), winner: true, changed: true, resultChanged: true, mySide: true, round: true, court: true, cancelled: true })
 const memberStanding = spec<MemberStanding>({ key: true, name: true, guest: true, me: true, wins: true, games: true, rank: true, tied: true })
-const publicMatch = spec<PublicClubMatch>({ id: true, name: true, date: true, method: true, status: true, modifiedAt: true, resultModifiedAt: true, games: list(memberGame), standings: list(memberStanding), team: teamWins, unrecorded: true, participating: true, displayStatus: true })
+const publicMatch = spec<PublicClubMatch>({ id: true, name: true, date: true, method: true, status: true, modifiedAt: true, resultModifiedAt: true, games: list(memberGame), standings: list(memberStanding), team: teamWins, unrecorded: true, participating: true, displayStatus: true, currentRound: true })
 const publicItem = spec<PublicClubMatchItem>({ id: true, name: true, date: true, method: true, status: true, team: teamWins, games: true, participants: true, unrecorded: true, resultText: true, displayStatus: true, result: clubResult })
 const myRecord = spec<MyRecord>({ rank: true, gamesToRank: true, games: true, wins: true, losses: true, rate: true })
 const memberStatus = spec<MemberStatus>({ referrer: true, rank: true, gamesToRank: true, record: { games: true, wins: true, losses: true }, tutorial: list({ course: true, name: true, passed: true, total: true }), recommended: true })
