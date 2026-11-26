@@ -1,0 +1,1065 @@
+{
+  "format": "pb-ui-plan/v1",
+  "batch": "B16",
+  "brief_digest": "90d1cec5a8f7b13cde1b552a7e82429ff6f78648587ee72630d7b8743f32670d",
+  "screens": {
+    "SCR-241": {
+      "tree": [
+        {
+          "part": "ClubMatchSetupPage",
+          "local": true,
+          "file": "frontend/src/pages/ClubMatchSetupPage.tsx",
+          "children": [
+            {
+              "part": "SetupFrame",
+              "local": true,
+              "file": "frontend/src/features/clubmatch/setup/SetupFrame.tsx",
+              "children": [
+                {
+                  "part": "SetupHeader",
+                  "local": true,
+                  "file": "frontend/src/features/clubmatch/setup/SetupFrame.tsx"
+                },
+                {
+                  "part": "StepProgress",
+                  "cmp": "CMP-053",
+                  "file": "frontend/src/components/StepProgress.tsx"
+                },
+                {
+                  "part": "BasicStep",
+                  "local": true,
+                  "file": "frontend/src/features/clubmatch/setup/BasicStep.tsx",
+                  "children": [
+                    {
+                      "part": "MethodTiles",
+                      "local": true,
+                      "file": "frontend/src/features/clubmatch/setup/parts.tsx"
+                    },
+                    {
+                      "part": "TextField",
+                      "cmp": "CMP-006"
+                    },
+                    {
+                      "part": "SetupDateField",
+                      "local": true,
+                      "file": "frontend/src/features/clubmatch/setup/parts.tsx"
+                    },
+                    {
+                      "part": "TextField",
+                      "note": "variant=stepper",
+                      "cmp": "CMP-006",
+                      "file": "frontend/src/components/TextField.tsx"
+                    },
+                    {
+                      "part": "NoticeBox",
+                      "cmp": "CMP-023"
+                    }
+                  ]
+                },
+                {
+                  "part": "StepActionBar",
+                  "cmp": "CMP-054",
+                  "file": "frontend/src/components/StepActionBar.tsx",
+                  "children": [
+                    {
+                      "part": "Button",
+                      "cmp": "CMP-001"
+                    }
+                  ]
+                },
+                {
+                  "part": "NoticeBox",
+                  "cmp": "CMP-023"
+                },
+                {
+                  "part": "ConfirmDialog",
+                  "cmp": "CMP-022"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "states": {
+        "SCR-241-ST1": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/basic.test.tsx [SCR-241-ST1]"
+        },
+        "SCR-241-ST2": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/basic.test.tsx [SCR-241-ST2]"
+        },
+        "SCR-241-ST4": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/basic.test.tsx [SCR-241-ST4]"
+        },
+        "SCR-241-ST5": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/basic.test.tsx [SCR-241-ST5]"
+        },
+        "SCR-241-ST6": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/basic.test.tsx [SCR-241-ST6]"
+        },
+        "SCR-241-ST7": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/basic.test.tsx [SCR-241-ST7]"
+        },
+        "SCR-241-ST8": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/basic.test.tsx [SCR-241-ST8]"
+        },
+        "SCR-241-ST9": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/basic.test.tsx [SCR-241-ST9]"
+        },
+        "SCR-241-ST10": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/basic.test.tsx [SCR-241-ST10]"
+        },
+        "SCR-241-ST11": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/rounds.test.tsx [SCR-241-ST11]"
+        },
+        "SCR-241-ST12": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/rounds.test.tsx [SCR-241-ST12]"
+        }
+      },
+      "interactions": [
+        {
+          "action": "방식 고르기",
+          "trigger": "click",
+          "result": "진행 표시 칸 수를 즉시 바꿈(팀전 5, 개인전 4). 만든 뒤 팀 배정·대진이 있으면 '다음'을 누를 때 방식 변경 확인 창(ST9)",
+          "to_state": "SCR-241-ST1",
+          "acs": [
+            "AC-070",
+            "AC-122"
+          ]
+        },
+        {
+          "action": "'다음'(만들기 전)",
+          "trigger": "click",
+          "result": "검증 → 준비 중 청백전 생성 → 주소를 `/setup/basic`으로 바꾸고 SCR-242로",
+          "to_state": "SCR-241-ST1",
+          "acs": [
+            "AC-123"
+          ]
+        },
+        {
+          "action": "'다음'(만든 뒤)",
+          "trigger": "click",
+          "result": "바뀐 값만 저장(이름·날짜는 팀·대진 유지). 값이 같으면 저장 없이 SCR-242로",
+          "to_state": "SCR-241-ST1",
+          "acs": [
+            "AC-123"
+          ]
+        },
+        {
+          "action": "(r11) 코트 수 −/＋",
+          "trigger": "click",
+          "result": "1–8 안에서 값을 바꾸고 아래 줄을 바로 갱신. 대진이 있는 청백전에서 저장값과 다른 값으로 '다음'을 누르면 확인 창(ST11). 저장값으로 돌아오면 확인 없음",
+          "to_state": "SCR-241-ST11",
+          "acs": [
+            "AC-144"
+          ]
+        },
+        {
+          "action": "'청백전 삭제'(만든 뒤)",
+          "trigger": "click",
+          "result": "확인 창(ST10) → 참가자·대진과 함께 삭제 → SCR-111",
+          "to_state": "SCR-241-ST1",
+          "acs": [
+            "AC-134"
+          ]
+        },
+        {
+          "action": "나가기",
+          "trigger": "click",
+          "result": "만들기 전 입력이 있으면 \"입력한 내용을 버릴까요?\"([계속 입력][버리기]), 만든 뒤 저장하지 않은 변경이 있으면 이탈 확인 창 → SCR-111",
+          "to_state": "SCR-241-ST1",
+          "acs": [
+            "AC-131"
+          ]
+        }
+      ],
+      "data": [
+        {
+          "name": "match",
+          "source": "api",
+          "contract": "GET /api/club-matches/{id}",
+          "task": "B10-T1",
+          "mock_file": "frontend/src/features/clubmatch/api.ts"
+        },
+        {
+          "name": "create",
+          "source": "api",
+          "contract": "POST /api/club-matches",
+          "task": "B10-T1",
+          "mock_file": "frontend/src/features/clubmatch/api.ts"
+        },
+        {
+          "name": "basic",
+          "source": "api",
+          "contract": "PUT /api/club-matches/{id}/basic",
+          "task": "B10-T2",
+          "mock_file": "frontend/src/features/clubmatch/api.ts"
+        },
+        {
+          "name": "delete",
+          "source": "api",
+          "contract": "DELETE /api/club-matches/{id}",
+          "task": "B10-T6",
+          "mock_file": "frontend/src/features/clubmatch/api.ts"
+        }
+      ],
+      "acs": {
+        "AC-144": {
+          "states": [
+            "SCR-241-ST1",
+            "SCR-241-ST11",
+            "SCR-241-ST4"
+          ],
+          "tests": [
+            "integration"
+          ]
+        }
+      },
+      "cmp_exclusions": {
+        "CMP-002": "POL-001",
+        "CMP-026": "POL-001"
+      }
+    },
+    "SCR-244": {
+      "tree": [
+        {
+          "part": "ClubMatchSetupPage",
+          "local": true,
+          "file": "frontend/src/pages/ClubMatchSetupPage.tsx",
+          "children": [
+            {
+              "part": "SetupFrame",
+              "local": true,
+              "file": "frontend/src/features/clubmatch/setup/SetupFrame.tsx",
+              "children": [
+                {
+                  "part": "SetupHeader",
+                  "local": true,
+                  "file": "frontend/src/features/clubmatch/setup/SetupFrame.tsx"
+                },
+                {
+                  "part": "StepProgress",
+                  "cmp": "CMP-053",
+                  "file": "frontend/src/components/StepProgress.tsx"
+                },
+                {
+                  "part": "GamesStep",
+                  "local": true,
+                  "file": "frontend/src/features/clubmatch/setup/GamesStep.tsx",
+                  "children": [
+                    {
+                      "part": "MethodTiles",
+                      "local": true,
+                      "file": "frontend/src/features/clubmatch/setup/parts.tsx"
+                    },
+                    {
+                      "part": "TextField",
+                      "cmp": "CMP-006"
+                    },
+                    {
+                      "part": "Switch",
+                      "cmp": "CMP-007"
+                    },
+                    {
+                      "part": "Badge",
+                      "cmp": "CMP-005"
+                    },
+                    {
+                      "part": "EditGameCard",
+                      "local": true,
+                      "file": "frontend/src/features/clubmatch/setup/GamesStep.tsx",
+                      "children": [
+                        {
+                          "part": "Avatar",
+                          "cmp": "CMP-057",
+                          "file": "frontend/src/components/Avatar.tsx"
+                        }
+                      ]
+                    },
+                    {
+                      "part": "StateView",
+                      "cmp": "CMP-027"
+                    },
+                    {
+                      "part": "Sheet",
+                      "cmp": "CMP-021",
+                      "children": [
+                        {
+                          "part": "Avatar",
+                          "cmp": "CMP-057",
+                          "file": "frontend/src/components/Avatar.tsx"
+                        },
+                        {
+                          "part": "PersonMeta",
+                          "cmp": "CMP-058",
+                          "file": "frontend/src/components/PersonMeta.tsx"
+                        }
+                      ]
+                    },
+                    {
+                      "part": "TextField",
+                      "note": "variant=stepper",
+                      "cmp": "CMP-006",
+                      "file": "frontend/src/components/TextField.tsx"
+                    },
+                    {
+                      "part": "RoundSection",
+                      "cmp": "CMP-059",
+                      "file": "frontend/src/components/RoundSection.tsx",
+                      "note": "phase=edit"
+                    },
+                    {
+                      "part": "RoundMoveSheet",
+                      "local": true,
+                      "file": "frontend/src/features/clubmatch/setup/RoundMoveSheet.tsx",
+                      "children": [
+                        {
+                          "part": "Sheet",
+                          "cmp": "CMP-021"
+                        },
+                        {
+                          "part": "RoundMoveRow",
+                          "local": true,
+                          "file": "frontend/src/features/clubmatch/setup/RoundMoveSheet.tsx",
+                          "note": "CMP-030 표현(선택 불가 행·사유). 공통 ListItem은 링크형이라 쓰지 않음"
+                        }
+                      ]
+                    },
+                    {
+                      "part": "ToastProvider",
+                      "cmp": "CMP-029",
+                      "file": "frontend/src/components/Toast.tsx"
+                    }
+                  ]
+                },
+                {
+                  "part": "StepActionBar",
+                  "cmp": "CMP-054",
+                  "file": "frontend/src/components/StepActionBar.tsx",
+                  "children": [
+                    {
+                      "part": "Button",
+                      "cmp": "CMP-001"
+                    }
+                  ]
+                },
+                {
+                  "part": "NoticeBox",
+                  "cmp": "CMP-023"
+                },
+                {
+                  "part": "ConfirmDialog",
+                  "cmp": "CMP-022"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "states": {
+        "SCR-244-ST1": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/games.test.tsx [SCR-244-ST1]"
+        },
+        "SCR-244-ST2": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/games.test.tsx [SCR-244-ST2]"
+        },
+        "SCR-244-ST4": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/games.test.tsx [SCR-244-ST4]"
+        },
+        "SCR-244-ST5": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/games.test.tsx [SCR-244-ST5]"
+        },
+        "SCR-244-ST6": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/games.test.tsx [SCR-244-ST6]"
+        },
+        "SCR-244-ST7": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/games.test.tsx [SCR-244-ST7]"
+        },
+        "SCR-244-ST8": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/games.test.tsx [SCR-244-ST8]"
+        },
+        "SCR-244-ST9": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/games.test.tsx [SCR-244-ST9]"
+        },
+        "SCR-244-ST10": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/edit.test.tsx [SCR-244-ST10]"
+        },
+        "SCR-244-ST11": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/edit.test.tsx [SCR-244-ST11]"
+        },
+        "SCR-244-ST12": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/edit.test.tsx [SCR-244-ST12]"
+        },
+        "SCR-244-ST13": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/edit.test.tsx [SCR-244-ST13]"
+        },
+        "SCR-244-ST14": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/edit.test.tsx [SCR-244-ST14]"
+        },
+        "SCR-244-ST15": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/edit.test.tsx [SCR-244-ST15]"
+        },
+        "SCR-244-ST16": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/edit.test.tsx [SCR-244-ST16]"
+        },
+        "SCR-244-ST18": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/rounds.test.tsx [SCR-244-ST18]"
+        },
+        "SCR-244-ST19": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/rounds.test.tsx [SCR-244-ST19]"
+        },
+        "SCR-244-ST20": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/rounds.test.tsx [SCR-244-ST20]"
+        },
+        "SCR-244-ST21": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/rounds.test.tsx [SCR-244-ST21]"
+        },
+        "SCR-244-ST22": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/rounds.test.tsx [SCR-244-ST22]"
+        },
+        "SCR-244-ST23": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/rounds.test.tsx [SCR-244-ST23]"
+        },
+        "SCR-244-ST24": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/rounds.test.tsx [SCR-244-ST24]"
+        },
+        "SCR-244-ST17": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/edit.test.tsx [SCR-244-ST17]"
+        }
+      },
+      "interactions": [
+        {
+          "action": "(r10) '자동 생성' 고르기",
+          "trigger": "click",
+          "result": "설정 영역을 보여 줌(대진을 바꾸지 않으므로 확인 없음). 대진이 없으면 이 방식이 기본 선택(ST1)",
+          "to_state": "SCR-244-ST1",
+          "acs": [
+            "AC-136"
+          ]
+        },
+        {
+          "action": "(r10) '직접 구성' 고르기",
+          "trigger": "click",
+          "result": "대진이 없으면 바로 빈 대진(ST10). 대진이 있으면 확인 창(ST15) → 확인 즉시 대진 폐기 저장 → ST10. 취소하면 방식 선택과 대진이 그대로",
+          "to_state": "SCR-244-ST10",
+          "acs": [
+            "AC-136"
+          ]
+        },
+        {
+          "action": "총 경기 수·규칙 바꾸기",
+          "trigger": "input/toggle",
+          "result": "대진 없으면 화면 입력(생성 때 함께 저장). 대진이 있으면 확인 창(ST8) → 확인 즉시 설정 저장 + 대진 폐기",
+          "to_state": "SCR-244-ST8",
+          "acs": [
+            "AC-132"
+          ]
+        },
+        {
+          "action": "균등안·'입력값 유지'",
+          "trigger": "click",
+          "result": "총 경기 수를 그 값으로 / 미리보기 유지",
+          "to_state": "SCR-244-ST9",
+          "acs": [
+            "AC-074"
+          ]
+        },
+        {
+          "action": "'대진 생성'",
+          "trigger": "click",
+          "result": "설정과 함께 저장하고 생성(ST2 → ST7)",
+          "to_state": "SCR-244-ST7",
+          "acs": [
+            "AC-073",
+            "AC-129"
+          ]
+        },
+        {
+          "action": "'다시 생성'",
+          "trigger": "click",
+          "result": "편집이 없으면 확인 없이 새 시드로 다시 생성(AC-076). (r10) 운영진 편집이 저장된 대진이면 확인 창(ST14) → 기준값으로 새로 생성, 취소하면 그대로",
+          "to_state": "SCR-244-ST14",
+          "acs": [
+            "AC-076",
+            "AC-142"
+          ]
+        },
+        {
+          "action": "(r10) '경기 추가'",
+          "trigger": "click",
+          "result": "목록 맨 끝에 빈 자리 4개(개인전 1팀 2·2팀 2, 팀전 청 2·백 2)인 미완성 카드를 만들고 첫 빈 자리의 SCR-225(빈 자리 선택)를 바로 엶. 서버에는 저장하지 않음(ST11)",
+          "to_state": "SCR-244-ST11",
+          "acs": [
+            "AC-137"
+          ]
+        },
+        {
+          "action": "(r10) 경기의 빈 자리 누르기",
+          "trigger": "click",
+          "result": "SCR-225 빈 자리 선택. 고르면 그 자리를 화면에서 채우고, 네 자리가 모두 차면 그 경기를 바로 저장(ST12)",
+          "to_state": "SCR-225",
+          "acs": [
+            "AC-137"
+          ]
+        },
+        {
+          "action": "경기의 선수 누르기",
+          "trigger": "click",
+          "result": "SCR-225 선수 교체(개인전은 같은 경기 맞교환 구역 포함). 고르면 바로 저장(완성된 경기) 또는 화면에서 바꿈(미완성 경기)",
+          "to_state": "SCR-225",
+          "acs": [
+            "AC-064",
+            "AC-139"
+          ]
+        },
+        {
+          "action": "(r10) 경기 삭제(완성된 경기)",
+          "trigger": "click",
+          "result": "확인 창(ST16) → 바로 저장, 경기 번호·요약·사람별 경기 수 재계산. 마지막 경기를 지우면 ST10",
+          "to_state": "SCR-244-ST16",
+          "acs": [
+            "AC-138"
+          ]
+        },
+        {
+          "action": "(r10) 경기 삭제(미완성 경기)",
+          "trigger": "click",
+          "result": "확인 없이 화면에서 지움",
+          "to_state": "SCR-244-ST7",
+          "acs": []
+        },
+        {
+          "action": "'다음'",
+          "trigger": "click",
+          "result": "SCR-245. 대진이 없거나(ST10) 미완성 경기가 있으면(ST11) 막고 사유 표시",
+          "to_state": "SCR-245",
+          "acs": [
+            "AC-129",
+            "AC-141"
+          ]
+        },
+        {
+          "action": "(r11) 라운드 수 −/＋·균등안",
+          "trigger": "click",
+          "result": "미리보기 세 줄을 바로 다시 계산(저장 없음). 대진이 있으면 값을 바꾸는 순간 ST8 확인 창 → 확인 즉시 설정 저장 + 대진 폐기, 취소하면 원래 값",
+          "to_state": "SCR-244-ST9",
+          "acs": [
+            "AC-145"
+          ]
+        },
+        {
+          "action": "(r11) '대진 생성'·'다시 생성'",
+          "trigger": "click",
+          "result": "라운드 수 기준으로 라운드마다 코트를 채워 생성(ST2 → ST7). k = 0이면 버튼 비활성(ST18)",
+          "to_state": "SCR-244-ST7",
+          "acs": [
+            "AC-146",
+            "AC-147"
+          ]
+        },
+        {
+          "action": "(r11) 라운드 구역 접기·펼치기",
+          "trigger": "click",
+          "result": "그 구역의 카드만 접음(머리글은 남음). 저장 없음, 생성 페이지 기본은 전체 펼침",
+          "to_state": "SCR-244-ST24",
+          "acs": []
+        },
+        {
+          "action": "(r11) '휴식 y' 누르기",
+          "trigger": "click",
+          "result": "그 라운드 휴식자 이름(팀전은 청·백)을 머리글 아래에 펼침/접음",
+          "to_state": "SCR-244-ST7",
+          "acs": [
+            "AC-148"
+          ]
+        },
+        {
+          "action": "(r11) '코트 m에 경기 추가'",
+          "trigger": "click",
+          "result": "그 라운드에 빈 자리 4개 미완성 카드(코트 m)를 만들고 첫 빈 자리 SCR-225를 엶. 네 자리가 차면 그 라운드에 저장(ST12)",
+          "to_state": "SCR-244-ST11",
+          "acs": [
+            "AC-149"
+          ]
+        },
+        {
+          "action": "(r11) '라운드 추가'",
+          "trigger": "click",
+          "result": "맨 끝에 '(마지막+1)라운드' 구역과 빈 경기 카드를 화면에만 만들고 첫 빈 자리 SCR-225를 엶. 경기가 저장될 때 라운드가 생김(빈 라운드는 저장하지 않음)",
+          "to_state": "SCR-244-ST21",
+          "acs": [
+            "AC-149"
+          ]
+        },
+        {
+          "action": "(r11) 경기 삭제로 라운드가 빔",
+          "trigger": "click",
+          "result": "삭제 저장 뒤 그 구역을 없애고 뒤 라운드 번호·경기 번호를 다시 그림, 토스트 \"n라운드가 비어 지웠습니다. 뒤 라운드 번호가 하나씩 당겨졌습니다\"(ST22)",
+          "to_state": "SCR-244-ST22",
+          "acs": [
+            "AC-151"
+          ]
+        },
+        {
+          "action": "(r11) '이동'(저장된 경기)",
+          "trigger": "click",
+          "result": "라운드 이동 시트(ST20)를 엶. 고를 수 있는 라운드를 누르면 바로 저장하고 시트를 닫은 뒤 토스트 \"n라운드 코트 m으로 옮겼습니다\", 옮긴 카드로 스크롤·포커스",
+          "to_state": "SCR-244-ST20",
+          "acs": [
+            "AC-152"
+          ]
+        },
+        {
+          "action": "'이전'·진행 표시·'수정'으로 앞 단계",
+          "trigger": "click",
+          "result": "페이지 안 이동: 미완성 경기도 화면에 유지(UXD-099). 진행 표시로 확정 단계로 가는 것은 '다음'과 같은 조건",
+          "to_state": "SCR-243",
+          "acs": []
+        },
+        {
+          "action": "페이지 밖으로 나가기",
+          "trigger": "click/back",
+          "result": "미완성 경기가 있으면 이탈 확인(ST17). 저장된 편집은 이미 저장되어 있어 따로 묻지 않음",
+          "to_state": "SCR-244-ST17",
+          "acs": [
+            "AC-141"
+          ]
+        }
+      ],
+      "data": [
+        {
+          "name": "settings",
+          "source": "api",
+          "contract": "PUT /api/club-matches/{id}/settings",
+          "task": "B10-T5",
+          "mock_file": "frontend/src/features/clubmatch/api.ts"
+        },
+        {
+          "name": "games",
+          "source": "api",
+          "contract": "POST /api/club-matches/{id}/games",
+          "task": "B10-T5",
+          "mock_file": "frontend/src/features/clubmatch/api.ts"
+        },
+        {
+          "name": "swap",
+          "source": "api",
+          "contract": "POST /api/club-matches/{id}/games/{no}/swap",
+          "task": "B10-T1",
+          "mock_file": "frontend/src/features/clubmatch/api.ts"
+        }
+      ],
+      "acs": {
+        "AC-145": {
+          "states": [
+            "SCR-244-ST1",
+            "SCR-244-ST18",
+            "SCR-244-ST19",
+            "SCR-244-ST8",
+            "SCR-244-ST9"
+          ],
+          "tests": [
+            "integration"
+          ]
+        },
+        "AC-148": {
+          "states": [
+            "SCR-244-ST7"
+          ],
+          "tests": [
+            "integration"
+          ]
+        },
+        "AC-149": {
+          "states": [
+            "SCR-244-ST10",
+            "SCR-244-ST11",
+            "SCR-244-ST21"
+          ],
+          "tests": [
+            "integration"
+          ]
+        },
+        "AC-150": {
+          "states": [
+            "SCR-244-ST13",
+            "SCR-244-ST23"
+          ],
+          "tests": [
+            "integration"
+          ]
+        },
+        "AC-151": {
+          "states": [
+            "SCR-244-ST16",
+            "SCR-244-ST22"
+          ],
+          "tests": [
+            "integration"
+          ]
+        },
+        "AC-152": {
+          "states": [
+            "SCR-244-ST20",
+            "SCR-244-ST22"
+          ],
+          "tests": [
+            "integration"
+          ]
+        }
+      },
+      "cmp_exclusions": {
+        "CMP-026": "POL-001",
+        "CMP-041": "POL-002",
+        "CMP-002": "POL-001",
+        "CMP-030": "POL-003"
+      }
+    },
+    "SCR-245": {
+      "tree": [
+        {
+          "part": "ClubMatchSetupPage",
+          "local": true,
+          "file": "frontend/src/pages/ClubMatchSetupPage.tsx",
+          "children": [
+            {
+              "part": "SetupFrame",
+              "local": true,
+              "file": "frontend/src/features/clubmatch/setup/SetupFrame.tsx",
+              "children": [
+                {
+                  "part": "SetupHeader",
+                  "local": true,
+                  "file": "frontend/src/features/clubmatch/setup/SetupFrame.tsx"
+                },
+                {
+                  "part": "StepProgress",
+                  "cmp": "CMP-053",
+                  "file": "frontend/src/components/StepProgress.tsx"
+                },
+                {
+                  "part": "ConfirmStep",
+                  "local": true,
+                  "file": "frontend/src/features/clubmatch/setup/ConfirmStep.tsx",
+                  "children": [
+                    {
+                      "part": "SetupSummary",
+                      "cmp": "CMP-056",
+                      "file": "frontend/src/components/SetupSummary.tsx"
+                    },
+                    {
+                      "part": "ValidationList",
+                      "cmp": "CMP-055",
+                      "file": "frontend/src/components/ValidationList.tsx"
+                    },
+                    {
+                      "part": "RoundSection",
+                      "cmp": "CMP-059",
+                      "file": "frontend/src/components/RoundSection.tsx",
+                      "note": "phase=readonly"
+                    }
+                  ]
+                },
+                {
+                  "part": "StepActionBar",
+                  "cmp": "CMP-054",
+                  "file": "frontend/src/components/StepActionBar.tsx",
+                  "children": [
+                    {
+                      "part": "Button",
+                      "cmp": "CMP-001"
+                    }
+                  ]
+                },
+                {
+                  "part": "NoticeBox",
+                  "cmp": "CMP-023"
+                },
+                {
+                  "part": "ConfirmDialog",
+                  "cmp": "CMP-022"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "states": {
+        "SCR-245-ST1": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/confirm.test.tsx [SCR-245-ST1]"
+        },
+        "SCR-245-ST2": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/confirm.test.tsx [SCR-245-ST2]"
+        },
+        "SCR-245-ST4": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/confirm.test.tsx [SCR-245-ST4]"
+        },
+        "SCR-245-ST5": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/confirm.test.tsx [SCR-245-ST5]"
+        },
+        "SCR-245-ST6": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/confirm.test.tsx [SCR-245-ST6]"
+        },
+        "SCR-245-ST7": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/confirm.test.tsx [SCR-245-ST7]"
+        },
+        "SCR-245-ST8": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/confirm.test.tsx [SCR-245-ST8]"
+        },
+        "SCR-245-ST9": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/rounds.test.tsx [SCR-245-ST9]"
+        }
+      },
+      "interactions": [
+        {
+          "action": "'수정'",
+          "trigger": "click",
+          "result": "해당 단계로 이동(입력 유지). (r10) 대진 '수정'은 SCR-244 편집기로(방식 선택 없이 저장된 대진, UXD-100)",
+          "to_state": "SCR-245-ST1",
+          "acs": [
+            "AC-130"
+          ]
+        },
+        {
+          "action": "'확정'",
+          "trigger": "click",
+          "result": "확인 창(ST8) → 확정 → SCR-112(확정 이후 화면)",
+          "to_state": "SCR-245-ST1",
+          "acs": [
+            "AC-077",
+            "AC-130"
+          ]
+        },
+        {
+          "action": "(r11) '라운드별 대진 보기'",
+          "trigger": "click",
+          "result": "라운드 구역을 읽기 전용으로 펼침/접음(편집·이동 버튼 없음, 구역마다 접기 가능)",
+          "to_state": "SCR-245-ST1",
+          "acs": [
+            "AC-153"
+          ]
+        },
+        {
+          "action": "'이전'",
+          "trigger": "click",
+          "result": "SCR-244",
+          "to_state": "SCR-245-ST1",
+          "acs": []
+        }
+      ],
+      "data": [
+        {
+          "name": "confirm",
+          "source": "api",
+          "contract": "POST /api/club-matches/{id}/confirm",
+          "task": "B10-T5",
+          "mock_file": "frontend/src/features/clubmatch/api.ts"
+        }
+      ],
+      "acs": {
+        "AC-153": {
+          "states": [
+            "SCR-245-ST1",
+            "SCR-245-ST9"
+          ],
+          "tests": [
+            "integration"
+          ]
+        }
+      },
+      "cmp_exclusions": {
+        "CMP-026": "POL-001"
+      }
+    }
+  },
+  "components": {
+    "CMP-001": {
+      "action": "reuse",
+      "part": "Button",
+      "file": "frontend/src/components/Button.tsx"
+    },
+    "CMP-002": {
+      "action": "reuse",
+      "part": "SegmentedControl",
+      "file": "frontend/src/components/RadioButtons.tsx"
+    },
+    "CMP-005": {
+      "action": "reuse",
+      "part": "Badge",
+      "file": "frontend/src/components/Badge.tsx"
+    },
+    "CMP-006": {
+      "action": "reuse",
+      "part": "TextField",
+      "file": "frontend/src/components/TextField.tsx"
+    },
+    "CMP-007": {
+      "action": "reuse",
+      "part": "Switch",
+      "file": "frontend/src/components/Switch.tsx"
+    },
+    "CMP-021": {
+      "action": "reuse",
+      "part": "Sheet",
+      "file": "frontend/src/components/Sheet.tsx"
+    },
+    "CMP-022": {
+      "action": "reuse",
+      "part": "ConfirmDialog",
+      "file": "frontend/src/components/ConfirmDialog.tsx"
+    },
+    "CMP-023": {
+      "action": "reuse",
+      "part": "NoticeBox",
+      "file": "frontend/src/components/NoticeBox.tsx"
+    },
+    "CMP-026": {
+      "action": "reuse",
+      "part": "PageHeader",
+      "file": "frontend/src/components/PageHeader.tsx"
+    },
+    "CMP-027": {
+      "action": "reuse",
+      "part": "StateView",
+      "file": "frontend/src/components/StateView.tsx"
+    },
+    "CMP-029": {
+      "action": "reuse",
+      "part": "ToastProvider",
+      "file": "frontend/src/components/Toast.tsx"
+    },
+    "CMP-030": {
+      "action": "reuse",
+      "part": "ListItem",
+      "file": "frontend/src/components/ListItem.tsx"
+    },
+    "CMP-041": {
+      "action": "excluded",
+      "part": "EditGameCard",
+      "file": "frontend/src/features/clubmatch/setup/GamesStep.tsx"
+    },
+    "CMP-053": {
+      "action": "reuse",
+      "part": "StepProgress",
+      "file": "frontend/src/components/StepProgress.tsx"
+    },
+    "CMP-054": {
+      "action": "reuse",
+      "part": "StepActionBar",
+      "file": "frontend/src/components/StepActionBar.tsx"
+    },
+    "CMP-055": {
+      "action": "reuse",
+      "part": "ValidationList",
+      "file": "frontend/src/components/ValidationList.tsx"
+    },
+    "CMP-056": {
+      "action": "reuse",
+      "part": "SetupSummary",
+      "file": "frontend/src/components/SetupSummary.tsx"
+    },
+    "CMP-057": {
+      "action": "reuse",
+      "part": "Avatar",
+      "file": "frontend/src/components/Avatar.tsx"
+    },
+    "CMP-058": {
+      "action": "reuse",
+      "part": "PersonMeta",
+      "file": "frontend/src/components/PersonMeta.tsx"
+    },
+    "CMP-059": {
+      "action": "reuse",
+      "part": "RoundSection",
+      "file": "frontend/src/components/RoundSection.tsx"
+    }
+  },
+  "notes": [
+    "(r12) SCR-241·244·245는 B11에서 B16으로 소유가 옮겨져, 기존 트리·상태 증거·상호작용(B11·B14)을 그대로 가져오고 라운드 부품·상태를 더했습니다.",
+    "CMP-041 경기 카드는 원장 POL-002 결정대로 생성 페이지 전용 카드(EditGameCard)를 확장합니다. CMP-029는 2026-11-26 사용자 확인으로 기존 Toast를 등록해 재사용합니다.",
+    "CMP-006 stepper 변형은 TextField에 variant=stepper(−/＋ 44px, 끝값 비활성, 직접 입력 범위 오류)로 더합니다(04 r11 변형). 스타일은 styles/clubmatch-setup.css r14 구역, 승인 토큰만.",
+    "CMP-030(라운드 이동 시트 행)은 원장 POL-003 결정(2026-11-26 \"생성 페이지 전용 행으로 구현 (권장)\")으로 생성 페이지 전용 행(RoundMoveRow)으로 구현합니다."
+  ],
+  "touched": {
+    "SCR-225": {
+      "changes": "(r11) 같은 라운드의 다른 경기 출전자를 선택 불가로(사유 '이 라운드에 이미 출전 · n경기 코트 m'), 시트 머리글에 'n라운드 코트 m'. 기존 쓰임·기능 그대로",
+      "via": [
+        "CMP-005",
+        "CMP-021",
+        "CMP-022",
+        "CMP-023",
+        "CMP-057",
+        "CMP-058",
+        "screen"
+      ],
+      "states": {
+        "SCR-225-ST13": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/rounds.test.tsx [SCR-225-ST13]"
+        },
+        "SCR-225-ST9": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/rounds.test.tsx [SCR-225-ST9]"
+        },
+        "SCR-225-ST4": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/setup/edit.test.tsx [SCR-225-ST4]"
+        }
+      },
+      "acs": {
+        "AC-149": {
+          "states": [
+            "SCR-225-ST9"
+          ]
+        },
+        "AC-150": {
+          "states": [
+            "SCR-225-ST13",
+            "SCR-225-ST4"
+          ]
+        }
+      }
+    }
+  }
+}

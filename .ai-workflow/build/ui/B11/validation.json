@@ -1,32 +1,26 @@
 {
-  "at": "2026-11-25T05:33:55Z",
+  "at": "2026-11-26T04:23:20Z",
   "ok": true,
-  "brief_digest": "a6bf0c3d6de67246494a72e98b6db3df62ca9d5ed40018f2251653a937b70f46",
-  "plan_sha256": "e66f6b8d0259771ab5cc3d5e5a80ee47d75780a3639573bdd71fe92932116b70",
+  "brief_digest": "ed70c0b5b8f2386e7b0413f27176a736f5163ff89aa15f62c385e56cb5c2db5b",
+  "plan_sha256": "e9872b9ed4fa17efe3001ec848b846557f470ab5d88f4748adc2ebda90c8a8d8",
   "errors": [],
   "warnings": [
-    "[screen_cmp_excluded] SCR-241: 02가 지정한 CMP-002를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
-    "[screen_cmp_excluded] SCR-241: 02가 지정한 CMP-026를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
     "[screen_cmp_excluded] SCR-242: 02가 지정한 CMP-004를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
     "[screen_cmp_excluded] SCR-242: 02가 지정한 CMP-024를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
     "[screen_cmp_excluded] SCR-242: 02가 지정한 CMP-026를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
     "[screen_cmp_excluded] SCR-243: 02가 지정한 CMP-002를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
     "[screen_cmp_excluded] SCR-243: 02가 지정한 CMP-024를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
     "[screen_cmp_excluded] SCR-243: 02가 지정한 CMP-026를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
-    "[screen_cmp_excluded] SCR-244: 02가 지정한 CMP-002를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
-    "[screen_cmp_excluded] SCR-244: 02가 지정한 CMP-026를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
-    "[screen_cmp_excluded] SCR-244: 02가 지정한 CMP-041를 원장 POL-002의 결정에 따라 트리에서 뺐습니다",
-    "[screen_cmp_excluded] SCR-245: 02가 지정한 CMP-026를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
     "[similar_to_mapped] SCR-246.tree[0]: 로컬 부품 SelectedSheet의 이름에 대응된 부품 이름이 들어 있습니다(Sheet CMP-021). 같은 부품이라는 뜻은 아닙니다. 대응된 부품을 재사용(cmp 지정)할 수 있는지 확인하세요",
     "[screen_cmp_excluded] SCR-246: 02가 지정한 CMP-024를 원장 POL-001의 결정에 따라 트리에서 뺐습니다"
   ],
   "counts": {
-    "screens": 6,
-    "states": 57,
-    "cmps_used": 15,
+    "screens": 3,
+    "states": 25,
+    "cmps_used": 10,
     "touched": {
-      "screens": 4,
-      "representative": 4,
+      "screens": 7,
+      "representative": 7,
       "covered": 0,
       "exempt": 0
     }

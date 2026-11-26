@@ -29,6 +29,8 @@ describe('club match setup flow', () => {
     await clickNext()
     await waitFor(() => expect(router.state.location.pathname).toBe(`/club-matches/${id}/setup/games`))
     expect(Object.keys(match(id).participants)).toHaveLength(4)
+    // (B16) 새 청백전은 라운드 기반(코트 4, 4명 → 라운드당 1경기): 기준 8라운드 = 8경기
+    fireEvent.change(await screen.findByRole('textbox', { name: '자동 생성 기준 라운드 수' }), { target: { value: '8' } })
     fireEvent.click(await screen.findByTestId('su-generate'))
     await waitFor(() => expect(match(id).games.length).toBe(8))
     await waitFor(() => expect(page()).toHaveAttribute('data-st', 'SCR-244-ST7'))

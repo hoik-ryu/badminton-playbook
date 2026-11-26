@@ -75,7 +75,7 @@ describe('SCR-241 basic step', () => {
   })
 
   it('[SCR-241-ST8] [AC-123] saved draft: name/date change keeps teams and games without a confirm', async () => {
-    const id = await seedDraft({ method: 'team', games: 4 })
+    const id = await seedDraft({ method: 'team', games: 4, courtCount: 1 })
     const router = renderAt(`/club-matches/${id}/setup/basic`)
     await waitSt('SCR-241-ST8')
     expect(screen.getByRole('button', { name: '더보기: 청백전 삭제' })).toBeInTheDocument()
@@ -89,7 +89,7 @@ describe('SCR-241 basic step', () => {
   })
 
   it('[SCR-241-ST9] [AC-070, AC-132] method change with teams and games asks; cancel keeps, confirm discards', async () => {
-    const id = await seedDraft({ method: 'team', games: 4 })
+    const id = await seedDraft({ method: 'team', games: 4, courtCount: 1 })
     renderAt(`/club-matches/${id}/setup/basic`)
     await waitSt('SCR-241-ST8')
     fireEvent.click(screen.getByRole('radio', { name: '개인전' }))
@@ -110,7 +110,7 @@ describe('SCR-241 basic step', () => {
   })
 
   it('[SCR-241-ST10] [AC-134] delete asks first; cancel changes nothing, confirm removes and returns to the list', async () => {
-    const id = await seedDraft({ method: 'individual', games: 2 })
+    const id = await seedDraft({ method: 'individual', games: 2, courtCount: 1 })
     const router = renderAt(`/club-matches/${id}/setup/basic`)
     await waitSt('SCR-241-ST8')
     fireEvent.click(screen.getByRole('button', { name: '더보기: 청백전 삭제' }))
@@ -127,7 +127,7 @@ describe('SCR-241 basic step', () => {
   })
 
   it('[SCR-241-ST6] [AC-133] another admin changed it first: conflict dialog, then the latest state', async () => {
-    const id = await seedDraft({ method: 'individual' })
+    const id = await seedDraft({ method: 'individual', courtCount: 1 })
     renderAt(`/club-matches/${id}/setup/basic`)
     await waitSt('SCR-241-ST8')
     fireEvent.change(screen.getByRole('textbox', { name: '청백전 이름' }), { target: { value: '내가 바꾼 이름' } })
@@ -147,7 +147,7 @@ describe('SCR-241 basic step', () => {
   })
 
   it('[SCR-241-ST2] re-entry shows loading first', async () => {
-    const id = await seedDraft({ method: 'individual' })
+    const id = await seedDraft({ method: 'individual', courtCount: 1 })
     let release = () => undefined as void
     fail.hold = new Promise<void>((r) => (release = r))
     renderAt(`/club-matches/${id}/setup/basic`)

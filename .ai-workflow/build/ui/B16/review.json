@@ -1,0 +1,822 @@
+{
+  "format": "pb-ui-review/v1",
+  "batch": "B16",
+  "status": "verified",
+  "run_id": "20261126-132142-79f573",
+  "verified_at": "2026-11-26T04:22:42Z",
+  "code": {
+    "run_id": "20261126-132142-79f573",
+    "at": "2026-11-26T04:22:42Z",
+    "valid": true,
+    "code_tree": "627e66f8eb07c0e1be45cf7a6f573391c80693dae12652f8812fce0fecef31db",
+    "code_only_tree": "368df91d8b9a8523bdaccc9255b53f2a7bc73d5f911545bc3a1b5bf91f90c6d8",
+    "head": "4d2e0ff486a74e8b52d4f4fe2fcbd0fcfc772b5f"
+  },
+  "scope_tree": "5cecb8ba0c5c3185b277f5551a924cb67348b03522b8bcc347ea8d1873ef5e61",
+  "evidence_digest": "e2c989f0a6e1f8677521c7f68ec7525cf6476c13d294f76255112b4983d6b2ea",
+  "screens": {
+    "SCR-225": {
+      "states": {
+        "SCR-225-ST13": {
+          "label": "라운드 출전 중 후보",
+          "required": false,
+          "status": "verified",
+          "level": "E2",
+          "scope": "touched",
+          "target": "E2|EM",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-225-ST4": {
+          "label": "오류",
+          "required": false,
+          "status": "verified",
+          "level": "E2",
+          "scope": "touched",
+          "target": "E2|EM",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-225-ST9": {
+          "label": "빈 자리 선택",
+          "required": false,
+          "status": "verified",
+          "level": "E2",
+          "scope": "touched",
+          "target": "E2|EM",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        }
+      },
+      "acs": {
+        "AC-149": {
+          "status": "verified",
+          "level": "E2"
+        },
+        "AC-150": {
+          "status": "verified",
+          "level": "E2"
+        }
+      },
+      "touched": {
+        "mode": "representative",
+        "via": [
+          "CMP-005",
+          "CMP-021",
+          "CMP-022",
+          "CMP-023",
+          "CMP-057",
+          "CMP-058",
+          "screen"
+        ],
+        "changes": "(r11) 같은 라운드의 다른 경기 출전자를 선택 불가로(사유 '이 라운드에 이미 출전 · n경기 코트 m'), 시트 머리글에 'n라운드 코트 m'. 기존 쓰임·기능 그대로"
+      }
+    },
+    "SCR-241": {
+      "states": {
+        "SCR-241-ST1": {
+          "label": "기본",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-241-ST10": {
+          "label": "삭제 확인",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-241-ST11": {
+          "label": "코트 수 변경 확인",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-241-ST12": {
+          "label": "라운드 정보 없는 준비 중 청백전",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-241-ST2": {
+          "label": "로딩",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-241-ST4": {
+          "label": "오류",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-241-ST5": {
+          "label": "권한 없음",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-241-ST6": {
+          "label": "충돌",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-241-ST7": {
+          "label": "방식 미선택",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-241-ST8": {
+          "label": "준비 중 편집",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-241-ST9": {
+          "label": "방식 변경 확인",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        }
+      },
+      "acs": {
+        "AC-144": {
+          "status": "verified",
+          "level": "E2"
+        }
+      }
+    },
+    "SCR-244": {
+      "states": {
+        "SCR-244-ST1": {
+          "label": "기본",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST10": {
+          "label": "직접 구성 빈 대진(0경기)",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST11": {
+          "label": "미완성 경기 있음",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST12": {
+          "label": "편집 저장 중",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST13": {
+          "label": "편집 저장 실패",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST14": {
+          "label": "다시 생성 확인(편집 있음)",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST15": {
+          "label": "직접 구성 전환 확인",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST16": {
+          "label": "경기 삭제 확인",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST17": {
+          "label": "미완성 경기 이탈 확인",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST18": {
+          "label": "경기를 만들 수 없음(k = 0)",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST19": {
+          "label": "평균 4경기 미달 안내",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST2": {
+          "label": "로딩",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST20": {
+          "label": "라운드 이동 시트",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST21": {
+          "label": "라운드 추가 중(화면에만 있는 라운드)",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST22": {
+          "label": "라운드 정리 알림",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST23": {
+          "label": "경기 200개 도달",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST24": {
+          "label": "라운드 구역 접힘",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST4": {
+          "label": "오류",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST5": {
+          "label": "권한 없음",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST6": {
+          "label": "충돌",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST7": {
+          "label": "대진 검토·편집",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST8": {
+          "label": "대진 폐기 확인",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-244-ST9": {
+          "label": "균등안 제안",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        }
+      },
+      "acs": {
+        "AC-145": {
+          "status": "verified",
+          "level": "E2"
+        },
+        "AC-148": {
+          "status": "verified",
+          "level": "E2"
+        },
+        "AC-149": {
+          "status": "verified",
+          "level": "E2"
+        },
+        "AC-150": {
+          "status": "verified",
+          "level": "E2"
+        },
+        "AC-151": {
+          "status": "verified",
+          "level": "E2"
+        },
+        "AC-152": {
+          "status": "verified",
+          "level": "E2"
+        }
+      }
+    },
+    "SCR-245": {
+      "states": {
+        "SCR-245-ST1": {
+          "label": "기본",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-245-ST2": {
+          "label": "로딩",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-245-ST4": {
+          "label": "오류",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-245-ST5": {
+          "label": "권한 없음",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-245-ST6": {
+          "label": "충돌",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-245-ST7": {
+          "label": "검증 실패",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-245-ST8": {
+          "label": "확정 확인",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        },
+        "SCR-245-ST9": {
+          "label": "라운드 검증 실패",
+          "required": true,
+          "status": "verified",
+          "level": "E2",
+          "sources": [
+            "test"
+          ],
+          "manual": [],
+          "browser": []
+        }
+      },
+      "acs": {
+        "AC-153": {
+          "status": "verified",
+          "level": "E2"
+        }
+      }
+    }
+  },
+  "browser": {
+    "status": "not_configured",
+    "steps": {},
+    "blocking": [],
+    "warnings": [
+      "프로필에 브라우저 검증 단계(report.format = \"pb-ui\")가 없습니다"
+    ],
+    "coverage": {
+      "required_states": 42,
+      "with_browser_pass": [],
+      "without_browser": [
+        "SCR-241-ST1",
+        "SCR-241-ST10",
+        "SCR-241-ST11",
+        "SCR-241-ST12",
+        "SCR-241-ST2",
+        "SCR-241-ST4",
+        "SCR-241-ST5",
+        "SCR-241-ST6",
+        "SCR-241-ST7",
+        "SCR-241-ST8",
+        "SCR-241-ST9",
+        "SCR-244-ST1",
+        "SCR-244-ST10",
+        "SCR-244-ST11",
+        "SCR-244-ST12",
+        "SCR-244-ST13",
+        "SCR-244-ST14",
+        "SCR-244-ST15",
+        "SCR-244-ST16",
+        "SCR-244-ST17",
+        "SCR-244-ST18",
+        "SCR-244-ST19",
+        "SCR-244-ST2",
+        "SCR-244-ST20",
+        "SCR-244-ST21",
+        "SCR-244-ST22",
+        "SCR-244-ST23",
+        "SCR-244-ST24",
+        "SCR-244-ST4",
+        "SCR-244-ST5",
+        "SCR-244-ST6",
+        "SCR-244-ST7",
+        "SCR-244-ST8",
+        "SCR-244-ST9",
+        "SCR-245-ST1",
+        "SCR-245-ST2",
+        "SCR-245-ST4",
+        "SCR-245-ST5",
+        "SCR-245-ST6",
+        "SCR-245-ST7",
+        "SCR-245-ST8",
+        "SCR-245-ST9"
+      ]
+    }
+  },
+  "tokens": {
+    "at_verify": {
+      "ok": true,
+      "source": "theme:docs/design-profile/theme.json",
+      "format": "css-vars",
+      "counts": {
+        "approved": 74,
+        "matched": 74,
+        "missing": 0,
+        "mismatch": 0,
+        "excepted": 0
+      },
+      "missing": [],
+      "mismatch": [],
+      "excepted": [],
+      "stale_exceptions": [],
+      "theme_approval": {
+        "status": "approved",
+        "theme_file": "docs/design-profile/theme.json",
+        "stage": "design_direction",
+        "approved_revision": 15,
+        "approved_hash": "8aee575f0fa0432ad2fa935ff311031a37c212b5c26b9b0c81765c749d036941",
+        "current_hash": "8aee575f0fa0432ad2fa935ff311031a37c212b5c26b9b0c81765c749d036941"
+      },
+      "expected_basis": "approved"
+    },
+    "now": {
+      "ok": true,
+      "counts": {
+        "approved": 74,
+        "matched": 74,
+        "missing": 0,
+        "mismatch": 0,
+        "excepted": 0
+      },
+      "missing": [],
+      "mismatch": [],
+      "excepted": []
+    },
+    "audit": {
+      "ok": true,
+      "mode": "warn",
+      "counts": {
+        "findings": 0,
+        "excepted": 0
+      },
+      "findings": []
+    }
+  },
+  "components": {
+    "CMP-001": {
+      "plan": "reuse",
+      "mapped": true,
+      "source": "existing",
+      "path": "frontend/src/components/Button.tsx",
+      "export": "Button"
+    },
+    "CMP-002": {
+      "plan": "reuse",
+      "mapped": true,
+      "source": "existing",
+      "path": "frontend/src/components/RadioButtons.tsx",
+      "export": "SegmentedControl"
+    },
+    "CMP-005": {
+      "plan": "reuse",
+      "mapped": true,
+      "source": "existing",
+      "path": "frontend/src/components/Badge.tsx",
+      "export": "Badge"
+    },
+    "CMP-006": {
+      "plan": "reuse",
+      "mapped": true,
+      "source": "existing",
+      "path": "frontend/src/components/TextField.tsx",
+      "export": "TextField"
+    },
+    "CMP-021": {
+      "plan": "reuse",
+      "mapped": true,
+      "source": "existing",
+      "path": "frontend/src/components/Sheet.tsx",
+      "export": "Sheet"
+    },
+    "CMP-022": {
+      "plan": "reuse",
+      "mapped": true,
+      "source": "existing",
+      "path": "frontend/src/components/ConfirmDialog.tsx",
+      "export": "ConfirmDialog"
+    },
+    "CMP-023": {
+      "plan": "reuse",
+      "mapped": true,
+      "source": "existing",
+      "path": "frontend/src/components/NoticeBox.tsx",
+      "export": "NoticeBox"
+    },
+    "CMP-027": {
+      "plan": "reuse",
+      "mapped": true,
+      "source": "existing",
+      "path": "frontend/src/components/StateView.tsx",
+      "export": "StateView"
+    },
+    "CMP-030": {
+      "plan": "reuse",
+      "mapped": true,
+      "source": "existing",
+      "path": "frontend/src/components/ListItem.tsx",
+      "export": "ListItem"
+    },
+    "CMP-055": {
+      "plan": "reuse",
+      "mapped": true,
+      "source": "built",
+      "path": "frontend/src/components/ValidationList.tsx",
+      "export": "ValidationList"
+    },
+    "CMP-056": {
+      "plan": "reuse",
+      "mapped": true,
+      "source": "built",
+      "path": "frontend/src/components/SetupSummary.tsx",
+      "export": "SetupSummary"
+    },
+    "CMP-057": {
+      "plan": "reuse",
+      "mapped": true,
+      "source": "built",
+      "path": "frontend/src/components/Avatar.tsx",
+      "export": "Avatar"
+    },
+    "CMP-058": {
+      "plan": "reuse",
+      "mapped": true,
+      "source": "built",
+      "path": "frontend/src/components/PersonMeta.tsx",
+      "export": "PersonMeta"
+    },
+    "CMP-059": {
+      "plan": "new",
+      "mapped": true,
+      "source": "built",
+      "path": "frontend/src/components/RoundSection.tsx",
+      "export": "RoundSection"
+    }
+  },
+  "manual": [],
+  "feedback": [],
+  "warnings": [
+    "[reuse_unmapped] B11가 재사용하는 CMP-041가 대응표에도 다른 배치의 신규 목록에도 없습니다",
+    "[planned_reuse_not_used] CMP-029(ToastProvider · frontend/src/components/Toast.tsx): UI Plan에서 재사용하기로 했지만(SCR-244) 배치 범위 코드에서 import·사용을 찾지 못했습니다. 대응 부품을 쓰거나 UI Plan을 고친 뒤 다시 검증합니다",
+    "프로필에 브라우저 검증 단계(report.format = \"pb-ui\")가 없습니다"
+  ],
+  "blockers": [],
+  "touched": {
+    "rules": "touched-v1",
+    "counts": {
+      "representative": 1,
+      "covered": 0,
+      "exempt": 0,
+      "unplanned": 0
+    }
+  },
+  "review_id": "209d012381955bff",
+  "ready": true,
+  "at": "2026-11-26T04:27:48Z"
+}

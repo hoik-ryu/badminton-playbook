@@ -1,5 +1,5 @@
-import { ArrowLeftRight, ListOrdered, ListPlus, LoaderCircle, Plus, RotateCcw, Scale, Shuffle, Trash2, UserRoundPen } from 'lucide-react'
-import { useState } from 'react'
+import { ArrowLeftRight, ArrowUpDown, ListOrdered, ListPlus, LoaderCircle, Plus, RotateCcw, Scale, Shuffle, Trash2, UserRoundPen } from 'lucide-react'
+import { useState, type ReactNode } from 'react'
 
 import { Avatar } from '../../../components/Avatar'
 import { Badge } from '../../../components/Badge'
@@ -14,6 +14,7 @@ import { addClubGame, CLUB_ERRORS, deleteClubGame, discardClubGames, exchangeClu
 import { PickSheet } from '../ClubSwapSheet'
 import { distribution, evenProposals, gap } from '../schedule'
 import { MethodTiles, SectionTitle } from './parts'
+import { RoundGamesStep } from './RoundGamesStep'
 import { filled, gameCounts, isComplete, lineupKey, lineupsOf, slotOf, teamLabelOf, type Lineup, type PickCandidate, type PickTarget } from './pick'
 import { SetupFrame } from './SetupFrame'
 import { participantsOf } from './steps'
@@ -31,7 +32,12 @@ type Pending = { patch: Partial<GamesDraft>; label: string }
 type Ask = { kind: 'regen' } | { kind: 'manual' } | { kind: 'delete'; no: number }
 type Busy = { key: string } | null
 
-export function GamesStep({ c, frame, go }: StepProps) {
+/** (r14) 라운드 기반 청백전(코트 수 있음)은 라운드 편집(RoundGamesStep), 라운드 정보 없는 청백전은 기존 편집기 */
+export function GamesStep(props: StepProps) {
+  return props.c.view?.courtCount != null ? <RoundGamesStep {...props} /> : <LegacyGamesStep {...props} />
+}
+
+function LegacyGamesStep({ c, frame, go }: StepProps) {
   const v = c.view!
   const d = c.drafts.games
   const ui = c.drafts.gamesUi
@@ -472,11 +478,12 @@ export function GamesStep({ c, frame, go }: StepProps) {
   )
 }
 
-/** 편집 경기 카드(CMP-041 phase=edit, VD-072): 기존 카드 + 머리 줄(번호·배지·실력차·삭제), 빈 자리 점선 */
-function EditGameCard({ l, v, busy, locked, onSlot, onDelete }: { l: Lineup; v: ClubMatchView; busy: boolean; locked: boolean; onSlot: (side: 0 | 1, idx: 0 | 1) => void; onDelete: () => void }) {
+/** 편집 경기 카드(CMP-041 phase=edit, VD-072): 기존 카드 + 머리 줄(번호·배지·실력차·삭제), 빈 자리 점선.
+ * (r14, VD-080) 라운드 기반: 머리 줄 '코트 m · n경기'(label), 저장된 완성 경기에 '이동'(onMove). gameNo = 서버 경기 번호(화면 번호와 다를 수 있음) */
+export function EditGameCard({ l, v, busy, locked, onSlot, onDelete, label, gameNo, onMove, ariaLabel }: { l: Lineup; v: ClubMatchView; busy: boolean; locked: boolean; onSlot: (side: 0 | 1, idx: 0 | 1) => void; onDelete: () => void; label?: ReactNode; gameNo?: number; onMove?: () => void; ariaLabel?: string }) {
   const team = v.method === 'team'
   const rows = new Map(v.rows.map((r) => [r.key, r]))
-  const g = l.saved ? v.games.find((x) => x.no === l.no) : undefined
+  const g = l.saved ? v.games.find((x) => x.no === (gameNo ?? l.no)) : undefined
   const empties = 4 - filled(l).length
   const score = (k: string | null) => (k ? (rows.get(k)?.score ?? null) : null)
   const gp = empties ? null : (g?.gap ?? gap(l.t1.map(score), l.t2.map(score)))
@@ -499,7 +506,7 @@ function EditGameCard({ l, v, busy, locked, onSlot, onDelete }: { l: Lineup; v: 
                 <ArrowLeftRight aria-hidden />
               </button>
             ) : (
-              <button key={idx} type="button" className="su-slot-empty" disabled={locked} aria-label={`${l.no}경기 ${tl} 빈 자리 선택`} onClick={() => onSlot(side, idx)}>
+              <button key={idx} type="button" className="su-slot-empty" disabled={locked} aria-label={`${l.round != null ? `${l.round}라운드 코트 ${l.court}, ` : ''}${l.no}경기 ${tl} 빈 자리 선택`} onClick={() => onSlot(side, idx)}>
                 <Plus aria-hidden />
                 빈 자리
               </button>
@@ -511,9 +518,9 @@ function EditGameCard({ l, v, busy, locked, onSlot, onDelete }: { l: Lineup; v: 
     )
   }
   return (
-    <li className="su-game" data-cmp="CMP-041" data-phase="edit" data-incomplete={empties > 0 || undefined} aria-busy={busy || undefined}>
+    <li className="su-game" data-cmp="CMP-041" data-phase="edit" data-incomplete={empties > 0 || undefined} aria-busy={busy || undefined} aria-label={ariaLabel} data-testid="game-card">
       <header>
-        <span className="su-gno">{l.no}경기</span>
+        <span className="su-gno">{label ?? `${l.no}경기`}</span>
         {empties > 0 && (
           <Badge tone="warning" className="su-badge" data-tone="warning">
             빈 자리 {empties}
@@ -530,9 +537,16 @@ function EditGameCard({ l, v, busy, locked, onSlot, onDelete }: { l: Lineup; v: 
             <LoaderCircle aria-hidden className="su-spin" />
           </span>
         ) : (
-          <button type="button" className="su-gdel" aria-label={`${l.no}경기 삭제`} disabled={locked} onClick={onDelete}>
-            <Trash2 aria-hidden />
-          </button>
+          <>
+            {onMove && (
+              <button type="button" className="su-gdel" aria-label={`${l.no}경기 다른 라운드로 이동`} disabled={locked} onClick={onMove} data-testid="move-btn">
+                <ArrowUpDown aria-hidden />
+              </button>
+            )}
+            <button type="button" className="su-gdel" aria-label={`${l.no}경기 삭제`} disabled={locked} onClick={onDelete}>
+              <Trash2 aria-hidden />
+            </button>
+          </>
         )}
       </header>
       {line(0)}

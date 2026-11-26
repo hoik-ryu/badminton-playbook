@@ -86,11 +86,13 @@ describe('SCR-112 unified club match detail', () => {
     await waitFor(() => expect(router.state.location.pathname).toMatch(/\/setup\/participants$/))
     const id = router.state.location.pathname.split('/')[2]!
     // ① 참가자
-    for (const n of ['김가람', '박다온', '정마루', '권초록']) fireEvent.click(await screen.findByRole('checkbox', { name: new RegExp(`^${n},`) }))
+    // (B16) 라운드 기반: 12명·코트 4 → 라운드당 3경기(1라운드에 3경기)
+    for (const n of ['김가람', '박다온', '정마루', '권초록', '오아라', '한바다', '신자람', '윤새벽', '정마음', '김민결', '남보람', '유하람']) fireEvent.click(await screen.findByRole('checkbox', { name: new RegExp(`^${n},`) }))
     await clickNext()
-    await waitFor(() => expect(Object.keys(match(id).participants)).toHaveLength(4))
+    await waitFor(() => expect(Object.keys(match(id).participants)).toHaveLength(12))
     // ② 대진 설정 ③ 대진 생성 ④ 다시 생성
-    fireEvent.change(await screen.findByRole('textbox', { name: '총 경기 수' }), { target: { value: '3' } })
+    // (B16) 라운드 기반: 기준 1라운드 = 3경기
+    fireEvent.change(await screen.findByRole('textbox', { name: '자동 생성 기준 라운드 수' }), { target: { value: '1' } })
     fireEvent.click(screen.getByTestId('su-generate'))
     await waitFor(() => expect(match(id).games).toHaveLength(3))
     expect(match(id).totalGames).toBe(3)

@@ -1,0 +1,29 @@
+{
+  "at": "2026-11-26T04:19:27Z",
+  "ok": true,
+  "brief_digest": "90d1cec5a8f7b13cde1b552a7e82429ff6f78648587ee72630d7b8743f32670d",
+  "plan_sha256": "640ca15f81e612ed4830faff2cea33268341f1f615b5f2c5299617c0fcb512eb",
+  "errors": [],
+  "warnings": [
+    "[screen_cmp_excluded] SCR-241: 02가 지정한 CMP-002를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
+    "[screen_cmp_excluded] SCR-241: 02가 지정한 CMP-026를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
+    "[similar_to_mapped] SCR-244.tree[0].children[0].children[2].children[9]: 로컬 부품 RoundMoveSheet의 이름에 대응된 부품 이름이 들어 있습니다(Sheet CMP-021). 같은 부품이라는 뜻은 아닙니다. 대응된 부품을 재사용(cmp 지정)할 수 있는지 확인하세요",
+    "[screen_cmp_excluded] SCR-244: 02가 지정한 CMP-002를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
+    "[screen_cmp_excluded] SCR-244: 02가 지정한 CMP-026를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",
+    "[screen_cmp_excluded] SCR-244: 02가 지정한 CMP-030를 원장 POL-003의 결정에 따라 트리에서 뺐습니다",
+    "[screen_cmp_excluded] SCR-244: 02가 지정한 CMP-041를 원장 POL-002의 결정에 따라 트리에서 뺐습니다",
+    "[screen_cmp_excluded] SCR-245: 02가 지정한 CMP-026를 원장 POL-001의 결정에 따라 트리에서 뺐습니다"
+  ],
+  "counts": {
+    "screens": 3,
+    "states": 42,
+    "cmps_used": 16,
+    "touched": {
+      "screens": 1,
+      "representative": 1,
+      "covered": 0,
+      "exempt": 0
+    }
+  },
+  "rules": "touched-v1"
+}

@@ -161,6 +161,20 @@
       "registered_at": "2026-11-25T05:19:01Z",
       "path": "frontend/src/components/PersonMeta.tsx",
       "built_by": "B14"
+    },
+    "CMP-029": {
+      "source": "existing",
+      "export": "ToastProvider",
+      "registered_at": "2026-11-26T03:38:10Z",
+      "path": "frontend/src/components/Toast.tsx",
+      "note": "기존 Toast를 CMP-029로 등록 (권장)"
+    },
+    "CMP-059": {
+      "source": "built",
+      "export": "RoundSection",
+      "registered_at": "2026-11-26T04:14:50Z",
+      "path": "frontend/src/components/RoundSection.tsx",
+      "built_by": "B16"
     }
   },
   "tokens": {
@@ -292,6 +306,16 @@
     {
       "at": "2026-11-25T05:19:01Z",
       "event": "register CMP-058 (built)",
+      "note": ""
+    },
+    {
+      "at": "2026-11-26T03:38:10Z",
+      "event": "register CMP-029 (existing)",
+      "note": "기존 Toast를 CMP-029로 등록 (권장)"
+    },
+    {
+      "at": "2026-11-26T04:14:50Z",
+      "event": "register CMP-059 (built)",
       "note": ""
     }
   ]

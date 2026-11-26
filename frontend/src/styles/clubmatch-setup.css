@@ -410,3 +410,21 @@
   .su-num { min-width: 0; }
   .su-pickhead { padding: 10px; gap: 8px; }
 }
+
+/* ===== (r14) 라운드·코트(SCR-241·244·245) — DD r14 VD-077–082·086, Preview r11 setup.css r14 구역 그대로(기존 토큰만).
+   스테퍼(CMP-006 stepper)·라운드 구역(CMP-059)은 공통 컴포넌트(Tailwind 토큰 유틸리티)라 여기에는 화면 안 표현만 둡니다 ===== */
+.su-help { margin: 0; font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+/* VD-078 미리보기 세 줄 */
+.su-plan { display: flex; flex-direction: column; gap: 4px; margin: 0; padding: 0; list-style: none; font-size: var(--font-size-caption); color: var(--color-text-secondary); }
+.su-plan li { display: flex; align-items: flex-start; gap: 6px; }
+.su-plan svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 2px; }
+.su-plan b { color: var(--color-text-primary); }
+.su-tdot { display: inline-block; width: 6px; height: 6px; margin: 0 3px 1px 0; border-radius: 999px; background: var(--color-team-blue-fg); vertical-align: middle; }
+.su-tdot[data-team='white'] { background: var(--color-bg-page); border: 1px solid var(--color-border-strong); }
+/* VD-079 라운드 구역 목록 */
+.su-rounds { display: flex; flex-direction: column; gap: 8px; }
+.su-round-list { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.su-badge[data-tone='pending'] { background: var(--color-bg-page); color: var(--color-text-secondary); border: 1px dashed var(--color-border-strong); }
+/* VD-080 카드 머리 줄 '코트 m · n경기', 구역 끝 '코트 m에 경기 추가'(높이 44) */
+.su-gno small { font-size: var(--font-size-caption); font-weight: 400; color: var(--color-text-secondary); }
+.su-add[data-size='sm'] { height: 44px; font-size: var(--font-size-caption); }

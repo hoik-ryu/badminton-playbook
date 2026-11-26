@@ -17,6 +17,7 @@ import { lineupsOf, pickCandidates, slotOf, teamLabelOf, type Lineup, type PickC
 // - 행: 참가자 설정 행(VD-064) + 오른쪽 정렬 'n경기 / 실력차 n'. 선택 가능 · 경고(배지) · 선택 불가(흐림·사유·포커스 가능)
 // - 확정 후(청백전 상세에서 엶, ST7)는 같은 모양으로 교체 구역만: 같은 대진 후보 선택 불가, 경기 수 차이 2 이상은 확인 창(AC-079), 기능·권한 그대로
 // - 결과가 기록된 경기에서는 열리지 않음(부모가 막음)
+// - (r14, VD-081) 라운드 기반: 머리글에 'n라운드 코트 m', 같은 라운드 출전자는 선택 불가(SCR-225-ST13, pick.ts)
 
 function TeamTag({ v, side }: { v: ClubMatchView; side: 0 | 1 }) {
   return (
@@ -51,7 +52,9 @@ export function PickSheet({ view, lineups, target, confirmed = view.status !== '
   const reps = list.filter((c) => c.section === 'replace')
   const anyOk = list.some((c) => c.state !== 'off')
   const repOk = reps.some((c) => c.state !== 'off')
-  const st = error ? 'SCR-225-ST4' : busyKey ? 'SCR-225-ST12' : confirmed ? 'SCR-225-ST7' : !me ? 'SCR-225-ST9' : !anyOk ? 'SCR-225-ST3' : 'SCR-225-ST1'
+  const roundBusy = list.some((c) => c.state === 'off' && c.reason?.startsWith('이 라운드에 이미 출전'))
+  const st = error ? 'SCR-225-ST4' : busyKey ? 'SCR-225-ST12' : confirmed ? 'SCR-225-ST7' : !me ? 'SCR-225-ST9' : !anyOk ? 'SCR-225-ST3' : roundBusy ? 'SCR-225-ST13' : 'SCR-225-ST1'
+  const where = l.round != null ? `${l.round}라운드 코트 ${l.court}` : null
 
   const row = (c: PickCandidate) => {
     const off = c.state === 'off'
@@ -121,7 +124,7 @@ export function PickSheet({ view, lineups, target, confirmed = view.status !== '
                 <span className="su-name su-pickname">{meRow?.name ?? '선수'}</span>
                 {meRow && <PersonMeta p={meRow} />}
                 <span className="su-pickpos">
-                  {l.no}경기 출전 · <TeamTag v={view} side={target.side} />
+                  {where ? `${where} · ${l.no}경기` : `${l.no}경기 출전`} · <TeamTag v={view} side={target.side} />
                 </span>
               </span>
             </>
@@ -132,6 +135,7 @@ export function PickSheet({ view, lineups, target, confirmed = view.status !== '
               </span>
               <span className="su-who">
                 <span className="su-name su-pickname">{l.no}경기 빈 자리</span>
+                {where && <span className="su-pickpos">{where}</span>}
                 <span className="su-pickpos">
                   <TeamTag v={view} side={target.side} /> 자리에 들어갈 사람을 고릅니다
                 </span>

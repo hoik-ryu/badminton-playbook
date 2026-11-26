@@ -33,13 +33,14 @@ export const networkError = () => new ApiError(0, { code: 'network_error', messa
 /** 다른 운영진이 먼저 바꾼 것처럼 version만 올림(충돌 재현) */
 export const bumpVersion = (id: string) => updateDb((db) => void db.clubMatches!.find((m) => m.id === id)!.version++)
 
-/** 준비 중 청백전을 API(Mock)로 만들어 둠: 참가자 → (팀전) 팀 → (선택) 대진 */
-export async function seedDraft(opts: { method: ClubMethod; keys?: string[]; teams?: 'halves' | 'none'; games?: number; name?: string }) {
-  const id = await createClubMatch({ method: opts.method, date: '2026-12-13', name: opts.name ?? '준비 중 테스트' })
+/** 준비 중 청백전을 API(Mock)로 만들어 둠: 참가자 → (팀전) 팀 → (선택) 대진.
+ * (B16) courtCount를 주면 라운드 기반 청백전(코트 1이면 라운드당 1경기라 games 그대로 games경기), 없으면 라운드 정보 없는 청백전 */
+export async function seedDraft(opts: { method: ClubMethod; keys?: string[]; teams?: 'halves' | 'none'; games?: number; name?: string; courtCount?: number }) {
+  const id = await createClubMatch({ method: opts.method, date: '2026-12-13', name: opts.name ?? '준비 중 테스트', courtCount: opts.courtCount })
   let v = { version: 1 }
   const keys = opts.keys ?? SCORED.slice(0, 8)
   if (keys.length) v = await saveParticipants(id, v.version, keys)
   if (opts.method === 'team' && opts.teams !== 'none' && keys.length) v = await saveTeams(id, v.version, halves(keys))
-  if (opts.games) await generateClub(id, v.version, { totalGames: opts.games, rules: { balance: true, gender: true } })
+  if (opts.games) await generateClub(id, v.version, opts.courtCount ? { rounds: opts.games, rules: { balance: true, gender: true } } : { totalGames: opts.games, rules: { balance: true, gender: true } })
   return id
 }

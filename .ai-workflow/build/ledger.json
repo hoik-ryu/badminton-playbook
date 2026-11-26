@@ -88,6 +88,50 @@
         }
       ],
       "digest": "de31f1e0c794a2c7ebb4f43d36e7b52b1c42a05ca546d50878b8a92d3a776e6c"
+    },
+    {
+      "id": "POL-003",
+      "type": "policy",
+      "title": "청백전 생성 페이지 전용 표현 부품 추가(CMP-030 라운드 이동 시트 행)",
+      "description": "POL-001·002와 같은 방식: SCR-244 라운드 이동 시트(ST20)의 라운드 행은 선택·선택 불가(사유) 표현이 필요한데 대응표의 CMP-030 ListItem은 링크형 행이라, Preview r11 표현 그대로 생성 페이지 전용 행(선수 선택 시트 행 표현 재사용)으로 구현합니다. 공통 부품 계약은 바꾸지 않습니다.",
+      "created_at": "2026-11-26T03:48:24Z",
+      "source": {
+        "kind": "manual"
+      },
+      "status": "decided",
+      "blocking": false,
+      "category": null,
+      "provisional": null,
+      "related": {
+        "batches": [
+          "B16"
+        ],
+        "acs": [],
+        "docs": []
+      },
+      "rationale": "공통 ListItem(링크) 계약과 선택 행 요구가 달라 02 지정 CMP를 화면 전용 표현으로 대신함",
+      "classified_by": "claude",
+      "decisions": [
+        {
+          "seq": 1,
+          "decision": "CMP-030 라운드 이동 시트 행도 생성 페이지 전용 행으로 구현",
+          "statement": "생성 페이지 전용 행으로 구현 (권장)",
+          "decided_by": "user",
+          "at": "2026-11-26T03:48:31Z",
+          "effects": {
+            "stale": [],
+            "proposals": []
+          }
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-11-26T03:48:31Z",
+          "event": "decided",
+          "seq": 1
+        }
+      ],
+      "digest": "267d8931713fa50170701e402cceef7ec8a0317a241b07617da69820b59e3c27"
     }
   ],
   "proposals": [],
@@ -115,6 +159,18 @@
       "event": "decided",
       "id": "POL-002",
       "note": "CMP-041 대진 미리보기 카드도 생성 페이지 전용 부품으로 구현"
+    },
+    {
+      "at": "2026-11-26T03:48:24Z",
+      "event": "added",
+      "id": "POL-003",
+      "note": "청백전 생성 페이지 전용 표현 부품 추가(CMP-030 라운드 이동 시트 행)"
+    },
+    {
+      "at": "2026-11-26T03:48:31Z",
+      "event": "decided",
+      "id": "POL-003",
+      "note": "CMP-030 라운드 이동 시트 행도 생성 페이지 전용 행으로 구현"
     }
   ]
 }

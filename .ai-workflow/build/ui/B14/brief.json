@@ -4,7 +4,7 @@
   "title": "공통 대진 편집기·선수 선택 시트·확정 요약(SCR-244·225·245) + 실제 API E2E·영향 배치 재검증",
   "kind": "ui",
   "goal": "(r7) UX Spec r10·DD r13(VD-071–076)·Preview r9를 제품 코드로 옮긴다. 기존 생성 페이지(B11)·확정 후 교체 시트(B6)를 재사용·확장하고 새 화면·라우트는 만들지 않는다. SCR-244: 대진 구성 방식(팀 구성 방식 타일 재사용), 자동 생성·직접 구성 공통 편집기(경기 추가·삭제·빈 자리·교체·개인전 맞교환), 미완성 경기(화면 상태), 0경기, 저장 중·실패·다시 시도·충돌, 확인 창(다시 생성·직접 구성 전환·삭제·이탈). SCR-225: ClubSwapSheet를 선택·교체·맞교환 공통 시트로 확장(확정 후는 교체 구역만, 기능·권한·정책 그대로). SCR-245: 실제 경기 수·수동 변경 요약. Avatar·PersonMeta를 공통 컴포넌트로 올림(CMP-057·058). 이탈 확인은 머리글 나가기·라우트 이동(useBlocker)·브라우저 뒤로 가기·새로고침/창 닫기(beforeunload) 모두(B-23). 360px 이하 카드 간격·아바타 보정(B-24). 마지막에 실제 API(APP_ENV=e2e)와 임시 PostgreSQL(scripts/test-db-temp.sh·smapsh_e2e, e2e-guard)로 편집 흐름 전체와 기존 청백전 회귀를 확인하고, 코드가 바뀐 기존 배치(B6·B10·B11·B12)만 재검증·재승인한다. 로컬 개발 DB·Neon은 쓰지 않는다. SCR-112 200% 확대 문제(B-25)는 후속 백로그로 범위 밖.",
-  "plan_revision": 11,
+  "plan_revision": 12,
   "design": {
     "level": "L3",
     "workflow": "v2",
@@ -623,8 +623,8 @@
     "docs/design/04-ui-system.md": "09ada63b8441af03cf684464c9d0c013512996e67cf8db40312cbc0688c32dc0",
     "docs/design/05-design-traceability.md": "8897c218eb35d0eea5c44a3b8715a996c53bbdf90f5f041a8cb3d45b08c9af71",
     "docs/design/07-design-direction.md": "ae0f7920b3362c36206d28966ebed7a3610ed4076ad7db4be1ab372fd5803160",
-    "docs/build/implementation-plan.json": "7e7e7ac5db13630ea83e3bafae437b8547f063a6bf91bc8013fcbd9bed505305",
-    "docs/build/ui-map.json": "b516844d66d55d6c8efdccb34e02b198e57db727e2c5bfc6948bcce6ab2b4ebf",
+    "docs/build/implementation-plan.json": "84c061f09c9fa2fafa7442924d9c9155e23b7568cf53510b6f116f6ab4ed2767",
+    "docs/build/ui-map.json": "fd53ae1c498563a07066d7a58170cb811fbeb2917db403b26080b99651b0cbca",
     "docs/design-profile/theme.json": "8aee575f0fa0432ad2fa935ff311031a37c212b5c26b9b0c81765c749d036941"
   },
   "warnings": [],
@@ -770,7 +770,7 @@
       "SCR-244": {
         "name": "청백전 생성 · 대진 설정",
         "route": "/club-matches/:matchId/setup/games",
-        "owner": "B11",
+        "owner": "B16",
         "priority": "Must",
         "states": [
           {
@@ -1546,7 +1546,7 @@
       "SCR-245": {
         "name": "청백전 생성 · 확정",
         "route": "/club-matches/:matchId/setup/confirm",
-        "owner": "B11",
+        "owner": "B16",
         "priority": "Must",
         "states": [
           {
@@ -2835,7 +2835,7 @@
         ]
       }
     ],
-    "digest": "b5405b35658857a91d62c02f160184b0646b3c8734ae8df6f9e84aa66fbf5107"
+    "digest": "67471af3c0470664a8ad529d966615dc5912efb6846c9836e3146930f80f7fd3"
   },
-  "digest": "76238525448bf7a86bfe4e8bc0fcccfc780b1694a87b61022c541be7780921a8"
+  "digest": "149959b0ae8cd22908d4f208c9ea887a06129f3a22d83d2847b7d9dc497dc9e2"
 }

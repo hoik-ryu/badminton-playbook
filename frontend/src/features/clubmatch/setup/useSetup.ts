@@ -10,8 +10,10 @@ import { participantsOf, sameSet } from './steps'
 // 저장 결과 처리(AC-133): 성공 → 최신 상세 / 409 confirm_required → 대진 폐기 확인 창 / 409 conflict → 다시 받아
 // 보내려던 결과가 이미 반영됐으면 성공(응답 유실), 아니면 충돌 창 → 최신 상태로 다시 그림 / 그 밖 → 안내 상자 + '다시 시도'(입력 유지)
 
-export type BasicDraft = { method: ClubMethod | null; name: string; date: string }
-export type GamesDraft = { totalGames: string; balance: boolean; gender: boolean; keepUneven: boolean }
+/** (r14) courts: 사용 코트 수 입력(1–8, 기본 4, UXD-105). 라운드 정보 없는 준비 중 청백전도 4로 채움(SCR-241-ST12) */
+export type BasicDraft = { method: ClubMethod | null; name: string; date: string; courts: string }
+/** (r14) rounds: 자동 생성 기준 라운드 수(라운드 기반 청백전, C-36). totalGames는 라운드 정보 없는 청백전만 */
+export type GamesDraft = { totalGames: string; rounds: string; balance: boolean; gender: boolean; keepUneven: boolean }
 export type TeamMove = { key: string; from: Team | null; to: Team }
 export type TeamUi = { method: 'auto' | 'manual' | null; note: string | null; lastMove: TeamMove | null; seeded: boolean }
 /** (r13, UXD-100·101·103) 대진 편집 화면 상태 — 저장하지 않음(C-35). 페이지 안 단계 이동·충돌 뒤에도 유지(UXD-099)
@@ -31,18 +33,19 @@ export type Drafts = {
   discard: { participants: boolean; teams: boolean }
 }
 
-export const savedBasic = (v: ClubMatchView): BasicDraft => ({ method: v.method, name: v.name, date: v.date })
+export const savedBasic = (v: ClubMatchView): BasicDraft => ({ method: v.method, name: v.name, date: v.date, courts: String(v.courtCount ?? 4) })
 export const savedParticipants = (v: ClubMatchView) => participantsOf(v).map((r) => r.key)
 export const savedTeams = (v: ClubMatchView): Record<string, Team | null> => Object.fromEntries(participantsOf(v).map((r) => [r.key, r.team]))
-export const savedGames = (v: ClubMatchView): GamesDraft => ({ totalGames: String(v.totalGames), balance: v.rules.balance, gender: v.rules.gender, keepUneven: false })
+/** rounds: 저장된 기준 라운드 수. 없으면 ''(화면이 지금 참가자로 기본값을 계산) */
+export const savedGames = (v: ClubMatchView): GamesDraft => ({ totalGames: String(v.totalGames), rounds: v.plannedRounds != null ? String(v.plannedRounds) : '', balance: v.rules.balance, gender: v.rules.gender, keepUneven: false })
 
 export function emptyDrafts(): Drafts {
   return {
-    basic: { method: null, name: '', date: kstDate() },
+    basic: { method: null, name: '', date: kstDate(), courts: '4' },
     participants: [],
     teams: {},
     teamUi: { method: null, note: null, lastMove: null, seeded: false },
-    games: { totalGames: '8', balance: true, gender: true, keepUneven: false },
+    games: { totalGames: '8', rounds: '', balance: true, gender: true, keepUneven: false },
     gamesUi: emptyGamesUi(),
     discard: { participants: false, teams: false },
   }
@@ -68,14 +71,14 @@ export function keepPartials(ui: GamesUi, v: ClubMatchView): GamesUi {
 }
 
 export const sameTeams = (a: Record<string, Team | null>, b: Record<string, Team | null>) => sameSet(Object.keys(a), Object.keys(b)) && Object.keys(a).every((k) => a[k] === b[k])
-export const sameGames = (a: GamesDraft, b: GamesDraft) => Number(a.totalGames) === Number(b.totalGames) && a.balance === b.balance && a.gender === b.gender
+export const sameGames = (a: GamesDraft, b: GamesDraft) => Number(a.totalGames) === Number(b.totalGames) && Number(a.rounds) === Number(b.rounds) && a.balance === b.balance && a.gender === b.gender
 
 /** 단계별 저장하지 않은 변경(이탈 확인·ST9) */
 export function dirtyOf(v: ClubMatchView | null, d: Drafts) {
-  if (!v) return { basic: d.basic.method !== null || d.basic.name !== '' || d.basic.date !== kstDate(), participants: false, teams: false, games: false, partials: false }
+  if (!v) return { basic: d.basic.method !== null || d.basic.name !== '' || d.basic.date !== kstDate() || d.basic.courts !== '4', participants: false, teams: false, games: false, partials: false }
   const b = savedBasic(v)
   return {
-    basic: d.basic.method !== b.method || d.basic.name.trim() !== b.name || d.basic.date !== b.date,
+    basic: d.basic.method !== b.method || d.basic.name.trim() !== b.name || d.basic.date !== b.date || Number(d.basic.courts) !== Number(b.courts),
     participants: !sameSet(d.participants, savedParticipants(v)),
     teams: v.method === 'team' && !sameTeams(d.teams, savedTeams(v)),
     games: !sameGames(d.games, savedGames(v)),

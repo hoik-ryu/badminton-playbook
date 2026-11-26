@@ -64,7 +64,8 @@ const api = (page) => ({
 
 const browser = await chromium.launch(); const report = {}
 const blocked = guardBrowser(browser, BASE) // BASE 밖 API 요청 차단
-for (const vp of [{ n: 'm360', w: 360, h: 640, m: true }, { n: 'm390', w: 390, h: 844, m: true }, { n: 'pc1440', w: 1440, h: 900 }]) {
+const VPS = process.env.VPS?.split(',') // 선택: 일부 폭만(예: VPS=m360,m390)
+for (const vp of [{ n: 'm360', w: 360, h: 640, m: true }, { n: 'm390', w: 390, h: 844, m: true }, { n: 'pc1440', w: 1440, h: 900 }].filter((x) => !VPS || VPS.includes(x.n))) {
   const opts = { viewport: { width: vp.w, height: vp.h }, deviceScaleFactor: vp.m ? 2 : 1, isMobile: !!vp.m, hasTouch: !!vp.m, locale: 'ko-KR' }
   const ctx = await browser.newContext(opts); const page = await ctx.newPage(); const errors = []
   const r = (report[vp.n] = { vp: vp.n, checks: {}, info: {}, errors })
@@ -80,6 +81,9 @@ for (const vp of [{ n: 'm360', w: 360, h: 640, m: true }, { n: 'm390', w: 390, h
   for (const [i, name] of names.entries()) check(r, `setup-member-${i}`, (await A.send('POST', '/api/roster/members', { name, gender: i % 2 ? '여' : '남', grade: 'C조', score: i < 3 ? 10 : 3 + i })).status === 201)
   const unscored = `E${RUN}${vp.n}미설정`
   await A.send('POST', '/api/roster/members', { name: unscored, gender: '남', grade: 'D조', score: null })
+  // (B16, r14) 라운드 방식에서 확정 뒤 교체 후보가 있도록 휴식자 1명을 둠(9명 = 라운드당 2경기 + 휴식 1)
+  const rester = `E${RUN}${vp.n}휴식`
+  await A.send('POST', '/api/roster/members', { name: rester, gender: '여', grade: 'C조', score: 5 })
   const g1 = (await A.send('POST', '/api/roster/guests', { name: `E${RUN}${vp.n}손님`, gender: '여', grade: '초심', score: 4 })).body
   const g2 = (await A.send('POST', '/api/roster/guests', { name: `E${RUN}${vp.n}미참가`, gender: '남', grade: '초심', score: 5 })).body
   check(r, 'guest-add', !!g1?.id && !!g2?.id)
@@ -95,7 +99,7 @@ for (const vp of [{ n: 'm360', w: 360, h: 640, m: true }, { n: 'm390', w: 390, h
   const id = page.url().split('/')[4]; r.info.matchId = id
   check(r, 'created-draft', (await A.get(`/api/club-matches/${id}`)).status === 'draft')
   await waitSt('SCR-242-ST1')
-  for (const n of [me.name, ...names, unscored, g1.name]) await page.getByRole('checkbox', { name: new RegExp(`^${n},`) }).click()
+  for (const n of [me.name, ...names, unscored, g1.name, rester]) await page.getByRole('checkbox', { name: new RegExp(`^${n},`) }).click()
   await waitSt('SCR-242-ST7') // 점수 미설정 포함 → 다음 비활성
   check(r, 'next-blocked-unscored', await page.locator('[data-testid=su-next]').isDisabled())
   await shot(page, `${vp.n}-1-participants.png`)
@@ -105,8 +109,9 @@ for (const vp of [{ n: 'm360', w: 360, h: 640, m: true }, { n: 'm390', w: 390, h
   check(r, 'score-entry-api', (await A.get('/api/roster')).members.find((x) => x.name === unscored)?.score === 5)
   await next(); await page.waitForURL(/\/setup\/games$/)
   let v = await A.get(`/api/club-matches/${id}`)
-  check(r, 'participants', v.summary.count === 8 && v.summary.unscored.length === 0, { count: v.summary.count })
-  await page.getByRole('textbox', { name: '총 경기 수' }).fill('6')
+  check(r, 'participants', v.summary.count === 9 && v.summary.unscored.length === 0, { count: v.summary.count })
+  // (B16, r14) 새 청백전은 기본 코트 4 → 라운드 방식. 8명은 라운드당 2경기라 3라운드 = 기존과 같은 6경기
+  await page.getByRole('textbox', { name: '자동 생성 기준 라운드 수' }).fill('3')
   await page.locator('[data-testid=su-generate]').click(); await waitSt('SCR-244-ST7')
   v = await A.get(`/api/club-matches/${id}`)
   check(r, 'generated', v.games.length === 6 && v.totalGames === 6, { games: v.games.length })
@@ -183,7 +188,15 @@ for (const vp of [{ n: 'm360', w: 360, h: 640, m: true }, { n: 'm390', w: 390, h
   await ctx2.close()
 
   // ── 나머지 기록 → 종료 → 종료 후 결과 수정(D-7) ──
-  for (const g of v.games.filter((x) => !x.winner)) { await page.locator(`[role=group][aria-label="${g.no}경기 결과"] button`, { hasText: '2팀 승' }).click(); await page.waitForTimeout(450) }
+  // (B16, r14) 라운드 방식: 진행 라운드 경기만 기록 가능. 라운드 진행 화면은 B17 범위라 여기서는 B15 API로 다음 라운드를 시작
+  for (;;) {
+    for (const g of v.games.filter((x) => !x.winner && !x.cancelled && x.round === v.currentRound)) { await page.locator(`[role=group][aria-label="${g.no}경기 결과"] button`, { hasText: '2팀 승' }).click(); await page.waitForTimeout(450) }
+    v = await A.get(`/api/club-matches/${id}`)
+    if (v.currentRound >= Math.max(...v.games.map((g) => g.round))) break
+    await A.send('POST', `/api/club-matches/${id}/rounds/next`, { version: v.version })
+    v = await A.get(`/api/club-matches/${id}`)
+    await page.reload(); await page.waitForSelector('[data-testid=ops-area] [data-cmp=CMP-041]')
+  }
   await vis(page, 'button', { hasText: '청백전 종료' }).click(); await page.locator('[role=alertdialog] button', { hasText: '종료' }).click(); await page.waitForTimeout(800)
   v = await A.get(`/api/club-matches/${id}`)
   check(r, 'finished', v.status === 'finished')

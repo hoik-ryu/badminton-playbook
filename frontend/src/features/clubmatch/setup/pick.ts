@@ -7,10 +7,12 @@ import { gap } from '../schedule'
 // - 구역: '같은 경기 맞교환'(개인전·확정 전·선수 자리) · '다른 참가자와 교체'(빈 자리면 '선수 선택')
 // - 상태: 선택 가능 / 경고(확정 전 같은 대진 반복·경기 수 차이 2 이상, 고를 수 있음) / 선택 불가(같은 경기에 이미 있음, 확정 후 같은 대진)
 // - 팀전은 그 자리 팀(1팀 = 청, 2팀 = 백)의 참가자만, 제외(귀가)·비활성 회원·삭제된 게스트는 후보에 없음(P-5)
+// - (r14, C-36·SCR-225-ST13) 라운드 기반: 같은 라운드의 다른 경기에 출전하는 사람은 선택 불가('이 라운드에 이미 출전 · n경기 코트 m').
+//   취소된 경기는 출전으로 세지 않음(C-37). 그 라운드 휴식자는 기존 정렬 안의 선택 가능 행
 
 export type Slot = string | null
-/** 화면의 경기 한 줄: 저장된 경기(saved) 또는 화면에만 있는 미완성 경기 */
-export type Lineup = { id: string; no: number; t1: [Slot, Slot]; t2: [Slot, Slot]; saved: boolean; winner?: 1 | 2 | null }
+/** 화면의 경기 한 줄: 저장된 경기(saved) 또는 화면에만 있는 미완성 경기. (r14) round·court: 라운드 기반 청백전(없으면 null), cancelled: 취소된 경기 */
+export type Lineup = { id: string; no: number; t1: [Slot, Slot]; t2: [Slot, Slot]; saved: boolean; winner?: 1 | 2 | null; round?: number | null; court?: number | null; cancelled?: boolean }
 export type PickTarget = { id: string; side: 0 | 1; idx: 0 | 1 }
 export type PickCandidate = {
   row: ParticipantRow
@@ -32,6 +34,8 @@ export const teamLabelOf = (v: Pick<ClubMatchView, 'method'>, side: 0 | 1) => (v
 export const SAME_GAME_REASON = '같은 경기에 이미 있습니다'
 export const CONFIRMED_REPEAT_REASON = '다른 경기와 같은 대진이 됩니다'
 export const REPEAT_BADGE = '같은 대진 반복'
+/** (r14) 같은 라운드 출전 사유 */
+export const roundBusyReason = (o: Pick<Lineup, 'no' | 'court'>) => `이 라운드에 이미 출전 · ${o.no}경기 코트 ${o.court}`
 
 export const seats = (l: Lineup) => [...l.t1, ...l.t2]
 export const filled = (l: Lineup) => seats(l).filter((k): k is string => !!k)
@@ -67,7 +71,7 @@ const spread = (c: Map<string, number>) => {
 }
 
 export function lineupsOf(v: ClubMatchView): Lineup[] {
-  return v.games.map((g) => ({ id: `g${g.no}`, no: g.no, t1: [g.team1[0]?.key ?? null, g.team1[1]?.key ?? null], t2: [g.team2[0]?.key ?? null, g.team2[1]?.key ?? null], saved: true, winner: g.winner }))
+  return v.games.map((g) => ({ id: `g${g.no}`, no: g.no, t1: [g.team1[0]?.key ?? null, g.team1[1]?.key ?? null], t2: [g.team2[0]?.key ?? null, g.team2[1]?.key ?? null], saved: true, winner: g.winner, round: g.round ?? null, court: g.court ?? null, cancelled: !!g.cancelled }))
 }
 
 const sideTeam = (side: 0 | 1): Team => (side === 0 ? 'blue' : 'white')
@@ -82,7 +86,8 @@ export function pickCandidates(v: ClubMatchView, lineups: Lineup[], t: PickTarge
   const counts = gameCounts(v.rows, lineups)
   const before = spread(counts)
   const inGame = new Set(filled(l))
-  const others = lineups.filter((x) => x.id !== l.id && isComplete(x) && x.saved).map(keyOf)
+  const others = lineups.filter((x) => x.id !== l.id && isComplete(x) && x.saved && !x.cancelled).map(keyOf)
+  const sameRound = l.round != null ? lineups.filter((x) => x.id !== l.id && x.round === l.round && !x.cancelled) : []
   const judge = (row: ParticipantRow, section: PickCandidate['section'], next: Lineup): PickCandidate => {
     const done = isComplete(next)
     // 바꾼 뒤 사람별 경기 수: 저장된 경기의 교체는 나가는 사람 -1·들어오는 사람 +1(맞교환은 변화 없음),
@@ -118,8 +123,28 @@ export function pickCandidates(v: ClubMatchView, lineups: Lineup[], t: PickTarge
       out.push({ row, section: 'replace', state: 'off', games: counts.get(row.key) ?? 0, gapAfter: null, diffAfter: 0, sameMatchup: false, warns: [], reason: SAME_GAME_REASON, next: l })
       continue
     }
+    const busy = sameRound.find((x) => filled(x).includes(row.key))
+    if (busy) {
+      out.push({ row, section: 'replace', state: 'off', games: counts.get(row.key) ?? 0, gapAfter: null, diffAfter: 0, sameMatchup: false, warns: [], reason: roundBusyReason(busy), next: l })
+      continue
+    }
     out.push(judge(row, 'replace', put(l, t.side, t.idx, row.key)))
   }
   const rank = (c: PickCandidate) => (c.state === 'off' ? 1 : 0)
   return out.sort((a, b) => (a.section === b.section ? 0 : a.section === 'swap' ? -1 : 1) || rank(a) - rank(b) || a.games - b.games || a.row.name.localeCompare(b.row.name, 'ko'))
+}
+
+export type MoveOption = { round: number; free: number; reason?: string }
+
+/** (r14, SCR-244-ST20) 옮길 수 있는 라운드 판정(서버 move_game과 같은 규칙): 저장된 경기 기준 빈 코트, 그 라운드 출전자와 겹침 */
+export function moveOptions(view: ClubMatchView, saved: Lineup[], target: Lineup, courts: number): MoveOption[] {
+  const names = new Map(view.rows.map((r) => [r.key, r.name]))
+  const people = filled(target)
+  const rounds = [...new Set(saved.map((l) => l.round ?? 1))].filter((r) => r !== target.round).sort((a, b) => a - b)
+  return rounds.map((round) => {
+    const inRound = saved.filter((l) => l.round === round)
+    const overlap = inRound.filter((l) => isComplete(l) && !l.cancelled).flatMap(filled).filter((k) => people.includes(k))
+    const free = courts - inRound.length
+    return { round, free, reason: free <= 0 ? '빈 코트 없음' : overlap.length ? `출전 겹침: ${overlap.map((k) => names.get(k) ?? '선수').join(', ')}` : undefined }
+  })
 }

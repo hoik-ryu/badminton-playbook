@@ -1,7 +1,7 @@
 {
   "format": "pb-ui-plan/v1",
   "batch": "B14",
-  "brief_digest": "76238525448bf7a86bfe4e8bc0fcccfc780b1694a87b61022c541be7780921a8",
+  "brief_digest": "149959b0ae8cd22908d4f208c9ea887a06129f3a22d83d2847b7d9dc497dc9e2",
   "screens": {},
   "components": {
     "CMP-001": {
@@ -54,7 +54,8 @@
     "화면 소유는 그대로(SCR-244·245 = B11, SCR-225 = B6). 이 배치는 touches로 바꾸고, 바뀐 코드 때문에 B6·B11의 검증이 stale이 되면 계획대로 재검증·재승인합니다.",
     "스타일은 승인된 DD r13 VD-071–076 값과 승인 Preview r9 시각에 맞춰 기존 토큰으로 styles/clubmatch-setup.css r13 구역에 작성(B11과 같은 방식)",
     "(2026-11-26 재검증) 디자인 r11·DD r14·Preview r10 개정으로 Brief를 다시 받음. B14 범위(r10 편집기·시트·요약)의 구현·상태는 그대로이며 라운드·코트 확장은 Build Plan r10의 B16·B17이 맡음",
-    "(2026-11-26 r11) 기획 r14·UX Spec r12·DD r15·Preview r11(취소 경기 복원 제거) 승인으로 UI Brief 기준이 바뀌어 brief_digest만 갱신했습니다. B14의 화면(SCR-244·245·225)·컴포넌트·구현 범위는 바뀌지 않았습니다."
+    "(2026-11-26 r11) 기획 r14·UX Spec r12·DD r15·Preview r11(취소 경기 복원 제거) 승인으로 UI Brief 기준이 바뀌어 brief_digest만 갱신했습니다. B14의 화면(SCR-244·245·225)·컴포넌트·구현 범위는 바뀌지 않았습니다.",
+    "(2026-11-26) 부품 대응표에 CMP-029(기존 Toast)를 사용자 확인으로 등록해 Brief 기준이 바뀌어 brief_digest만 갱신했습니다. 화면·범위 변경 없음."
   ],
   "touched": {
     "SCR-244": {
