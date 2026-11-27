@@ -1,4 +1,4 @@
-import { Check, Info, LoaderCircle, Undo2 } from 'lucide-react'
+import { Check, Info, LoaderCircle, Lock, Undo2 } from 'lucide-react'
 import { Fragment, useId, useRef, useState, type ComponentProps, type KeyboardEvent, type ReactNode } from 'react'
 
 import type { ClubMatchView, ClubMethod, GameView, Person, Relaxation } from '../api'
@@ -29,11 +29,23 @@ export function CmSection({ title, children, className, ...props }: { title?: Re
   )
 }
 
-/** CMP-005 Badge(Preview 표현: neutral은 테두리형) */
-export function CmBadge({ tone, children }: { tone: 'warning' | 'success' | 'info' | 'neutral'; children: ReactNode }) {
-  const cls = tone === 'warning' ? 'bg-warning-bg text-warning-fg' : tone === 'success' ? 'bg-success-bg text-success-fg' : tone === 'info' ? 'bg-info-bg text-ink' : 'border border-line-strong bg-page text-ink'
+/** 청백전 상세 배지(Preview 표현: neutral은 테두리형). (B17, 원장 결정) 공통 CMP-005 Badge의 청백전 전용 변형이라 구현 표지(data-cmp) 대신 data-cmp-variant를 씀 */
+// (B17, DD r14 VD-079) live = 라운드 '진행 중'(action.strong 면), pending = '시작 전'(점선 테두리)
+export function CmBadge({ tone, children }: { tone: 'warning' | 'success' | 'info' | 'neutral' | 'live' | 'pending'; children: ReactNode }) {
+  const cls =
+    tone === 'warning'
+      ? 'bg-warning-bg text-warning-fg'
+      : tone === 'success'
+        ? 'bg-success-bg text-success-fg'
+        : tone === 'info'
+          ? 'bg-info-bg text-ink'
+          : tone === 'live'
+            ? 'bg-strong text-on-strong'
+            : tone === 'pending'
+              ? 'border border-dashed border-line-strong bg-page text-ink-muted'
+              : 'border border-line-strong bg-page text-ink'
   return (
-    <span data-cmp="CMP-005" className={cx('inline-flex h-6 shrink-0 items-center rounded-sm px-2 text-caption leading-none font-bold whitespace-nowrap', cls)}>
+    <span data-cmp-variant="CMP-005" className={cx('inline-flex h-6 shrink-0 items-center rounded-sm px-2 text-caption leading-none font-bold whitespace-nowrap', cls)}>
       {children}
     </span>
   )
@@ -42,7 +54,7 @@ export function CmBadge({ tone, children }: { tone: 'warning' | 'success' | 'inf
 /** CMP-023 안내(Preview Notice: info, 아이콘 위 정렬, 안 여백 space.3) */
 export function CmNotice({ children }: { children: ReactNode }) {
   return (
-    <div data-cmp="CMP-023" role="status" className="flex items-start gap-2 rounded-md bg-info-bg p-3 text-body text-ink">
+    <div data-cmp-variant="CMP-023" role="status" className="flex items-start gap-2 rounded-md bg-info-bg p-3 text-body text-ink">
       <Info aria-hidden className="mt-0.5 size-5 shrink-0" />
       <span>{children}</span>
     </div>
@@ -65,9 +77,10 @@ export function CmTeamLine({ label, team, children, trailing }: { label: string;
 }
 
 /** CMP-041 GameCard(Preview): 테두리 1px + radius.md, 안 여백 space.3, 머리(제목·보조 글) → 배지 줄 → 팀 줄 */
-export function CmGameCard({ title, meta, badges, children, ...props }: { title: ReactNode; meta?: ReactNode; badges?: ReactNode; children: ReactNode } & Omit<ComponentProps<'article'>, 'title'>) {
+/** (B17, VD-084) dimmed: 취소된 경기(면 surface·글자 흐림) */
+export function CmGameCard({ title, meta, badges, children, dimmed = false, ...props }: { title: ReactNode; meta?: ReactNode; badges?: ReactNode; children: ReactNode; dimmed?: boolean } & Omit<ComponentProps<'article'>, 'title'>) {
   return (
-    <article data-cmp="CMP-041" className="flex flex-col gap-1 rounded-md border border-line bg-page p-3" {...props}>
+    <article data-cmp="CMP-041" data-cancelled={dimmed || undefined} className={cx('flex flex-col gap-1 rounded-md border border-line p-3', dimmed ? 'bg-surface text-ink-muted [&_[data-names]]:text-ink-muted' : 'bg-page')} {...props}>
       <div className="flex items-center justify-between gap-2">
         <h3 className="m-0 text-body font-bold text-ink">{title}</h3>
         {meta && <span className="shrink-0 text-caption tabular-nums text-ink-muted">{meta}</span>}
@@ -121,7 +134,7 @@ export function CmMemberGameCard({ game, method, next = false }: { game: MemberG
   const labels = teamLabels(method)
   const mine = game.mySide !== null
   const outcome = mine && game.winner ? (game.winner === game.mySide ? '승' : '패') : null
-  const meta = outcome ? `결과 ${outcome}` : game.winner ? `${labels[game.winner - 1]} 승` : next ? '다음 경기' : '결과 전'
+  const meta = game.cancelled ? undefined : outcome ? `결과 ${outcome}` : game.winner ? `${labels[game.winner - 1]} 승` : next ? '다음 경기' : '결과 전'
   const title = mine ? (
     <>
       {game.no}번째 경기<span> · {labels[(game.mySide as 1 | 2) - 1]}</span>
@@ -129,10 +142,12 @@ export function CmMemberGameCard({ game, method, next = false }: { game: MemberG
   ) : (
     `${game.no}경기`
   )
+  // (B17, AC-162·UXD-113) 취소된 경기: '취소' 배지·흐림, 승·패 없음(사유는 회원에게 보이지 않음)
   const badges =
-    game.changed || game.resultChanged ? (
+    game.cancelled || game.changed || game.resultChanged ? (
       <>
-        {game.changed && <CmBadge tone="warning">변경됨</CmBadge>}
+        {game.cancelled && <CmBadge tone="neutral">취소</CmBadge>}
+        {game.changed && !game.cancelled && <CmBadge tone="warning">변경됨</CmBadge>}
         {game.resultChanged && <CmBadge tone="info">결과 수정됨</CmBadge>}
       </>
     ) : undefined
@@ -142,10 +157,11 @@ export function CmMemberGameCard({ game, method, next = false }: { game: MemberG
       data-game={game.no}
       data-mine={mine ? 'true' : 'false'}
       data-recorded={game.winner ? 'true' : 'false'}
-      aria-label={`${game.no}경기${mine ? ' · 내 경기' : ''}${outcome ? ` · ${outcome}` : ''}`}
+      aria-label={`${game.no}경기${mine ? ' · 내 경기' : ''}${game.cancelled ? ' · 취소됨' : outcome ? ` · ${outcome}` : ''}`}
       title={title}
       meta={meta}
       badges={badges}
+      dimmed={game.cancelled}
     >
       {([0, 1] as const).map((i) => (
         <CmTeamLine key={i} label={labels[i]} team={teamOf(method, i)}>
@@ -175,10 +191,22 @@ type OpsCardProps = {
   onResult?: (winner: 1 | 2) => void
   onRevert?: () => void
   busy?: boolean
+  /** (B17, VD-080) 라운드 기반: 머리 '코트 m · n경기' */
+  label?: ReactNode
+  /** (B17, ST20) 시작 전 라운드: 결과 버튼 자리에 '시작 전'(줄 높이 유지) */
+  locked?: boolean
+  /** (B17, ST22·VD-084) 취소된 경기: 흐림 + '취소 · 중도 귀가', 결과·교체 없음 */
+  cancelled?: boolean
+  /** 경기 article 이름(없으면 'n경기') */
+  ariaLabel?: string
+  /** 스크롤 대상 id(진행 라운드 첫 미처리 경기로 이동) */
+  id?: string
 }
 
 /** 운영 경기 카드(Preview ClubMatchOps): 이름(성별점수) · =팀 합, 줄 끝 결과 버튼, 아래 '미기록으로 되돌리기' */
-export function CmOpsGameCard({ game, method, showResult, onPlayer, onResult, onRevert, busy }: OpsCardProps) {
+export function CmOpsGameCard({ game, method, showResult, onPlayer: onPlayerIn, onResult, onRevert, busy, label, locked = false, cancelled = false, ariaLabel, id }: OpsCardProps) {
+  const onPlayer = cancelled ? undefined : onPlayerIn
+  const results = showResult && !cancelled && !locked
   const labels = teamLabels(method)
   const short = teamShort(method)
   const person = (p: Person, tail: (extra?: ReactNode) => ReactNode) => {
@@ -218,9 +246,10 @@ export function CmOpsGameCard({ game, method, showResult, onPlayer, onResult, on
     )
   }
   const badges =
-    game.changed || game.resultChanged || game.repeatedMatchup || game.genderRelaxed ? (
+    cancelled || game.changed || game.resultChanged || game.repeatedMatchup || game.genderRelaxed ? (
       <>
-        {game.changed && <CmBadge tone="info">변경됨</CmBadge>}
+        {cancelled && <CmBadge tone="neutral">취소 · 중도 귀가</CmBadge>}
+        {game.changed && !cancelled && <CmBadge tone="info">변경됨</CmBadge>}
         {game.resultChanged && <CmBadge tone="info">결과 수정됨</CmBadge>}
         {game.repeatedMatchup && <CmBadge tone="warning">같은 대진 반복{reasonText(game, 'matchup', MATCHUP_REASON)}</CmBadge>}
         {game.genderRelaxed && <CmBadge tone="warning">성별 규칙 완화{reasonText(game, 'gender', GENDER_REASON)}</CmBadge>}
@@ -236,7 +265,15 @@ export function CmOpsGameCard({ game, method, showResult, onPlayer, onResult, on
         trailing={
           <>
             <span className="shrink-0 font-bold tabular-nums text-ink">={sum(t)}</span>
-            {showResult && resultButton((i + 1) as 1 | 2)}
+            {results && resultButton((i + 1) as 1 | 2)}
+            {showResult && locked && !cancelled && (i === 0 ? (
+              <span className="flex h-11 shrink-0 items-center gap-1 px-1 text-caption text-ink-muted" data-testid="locked-result" aria-label="시작 전, 결과를 기록할 수 없음">
+                <Lock aria-hidden className="size-3.5" />
+                시작 전
+              </span>
+            ) : (
+              <span aria-hidden className="h-11 w-0 shrink-0" />
+            ))}
           </>
         }
       >
@@ -245,15 +282,25 @@ export function CmOpsGameCard({ game, method, showResult, onPlayer, onResult, on
     )
   })
   return (
-    <CmGameCard data-game={game.no} data-recorded={game.winner ? 'true' : 'false'} aria-label={`${game.no}경기`} title={`${game.no}경기`} meta={game.gap === null ? '실력차 계산 불가' : `실력차 ${game.gap}점`} badges={badges}>
-      {showResult ? (
+    <CmGameCard
+      id={id}
+      data-game={game.no}
+      data-recorded={game.winner || cancelled ? 'true' : 'false'}
+      data-phase={locked ? 'locked' : undefined}
+      dimmed={cancelled}
+      aria-label={ariaLabel ?? `${game.no}경기`}
+      title={label ?? `${game.no}경기`}
+      meta={cancelled ? undefined : game.gap === null ? '실력차 계산 불가' : `실력차 ${game.gap}점`}
+      badges={badges}
+    >
+      {results ? (
         <div role="group" aria-label={`${game.no}경기 결과`} className="flex flex-col gap-1">
           {lines}
         </div>
       ) : (
         lines
       )}
-      {showResult && onRevert && game.winner && (
+      {results && onRevert && game.winner && (
         <button type="button" disabled={busy} onClick={onRevert} className="flex h-11 items-center gap-1 self-start text-body text-ink-muted">
           <Undo2 aria-hidden className="size-4" />
           미기록으로 되돌리기

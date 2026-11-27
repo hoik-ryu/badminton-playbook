@@ -14,7 +14,7 @@ export type ClubMatchBadgeTone = 'live' | 'upcoming' | 'pending' | 'ended' | 'te
 /** CMP-005 청백전 배지 — 알약 22px, 항상 글자를 포함(색만으로 구분하지 않음). .cm 안에서 써야 합니다 */
 export function ClubMatchBadge({ tone, children }: { tone: ClubMatchBadgeTone; children: ReactNode }) {
   return (
-    <span className="cm-badge" data-cmp="CMP-005" data-tone={tone}>
+    <span className="cm-badge" data-cmp-variant="CMP-005" data-tone={tone}>
       {children}
     </span>
   )

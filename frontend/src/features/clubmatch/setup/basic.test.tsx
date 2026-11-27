@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor, within } from '@testing-library/react'
+import { cleanup, fireEvent, screen, waitFor, within } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { read } from '../api'
@@ -78,7 +78,7 @@ describe('SCR-241 basic step', () => {
     const id = await seedDraft({ method: 'team', games: 4, courtCount: 1 })
     const router = renderAt(`/club-matches/${id}/setup/basic`)
     await waitSt('SCR-241-ST8')
-    expect(screen.getByRole('button', { name: '더보기: 청백전 삭제' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: '더보기' })).toBeInTheDocument() // (CP-001) 더보기 → 메뉴 '청백전 삭제'
     fireEvent.change(screen.getByRole('textbox', { name: '청백전 이름' }), { target: { value: '바뀐 이름' } })
     fireEvent.change(screen.getByLabelText(/^날짜/), { target: { value: '2026-12-20' } })
     await clickNext()
@@ -113,14 +113,45 @@ describe('SCR-241 basic step', () => {
     const id = await seedDraft({ method: 'individual', games: 2, courtCount: 1 })
     const router = renderAt(`/club-matches/${id}/setup/basic`)
     await waitSt('SCR-241-ST8')
-    fireEvent.click(screen.getByRole('button', { name: '더보기: 청백전 삭제' }))
-    let dlg = await screen.findByRole('alertdialog', { name: '청백전을 삭제할까요?' })
+    // (CP-001, UXD-114) 더보기 메뉴의 '청백전 삭제' → 확인 창 제목에 청백전 이름
+    const openDelete = async () => {
+      fireEvent.keyDown(screen.getByRole('button', { name: '더보기' }), { key: 'Enter' })
+      fireEvent.click(await screen.findByRole('menuitem', { name: '청백전 삭제' }))
+    }
+    await openDelete()
+    let dlg = await screen.findByRole('alertdialog', { name: "'준비 중 테스트'를 삭제할까요?" })
     expect(st()).toBe('SCR-241-ST10')
     fireEvent.click(within(dlg).getByRole('button', { name: '취소' }))
     await waitFor(() => expect(screen.queryByRole('alertdialog')).toBeNull())
     expect(match(id)).toBeTruthy()
-    fireEvent.click(screen.getByRole('button', { name: '더보기: 청백전 삭제' }))
-    dlg = await screen.findByRole('alertdialog', { name: '청백전을 삭제할까요?' })
+    await openDelete()
+    dlg = await screen.findByRole('alertdialog', { name: "'준비 중 테스트'를 삭제할까요?" })
+    fireEvent.click(within(dlg).getByRole('button', { name: '삭제' }))
+    await waitFor(() => expect(router.state.location.pathname).toBe('/club-matches'))
+    expect(read().clubMatches!.some((m) => m.id === id)).toBe(false)
+  })
+
+  it.each([
+    ['individual', ['basic', 'participants', 'games', 'confirm']],
+    ['team', ['basic', 'participants', 'teams', 'games', 'confirm']],
+  ] as const)('[SCR-241–245] [AC-134] (2026-11-27) %s: the delete menu is in the header on every step', async (method, steps) => {
+    const id = await seedDraft({ method, games: 4, courtCount: 1 })
+    for (const s of steps) {
+      renderAt(`/club-matches/${id}/setup/${s}`)
+      await waitFor(() => expect(page()?.getAttribute('data-st') ?? '').toMatch(/-ST(?!2$)\d+$/)) // 불러오기(ST2) 끝
+      expect(page()).toHaveAttribute('data-scr', { basic: 'SCR-241', participants: 'SCR-242', teams: 'SCR-243', games: 'SCR-244', confirm: 'SCR-245' }[s])
+      expect(screen.getByRole('button', { name: '더보기' })).toBeInTheDocument()
+      cleanup()
+    }
+  })
+
+  it('[SCR-244] [AC-134] (2026-11-27) deleting from a later step removes it and returns to the list', async () => {
+    const id = await seedDraft({ method: 'team', games: 4, courtCount: 1 })
+    const router = renderAt(`/club-matches/${id}/setup/games`)
+    await waitFor(() => expect(page()).toHaveAttribute('data-scr', 'SCR-244'))
+    fireEvent.keyDown(await screen.findByRole('button', { name: '더보기' }), { key: 'Enter' })
+    fireEvent.click(await screen.findByRole('menuitem', { name: '청백전 삭제' }))
+    const dlg = await screen.findByRole('alertdialog', { name: "'준비 중 테스트'를 삭제할까요?" })
     fireEvent.click(within(dlg).getByRole('button', { name: '삭제' }))
     await waitFor(() => expect(router.state.location.pathname).toBe('/club-matches'))
     expect(read().clubMatches!.some((m) => m.id === id)).toBe(false)

@@ -1,4 +1,5 @@
 import { ChevronDown, Info } from 'lucide-react'
+import { useState } from 'react'
 import { AppNav } from '../components/smapsh/AppNav'
 import { ClubMatchOps, ClubMatchOpsBar } from '../components/smapsh/ClubMatchOps'
 import { Badge, GameCard, TeamLine } from '../components/smapsh/GameCard'
@@ -6,6 +7,7 @@ import { Screen, ScrollSafeArea, Section } from '../components/smapsh/Layout'
 import { PageHeader } from '../components/smapsh/PageHeader'
 import { memberClubMatches, type MemberGame } from '../mock/data'
 import { isRoundState, RoundLive } from '../components/smapsh/RoundLive'
+import { Dialog } from '../components/smapsh/Setup'
 
 // SCR-112 청백전 상세(회원·운영진 공통) — UX Spec r6(02 SCR-112, r6에서 SCR-223 통합, UXD-085) + Design Direction r8(VD-024 r3 카드, VD-038–042, VD-019·056 하단 탭)
 // 실제 회원이 모여 진행하는 청백전의 대진·결과 화면. 회원에게는 1–10 점수·팀 점수 합·실력차를 보여 주지 않음(AC-066).
@@ -14,7 +16,9 @@ import { isRoundState, RoundLive } from '../components/smapsh/RoundLive'
 // 운영 기능 영역(운영진 보기, 4탭): ST12 준비 중 · 대진 검토(공개 영역 없음) / ST13 확정 · 결과 입력(공개 영역 위 + 운영 기능 영역 아래, 02 '운영진도 선수')
 // (r14) ST16–ST23(라운드 기반, 운영진)은 RoundLive(UXD-111·112, VD-079·080·083·084). ST22-MEMBER는 회원 화면의 취소 경기(VD-084, UXD-113: '취소' 배지만, 다음 경기에서 빠짐)
 // ST24(라운드 정보 없는 기존 청백전)는 ST13 운영 화면 그대로(회귀 비교용)
+// (CP-001) ST25: 진행 예정(확정·날짜 전·결과 없음) 운영진 상세 — 머리글 더보기 '청백전 삭제'(위험 톤, VD-068) → 이름 있는 확인 창(UXD-114)
 export function Scr112({ stateId }: { stateId: string }) {
+  if (stateId === 'SCR-112-ST25') return <Upcoming112 />
   if (isRoundState(stateId) && !stateId.endsWith('-MEMBER')) return <RoundLive stateId={stateId} />
   if (stateId === 'SCR-112-ST24') return <Scr112 stateId="SCR-112-ST13" />
   const memberCancel = stateId === 'SCR-112-ST22-MEMBER'
@@ -119,5 +123,33 @@ function MyGame({ g, me, highlight, changed }: { g: MemberGame & { cancelled?: b
       <TeamLine label="청팀" team="blue" showScore={false} players={names(g.blue).map((n) => ({ name: n, gender: '남', score: 0 }))} />
       <TeamLine label="백팀" team="white" showScore={false} players={names(g.white).map((n) => ({ name: n, gender: '남', score: 0 }))} />
     </GameCard>
+  )
+}
+
+/** (CP-001) 진행 예정 청백전 운영진 상세: 공개 영역(다음 경기 = 첫 경기) + 운영 기능 영역, 머리글 더보기 메뉴의 '청백전 삭제' → 확인 창 */
+function Upcoming112() {
+  const d = memberClubMatches.detail
+  const [ask, setAsk] = useState(true)
+  const myGames = d.games.filter((g) => g.mine).map((g) => ({ ...g, result: undefined }))
+  return (
+    <Screen scr="SCR-112" st="SCR-112-ST25" platform="mobile">
+      <PageHeader
+        title={d.name}
+        badge={<span className="flex gap-1"><Badge tone="neutral">{d.type}</Badge><Badge tone="neutral">진행 예정</Badge></span>}
+        menu={[{ label: '청백전 삭제', danger: true, onSelect: () => setAsk(true) }]}
+      />
+      <main className="flex flex-col gap-6 pt-2">
+        {myGames[0] && (
+          <Section title="다음 경기">
+            <MyGame g={myGames[0]} me={d.me} highlight />
+          </Section>
+        )}
+        <ClubMatchOps mode="live" />
+        <ScrollSafeArea withBar />
+      </main>
+      <ClubMatchOpsBar mode="live" />
+      <AppNav active="match" role="admin" />
+      {ask && <Dialog title={`'${d.name}'을 삭제할까요?`} desc="참가자와 대진도 함께 지워지고 되돌릴 수 없습니다" ok="삭제" tone="danger" onCancel={() => setAsk(false)} onOk={() => setAsk(false)} />}
+    </Screen>
   )
 }

@@ -96,9 +96,9 @@ describe('B4 club matches (mock)', () => {
     fireEvent.click(within(await screen.findByRole('alertdialog', { name: '대진을 확정하고 회원에게 공개할까요?' })).getByRole('button', { name: '확정' }))
     await waitFor(() => expect(match(id).status).toBe('confirmed'))
     await waitFor(() => expect(router.state.location.pathname).toBe(`/club-matches/${id}`))
-    // 종료는 미기록이 있으면 비활성 + 'n경기 남음'
+    // 종료는 미기록이 있으면 비활성 + 사유. (B17, r14 SCR-112-ST23) 라운드 기반은 'n경기 남음' 대신 '처리되지 않은 경기 n개'
     expect(await screen.findByRole('button', { name: '청백전 종료' })).toBeDisabled()
-    expect(screen.getByRole('button', { name: '3경기 남음' })).toBeInTheDocument()
+    expect(screen.getByText('처리되지 않은 경기 3개')).toBeInTheDocument()
     for (const no of [1, 2, 3]) {
       fireEvent.click(within(await screen.findByRole('group', { name: `${no}경기 결과` })).getByRole('button', { name: '1팀 승' }))
       await waitFor(() => expect(match(id).games.find((g) => g.no === no)!.winner).toBe(1))

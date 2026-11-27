@@ -5,7 +5,7 @@ import cut1 from "./assets/v4/cut1-shuttle.jpg";
 import cut2 from "./assets/v4/cut2-smash.jpg";
 import cut3 from "./assets/v4/cut3-player.jpg";
 import cut4 from "./assets/v4/cut4-doubles.jpg";
-import cut5 from "./assets/v4/cut5-celebrate.jpg";
+import cut5 from "./assets/v4/cut5-people.jpg";
 import { buildIntro } from "./timeline";
 import "./intro.css";
 
@@ -14,7 +14,8 @@ import "./intro.css";
 // - 사진: 사용자 제공 6컷 보드(2026-11-12, 운영진 사진 포함)에서 잘라낸 1차 시안(컷당 약 834×309 가로 원본 → 세로 화면에서 확대됨).
 //   고해상도 컷별 원본을 받으면 assets/v4/ 같은 이름으로 교체. 보드 원본: experiments/cinematic-intro/assets/source/storyboard-v4-6cut.png
 //   순서: ① 셔틀콕 → ② 스매시 → ③ 선수(위)·④ 복식(아래) 대각선 분할 → ⑤ 두 사람 환호 → ⑥ 로고
-//   ①②⑤는 원본 세로 해상도가 낮아(306px) 화면 가운데 '띠'로 보여 주고 같은 사진을 흐린 배경으로 깔아 확대를 줄임(③④는 반 화면이라 채움)
+//   ①②는 원본 세로 해상도가 낮아(306px) 화면 가운데 '띠'로 보여 주고 같은 사진을 흐린 배경으로 깔아 확대를 줄임(③④는 반 화면이라 채움)
+//   ⑤는 세로형 원본(cut5-people, 941×1671, 2026-11-27 교체)이라 띠·흐린 배경 없이 화면 전체를 채움(PNG 원본 → 같은 해상도 JPEG 파생본)
 // - 로고: 브랜드 v4 심볼(src/assets/brand/smapsh-symbol.svg, 로그인과 같은 파일) + 'SMAPSH' 글자(이미지 속 로고는 쓰지 않고 실제 자산으로 그림)
 const LOAD_TIMEOUT_MS = 2500;
 
@@ -110,9 +111,8 @@ export default function IntroOverlay({
         </div>
         <div className="neon sharp" />
       </div>
-      <div className="shot s4 band band--wide">
-        <img className="band__bg" src={cut5} alt="" />
-        <img className="band__fg" src={cut5} alt="" />
+      <div className="shot s4">
+        <img src={cut5} alt="" />
       </div>
       <div className="shot s5">
         <div className="burst" />

@@ -349,6 +349,8 @@ export function RoundGamesStep({ c, frame, go }: StepProps) {
       current="games"
       onStep={onStep}
       onExit={frame.onExit}
+      onMore={frame.onMore}
+      moreNotice={frame.moreNotice}
       notice={
         <>
           <p className="sr-only" aria-live="polite">

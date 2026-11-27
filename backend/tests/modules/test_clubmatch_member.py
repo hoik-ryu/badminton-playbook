@@ -462,8 +462,10 @@ def test_ac_045_046_rank_boundaries(
 def test_scr111_member_list_display_status_and_result(
     setup: dict[str, Any], admin: TestClient, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """확정 청백전(날짜 2026-11-15): 기록된 결과가 있으면 날짜 전이라도 진행 중,
-    결과가 없고 날짜 전이면 진행 예정. 기존 status·resultText는 그대로(하위 호환).
+    """확정 청백전(날짜 2026-11-15): 날짜 전이면 진행 예정, 당일부터 진행 중.
+
+    (2026-11-27: 날짜만 봄 — 예전 규칙으로 날짜 전에 기록된 결과가 있어도 진행 예정.)
+    기존 status·resultText는 그대로(하위 호환).
     회원 목록에는 준비 중이 없음."""
     from app.modules.clubmatch import display
 
@@ -471,8 +473,12 @@ def test_scr111_member_list_display_status_and_result(
     view = setup["confirmed"]
     monkeypatch.setattr(display, "today_kst", lambda now=None: dt.date(2026, 11, 14))
     item = c.get(MEMBER).json()[0]
-    assert (item["status"], item["displayStatus"], item["result"]) == ("confirmed", "live", None)
-    # 기록된 결과를 되돌리면 날짜 전 + 결과 없음 → 진행 예정
+    assert (item["status"], item["displayStatus"], item["result"]) == (
+        "confirmed",
+        "upcoming",
+        None,
+    )
+    # 날짜 전 결과를 미기록으로 되돌리는 것은 허용, 상태는 그대로 진행 예정
     view = admin.put(
         f"{ADMIN}/{view['id']}/games/1/result", json={"winner": None, "version": view["version"]}
     ).json()

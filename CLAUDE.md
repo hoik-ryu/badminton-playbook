@@ -34,6 +34,7 @@ backend/
     modules/approval/  # 가입 승인 API / modules/role/: 역할 관리 API
     modules/roster/    # 명단(I1): member_ratings(운영진 평가 점수, 프로필과 분리)·guests(소프트 삭제 + 이름·급수·성별·점수 비식별화, U5·C안), 내용 기반 version으로 동시 수정 감지
     modules/clubmatch/ # 청백전(I3-a 확정 전·I3-b 대진 생성·I3-c 확정 이후 운영 API·I3-d 정책 P-1~P-10, I3-d4부터 api 모드 화면 연결): 4개 테이블, 모든 변경은 행 잠금 + version(U9). 계산 schedule.py는 FE schedule.ts와 골든 JSON(backend/tests/golden)으로 일치 확인
+                       #   (B15–B18) 라운드·코트: courtCount 있으면 라운드 기반(0011: round_no·court_no·cancelled_at·current_round·이벤트). rounds/next·rounds/undo, games/{no}/move, leave의 cancel. 공통 라운드 검사(round_conflict·court_full), 진행 거부(round_not_started·round_locked·round_has_results·round_incomplete). 취소 경기는 복원 없음
                        #   단계형 생성(SCR-241–246, B10): PUT /{id}/basic·participants·teams(일괄), DELETE /{id}?version=(준비 중만), 대진이 있으면 409 confirm_required → discard:true로 재요청
                        #   (B13) 확정 전 공통 편집(C-35): POST /{id}/games/manual · DELETE /{id}/games/{no}?version= · POST /{id}/games/{no}/exchange(개인전) · DELETE /{id}/games?version=, 항상 막는 규칙 _check_lineup(확정 때도), 확정 전 같은 대진은 허용·표시(_mark_draft_repeats), 0경기면 total_games 기준값 유지
                        #   member.py·member_schemas.py: 회원 조회·/api/me/record(운영진 스키마와 분리된 허용 목록, 키는 청백전 범위 p:<참가자 id>). record.py: 전적·랭크 계산
@@ -45,7 +46,7 @@ frontend/
   src/
     lib/api/           # 공통 API 클라이언트(api.get/post/...), ApiError
     lib/data/source.ts # 데이터 출처 선택(VITE_DATA_SOURCE: api(기본) | mock). featureSource(): 백엔드 준비된 기능만 api
-    components/        # 공통 UI 컴포넌트(04 CMP: Button, Badge, NoticeBox, StateView, ConfirmDialog, Toast, PageHeader, AppNav …)
+    components/        # 공통 UI 컴포넌트(04 CMP: Button, Badge, NoticeBox, StateView, ConfirmDialog, Toast, PageHeader, AppNav, RoundSection(CMP-059), RoundProgressCard(CMP-060) …)
     features/<domain>/ # 기능 단위: api.ts(mock/api 분기), 훅, 컴포넌트, 테스트
     features/auth/     # 계정·역할 타입, getMe, 개발용 역할 전환(devPersona)
     features/intro/    # 시네마틱 인트로(최초 방문 1회 정책)

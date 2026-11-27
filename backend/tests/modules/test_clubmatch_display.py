@@ -21,27 +21,23 @@ D = dt.date(2026, 11, 15)
 
 
 @pytest.mark.parametrize(
-    ("status", "match_date", "recorded", "today", "expected"),
+    ("status", "match_date", "today", "expected"),
     [
-        ("draft", D, 0, dt.date(2026, 11, 1), "pending"),
-        ("draft", D, 0, dt.date(2026, 12, 1), "pending"),  # 날짜와 무관하게 확정 전은 준비 중
-        ("finished", D, 3, dt.date(2026, 11, 1), "ended"),
-        ("confirmed", D, 0, dt.date(2026, 11, 14), "upcoming"),  # 날짜가 오늘보다 뒤 + 결과 없음
-        ("confirmed", D, 0, D, "live"),  # 당일은 진행 중(뒤가 아님)
-        ("confirmed", D, 0, dt.date(2026, 11, 16), "live"),  # 날짜가 지났는데 미종료
-        (
-            "confirmed",
-            D,
-            1,
-            dt.date(2026, 11, 14),
-            "live",
-        ),  # 날짜 전이라도 기록된 결과가 있으면 진행 중
+        ("draft", D, dt.date(2026, 11, 1), "pending"),
+        ("draft", D, dt.date(2026, 12, 1), "pending"),  # 날짜와 무관하게 확정 전은 준비 중
+        ("finished", D, dt.date(2026, 11, 1), "ended"),
+        ("confirmed", D, dt.date(2026, 11, 14), "upcoming"),  # 날짜가 오늘보다 뒤
+        ("confirmed", D, D, "live"),  # 당일은 진행 중(뒤가 아님)
+        ("confirmed", D, dt.date(2026, 11, 16), "live"),  # 날짜가 지났는데 미종료
     ],
 )
 def test_uxd_087_display_status(
-    status: str, match_date: dt.date, recorded: int, today: dt.date, expected: str
+    status: str, match_date: dt.date, today: dt.date, expected: str
 ) -> None:
-    assert display_status(status, match_date, recorded, today) == expected
+    """(2026-11-27) 날짜만 봄: 날짜 전이면 기록된 결과가 있어도 진행 예정.
+
+    날짜 전 기록은 서버가 막음."""
+    assert display_status(status, match_date, today) == expected
 
 
 def test_uxd_087_today_is_kst_date_at_utc_boundary() -> None:
@@ -60,8 +56,8 @@ def test_uxd_087_kst_boundary_changes_upcoming_to_live() -> None:
     """11/15 청백전: KST 11/14 23:59까지 진행 예정, KST 11/15 00:00부터 진행 중."""
     before = today_kst(dt.datetime(2026, 11, 14, 14, 59, tzinfo=dt.UTC))
     after = today_kst(dt.datetime(2026, 11, 14, 15, 0, tzinfo=dt.UTC))
-    assert display_status("confirmed", D, 0, before) == "upcoming"
-    assert display_status("confirmed", D, 0, after) == "live"
+    assert display_status("confirmed", D, before) == "upcoming"
+    assert display_status("confirmed", D, after) == "live"
 
 
 def test_uxd_088_team_result_with_final_score() -> None:

@@ -22,7 +22,7 @@ const keysOf = (g: ClubMatchView['games'][number]) => [...g.team1, ...g.team2].m
 const layout = (v: ClubMatchView) => v.games.map((g) => `${g.no}:${g.round}-${g.court}`)
 
 async function roundMatch(people = P.slice(0, 9), courtCount = 2) {
-  const id = await createClubMatch({ method: 'individual', date: '2026-12-20', name: '라운드전', courtCount })
+  const id = await createClubMatch({ method: 'individual', date: '2026-11-15', name: '라운드전', courtCount })
   return saveParticipants(id, 1, people)
 }
 
@@ -35,7 +35,7 @@ function crafted(games: [number, number, number[]][], opts: { people?: string[];
     db.clubMatches ??= []
     const list: MockClubGame[] = games.map(([round, court, f], i) => ({ no: i + 1, round, court, team1: [people[f[0]!]!, people[f[1]!]!], team2: [people[f[2]!]!, people[f[3]!]!], winner: null, genderRelaxed: false }))
     const status = opts.status ?? 'confirmed'
-    db.clubMatches.push({ id, name: '라운드', date: '2026-12-20', method: 'individual', status, participants: Object.fromEntries(people.map((k) => [k, { team: null, left: false }])), totalGames: list.length, rules: { balance: true, gender: false }, games: list, seed: 1, teamProposed: false, modifiedAt: null, resultModifiedAt: null, version: 1, courtCount: opts.courtCount ?? 2, plannedRounds: null, currentRound: status === 'confirmed' ? (opts.currentRound ?? 1) : null })
+    db.clubMatches.push({ id, name: '라운드', date: '2026-11-15', method: 'individual', status, participants: Object.fromEntries(people.map((k) => [k, { team: null, left: false }])), totalGames: list.length, rules: { balance: true, gender: false }, games: list, seed: 1, teamProposed: false, modifiedAt: null, resultModifiedAt: null, version: 1, courtCount: opts.courtCount ?? 2, plannedRounds: null, currentRound: status === 'confirmed' ? (opts.currentRound ?? 1) : null })
   })
   return id
 }

@@ -132,6 +132,51 @@
         }
       ],
       "digest": "267d8931713fa50170701e402cceef7ec8a0317a241b07617da69820b59e3c27"
+    },
+    {
+      "id": "POL-004",
+      "type": "policy",
+      "title": "청백전 상세 전용 표현 부품의 CMP 표지를 전용 변형 표기로 정리",
+      "description": "청백전 상세(SCR-111·112)의 Preview r5·r6 승인 표현 부품(CmBadge·CmNotice·빈 상태 문단·청백전 배지·clubmatch.css 배지 규칙)이 공통 CMP-005·023·027의 구현 표지(data-cmp·머리 주석)를 달고 있어 duplicate_component로 판정됨. 화면 모양은 그대로 두고 표지를 data-cmp-variant(청백전 전용 변형) 표기로 바꿈. 공통 부품 계약과 대응표는 바꾸지 않음.",
+      "created_at": "2026-11-26T04:42:17Z",
+      "source": {
+        "kind": "manual"
+      },
+      "status": "decided",
+      "blocking": false,
+      "category": null,
+      "provisional": null,
+      "related": {
+        "batches": [
+          "B12",
+          "B17"
+        ],
+        "acs": [],
+        "docs": []
+      },
+      "rationale": "B17 범위 파일의 기존 표지 때문에 verify가 막힘. 공통 부품 교체는 배지 모양이 바뀌어 디자인 변경 금지와 충돌",
+      "classified_by": "claude",
+      "decisions": [
+        {
+          "seq": 1,
+          "decision": "표지만 data-cmp-variant로 정리하고 화면 모양은 유지",
+          "statement": "표지만 정리 (권장)",
+          "decided_by": "user",
+          "at": "2026-11-26T04:42:35Z",
+          "effects": {
+            "stale": [],
+            "proposals": []
+          }
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-11-26T04:42:35Z",
+          "event": "decided",
+          "seq": 1
+        }
+      ],
+      "digest": "1c57421170ccb8c3d68b9fd61d16292b71919c6ae04db7088dc6f83ab4c923ad"
     }
   ],
   "proposals": [],
@@ -171,6 +216,18 @@
       "event": "decided",
       "id": "POL-003",
       "note": "CMP-030 라운드 이동 시트 행도 생성 페이지 전용 행으로 구현"
+    },
+    {
+      "at": "2026-11-26T04:42:17Z",
+      "event": "added",
+      "id": "POL-004",
+      "note": "청백전 상세 전용 표현 부품의 CMP 표지를 전용 변형 표기로 정리"
+    },
+    {
+      "at": "2026-11-26T04:42:35Z",
+      "event": "decided",
+      "id": "POL-004",
+      "note": "표지만 data-cmp-variant로 정리하고 화면 모양은 유지"
     }
   ]
 }

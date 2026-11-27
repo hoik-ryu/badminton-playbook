@@ -1,6 +1,7 @@
 import { ArrowRight, Check, ChevronLeft, Info, MoreVertical } from 'lucide-react'
-import { useLayoutEffect, useRef, type ReactNode } from 'react'
+import { useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import { FixedInColumn, Screen } from './Layout'
+import { MoreMenuList } from './PageHeader'
 import { initial, meta, type SetupPerson } from '../../mock/setup'
 
 // 청백전 생성 페이지 공통 틀(SCR-241–245) — UX Spec r9 02 '생성 페이지 공통', 04 3.3 / Design Direction r12 VD-059–063·068–070
@@ -90,6 +91,7 @@ export function SetupScreen({
   bar,
   overlay,
   onExit,
+  onDelete,
 }: {
   scr: string
   st: string
@@ -100,6 +102,8 @@ export function SetupScreen({
   compact?: boolean
   /** 저장된 준비 중 청백전: 머리글 오른쪽에 더보기(삭제) */
   draft?: boolean
+  /** (CP-001, VD-068) 더보기 메뉴의 '청백전 삭제'를 고름 */
+  onDelete?: () => void
   card: ReactNode
   after?: ReactNode
   bar: ReactNode
@@ -125,9 +129,10 @@ export function SetupScreen({
             <span aria-hidden>SMAPSH</span>
           </div>
           {draft ? (
-            <button type="button" className="su-icon-btn" aria-label="더보기: 청백전 삭제" data-testid="su-more">
-              <MoreVertical aria-hidden className="size-5" />
-            </button>
+            // (CP-001) 더보기 → 메뉴('청백전 삭제', 위험 톤). 아이콘 버튼 자리·모양은 그대로
+            <span style={{ position: 'relative' }}>
+              <MoreButton onDelete={onDelete} />
+            </span>
           ) : (
             <span aria-hidden />
           )}
@@ -265,5 +270,18 @@ export function Dialog({ title, desc, cancel = '취소', ok, tone = 'primary', s
         </div>
       </div>
     </div>
+  )
+}
+
+/** (CP-001, VD-068) 생성 페이지 머리글 더보기: 누르면 '청백전 삭제' 한 항목 메뉴 */
+function MoreButton({ onDelete }: { onDelete?: () => void }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <>
+      <button type="button" className="su-icon-btn" aria-label="더보기" aria-haspopup="menu" aria-expanded={open} data-testid="su-more" onClick={() => setOpen((o) => !o)}>
+        <MoreVertical aria-hidden className="size-5" />
+      </button>
+      {open && <MoreMenuList items={[{ label: '청백전 삭제', danger: true, onSelect: onDelete }]} onClose={() => setOpen(false)} />}
+    </>
   )
 }

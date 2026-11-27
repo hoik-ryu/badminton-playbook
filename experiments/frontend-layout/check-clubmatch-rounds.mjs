@@ -365,7 +365,9 @@ try {
   await shot(page, 'error.png', true).catch(() => {})
 }
 await browser.close()
-reportBlocked(report, blocked)
+reportBlocked(blocked)
+report.blockedOutsideBase = blocked.length
+check("outside-base-requests-0", blocked.length === 0, blocked.slice(0, 3))
 check('console-errors-0', report.errors.length === 0, report.errors.slice(0, 3))
 fs.writeFileSync(path.join(OUT, 'report.json'), JSON.stringify(report, null, 2))
 console.log(JSON.stringify({ fails, errors: report.errors.slice(0, 3), info: report.info, total: Object.keys(report.checks).length }, null, 1))

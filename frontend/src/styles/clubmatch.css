@@ -3,7 +3,7 @@
    (2026-11-24, DD r9 Soft Mint) 청백전 범위 테마 덮어쓰기(.cm의 action.primary·bg.page·focus.ring)와 토큰 밖 채움색 #087F73(--cm-fill)은 없앴습니다.
    작은 흰 글자 채움('진행 중' 배지, 배너 배지)은 color.action.strong + onStrong, '새 청백전'은 큰 CTA 규칙(action.primary + onPrimary). */
 
-/* CMP-005 청백전 상태·방식 배지(VD-053): 알약, 높이 22, 12px 굵게, 좌우 10. 항상 글자를 포함(색만으로 구분하지 않음) */
+/* 청백전 상태·방식 배지(CMP-005의 청백전 전용 변형, VD-053): 알약, 높이 22, 12px 굵게, 좌우 10. 항상 글자를 포함(색만으로 구분하지 않음) */
 .cm .cm-badge {
   display: inline-flex;
   flex: none;

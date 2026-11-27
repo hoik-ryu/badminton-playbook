@@ -127,6 +127,8 @@ export function ParticipantsStep({ c, frame, go }: StepProps) {
       current="participants"
       onStep={frame.onStep}
       onExit={frame.onExit}
+      onMore={frame.onMore}
+      moreNotice={frame.moreNotice}
       notice={
         c.failure && (
           <NoticeBox tone="danger" action={<button type="button" className="su-link" onClick={c.failure.retry}>다시 시도</button>}>

@@ -521,6 +521,11 @@ def test_scr111_admin_list_display_fields_and_back_compat(
     add_game(db, live["id"], 1, [mkey(u) for u in us], winner=1)
     add_game(db, live["id"], 2, [mkey(u) for u in us])
     set_status(db, live["id"], "confirmed")
+    # (2026-11-27) 진행 중 = 날짜가 오늘(11-14) 이하. 결과 기록 여부는 보지 않음
+    lm = db.get(ClubMatch, uuid.UUID(live["id"]))
+    assert lm is not None
+    lm.match_date = date(2026, 11, 14)
+    db.commit()
     ended = create(admin, method="team", name="종료")
     for u, t in zip(us, ("blue", "blue", "white", "white"), strict=True):
         ended = assign(admin, ended, mkey(u), t)

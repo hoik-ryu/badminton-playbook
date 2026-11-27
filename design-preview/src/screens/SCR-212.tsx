@@ -25,7 +25,7 @@ export function Scr212({ stateId }: { stateId: string }) {
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-3">
                 <Field label="이름">
-                  <TextField value={person.name} />
+                  <TextField value={person.name} label="이름" />
                 </Field>
                 <Field label="성별">
                   <Segmented options={['남', '여']} value={person.gender} />

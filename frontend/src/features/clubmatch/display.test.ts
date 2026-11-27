@@ -5,11 +5,11 @@ import { displayStatusOf, formatMatchDate, individualResult, teamResult, todayKs
 // SCR-111 r6 표시 상태·결과(UXD-087·088) — Mock 계산이 서버(backend/app/modules/clubmatch/display.py)와 같은 규칙인지
 describe('UXD-087 display status', () => {
   it('pending / upcoming / live / ended', () => {
-    expect(displayStatusOf('draft', '2026-11-15', 0, '2026-12-01')).toBe('pending')
-    expect(displayStatusOf('finished', '2026-11-15', 3, '2026-11-01')).toBe('ended')
-    expect(displayStatusOf('confirmed', '2026-11-15', 0, '2026-11-14')).toBe('upcoming')
-    expect(displayStatusOf('confirmed', '2026-11-15', 0, '2026-11-15')).toBe('live') // 당일은 진행 중
-    expect(displayStatusOf('confirmed', '2026-11-15', 1, '2026-11-14')).toBe('live') // 기록된 결과가 있으면 진행 중
+    expect(displayStatusOf('draft', '2026-11-15', '2026-12-01')).toBe('pending')
+    expect(displayStatusOf('finished', '2026-11-15', '2026-11-01')).toBe('ended')
+    expect(displayStatusOf('confirmed', '2026-11-15', '2026-11-14')).toBe('upcoming') // 날짜 전(2026-11-27: 결과 여부와 무관)
+    expect(displayStatusOf('confirmed', '2026-11-15', '2026-11-15')).toBe('live') // 당일은 진행 중
+    expect(displayStatusOf('confirmed', '2026-11-15', '2026-11-16')).toBe('live') // 날짜가 지났는데 미종료
   })
 
   it('today is the KST date (KST midnight = UTC 15:00)', () => {

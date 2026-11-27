@@ -19,11 +19,12 @@ export type ClubMatchResult = {
 /** 오늘(KST) 날짜 'YYYY-MM-DD' */
 export const todayKst = (now = new Date()) => kstDate(now)
 
-/** UXD-087: 준비 중(확정 전) / 진행 예정(확정 + 날짜가 오늘보다 뒤 + 기록된 결과 없음) / 진행 중 / 종료 */
-export function displayStatusOf(status: 'draft' | 'confirmed' | 'finished', date: string, recorded: number, today: string): DisplayStatus {
+/** UXD-087: 준비 중(확정 전) / 진행 예정(확정 + 날짜가 오늘보다 뒤) / 진행 중(당일, 날짜가 지났지만 미종료) / 종료.
+ *  (2026-11-27) 날짜만 봄: 기록된 결과로 진행 중이 되는 예외 없음. 날짜 전 결과 기록은 막음(recordResult) */
+export function displayStatusOf(status: 'draft' | 'confirmed' | 'finished', date: string, today: string): DisplayStatus {
   if (status === 'draft') return 'pending'
   if (status === 'finished') return 'ended'
-  return date > today && recorded === 0 ? 'upcoming' : 'live'
+  return date > today ? 'upcoming' : 'live'
 }
 
 export function teamResult(blue: number, white: number): ClubMatchResult {
@@ -43,3 +44,14 @@ export function formatMatchDate(iso: string) {
   const day = new Date(Date.UTC(y!, m! - 1, d!)).getUTCDay()
   return `${m}월 ${d}일 (${DAYS[day]})`
 }
+
+/** (CP-001) 확인 창 제목 "'이름'을/를 삭제할까요?"의 목적격 조사: 마지막 글자가 받침 있는 한글이면 '을', 받침 없는 한글이면 '를', 그 밖은 '을(를)' */
+export function objectJosa(word: string): string {
+  const ch = word.trim().slice(-1)
+  const code = ch.charCodeAt(0) - 0xac00
+  if (code < 0 || code > 11171) return '을(를)'
+  return code % 28 ? '을' : '를'
+}
+
+/** (CP-001, SCR-241-ST10·SCR-112-ST25) 삭제 확인 창 제목 */
+export const deleteTitle = (name: string) => `'${name}'${objectJosa(name)} 삭제할까요?`

@@ -27,7 +27,7 @@ export function ClubMatchDetailPage() {
       <ClubMatchOps
         key={matchId}
         matchId={matchId}
-        header={(view) => <ClubMatchDetailHeader match={view ? { name: view.name, date: view.date, method: view.method, status: displayStatusOfView(view) } : null} />}
+        header={(view, menu) => <ClubMatchDetailHeader match={view ? { name: view.name, date: view.date, method: view.method, status: displayStatusOfView(view) } : null} menu={menu} />}
         renderPublic={(view) => <ClubMatchPublicArea m={publicFromOps(view, me.id)} />}
       />
     )

@@ -183,7 +183,7 @@ def list_public_club_matches(user: ApprovedUser, db: DbSession) -> list[PublicCl
         x = _Match(db, m, user.id)
         players = {k for _, t1, t2 in x.games for k in (*t1, *t2)}
         unrecorded = x.unrecorded()
-        shown = display.display_status(m.status, m.match_date, len(x.live) - unrecorded, today)
+        shown = display.display_status(m.status, m.match_date, today)
         items.append(
             PublicClubMatchItem(
                 id=str(m.id),
@@ -240,9 +240,7 @@ def get_public_club_match(match_id: str, user: ApprovedUser, db: DbSession) -> P
         unrecorded=x.unrecorded(),
         participating=any(g.mySide is not None for g in games),
         displayStatus=_public_status(
-            display.display_status(
-                m.status, m.match_date, len(x.live) - x.unrecorded(), display.today_kst()
-            )
+            display.display_status(m.status, m.match_date, display.today_kst())
         ),
         currentRound=m.current_round,
     )

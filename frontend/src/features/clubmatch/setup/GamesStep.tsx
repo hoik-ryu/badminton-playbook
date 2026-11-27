@@ -244,6 +244,8 @@ function LegacyGamesStep({ c, frame, go }: StepProps) {
       current="games"
       onStep={onStep}
       onExit={frame.onExit}
+      onMore={frame.onMore}
+      moreNotice={frame.moreNotice}
       notice={
         <>
           <p className="sr-only" aria-live="polite">{`전체 ${saved.length}경기${partials.length ? `, 빈 자리가 있는 경기 ${partials.length}개` : ''}`}</p>

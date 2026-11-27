@@ -35,8 +35,8 @@
 }
 .smapsh-intro .s1 > .band__fg { object-position: 32% 50%; }
 .smapsh-intro .s2 > .band__fg { object-position: 52% 45%; }
-/* ⑤ 두 사람: 원본 비율(780×312) 그대로 조금 크게 — 두 얼굴이 모두 보이게 */
-.smapsh-intro .band--wide > .band__fg { left: -10%; width: 120%; height: auto; aspect-ratio: 780 / 312; }
+/* ⑤ 단체 사진(세로형 941×1671): 띠·흐린 배경 없이 화면 전체를 채움. 넓은 화면에서 위아래가 잘릴 때 기준점(가로 50%, 세로 40%) */
+.smapsh-intro .s4 > img { object-position: 50% 40%; }
 .smapsh-intro .s2 .flash { position: absolute; inset: 0; background: #fff; opacity: 0; mix-blend-mode: screen; }
 
 .smapsh-intro .s3 .half { position: absolute; left: 0; right: 0; height: 56%; overflow: hidden; }

@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+
 import type { StepItem } from '../../../components/StepProgress'
 import type { StepKey } from './steps'
 import type { SetupController } from './useSetup'
@@ -8,6 +10,12 @@ export type FrameCommon = {
   current: StepKey
   onStep: (key: string) => void
   onExit: () => void
+  /** (CP-001) 머리글 더보기 → '청백전 삭제'. 만든 뒤에만, 모든 단계 */
+  onMore?: () => void
+  /** 삭제 확인 창이 열려 있음(상태 표시용) */
+  deleting?: boolean
+  /** 삭제 실패 안내(카드 위쪽) */
+  moreNotice?: ReactNode
 }
 
 export type StepProps = {

@@ -1,0 +1,855 @@
+{
+  "format": "design-explore-measure-spec/v1",
+  "run_id": "CV20261126-055338-5d8d4b",
+  "round": "CR-001",
+  "phase": "change",
+  "mode": "change",
+  "method": "emulation",
+  "viewports": [
+    {
+      "name": "mobile",
+      "width": 390,
+      "height": 844,
+      "dpr": 2.0,
+      "mobile": true
+    },
+    {
+      "name": "mobile-sm",
+      "width": 360,
+      "height": 640,
+      "dpr": 2.0,
+      "mobile": true
+    },
+    {
+      "name": "desktop",
+      "width": 1280,
+      "height": 800,
+      "dpr": 1.0,
+      "mobile": false
+    }
+  ],
+  "checks": {
+    "touch_min_px": 44,
+    "contrast_min": 4.5,
+    "contrast_large_min": 3.0,
+    "overlap_min_px": 4
+  },
+  "pages": [
+    {
+      "variant": "SCR-101-ST1",
+      "target": "SCR-101",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-101/SCR-101-ST1",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-101-ST3",
+      "target": "SCR-101",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-101/SCR-101-ST3",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-101-ST4",
+      "target": "SCR-101",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-101/SCR-101-ST4",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-101-ST7",
+      "target": "SCR-101",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-101/SCR-101-ST7",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-111-ST1",
+      "target": "SCR-111",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-111/SCR-111-ST1",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-111-ST3",
+      "target": "SCR-111",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-111/SCR-111-ST3",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-111-ST4",
+      "target": "SCR-111",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-111/SCR-111-ST4",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-112-ST1",
+      "target": "SCR-112",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-112/SCR-112-ST1",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-112-ST3",
+      "target": "SCR-112",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-112/SCR-112-ST3",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-112-ST7",
+      "target": "SCR-112",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-112/SCR-112-ST7",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-112-ST8",
+      "target": "SCR-112",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-112/SCR-112-ST8",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-112-ST12",
+      "target": "SCR-112",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-112/SCR-112-ST12",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-112-ST13",
+      "target": "SCR-112",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-112/SCR-112-ST13",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-112-ST16",
+      "target": "SCR-112",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-112/SCR-112-ST16",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-112-ST17",
+      "target": "SCR-112",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-112/SCR-112-ST17",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-112-ST18",
+      "target": "SCR-112",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-112/SCR-112-ST18",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-112-ST19",
+      "target": "SCR-112",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-112/SCR-112-ST19",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-112-ST20",
+      "target": "SCR-112",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-112/SCR-112-ST20",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-112-ST21",
+      "target": "SCR-112",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-112/SCR-112-ST21",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-112-ST22",
+      "target": "SCR-112",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-112/SCR-112-ST22",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-112-ST23",
+      "target": "SCR-112",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-112/SCR-112-ST23",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-112-ST24",
+      "target": "SCR-112",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-112/SCR-112-ST24",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-112-ST25",
+      "target": "SCR-112",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-112/SCR-112-ST25",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-121-ST1",
+      "target": "SCR-121",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-121/SCR-121-ST1",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-121-ST3",
+      "target": "SCR-121",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-121/SCR-121-ST3",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-121-ST7",
+      "target": "SCR-121",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-121/SCR-121-ST7",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-122-ST1",
+      "target": "SCR-122",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-122/SCR-122-ST1",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-122-ST4",
+      "target": "SCR-122",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-122/SCR-122-ST4",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-201-ST1",
+      "target": "SCR-201",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-201/SCR-201-ST1",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-202-ST1",
+      "target": "SCR-202",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-202/SCR-202-ST1",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-202-ST7",
+      "target": "SCR-202",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-202/SCR-202-ST7",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-203-ST1",
+      "target": "SCR-203",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-203/SCR-203-ST1",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-211-ST1",
+      "target": "SCR-211",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-211/SCR-211-ST1",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-212-ST1",
+      "target": "SCR-212",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-212/SCR-212-ST1",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-212-ST7",
+      "target": "SCR-212",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-212/SCR-212-ST7",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-213-ST1",
+      "target": "SCR-213",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-213/SCR-213-ST1",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-213-ST7",
+      "target": "SCR-213",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-213/SCR-213-ST7",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-225-ST1",
+      "target": "SCR-225",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-225/SCR-225-ST1",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-225-ST3",
+      "target": "SCR-225",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-225/SCR-225-ST3",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-225-ST4",
+      "target": "SCR-225",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-225/SCR-225-ST4",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-225-ST7",
+      "target": "SCR-225",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-225/SCR-225-ST7",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-225-ST8",
+      "target": "SCR-225",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-225/SCR-225-ST8",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-225-ST9",
+      "target": "SCR-225",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-225/SCR-225-ST9",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-225-ST10",
+      "target": "SCR-225",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-225/SCR-225-ST10",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-225-ST11",
+      "target": "SCR-225",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-225/SCR-225-ST11",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-225-ST12",
+      "target": "SCR-225",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-225/SCR-225-ST12",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-225-ST13",
+      "target": "SCR-225",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-225/SCR-225-ST13",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-226-ST1",
+      "target": "SCR-226",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-226/SCR-226-ST1",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-226-ST8",
+      "target": "SCR-226",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-226/SCR-226-ST8",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-241-ST1",
+      "target": "SCR-241",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-241/SCR-241-ST1",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-241-ST4",
+      "target": "SCR-241",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-241/SCR-241-ST4",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-241-ST7",
+      "target": "SCR-241",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-241/SCR-241-ST7",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-241-ST8",
+      "target": "SCR-241",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-241/SCR-241-ST8",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-241-ST9",
+      "target": "SCR-241",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-241/SCR-241-ST9",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-241-ST10",
+      "target": "SCR-241",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-241/SCR-241-ST10",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-241-ST11",
+      "target": "SCR-241",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-241/SCR-241-ST11",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-241-ST12",
+      "target": "SCR-241",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-241/SCR-241-ST12",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-242-ST1",
+      "target": "SCR-242",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-242/SCR-242-ST1",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-242-ST2",
+      "target": "SCR-242",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-242/SCR-242-ST2",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-242-ST3",
+      "target": "SCR-242",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-242/SCR-242-ST3",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-242-ST4",
+      "target": "SCR-242",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-242/SCR-242-ST4",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-242-ST7",
+      "target": "SCR-242",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-242/SCR-242-ST7",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-242-ST8",
+      "target": "SCR-242",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-242/SCR-242-ST8",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-242-ST10",
+      "target": "SCR-242",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-242/SCR-242-ST10",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-243-ST1",
+      "target": "SCR-243",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-243/SCR-243-ST1",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-243-ST7",
+      "target": "SCR-243",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-243/SCR-243-ST7",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-243-ST8",
+      "target": "SCR-243",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-243/SCR-243-ST8",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-243-ST9",
+      "target": "SCR-243",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-243/SCR-243-ST9",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-243-ST10",
+      "target": "SCR-243",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-243/SCR-243-ST10",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-243-ST11",
+      "target": "SCR-243",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-243/SCR-243-ST11",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-243-ST12",
+      "target": "SCR-243",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-243/SCR-243-ST12",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-243-ST13",
+      "target": "SCR-243",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-243/SCR-243-ST13",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-243-ST14",
+      "target": "SCR-243",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-243/SCR-243-ST14",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST1",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST1",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST2",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST2",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST4",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST4",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST6",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST6",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST7",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST7",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST8",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST8",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST9",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST9",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST10",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST10",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST11",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST11",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST12",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST12",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST13",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST13",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST14",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST14",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST15",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST15",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST16",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST16",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST17",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST17",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST18",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST18",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST19",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST19",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST20",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST20",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST21",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST21",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST22",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST22",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST23",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST23",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-244-ST24",
+      "target": "SCR-244",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-244/SCR-244-ST24",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-245-ST1",
+      "target": "SCR-245",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-245/SCR-245-ST1",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-245-ST7",
+      "target": "SCR-245",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-245/SCR-245-ST7",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-245-ST8",
+      "target": "SCR-245",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-245/SCR-245-ST8",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-245-ST9",
+      "target": "SCR-245",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-245/SCR-245-ST9",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-246-ST1",
+      "target": "SCR-246",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-246/SCR-246-ST1",
+      "elements": [],
+      "layouts": []
+    },
+    {
+      "variant": "SCR-246-ST3",
+      "target": "SCR-246",
+      "file": "/var/folders/vv/nr8pb56n333fdjs9bx8jwm5r0000gn/T/pd-change-measure-qwl400en/preview/__pd_measure_dist/__pd_measure.html",
+      "url": "http://127.0.0.1:62720/__pd_measure.html#SCR-246/SCR-246-ST3",
+      "elements": [],
+      "layouts": []
+    }
+  ],
+  "report": "/Users/hoikryu/Desktop/badminton-playbook/.ai-workflow/changes/CR-001/runs/CV20261126-055338-5d8d4b/report.json",
+  "screenshot_dir": "shots",
+  "extensions": {},
+  "asset_fallback": false,
+  "asset_block_pattern": null,
+  "rules": [
+    "변경 요청 영향 화면 검증: 화면 단독 렌더(data-target=화면 ID). 사실만 기록하고 판정은 엔진이 합니다."
+  ]
+}

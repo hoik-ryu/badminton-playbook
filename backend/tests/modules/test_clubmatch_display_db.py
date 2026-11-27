@@ -201,7 +201,9 @@ def test_db_display_status_result_and_list_fields(
 def test_db_display_status_follows_kst_day_and_results(
     admin: TestClient, member: tuple[TestClient, User], pg: Session, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """UXD-087: 'KST 오늘'이 바뀌면 진행 예정 → 진행 중, 기록·되돌리기로 진행 중 ↔ 진행 예정."""
+    """UXD-087(2026-11-27 날짜만 봄): 'KST 오늘'이 날짜가 되면 진행 예정 → 진행 중.
+
+    날짜 전에는 결과를 기록할 수 없고(409 match_not_started) 상태도 그대로 진행 예정."""
     mc, _ = member
     day = dt.date(2026, 11, 24)
     monkeypatch.setattr(display, "today_kst", lambda now=None: day - dt.timedelta(days=1))
@@ -215,16 +217,14 @@ def test_db_display_status_follows_kst_day_and_results(
     rec = admin.put(
         f"{BASE}/{view['id']}/games/1/result", json={"winner": 2, "version": view["version"]}
     )
-    assert rec.status_code == 200
-    assert status() == ("live", "live")  # 날짜 전이어도 결과가 있으면 진행 중
-    back = admin.put(
-        f"{BASE}/{view['id']}/games/1/result",
-        json={"winner": None, "version": rec.json()["version"]},
-    )
-    assert back.status_code == 200
-    assert status() == ("upcoming", "upcoming")
+    assert (rec.status_code, rec.json()["error"]["code"]) == (409, "match_not_started")
+    assert status() == ("upcoming", "upcoming")  # 거부되면 아무것도 바뀌지 않음
     monkeypatch.setattr(display, "today_kst", lambda now=None: day)
     assert status() == ("live", "live")  # 당일
+    rec = admin.put(
+        f"{BASE}/{view['id']}/games/1/result", json={"winner": 2, "version": view["version"]}
+    )
+    assert rec.status_code == 200  # 당일부터 기록 가능
 
 
 def test_db_member_permissions_on_extended_api(

@@ -3,8 +3,10 @@
 DB에 저장하는 상태(`draft`·`confirmed`·`finished`)는 그대로 두고,
 화면에 보여 줄 상태만 응답할 때 계산합니다.
 - 준비 중(pending): 확정 전(draft)
-- 진행 예정(upcoming): 확정 + 청백전 날짜가 오늘(KST)보다 뒤 + 기록된 결과 없음
-- 진행 중(live): 그 밖의 확정·미종료
+- 진행 예정(upcoming): 확정 + 청백전 날짜가 오늘(KST)보다 뒤
+- 진행 중(live): 그 밖의 확정·미종료(당일, 날짜가 지났지만 종료하지 않음)
+  (2026-11-27 사용자 결정: 기록된 결과로 진행 중이 되는 예외를 없애고 날짜만 봄.
+  날짜 전 결과 기록은 서버가 막음)
 - 종료(ended): finished
 '오늘'은 클럽 기준 시간대(한국 시간, KST)의 날짜입니다.
 KST는 일광 절약 시간이 없어 고정 UTC+9로 계산합니다(서버 시간대 데이터베이스에 의존하지 않음).
@@ -27,15 +29,13 @@ def today_kst(now: dt.datetime | None = None) -> dt.date:
     return now.astimezone(KST).date()
 
 
-def display_status(
-    status: str, match_date: dt.date, recorded: int, today: dt.date
-) -> DisplayStatus:
-    """UXD-087 표시 상태. recorded = 결과가 기록된 경기 수."""
+def display_status(status: str, match_date: dt.date, today: dt.date) -> DisplayStatus:
+    """UXD-087 표시 상태(날짜 기준, 2026-11-27)."""
     if status == "draft":
         return "pending"
     if status == "finished":
         return "ended"
-    if match_date > today and recorded == 0:
+    if match_date > today:
         return "upcoming"
     return "live"
 

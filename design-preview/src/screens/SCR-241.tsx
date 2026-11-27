@@ -31,6 +31,7 @@ export function Scr241({ stateId }: { stateId: string }) {
       title={draft ? '12월 둘째 주 청백전' : '새 청백전'}
       desc="청백전의 기본 정보를 입력해 주세요."
       draft={draft}
+      onDelete={() => setDialog('delete')}
       card={
         <>
           <section className="su-sec" aria-labelledby="s241-m">
@@ -105,7 +106,7 @@ export function Scr241({ stateId }: { stateId: string }) {
         ) : dialog === 'courts' ? (
           <Dialog title="코트 수를 바꾸면 만든 대진이 초기화됩니다" desc="대진 설정 단계에서 다시 만들어야 합니다" ok="바꾸기" tone="danger" onCancel={() => { setCourts(savedCourts); setDialog(null) }} onOk={() => { window.location.hash = stepHref('SCR-242', method ?? 'team') }} />
         ) : dialog === 'delete' ? (
-          <Dialog title="청백전을 삭제할까요?" desc="참가자와 대진도 함께 지워지고 되돌릴 수 없습니다" ok="삭제" tone="danger" onCancel={() => setDialog(null)} onOk={() => setDialog(null)} />
+          <Dialog title="'12월 둘째 주 청백전'을 삭제할까요?" desc="참가자와 대진도 함께 지워지고 되돌릴 수 없습니다" ok="삭제" tone="danger" onCancel={() => setDialog(null)} onOk={() => setDialog(null)} />
         ) : undefined
       }
     />

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { readDb, updateDb } from '../../lib/mock/db'
-import { CLUB_ERRORS, confirmClub, createClubMatch, deleteClubMatch, generateClub, getClubMatchView, listClubMatches, saveBasic, saveParticipants, saveTeams, setParticipating, setSettings, type ClubMatchView } from './api'
+import { CLUB_ERRORS, confirmClub, createClubMatch, deleteClubMatch, generateClub, getClubMatchView, listClubMatches, recordResult, saveBasic, saveParticipants, saveTeams, setParticipating, setSettings, type ClubMatchView } from './api'
 
 // (B10) Mock 어댑터가 서버(backend test_clubmatch_setup.py)와 같은 규칙인지: 확인 필요·무변경·원자성·자격·미배정·삭제
 // 화면은 출처를 모르고 같은 분기를 쓰므로 Mock 모드(VITE_DATA_SOURCE=mock)도 같은 결과여야 합니다.
@@ -109,7 +109,7 @@ describe('club match setup mock adapter (B10)', () => {
     expect(await code(confirmClub(v.id, v.version))).toBe(CLUB_ERRORS.unassigned)
   })
 
-  it('[AC-134] draft delete removes it; confirmed ones are locked; stale version conflicts', async () => {
+  it('[AC-134] draft and unfinished confirmed matches delete; stale version conflicts', async () => {
     const v = await teamReady()
     expect(await code(deleteClubMatch(v.id, v.version - 1))).toBe(CLUB_ERRORS.conflict)
     await deleteClubMatch(v.id, v.version)
@@ -117,7 +117,13 @@ describe('club match setup mock adapter (B10)', () => {
     expect(await code(deleteClubMatch(v.id, v.version))).toBe('not_found')
     const w = await teamReady()
     const done = await confirmClub(w.id, w.version)
-    expect(await code(deleteClubMatch(w.id, done.version))).toBe(CLUB_ERRORS.locked)
+    // (2026-11-27) 날짜(12-13) 전에는 결과를 기록할 수 없음
+    expect(await code(recordResult(w.id, done.version, 1, 1))).toBe(CLUB_ERRORS.matchNotStarted)
+    // 날짜가 지나면 진행 중 → 기록됨. (2026-11-27) 종료 전이면 결과가 있어도 삭제(종료 거부는 delete.test.tsx)
+    updateDb((db) => void (db.clubMatches!.find((m) => m.id === w.id)!.date = '2026-11-15'))
+    const live = await recordResult(w.id, done.version, 1, 1)
+    await deleteClubMatch(w.id, live.version)
+    expect((await listClubMatches()).some((x) => x.id === w.id)).toBe(false)
   })
 
   it('[AC-133] a rejected save changes nothing (atomic) and a repeated save does not double apply', async () => {

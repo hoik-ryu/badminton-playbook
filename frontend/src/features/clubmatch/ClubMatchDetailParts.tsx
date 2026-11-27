@@ -1,5 +1,5 @@
 import { ChevronDown } from 'lucide-react'
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 
 import { PageHeader } from '../../components/PageHeader'
 import { METHOD_LABEL, type ClubMethod } from './api'
@@ -21,13 +21,15 @@ const STATUS: Record<DisplayStatus, { label: string; tone: 'warning' | 'info' | 
   ended: { label: '종료', tone: 'info' },
 }
 
-/** 머리글: 이름·날짜(UX Spec r6), 방식 배지, 상태 배지(UXD-087 '준비 중'·'진행 예정'·'진행 중'·'종료') */
-export function ClubMatchDetailHeader({ match }: { match: { name: string; date: string; method: ClubMethod; status: DisplayStatus } | null }) {
+/** 머리글: 이름·날짜(UX Spec r6), 방식 배지, 상태 배지(UXD-087 '준비 중'·'진행 예정'·'진행 중'·'종료').
+ * (CP-001, UXD-114) menu: 오른쪽 더보기 메뉴(운영진·진행 예정일 때만 화면이 넘김) */
+export function ClubMatchDetailHeader({ match, menu }: { match: { name: string; date: string; method: ClubMethod; status: DisplayStatus } | null; menu?: ReactNode }) {
   return (
     <PageHeader
       title={match ? `${match.name} ${mmdd(match.date)}` : '청백전'}
       leading="back"
       backTo="/club-matches"
+      trailing={menu ?? 'none'}
       badge={
         match ? (
           <span className="flex gap-1" data-testid="detail-badges">
@@ -40,11 +42,13 @@ export function ClubMatchDetailHeader({ match }: { match: { name: string; date: 
   )
 }
 
+// (B17, AC-162·UXD-113) 취소된 경기는 '다음 경기'에서 빠지고, 내 경기 목록에서는 끝에 '취소'로 남음
 function myGames(games: MemberGame[]) {
   const mine = games.filter((g) => g.mySide !== null)
-  const pending = mine.filter((g) => !g.winner)
-  const done = mine.filter((g) => g.winner)
-  return { next: pending[0] ?? null, rest: [...pending.slice(1), ...done] }
+  const pending = mine.filter((g) => !g.winner && !g.cancelled)
+  const done = mine.filter((g) => g.winner && !g.cancelled)
+  const cancelled = mine.filter((g) => g.cancelled)
+  return { next: pending[0] ?? null, rest: [...pending.slice(1), ...done, ...cancelled] }
 }
 
 /** 공개 영역(회원 전체, 운영진은 확정 후 운영 기능 영역 위) */
@@ -73,7 +77,7 @@ export function ClubMatchPublicArea({ m }: { m: PublicClubMatch }) {
 
       <CmSection title="내 경기">
         {!m.participating ? (
-          <p data-cmp="CMP-027" data-variant="empty" className="m-0 rounded-md bg-surface px-3 py-4 text-body text-ink-muted">
+          <p data-cmp-variant="CMP-027" data-variant="empty" className="m-0 rounded-md bg-surface px-3 py-4 text-body text-ink-muted">
             이번 청백전에는 참가하지 않았어요
           </p>
         ) : restGames.length === 0 ? (

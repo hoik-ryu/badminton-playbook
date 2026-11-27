@@ -1278,6 +1278,7 @@
         "SCR-112-ST22",
         "SCR-112-ST23",
         "SCR-112-ST24",
+        "SCR-112-ST25",
         "SCR-112-ST3",
         "SCR-112-ST4",
         "SCR-112-ST5",
@@ -1958,12 +1959,12 @@
     "UI Plan(.ai-workflow/build/ui/<배치>/plan.json)을 쓰고 ui-plan-validate가 통과한 뒤 구현합니다."
   ],
   "sources": {
-    "docs/design/02-screens.md": "a287bcde6a4dc87c23e88f5b79e56379d41948fa2d166d7a948ece2d80be8292",
+    "docs/design/02-screens.md": "78d8583f996405462dff0406f44aa925bdb6d96cbc297affb604627d9bbe338b",
     "docs/design/04-ui-system.md": "09ada63b8441af03cf684464c9d0c013512996e67cf8db40312cbc0688c32dc0",
-    "docs/design/05-design-traceability.md": "8897c218eb35d0eea5c44a3b8715a996c53bbdf90f5f041a8cb3d45b08c9af71",
-    "docs/design/07-design-direction.md": "ae0f7920b3362c36206d28966ebed7a3610ed4076ad7db4be1ab372fd5803160",
-    "docs/build/implementation-plan.json": "84c061f09c9fa2fafa7442924d9c9155e23b7568cf53510b6f116f6ab4ed2767",
-    "docs/build/ui-map.json": "fd53ae1c498563a07066d7a58170cb811fbeb2917db403b26080b99651b0cbca",
+    "docs/design/05-design-traceability.md": "f43b6ea0c5a8b6375fe0ffe0e056d5b84d92a7ef092f1a1f631bb8cf2f4abaaf",
+    "docs/design/07-design-direction.md": "2819c6b48f86cfcbd1539099fe387f2b65fd83eb80939e44db5ead447e1ee23a",
+    "docs/build/implementation-plan.json": "81f63f08a5db52211df8570adb7106317d39fdba2dc5f8d27a6ac8431ea17c02",
+    "docs/build/ui-map.json": "fde099e6f8fa21362c490697026178242c720827c55f5be8aab3f765cb95c630",
     "docs/design-profile/theme.json": "8aee575f0fa0432ad2fa935ff311031a37c212b5c26b9b0c81765c749d036941"
   },
   "warnings": [
@@ -2186,7 +2187,7 @@
           {
             "id": "SCR-241-ST10",
             "label": "삭제 확인",
-            "behavior": "확인 창 \"청백전을 삭제할까요?\" / \"참가자와 대진도 함께 지워지고 되돌릴 수 없습니다\" / [취소][삭제](위험 톤). 삭제 실패는 안내 상자, 충돌은 ST6(AC-134)",
+            "behavior": "확인 창 ~~\"청백전을 삭제할까요?\"~~ (CP-001) \"'청백전 이름'을 삭제할까요?\" / \"참가자와 대진도 함께 지워지고 되돌릴 수 없습니다\" / [취소][삭제](위험 톤). 삭제 실패는 안내 상자(화면 유지), 충돌은 ST6(AC-134)",
             "defined": true
           },
           {
@@ -2274,7 +2275,7 @@
           },
           {
             "id": "AC-134",
-            "title": "준비 중 청백전은 삭제할 수 있고 확정한 청백전은 삭제할 수 없다 *(r9 신규)*",
+            "title": "준비 중 청백전은 삭제할 수 있고 ~~확정한~~ 진행 중인 청백전은 삭제할 수 없다 *(r9 신규, r15 수정)*",
             "priority": "Must",
             "states": [
               "SCR-241-ST10",
@@ -3616,6 +3617,12 @@
             "defined": true
           },
           {
+            "id": "SCR-112-ST25",
+            "label": "삭제 확인(운영진, 진행 예정)",
+            "behavior": "(CP-001) 확인 창 \"'청백전 이름'을 삭제할까요?\" / \"참가자와 대진도 함께 지워지고 되돌릴 수 없습니다\" / [취소][삭제](위험 톤). 취소하면 그대로, 확인하면 목록 + 토스트. 거부·실패는 화면 유지 + 안내 상자(AC-166, UXD-114)",
+            "defined": true
+          },
+          {
             "id": "SCR-112-ST24",
             "label": "라운드 정보 없는 청백전",
             "behavior": "(r11) 코트 수가 없는 기존 확정·종료 청백전: 진행 라운드 카드·라운드 구역·'시작 전'·경기 취소 없이 ST13·ST14·ST8 그대로(AC-163, FLOW-005-S6c)",
@@ -4668,7 +4675,7 @@
         ]
       }
     ],
-    "digest": "de4e43593d059aa190c109588f5666c85e9556e038ddbbeab543e78f1de75ba0"
+    "digest": "955d84b009e2d77493488cb3cbd3b7e86b87f9cb8c89db9f22d17789306e5581"
   },
-  "digest": "ed70c0b5b8f2386e7b0413f27176a736f5163ff89aa15f62c385e56cb5c2db5b"
+  "digest": "ae0e612263f273cd626dcb45370ae0d6093111c1ccb09964eff11cf07e10d462"
 }

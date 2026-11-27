@@ -1,8 +1,8 @@
 {
-  "at": "2026-11-26T04:23:20Z",
+  "at": "2026-11-26T07:40:14Z",
   "ok": true,
-  "brief_digest": "ed70c0b5b8f2386e7b0413f27176a736f5163ff89aa15f62c385e56cb5c2db5b",
-  "plan_sha256": "e9872b9ed4fa17efe3001ec848b846557f470ab5d88f4748adc2ebda90c8a8d8",
+  "brief_digest": "ae0e612263f273cd626dcb45370ae0d6093111c1ccb09964eff11cf07e10d462",
+  "plan_sha256": "37ecc1ec296841c12f714ddf20d73edc6c4f381838d8d15957ddd4402358ebc2",
   "errors": [],
   "warnings": [
     "[screen_cmp_excluded] SCR-242: 02가 지정한 CMP-004를 원장 POL-001의 결정에 따라 트리에서 뺐습니다",

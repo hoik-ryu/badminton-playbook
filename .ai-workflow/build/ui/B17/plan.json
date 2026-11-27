@@ -1,0 +1,236 @@
+{
+  "format": "pb-ui-plan/v1",
+  "batch": "B17",
+  "brief_digest": "9cbd28a70d0bf3c4caf3161483bb77787703802ce38b980586743969e686f12a",
+  "screens": {},
+  "components": {
+    "CMP-001": {
+      "action": "reuse",
+      "part": "Button",
+      "file": "frontend/src/components/Button.tsx"
+    },
+    "CMP-005": {
+      "action": "reuse",
+      "part": "Badge",
+      "file": "frontend/src/components/Badge.tsx"
+    },
+    "CMP-008": {
+      "action": "reuse",
+      "part": "Checkbox",
+      "file": "frontend/src/components/Checkbox.tsx"
+    },
+    "CMP-021": {
+      "action": "reuse",
+      "part": "Sheet",
+      "file": "frontend/src/components/Sheet.tsx"
+    },
+    "CMP-022": {
+      "action": "reuse",
+      "part": "ConfirmDialog",
+      "file": "frontend/src/components/ConfirmDialog.tsx"
+    },
+    "CMP-023": {
+      "action": "reuse",
+      "part": "NoticeBox",
+      "file": "frontend/src/components/NoticeBox.tsx"
+    },
+    "CMP-057": {
+      "action": "reuse",
+      "part": "Avatar",
+      "file": "frontend/src/components/Avatar.tsx"
+    },
+    "CMP-058": {
+      "action": "reuse",
+      "part": "PersonMeta",
+      "file": "frontend/src/components/PersonMeta.tsx"
+    },
+    "CMP-059": {
+      "action": "reuse",
+      "part": "RoundSection",
+      "file": "frontend/src/components/RoundSection.tsx"
+    },
+    "CMP-060": {
+      "action": "reuse",
+      "part": "RoundProgressCard",
+      "file": "frontend/src/components/RoundProgressCard.tsx"
+    }
+  },
+  "notes": [
+    "(r10, UX Spec r12·DD r15·Preview r11) B17은 소유 화면 없이 SCR-112·226·225·121을 바꿉니다. 상세·결과 화면의 전면 디자인 개선은 범위 밖이라 기존 운영 경기 카드(CmOpsGameCard)·회원 카드(CmMemberGameCard)에 라운드 표시·잠금·취소만 더합니다(VD-080·084).",
+    "진행 라운드 카드는 새 공통 부품 CMP-060 RoundProgressCard(frontend/src/components), 라운드 구역은 B16의 CMP-059 RoundSection(phase=live)을 재사용합니다.",
+    "라운드 정보 없는 기존 청백전(courtCount 없음)은 기존 화면 그대로(SCR-112-ST24, AC-163)."
+  ],
+  "touched": {
+    "SCR-112": {
+      "changes": "(r11) 라운드 기반 확정 청백전의 운영 영역: 진행 라운드 카드(CMP-060)·라운드 구역(CMP-059 live)·카드 머리 '코트 m · n경기'·시작 전 잠금·지난 라운드 되돌리기 없음·취소 경기 카드·종료 조건 사유, 회원 영역 취소 표시. 기존 청백전은 그대로",
+      "via": [
+        "CMP-001",
+        "CMP-005",
+        "CMP-021",
+        "CMP-022",
+        "CMP-023",
+        "CMP-059",
+        "CMP-060",
+        "screen"
+      ],
+      "states": {
+        "SCR-112-ST16": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/live.test.tsx [SCR-112-ST16]"
+        },
+        "SCR-112-ST17": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/live.test.tsx [SCR-112-ST17]"
+        },
+        "SCR-112-ST18": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/live.test.tsx [SCR-112-ST18]"
+        },
+        "SCR-112-ST19": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/live.test.tsx [SCR-112-ST19]"
+        },
+        "SCR-112-ST20": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/live.test.tsx [SCR-112-ST20]"
+        },
+        "SCR-112-ST21": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/live.test.tsx [SCR-112-ST21]"
+        },
+        "SCR-112-ST22": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/live.test.tsx [SCR-112-ST22]"
+        },
+        "SCR-112-ST23": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/live.test.tsx [SCR-112-ST23]"
+        },
+        "SCR-112-ST24": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/live.test.tsx [SCR-112-ST24]"
+        },
+        "SCR-112-ST6": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/live.test.tsx [SCR-112-ST6]"
+        },
+        "SCR-112-ST1": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/live.test.tsx [SCR-112-ST1]"
+        }
+      },
+      "acs": {
+        "AC-154": {
+          "states": [
+            "SCR-112-ST16",
+            "SCR-112-ST20"
+          ]
+        },
+        "AC-155": {
+          "states": [
+            "SCR-112-ST17",
+            "SCR-112-ST18",
+            "SCR-112-ST6"
+          ]
+        },
+        "AC-156": {
+          "states": [
+            "SCR-112-ST19"
+          ]
+        },
+        "AC-157": {
+          "states": [
+            "SCR-112-ST16",
+            "SCR-112-ST21"
+          ]
+        },
+        "AC-162": {
+          "states": [
+            "SCR-112-ST1",
+            "SCR-112-ST22"
+          ]
+        }
+      }
+    },
+    "SCR-226": {
+      "changes": "(r11·r12) 남은 경기 행에 'n라운드 코트 m', 후보는 그 라운드 미출전 적격자, 대체 불가 경기는 '이 경기 취소' 체크(CMP-008), 서버 거절 안내·재시도. 복원 없음",
+      "via": [
+        "CMP-001",
+        "CMP-005",
+        "CMP-008",
+        "CMP-021",
+        "CMP-022",
+        "CMP-023",
+        "screen"
+      ],
+      "states": {
+        "SCR-226-ST1": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/live.test.tsx [SCR-226-ST1]"
+        },
+        "SCR-226-ST4": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/live.test.tsx [SCR-226-ST4]"
+        },
+        "SCR-226-ST8": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/live.test.tsx [SCR-226-ST8]"
+        }
+      },
+      "acs": {
+        "AC-159": {
+          "states": [
+            "SCR-226-ST1",
+            "SCR-226-ST4",
+            "SCR-226-ST8"
+          ]
+        }
+      }
+    },
+    "SCR-225": {
+      "changes": "(r11) 확정 후 교체도 같은 라운드 출전자 선택 불가(B16 pick.ts 공용), 취소 경기·결과 있는 경기는 열지 않음",
+      "via": [
+        "CMP-005",
+        "CMP-021",
+        "CMP-022",
+        "CMP-023",
+        "CMP-057",
+        "CMP-058",
+        "screen"
+      ],
+      "states": {
+        "SCR-225-ST13": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/live.test.tsx [SCR-225-ST13]"
+        },
+        "SCR-225-ST7": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/live.test.tsx [SCR-225-ST7]"
+        }
+      },
+      "acs": {
+        "AC-158": {
+          "states": [
+            "SCR-225-ST13",
+            "SCR-225-ST7"
+          ]
+        }
+      }
+    },
+    "SCR-121": {
+      "changes": "(r11) 추적만: 마이페이지 전적은 서버 집계(취소 경기 제외) 그대로. 화면 변경 없음",
+      "via": [
+        "CMP-001",
+        "CMP-021",
+        "screen"
+      ],
+      "states": {
+        "SCR-121-ST1": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/live.test.tsx [SCR-121-ST1]"
+        }
+      },
+      "acs": {}
+    }
+  }
+}

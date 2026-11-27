@@ -3363,6 +3363,148 @@
           "kind": "e2e"
         }
       ]
+    },
+    {
+      "id": "B19",
+      "kind": "ui",
+      "title": "청백전 삭제 범위 확대(CP-001): 진행 예정 삭제·운영 이력 차단·삭제 메뉴(SCR-241·SCR-112)",
+      "goal": "변경 계약 CP-001(기획 r15 C-32·AC-134·AC-166·FLOW-005-S1c, UXD-114, VD-068 CP-001 항목)을 구현한다. 기존 삭제 API(DELETE /api/club-matches/{id}?version=)를 그대로 쓰고 서버가 권한(운영진)·상태(준비 중, 또는 확정 + 날짜가 오늘(KST)보다 뒤 + 기록된 결과 없음)·운영 이력(경기 취소·이벤트, 중도 귀가 제외, 2라운드 이상 진행)을 행 잠금 + version으로 검사한 뒤 경기 선수·경기·참가자·청백전을 한 트랜잭션에서 지운다. 회원·게스트·명단 점수는 지우지 않는다. 확정 때 1라운드가 진행 중으로 설정된 것만으로는 막지 않는다. FE Mock 어댑터도 같은 규칙. 화면: 생성 페이지 머리글 더보기 → 메뉴 '청백전 삭제'(위험 톤), 진행 예정 상세(운영진) 머리글 더보기 메뉴 '청백전 삭제', 이름 있는 확인 창, 성공 시 목록 + 토스트, 실패 시 화면 유지 + 안내, 충돌 확인 창. 삭제할 수 없는 상태·회원에게는 메뉴 없음. 마이그레이션 없음, DB 검증은 임시 PostgreSQL에서만.",
+      "screens": [],
+      "touches": [
+        "SCR-241",
+        "SCR-112"
+      ],
+      "stories": [
+        "US-014"
+      ],
+      "acs": [
+        "AC-166"
+      ],
+      "components": {
+        "reuse": [
+          "CMP-001",
+          "CMP-022",
+          "CMP-023",
+          "CMP-026",
+          "CMP-029"
+        ],
+        "new": []
+      },
+      "depends_on": [
+        "B16",
+        "B17"
+      ],
+      "risk_tags": [
+        "data_loss",
+        "permission"
+      ],
+      "approval": "user",
+      "paths": {
+        "allow": [
+          "backend/app/modules/clubmatch/router.py",
+          "backend/tests/modules/test_clubmatch_setup.py",
+          "backend/tests/modules/test_clubmatch_db.py",
+          "backend/tests/modules/test_clubmatch_delete.py",
+          "frontend/src/features/clubmatch/**",
+          "frontend/src/components/OverflowMenu.tsx",
+          "frontend/src/components/*.test.tsx",
+          "frontend/src/pages/ClubMatchDetailPage.tsx",
+          "frontend/src/pages/ClubMatchSetupPage.tsx",
+          "experiments/frontend-layout/check-clubmatch-*.mjs",
+          "README.md",
+          "CLAUDE.md"
+        ],
+        "shared": [
+          "frontend/src/lib/**",
+          "backend/tests/conftest.py"
+        ]
+      },
+      "done_criteria": [
+        "운영진: 준비 중·진행 예정 삭제 204, 진행 중·종료·운영 이력 있음 409 locked(아무것도 지우지 않음), 회원 403, 오래된 version 409 conflict",
+        "삭제 뒤 경기 선수·경기·참가자·청백전 0, 회원·게스트·명단 점수·다른 청백전 그대로(임시 PostgreSQL)",
+        "동시 결과 기록과 삭제가 겹쳐도 한쪽만 반영(실제 PostgreSQL 연결 2개)",
+        "UI: 생성 페이지·진행 예정 상세 더보기 메뉴(위험 톤), 이름 있는 확인 창, 취소·성공(목록+토스트)·실패(화면 유지·안내)·충돌, 삭제 불가 상태·회원에게 메뉴 없음",
+        "AC-166 새 테스트는 구현 전 실패를 엔진에 기록한 뒤 통과, AC-134 기존 테스트는 계약대로 '진행 중이면 삭제 불가'로 수정(완화 없음)",
+        "test-be·test-fe·test-db·lint·typecheck·build 통과, 기존 청백전 E2E(생성·진행·종료) 회귀 통과"
+      ],
+      "test_plan": [
+        {
+          "ac": "AC-166",
+          "kind": "integration"
+        },
+        {
+          "ac": "AC-166",
+          "kind": "e2e"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "B19-T1",
+          "layer": "test",
+          "title": "실패 우선 테스트([AC-166] 태그): BE test_clubmatch_delete.py(진행 예정 삭제 204·관련 행 0·공통 데이터 보존, 진행 중·종료·취소 경기·중도 귀가·2라운드 진행 409 locked, 회원 403, 오래된 version 409, @pytest.mark.db 동시 결과 기록·삭제), FE delete.test.tsx(상세 더보기 메뉴·확인 창·성공·실패·메뉴 없음). verify --batch B19 --lock으로 구현 전 실패를 엔진에 기록",
+          "refs": [
+            "AC-166"
+          ]
+        },
+        {
+          "id": "B19-T2",
+          "layer": "be",
+          "title": "router.py delete_club_match: 권한(AdminUser)·행 잠금·version 유지, 상태 검사(draft 또는 confirmed + display upcoming), 운영 이력 검사(취소 경기·이벤트·left 참가자·current_round > 1), 이벤트·경기 선수·경기·참가자·청백전 한 트랜잭션 삭제. AC-134 테스트를 계약대로 수정(진행 중 청백전 거부)",
+          "refs": [
+            "AC-166",
+            "AC-134"
+          ],
+          "depends_on": [
+            "B19-T1"
+          ]
+        },
+        {
+          "id": "B19-T3",
+          "layer": "fe",
+          "title": "api.ts deleteClubMatch Mock 규칙을 서버와 같게(진행 예정·이력 검사), canDeleteClubMatch(view) 판정 공용 함수",
+          "refs": [
+            "AC-166",
+            "AC-134"
+          ],
+          "depends_on": [
+            "B19-T2"
+          ]
+        },
+        {
+          "id": "B19-T4",
+          "layer": "fe",
+          "title": "UI: OverflowMenu 위험 톤 항목(VD-068 CP-001), 생성 페이지 머리글 더보기 → 메뉴 → 확인 창(이름)·성공 토스트, 진행 예정 상세(운영진) 머리글 더보기 메뉴 → SCR-112-ST25 확인 창·목록+토스트·실패 안내·충돌",
+          "refs": [
+            "AC-166",
+            "AC-134"
+          ],
+          "depends_on": [
+            "B19-T3"
+          ]
+        },
+        {
+          "id": "B19-T5",
+          "layer": "test",
+          "title": "UI 검증·E2E: ui-brief → UI Plan(touched SCR-241·SCR-112) → ui-plan-validate, token-check·audit, 실제 API E2E(check-clubmatch-delete.mjs, e2e-guard·임시 DB, 운영진 준비 중·진행 예정 삭제, 진행 중·종료 거부, 회원 메뉴 없음·403, 360·390·1440), 기존 청백전 E2E 회귀, make check",
+          "refs": [
+            "AC-166"
+          ],
+          "depends_on": [
+            "B19-T4"
+          ]
+        },
+        {
+          "id": "B19-T6",
+          "layer": "docs",
+          "title": "README 청백전 절에 삭제 정책(준비 중·진행 예정, 이력 차단) 반영",
+          "refs": [
+            "AC-166"
+          ],
+          "depends_on": [
+            "B19-T5"
+          ]
+        }
+      ]
     }
   ],
   "deferred": [

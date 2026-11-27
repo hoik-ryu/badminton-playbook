@@ -7,7 +7,7 @@ import { displayStatusOf, todayKst, type DisplayStatus } from './display'
 import type { MemberGame, MemberPlayer, PublicClubMatch } from './memberApi'
 
 export function displayStatusOfView(view: Pick<ClubMatchView, 'status' | 'date' | 'games'>, today = todayKst()): DisplayStatus {
-  return displayStatusOf(view.status, view.date, view.games.filter((g) => g.winner).length, today)
+  return displayStatusOf(view.status, view.date, today)
 }
 
 export function publicFromOps(view: ClubMatchView, meId: string | null): PublicClubMatch {

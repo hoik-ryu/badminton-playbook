@@ -3,9 +3,12 @@ import { Link, Navigate, useBlocker, useNavigate, useParams, useRouteLoaderData 
 
 import { Button } from '../components/Button'
 import { ConfirmDialog } from '../components/ConfirmDialog'
+import { NoticeBox } from '../components/NoticeBox'
 import { StateView } from '../components/StateView'
+import { useToast } from '../components/toastContext'
 import { isAdmin } from '../features/auth/types'
-import { getClubMatchView } from '../features/clubmatch/api'
+import { CLUB_ERRORS, deleteClubMatch, getClubMatchView } from '../features/clubmatch/api'
+import { deleteTitle } from '../features/clubmatch/display'
 import { BasicStep } from '../features/clubmatch/setup/BasicStep'
 import { ConfirmStep } from '../features/clubmatch/setup/ConfirmStep'
 import { GamesStep } from '../features/clubmatch/setup/GamesStep'
@@ -24,6 +27,8 @@ import type { ShellData } from '../routes/guards'
 // - 회원: /new는 SCR-004(/forbidden), setup 주소는 존재를 드러내지 않는 "청백전을 찾을 수 없습니다"(SCR-112-ST5, AC-069)
 // - 준비 중이 아닌 청백전은 상세(SCR-112)로. 단계 주소가 없거나 아직 갈 수 없는 단계면 저장된 데이터로 계산한 단계로(AC-131, C-32)
 // - 저장하지 않은 변경이 있는 채로 페이지 밖으로 나가면 이탈 확인(UXD-099). 단계 사이 이동은 입력 유지
+// - (CP-001, UXD-114) 만든 뒤에는 모든 단계(개인전 4·팀전 5) 머리글 더보기 → '청백전 삭제'(사용자 지시 2026-11-27: 기본정보만 → 전 단계).
+//   확인 창·실패 안내는 페이지가 소유하고 frame으로 단계 화면에 넘김
 type Load = { kind: 'loading' } | { kind: 'error' } | { kind: 'notFound' } | { kind: 'ok' }
 
 export function ClubMatchSetupPage() {
@@ -55,9 +60,12 @@ function NotFoundView() {
 
 function SetupScreen({ matchId, stepParam }: { matchId: string | null; stepParam?: string }) {
   const navigate = useNavigate()
+  const toast = useToast()
   const c = useSetup()
   const [load, setLoad] = useState<Load>(matchId ? { kind: 'loading' } : { kind: 'ok' })
   const leaving = useRef(false)
+  const [askDelete, setAskDelete] = useState(false)
+  const [deleteFailed, setDeleteFailed] = useState(false)
 
   const fetchView = useCallback(async () => {
     if (!matchId) return
@@ -120,8 +128,29 @@ function SetupScreen({ matchId, stepParam }: { matchId: string | null; stepParam
       current: step,
       onStep: (k: string) => isStepKey(k) && go(k),
       onExit: () => navigate('/club-matches'),
+      // 만든 뒤(v 있음)에만 더보기 메뉴. 단계와 무관
+      onMore: v ? () => setAskDelete(true) : undefined,
+      deleting: askDelete,
+      moreNotice: deleteFailed ? <NoticeBox tone="danger">청백전을 삭제하지 못했습니다. 다시 시도해 주세요</NoticeBox> : null,
     }
-  }, [step, c.drafts.basic.method, v, go, navigate])
+  }, [step, c.drafts.basic.method, v, go, navigate, askDelete, deleteFailed])
+
+  const removeMatch = async () => {
+    if (!v) return
+    setDeleteFailed(false)
+    try {
+      await deleteClubMatch(v.id, v.version)
+      leaving.current = true // 삭제 뒤 목록 이동은 이탈 확인 없이
+      toast('청백전을 삭제했습니다') // (CP-001, UXD-114) 목록으로 돌아가 완료 알림
+      navigate('/club-matches', { replace: true, state: { deleted: v.name } })
+    } catch (e) {
+      if (isApiError(e) && e.status === 404) {
+        leaving.current = true
+        navigate('/club-matches', { replace: true })
+      } else if (isApiError(e) && e.code === CLUB_ERRORS.conflict) c.setConflict(await getClubMatchView(v.id))
+      else setDeleteFailed(true)
+    }
+  }
 
   if (load.kind === 'notFound') return <NotFoundView />
   if (matchId && v && v.status !== 'draft') return <Navigate to={`/club-matches/${encodeURIComponent(matchId)}`} replace />
@@ -166,6 +195,15 @@ function SetupScreen({ matchId, stepParam }: { matchId: string | null; stepParam
   return (
     <ClubMatchScope className="flex w-full flex-1 flex-col" data-role="admin">
       {body}
+      <ConfirmDialog
+        open={askDelete}
+        onOpenChange={(o) => !o && setAskDelete(false)}
+        tone="danger"
+        title={v ? deleteTitle(v.name) : '청백전을 삭제할까요?'}
+        description="참가자와 대진도 함께 지워지고 되돌릴 수 없습니다"
+        confirmLabel="삭제"
+        onConfirm={removeMatch}
+      />
       <ConfirmDialog
         open={!!c.conflict}
         onOpenChange={() => undefined}

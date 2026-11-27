@@ -12,7 +12,7 @@ function AddForm({ member }: { member: boolean }) {
     <div className="flex flex-col gap-3">
       {member && <NoticeBox>카카오로 가입하지 않는 회원만 직접 추가하세요</NoticeBox>}
       <Field label="이름">
-        <TextField placeholder="이름" />
+        <TextField placeholder="이름" label="이름" />
       </Field>
       <Field label="성별">
         <Segmented options={['남', '여']} />
@@ -25,7 +25,7 @@ function AddForm({ member }: { member: boolean }) {
       </Field>
       {member && (
         <Field label="누구의 지인(선택)">
-          <TextField placeholder="지인 이름" />
+          <TextField placeholder="지인 이름" label="누구의 지인(선택)" />
         </Field>
       )}
     </div>

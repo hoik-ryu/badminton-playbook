@@ -619,12 +619,12 @@
     "UI Plan(.ai-workflow/build/ui/<배치>/plan.json)을 쓰고 ui-plan-validate가 통과한 뒤 구현합니다."
   ],
   "sources": {
-    "docs/design/02-screens.md": "a287bcde6a4dc87c23e88f5b79e56379d41948fa2d166d7a948ece2d80be8292",
+    "docs/design/02-screens.md": "78d8583f996405462dff0406f44aa925bdb6d96cbc297affb604627d9bbe338b",
     "docs/design/04-ui-system.md": "09ada63b8441af03cf684464c9d0c013512996e67cf8db40312cbc0688c32dc0",
-    "docs/design/05-design-traceability.md": "8897c218eb35d0eea5c44a3b8715a996c53bbdf90f5f041a8cb3d45b08c9af71",
-    "docs/design/07-design-direction.md": "ae0f7920b3362c36206d28966ebed7a3610ed4076ad7db4be1ab372fd5803160",
-    "docs/build/implementation-plan.json": "84c061f09c9fa2fafa7442924d9c9155e23b7568cf53510b6f116f6ab4ed2767",
-    "docs/build/ui-map.json": "fd53ae1c498563a07066d7a58170cb811fbeb2917db403b26080b99651b0cbca",
+    "docs/design/05-design-traceability.md": "f43b6ea0c5a8b6375fe0ffe0e056d5b84d92a7ef092f1a1f631bb8cf2f4abaaf",
+    "docs/design/07-design-direction.md": "2819c6b48f86cfcbd1539099fe387f2b65fd83eb80939e44db5ead447e1ee23a",
+    "docs/build/implementation-plan.json": "81f63f08a5db52211df8570adb7106317d39fdba2dc5f8d27a6ac8431ea17c02",
+    "docs/build/ui-map.json": "fde099e6f8fa21362c490697026178242c720827c55f5be8aab3f765cb95c630",
     "docs/design-profile/theme.json": "8aee575f0fa0432ad2fa935ff311031a37c212b5c26b9b0c81765c749d036941"
   },
   "warnings": [],
@@ -2837,5 +2837,5 @@
     ],
     "digest": "67471af3c0470664a8ad529d966615dc5912efb6846c9836e3146930f80f7fd3"
   },
-  "digest": "149959b0ae8cd22908d4f208c9ea887a06129f3a22d83d2847b7d9dc497dc9e2"
+  "digest": "21bfde530a51afc9c7198c345fc60e46fcb37361c3a152fdc887552d0be12260"
 }

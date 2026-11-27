@@ -22,7 +22,7 @@ export function Scr122({ stateId }: { stateId: string }) {
               </div>
             )}
             <Field label="이름">
-              <TextField key={stateId} value={err ? '' : me.name} placeholder="이름" />
+              <TextField key={stateId} value={err ? '' : me.name} placeholder="이름" label="이름" />
               {err && <span className="text-caption font-bold text-danger-fg">이름을 입력해 주세요</span>}
             </Field>
             <Field label="성별">

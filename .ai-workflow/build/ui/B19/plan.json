@@ -1,0 +1,94 @@
+{
+  "format": "pb-ui-plan/v1",
+  "batch": "B19",
+  "brief_digest": "663ac1d4acff108f01774848ca1fbf11355c73d24ee4bf1c2f6bd6ede12e2a3f",
+  "screens": {},
+  "components": {
+    "CMP-001": {
+      "action": "reuse",
+      "part": "Button",
+      "file": "frontend/src/components/Button.tsx"
+    },
+    "CMP-022": {
+      "action": "reuse",
+      "part": "ConfirmDialog",
+      "file": "frontend/src/components/ConfirmDialog.tsx"
+    },
+    "CMP-023": {
+      "action": "reuse",
+      "part": "NoticeBox",
+      "file": "frontend/src/components/NoticeBox.tsx"
+    },
+    "CMP-026": {
+      "action": "reuse",
+      "part": "PageHeader",
+      "file": "frontend/src/components/PageHeader.tsx"
+    },
+    "CMP-029": {
+      "action": "reuse",
+      "part": "ToastProvider",
+      "file": "frontend/src/components/Toast.tsx"
+    }
+  },
+  "notes": [
+    "(CP-001) 소유 화면 없이 SCR-241·SCR-112를 바꿉니다. 삭제 진입은 기존 머리글 더보기(⋯) 버튼 자리 그대로 메뉴로 열고(CMP-026 trailing=menu, 기존 OverflowMenu), 항목 위험 톤·확인 창 문구는 VD-068 CP-001 항목(DD r15 + 패키지)입니다.",
+    "확인 창은 공통 ConfirmDialog(CMP-022) 위험 톤, 성공 토스트는 공통 Toast(CMP-029), 실패는 기존 안내 상자(CMP-023)를 재사용합니다. 화면 레이아웃·주요 버튼은 바꾸지 않습니다."
+  ],
+  "touched": {
+    "SCR-241": {
+      "changes": "(CP-001) 만든 뒤 머리글 더보기 → 메뉴 '청백전 삭제'(위험 톤) → 확인 창 제목에 청백전 이름(ST10) → 성공 시 목록 + 토스트, 실패 시 화면 유지 안내",
+      "via": [
+        "CMP-001",
+        "CMP-022",
+        "CMP-023",
+        "CMP-026",
+        "screen"
+      ],
+      "states": {
+        "SCR-241-ST10": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/delete.test.tsx [SCR-241-ST10]"
+        },
+        "SCR-241-ST8": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/delete.test.tsx [SCR-241-ST8]"
+        }
+      },
+      "acs": {}
+    },
+    "SCR-112": {
+      "changes": "(CP-001) 진행 예정·운영 이력 없음·운영진일 때만 머리글 더보기 메뉴 '청백전 삭제'(위험 톤) → 이름 있는 확인 창(ST25) → 목록 + 토스트, 실패·거부는 화면 유지 + 안내(ST4), 충돌 ST6. 진행 중·종료·이력 있음·회원은 메뉴 없음",
+      "via": [
+        "CMP-001",
+        "CMP-022",
+        "CMP-023",
+        "CMP-026",
+        "CMP-029",
+        "screen"
+      ],
+      "states": {
+        "SCR-112-ST15": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/delete.test.tsx [SCR-112-ST15]"
+        },
+        "SCR-112-ST25": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/delete.test.tsx [SCR-112-ST25]"
+        },
+        "SCR-112-ST4": {
+          "how": "test",
+          "ref": "frontend/src/features/clubmatch/delete.test.tsx [SCR-112-ST4]"
+        }
+      },
+      "acs": {
+        "AC-166": {
+          "states": [
+            "SCR-112-ST15",
+            "SCR-112-ST25",
+            "SCR-112-ST4"
+          ]
+        }
+      }
+    }
+  }
+}

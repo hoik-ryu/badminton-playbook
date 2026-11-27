@@ -165,6 +165,7 @@ INVALID_ROUND = "invalid_round"
 ROUND_NOT_STARTED = "round_not_started"
 ROUND_INCOMPLETE = "round_incomplete"
 ROUND_LOCKED = "round_locked"
+MATCH_NOT_STARTED = "match_not_started"  # 청백전 날짜 전 결과 기록(2026-11-27)
 ROUND_HAS_RESULTS = "round_has_results"
 GAME_CANCELLED = "game_cancelled"
 CANCEL_NOT_ALLOWED = "cancel_not_allowed"
@@ -507,9 +508,7 @@ def list_club_matches(_: AdminUser, db: DbSession) -> list[ClubMatchListItem]:
                 winnerText=winner,
                 participants=view.summary.count,
                 games=len(view.games),
-                displayStatus=display.display_status(
-                    m.status, m.match_date, len(view.games) - view.unrecorded, today
-                ),
+                displayStatus=display.display_status(m.status, m.match_date, today),
                 result=result,
             )
         )
@@ -997,9 +996,23 @@ def save_teams(
     return _finish(db, m)
 
 
+def _check_deletable_confirmed(db: Session, m: ClubMatch) -> None:
+    """확정 청백전 삭제 범위(CP-001 → 2026-11-27 사용자 결정으로 확대).
+
+    종료하지 않았으면(진행 예정·진행 중) 결과·운영 기록(경기 취소·이벤트·중도 귀가·라운드 진행)이
+    있어도 운영진이 삭제할 수 있음(잘못 올린 청백전 정리). 결과·전적도 함께 사라짐.
+    종료한 청백전만 409 locked(아무것도 지우지 않음). 행 잠금(_lock) 안에서 판정합니다."""
+    if m.status == "finished":
+        raise _fail(db, LOCKED, "종료된 청백전은 삭제할 수 없습니다", 409)
+
+
 @router.delete("/{match_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_club_match(match_id: uuid.UUID, version: int, _: AdminUser, db: DbSession) -> Response:
-    """준비 중 청백전 삭제(AC-134, C-32): 물리 삭제(참가자·대진 함께). 확정한 청백전은 409 locked.
+    """청백전 삭제(AC-134, AC-166, C-32 r15): 물리 삭제(한 트랜잭션).
+
+    이력·경기 선수·경기·참가자·청백전을 지움. 종료하지 않은 청백전(준비 중·진행 예정·진행 중)만,
+    결과·운영 기록이 있어도 삭제(2026-11-27). 종료는 409 locked.
+    회원·게스트·명단 점수는 지우지 않음.
 
     경기 선수 → 경기 → 참가자 → 청백전 순서(경기 선수 → 참가자 FK가 RESTRICT).
     재시도 때의 404는 화면이 '이미 삭제됨'으로 처리.
@@ -1007,7 +1020,9 @@ def delete_club_match(match_id: uuid.UUID, version: int, _: AdminUser, db: DbSes
     """
     m = _lock(db, match_id, Versioned(version=version))
     if m.status != "draft":
-        raise _fail(db, LOCKED, "확정한 청백전은 삭제할 수 없습니다", 409)
+        _check_deletable_confirmed(db, m)
+    # 이력 행(경기 이벤트)을 경기보다 먼저 지워 순서를 분명히 함(2026-11-27부터 이력이 있어도 삭제)
+    db.execute(delete(ClubMatchGameEvent).where(ClubMatchGameEvent.match_id == m.id))
     _discard_games(db, m)
     db.flush()
     db.execute(delete(ClubMatchParticipant).where(ClubMatchParticipant.match_id == m.id))
@@ -1292,6 +1307,7 @@ def record_result(
     """결과 기록·수정(AC-044·081·085)·미기록으로 되돌리기(U2, winner=null).
 
     - 확정 후부터(확정 전 409 locked). 이긴 쪽만, 스코어 없음(C-20)
+    - 청백전 날짜(KST) 전에는 기록 불가(409 match_not_started, 되돌리기는 허용, 2026-11-27)
     - 종료 후에는 수정만 가능하고 되돌리기는 불가(종료 = 미기록 0 조건 유지, 409 locked)
     - 종료 후 수정(U10)은 기록 시각이 종료 시각보다 늦어지는 것으로 표시(`resultChanged`·
       `resultModifiedAt`). 대진 수정 표시(`changed`·`modifiedAt`)와 따로 안내(P-10)
@@ -1304,6 +1320,16 @@ def record_result(
     g = _game(db, m, no)
     if g.cancelled_at is not None:
         raise _fail(db, GAME_CANCELLED, "취소된 경기는 결과를 기록할 수 없습니다", 409)
+    # (2026-11-27) 청백전 날짜(KST) 전에는 결과를 기록하지 않음(진행 예정 = 날짜만 봄).
+    # 미기록으로 되돌리기는 허용(예전 규칙으로 날짜 전에 기록된 결과 정리)
+    if body.winner is not None and m.match_date > display.today_kst():
+        raise _fail(
+            db,
+            MATCH_NOT_STARTED,
+            "청백전 날짜부터 결과를 기록할 수 있습니다",
+            409,
+            {"date": m.match_date.isoformat()},
+        )
     if body.winner is None and m.status == "finished":
         raise _fail(db, LOCKED, "종료된 청백전은 결과를 미기록으로 되돌릴 수 없습니다", 409)
     if _is_round(m) and g.round_no is not None:

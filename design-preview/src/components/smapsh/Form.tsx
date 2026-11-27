@@ -30,10 +30,12 @@ export function Field({ label, children }: { label: string; children: ReactNode 
 }
 
 // CMP-006 TextField
-export function TextField({ value, placeholder }: { value?: string; placeholder?: string }) {
+// (CP-001) 접근 가능한 이름(label): 보이는 필드 제목과 같은 글자(모양 변화 없음, 측정 a11y label 규칙)
+export function TextField({ value, placeholder, label }: { value?: string; placeholder?: string; label?: string }) {
   return (
     <input
       data-cmp="CMP-006"
+      aria-label={label}
       defaultValue={value}
       placeholder={placeholder}
       className="h-11 rounded-md border border-line-strong bg-page px-3 text-body text-ink placeholder:text-ink-muted"

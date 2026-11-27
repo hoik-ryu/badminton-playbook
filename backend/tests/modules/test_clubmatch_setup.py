@@ -404,13 +404,14 @@ def test_delete_draft_removes_match_participants_and_games(
 
 
 @ac("AC-134")
-def test_confirmed_match_cannot_be_deleted_and_members_cannot_delete(
+def test_confirmed_unfinished_match_can_be_deleted_and_members_cannot_delete(
     ac_tag: str, make_client: Factory, admin: TestClient, db: Session
 ) -> None:
+    """(2026-11-27) 확정했어도 종료 전이면 운영진이 삭제(종료 거부는 test_clubmatch_delete)."""
     view, _ = team_ready(admin, db)
     done = ok(post(admin, view, "confirm"))
     res = admin.delete(f"{BASE}/{done['id']}", params={"version": done["version"]})
-    assert err(res) == (409, "locked")
+    assert res.status_code == 204
     draft = new_match(admin, name="준비 중")
     m = make_client()
     make_user(db, name="회원", kakao_id="9302")

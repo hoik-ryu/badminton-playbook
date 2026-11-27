@@ -1,13 +1,11 @@
 import { CalendarDays, Grid2x2, PenLine, User, Users } from 'lucide-react'
 import { useRef, useState } from 'react'
-import { useNavigate } from 'react-router'
 
 import { ConfirmDialog } from '../../../components/ConfirmDialog'
 import { NoticeBox } from '../../../components/NoticeBox'
 import { StepActionBar } from '../../../components/StepActionBar'
 import { TextField } from '../../../components/TextField'
-import { isApiError } from '../../../lib/api'
-import { CLUB_ERRORS, createClubMatch, deleteClubMatch, getClubMatchView, NAME_MAX, nameErrorOf, nameProblem, saveBasic, type ClubMethod } from '../api'
+import { createClubMatch, NAME_MAX, nameErrorOf, nameProblem, saveBasic, type ClubMethod } from '../api'
 import { MAX_COURTS } from '../schedule'
 import { MethodTiles, SectionTitle, SetupDateField, ShuttleIcon } from './parts'
 import { SetupFrame } from './SetupFrame'
@@ -17,19 +15,17 @@ import type { StepProps } from './types'
 // SCR-241 청백전 생성 · 기본정보 — UX Spec r9 02 SCR-241(UXD-090–092), DD r12 VD-059–063, Preview r8
 // 방식(필수, 고르면 진행 표시 5↔4칸 즉시) · 이름(필수, 공백 제외 30자, 글자 수 n/30) · 날짜(필수, 기본 오늘, 기기 날짜 선택기)
 // '다음'(만들기 전): 준비 중 청백전을 만들고 setup 주소로. '다음'(만든 뒤): 바뀐 값만 저장(이름·날짜는 팀·대진 유지, AC-123)
-// 방식이 바뀌고 팀 배정·대진이 있으면 확인 창(ST9, AC-070·132). 더보기 → 삭제 확인(ST10, AC-134)
+// 방식이 바뀌고 팀 배정·대진이 있으면 확인 창(ST9, AC-070·132). 더보기 → 삭제 확인(ST10, AC-134 — 확인 창·처리는 페이지가 소유, 모든 단계 공통)
 // (r14, UX Spec r11 SCR-241·UXD-105·DD r14 VD-077) 날짜 아래 '사용 코트 수' 스테퍼(1–8, 기본 4). 대진이 있을 때 다른 코트 수로 '다음'이면
 //   확인 창(ST11, 취소하면 저장값으로). 라운드 정보 없는 준비 중 청백전은 4를 채우고 안내 상자(ST12) — '다음'에서 코트 수를 저장(AC-144·163)
 type Errors = { method?: string; name?: string; date?: string; courts?: string }
 const COURTS_ERROR = `코트 수는 1–${MAX_COURTS} 사이로 입력해 주세요`
 
 export function BasicStep({ c, frame, go, onCreated }: StepProps & { onCreated: (id: string) => void }) {
-  const navigate = useNavigate()
   const v = c.view
   const d = c.drafts.basic
   const [errors, setErrors] = useState<Errors>({})
-  const [ask, setAsk] = useState<'method' | 'delete' | 'courts' | null>(null)
-  const [deleteFailed, setDeleteFailed] = useState(false)
+  const [ask, setAsk] = useState<'method' | 'courts' | null>(null)
   const nameRef = useRef<HTMLInputElement>(null)
   const confirmed = useRef(false)
   const set = (patch: Partial<typeof d>) => c.setDrafts((x) => ({ ...x, basic: { ...x.basic, ...patch } }))
@@ -107,25 +103,12 @@ export function BasicStep({ c, frame, go, onCreated }: StepProps & { onCreated: 
     await saveExisting(false)
   }
 
-  const remove = async () => {
-    if (!v) return
-    setDeleteFailed(false)
-    try {
-      await deleteClubMatch(v.id, v.version)
-      navigate('/club-matches', { replace: true, state: { deleted: v.name } })
-    } catch (e) {
-      if (isApiError(e) && e.status === 404) navigate('/club-matches', { replace: true })
-      else if (isApiError(e) && e.code === CLUB_ERRORS.conflict) c.setConflict(await getClubMatchView(v.id))
-      else setDeleteFailed(true)
-    }
-  }
-
   const setCourts = (courtsText: string) => {
     set({ courts: courtsText })
     setErrors((x) => ({ ...x, courts: undefined }))
   }
   const fieldError = Object.values(errors).some(Boolean) || !!liveNameError
-  const st = ask === 'method' ? 'SCR-241-ST9' : ask === 'delete' ? 'SCR-241-ST10' : ask === 'courts' ? 'SCR-241-ST11' : c.conflict ? 'SCR-241-ST6' : c.saving ? 'SCR-241-ST2' : fieldError || c.failure || deleteFailed ? 'SCR-241-ST4' : !d.method ? 'SCR-241-ST7' : legacy ? 'SCR-241-ST12' : v ? 'SCR-241-ST8' : 'SCR-241-ST1'
+  const st = ask === 'method' ? 'SCR-241-ST9' : frame.deleting ? 'SCR-241-ST10' : ask === 'courts' ? 'SCR-241-ST11' : c.conflict ? 'SCR-241-ST6' : c.saving ? 'SCR-241-ST2' : fieldError || c.failure || frame.moreNotice ? 'SCR-241-ST4' : !d.method ? 'SCR-241-ST7' : legacy ? 'SCR-241-ST12' : v ? 'SCR-241-ST8' : 'SCR-241-ST1'
 
   return (
     <SetupFrame
@@ -138,7 +121,8 @@ export function BasicStep({ c, frame, go, onCreated }: StepProps & { onCreated: 
       current="basic"
       onStep={frame.onStep}
       onExit={frame.onExit}
-      onMore={v ? () => setAsk('delete') : undefined}
+      onMore={frame.onMore}
+      moreNotice={frame.moreNotice}
       notice={
         <>
           {c.failure && (
@@ -146,7 +130,6 @@ export function BasicStep({ c, frame, go, onCreated }: StepProps & { onCreated: 
               {c.failure.message}
             </NoticeBox>
           )}
-          {deleteFailed && <NoticeBox tone="danger">청백전을 삭제하지 못했습니다. 다시 시도해 주세요</NoticeBox>}
         </>
       }
       bar={<StepActionBar onNext={() => void next()} loading={c.saving} />}
@@ -187,7 +170,6 @@ export function BasicStep({ c, frame, go, onCreated }: StepProps & { onCreated: 
               await saveExisting(true)
             }}
           />
-          <ConfirmDialog open={ask === 'delete'} onOpenChange={(o) => !o && setAsk(null)} tone="danger" title="청백전을 삭제할까요?" description="참가자와 대진도 함께 지워지고 되돌릴 수 없습니다" confirmLabel="삭제" onConfirm={remove} />
         </>
       }
     >

@@ -51,6 +51,8 @@ export const CLUB_ERRORS = {
   invalidRound: 'invalid_round',
   /** 아직 시작하지 않은 라운드의 결과 기록. details = { round, currentRound } */
   roundNotStarted: 'round_not_started',
+  /** (2026-11-27) 청백전 날짜 전 결과 기록. details = { date } */
+  matchNotStarted: 'match_not_started',
   /** 진행 라운드에 처리되지 않은 경기가 있어 다음 라운드를 시작할 수 없음. details = { games, currentRound } */
   roundIncomplete: 'round_incomplete',
   /** 지난 라운드 결과를 미기록으로 되돌리기. details = { round, currentRound } */
@@ -169,7 +171,7 @@ export async function listClubMatches(): Promise<ClubMatchListItem[]> {
     return {
       id: m.id, name: m.name, date: m.date, method: m.method, status: m.status, unrecorded, team: m.method === 'team' && m.status !== 'draft' ? ts : null, winnerText,
       participants: Object.values(m.participants).filter((p) => !p.left).length, games: m.games.length,
-      displayStatus: displayStatusOf(m.status, m.date, m.games.length - unrecorded, today), result,
+      displayStatus: displayStatusOf(m.status, m.date, today), result,
     }
   })
   return mockDelay(items.sort((a, b) => b.date.localeCompare(a.date) || b.id.localeCompare(a.id)))
@@ -552,6 +554,19 @@ export async function saveTeams(id: string, version: number, assignments: Record
 }
 
 /** (B10) 준비 중 청백전 삭제(AC-134): 참가자·대진 함께. 확정한 청백전은 409 locked. 이미 없으면 404(재시도 = 이미 삭제됨) */
+/**
+ * 삭제를 막는 이유(서버 delete_club_match·_check_deletable_confirmed와 같은 규칙). null이면 삭제 가능.
+ * (CP-001 → 2026-11-27 확대) 종료하지 않았으면(준비 중·진행 예정·진행 중) 결과·운영 기록이 있어도 삭제 가능. 종료만 막음.
+ */
+export function clubDeleteBlock(m: { status: ClubStatus }): string | null {
+  return m.status === 'finished' ? '종료된 청백전은 삭제할 수 없습니다' : null
+}
+
+/** 화면용: 운영 응답으로 삭제 메뉴를 보일지(서버가 다시 검사) */
+export function canDeleteClubMatch(v: ClubMatchView): boolean {
+  return clubDeleteBlock(v) === null
+}
+
 export async function deleteClubMatch(id: string, version: number): Promise<void> {
   if (dataSource === 'api') {
     await api.delete<void>(`${base(id)}?version=${version}`)
@@ -561,7 +576,8 @@ export async function deleteClubMatch(id: string, version: number): Promise<void
   updateDb((db) => {
     const m = find(db, id)
     checkVersion(m, version)
-    if (m.status !== 'draft') throw err(409, CLUB_ERRORS.locked, '확정한 청백전은 삭제할 수 없습니다')
+    const why = clubDeleteBlock(m)
+    if (why) throw err(409, CLUB_ERRORS.locked, why)
     db.clubMatches = db.clubMatches!.filter((x) => x.id !== id)
   })
 }
@@ -701,6 +717,8 @@ export async function recordResult(id: string, version: number, gameNo: number, 
     const g = m.games.find((x) => x.no === gameNo)
     if (!g) throw err(404, 'not_found', '경기를 찾을 수 없습니다')
     if (g.cancelled) throw err(409, CLUB_ERRORS.gameCancelled, '취소된 경기는 결과를 기록할 수 없습니다')
+    // (2026-11-27) 청백전 날짜(KST) 전에는 기록 불가(되돌리기는 허용)
+    if (winner !== null && m.date > todayKst()) throw err(409, CLUB_ERRORS.matchNotStarted, '청백전 날짜부터 결과를 기록할 수 있습니다', { date: m.date })
     if (winner === null && m.status === 'finished') throw err(409, CLUB_ERRORS.locked, '종료된 청백전은 결과를 미기록으로 되돌릴 수 없습니다')
     if (isRound(m) && g.round != null) {
       // (B15, C-37·AC-153·165) 시작 전 라운드는 기록 불가, 지난 라운드는 수정만(미기록으로 되돌리기 불가)

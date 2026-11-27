@@ -57,7 +57,7 @@ describe('청백전 배지(CMP-005, VD-053)', () => {
     expect(screen.getByTestId('scope')).toHaveClass('cm')
     for (const [t, label] of tones) {
       const el = screen.getByText(label)
-      expect(el).toHaveAttribute('data-cmp', 'CMP-005')
+      expect(el).toHaveAttribute('data-cmp-variant', 'CMP-005')
       expect(el).toHaveAttribute('data-tone', t)
       expect(el).toHaveClass('cm-badge')
     }

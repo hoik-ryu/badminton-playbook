@@ -579,3 +579,60 @@ def test_db_concurrent_batch_saves_only_one_wins(
     assert sorted(statuses) == [200] + [409] * 5
     after = admin.get(f"{BASE}/{view['id']}").json()
     assert after["version"] == view["version"] + 1 and after["games"] == []
+
+
+# ── (CP-001, AC-166) 진행 예정 청백전 삭제와 결과 기록이 동시에 오면 한쪽만 반영 ──
+@_setup_ac("AC-166")
+def test_db_delete_upcoming_races_with_result(ac_tag: str, admin: TestClient, pg: Session) -> None:
+    for attempt in range(3):  # 어느 쪽이 먼저 잠금을 잡든 결과는 일관되어야 함(여러 번 시도)
+        keys = []
+        for i in range(8):
+            u = new_member(pg, f"삭제경합{attempt}-{i}")
+            pg.add(MemberRating(user_id=u.id, score=3 + i % 5))
+            pg.commit()
+            keys.append(f"member:{u.id}")
+        res = admin.post(
+            BASE,
+            json={
+                "method": "individual",
+                "date": "2099-12-31",
+                "name": f"{TAG}삭제경합{attempt}",
+                "courtCount": 2,
+            },
+        )
+        view = admin.get(f"{BASE}/{res.json()['id']}").json()
+        view = admin.put(
+            f"{BASE}/{view['id']}/participants", json={"keys": keys, "version": view["version"]}
+        ).json()
+        view = admin.post(
+            f"{BASE}/{view['id']}/games",
+            json={"version": view["version"], "rounds": 2, "rules": RULES},
+        ).json()
+        view = admin.post(f"{BASE}/{view['id']}/confirm", json={"version": view["version"]}).json()
+        assert view["status"] == "confirmed", view
+
+        def act(kind: str, view: dict = view) -> int:  # type: ignore[type-arg]
+            if kind == "delete":
+                return int(
+                    admin.delete(
+                        f"{BASE}/{view['id']}", params={"version": view["version"]}
+                    ).status_code
+                )
+            r = admin.put(
+                f"{BASE}/{view['id']}/games/1/result",
+                json={"winner": 1, "version": view["version"]},
+            )
+            return int(r.status_code)
+
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            deleted, recorded = pool.map(act, ["delete", "result"])
+        parts, games, seats = _rows(pg, view["id"])
+        if deleted == 204:
+            assert recorded in (404, 409) and (parts, games, seats) == (0, 0, 0)
+        else:
+            assert (deleted, recorded) == (409, 200) and (parts, games) == (8, 4)
+            pg.expire_all()
+            assert pg.get(ClubMatch, uuid.UUID(view["id"])) is not None
+        # 회원·명단 점수는 그대로
+        ids = [uuid.UUID(k.split(":", 1)[1]) for k in keys]
+        assert len(pg.scalars(select(MemberRating).where(MemberRating.user_id.in_(ids))).all()) == 8

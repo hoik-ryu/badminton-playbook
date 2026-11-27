@@ -134,7 +134,7 @@ for (const vp of [{ n: 'm360', w: 360, h: 640, m: true }, { n: 'm390', w: 390, h
   check(r, 'results', v.games[0].winner === 1 && v.games[1].winner === 1)
   await page.locator('article[aria-label="2경기"] button', { hasText: '미기록으로 되돌리기' }).click()
   await page.locator('[role=alertdialog] button', { hasText: '되돌리기' }).click()
-  const toast = await page.locator('[data-cmp=CMP-029]').textContent({ timeout: 4000 }).catch(() => null)
+  const toast = await page.locator('[data-cmp=CMP-029]', { hasText: '미기록' }).first().textContent({ timeout: 4000 }).catch(() => null) // (B17) 확정 직후 '1라운드를 시작했습니다' 토스트가 함께 있을 수 있음
   v = await A.get(`/api/club-matches/${id}`)
   check(r, 'revert', v.games[1].winner === null && toast === '경기 결과가 미기록으로 변경되었습니다.', { toast })
 
@@ -178,24 +178,27 @@ for (const vp of [{ n: 'm360', w: 360, h: 640, m: true }, { n: 'm390', w: 390, h
   check(r, 'legacy-redirect', new URL(p2.url()).pathname === `/club-matches/${id}` && new URL(p2.url()).search === '?from=bookmark', { url: p2.url() })
   await p2.waitForSelector('[data-testid=ops-area] [data-cmp=CMP-041]')
   await page.goto(BASE + `/club-matches/${id}`); await page.waitForSelector('[data-testid=ops-area] [data-cmp=CMP-041]')
-  const open = (v.games.filter((g) => !g.winner)).map((g) => g.no)
+  // (B17, r14) 결과는 진행 라운드 경기만 기록 가능(시작 전 라운드는 '시작 전' 잠금)
+  const open = v.games.filter((g) => !g.winner && !g.cancelled && g.round === v.currentRound).map((g) => g.no)
   await page.locator(`[role=group][aria-label="${open[0]}경기 결과"] button`, { hasText: '1팀 승' }).click(); await page.waitForTimeout(600)
-  await p2.locator(`[role=group][aria-label="${open[1]}경기 결과"] button`, { hasText: '2팀 승' }).click()
+  // 진행 라운드에 미기록이 하나뿐이면 다른 화면도 같은 경기를 반대 결과로(오래된 version → 충돌)
+  const other = open[1] ?? open[0]
+  await p2.locator(`[role=group][aria-label="${other}경기 결과"] button`, { hasText: '2팀 승' }).click()
   const conflict = await p2.locator('[role=alertdialog]', { hasText: '다른 운영진이 청백전을 변경했습니다' }).count().then(async (n) => n || (await p2.waitForSelector('[role=alertdialog]', { timeout: 4000 }).then(() => 1, () => 0)))
   await shot(p2, `${vp.n}-5-conflict.png`)
   v = await A.get(`/api/club-matches/${id}`)
-  check(r, 'conflict-409', conflict > 0 && v.games.find((g) => g.no === open[1]).winner === null)
+  check(r, 'conflict-409', conflict > 0 && v.games.find((g) => g.no === other).winner === (open[1] ? null : 1))
   await ctx2.close()
 
   // ── 나머지 기록 → 종료 → 종료 후 결과 수정(D-7) ──
-  // (B16, r14) 라운드 방식: 진행 라운드 경기만 기록 가능. 라운드 진행 화면은 B17 범위라 여기서는 B15 API로 다음 라운드를 시작
+  // (B16·B17, r14) 라운드 방식: 진행 라운드 경기만 기록 → 진행 라운드 카드의 '다음 라운드 시작'(B17 화면)으로 넘김
   for (;;) {
+    v = await A.get(`/api/club-matches/${id}`)
     for (const g of v.games.filter((x) => !x.winner && !x.cancelled && x.round === v.currentRound)) { await page.locator(`[role=group][aria-label="${g.no}경기 결과"] button`, { hasText: '2팀 승' }).click(); await page.waitForTimeout(450) }
     v = await A.get(`/api/club-matches/${id}`)
     if (v.currentRound >= Math.max(...v.games.map((g) => g.round))) break
-    await A.send('POST', `/api/club-matches/${id}/rounds/next`, { version: v.version })
-    v = await A.get(`/api/club-matches/${id}`)
-    await page.reload(); await page.waitForSelector('[data-testid=ops-area] [data-cmp=CMP-041]')
+    await page.locator('[data-testid=next-round]:not([disabled])').click()
+    await page.waitForFunction((x) => document.querySelector('[data-testid=round-progress] h2')?.textContent === `${x}라운드 진행 중`, v.currentRound + 1, { timeout: 8000 })
   }
   await vis(page, 'button', { hasText: '청백전 종료' }).click(); await page.locator('[role=alertdialog] button', { hasText: '종료' }).click(); await page.waitForTimeout(800)
   v = await A.get(`/api/club-matches/${id}`)
@@ -263,7 +266,7 @@ for (const vp of [{ n: 'm360', w: 360, h: 640, m: true }, { n: 'm390', w: 390, h
   // (B12) 준비 중 청백전 재진입 → 계산된 단계(참가자 0명 → 참가자 설정) → 더보기 삭제(SCR-241-ST10)
   await page.goto(BASE + '/club-matches'); await page.locator(`a[data-match="${pendingId}"]`).click(); await page.waitForURL((u) => u.pathname === `/club-matches/${pendingId}/setup/participants`, { timeout: 8000 }).catch(() => {})
   check(r, 'resume-participants', new URL(page.url()).pathname === `/club-matches/${pendingId}/setup/participants`, page.url())
-  await page.goto(BASE + `/club-matches/${pendingId}/setup/basic`); await page.getByRole('button', { name: '더보기: 청백전 삭제' }).click()
+  await page.goto(BASE + `/club-matches/${pendingId}/setup/basic`); await page.getByRole('button', { name: '더보기' }).click(); await page.getByRole('menuitem', { name: '청백전 삭제' }).click() /* (CP-001) 더보기 → 메뉴 '청백전 삭제' */
   await page.locator('[role=alertdialog] button', { hasText: '삭제' }).click(); await page.waitForURL(BASE + '/club-matches')
   check(r, 'delete-draft', (await page.request.get(BASE + `/api/club-matches/${pendingId}`)).status() === 404)
   const delConfirmed = await A.send('DELETE', `/api/club-matches/${id}?version=${(await A.get(`/api/club-matches/${id}`)).version}`)

@@ -86,6 +86,8 @@ export function ConfirmStep({ c, frame, go }: StepProps) {
       current="confirm"
       onStep={frame.onStep}
       onExit={frame.onExit}
+      onMore={frame.onMore}
+      moreNotice={frame.moreNotice}
       notice={
         failed && (
           <NoticeBox tone="danger" action={<button type="button" className="su-link" onClick={() => setAsk(true)}>다시 시도</button>}>

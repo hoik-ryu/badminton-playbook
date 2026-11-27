@@ -175,6 +175,13 @@
       "registered_at": "2026-11-26T04:14:50Z",
       "path": "frontend/src/components/RoundSection.tsx",
       "built_by": "B16"
+    },
+    "CMP-060": {
+      "source": "built",
+      "export": "RoundProgressCard",
+      "registered_at": "2026-11-26T04:39:27Z",
+      "path": "frontend/src/components/RoundProgressCard.tsx",
+      "built_by": "B17"
     }
   },
   "tokens": {
@@ -316,6 +323,11 @@
     {
       "at": "2026-11-26T04:14:50Z",
       "event": "register CMP-059 (built)",
+      "note": ""
+    },
+    {
+      "at": "2026-11-26T04:39:27Z",
+      "event": "register CMP-060 (built)",
       "note": ""
     }
   ]

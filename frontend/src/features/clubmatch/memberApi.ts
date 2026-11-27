@@ -113,7 +113,7 @@ export async function listPublicClubMatches(): Promise<PublicClubMatchItem[]> {
     const counts = gameCounts(m.games)
     const live = liveOf(m)
     const unrecorded = live.filter((g) => !g.winner).length
-    const shown = displayStatusOf(m.status, m.date, live.length - unrecorded, today)
+    const shown = displayStatusOf(m.status, m.date, today)
     return {
       id: m.id,
       name: m.name,
@@ -170,7 +170,7 @@ export async function getPublicClubMatch(id: string, meId: string | null): Promi
     team: teamScore(live),
     unrecorded: live.filter((g) => !g.winner).length,
     participating: games.some((g) => g.mySide !== null),
-    displayStatus: ((s) => (s === 'pending' ? 'live' : s))(displayStatusOf(m.status, m.date, live.filter((g) => g.winner).length, todayKst())),
+    displayStatus: ((s) => (s === 'pending' ? 'live' : s))(displayStatusOf(m.status, m.date, todayKst())),
     currentRound: m.currentRound ?? null,
   }
 }

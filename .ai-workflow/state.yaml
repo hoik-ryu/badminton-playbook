@@ -30,7 +30,7 @@ stages:
 
   planning:
     status: approved   # locked | not_started | in_progress | awaiting_approval | approved | outdated
-    revision: 14
+    revision: 15
     based_on_discovery_revision: 6
     artifacts:
       - docs/planning/02-prd.md
@@ -43,13 +43,13 @@ stages:
       at: null
       hashes: {}
     approved:
-      revision: 14
-      at: "2026-11-26T01:16:33Z"
+      revision: 15
+      at: "2026-11-26T08:09:28Z"
       hashes:
-        docs/planning/02-prd.md: d24d59b7a140b78e2e56eaa28fc762c263ba02def07f6b0c3f4ea5090778c3b4
-        docs/planning/03-user-stories.md: 8fea49e8c39e1f0236113e3caccc3a9cef961b1874cc8eefded7263e4568c1e7
-        docs/planning/04-user-flows.md: 1bd0dc2dc93e05182b90f9bbabcad6951be421489675503866d1cb6925b7613d
-        docs/planning/05-acceptance-criteria.md: 9f080c5d03f91429ed2a520c2beec7a5c58a244f7aedfb77ee70849597412ba6
+        docs/planning/02-prd.md: 1c39e4c7cf6144224605859764e875922bbc71c6c237f2184f15583ecdf51ced
+        docs/planning/03-user-stories.md: 08ea6ccfacc7fc78fc7d27c6e64cb8dd362200ccb9570e5ff760e20d720f7446
+        docs/planning/04-user-flows.md: e61ece2f71824224a5cbf81a498f6d5e4d47af9d894fa895ffdcf8a0991b2305
+        docs/planning/05-acceptance-criteria.md: 6fa1665f1ff0aeab7cc4d4542fbbd17f70cc50b09d0667978c028473708fd5ab
 
   design:
     status: not_started   # locked | not_started  (Milestone 2 이후. planning 승인으로만 잠금 해제)
@@ -115,4 +115,7 @@ history:
   - { at: "2026-11-26T01:12:39Z", stage: planning, event: reopened, revision: 13, note: "T9 재개: 변경 영향 분석과 최소 재승인 절차를 승인합니다. AC-164 취소 경기 복원 제거, Q-032 A4는 '취소 경기는 되돌리지 않는다'로 확정. r13 승인(2026-11-25T07:01:11Z) 무효화, 이전 승인 해시 02=2c18d74a… 03=8fc91a2d… 04=0e865685… 05=00be4146…. design locked", src: engine }
   - { at: "2026-11-26T01:15:17Z", stage: planning, event: submitted, revision: 14, note: "r14: 취소 경기 복원 제거(AC-164·FLOW-005-S7d 폐기, C-37·C-38·Q-032 A4 확정, AC-160·165 수정). FR 24·US 24·FLOW 8·AC 161, 추적성 미해결 1건. 제출 해시 02=d24d59b7… 03=8fea49e8… 04=1bd0dc2d… 05=9f080c5d…", src: engine }
   - { at: "2026-11-26T01:16:33Z", stage: planning, event: approved, revision: 14, note: "Planning r14를 승인합니다. 복원 기능 제거 범위와 유효 AC 161개를 확인했습니다.. 제출 스냅샷(r14, 2026-11-26T01:15:17Z)과 일치 확인", src: engine }
+  - { at: "2026-11-26T08:09:28Z", stage: planning, event: reopened, revision: 14, note: "T9 재개: [CP-001 최종 통합 승인 2026-11-26T08:09:28Z · 묶음 309e92d8f448] 최종 통합 승인 (권장) (패키지 기획 개정 반영을 위한 재개). r14 승인(2026-11-26T01:16:33Z) 무효화, 이전 승인 해시 02=d24d59b7… 03=8fea49e8… 04=1bd0dc2d… 05=9f080c5d…. design locked. 승인 후 변경된 파일: 02-prd.md, 03-user-stories.md, 04-user-flows.md, 05-acceptance-criteria.md", src: engine }
+  - { at: "2026-11-26T08:09:28Z", stage: planning, event: submitted, revision: 15, note: "CP-001 최종 통합 승인 묶음의 기획 r15 제출. FR 24·US 24·FLOW 8·AC 162, 추적성 미해결 1건. 제출 해시 02=1c39e4c7… 03=08ea6ccf… 04=e61ece2f… 05=6fa1665f…", src: engine }
+  - { at: "2026-11-26T08:09:28Z", stage: planning, event: approved, revision: 15, note: "[CP-001 최종 통합 승인 2026-11-26T08:09:28Z · 묶음 309e92d8f448] 최종 통합 승인 (권장). 제출 스냅샷(r15, 2026-11-26T08:09:28Z)과 일치 확인", src: engine }
   # - { at: "", stage: discovery, event: started | submitted | changes_requested | approved | reopened | outdated | generated, revision: 0, note: "" }
